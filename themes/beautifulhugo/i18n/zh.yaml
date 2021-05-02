@@ -1,0 +1,38 @@
+# Content
+- id: dateFormat
+  translation: "2016-01-02"
+- id: postedOnDate
+  translation: "发表于 {{ .Count }}"
+- id: translationsLabel
+  translation: "其它语言: "
+- id: translationsSeparator
+  translation: ", "
+- id: readMore
+  translation: "阅读全文"
+- id: olderPosts
+  translation: "下一页"
+- id: newerPosts
+  translation: "上一页"
+- id: previousPost
+  translation: "前一篇"
+- id: nextPost
+  translation: "后一篇"
+- id: aboutMe
+  translation: "大家好，我是WoolfBreathe，一个有着产品思维的工程师，现在也在努力将自己的产品思维体系化，对互联网产品有自己独到的见解，现阶段专注kubernetes和istio。"
+
+# 404 page
+- id: pageNotFound
+  translation: "啊哦，这篇文章不存在。 (404 错误)"
+
+# Navigation
+- id: toggleNavigation
+  translation: "切换导航"
+- id: languageSwitcherLabel
+  translation: "语言"
+- id: gcseLabelShort
+  translation: "搜索"
+- id: gcseLabelLong
+  translation: "搜索 {{ .Site.Title }}"
+- id: gcseClose
+  translation: "关闭"
+

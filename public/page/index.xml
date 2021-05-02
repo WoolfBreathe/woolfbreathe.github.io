@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pages on WoolfBreathe</title>
+    <link>/page/</link>
+    <description>Recent content in Pages on WoolfBreathe</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <managingEditor>youremail@domain.com (WoolfBreathe)</managingEditor>
+    <webMaster>youremail@domain.com (WoolfBreathe)</webMaster>
+    
+	<atom:link href="/page/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About me</title>
+      <link>/page/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/page/about/</guid>
+      <description>Nothing in the world can take the place of Persistence. Talent will not; nothing is more common than unsuccessful men with talent. Genius will not; unrewarded genius is almost a proverb. Education will not; the world is full of educated derelicts. Persistence and Determination alone are omnipotent. The slogan “Press On” has solved and will always solve the problems of the human race.</description>
+    </item>
+    
+    <item>
+      <title>Archive</title>
+      <link>/page/archive/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/page/archive/</guid>
+      <description>关注容器、kubernetes、devops、python、golang、微服务等技术。
+ Kubernetes/Docker  你应该了解的10个 Kubernetes 安全上下文设置 如何收集管理多行日志？ 通过 Traefik 使用 Kubernetes Service APIs 进行流量路由 Kubernetes Service APIs 简介 给 Pod 添加 DNS 记录 理解 Linux 网络命名空间 自己动手写一个 Kubernetes YAML 模板化工具 图解 Kubernetes Ingress 图解 Kubernetes Service 在 Kubernetes 上运行高可用的 Kafka 集群 使用 KinD 加速 CI/CD 流水线 使用 Kustomize 定制 Helm Charts 更新一个 10 年有效期的 Kubernetes 证书 Grafana Loki 简明教程 使用 GitLab CI 与 Argo CD 进行 GitOps 实践 使用 Elastic 技术栈构建 K8S 全栈监控(4/4) 使用 Elastic 技术栈构建 K8S 全栈监控(3/4) 使用 Elastic 技术栈构建 K8S 全栈监控(2/4) 使用 Elastic 技术栈构建 K8S 全栈监控(1/4) Prometheus 监控外部 Kubernetes 集群 使用 Sealed Secrets 加密 Kubernetes Secrets Kubernetes 中 PV 和 PVC 的状态变化 在 Kubernetes 中运行 Kubernetes 在 Windows 下使用 WSL2 搭建 Kubernetes 集群 使用 Loki 进行日志监控和报警 使用 Tekton 创建 CI/CD 流水线（3/4） GitOps - 在 Kubernetes 中进行 DevOps 的方式 Jenkins 共享库示例 解决 CoreDNS 自定义域名失效的问题 请使用 JSON 格式记录日志[译] 使用 PyCharm、Okteto 和 Kubernetes 搭建远程开发环境 可视化创建 Kubernetes 微服务应用 使用 Tekton 创建 CI/CD 流水线（2/2） 使用 Tekton 创建 CI/CD 流水线（1/2） 加速开发流程的 Dockerfile 最佳实践 在 Kubernetes 上搭建 EFK 日志收集系统 使用编程语言描述 Kubernetes 应用 - cdk8s 在 Kubernetes 集群中使用 NodeLocal DNSCache Kubernetes HPA 使用详解 Envoy 简单入门示例 ingress-nginx 控制器工作原理 用 Kubernetes 资源对象创建 Grafana Dashboard AlertManager 何时报警 优秀的 Grafana K8S 插件 - DevOpsProdigy KubeGraf 在 Kubernetes 集群上部署 Kafka Kubernetes 集群均衡器 Descheduler 有时光机的 Kubernetes Dashboard - Kubevious 获取客户端访问真实 IP 在 Kubernetes 上部署 Vault 在 Kubernetes 上部署 Spinnaker Kubernetes 零宕机滚动更新 在 Kubernetes 集群上部署 VSCode 自定义 Traefik2 中间件 Traefik2.</description>
+    </item>
+    
+    <item>
+      <title>Kubernetes</title>
+      <link>/page/kubernetes.io/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/page/kubernetes.io/</guid>
+      <description>Kubernetes 是用于自动部署，扩展和管理容器化应用程序的开源系统。 它将组成应用程序的容器组合成逻辑单元，以便于管理和服务发现，Kubernetes 构建在 Google 15 年生产环境经验基础之上，并结合来自社区的最佳创意和实践。
+Kubernetes 特性1  全球规模：基于允许 Google 每周运行数十亿个容器的原则进行设计，Kubernetes 可以在不增加您的运维团队的情况下进行弹性扩展。 永不过时：无论您应用运行在本地还是运行于全球任何地域，Kubernetes 的灵活性都可以随着您的需求复杂度不断增加，还可以持续、轻松地对外提供服务。 随处运行：Kubernetes 是开源的，可以让您自由地部署在企业内部，私有云、混合云或公有云基础架构，使您轻松将应用迁移至任何位置。  Kubernetes 特性2  自动包装：根据资源需求和其他约束自动放置容器，同时不会牺牲可用性，混合关键和最大努力的工作负载，以提高资源利用率并节省更多资源。 自我修复：重新启动失败的容器，在节点不可用时，替换和重新调度节点上的容器，对用户定义的健康检查不响应的容器会被中止，并且在容器准备好服务之前不会把其向客户端广播。 横向缩放：使用简单的命令或 UI，或者根据 CPU 的使用情况自动调整应用程序副本数。 服务发现和负载均衡：不需要修改您的应用程序来使用不熟悉的服务发现机制，Kubernetes 为容器提供了自己的 IP 地址和一组容器的单个 DNS 名称，并可以在它们之间进行负载均衡。</description>
+    </item>
+    
+    <item>
+      <title>Kubernetes中文社区</title>
+      <link>/page/kubernetes.org.cn/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/page/kubernetes.org.cn/</guid>
+      <description>Kubernetes中文社区 www.kubernetes.org.cn 致力于让K8S技术人员便捷地获取信息，掌握K8S相关知识。推崇开源理念，推广K8S开源项目。</description>
+    </item>
+    
+    <item>
+      <title>友情链接</title>
+      <link>/page/friend/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/page/friend/</guid>
+      <description>阳明的一些朋友  JACK LEE 云原生实验室 Roc RECALL&amp;rsquo;s Blog devopser sealyun wujunze 风巢知识导航 运维咖啡吧 abcdocker 运维博客 鸡书之家 anonym0x1  </description>
+    </item>
+    
+  </channel>
+</rss>
