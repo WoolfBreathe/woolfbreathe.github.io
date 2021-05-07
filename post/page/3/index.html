@@ -197,6 +197,40 @@ autocomplete('#aa-search-input',
         <div class="posts-list">
           
             <article class="post-preview">
+              <a href="/post/devops/linux/devops-linux-homestead/">
+                <h2 class="post-title">Homestead(Windows系统Laravel环境搭建)</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-11-27
+              </p>
+              <div class="post-entry">
+                
+                  步骤简略  接下来让我们按照这几个步骤来完成整个 Laravel 开发环境的安装及配置： 安装 VirtualBox 安装 Vagrant 导入 Homestead Box 虚拟机盒子 安装 Git 安装 Homestead 管理脚本 配置 Homestead.yaml 文件 启动 Homestead 虚拟机
+ 安装 VirtualBox VirtualBox 是 Oracle 公司的开源虚拟机软件。VirtualBox 号称是最强的免费虚拟机软件，它不仅功能齐全，而且性能也很优异！VirtualBox 支持大部分流行的系统，如：Mac, Windows, Linux 等。
+安装 Vagrant Vagrant 是用来管理虚拟机的工具，支持当前主流的虚拟机系统如 VirtualBox、VMware、AWS 等。Vagrant 的主要作用是提供一个可配置、可移植和复用的软件环境。Vagrant 让你通过编写一个 Vagrantfile 文件来控制虚拟机的启动、虚拟机网络环境的配置、虚拟机与主机间的文件共享，以及启动后自动执行一些配置脚本，如自动执行一个 Shell Script 来安装一些必备的开发工具，如安装配置 MySQL、PHP，甚至是自动配置 Nginx 站点。这意味着，在一个多人开发的项目中，你只需要同步 Vagrantfile 文件，就可以保证参与项目的每个人各自的机器上拥有一致的开发环境。
+Homestead 介绍 Homestead 利用 Vagrantfile 提供的便利，定制了一整套的可配置、可移植和复用的 Laravel 开发环境。Homestead 虚拟机里面包含了 Nginx Web 服务器、PHP 7、MySQL、Postgres、Redis、Memcached、Node，以及所有你在使用 Laravel 开发时需要用到的各种软件。 Homestead 包含了两个东西： Homestead 管理脚本； Homestead Box 虚拟机盒子。 接下来独自说明下。
+                  <a href="/post/devops/linux/devops-linux-homestead/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/devops/">DevOps</a>&nbsp;
+                  
+                    #<a href="/tags/vagrant/">Vagrant</a>&nbsp;
+                  
+                    #<a href="/tags/homestead/">Homestead</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
               <a href="/post/computerlanguages/php/computerlanguages-php-laravel-phpunit/">
                 <h2 class="post-title">Laravel使用PHPUnit进行单元测试注意事项</h2>
 
@@ -720,42 +754,6 @@ public function dfs($s, $t) { $this-&gt;found = false; for ($i = 0; $i &lt;= $th
                     #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
                   
                     #<a href="/tags/graph/">Graph</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="/post/algorithms/binarytree/algorithms-binarytree-huffmantree/">
-                <h2 class="post-title">二叉树(BinaryTree)-哈夫曼树(HuffmanTree)</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                发表于 2019-08-26
-              </p>
-              <div class="post-entry">
-                
-                  赫夫曼树 在中小学每年期末考试结束后都会领到成绩单，成绩单上列出我们考试分数的等级，比如优秀（&gt;=90）、良好(&gt;=80)、合格(&gt;=60)、不合格(&lt;60)，以某个班为例，总人数是100人，不同成绩区间的比例如下：
-不考虑效率因素的话，可以这么实现成绩等级判定：
-这种情况下，比例占80%以上的分数都需要经历三次以上的判断才能得到结果，显然不合理，可以对判断逻辑进行改进：
-大部分同学的成绩都在 80 分左右，因此我们判断的逻辑改成了先通过 80 分对成绩进行划分，看起来效率是提升了，这其中的原理是每个分数都要循环调用此逻辑，将 80 分放到入口判断，总体判断次数更少，效率更高。
-这就是赫夫曼树的雏形。显然，上述流程图可以抽象为一棵二叉树，每个等级的人数看作路径权重，
-带权路径长度（权重x路径求和）最小的树叫做 赫夫曼树  把上面两个流程图抽象为带路径权重的二叉树如下：
-二叉树 a 的带权路径长度是 $15+215+340+430+410 = 315$，二叉树 b 的带权路径长度是 $240+35+153+230+102 = 220$，这意味着，对于人数 100 的班级，通过第一种方式要做 315 次比较，对于第二种方式，只需要 220 次比较，显然二叉树 b 比二叉树 a 更优。
-赫夫曼树的构建 当然，上述二叉树 b 还不是赫夫曼树，因为它不是最优的，赫夫曼树的构造方式如下：
-1. 把有权值的节点按照从小到大顺序进行排序：A5、E10、B15、D30、C40； 2. 取最小的两个节点作为某个新节点 N1 的子节点，较小的作为左子结点； 3. 然后将 N1 替代 A5 和 E10，插入上述有序序列，保持从小到大排序：N115、B15、D30、C40； 4. 重复步骤2，将 N1 和 B 作为一个新节点 N2 的左右节点，依次类推，直到把所有节点纳入树中。  最终形成的二叉树如下所示：
-对应的带权路径长度是 $140+230+315+45+4*10 = 205$，对于 100 个学生而言，需要进行 205 次判断。比前面的二叉树 b 更优，同时也是最优的二叉树，所以是赫夫曼树。
-                  <a href="/post/algorithms/binarytree/algorithms-binarytree-huffmantree/" class="post-read-more">[阅读全文]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
                   
                 </span>
               

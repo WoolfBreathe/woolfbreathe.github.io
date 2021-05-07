@@ -8,22 +8,18 @@
     <language>zh-cn</language>
     <managingEditor>youremail@domain.com (WoolfBreathe)</managingEditor>
     <webMaster>youremail@domain.com (WoolfBreathe)</webMaster>
-    <lastBuildDate>Fri, 07 May 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 06 May 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/math/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Math Sample</title>
-      <link>/post/2021-05-07-math-sample/</link>
-      <pubDate>Fri, 07 May 2021 00:00:00 +0000</pubDate>
+      <title>Matrix Analysis</title>
+      <link>/post/matrix/2021-05-06-matrixanalysis/</link>
+      <pubDate>Thu, 06 May 2021 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (WoolfBreathe)</author>
-      <guid>/post/2021-05-07-math-sample/</guid>
-      <description>&lt;p&gt;KaTeX can be used to generate complex math formulas server-side.&lt;/p&gt;
-&lt;p&gt;$$
-\phi = \frac{(1+\sqrt{5})}{2} = 1.6180339887\cdots
-$$&lt;/p&gt;
-&lt;p&gt;Additional details can be found on &lt;a href=&#34;https://github.com/Khan/KaTeX&#34;&gt;GitHub&lt;/a&gt; or on the &lt;a href=&#34;http://tiddlywiki.com/plugins/tiddlywiki/katex/&#34;&gt;Wiki&lt;/a&gt;.&lt;/p&gt;</description>
+      <guid>/post/matrix/2021-05-06-matrixanalysis/</guid>
+      <description></description>
     </item>
     
   </channel>
