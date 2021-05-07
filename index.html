@@ -276,50 +276,6 @@ autocomplete('#aa-search-input',
           	
 
             <article class="post-preview">
-              <a href="/post/2021-05-07-math-sample/">
-                <h2 class="post-title">Math Sample</h2>
-                
-                  <h3 class="post-subtitle">
-                  Using KaTeX
-                  </h3>
-                
-              </a>
-
-              <span class="post-meta">
-  
-    发表于 2021-05-07
-  
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  <p>KaTeX can be used to generate complex math formulas server-side.</p>
-<p>$$
-\phi = \frac{(1+\sqrt{5})}{2} = 1.6180339887\cdots
-$$</p>
-<p>Additional details can be found on <a href="https://github.com/Khan/KaTeX">GitHub</a> or on the <a href="http://tiddlywiki.com/plugins/tiddlywiki/katex/">Wiki</a>.</p>
-                  <a href="/post/2021-05-07-math-sample/" class="post-read-more">[阅读全文]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="/tags/example/">example</a>&nbsp;
-                
-                  #<a href="/tags/math/">math</a>&nbsp;
-                
-                </span>
-              
-            </article>
-
-          
-
-          	
-
-            <article class="post-preview">
               <a href="/post/devops/docker/devops-docker-install/">
                 <h2 class="post-title">Docker Install</h2>
                 
@@ -337,8 +293,9 @@ $$</p>
                 
                   Get Docker CE for Ubuntu 要在Ubuntu上开始使用Docker CE，请确保满足先决条件，然后安装Docker。
 先决条件(Prerequisites) Docker EE 用户 要安装Docker Enterprise Edition（Docker EE），请转到获取Ubuntu的Docker EE而不是此主题。
-OS requirements 要安装Docker CE，您需要其中一个64位的Ubuntu版本： Cosmic 18.10 Bionic 18.04 (LTS) Xenial 16.04 (LTS) 在x86_64（或amd64），armhf，arm64，s390x（IBM Z）和ppc64le（IBM Power）体系结构上支持Docker CE。  Uninstall old versions 较旧版本的Docker被称为docker，docker.io或docker引擎。如果已安装，请卸载它们：
-$ sudo apt-get remove docker docker-engine docker.io containerd runc 如果apt-get报告没有安装这些软件包，那就没关系。 保留/var/lib/docker/的内容，包括图像，容器，卷(volumes)和网络。 Docker CE包现在称为docker-ce。
+OS requirements 要安装Docker CE，您需要其中一个64位的Ubuntu版本  Cosmic 18.10 Bionic 18.04 (LTS) Xenial 16.04 (LTS) 在x86_64（或amd64），armhf，arm64，s390x（IBM Z）和ppc64le（IBM Power）体系结构上支持Docker CE。
+ Uninstall old versions 较旧版本的Docker被称为docker，docker.io或docker引擎。如果已安装，请卸载它们：
+sudo apt-get remove docker docker-engine docker.io containerd runc 如果apt-get报告没有安装这些软件包，那就没关系。 保留/var/lib/docker/的内容，包括图像，容器，卷(volumes)和网络。 Docker CE包现在称为docker-ce。
 Supported storage drivers Ubuntu上的Docker CE支持overlay2，aufs和btrfs存储驱动程序。
 对于Linux内核版本4及更高版本的新安装，支持overlay2并优先于aufs。 Docker CE默认使用overlay2存储驱动程序。如果您需要使用aufs，则需要手动配置它。见aufs
 Install Docker CE 使用存储库安装(Install using the repository) 在新主机上首次安装Docker CE之前，需要设置Docker存储库。之后，您可以从存储库安装和更新Docker。 Set up the repository
@@ -362,7 +319,7 @@ Install Docker CE 使用存储库安装(Install using the repository) 在新主�
           	
 
             <article class="post-preview">
-              <a href="/post/devops/docker/devops-docker-layering/">
+              <a href="/post/devops/docker/devops-docker-docker/">
                 <h2 class="post-title">Docker</h2>
                 
               </a>
@@ -377,9 +334,9 @@ Install Docker CE 使用存储库安装(Install using the repository) 在新主�
 
               <div class="post-entry">
                 
-                  Docker 架构 Docker 使用 C/S （客户端/服务器）体系的架构，Docker 客户端与 Docker 守护进程通信，Docker 守护进程负责构建，运行和分发 Docker 容器。Docker 客户端和守护进程可以在同一个系统上运行，也可以将 Docker 客户端连接到远程 Docker 守护进程。Docker 客户端和守护进程使用 REST API 通过UNIX套接字或网络接口进行通信。 docker structrue ​​
-1. Docker Damon：dockerd，用来监听 Docker API 的请求和管理 Docker 对象，比如镜像、容器、网络和 Volume。 2. Docker Client：docker，docker client 是我们和 Docker 进行交互的最主要的方式方法，比如我们可以通过 docker run 命令来运行一个容器，然后我们的这个 client 会把命令发送给上面的 Dockerd，让他来做真正事情。 3. Docker Registry：用来存储 Docker 镜像的仓库，Docker Hub 是 Docker 官方提供的一个公共仓库，而且 Docker 默认也是从 4. Docker Hub 上查找镜像的，当然你也可以很方便的运行一个私有仓库，当我们使用 docker pull 或者 docker run 命令时，就会从我们配置的 Docker 镜像仓库中去拉取镜像，使用 docker push 命令时，会将我们构建的镜像推送到对应的镜像仓库中。 4.
-                  <a href="/post/devops/docker/devops-docker-layering/" class="post-read-more">[阅读全文]</a>
+                  <h2 id="docker-架构">Docker 架构</h2>
+<p>Docker 使用 C/S （客户端/服务器）体系的架构，Docker 客户端与 Docker 守护进程通信，Docker 守护进程负责构建，运行和分发 Docker 容器。Docker 客户端和守护进程可以在同一个系统上运行，也可以将 Docker 客户端连接到远程 Docker 守护进程。Docker 客户端和守护进程使用 REST API 通过UNIX套接字或网络接口进行通信。 docker structrue ​​</p>
+                  <a href="/post/devops/docker/devops-docker-docker/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
@@ -397,20 +354,9 @@ Install Docker CE 使用存储库安装(Install using the repository) 在新主�
           
 
           	
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>	
-            <ins class="adsbygoogle"	
-                style="display:block"	
-                data-ad-format="fluid"	
-                data-ad-layout-key="-49+ch+3h-db+7h"	
-                data-ad-client="ca-pub-5376999672787220"	
-                data-ad-slot="7981888143"></ins>	
-            <script>	
-                (adsbygoogle = window.adsbygoogle || []).push({});	
-            </script>	
-          	
 
             <article class="post-preview">
-              <a href="/post/devops/docker/devops-docker-layering/">
+              <a href="/post/devops/docker/devops-docker-layering-principle/">
                 <h2 class="post-title">Docker分层原理</h2>
                 
               </a>
@@ -442,6 +388,17 @@ Install Docker CE 使用存储库安装(Install using the repository) 在新主�
 
           
 
+          	
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>	
+            <ins class="adsbygoogle"	
+                style="display:block"	
+                data-ad-format="fluid"	
+                data-ad-layout-key="-49+ch+3h-db+7h"	
+                data-ad-client="ca-pub-5376999672787220"	
+                data-ad-slot="7981888143"></ins>	
+            <script>	
+                (adsbygoogle = window.adsbygoogle || []).push({});	
+            </script>	
           	
 
             <article class="post-preview">
@@ -762,6 +719,52 @@ Ubuntu安装 安装Chrome sudo apt-get install libxss1 libappindicator1 libindic
                   #<a href="/tags/unittest/">UnitTest</a>&nbsp;
                 
                   #<a href="/tags/selenium/">Selenium</a>&nbsp;
+                
+                </span>
+              
+            </article>
+
+          
+
+          	
+
+            <article class="post-preview">
+              <a href="/post/devops/linux/devops-linux-timedatectl/">
+                <h2 class="post-title">Linux使用Timedatectl修改时区和时间</h2>
+                
+              </a>
+
+              <span class="post-meta">
+  
+    发表于 2020-02-18
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <h1 id="timedatectl常见操作">Timedatectl常见操作</h1>
+<p>1.查看当前时间/日期/时区：timedatectl或者 timedatectl status</p>
+<p>2.查看所有可用时区：timedatectl list-timezones</p>
+<p>3.设置时区：timedatectl set-timezone “Asia/Shanghai”   或者  timedatectl set-timezone PRC</p>
+<p>4.设置时间：timedatectl set-time HH:MM:SS</p>
+<p>5.设置日期：timedatectl set-time YYYY-MM-DD</p>
+<p>6.设置日期时间：timedatectl set-time “YYYY-MM-DD HH:MM:SS”</p>
+<p>7.设置硬件时钟为本地时间：timedatectl set-local-rtc 1</p>
+<p>8.设置硬件时钟为UTC时间：timedatectl set-local-rtc 0</p>
+<p>9.启动NTP时间同步（启用NTP服务或者Chrony服务）：timedatectl set-ntp true</p>
+<p>10.禁用NTP时间同步：timedatectl set-ntp false</p>
+
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="/tags/devops/">DevOps</a>&nbsp;
+                
+                  #<a href="/tags/linux/">Linux</a>&nbsp;
                 
                 </span>
               

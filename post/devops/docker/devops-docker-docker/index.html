@@ -10,11 +10,12 @@
   <meta property="og:title" content="Docker" />
   <meta name="twitter:title" content="Docker" />
 
-  <meta name="description" content="Docker 架构 Docker 使用 C/S （客户端/服务器）体系的架构，Docker 客户端与 Docker 守护进程通信，Docker 守护进程负责构建，运行和分发 Docker 容器。Docker 客户端和守护进程可以在同一个系统上运行，也可以将 Docker 客户端连接到远程 Docker 守护进程。Docker 客户端和守护进程使用 REST API 通过UNIX套接字或网络接口进行通信。 docker structrue ​​
-1. Docker Damon：dockerd，用来监听 Docker API 的请求和管理 Docker 对象，比如镜像、容器、网络和 Volume。 2. Docker Client：docker，docker client 是我们和 Docker 进行交互的最主要的方式方法，比如我们可以通过 docker run 命令来运行一个容器，然后我们的这个 client 会把命令发送给上面的 Dockerd，让他来做真正事情。 3. Docker Registry：用来存储 Docker 镜像的仓库，Docker Hub 是 Docker 官方提供的一个公共仓库，而且 Docker 默认也是从 4. Docker Hub 上查找镜像的，当然你也可以很方便的运行一个私有仓库，当我们使用 docker pull 或者 docker run 命令时，就会从我们配置的 Docker 镜像仓库中去拉取镜像，使用 docker push 命令时，会将我们构建的镜像推送到对应的镜像仓库中。 4.">
-  <meta property="og:description" content="Docker 架构 Docker 使用 C/S （客户端/服务器）体系的架构，Docker 客户端与 Docker 守护进程通信，Docker 守护进程负责构建，运行和分发 Docker 容器。Docker 客户端和守护进程可以在同一个系统上运行，也可以将 Docker 客户端连接到远程 Docker 守护进程。Docker 客户端和守护进程使用 REST API 通过UNIX套接字或网络接口进行通信。 docker structrue ​​
-1. Docker Damon：dockerd，用来监听 Docker API 的请求和管理 Docker 对象，比如镜像、容器、网络和 Volume。 2. Docker Client：docker，docker client 是我们和 Docker 进行交互的最主要的方式方法，比如我们可以通过 docker run 命令来运行一个容器，然后我们的这个 client 会把命令发送给上面的 Dockerd，让他来做真正事情。 3. Docker Registry：用来存储 Docker 镜像的仓库，Docker Hub 是 Docker 官方提供的一个公共仓库，而且 Docker 默认也是从 4. Docker Hub 上查找镜像的，当然你也可以很方便的运行一个私有仓库，当我们使用 docker pull 或者 docker run 命令时，就会从我们配置的 Docker 镜像仓库中去拉取镜像，使用 docker push 命令时，会将我们构建的镜像推送到对应的镜像仓库中。 4.">
-  <meta name="twitter:description" content="Docker 架构 Docker 使用 C/S （客户端/服务器）体系的架构，Docker 客户端与 Docker 守护进程通信，Docker 守护进程负责构建，运行和分发 Docker 容器。Docker 客户端和守护进程可以在同一个系统上运行，也可以将 Docker 客户端连接到远程 Docker 守护进程。Docker 客户端和守护进程使用 REST API 通过UNIX套接字或网络接口进行 …">
+  <meta name="description" content="Docker 架构
+Docker 使用 C/S （客户端/服务器）体系的架构，Docker 客户端与 Docker 守护进程通信，Docker 守护进程负责构建，运行和分发 Docker 容器。Docker 客户端和守护进程可以在同一个系统上运行，也可以将 Docker 客户端连接到远程 Docker 守护进程。Docker 客户端和守护进程使用 REST API 通过UNIX套接字或网络接口进行通信。 docker structrue ​​">
+  <meta property="og:description" content="Docker 架构
+Docker 使用 C/S （客户端/服务器）体系的架构，Docker 客户端与 Docker 守护进程通信，Docker 守护进程负责构建，运行和分发 Docker 容器。Docker 客户端和守护进程可以在同一个系统上运行，也可以将 Docker 客户端连接到远程 Docker 守护进程。Docker 客户端和守护进程使用 REST API 通过UNIX套接字或网络接口进行通信。 docker structrue ​​">
+  <meta name="twitter:description" content="Docker 架构
+Docker 使用 C/S （客户端/服务器）体系的架构，Docker 客户端与 Docker 守护进程通信，Docker 守护进程负责构建，运行和分发 Docker 容器。Docker 客户端和守护进程可以在同一个系统上运行，也可以将 Docker 客户端连接到远程 Docker 守护进程。Docker 客户端和守护进程使用 REST API 通过UNIX套接字或网络接口进行 …">
   <meta name="author" content="WoolfBreathe"/>
   <link href="/img/favicon.png" rel="icon" type="image/x-icon" />
   <link rel="apple-touch-icon" href="/img/favicon.png"/>
@@ -266,13 +267,18 @@ autocomplete('#aa-search-input',
 <aside class="toc">
   <nav id="TableOfContents">
   <ul>
-    <li><a href="#执行流程">执行流程</a></li>
-    <li><a href="#容器">容器</a></li>
-    <li><a href="#镜像">镜像</a></li>
-    <li><a href="#定制镜像流程">定制镜像流程</a></li>
-    <li><a href="#dockerfile定制镜像">DockerFile定制镜像</a></li>
-    <li><a href="#迁移镜像">迁移镜像</a></li>
-    <li><a href="#私有仓库">私有仓库</a></li>
+    <li><a href="#docker-架构">Docker 架构</a></li>
+    <li><a href="#常用命令">常用命令</a>
+      <ul>
+        <li><a href="#执行流程">执行流程</a></li>
+        <li><a href="#容器">容器</a></li>
+        <li><a href="#镜像">镜像</a></li>
+        <li><a href="#定制镜像流程">定制镜像流程</a></li>
+        <li><a href="#dockerfile定制镜像">DockerFile定制镜像</a></li>
+        <li><a href="#迁移镜像">迁移镜像</a></li>
+        <li><a href="#私有仓库">私有仓库</a></li>
+      </ul>
+    </li>
   </ul>
 </nav>
 </aside>
@@ -291,18 +297,19 @@ autocomplete('#aa-search-input',
           
           
 
-          <h1 id="docker-架构">Docker 架构</h1>
+          <h2 id="docker-架构">Docker 架构</h2>
 <p>Docker 使用 C/S （客户端/服务器）体系的架构，Docker 客户端与 Docker 守护进程通信，Docker 守护进程负责构建，运行和分发 Docker 容器。Docker 客户端和守护进程可以在同一个系统上运行，也可以将 Docker 客户端连接到远程 Docker 守护进程。Docker 客户端和守护进程使用 REST API 通过UNIX套接字或网络接口进行通信。 docker structrue ​​</p>
 <p><img src="/img/posts/DevOps/Docker/docker-structrue.png" alt="PHP-FPM动态页面的过程!"></p>
-<pre><code>1. Docker Damon：dockerd，用来监听 Docker API 的请求和管理 Docker 对象，比如镜像、容器、网络和 Volume。
-2. Docker Client：docker，docker client 是我们和 Docker 进行交互的最主要的方式方法，比如我们可以通过 docker run 命令来运行一个容器，然后我们的这个 client 会把命令发送给上面的 Dockerd，让他来做真正事情。
-3. Docker Registry：用来存储 Docker 镜像的仓库，Docker Hub 是 Docker 官方提供的一个公共仓库，而且 Docker 默认也是从 4. Docker Hub 上查找镜像的，当然你也可以很方便的运行一个私有仓库，当我们使用 docker pull 或者 docker run 命令时，就会从我们配置的 Docker 镜像仓库中去拉取镜像，使用 docker push 命令时，会将我们构建的镜像推送到对应的镜像仓库中。
-4. Images：镜像，镜像是一个只读模板，带有创建 Docker 容器的说明，一般来说的，镜像会基于另外的一些基础镜像并加上一些额外的自定义功能。比如，你可以构建一个基于 Centos 的镜像，然后在这个基础镜像上面安装一个 Nginx 服务器，这样就可以构成一个属于我们自己的镜像了。
-5. Containers：容器，容器是一个镜像的可运行的实例，可以使用 Docker REST API 或者 CLI 来操作容器，容器的实质是进程，但与直接在宿主执行的进程不同，容器进程运行于属于自己的独立的命名空间。因此容器可以拥有自己的 root 文件系统、自己的网络配置、自己的进程空间，甚至自己的用户 ID 空间。容器内的进程是运行在一个隔离的环境里，使用起来，就好像是在一个独立于宿主的系统下操作一样。这种特性使得容器封装的应用比直接在宿主运行更加安全。
-6. 底层技术支持：Namespaces（做隔离）、CGroups（做资源限制）、UnionFS（镜像和容器的分层） the-underlying-technology Docker 底层架构分析
-</code></pre>
-<h1 id="常用命令">常用命令</h1>
-<h2 id="执行流程">执行流程</h2>
+<blockquote>
+<p>Docker Damon：dockerd，用来监听 Docker API 的请求和管理 Docker 对象，比如镜像、容器、网络和 Volume。
+Docker Client：docker，docker client 是我们和 Docker 进行交互的最主要的方式方法，比如我们可以通过 docker run 命令来运行一个容器，然后我们的这个 client 会把命令发送给上面的 Dockerd，让他来做真正事情。
+Docker Registry：用来存储 Docker 镜像的仓库，Docker Hub 是 Docker 官方提供的一个公共仓库，而且 Docker 默认也是从 4. Docker Hub 上查找镜像的，当然你也可以很方便的运行一个私有仓库，当我们使用 docker pull 或者 docker run 命令时，就会从我们配置的 Docker 镜像仓库中去拉取镜像，使用 docker push 命令时，会将我们构建的镜像推送到对应的镜像仓库中。
+Images：镜像，镜像是一个只读模板，带有创建 Docker 容器的说明，一般来说的，镜像会基于另外的一些基础镜像并加上一些额外的自定义功能。比如，你可以构建一个基于 Centos 的镜像，然后在这个基础镜像上面安装一个 Nginx 服务器，这样就可以构成一个属于我们自己的镜像了。
+Containers：容器，容器是一个镜像的可运行的实例，可以使用 Docker REST API 或者 CLI 来操作容器，容器的实质是进程，但与直接在宿主执行的进程不同，容器进程运行于属于自己的独立的命名空间。因此容器可以拥有自己的 root 文件系统、自己的网络配置、自己的进程空间，甚至自己的用户 ID 空间。容器内的进程是运行在一个隔离的环境里，使用起来，就好像是在一个独立于宿主的系统下操作一样。这种特性使得容器封装的应用比直接在宿主运行更加安全。
+底层技术支持：Namespaces（做隔离）、CGroups（做资源限制）、UnionFS（镜像和容器的分层） the-underlying-technology Docker 底层架构分析</p>
+</blockquote>
+<h2 id="常用命令">常用命令</h2>
+<h3 id="执行流程">执行流程</h3>
 <p>当利用docker run来创建容器时，Docker 在后台运行的标准操作包括：</p>
 <ol>
 <li>检查本地是否存在指定的镜像，不存在就从公有仓库下载</li>
@@ -313,41 +320,40 @@ autocomplete('#aa-search-input',
 <li>执行用户指定的应用程序</li>
 <li>执行完毕后容器被终止</li>
 </ol>
-<h2 id="容器">容器</h2>
+<h3 id="容器">容器</h3>
 <p>查看正在运行的容器</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">docker ps -a
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker ps -a
 
 docker container ls
 </code></pre></div><p>查看镜像、容器、数据卷所占用的空间</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">docker system df
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker system df
 </code></pre></div><p>创建并运行</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">docker container run -it ubuntu:16.04 /bin/bash
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker container run -it ubuntu:16.04 /bin/bash
 </code></pre></div><p>进入容器</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">docker exec -it 容器ID /bin/bash
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker <span style="color:#8be9fd;font-style:italic">exec</span> -it 容器ID /bin/bash
 </code></pre></div><p>启动容器</p>
-<pre><code>注意: 
+<p>注意:
 docker container run ubuntu:16.04 创建的容器不能使用start启动
-docker container run -it ubuntu:16.04 /bin/bash 创建的容器可以使用start启动
-</code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">docker container start 容器ID
+docker container run -it ubuntu:16.04 /bin/bash 创建的容器可以使用start启动</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker container start 容器ID
 </code></pre></div><p>停止容器</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">docker container stop 容器ID
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker container stop 容器ID
 </code></pre></div><p>删除指定容器</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">docker container rm 容器ID
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker container rm 容器ID
 </code></pre></div><p>清除停止的容器(谨慎使用!)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">docker container prune
-</code></pre></div><h2 id="镜像">镜像</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker container prune
+</code></pre></div><h3 id="镜像">镜像</h3>
 <p>查看已有镜像</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">docker image ls
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker image ls
 </code></pre></div><p>删除镜像</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">docker image rm [选项] &lt;镜像1&gt; [&lt;镜像2&gt; ...]
-</code></pre></div><h2 id="定制镜像流程">定制镜像流程</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">docker run --name webserver -d -p 80:80 nginx
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker image rm <span style="color:#ff79c6">[</span>选项<span style="color:#ff79c6">]</span> &lt;镜像1&gt; <span style="color:#ff79c6">[</span>&lt;镜像2&gt; ...<span style="color:#ff79c6">]</span>
+</code></pre></div><h3 id="定制镜像流程">定制镜像流程</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker run --name webserver -d -p 80:80 nginx
 </code></pre></div><p>添加修改</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ docker exec -it webserver bash
-root@3729b97e8226:/# echo &#39;&lt;h1&gt;Hello, Docker!&lt;/h1&gt;&#39; &gt; /usr/share/nginx/html/index.html
-root@3729b97e8226:/# exit
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ docker diff webserver
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ docker <span style="color:#8be9fd;font-style:italic">exec</span> -it webserver bash
+root@3729b97e8226:/# <span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#39;&lt;h1&gt;Hello, Docker!&lt;/h1&gt;&#39;</span> &gt; /usr/share/nginx/html/index.html
+root@3729b97e8226:/# <span style="color:#8be9fd;font-style:italic">exit</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ docker diff webserver
 C /root
 A /root/.bash_history
 C /run
@@ -365,77 +371,77 @@ A /var/cache/nginx/proxy_temp
 A /var/cache/nginx/scgi_temp
 A /var/cache/nginx/uwsgi_temp
 </code></pre></div><p>提交修改生成新镜像</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ docker commit \
-    --author &#34;海马学院&#34; \
-    --message &#34;修改了默认首页&#34; \
-    webserver \
-    nginx:v2
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ docker commit <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    --author <span style="color:#f1fa8c">&#34;海马学院&#34;</span> <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    --message <span style="color:#f1fa8c">&#34;修改了默认首页&#34;</span> <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    webserver <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    nginx:v2
 sha256:07e33465974800ce65751acc279adc6ed2dc5ed4e0838f8b86f0c87aa1795214
 </code></pre></div><p>查看提交记录</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ docker history nginx:v2
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ docker <span style="color:#8be9fd;font-style:italic">history</span> nginx:v2
 IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
-07e334659748        54 seconds ago      nginx -g daemon off;                            95 B                修改了默认网页
-e43d811ce2f4        4 weeks ago         /bin/sh -c #(nop)  CMD [&#34;nginx&#34; &#34;-g&#34; &#34;daemon    0 B
-&lt;missing&gt;           4 weeks ago         /bin/sh -c #(nop)  EXPOSE 443/tcp 80/tcp        0 B
-&lt;missing&gt;           4 weeks ago         /bin/sh -c ln -sf /dev/stdout /var/log/nginx/   22 B
-&lt;missing&gt;           4 weeks ago         /bin/sh -c apt-key adv --keyserver hkp://pgp.   58.46 MB
-&lt;missing&gt;           4 weeks ago         /bin/sh -c #(nop)  ENV NGINX_VERSION=1.11.5-1   0 B
-&lt;missing&gt;           4 weeks ago         /bin/sh -c #(nop)  MAINTAINER NGINX Docker Ma   0 B
-&lt;missing&gt;           4 weeks ago         /bin/sh -c #(nop)  CMD [&#34;/bin/bash&#34;]            0 B
-&lt;missing&gt;           4 weeks ago         /bin/sh -c #(nop) ADD file:23aa4f893e3288698c   123 MB
+07e334659748        <span style="color:#bd93f9">54</span> seconds ago      nginx -g daemon off;                            <span style="color:#bd93f9">95</span> B                修改了默认网页
+e43d811ce2f4        <span style="color:#bd93f9">4</span> weeks ago         /bin/sh -c <span style="color:#6272a4">#(nop)  CMD [&#34;nginx&#34; &#34;-g&#34; &#34;daemon    0 B</span>
+&lt;missing&gt;           <span style="color:#bd93f9">4</span> weeks ago         /bin/sh -c <span style="color:#6272a4">#(nop)  EXPOSE 443/tcp 80/tcp        0 B</span>
+&lt;missing&gt;           <span style="color:#bd93f9">4</span> weeks ago         /bin/sh -c ln -sf /dev/stdout /var/log/nginx/   <span style="color:#bd93f9">22</span> B
+&lt;missing&gt;           <span style="color:#bd93f9">4</span> weeks ago         /bin/sh -c apt-key adv --keyserver hkp://pgp.   58.46 MB
+&lt;missing&gt;           <span style="color:#bd93f9">4</span> weeks ago         /bin/sh -c <span style="color:#6272a4">#(nop)  ENV NGINX_VERSION=1.11.5-1   0 B</span>
+&lt;missing&gt;           <span style="color:#bd93f9">4</span> weeks ago         /bin/sh -c <span style="color:#6272a4">#(nop)  MAINTAINER NGINX Docker Ma   0 B</span>
+&lt;missing&gt;           <span style="color:#bd93f9">4</span> weeks ago         /bin/sh -c <span style="color:#6272a4">#(nop)  CMD [&#34;/bin/bash&#34;]            0 B</span>
+&lt;missing&gt;           <span style="color:#bd93f9">4</span> weeks ago         /bin/sh -c <span style="color:#6272a4">#(nop) ADD file:23aa4f893e3288698c   123 MB</span>
 </code></pre></div><p>启用新的容器</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">docker run --name webserv2 -d -p 81:80 nginx:v2
-</code></pre></div><h2 id="dockerfile定制镜像">DockerFile定制镜像</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker run --name webserv2 -d -p 81:80 nginx:v2
+</code></pre></div><h3 id="dockerfile定制镜像">DockerFile定制镜像</h3>
 <p>FROM 指定基础镜像
 RUN 执行命令(每一个RUN建立一层，执行结束后，COMMEIT 这一层的修改，构成新的镜像)
 COPY 复制上下文文件</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">FROM nginx
-RUN echo &#39;&lt;h1&gt;Hello, Docker!&lt;/h1&gt;&#39; &gt; /usr/share/nginx/html/index.html &amp;&amp; echo &#39;&lt;h1&gt;Hello, Docker!&lt;/h1&gt;&#39; &gt; /usr/share/nginx/html/home.html
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">FROM nginx
+RUN <span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#39;&lt;h1&gt;Hello, Docker!&lt;/h1&gt;&#39;</span> &gt; /usr/share/nginx/html/index.html <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#39;&lt;h1&gt;Hello, Docker!&lt;/h1&gt;&#39;</span> &gt; /usr/share/nginx/html/home.html
 COPY ./package.json /app/
 </code></pre></div><p>构建镜像</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ docker build -t nginx:v3 .
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ docker build -t nginx:v3 .
 Sending build context to Docker daemon 2.048 kB
-Step 1 : FROM nginx
+Step <span style="color:#bd93f9">1</span> : FROM nginx
  ---&gt; e43d811ce2f4
-Step 2 : RUN echo &#39;&lt;h1&gt;Hello, Docker!&lt;/h1&gt;&#39; &gt; /usr/share/nginx/html/index.html
+Step <span style="color:#bd93f9">2</span> : RUN <span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#39;&lt;h1&gt;Hello, Docker!&lt;/h1&gt;&#39;</span> &gt; /usr/share/nginx/html/index.html
  ---&gt; Running in 9cdc27646c7b
  ---&gt; 44aa4490ce2c
 Removing intermediate container 9cdc27646c7b
 Successfully built 44aa4490ce2c
-</code></pre></div><h2 id="迁移镜像">迁移镜像</h2>
+</code></pre></div><h3 id="迁移镜像">迁移镜像</h3>
 <p>Docker 还提供了docker load和docker save命令，用以将镜像保存为一个 tar 文件，然后传输到另一个位置上，再加载进来。这是在没有 Docker Registry 时的做法，现在已经不推荐，镜像迁移应该直接使用 Docker Registry，无论是直接使用 Docker Hub 还是使用内网私有 Registry 都可以。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ docker save alpine | gzip &gt; alpine-latest.tar.gz
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ docker load -i alpine-latest.tar.gz
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker save alpine | gzip &gt; alpine-latest.tar.gz
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ docker load -i alpine-latest.tar.gz
 Loaded image: alpine:latest
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">docker save &lt;镜像名&gt; | bzip2 | pv | ssh &lt;用户名&gt;@&lt;主机名&gt; &#39;cat | docker load&#39;
-</code></pre></div><h2 id="私有仓库">私有仓库</h2>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker save &lt;镜像名&gt; | bzip2 | pv | ssh &lt;用户名&gt;@&lt;主机名&gt; <span style="color:#f1fa8c">&#39;cat | docker load&#39;</span>
+</code></pre></div><h3 id="私有仓库">私有仓库</h3>
 <p>docker-registry是官方提供的工具，可以用于构建私有的镜像仓库。本文内容基于 docker-registry v2.x 版本。你可以通过获取官方 registry 镜像来运行。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">docker run -d \
-    -p 27018:5000 \
-    -v /home/vagrant/opt/data/registry:/var/lib/registry \
-    registry
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker run -d <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    -p 27018:5000 <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    -v /home/vagrant/opt/data/registry:/var/lib/registry <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    registry
 </code></pre></div><p>如果你不想使用 127.0.0.1:5000 作为仓库地址，比如想让本网段的其他主机也能把镜像推送到私有仓库。你就得把例如 192.168.199.100:5000 这样的内网地址作为私有仓库地址，这时你会发现无法成功推送镜像。</p>
 <p>这是因为 Docker 默认不允许非 HTTPS 方式推送镜像。我们可以通过 Docker 的配置选项来取消这个限制。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">{
-    &#34;registry-mirrors&#34;: [&#34;https://alzgoonw.mirror.aliyuncs.com&#34;],
-    &#34;insecure-registries&#34;: [
-        &#34;192.168.10.10:27018&#34;,
-        &#34;10.0.2.15:27018&#34;,
-        &#34;192.168.31.31:27018&#34;,
-        &#34;192.168.31.36:27018&#34;,
-        &#34;0.0.0.0:27018&#34;
-    ]
-}
-</code></pre></div><p><strong>重启docker</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">{</span>
+    <span style="color:#f1fa8c">&#34;registry-mirrors&#34;</span>: <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;https://alzgoonw.mirror.aliyuncs.com&#34;</span><span style="color:#ff79c6">]</span>,
+    <span style="color:#f1fa8c">&#34;insecure-registries&#34;</span>: <span style="color:#ff79c6">[</span>
+        <span style="color:#f1fa8c">&#34;192.168.10.10:27018&#34;</span>,
+        <span style="color:#f1fa8c">&#34;10.0.2.15:27018&#34;</span>,
+        <span style="color:#f1fa8c">&#34;192.168.31.31:27018&#34;</span>,
+        <span style="color:#f1fa8c">&#34;192.168.31.36:27018&#34;</span>,
+        <span style="color:#f1fa8c">&#34;0.0.0.0:27018&#34;</span>
+    <span style="color:#ff79c6">]</span>
+<span style="color:#ff79c6">}</span>
+</code></pre></div><p>重启docker</p>
 <p>使用docker tag来标记一个镜像，然后推送它到仓库。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">docker tag hello-world:latest 0.0.0.0:27018/hello-world:latest
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker tag hello-world:latest 0.0.0.0:27018/hello-world:latest
 </code></pre></div><p>推送镜像</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">docker push 10.0.2.15:27018/hello-world:latest
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker push 10.0.2.15:27018/hello-world:latest
 </code></pre></div><p>检查仓库中的镜像</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ curl 127.0.0.1:27018/v2/_catalog
-{&#34;repositories&#34;:[&#34;ubuntu&#34;]}
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ curl 127.0.0.1:27018/v2/_catalog
+<span style="color:#ff79c6">{</span><span style="color:#f1fa8c">&#34;repositories&#34;</span>:<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;ubuntu&#34;</span><span style="color:#ff79c6">]}</span>
 </code></pre></div><p>拉取镜像</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">docker pull 192.168.31.36:27018/hello-world:latest
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker pull 192.168.31.36:27018/hello-world:latest
 </code></pre></div>
 
           <h2>微信公众号</h2>
@@ -500,7 +506,7 @@ Loaded image: alpine:latest
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
     
-    <li><a href="/post/devops/docker/devops-docker-layering/">Docker分层原理</a></li>
+    <li><a href="/post/devops/docker/devops-docker-layering-principle/">Docker分层原理</a></li>
     
     <li><a href="/post/devops/linux/devops-linux-rsync/">Linux Rsync 文件同步</a></li>
     
@@ -528,7 +534,7 @@ Loaded image: alpine:latest
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="/post/devops/docker/devops-docker-layering/" data-toggle="tooltip" data-placement="top" title="Docker分层原理">&larr; 前一篇</a>
+              <a href="/post/devops/docker/devops-docker-layering-principle/" data-toggle="tooltip" data-placement="top" title="Docker分层原理">&larr; 前一篇</a>
             </li>
           
           
