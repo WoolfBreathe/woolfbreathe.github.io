@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MySQL on WoolfBreathe</title>
+    <link>/tags/mysql/</link>
+    <description>Recent content in MySQL on WoolfBreathe</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <managingEditor>youremail@domain.com (WoolfBreathe)</managingEditor>
+    <webMaster>youremail@domain.com (WoolfBreathe)</webMaster>
+    <lastBuildDate>Wed, 08 Jan 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Centos7.X下编译安装MySQL Utilities</title>
+      <link>/post/devops/database/devops-linux-mysql-utilities/</link>
+      <pubDate>Wed, 08 Jan 2020 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/devops/database/devops-linux-mysql-utilities/</guid>
+      <description>简介 MySQL Utilities是MySQL官方提供的mysql管理辅助工具，工具非常之多，其功能组件：
+Binary Log Operations(二进制日志操作) mysqlbinlogmove 二进制日志移动 mysqlbinlogpurge 二进制日志清理 mysqlbinlogrotate 二进制日志老化工具 Database Operations(数据库操作) mysqldbexport 数据导出 mysqldbimport 数据导入 mysqldbcopy 库级别数据库复制 mysqldiff 数据库对象级别比较工具 mysqldbcompare 数据库库级别比较工具 General Operations(通用用的操作) mysqldiskusage 磁盘空间查看 mysqlfrm 恢复故障表.frm文件 mysqluserclone 用户克隆工具 mysqluc Utilities帮助工具 mysqlindexcheck 索引检测工具 mysqlmetagrep 元数据过滤器 mysqlprocgrep 进程搜索及清理工具 High Availability Operations(高可用) mysqlreplicate 主从复制工具 mysqlrpladmin 主从复制管理工具 mysqlrplcheck 主从复制检测工具 mysqlrplms 主从多元复制工具 mysqlrplshow 主从复制拓扑图工具 mysqlrplsync 主从复制同步工具 mysqlfailover 主从failover工具 mysqlslavetrx 从库事务跳过工具 Server Operations(服务器操作) mysqlserverinfo 服务器信息查看工具 mysqlserverclone 服务器克隆工具 Specialized Operations(特殊操作) mysqlauditadmin 审计管理工具 mysqlauditgrep 审计日志过滤工具 下载安装 [root@centos7 ~]# wget https://downloads.</description>
+    </item>
+    
+    <item>
+      <title>Linux安装MySQL</title>
+      <link>/post/devops/database/devops-mysql/</link>
+      <pubDate>Sun, 29 Dec 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/devops/database/devops-mysql/</guid>
+      <description>Mysql搭建 1.下载二进制包(Linux-Generic 线上环境一般用二进制包) 解压到目录 /usr/local/mysql  2.增加执行路径 export PATH=/usr/local/mysql/bin:$PATH 3.创建用户 groupadd -r mysql &amp;amp;&amp;amp; useradd -g mysql -s /sbin/nologin mysql 4.安装数据库 /usr/local/mysql/script/mysql_install_db --user=mysql --basedir=/usr/local/mysql --datadir=/mysqldata/node1 /usr/local/mysql/bin/mysqld --initialize --user=mysql --basedir=/usr/local/mysql --datadir=/data/mysql 5.修改配置并启动 /usr/local/mysql/bin/mysqld_safe --defaults-file=/usr/local/mysql/cnf/my.cnf &amp;amp; 6.创建用户并分配权限 删除多余用户 删除test数据库
+select user,host,password from mysql.user; delete from msyql.user where user=&amp;#39;&amp;#39;; delete from mysql.user where host&amp;lt;&amp;gt;&amp;#39;localhost&amp;#39;; # set password for root@&amp;#39;localhost&amp;#39;=password(&amp;#39;123456&amp;#39;); alter user &amp;#39;test&amp;#39;@&amp;#39;localhost&amp;#39; identified by &amp;#39;123&amp;#39;; flush privileges; 7.停止数据库 /usr/local/mysql/bin/mysqladmin --socket=/data/mysql/mysql.sock shutdown -p Mysql在线升级 1.</description>
+    </item>
+    
+  </channel>
+</rss>

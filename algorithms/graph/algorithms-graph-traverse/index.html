@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+  <title>图(Graph)-遍历-WoolfBreathe</title>
+  <meta property="og:title" content="图(Graph)-遍历" />
+  <meta name="twitter:title" content="图(Graph)-遍历" />
+
+  <meta name="description" content="图的遍历 图的遍历和树的遍历类似，最直接的理解就是，在图中某个顶点出发，访遍图中其余顶点，并且其中每个顶点仅被访问一次，这个过程就是图的遍历。
+图的遍历主要有两种方式，一种是深度优先搜索，一种是广度优先搜索。我们先来看深度优先搜索。
+深度优先搜索定义 深度优先搜索（Depth First Search），简称 DFS，这种算法有点像走迷宫，沿着一条路径一直走，如果某个路径不通，则回到前驱节点，以此为出发点继续尝试下一条路径，以此类推，直到访遍所有顶点。
+深度优先搜索也是这样，它从图的某个顶点出发，访问此顶点，然后从该顶点未被访问的邻接顶点出发，深度遍历图，在未遇到已访问过的重复顶点前，我们约定右手优先原则，一直往前走，遇到已经访问过的顶点，则回溯到前驱顶点，访问与其相邻路径对应的邻接顶点，继续做上述判断，依次类推，直到图中所有与该顶点路径想通的顶点都被访问到，如下图所示：
+如果还有顶点未被访问，则将其作为起点，重复上述过程，直到图中所有顶点都被访问到。
+代码实现 首先将所有顶点的邻接顶点设置为空链表，然后我们可以通过 addEdge 方法为图添加边（$s 和 $t 分别代表边的两个顶点），从而完成图的构建。
+有了完整的图之后，就可以编写深度优先搜索方法对其进行遍历了。
+public function dfs($s, $t){$this-&gt;found = false;for ($i = 0; $i &lt;= $this-&gt;v; $i&#43;&#43;) {$visited[$i] = 0;}for ($i = 0; $i &lt;= $this-&gt;v; $i&#43;&#43;) {$prev[$i] = -1;}$this-&gt;recurDfs($s, $t, $visited, $prev);$this-&gt;printPath($prev, $s, $t);}public function recurDfs($w, $t, $visited, $prev){if ($this-&gt;found == true) {return;}$visited[$w] = 1;if ($w == $t) {$this-&gt;found = true;return true;}for ($i = 0; $i &lt; $this-&gt;adj[$w]-&gt;getSize(); $i&#43;&#43;) {$q = $this-&gt;adj[$w]-&gt;get($i)-&gt;data;if (!">
+  <meta property="og:description" content="图的遍历 图的遍历和树的遍历类似，最直接的理解就是，在图中某个顶点出发，访遍图中其余顶点，并且其中每个顶点仅被访问一次，这个过程就是图的遍历。
+图的遍历主要有两种方式，一种是深度优先搜索，一种是广度优先搜索。我们先来看深度优先搜索。
+深度优先搜索定义 深度优先搜索（Depth First Search），简称 DFS，这种算法有点像走迷宫，沿着一条路径一直走，如果某个路径不通，则回到前驱节点，以此为出发点继续尝试下一条路径，以此类推，直到访遍所有顶点。
+深度优先搜索也是这样，它从图的某个顶点出发，访问此顶点，然后从该顶点未被访问的邻接顶点出发，深度遍历图，在未遇到已访问过的重复顶点前，我们约定右手优先原则，一直往前走，遇到已经访问过的顶点，则回溯到前驱顶点，访问与其相邻路径对应的邻接顶点，继续做上述判断，依次类推，直到图中所有与该顶点路径想通的顶点都被访问到，如下图所示：
+如果还有顶点未被访问，则将其作为起点，重复上述过程，直到图中所有顶点都被访问到。
+代码实现 首先将所有顶点的邻接顶点设置为空链表，然后我们可以通过 addEdge 方法为图添加边（$s 和 $t 分别代表边的两个顶点），从而完成图的构建。
+有了完整的图之后，就可以编写深度优先搜索方法对其进行遍历了。
+public function dfs($s, $t){$this-&gt;found = false;for ($i = 0; $i &lt;= $this-&gt;v; $i&#43;&#43;) {$visited[$i] = 0;}for ($i = 0; $i &lt;= $this-&gt;v; $i&#43;&#43;) {$prev[$i] = -1;}$this-&gt;recurDfs($s, $t, $visited, $prev);$this-&gt;printPath($prev, $s, $t);}public function recurDfs($w, $t, $visited, $prev){if ($this-&gt;found == true) {return;}$visited[$w] = 1;if ($w == $t) {$this-&gt;found = true;return true;}for ($i = 0; $i &lt; $this-&gt;adj[$w]-&gt;getSize(); $i&#43;&#43;) {$q = $this-&gt;adj[$w]-&gt;get($i)-&gt;data;if (!">
+  <meta name="twitter:description" content="图的遍历 图的遍历和树的遍历类似，最直接的理解就是，在图中某个顶点出发，访遍图中其余顶点，并且其中每个顶点仅被访问一次，这个过程就是图的遍历。
+图的遍历主要有两种方式，一种是深度优先搜索，一种是广度优先搜索。我们先来看深度优先搜索。
+深度优先搜索定义 深度优先搜索（Depth First Search），简称 DFS，这种算法有点像走迷宫，沿着一条路径一直走，如果某个路径不通，则回到前驱节点，以此 …">
+  <meta name="author" content="WoolfBreathe"/>
+  <link href="/img/favicon.png" rel="icon" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/img/favicon.png"/>
+  <meta property="og:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@username" />
+  <meta name="twitter:creator" content="@username" />
+  <meta property="og:url" content="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="WoolfBreathe" />
+
+  <meta name="generator" content="Hugo 0.68.3" />
+  <link rel="canonical" href="/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="WoolfBreathe">
+
+  
+  
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700%7COpen+Sans:400,700" rel="stylesheet">
+  
+
+  <link rel="stylesheet" href='/css/bundle.min.62de9d30b83723e0d55f82908aedb1c5eb18c910bc24bcf43e530ce754ee1502.css' integrity='sha256-Yt6dMLg3I&#43;DVX4KQiu2xxesYyRC8JLz0PlMM51TuFQI='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
+<meta name="google-site-verification" content="oKxX4fOvB2yYmU02txZFChM93XQbESU4JaG3tNH9Hm8" />
+<meta name="baidu-site-verification" content="F5ojAyqaKU" />
+<meta name="keywords" content="Algorithms, Graph">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d611849735f187dd788dc054908f7d7a";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/" title="WoolfBreathe">
+        <img src="img/avatar-icon.png" style="margin-top: -5px;height: 32px;" alt="WoolfBreathe">
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="首页" href="/">首页</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="归档" href="/archives">归档</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="标签" href="/tags">标签</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于" href="/page/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="RSS" href="/index.xml">RSS</a>
+            </li>
+          
+        
+
+        
+
+        
+
+        
+          <li>
+            <a href="#modalSearch" data-toggle="modal" data-target="#modalSearch" style="outline: none;">
+              <span id="searchGlyph" class="glyphicon glyphicon-search"></span>
+            </a>
+          </li>
+          
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+  <div id="modalSearch" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">搜索</h4>
+        </div>
+        <div class="modal-body">
+            
+<div class="aa-input-container" id="aa-input-container">
+    <input type="search" id="aa-search-input" class="aa-input-search" placeholder="Search for titles or URIs..." name="search" autocomplete="off" />
+    <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
+        <path d="M1806,332c0-123.3-43.8-228.8-131.5-316.5C1586.8-72.2,1481.3-116,1358-116s-228.8,43.8-316.5,131.5  C953.8,103.2,910,208.7,910,332s43.8,228.8,131.5,316.5C1129.2,736.2,1234.7,780,1358,780s228.8-43.8,316.5-131.5  C1762.2,560.8,1806,455.3,1806,332z M2318,1164c0,34.7-12.7,64.7-38,90s-55.3,38-90,38c-36,0-66-12.7-90-38l-343-342  c-119.3,82.7-252.3,124-399,124c-95.3,0-186.5-18.5-273.5-55.5s-162-87-225-150s-113-138-150-225S654,427.3,654,332  s18.5-186.5,55.5-273.5s87-162,150-225s138-113,225-150S1262.7-372,1358-372s186.5,18.5,273.5,55.5s162,87,225,150s113,138,150,225  S2062,236.7,2062,332c0,146.7-41.3,279.7-124,399l343,343C2305.7,1098.7,2318,1128.7,2318,1164z" />
+    </svg>
+</div>
+<script src="/js/algoliasearch.min.js"></script>
+<script src="/js/autocomplete.min.js"></script>
+
+<script>
+var client = algoliasearch("1JDRAS0AZR", "8804ac109158bb3bb60d74ce98fa332f");
+var index = client.initIndex('prod_blog');
+
+autocomplete('#aa-search-input',
+{ hint: false}, {
+    source: autocomplete.sources.hits(index, {hitsPerPage: 5}),
+    
+    displayKey: 'name',
+    
+    templates: {
+        
+        suggestion: function(suggestion) {
+            return '<span>' + '<a href="/post/' + suggestion.slug + '">' +
+            suggestion._highlightResult.title.value + '</a></span>';
+        }
+    }
+});
+</script>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/20200317190406.png" ></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="Algorithms-heading">
+                <h1>图(Graph)-遍历</h1>
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="Algorithms-heading">
+              <h1>图(Graph)-遍历</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+  </header>
+
+
+    
+
+
+
+<div class="container" role="main">
+  <div class="row">
+
+    
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div>
+            
+            
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="/tags/algorithms/">Algorithms</a> &nbsp;
+              
+                  <a href="/tags/graph/">Graph</a> &nbsp;
+              
+            </h5>
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+          
+            
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <h1 id="图的遍历">图的遍历</h1>
+<p>图的遍历和树的遍历类似，最直接的理解就是，在图中某个顶点出发，访遍图中其余顶点，并且其中每个顶点仅被访问一次，这个过程就是图的遍历。</p>
+<p>图的遍历主要有两种方式，一种是深度优先搜索，一种是广度优先搜索。我们先来看深度优先搜索。</p>
+<h2 id="深度优先搜索定义">深度优先搜索定义</h2>
+<p>深度优先搜索（Depth First Search），简称 DFS，这种算法有点像走迷宫，沿着一条路径一直走，如果某个路径不通，则回到前驱节点，以此为出发点继续尝试下一条路径，以此类推，直到访遍所有顶点。</p>
+<p>深度优先搜索也是这样，它从图的某个顶点出发，访问此顶点，然后从该顶点未被访问的邻接顶点出发，深度遍历图，在未遇到已访问过的重复顶点前，我们约定右手优先原则，一直往前走，遇到已经访问过的顶点，则回溯到前驱顶点，访问与其相邻路径对应的邻接顶点，继续做上述判断，依次类推，直到图中所有与该顶点路径想通的顶点都被访问到，如下图所示：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/Graph/image-1572533115673.png" alt="深度优先搜索"></p>
+<p>如果还有顶点未被访问，则将其作为起点，重复上述过程，直到图中所有顶点都被访问到。</p>
+<h2 id="代码实现">代码实现</h2>
+<p>首先将所有顶点的邻接顶点设置为空链表，然后我们可以通过 addEdge 方法为图添加边（$s 和 $t 分别代表边的两个顶点），从而完成图的构建。</p>
+<p>有了完整的图之后，就可以编写深度优先搜索方法对其进行遍历了。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">public function dfs($s, $t)
+{
+    $this-&gt;found = false;
+    for ($i = 0; $i &lt;= $this-&gt;v; $i++) {
+        $visited[$i] = 0;
+    }
+    for ($i = 0; $i &lt;= $this-&gt;v; $i++) {
+        $prev[$i] = -1;
+    }
+    $this-&gt;recurDfs($s, $t, $visited, $prev);
+    $this-&gt;printPath($prev, $s, $t);
+}
+
+public function recurDfs($w, $t, $visited, $prev)
+{
+    if ($this-&gt;found == true) {
+        return;
+    }
+    $visited[$w] = 1;
+    if ($w == $t) {
+        $this-&gt;found = true;
+        return true;
+    }
+    for ($i = 0; $i &lt; $this-&gt;adj[$w]-&gt;getSize(); $i++) {
+        $q = $this-&gt;adj[$w]-&gt;get($i)-&gt;data;
+        if (!$visited[$q]) {
+            $prev[$q] = $w;
+            $this-&gt;recurDfs($q, $t, $visited, $prev);
+        }
+    }
+}
+
+public function printPath($prev, $s, $t)
+{
+    if ($prev[$t] != -1 &amp;&amp; $t != $s) {
+        $this-&gt;printPath($prev, $s, $prev[$t]);
+    }
+    print $t;
+}
+</code></pre></div><p>先将每个顶点是否已经访问设置为 0，将每个顶点的前驱节点设置为 -1，然后通过一个递归方法 recurDfs 实现深度优先搜索算法，如果最终起点与终点重合则表示两个顶点之间的所有顶点已经遍历完毕，立即返回，否则继续搜索。</p>
+<p>搜索完毕后，将路径信息通过 printPath 打印出来。这个测试任务交给你们自己去完成。</p>
+<p>深度优先搜索的时间复杂度很显然是 O(v+e)，其中 v 表示顶点数，e 表示边数，需要额外的数组存储已访问顶点和前驱顶点，对应的空间复杂度是 O(v)。</p>
+<h2 id="广度优先搜索定义">广度优先搜索定义</h2>
+<p>广度优先搜索（Breadth First Search），简称 BFS，以在家里房间里找钥匙为例来对比说明深度优先搜索和广度优先搜索，深度优先搜索好比我们从某个房间（顶点）开始，先把一个房间的所有角落找遍，再从下一个相邻房间开始继续找，依次类推，但这有时候并不是最佳方案，我们可以换一种思路，先大致扫一下每个房间的常见位置，如果都没有的话才继续更深入的寻找，这种遍历方式就是广度优先搜索。</p>
+<p>还可以通过树的遍历来类比图的遍历，前序遍历类似深度优先搜索，层序遍历类似广度优先搜索，下面我们以一个图为例来说明，这样更加形象：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/Graph/image-1572578984124.png" alt="广度优先搜索图示"></p>
+<p>左图是我们要遍历的图，右图是以广度优先搜索对图进行遍历，我们把 A 作为第一层，B、F 作为第二层，C、I、G、E 看作第三层，D、H 看作第四层，每次遍历一层。</p>
+<p>深度优先搜索会把某个顶点的所有相邻顶点访问完才继续下一个顶点的访问，广度优先搜索则不然，它是按照「层级」遍历图的节点，最终也能够遍历完所有节点。</p>
+<h2 id="代码实现-1">代码实现</h2>
+<p>下面我们把上述广度优先搜索的实现转化为代码实现，我们还是基于上篇文章定义的 Graph 类，为其编写广度优先搜索实现方法。</p>
+<p>在实现广度优先搜索的时候需要用到队列的概念，访问到某个顶点时，将其相邻顶点推送到队列中，然后访问完一层之后，根据队列先入先出的特点，从该层顶点相邻顶点中取出最先插入的顶点，即下一层的第一个顶点开始进行访问，这样，依次类推，就完成了广度优先搜索。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">/**
+ * 通过 PHP 数组实现的队列
+ */
+class SimpleQueue
+{
+    private $_queue = [];
+    private $_size = 0;
+
+    public function __construct($size = 10)
+    {
+        $this-&gt;_size = $size;
+    }
+
+    // 入队
+    public function enqueue($value)
+    {
+        if (count($this-&gt;_queue) &gt; $this-&gt;_size) {
+            return false;
+        }
+        array_push($this-&gt;_queue, $value);
+    }
+
+    // 出队
+    public function dequeue()
+    {
+        if (count($this-&gt;_queue) == 0) {
+            return false;
+        }
+        return array_shift($this-&gt;_queue);
+    }
+
+    public function size()
+    {
+        return count($this-&gt;_queue);
+    }
+}
+</code></pre></div><p>visited 是用来记录已经被访问的顶点，用来避免顶点被重复访问。如果顶点 q 被访问，那相应的 visited[q] 会被设置为 true。</p>
+<p>queue 是一个队列，用来存储已经被访问、但相连的顶点还没有被访问的顶点。因为广度优先搜索是逐层访问的，也就是说，我们只有把第 k 层的顶点都访问完成之后，才能访问第 k+1 层的顶点。当我们访问到第 k 层的顶点的时候，我们需要把第 k 层的顶点记录下来，稍后才能通过第 k 层的顶点来找第 k+1 层的顶点。所以，我们用这个队列来实现记录的功能。</p>
+<p>prev 用来记录搜索路径。当我们从顶点 s 开始，广度优先搜索到顶点 t 后，prev 数组中存储的就是搜索的路径。不过，这个路径是反向存储的。prev[w] 存储的是，顶点 w 是从哪个前驱顶点遍历过来的。比如，我们通过顶点 2 的邻接表访问到顶点 3，那 prev[3] 就等于 2。</p>
+<p>广度优先搜索的时间复杂度和深度优先搜索一样，也是 O(v+e)，其中 v 表示顶点数，e 表示边数，需要额外的数组存储已访问顶点和前驱顶点，对应的空间复杂度是 O(v)。</p>
+<p>广度优先搜索和深度优先搜索的复杂度完全一样，没有优劣之分，具体使用哪种搜索方式，以实际情况为准。</p>
+
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我们的微信公众帐号，在微信公众帐号中回复◉加群◉即可加入到我们的 kubernetes 讨论群里面共同学习。</p>
+<img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/qrcode.png" alt="wechat-account-qrcode">
+
+  
+          
+            <div class="entry-shang text-center">
+    <p>「真诚赞赏，手留余香」</p>
+    <button class="zs show-zs btn btn-bred">赞赏</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+    <div class="zs-modal-head">
+        <button type="button" class="close">×</button>
+        <span class="author"><img src="/img/avatar.jpeg"/>阳明</span>
+        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
+    </div>
+    <div class="zs-modal-body">
+        <div class="zs-modal-btns">
+            <button class="btn btn-blink" data-num="2">2元</button>
+            <button class="btn btn-blink" data-num="5">5元</button>
+            <button class="btn btn-blink" data-num="10">10元</button>
+            <button class="btn btn-blink" data-num="50">50元</button>
+            <button class="btn btn-blink" data-num="100">100元</button>
+            <button class="btn btn-blink" data-num="1">任意金额</button>
+        </div>
+        <div class="zs-modal-pay">
+            <button class="btn btn-bred" id="pay-text">2元</button>
+            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+            <img src="/img/wechat-2.png" id="pay-image"/>
+        </div>
+    </div>
+    <div class="zs-modal-footer">
+        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
+    </div>
+</div>
+          
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
+        
+          
+
+<h3>相关文章</h3>
+<ul style="margin-bottom: 25px;">
+    
+    <li><a href="/algorithms/graph/algorithms-graph-storage/">图(Graph)-存储</a></li>
+    
+    <li><a href="/algorithms/graph/algorithms-graph/">图(Graph)</a></li>
+    
+    <li><a href="/algorithms/binarytree/algorithms-binarytree-huffmantree/">二叉树(BinaryTree)-哈夫曼树(HuffmanTree)</a></li>
+    
+    <li><a href="/algorithms/binarytree/algorithms-binarytree-heap/">二叉树(BinaryTree)-堆(Heap)</a></li>
+    
+    <li><a href="/algorithms/binarytree/algorithms-redblacktree/">二叉树(BinaryTree)-红黑树(Red-Black Tree)</a></li>
+    
+    <li><a href="/algorithms/binarytree/algorithms-binarytree-avl/">二叉树(BinaryTree)-平衡二叉树(AVL)</a></li>
+    
+    <li><a href="/algorithms/binarytree/algorithms-binarytree-search/">二叉树(BinaryTree)-查找</a></li>
+    
+    <li><a href="/algorithms/binarytree/algorithms-binarytree-traversal/">二叉树(BinaryTree)-遍历</a></li>
+    
+    <li><a href="/algorithms/binarytree/algorithms-binarytree-storage/">二叉树(BinaryTree)-存储</a></li>
+    
+    <li><a href="/algorithms/binarytree/algorithms-binarytree/">二叉树(BinaryTree)</a></li>
+    
+</ul>
+
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="/algorithms/graph/algorithms-graph-storage/" data-toggle="tooltip" data-placement="top" title="图(Graph)-存储">&larr; 前一篇</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="/algorithms/graph/algorithms-graph-minimumspanningtree/" data-toggle="tooltip" data-placement="top" title="图(Graph)-最小生成树(MinimumSpanningTree)">后一篇 &rarr;</a>
+            </li>
+          
+        </ul>
+        
+
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
+        
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+    var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        labels: ['gitment'],
+        title: '图(Graph)-遍历',
+        createIssueManually: true,
+        id: 'Algorithms-Graph-Traverse',      
+        distractionFreeMode: true  
+    });
+    gitalk.render('gitalk-container');
+</script>
+
+
+        
+          
+
+        
+  
+      </div>
+    
+    
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          <img src="/img/wechatmp.png" alt="k8s技术圈">
+          
+              <li>
+                <a href="mailto:icnych@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://github.com/cnych" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://weibo.com/cnych" title="微博">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://instagram.com/cnych" title="Instagram">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          
+          <li>
+            <a href="/index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="/">WoolfBreathe</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2021
+        </p>
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
+</script>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script >
+$(document).ready(function() {
+  var int = setInterval(fixCount, 50);  
+  
+  var initPVCount = 584976;
+  var initUVCount = 153191;
+  function fixCount() {                   
+    if ($("#busuanzi_container_site_pv").css("display") != "none") {
+        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
+        clearInterval(int); 
+    }
+    if ($("#busuanzi_container_site_uv").css("display") != "none") {
+      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
+      clearInterval(int); 
+    }  
+  }           
+});
+</script>
+ <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery-migrate@1.2.1/dist/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+$('.carousel').slick({
+    dots: true,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear',
+    centerMode: true,
+    prevArrow: '<button type="button" class="slick-prev"></button>',
+    nextArrow: '<button type="button" class="slick-next"></button>',
+});
+</script>
+
+  </body>
+</html>
+

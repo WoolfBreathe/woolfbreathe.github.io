@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+  <title>Linux安装PHP源码包-WoolfBreathe</title>
+  <meta property="og:title" content="Linux安装PHP源码包" />
+  <meta name="twitter:title" content="Linux安装PHP源码包" />
+
+  <meta name="description" content="依赖库安装 安装 gcc 环境 sudo yum -y install gcc gcc-c&#43;&#43; # 编译时依赖 gcc 环境 安装 libxml2 sudo yum -y install libxml2 libxml2-devel # Libxml2库提供了C语言解析和构造xml文档的接口 安装 libjpeg-devel yum -y install libjpeg-devel libpng-devel # 图片处理 安装 openssl # 安全套接字层密码库，用于通信加密 $ sudo yum -y install openssl openssl-devel yum install freetype-devel libzip 安装sqlite yum install sqlite-devel 创建用户组和用户 groupadd -r www &amp;&amp; useradd -g www -s /sbin/nologin www 安装 Nginx 源码包安装 Nginx官方下载
+sudo tar -zxvf php-7.">
+  <meta property="og:description" content="依赖库安装 安装 gcc 环境 sudo yum -y install gcc gcc-c&#43;&#43; # 编译时依赖 gcc 环境 安装 libxml2 sudo yum -y install libxml2 libxml2-devel # Libxml2库提供了C语言解析和构造xml文档的接口 安装 libjpeg-devel yum -y install libjpeg-devel libpng-devel # 图片处理 安装 openssl # 安全套接字层密码库，用于通信加密 $ sudo yum -y install openssl openssl-devel yum install freetype-devel libzip 安装sqlite yum install sqlite-devel 创建用户组和用户 groupadd -r www &amp;&amp; useradd -g www -s /sbin/nologin www 安装 Nginx 源码包安装 Nginx官方下载
+sudo tar -zxvf php-7.">
+  <meta name="twitter:description" content="依赖库安装 安装 gcc 环境 sudo yum -y install gcc gcc-c&#43;&#43; # 编译时依赖 gcc 环境 安装 libxml2 sudo yum -y install libxml2 libxml2-devel # Libxml2库提供了C语言解析和构造xml文档的接口 安装 libjpeg-devel yum -y install libjpeg-devel …">
+  <meta name="author" content="WoolfBreathe"/>
+  <link href="/img/favicon.png" rel="icon" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/img/favicon.png"/>
+  <meta property="og:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@username" />
+  <meta name="twitter:creator" content="@username" />
+  <meta property="og:url" content="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="WoolfBreathe" />
+
+  <meta name="generator" content="Hugo 0.68.3" />
+  <link rel="canonical" href="/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="WoolfBreathe">
+
+  
+  
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700%7COpen+Sans:400,700" rel="stylesheet">
+  
+
+  <link rel="stylesheet" href='/css/bundle.min.62de9d30b83723e0d55f82908aedb1c5eb18c910bc24bcf43e530ce754ee1502.css' integrity='sha256-Yt6dMLg3I&#43;DVX4KQiu2xxesYyRC8JLz0PlMM51TuFQI='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
+<meta name="google-site-verification" content="oKxX4fOvB2yYmU02txZFChM93XQbESU4JaG3tNH9Hm8" />
+<meta name="baidu-site-verification" content="F5ojAyqaKU" />
+<meta name="keywords" content="DevOps, Linux">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d611849735f187dd788dc054908f7d7a";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/" title="WoolfBreathe">
+        <img src="img/avatar-icon.png" style="margin-top: -5px;height: 32px;" alt="WoolfBreathe">
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="首页" href="/">首页</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="归档" href="/archives">归档</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="标签" href="/tags">标签</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于" href="/page/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="RSS" href="/index.xml">RSS</a>
+            </li>
+          
+        
+
+        
+
+        
+
+        
+          <li>
+            <a href="#modalSearch" data-toggle="modal" data-target="#modalSearch" style="outline: none;">
+              <span id="searchGlyph" class="glyphicon glyphicon-search"></span>
+            </a>
+          </li>
+          
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+  <div id="modalSearch" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">搜索</h4>
+        </div>
+        <div class="modal-body">
+            
+<div class="aa-input-container" id="aa-input-container">
+    <input type="search" id="aa-search-input" class="aa-input-search" placeholder="Search for titles or URIs..." name="search" autocomplete="off" />
+    <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
+        <path d="M1806,332c0-123.3-43.8-228.8-131.5-316.5C1586.8-72.2,1481.3-116,1358-116s-228.8,43.8-316.5,131.5  C953.8,103.2,910,208.7,910,332s43.8,228.8,131.5,316.5C1129.2,736.2,1234.7,780,1358,780s228.8-43.8,316.5-131.5  C1762.2,560.8,1806,455.3,1806,332z M2318,1164c0,34.7-12.7,64.7-38,90s-55.3,38-90,38c-36,0-66-12.7-90-38l-343-342  c-119.3,82.7-252.3,124-399,124c-95.3,0-186.5-18.5-273.5-55.5s-162-87-225-150s-113-138-150-225S654,427.3,654,332  s18.5-186.5,55.5-273.5s87-162,150-225s138-113,225-150S1262.7-372,1358-372s186.5,18.5,273.5,55.5s162,87,225,150s113,138,150,225  S2062,236.7,2062,332c0,146.7-41.3,279.7-124,399l343,343C2305.7,1098.7,2318,1128.7,2318,1164z" />
+    </svg>
+</div>
+<script src="/js/algoliasearch.min.js"></script>
+<script src="/js/autocomplete.min.js"></script>
+
+<script>
+var client = algoliasearch("1JDRAS0AZR", "8804ac109158bb3bb60d74ce98fa332f");
+var index = client.initIndex('prod_blog');
+
+autocomplete('#aa-search-input',
+{ hint: false}, {
+    source: autocomplete.sources.hits(index, {hitsPerPage: 5}),
+    
+    displayKey: 'name',
+    
+    templates: {
+        
+        suggestion: function(suggestion) {
+            return '<span>' + '<a href="/post/' + suggestion.slug + '">' +
+            suggestion._highlightResult.title.value + '</a></span>';
+        }
+    }
+});
+</script>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/20200317190406.png" ></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="post-heading">
+                <h1>Linux安装PHP源码包</h1>
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Linux安装PHP源码包</h1>
+                
+                
+                  <span class="post-meta">
+  
+    发表于 2019-12-28
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+  </header>
+
+
+    
+
+
+
+<div class="container" role="main">
+  <div class="row">
+
+    
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div>
+            
+            
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="/tags/devops/">DevOps</a> &nbsp;
+              
+                  <a href="/tags/linux/">Linux</a> &nbsp;
+              
+            </h5>
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+          
+            
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <h1 id="依赖库安装">依赖库安装</h1>
+<h2 id="安装-gcc-环境">安装 gcc 环境</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo yum -y install gcc gcc-c++ <span style="color:#6272a4"># 编译时依赖 gcc 环境</span>
+</code></pre></div><h2 id="安装-libxml2">安装 libxml2</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo yum -y install libxml2 libxml2-devel <span style="color:#6272a4"># Libxml2库提供了C语言解析和构造xml文档的接口</span>
+</code></pre></div><h2 id="安装-libjpeg-devel">安装 libjpeg-devel</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">yum -y install libjpeg-devel libpng-devel <span style="color:#6272a4"># 图片处理</span>
+</code></pre></div><h2 id="安装-openssl">安装 openssl</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4"># 安全套接字层密码库，用于通信加密</span>
+$ sudo yum -y install openssl openssl-devel
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">yum install freetype-devel libzip
+</code></pre></div><h2 id="安装sqlite">安装sqlite</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">yum install sqlite-devel
+</code></pre></div><h1 id="创建用户组和用户">创建用户组和用户</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">groupadd -r www &amp;&amp; useradd -g www -s /sbin/nologin www
+</code></pre></div><h2 id="安装">安装</h2>
+<h1 id="nginx-源码包安装">Nginx 源码包安装</h1>
+<p><a href="https://www.php.net/downloads.php">Nginx官方下载</a></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo tar -zxvf  php-7.3.3.tar.gz <span style="color:#6272a4"># 解压缩</span>
+</code></pre></div><h3 id="生成-makefile-文件">生成 makefile 文件</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#8be9fd;font-style:italic">cd</span> php-7.3.3
+./configure <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--prefix<span style="color:#ff79c6">=</span>/usr/local/php7 <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--exec-prefix<span style="color:#ff79c6">=</span>/usr/local/php7 <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--bindir<span style="color:#ff79c6">=</span>/usr/local/php7/bin <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--sbindir<span style="color:#ff79c6">=</span>/usr/local/php7/sbin <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--includedir<span style="color:#ff79c6">=</span>/usr/local/php7/include <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--libdir<span style="color:#ff79c6">=</span>/usr/local/php7/lib/php <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--mandir<span style="color:#ff79c6">=</span>/usr/local/php7/php/man <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--with-config-file-path<span style="color:#ff79c6">=</span>/usr/local/php7/etc <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--with-mcrypt <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--with-mhash <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--with-openssl <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--with-mysql<span style="color:#ff79c6">=</span>shared,mysqlnd <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--with-mysqli<span style="color:#ff79c6">=</span>shared,mysqlnd <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--with-pdo-mysql<span style="color:#ff79c6">=</span>shared,mysqlnd <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--with-gd <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--with-iconv <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--with-zlib <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--enable-zip <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--enable-inline-optimization <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--disable-debug <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--disable-rpath <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--enable-shared <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--enable-xml <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--enable-bcmath <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--enable-shmop <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--enable-sysvsem <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--enable-mbregex <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--enable-mbstring <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--disable-mbregex <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--enable-ftp <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--enable-gd-native-ttf <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--enable-pcntl <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--enable-sockets <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--with-xmlrpc <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--enable-soap <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--without-pear <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--with-gettext <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--enable-session <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--with-curl <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--with-jpeg-dir <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--with-freetype-dir <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--enable-opcache <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--enable-redis <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--enable-fpm <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--enable-fastcgi <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--with-fpm-user<span style="color:#ff79c6">=</span>web <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--with-fpm-group<span style="color:#ff79c6">=</span>web <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--without-gdbm <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--enable-fileinfo <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--enable-opcache <span style="color:#f1fa8c">\
+</span></code></pre></div><p>参数说明</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"># 安装目录
+--prefix=/usr/local/php7
+--exec-prefix=/usr/local/php7 \
+# 用户可执行文件
+--bindir=/usr/local/php7/bin \
+# 系统管理员可执行文件               
+--sbindir=/usr/local/php7/sbin \
+# C语言头文件             
+--includedir=/usr/local/php7/include \
+# 程序的可执行文件 
+--libdir=/usr/local/php7/lib/php \
+# man 文档 
+--mandir=/usr/local/php7/php/man \
+# 设置 php.ini 路径
+--with-config-file-path=/usr/local/php7/etc \
+# 包含 mcrypt 支持
+--with-mcrypt \                                 
+</code></pre></div><h3 id="进行源码编译并安装">进行源码编译并安装</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">make <span style="color:#6272a4"># 编译</span>
+make install <span style="color:#6272a4"># 安装</span>
+</code></pre></div><h1 id="扩展安装示例">扩展安装示例</h1>
+<h2 id="进入源码中的extpcntl目录">进入源码中的ext/pcntl目录</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#8be9fd;font-style:italic">cd</span> php-7.3.3/ext/pcntl/
+</code></pre></div><h2 id="运行-phpize-命令">运行 phpize 命令</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">~# phpize
+Configuring <span style="color:#ff79c6">for</span>:
+PHP Api Version:         <span style="color:#bd93f9">20090626</span>
+Zend Module Api No:      <span style="color:#bd93f9">20090626</span>
+Zend Extension Api No:   <span style="color:#bd93f9">220090626</span>
+</code></pre></div><h2 id="编译">编译</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./configure --with-php-config<span style="color:#ff79c6">=</span>/usr/local/php7/bin/php-config
+</code></pre></div><h2 id="运行安装命令">运行安装命令</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">make <span style="color:#ff79c6">&amp;&amp;</span> make install
+</code></pre></div><h1 id="启动或关闭">启动或关闭</h1>
+<p>拷贝php.ini</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cp /usr/local/src/php-7.3.22/php.ini-production /usr/local/php7/etc/php.ini
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">killall php-fpm
+
+/usr/local/php7/sbin/php-fpm &amp;
+</code></pre></div><h1 id="phpini配置核心">php.ini配置(核心)</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4">######避免PHP信息暴露在http头中</span>
+<span style="color:#8be9fd;font-style:italic">expose_php</span> <span style="color:#ff79c6">=</span> Off
+
+<span style="color:#6272a4">######避免暴露php调用mysql的错误信息</span>
+<span style="color:#8be9fd;font-style:italic">display_errors</span> <span style="color:#ff79c6">=</span> Off
+
+<span style="color:#6272a4">######在关闭display_errors后开启PHP错误日志（路径在php-fpm.conf中配置）</span>
+<span style="color:#8be9fd;font-style:italic">log_errors</span> <span style="color:#ff79c6">=</span> On
+
+<span style="color:#6272a4">######设置PHP的扩展库路径</span>
+<span style="color:#8be9fd;font-style:italic">extension_dir</span> <span style="color:#ff79c6">=</span> <span style="color:#f1fa8c">&#34;/usr/local/php7/lib/php/extensions/no-debug-non-zts-20141001/&#34;</span>
+
+<span style="color:#6272a4">######设置PHP的opcache和mysql动态库</span>
+<span style="color:#8be9fd;font-style:italic">zend_extension</span><span style="color:#ff79c6">=</span>opcache.so
+<span style="color:#8be9fd;font-style:italic">extension</span><span style="color:#ff79c6">=</span>mysqli.so
+<span style="color:#8be9fd;font-style:italic">extension</span><span style="color:#ff79c6">=</span>pdo_mysql.so
+
+<span style="color:#6272a4">######设置PHP的时区</span>
+date.timezone <span style="color:#ff79c6">=</span> PRC
+
+<span style="color:#6272a4">######开启opcache</span>
+<span style="color:#ff79c6">[</span>opcache<span style="color:#ff79c6">]</span>
+; Determines <span style="color:#ff79c6">if</span> Zend OPCache is enabled
+opcache.enable<span style="color:#ff79c6">=</span><span style="color:#bd93f9">1</span>
+
+<span style="color:#6272a4">######设置PHP脚本允许访问的目录（需要根据实际情况配置）</span>
+;<span style="color:#8be9fd;font-style:italic">open_basedir</span> <span style="color:#ff79c6">=</span> /usr/share/nginx/html;
+</code></pre></div><h1 id="配置php-fpmconfphp-fpm进程服务的配置文件">配置php-fpm.conf(php-fpm进程服务的配置文件：)</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4">######设置错误日志的路径</span>
+<span style="color:#8be9fd;font-style:italic">error_log</span> <span style="color:#ff79c6">=</span> /var/log/php-fpm/error.log
+<span style="color:#6272a4">######引入www.conf文件中的配置</span>
+<span style="color:#8be9fd;font-style:italic">include</span><span style="color:#ff79c6">=</span>/usr/local/php7/etc/php-fpm.d/*.conf
+</code></pre></div><h1 id="配置wwwconf在php-fpmd目录下-是php-fpm进程服务的扩展配置文件">配置www.conf（在php-fpm.d目录下, 是php-fpm进程服务的扩展配置文件：）</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#6272a4">######设置用户和用户组</span>
+<span style="color:#8be9fd;font-style:italic">user</span> <span style="color:#ff79c6">=</span> www
+<span style="color:#8be9fd;font-style:italic">group</span> <span style="color:#ff79c6">=</span> www
+
+<span style="color:#6272a4">######根据nginx.conf中的配置fastcgi_pass unix:/var/run/php-fpm/php-fpm.sock;设置PHP监听</span>
+; <span style="color:#8be9fd;font-style:italic">listen</span> <span style="color:#ff79c6">=</span> 127.0.0.1:9000   <span style="color:#6272a4">#####不建议使用</span>
+<span style="color:#8be9fd;font-style:italic">listen</span> <span style="color:#ff79c6">=</span> /var/run/php-fpm/php-fpm.sock
+
+<span style="color:#6272a4">######开启慢日志</span>
+<span style="color:#8be9fd;font-style:italic">slowlog</span> <span style="color:#ff79c6">=</span> /var/log/php-fpm/<span style="color:#8be9fd;font-style:italic">$pool</span>-slow.log
+<span style="color:#8be9fd;font-style:italic">request_slowlog_timeout</span> <span style="color:#ff79c6">=</span> 10s
+
+<span style="color:#6272a4">######设置php的session目录（所属用户和用户组都是nginx）</span>
+php_value<span style="color:#ff79c6">[</span>session.save_handler<span style="color:#ff79c6">]</span> <span style="color:#ff79c6">=</span> files
+php_value<span style="color:#ff79c6">[</span>session.save_path<span style="color:#ff79c6">]</span> <span style="color:#ff79c6">=</span> /var/lib/php/session
+</code></pre></div><h1 id="opcache配置重要">opcache配置(重要)</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#8be9fd;font-style:italic">zend_extension</span><span style="color:#ff79c6">=</span>opcache.so
+<span style="color:#ff79c6">[</span>opcache<span style="color:#ff79c6">]</span>
+<span style="color:#6272a4">#开启opcache</span>
+opcache.enable<span style="color:#ff79c6">=</span><span style="color:#bd93f9">1</span>  
+
+<span style="color:#6272a4">#CLI环境下，PHP启用OPcache</span>
+opcache.enable_cli<span style="color:#ff79c6">=</span><span style="color:#bd93f9">1</span>
+
+<span style="color:#6272a4">#OPcache共享内存存储大小,单位MB</span>
+opcache.memory_consumption<span style="color:#ff79c6">=</span><span style="color:#bd93f9">128</span>  
+
+<span style="color:#6272a4">#PHP使用了一种叫做字符串驻留（string interning）的技术来改善性能。例如，如果在代码中使用了1000次字符串“foobar”，在PHP内部只会在第一使用这个字符串的时候分配一个不可变的内存区域来存储这个字符串，其他的999次使用都会直接指向这个内存区域。这个选项则会把这个特性提升一个层次——默认情况下这个不可变的内存区域只会存在于单个php-fpm的进程中，如果设置了这个选项，那么它将会在所有的php-fpm进程中共享。在比较大的应用中，这可以非常有效地节约内存，提高应用的性能。</span>
+<span style="color:#6272a4">#这个选项的值是以兆字节（megabytes）作为单位，如果把它设置为16，则表示16MB，默认是4MB</span>
+opcache.interned_strings_buffer<span style="color:#ff79c6">=</span><span style="color:#bd93f9">8</span>
+
+<span style="color:#6272a4">#这个选项用于控制内存中最多可以缓存多少个PHP文件。这个选项必须得设置得足够大，大于项目中的所有PHP文件的总和。</span>
+<span style="color:#6272a4">#设置值取值范围最小值是 200，最大值在 PHP 5.5.6 之前是 100000，PHP 5.5.6 及之后是 1000000。也就是说在200到1000000之间。</span>
+opcache.max_accelerated_files<span style="color:#ff79c6">=</span><span style="color:#bd93f9">4000</span>
+
+<span style="color:#6272a4">#设置缓存的过期时间（单位是秒）,为0的话每次都要检查</span>
+opcache.revalidate_freq<span style="color:#ff79c6">=</span><span style="color:#bd93f9">60</span>
+
+<span style="color:#6272a4">#从字面上理解就是“允许更快速关闭”。它的作用是在单个请求结束时提供一种更快速的机制来调用代码中的析构器，从而加快PHP的响应速度和PHP进程资源的回收速度，这样应用程序可以更快速地响应下一个请求。把它设置为1就可以使用这个机制了。</span>
+opcache.fast_shutdown<span style="color:#ff79c6">=</span><span style="color:#bd93f9">1</span>
+
+<span style="color:#6272a4">#如果启用（设置为1），OPcache会在opcache.revalidate_freq设置的秒数去检测文件的时间戳（timestamp）检查脚本是否更新。</span>
+<span style="color:#6272a4">#如果这个选项被禁用（设置为0），opcache.revalidate_freq会被忽略，PHP文件永远不会被检查。这意味着如果修改了代码，然后把它更新到服务器上，再在浏览器上请求更新的代码对应的功能，会看不到更新的效果</span>
+<span style="color:#6272a4">#强烈建议在生产环境中设置为0，更新代码后，再平滑重启PHP和web服务器。</span>
+opcache.validate_timestamps<span style="color:#ff79c6">=</span><span style="color:#bd93f9">0</span> 
+
+<span style="color:#6272a4">#开启Opcache File Cache(实验性), 通过开启这个, 可以让Opcache把opcode缓存缓存到外部文件中, 对于一些脚本, 会有很明显的性能提升.</span>
+<span style="color:#6272a4">#这样PHP就会在/tmp目录下Cache一些Opcode的二进制导出文件, 可以跨PHP生命周期存在.</span>
+opcache.file_cache<span style="color:#ff79c6">=</span>/tmp
+</code></pre></div>
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我们的微信公众帐号，在微信公众帐号中回复◉加群◉即可加入到我们的 kubernetes 讨论群里面共同学习。</p>
+<img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/qrcode.png" alt="wechat-account-qrcode">
+
+  
+          
+            <div class="entry-shang text-center">
+    <p>「真诚赞赏，手留余香」</p>
+    <button class="zs show-zs btn btn-bred">赞赏</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+    <div class="zs-modal-head">
+        <button type="button" class="close">×</button>
+        <span class="author"><img src="/img/avatar.jpeg"/>阳明</span>
+        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
+    </div>
+    <div class="zs-modal-body">
+        <div class="zs-modal-btns">
+            <button class="btn btn-blink" data-num="2">2元</button>
+            <button class="btn btn-blink" data-num="5">5元</button>
+            <button class="btn btn-blink" data-num="10">10元</button>
+            <button class="btn btn-blink" data-num="50">50元</button>
+            <button class="btn btn-blink" data-num="100">100元</button>
+            <button class="btn btn-blink" data-num="1">任意金额</button>
+        </div>
+        <div class="zs-modal-pay">
+            <button class="btn btn-bred" id="pay-text">2元</button>
+            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+            <img src="/img/wechat-2.png" id="pay-image"/>
+        </div>
+    </div>
+    <div class="zs-modal-footer">
+        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
+    </div>
+</div>
+          
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
+        
+          
+
+<h3>相关文章</h3>
+<ul style="margin-bottom: 25px;">
+    
+    <li><a href="/post/devops/linux/devops-linux-redis/">Linux安装Redis</a></li>
+    
+    <li><a href="/post/devops/linux/devops-linux-ssh/">Linux SSH</a></li>
+    
+    <li><a href="/post/devops/linux/devops-linux-homestead/">Homestead(Windows系统Laravel环境搭建)</a></li>
+    
+    <li><a href="/post/devops/git/devops-git-multiuser/">Linux 配置多个Git用户SSH登录</a></li>
+    
+    <li><a href="/post/devops/git/devops-git-gitignore/">Git忽略规则及.gitignore规则正确姿势</a></li>
+    
+</ul>
+
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="/post/devops/linux/devops-linux-redis/" data-toggle="tooltip" data-placement="top" title="Linux安装Redis">&larr; 前一篇</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="/post/devops/linux/devops-linux-nginx/" data-toggle="tooltip" data-placement="top" title="Linux安装Nginx源码包">后一篇 &rarr;</a>
+            </li>
+          
+        </ul>
+        
+
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
+        
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+    var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        labels: ['gitment'],
+        title: 'Linux安装PHP源码包',
+        createIssueManually: true,
+        id: 'DevOps-Linux-PHP',      
+        distractionFreeMode: true  
+    });
+    gitalk.render('gitalk-container');
+</script>
+
+
+        
+          
+
+        
+  
+      </div>
+    
+    
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          <img src="/img/wechatmp.png" alt="k8s技术圈">
+          
+          <li>
+            <a href="mailto:icnych@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://github.com/cnych" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://weibo.com/cnych" title="微博">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://instagram.com/cnych" title="Instagram">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="/%20index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+          
+          <a href="/">WoolfBreathe</a>
+          
+          
+
+          &nbsp;&bull;&nbsp;
+          2021
+        </p>
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a
+            href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a
+            href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script> renderMathInElement(document.body); </script>
+<script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
+</script>
+<script>
+  (function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+
+  </body>
+</html>
+

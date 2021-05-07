@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>PHP on WoolfBreathe</title>
+    <link>/tags/php/</link>
+    <description>Recent content in PHP on WoolfBreathe</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <managingEditor>youremail@domain.com (WoolfBreathe)</managingEditor>
+    <webMaster>youremail@domain.com (WoolfBreathe)</webMaster>
+    <lastBuildDate>Thu, 31 Dec 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/php/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>PHP的运行机制和基本原理</title>
+      <link>/post/computerlanguages/php/computerlanguages-php-principle/</link>
+      <pubDate>Thu, 31 Dec 2020 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/computerlanguages/php/computerlanguages-php-principle/</guid>
+      <description>PHP说简单，但是要精通也不是一件简单的事。需要知道它底层的工作原理。
+PHP是一种适用于web开发的动态语言。具体点说，就是一个用C语言实现包含大量组件的软件框架。更狭义点看，可以把它认为是一个强大的UI框架。
+了解PHP底层实现的目的是什么？动态语言要像用好首先得了解它，内存管理、框架模型值得我们借鉴，通过扩展开发实现更多更强大的功能，优化我们程序的性能。
+1. PHP的设计理念及特点  多进程模型：由于PHP是多进程模型，不同请求间互不干涉，这样保证了一个请求挂掉不会对全盘服务造成影响。当然，随着时代发展，PHP也早已支持多线程模型。 弱类型语言：和C/C++、Java、C#等语言不同，PHP是一门弱类型语言。一个变量的类型并不是一开始就确定不变，运行中才会确定并可能发生隐式或显式的类型转换，这种机制的灵活性在web开发中非常方便、高效，具体会在后面PHP变量中详述。 引擎(Zend)+组件(ext)的模式降低内部耦合。 中间层(sapi)隔绝web server和PHP。 语法简单灵活，没有太多规范。缺点导致风格混杂，但再差的程序员也不会写出太离谱危害全局的程序。  2. PHP的四层体系 PHP的核心架构如下图：
+从图上可以看出，PHP从下到上是一个4层体系：
+Zend引擎：Zend整体用纯C实现，是PHP的内核部分，它将PHP代码翻译（词法、语法解析等一系列编译过程）为可执行opcode处理，并实现相应的处理方法，实现了基本的数据结构（如hashtable、oo）、内存分配及管理、提供了相应的api方法供外部调用，是一切的核心，所有的外围功能均围绕Zend实现。 Extensions：围绕着Zend引擎，extensions通过组件式的方式提供各种基础服务，我们常见的各种内置函数（如array系列）、标准库等都是通过extension来实现，用户也可以根据需要实现自己的extension以达到功能扩展、性能优化等目的（如贴吧正在使用的PHP中间层、富文本解析就是extension的典型应用）。 Sapi：Sapi全称是Server Application Programming Interface，也就是服务端应用编程接口，Sapi通过一系列钩子函数，使得PHP可以和外围交互数据，这是PHP非常优雅和成功的一个设计，通过sapi成功的将PHP本身和上层应用解耦隔离，PHP可以不再考虑如何针对不同应用进行兼容，而应用本身也可以针对自己的特点实现不同的处理方式。 Application：这就是我们平时编写的PHP程序，通过不同的sapi方式得到各种各样的应用模式，如通过webserver实现web应用、在命令行下以脚本方式运行等等。  如果PHP是一辆车，那么车的框架就是PHP本身，Zend是车的引擎（发动机），Ext下面的各种组件就是车的轮子，Sapi可以看做是公路，车可以跑在不同类型的公路上，而一次PHP程序的执行就是汽车跑在公路上。因此，我们需要：性能优异的引擎+合适的车轮+正确的跑道。
+3. Sapi 如前所述，Sapi通过通过一系列的接口，使得外部应用可以和PHP交换数据，并可以根据不同应用特点实现特定的处理方法，我们常见的一些sapi有：
+apache2handler：这是以apache作为webserver，采用mod_PHP模式运行时候的处理方式。 cgi：这是webserver和PHP直接的另一种交互方式，也就是大名鼎鼎的fastcgi协议，在最近今年fastcgi+PHP得到越来越多的应用，也是异步webserver所唯一支持的方式。 cli：命令行调用的应用模式  4. PHP的执行流程&amp;amp;opcode PHP代码的执行所经过的流程
+从图上可以看到，PHP实现了一个典型的动态语言执行过程：拿到一段代码后，经过词法解析、语法解析等阶段后，源程序会被翻译成一个个指令(opcodes)，然后ZEND虚拟机顺次执行这些指令完成操作。PHP本身是用C实现的，因此最终调用的也都是C的函数，实际上，我们可以把PHP看做是一个C开发的软件。
+PHP的执行的核心是翻译出来的一条一条指令，也即opcode。
+Opcode是PHP程序执行的最基本单位。一个opcode由两个参数(op1,op2)、返回值和处理函数组成。PHP程序最终被翻译为一组opcode处理函数的顺序执行。
+常见的几个处理函数：
+ZEND_ASSIGN_SPEC_CV_CV_HANDLER : 变量分配 （$a=$b） ZEND_DO_FCALL_BY_NAME_SPEC_HANDLER：函数调用 ZEND_CONCAT_SPEC_CV_CV_HANDLER：字符串拼接 $a.$b ZEND_ADD_SPEC_CV_CONST_HANDLER: 加法运算 $a+2 ZEND_IS_EQUAL_SPEC_CV_CONST：判断相等 $a==1 ZEND_IS_IDENTICAL_SPEC_CV_CONST：判断相等 $a===1 5. PHP-FPM CGI  CGI全称是Common Geteway Interface，中文翻译公共网关接口，是HTTP服务器与你或者其他机器上的程序进行会话的一种工具，程序必须运行在网络服务器上。
+Fast-CGI  Fast-CGI是CGI的fast版本，是常驻内存的CGI，并接收进程管理器的调度。不会像CGI每次激活都要fork出一进程来加载解释器导致性能下降的缺点。
+PHP-CGI  PHP-CGI是实现了CGI接口协议的php脚本解析器。
+PHP-FPM  管理和调度PHP-CGI进程，进而实现Fast-CGI协议接口的程序。</description>
+    </item>
+    
+    <item>
+      <title>Windows VSCode 远程调试 Homestead PHP</title>
+      <link>/post/computerlanguages/php/computerlanguages-php-xdebug/</link>
+      <pubDate>Wed, 29 Apr 2020 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/computerlanguages/php/computerlanguages-php-xdebug/</guid>
+      <description>环境准备 Homestead VSCode 安装 PHP Debug 扩展 Chrome 安装 Xdebug helper 扩展程序 | FireFox 安装 Xdebug helper 扩展程序 Homestead PHP 版本要和 Windows PHP 版本 一致  VSCode 修改 launch.json { &amp;#34;version&amp;#34;: &amp;#34;0.2.0&amp;#34;, &amp;#34;configurations&amp;#34;: [ { &amp;#34;name&amp;#34;: &amp;#34;Listen for XDebug&amp;#34;, &amp;#34;type&amp;#34;: &amp;#34;php&amp;#34;, &amp;#34;request&amp;#34;: &amp;#34;launch&amp;#34;, &amp;#34;port&amp;#34;: 9000, &amp;#34;stopOnEntry&amp;#34;: false, &amp;#34;pathMappings&amp;#34;: { &amp;#34;/home/vagrant/code/production/kwc&amp;#34;:&amp;#34;${workspaceRoot}&amp;#34; }, &amp;#34;log&amp;#34;: true }, { &amp;#34;name&amp;#34;: &amp;#34;Launch currently open script&amp;#34;, &amp;#34;type&amp;#34;: &amp;#34;php&amp;#34;, &amp;#34;request&amp;#34;: &amp;#34;launch&amp;#34;, &amp;#34;program&amp;#34;: &amp;#34;${workspaceRoot}/public/index.php&amp;#34;, &amp;#34;cwd&amp;#34;: &amp;#34;${workspaceRoot}/public/&amp;#34;, &amp;#34;port&amp;#34;: 9000 } ] } 这里主要添加了 pathMappings 配置项：</description>
+    </item>
+    
+    <item>
+      <title>PHP测试替身 Mockery</title>
+      <link>/post/computerlanguages/php/computerlanguages-php-mockery/</link>
+      <pubDate>Sun, 22 Mar 2020 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/computerlanguages/php/computerlanguages-php-mockery/</guid>
+      <description>单元测试：测试替身 Gerard Meszaros 在 Meszaros2007 中介绍了测试替身的概念： 『有时候对被测系统（SUT）进行测试是很困难的，因为它依赖于其他无法在测试环境中使用的组件。这有可能是因为这些组件不可用，它们不会返回测试所需要的结果，或者执行它们会有不良副作用。在其他情况下，的测试策略要求对被测系统的内部行为有更多控制或更多可见性。 如果在编写测试时无法使用（或选择不使用）实际的依赖组件（DOC），可以用测试替身来代替。测试替身不需要和真正的依赖组件有完全一样的的行为方式；他只需要提供和真正的组件同样的 API 即可，这样被测系统就会以为它是真正的组件！』 运行单元测试的环境不一定具有生产环境的系统组件，比如在代码持续集成系统中，通常只有代码与基本的构建环境。为了在测试环境中能保证测试的正常运行，需要对环境依赖使用替身来代替，以达到稳定测试效果，所以在测试时，网络请求组件是需要使用模拟对象（替身）来代替的，并不会真正的去请求 API。 Mockery使用说明 安装
+composer require phpunit/phpunit mockery/mockery 期望 使用with/withArg 判断是否满足期望需要用 \Mockery::close();
+$mock = \Mockery::mock(&amp;#39;MyClass&amp;#39;); $mock-&amp;gt;shouldReceive(&amp;#39;foo&amp;#39;)-&amp;gt;with(&amp;#39;Hello&amp;#39;); $mock-&amp;gt;foo(&amp;#39;Goodbye&amp;#39;); // throws a NoMatchingExpectationException \Mockery::close(); 使用闭包函数
+$mock = \Mockery::mock(&amp;#39;MyClass&amp;#39;); $mock-&amp;gt;shouldReceive(&amp;#39;foo&amp;#39;)-&amp;gt;withArgs(function ($arg) { if ($arg % 2 == 0) { return true; } return false; }); $mock-&amp;gt;foo(4); // matches the expectation $mock-&amp;gt;foo(3); // throws a NoMatchingExpectationException \Mockery::close(); 部分参数期望
+$mock = \Mockery::mock(&amp;#39;MyClass&amp;#39;); $mock-&amp;gt;shouldReceive(&amp;#39;foo&amp;#39;) -&amp;gt;withSomeOfArgs(1, 2); $mock-&amp;gt;foo(1, 2, 3); // matches the expectation $mock-&amp;gt;foo(3, 2, 1); // matches the expectation (passed order doesn&amp;#39;t matter) $mock-&amp;gt;foo(&amp;#39;1&amp;#39;, &amp;#39;2&amp;#39;); // throws a NoMatchingExpectationException (type should be matched) $mock-&amp;gt;foo(3); // throws a NoMatchingExpectationException \Mockery::close(); 系列返回值</description>
+    </item>
+    
+    <item>
+      <title>PHP扩展包开发</title>
+      <link>/post/computerlanguages/php/computerlanguages-php-phppackage/</link>
+      <pubDate>Sun, 05 Jan 2020 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/computerlanguages/php/computerlanguages-php-phppackage/</guid>
+      <description>现代PHP 现代化的 PHP 开发离不开 Composer、它的诞生也离不开 GitHub，基于它，可以非常方便的管理项目的依赖，有效的进行依赖的版本控制以用版本更新。
+现有的诸多优秀的开源项目大都是基于其它开源项目的，很少有独立开发的，正所谓站在巨人的肩膀上，才能看得更高。比如 Laravel，它就是一个非常典型的基于很多优秀第三方扩展包的模块化开发框架，它的很多核心功能都是基于另外一系列 Symfony 组件 之上构建的。
+日常开发中经常要与非常多优秀的扩展包打交道，比如图片处理包 intervention/image、单元测试框架 PHPUnit、还有非常强大的日期处理类 Carbon、日志处理 Monolog 等等太多太多。
+PHP 扩展包 **PHP 原生扩展
+PHP 原生扩展（PHP Native Extension），通常指基于 C/C++ 语言开发的对 PHP 语言的扩展，需要编译安装，比如最常使用的 phpredis、GD、MySQL、cURL 扩展等，这里有一个 PHP 的扩展列表。
+**PHP 扩展包
+PHP 扩展包（PHP Package）或者 PHP 包，通常指用 PHP 代码编写的代码包。它通常是一些特定功能的封装，比如 Intervention/image，它是基于 PHP 图像处理库 GD/Imagick 实现的图像处理功能包，具有非常强大且优雅的图片处理 API，可以非常便捷的基于它完成常规的图片操作，简化开发工作。
+PHP 扩展包结构说明 weather/ ├── .editorconfig # 编辑器配置文件，比如缩进大小、换行模式等 ├── .gitattributes # git 配置文件，可以设计导出时忽略文件等 ├── .gitignore # git 忽略文件配置列表 ├── .php_cs # PHP-CS-Fixer 配置文件 ├── README.</description>
+    </item>
+    
+    <item>
+      <title>Laravel常用命令</title>
+      <link>/post/computerlanguages/php/computerlanguages-php-laravel-common/</link>
+      <pubDate>Tue, 03 Dec 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/computerlanguages/php/computerlanguages-php-laravel-common/</guid>
+      <description>Laravel多环境配置 新建文件 .env.beta beta预发布环境
+Nginx配置
+location ~ \.php$ { try_files $uri =404; fastcgi_split_path_info ^(.+\.php)(/.+)$; fastcgi_pass phpserver; fastcgi_index index.php; # 添加 APP_ENV 参数, 这个参数设置会覆盖Laravel里的 APP_ENV, 设置后就会读取指定配置文件 .env.beta  fastcgi_param APP_ENV beta; fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name; fastcgi_param QUERY_STRING $query_string; include fastcgi_params; } </description>
+    </item>
+    
+    <item>
+      <title>Laravel各种调试工具和常用工具</title>
+      <link>/post/computerlanguages/php/computerlanguages-php-laravel-component/</link>
+      <pubDate>Mon, 02 Dec 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/computerlanguages/php/computerlanguages-php-laravel-component/</guid>
+      <description>Laravel调试  注意:调试工具切忌不可在正式环境中打开, 否则重要信息会泄露
+ Laravel-ddoc 数据字典 安装
+composer require jormin/laravel-ddoc --dev 发布
+php artisan vendor:publish --provider=&amp;#34;Jormin\DDoc\DDocServiceProvider&amp;#34; Laravel-log-viewer 日志 安装
+composer require rap2hpoutre/laravel-log-viewer --dev 发布
+php artisan vendor:publish --provider=&amp;#34;Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider&amp;#34; 添加路由 routes/web.php 中添加
+Route::get(&amp;#39;logs&amp;#39;, &amp;#39;\Rap2hpoutre\LaravelLogViewer\LogViewerController@index&amp;#39;); Telescope 调试工具 安装
+# 安装 Telescope composer require laravel/telescope --dev # Artisan 命令 telescope:install 发布其公共资源 php artisan telescope:install # 运行 migrate 命令执行数据库变更： php artisan migrate # 更新 Telescope 的时候，需要重新发布公共资源： php artisan telescope:publish 配置
+发布完 Telescope 的公共资源后，配置文件位于 config/telescope.</description>
+    </item>
+    
+    <item>
+      <title>Laravel使用PHPUnit进行单元测试注意事项</title>
+      <link>/post/computerlanguages/php/computerlanguages-php-laravel-phpunit/</link>
+      <pubDate>Tue, 26 Nov 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/computerlanguages/php/computerlanguages-php-laravel-phpunit/</guid>
+      <description>Laravel单元测试常用示例 # 运行单个测试实例 phpunit tests/Unit/AdministratorTest.php # 单独执行某个测试中的函数 phpunit --filter a_thread_has_a_creator # 带环境变量运行全部(不需要 CsrfToken) APP_ENV=testing phpunit # 带环境变量运行单个函数(不需要 CsrfToken) APP_ENV=testing phpunit --filter an_authenticated_user_may_participate_in_forum_threads Laravel使用PHPUnit注意: class TestHelper { // 任何测试类里都不要使用__construct方法 // 会与PHPUnit @depends @dataProvider方法重置 public function __construct() { } //$this里的属性赋值之后, 在其他方法中是无法拿到值的 private $_store; //设置_store值 public function create($class, $attributes = []) { $this-&amp;gt;_store = 1; return ; } //这里会返回null, public function get() { return $this-&amp;gt;_store; } } PHPUnit 依赖关系使用示例 class StackTest extends TestCase { // 注意:@depends 必须依赖PHPUnit测试方法, 也就是必须以test开头的方法 public function testEmpty() { $stack = []; $this-&amp;gt;assertEmpty($stack); //保持依赖关系的变量名必须一致, 下一个接口参数名必须是$stack return $stack; } /** * 保持依赖关系的变量名必须一致, 上一个接口必须是 return $stack * * @depends testEmpty */ public function testPush(array $stack) { array_push($stack, &amp;#39;foo&amp;#39;); $this-&amp;gt;assertEquals(&amp;#39;foo&amp;#39;, $stack[count($stack)-1]); $this-&amp;gt;assertNotEmpty($stack); return $stack; } /** * @depends testPush */ public function testPop(array $stack) { $this-&amp;gt;assertEquals(&amp;#39;foo&amp;#39;, array_pop($stack)); $this-&amp;gt;assertEmpty($stack); } } </description>
+    </item>
+    
+  </channel>
+</rss>

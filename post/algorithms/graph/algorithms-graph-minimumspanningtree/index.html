@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+  <title>图(Graph)-最小生成树(MinimumSpanningTree)-WoolfBreathe</title>
+  <meta property="og:title" content="图(Graph)-最小生成树(MinimumSpanningTree)" />
+  <meta name="twitter:title" content="图(Graph)-最小生成树(MinimumSpanningTree)" />
+
+  <meta name="description" content="最小生成树 在介绍图的相关概念的时候，提到过连通图，以无向图为例，如果图的任意两个顶点之间都是想通的，这个图就是连通图，今天我们在此基础上进一步介绍连通图的生成树概念。
+一个连通图的生成树是一个极小的连通子图，它含有图中全部的 n 个顶点，和足以构成一棵树的 n-1 条边，如下图所示：
+图1是一个连通图，图2是该连通图的生成树，反过来说，如果一棵树大于 n-1 条边，则必然构成环。
+构造连通网（带权连通图）的最小代价生成树叫做最小生成树。这个最小代价指的是通过 n-1 条边具有把 n 个顶点的连通图连接起来，并且使所有边的权值和最小。如下图所示，实线部分就是最小生成树：
+最小生成树的应用场景很多，小到欧洲十国游，怎么规划路径让交通费用最低，大到国家的电力网、公路网、通信网，怎么规划路径可以让建设成本最低，学习了最小生成树后，就可以通过算法来计算出最佳路径了，不仅如此，所有涉及连接网络中所有节点的最优路径问题，都可以通过最小生成树来处理。
+最小生成树有多种实现算法，我们这里介绍两种比较常见的：普里姆算法（Prim）和克鲁斯卡尔算法（Kruskal）。
+普里姆（Prim）算法 算法定义 简单来说，普里姆算法从图中某个顶点开始，将其作为一棵树的根节点，然后这棵树会逐步长大，一直长大到覆盖图中的每一个顶点为止，每一步都会从剩下的与当前操作节点相邻的顶点中找到一条权重最小的边加入到树中，当算法终止时，这棵树就是一棵最小生成树。
+下面是图示过程：
+从 V1 开始，从与其相邻的顶点中找到权重最小的边，连接的是 V3，然后从 V3 开始，在于 V3 相邻的顶点中找到权重最小的边，连接的是 V6，再从 V6 开始，依次类推，当到达某个顶点，与该顶点相邻的所有顶点都已经访问过，则需要往前回溯，从所有前驱节点中找到权重最小的一条未添加的边开始，继续上述流程，直到所有顶点都已经覆盖，此时，通过 n-1 条边连接 n 个顶点构成的树就是最小生成树。
+代码实现 在开始编写实现代码之前，需要做一些准备工作，因为最小生成树操作的图的边是有权重的，所以需要先构建一个带权重的图，此外，还需要对之前通过邻接表存储图的代码做一些扩展，因为之前保存的无向图是没有权重的，将邻接表中存储顶点节点和边节点的节点类分开加以区分：
+/** * 带权重的边节点 * Class ENode */ class ENode extends Node { public $weight; // 边的权重值 public function __construct($data, $weight) { $this-&gt;weight = $weight; parent::__construct($data); } } /** * 顶点 * Class VNode */ class VNode extends Node { } 对于存储图的邻接链表类也要稍作调整，将属性改成受保护的，以便可以在子类中继承，然后修改插入节点方法如下：">
+  <meta property="og:description" content="最小生成树 在介绍图的相关概念的时候，提到过连通图，以无向图为例，如果图的任意两个顶点之间都是想通的，这个图就是连通图，今天我们在此基础上进一步介绍连通图的生成树概念。
+一个连通图的生成树是一个极小的连通子图，它含有图中全部的 n 个顶点，和足以构成一棵树的 n-1 条边，如下图所示：
+图1是一个连通图，图2是该连通图的生成树，反过来说，如果一棵树大于 n-1 条边，则必然构成环。
+构造连通网（带权连通图）的最小代价生成树叫做最小生成树。这个最小代价指的是通过 n-1 条边具有把 n 个顶点的连通图连接起来，并且使所有边的权值和最小。如下图所示，实线部分就是最小生成树：
+最小生成树的应用场景很多，小到欧洲十国游，怎么规划路径让交通费用最低，大到国家的电力网、公路网、通信网，怎么规划路径可以让建设成本最低，学习了最小生成树后，就可以通过算法来计算出最佳路径了，不仅如此，所有涉及连接网络中所有节点的最优路径问题，都可以通过最小生成树来处理。
+最小生成树有多种实现算法，我们这里介绍两种比较常见的：普里姆算法（Prim）和克鲁斯卡尔算法（Kruskal）。
+普里姆（Prim）算法 算法定义 简单来说，普里姆算法从图中某个顶点开始，将其作为一棵树的根节点，然后这棵树会逐步长大，一直长大到覆盖图中的每一个顶点为止，每一步都会从剩下的与当前操作节点相邻的顶点中找到一条权重最小的边加入到树中，当算法终止时，这棵树就是一棵最小生成树。
+下面是图示过程：
+从 V1 开始，从与其相邻的顶点中找到权重最小的边，连接的是 V3，然后从 V3 开始，在于 V3 相邻的顶点中找到权重最小的边，连接的是 V6，再从 V6 开始，依次类推，当到达某个顶点，与该顶点相邻的所有顶点都已经访问过，则需要往前回溯，从所有前驱节点中找到权重最小的一条未添加的边开始，继续上述流程，直到所有顶点都已经覆盖，此时，通过 n-1 条边连接 n 个顶点构成的树就是最小生成树。
+代码实现 在开始编写实现代码之前，需要做一些准备工作，因为最小生成树操作的图的边是有权重的，所以需要先构建一个带权重的图，此外，还需要对之前通过邻接表存储图的代码做一些扩展，因为之前保存的无向图是没有权重的，将邻接表中存储顶点节点和边节点的节点类分开加以区分：
+/** * 带权重的边节点 * Class ENode */ class ENode extends Node { public $weight; // 边的权重值 public function __construct($data, $weight) { $this-&gt;weight = $weight; parent::__construct($data); } } /** * 顶点 * Class VNode */ class VNode extends Node { } 对于存储图的邻接链表类也要稍作调整，将属性改成受保护的，以便可以在子类中继承，然后修改插入节点方法如下：">
+  <meta name="twitter:description" content="最小生成树 在介绍图的相关概念的时候，提到过连通图，以无向图为例，如果图的任意两个顶点之间都是想通的，这个图就是连通图，今天我们在此基础上进一步介绍连通图的生成树概念。
+一个连通图的生成树是一个极小的连通子图，它含有图中全部的 n 个顶点，和足以构成一棵树的 n-1 条边，如下图所示：
+图1是一个连通图，图2是该连通图的生成树，反过来说，如果一棵树大于 n-1 条边，则必然构成环。
+构造连通网（带 …">
+  <meta name="author" content="WoolfBreathe"/>
+  <link href="/img/favicon.png" rel="icon" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/img/favicon.png"/>
+  <meta property="og:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@username" />
+  <meta name="twitter:creator" content="@username" />
+  <meta property="og:url" content="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="WoolfBreathe" />
+
+  <meta name="generator" content="Hugo 0.68.3" />
+  <link rel="canonical" href="/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="WoolfBreathe">
+
+  
+  
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700%7COpen+Sans:400,700" rel="stylesheet">
+  
+
+  <link rel="stylesheet" href='/css/bundle.min.62de9d30b83723e0d55f82908aedb1c5eb18c910bc24bcf43e530ce754ee1502.css' integrity='sha256-Yt6dMLg3I&#43;DVX4KQiu2xxesYyRC8JLz0PlMM51TuFQI='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
+<meta name="google-site-verification" content="oKxX4fOvB2yYmU02txZFChM93XQbESU4JaG3tNH9Hm8" />
+<meta name="baidu-site-verification" content="F5ojAyqaKU" />
+<meta name="keywords" content="Algorithms, Graph">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d611849735f187dd788dc054908f7d7a";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/" title="WoolfBreathe">
+        <img src="img/avatar-icon.png" style="margin-top: -5px;height: 32px;" alt="WoolfBreathe">
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="首页" href="/">首页</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="归档" href="/archives">归档</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="标签" href="/tags">标签</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于" href="/page/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="RSS" href="/index.xml">RSS</a>
+            </li>
+          
+        
+
+        
+
+        
+
+        
+          <li>
+            <a href="#modalSearch" data-toggle="modal" data-target="#modalSearch" style="outline: none;">
+              <span id="searchGlyph" class="glyphicon glyphicon-search"></span>
+            </a>
+          </li>
+          
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+  <div id="modalSearch" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">搜索</h4>
+        </div>
+        <div class="modal-body">
+            
+<div class="aa-input-container" id="aa-input-container">
+    <input type="search" id="aa-search-input" class="aa-input-search" placeholder="Search for titles or URIs..." name="search" autocomplete="off" />
+    <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
+        <path d="M1806,332c0-123.3-43.8-228.8-131.5-316.5C1586.8-72.2,1481.3-116,1358-116s-228.8,43.8-316.5,131.5  C953.8,103.2,910,208.7,910,332s43.8,228.8,131.5,316.5C1129.2,736.2,1234.7,780,1358,780s228.8-43.8,316.5-131.5  C1762.2,560.8,1806,455.3,1806,332z M2318,1164c0,34.7-12.7,64.7-38,90s-55.3,38-90,38c-36,0-66-12.7-90-38l-343-342  c-119.3,82.7-252.3,124-399,124c-95.3,0-186.5-18.5-273.5-55.5s-162-87-225-150s-113-138-150-225S654,427.3,654,332  s18.5-186.5,55.5-273.5s87-162,150-225s138-113,225-150S1262.7-372,1358-372s186.5,18.5,273.5,55.5s162,87,225,150s113,138,150,225  S2062,236.7,2062,332c0,146.7-41.3,279.7-124,399l343,343C2305.7,1098.7,2318,1128.7,2318,1164z" />
+    </svg>
+</div>
+<script src="/js/algoliasearch.min.js"></script>
+<script src="/js/autocomplete.min.js"></script>
+
+<script>
+var client = algoliasearch("1JDRAS0AZR", "8804ac109158bb3bb60d74ce98fa332f");
+var index = client.initIndex('prod_blog');
+
+autocomplete('#aa-search-input',
+{ hint: false}, {
+    source: autocomplete.sources.hits(index, {hitsPerPage: 5}),
+    
+    displayKey: 'name',
+    
+    templates: {
+        
+        suggestion: function(suggestion) {
+            return '<span>' + '<a href="/post/' + suggestion.slug + '">' +
+            suggestion._highlightResult.title.value + '</a></span>';
+        }
+    }
+});
+</script>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/20200317190406.png" ></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="post-heading">
+                <h1>图(Graph)-最小生成树(MinimumSpanningTree)</h1>
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>图(Graph)-最小生成树(MinimumSpanningTree)</h1>
+                
+                
+                  <span class="post-meta">
+  
+    发表于 2019-08-31
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+  </header>
+
+
+    
+
+
+
+<div class="container" role="main">
+  <div class="row">
+
+    
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div>
+            
+            
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="/tags/algorithms/">Algorithms</a> &nbsp;
+              
+                  <a href="/tags/graph/">Graph</a> &nbsp;
+              
+            </h5>
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+          
+            
+<aside class="toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#算法定义">算法定义</a>
+      <ul>
+        <li><a href="#代码实现">代码实现</a></li>
+        <li><a href="#代码测试">代码测试</a></li>
+        <li><a href="#算法复杂度">算法复杂度</a></li>
+      </ul>
+    </li>
+  </ul>
+
+  <ul>
+    <li><a href="#原理">原理</a></li>
+    <li><a href="#代码">代码</a></li>
+    <li><a href="#复杂度分析">复杂度分析</a></li>
+  </ul>
+</nav>
+</aside>
+
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <h1 id="最小生成树">最小生成树</h1>
+<p>在介绍图的相关概念的时候，提到过连通图，以无向图为例，如果图的任意两个顶点之间都是想通的，这个图就是连通图，今天我们在此基础上进一步介绍连通图的生成树概念。</p>
+<p>一个连通图的生成树是一个极小的连通子图，它含有图中全部的 n 个顶点，和足以构成一棵树的 n-1 条边，如下图所示：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/Graph/image-1572579434110.png" alt="连通图"></p>
+<p>图1是一个连通图，图2是该连通图的生成树，反过来说，如果一棵树大于 n-1 条边，则必然构成环。</p>
+<p>构造连通网（带权连通图）的最小代价生成树叫做<strong>最小生成树</strong>。这个最小代价指的是通过 n-1 条边具有把 n 个顶点的连通图连接起来，并且使所有边的权值和最小。如下图所示，实线部分就是最小生成树：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/Graph/image-1572579485148.png" alt="最小生成树"></p>
+<p>最小生成树的应用场景很多，小到欧洲十国游，怎么规划路径让交通费用最低，大到国家的电力网、公路网、通信网，怎么规划路径可以让建设成本最低，学习了最小生成树后，就可以通过算法来计算出最佳路径了，不仅如此，所有涉及连接网络中所有节点的最优路径问题，都可以通过最小生成树来处理。</p>
+<p>最小生成树有多种实现算法，我们这里介绍两种比较常见的：普里姆算法（Prim）和克鲁斯卡尔算法（Kruskal）。</p>
+<h1 id="普里姆prim算法">普里姆（Prim）算法</h1>
+<h2 id="算法定义">算法定义</h2>
+<p>简单来说，普里姆算法从图中某个顶点开始，将其作为一棵树的根节点，然后这棵树会逐步长大，一直长大到覆盖图中的每一个顶点为止，每一步都会从剩下的与当前操作节点相邻的顶点中找到一条权重最小的边加入到树中，当算法终止时，这棵树就是一棵最小生成树。</p>
+<p>下面是图示过程：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/Graph/image-1572787675442.png" alt="普里姆算法图示"></p>
+<p>从 V1 开始，从与其相邻的顶点中找到权重最小的边，连接的是 V3，然后从 V3 开始，在于 V3 相邻的顶点中找到权重最小的边，连接的是 V6，再从 V6 开始，依次类推，当到达某个顶点，与该顶点相邻的所有顶点都已经访问过，则需要往前回溯，从所有前驱节点中找到权重最小的一条未添加的边开始，继续上述流程，直到所有顶点都已经覆盖，此时，通过 n-1 条边连接 n 个顶点构成的树就是最小生成树。</p>
+<h3 id="代码实现">代码实现</h3>
+<p>在开始编写实现代码之前，需要做一些准备工作，因为最小生成树操作的图的边是有权重的，所以需要先构建一个带权重的图，此外，还需要对之前通过邻接表存储图的代码做一些扩展，因为之前保存的无向图是没有权重的，将邻接表中存储顶点节点和边节点的节点类分开加以区分：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">/**
+ * 带权重的边节点
+ * Class ENode
+ */
+class ENode extends Node
+{
+    public $weight;  // 边的权重值
+
+    public function __construct($data, $weight)
+    {
+        $this-&gt;weight = $weight;
+        parent::__construct($data);
+    }
+}
+
+/**
+ * 顶点
+ * Class VNode
+ */
+class VNode extends Node
+{
+
+}
+</code></pre></div><p>对于存储图的邻接链表类也要稍作调整，将属性改成受保护的，以便可以在子类中继承，然后修改插入节点方法如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">/**
+ * Class LinkedList
+ * 链表类
+ */
+class LinkedList
+{
+    protected $head = null;
+    protected $count = 0;
+
+    ...
+
+    public function insert(Node $node)
+    {
+        if ($this-&gt;head == null) {
+            return;
+        }
+        $node-&gt;next = $this-&gt;head-&gt;next;
+        $this-&gt;head-&gt;next = $node;
+        $this-&gt;count++;
+    }
+    
+    ...
+</code></pre></div><p>接下来，我们在最小生成树对应的无向连通网中，继承这个链表类，并新增插入顶点节点和边节点的方法：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">/**
+ * 邻接链表类
+ * Class AdjLinkedList
+ */
+class AdjLinkedList extends LinkedList
+{
+    // 插入顶点节点
+    public function insertVNode(VNode $node)
+    {
+        $this-&gt;insert($node);
+    }
+
+    // 插入边节点
+    public function insertENode(ENode $node)
+    {
+        // 顶点不能为空
+        if ($this-&gt;head == null || $this-&gt;head-&gt;next == null) {
+            return;
+        }
+        $vNode = $this-&gt;head-&gt;next;
+        $node-&gt;next = $vNode-&gt;next;
+        $vNode-&gt;next = $node;
+        $this-&gt;count++;
+    }
+}
+</code></pre></div><p>最后，我们基于以上数据结构完成无向连通网类 EdgeWeightedGraph 的构建：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">/**
+ * 无向连通网类
+ * Class EdgeWeightedGraph
+ */
+class EdgeWeightedGraph
+{
+    private $vNum;  // 顶点总数
+    private $vData = []; // 顶点数组
+    
+    /**
+     * @var AdjLinkedList[]
+     */
+    private $adj = [];  // 邻接表
+
+    public function __construct($vNum)
+    {
+        $this-&gt;vNum = $vNum;
+        for ($i = 0; $i &lt; $vNum; $i++) {
+            $this-&gt;adj[$i] = new AdjLinkedList();
+        }
+    }
+
+    // 添加顶点
+    public function addVertex($i, $v)
+    {
+        $vNode = new VNode($v);
+        $this-&gt;vData[$i] = $v;
+        $this-&gt;adj[$i]-&gt;insertVNode($vNode);
+    }
+
+    // 添加边
+    public function addEdge($s, $t, $weight)
+    {
+        $esNode = new ENode($s, $weight);
+        $etNode = new ENode($t, $weight);
+        $this-&gt;adj[$s]-&gt;insertENode($etNode);
+        $this-&gt;adj[$t]-&gt;insertENode($esNode);
+    }
+
+    /*
+     * 获取边&lt;<span style="color:#ff79c6">start</span>, <span style="color:#50fa7b">end</span>&gt;的权值；若start和end不是连通的，则返回无穷大。
+     */
+    public function getWeight($start, $end)
+    {
+        if ($start == $end) {
+            return 0;
+        }
+
+        $node = $this-&gt;adj[$start]-&gt;get(0)-&gt;next;
+        while ($node != null) {
+            if ($end == $node-&gt;data) {
+                return $node-&gt;weight;
+            }
+            $node = $node-&gt;next;
+        }
+
+        return INF;  // 如果没有找到结束节点返回无限大
+    }
+
+    /**
+     * 返回指定顶点的位置
+     * @param $data
+     * @return int
+     */
+    public function getPosition($data)
+    {
+        for ($i = 0; $i &lt; $this-&gt;vNum; $i++) {
+            if ($this-&gt;vData[$i] == $data) {
+                return $i;
+            }
+        }
+        return -1;
+    }
+}
+</code></pre></div><p>在这个类中，通过邻接表来存储图，在构造函数中对图进行初始化，然后通过 addVNode 在邻接表中添加顶点节点，并且通过额外的 $vData 数组存储顶点数据，通过 addENode 方法向邻接表中插入边节点。此外，我们还提供了 getWeight 方法用于获取两个顶点之间边的权重，以及 getPosition 方法获取指定顶点在邻接表中的位置。</p>
+<p>在 EdgeWeightedGraph 类中编写最小生成树的普里姆（Prim）算法实现代码了，其实就是将上面的算法原理做一个转化：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">// 通过 Prim 算法实现最小生成树
+public function prim($start = 0)
+{
+    $index = 0;     // prim最小树的索引，即prims数组的索引
+    $primTree = []; // prim最小树的结果数组（顶点）
+    $weights = [];  // 顶点间边的权值数组
+
+    // 假设从顶点数组索引start开始构造最小生成树
+    $primTree[$index++] = $this-&gt;vData[$start];
+
+    // 初始化&#34;顶点的权值数组&#34;，
+    // 将每个顶点的权值初始化为&#34;起始顶点start&#34;到&#34;该顶点&#34;的权值。
+    for ($i = 0; $i &lt; $this-&gt;vNum; $i++ ) {
+        $weights[$i] = $this-&gt;getWeight($start, $i);
+    }
+
+    // 构造最小生成树顶点数组
+    for ($i = 0; $i &lt; $this-&gt;vNum; $i++) {
+        // 由于从 start 开始，所以跳过 start 顶点
+        if ($i == $start) {
+            continue;
+        }
+
+        $j = 0;
+        $k = 0;
+        $min = INF;   // 初始化最小权值为无穷大
+        // 在未被加入到最小生成树的顶点中，找出边权值最小的那个顶点
+        while ($j &lt; $this-&gt;vNum) {
+            if ($weights[$j] != 0 &amp;&amp; $weights[$j] &lt; $min) {
+                $min = $weights[$j];  // 最小权重值
+                $k = $j;   // 对应顶点下标
+            }
+            $j++;
+        }
+
+        // 经过上面的处理后，在未被加入到最小生成树的顶点中，权值最小的顶点是第k个顶点。
+        // 将第k个顶点加入到最小生成树的结果数组中
+        $primTree[$index++] = $this-&gt;vData[$k];
+        // 将&#34;第k个顶点的权值&#34;标记为0，意味着该顶点已经加入到最小树结果中
+        $weights[$k] = 0;
+        // 当第k个顶点被加入到最小生成树的结果数组中之后，以顶点k为起点更新其与其它顶点的权值。
+        for ($j = 0 ; $j &lt; $this-&gt;vNum; $j++) {
+            // 获取第k个顶点到第j个顶点的权值
+            $tmp = $this-&gt;getWeight($k, $j);
+            // 当第j个节点还没有添加到最小生成树，并且权值比之前小时才被更新。
+            if ($weights[$j] != 0 &amp;&amp; $tmp &lt; $weights[$j]) {
+                $weights[$j] = $tmp;
+            }
+        }
+    }
+
+    // 计算最小生成树的权值和
+    $sum = 0;
+    // 跳过起始顶点
+    for ($i = 1; $i &lt; $index; $i++) {
+        $min = INF;
+        // 获取$primTree[$i]在邻接表中的位置
+        $n = $this-&gt;getPosition($primTree[$i]);
+        // 在$vData[0...i]中，找出到j的权值最小的顶点。
+        for ($j = 0; $j &lt; $i; $j++) {
+            $m = $this-&gt;getPosition($primTree[$j]);
+            $tmp = $this-&gt;getWeight($m, $n);
+            if ($tmp &lt; $min) {
+                $min = $tmp;
+            }
+        }
+        $sum += $min;
+    }
+
+    // 打印最小生成树
+    printf(&#34;PRIM(%s)=%d: &#34;, $this-&gt;vData[$start], $sum);
+    for ($i = 0; $i &lt; $index; $i++) {
+        printf(&#34;%s &#34;, $primTree[$i]);
+    }
+}
+</code></pre></div><h3 id="代码测试">代码测试</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">// 顶点和边数据
+$nodes = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;, &#39;G&#39;];
+$edges = [
+    [&#39;A&#39;, &#39;B&#39;, 12],
+    [&#39;A&#39;, &#39;F&#39;, 16],
+    [&#39;A&#39;, &#39;G&#39;, 14],
+    [&#39;B&#39;, &#39;C&#39;, 10],
+    [&#39;B&#39;, &#39;F&#39;,  7],
+    [&#39;C&#39;, &#39;D&#39;,  3],
+    [&#39;C&#39;, &#39;E&#39;,  5],
+    [&#39;C&#39;, &#39;F&#39;,  6],
+    [&#39;D&#39;, &#39;E&#39;,  4],
+    [&#39;E&#39;, &#39;F&#39;,  2],
+    [&#39;E&#39;, &#39;G&#39;,  8],
+    [&#39;F&#39;, &#39;G&#39;,  9],
+];
+
+// 构造无向连通网
+$graph = new EdgeWeightedGraph(count($nodes));
+foreach ($nodes as $i =&gt; $v) {
+    $graph-&gt;addVertex($i, $v);
+}
+foreach ($edges as $edge) {
+    $start = $graph-&gt;getPosition($edge[0]);
+    $end = $graph-&gt;getPosition($edge[1]);
+    $graph-&gt;addEdge($start, $end, $edge[2]);
+}
+
+// 构造并打印最小生成树结果
+$graph-&gt;prim();
+</code></pre></div><p>执行测试代码，输出结果如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">PRIM(A)=36: A B F E D C G
+</code></pre></div><p>表明最小生成树构建成功。</p>
+<h3 id="算法复杂度">算法复杂度</h3>
+<p>通过分析上述实现代码，很容易看出对于顶点数为 n 的无向连通网，普里姆算法实现最小生成树对应的时间复杂度是 O(n2)（嵌套循环，舍弃低阶对边的遍历），还需要额外的空间存储顶点和边，对应的空间复杂度是 O(n+e)，其中，n 是顶点数，e 是边数。</p>
+<h1 id="克鲁斯卡尔算法kruskal">克鲁斯卡尔算法（Kruskal）</h1>
+<h2 id="原理">原理</h2>
+<p>与普里姆算法不同，克鲁斯卡尔算法主要以边为维度，每次从剩下的边中找权重值最小的边来构建最小生成树，具体实现思路如下：</p>
+<pre><code>将无向图的边按权重大小递增式排序，放到集合中
+遍历该集合，找出权重最小的边，加入到结果生成树的集合中
+如果结果生成树出现回路，则放弃这条边
+重新执行步骤2，直至所有顶点被遍历，最终生成最小生成树
+</code></pre>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/Graph/image-1572788672108.png" alt="克鲁斯卡尔算法"></p>
+<h2 id="代码">代码</h2>
+<p>在 EdgeWeightedGraph 类中新增一个边集合属性：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">/**
+ * @var Edge[]
+ */
+private $edges = []; // 边数组
+</code></pre></div><p>然后在添加边的时候顺便将其添加到边集合数组中：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">// 添加边
+public function addEdge($s, $t, $weight)
+{
+    $esNode = new ENode($s, $weight);
+    $etNode = new ENode($t, $weight);
+    $this-&gt;adj[$s]-&gt;insertENode($etNode);
+    $this-&gt;adj[$t]-&gt;insertENode($esNode);
+    $this-&gt;edges[] = new Edge($s, $t, $weight);
+    $this-&gt;edges[] = new Edge($t, $s, $weight);
+}
+</code></pre></div><p>Kruskal 算法实现代码如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">public function kruskal()
+{
+    // 按照权重值大小对边数组进行排序（升序）
+    usort($this-&gt;edges, function ($edge, $anotherEdge) {
+        if ($edge-&gt;weight &lt; $anotherEdge-&gt;weight) {
+            return -1;
+        } elseif ($edge-&gt;weight &gt; $anotherEdge-&gt;weight) {
+            return 1;
+        } else {
+            return 0;
+        }
+    });
+
+    $kruskalTree = []; // 最小生成树
+    $parent = [];   // 存储前驱顶点，用于判断回路
+    $points = [];
+
+    $sum = 0; // 总权值
+    foreach ($this-&gt;edges as $edge) {
+        // 如果存在回路则跳过
+        if (!$this-&gt;isLoop($parent, $edge-&gt;start, $edge-&gt;end)) {
+            $points[] = $edge-&gt;start;
+            $points[] = $edge-&gt;end;
+            // 边数校验
+            if (count($kruskalTree) + 1 &gt; count(array_unique($points)) - 1) {
+                continue;
+            }
+            $parent[$edge-&gt;start] = $edge-&gt;end;
+            $kruskalTree[] = $edge;
+            $sum += $edge-&gt;weight;
+            // n-1 条边
+            if (count($kruskalTree) == $this-&gt;vNum - 1) {
+                break;
+            }
+        }
+    }
+
+    // 打印最小生成树
+    printf(&#34;KRUSKAL()=%d: &#34;, $sum);
+    foreach ($kruskalTree as $edge) {
+        printf(&#34;(%s,%s): %d\n&#34;, $this-&gt;vData[$edge-&gt;start], $this-&gt;vData[$edge-&gt;end], $edge-&gt;weight);
+    }
+}
+
+// 判断是否存在回路
+protected function isLoop($parent, $start, $end)
+{
+    $p = $this-&gt;find($parent, $start);
+    $q = $this-&gt;find($parent, $end);
+    return $p == $q;
+}
+
+protected function find($parent, $f)
+{
+    while (isset($parent[$f])) {
+        $f = $parent[$f];
+    }
+    return $f;
+}
+</code></pre></div><p>其实就是对照原理将其转化为代码，参照原理看代码很好理解，克鲁斯卡尔算法实现代码比普里姆算法实现代码要精简一些，但是理解起来也还是有一定难度的，下面我们参照普里姆算法测试代码编写克鲁斯卡尔算法测试代码：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">// 顶点和边数据
+$nodes = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;, &#39;D&#39;, &#39;E&#39;, &#39;F&#39;, &#39;G&#39;];
+$edges = [
+    [&#39;A&#39;, &#39;B&#39;, 12],
+    [&#39;A&#39;, &#39;F&#39;, 16],
+    [&#39;A&#39;, &#39;G&#39;, 14],
+    [&#39;B&#39;, &#39;C&#39;, 10],
+    [&#39;B&#39;, &#39;F&#39;,  7],
+    [&#39;C&#39;, &#39;D&#39;,  3],
+    [&#39;C&#39;, &#39;E&#39;,  5],
+    [&#39;C&#39;, &#39;F&#39;,  6],
+    [&#39;D&#39;, &#39;E&#39;,  4],
+    [&#39;E&#39;, &#39;F&#39;,  2],
+    [&#39;E&#39;, &#39;G&#39;,  8],
+    [&#39;F&#39;, &#39;G&#39;,  9],
+];
+
+// 构造无向连通网
+$graph = new EdgeWeightedGraph(count($nodes));
+foreach ($nodes as $i =&gt; $v) {
+    $graph-&gt;addVertex($i, $v);
+}
+foreach ($edges as $edge) {
+    $start = $graph-&gt;getPosition($edge[0]);
+    $end = $graph-&gt;getPosition($edge[1]);
+    $graph-&gt;addEdge($start, $end, $edge[2]);
+}
+
+// 构建并打印最小生成树
+$graph-&gt;kruskal();
+</code></pre></div><p><img src="/img/posts/AlgorithmsAndDataStructures/Graph/image-1572788714271.png" alt="克鲁斯卡尔算法运行结果"></p>
+<h2 id="复杂度分析">复杂度分析</h2>
+<p>克鲁斯卡尔算法时间复杂度主要消耗在对边的遍历和回路校验上，假设图的边数是 e，则对应的时间复杂度是 O(eloge)，e 是指边的循环遍历次数，loge 指的是 isLoop 函数，尤其是 find 函数的时间复杂度，关于这种形式的 while 循环其实是个递归，所以对应时间复杂度是 loge。单从数量级上看克鲁斯卡尔算法要优于普里姆算法。</p>
+<h1 id="克鲁斯卡尔算法kruskal优化">克鲁斯卡尔算法（Kruskal）优化</h1>
+<p>之前的克鲁斯卡尔算法关键的判断回路代码难以理解</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">if (!$this-&gt;isLoop($parent, $edge-&gt;start, $edge-&gt;end)) {
+    $points[] = $edge-&gt;start;
+    $points[] = $edge-&gt;end;
+    // 边数校验 
+    // 为什么可以通过顶点数据判断是否形成回路
+    if (count($kruskalTree) + 1 &gt; count(array_unique($points)) - 1) {
+        continue;
+    }
+    // 如果$edge-&gt;start已经在parent里了, 为什么可以替换
+    // 边Edge(E,F,2)最先插入parent, 之后会被边Edge(E,D,4)取代???
+    $parent[$edge-&gt;start] = $edge-&gt;end;
+    $kruskalTree[] = $edge;
+    $sum += $edge-&gt;weight;
+    // n-1 条边
+    if (count($kruskalTree) == $this-&gt;vNum - 1) {
+        break;
+    }
+}
+</code></pre></div><p>修改后的代码:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">class Kruskal2
+{
+    /**
+     * 无向连通网类
+     * 
+     * @var EdgeWeightedGraph
+     */
+    public $graph;
+
+    /**
+     * 用于保存节点的pre节点序号
+     * 
+     * @var array
+     */
+    public $arr;
+
+    /**
+     * 用于保存每个树的大小
+     * 
+     * @var array
+     */
+    public $size;
+
+    /**
+     * 构造函数
+     * 
+     * @param EdgeWeightedGraph $edgeWeightedGraph 图
+     * 
+     * @return void
+     */
+    public function __construct(EdgeWeightedGraph $edgeWeightedGraph)
+    {
+        $this-&gt;graph = $edgeWeightedGraph;
+
+        for ($i=0; $i &lt; $this-&gt;graph-&gt;vNum; $i++) { 
+            $this-&gt;arr[$i] = $i;
+            $this-&gt;size[$i] = $i;
+        }
+    }
+
+    /**
+     * 通过 Prim 算法实现最小生成树
+     * 
+     * @return void
+     */
+    public function kruskal()
+    {
+        // 按照权重值大小对边数组进行排序（升序）
+        usort(
+            $this-&gt;graph-&gt;edges, function ($edge, $anotherEdge) {
+                if ($edge-&gt;weight &lt; $anotherEdge-&gt;weight) {
+                    return -1;
+                } elseif ($edge-&gt;weight &gt; $anotherEdge-&gt;weight) {
+                    return 1;
+                } else {
+                    return 0;
+                }
+            }
+        );
+
+        $kruskalTree = []; // 最小生成树
+
+        $sum = 0; // 总权值
+        foreach ($this-&gt;graph-&gt;edges as $edge) {
+            // 如果存在回路则跳过
+            if ($this-&gt;isLoop($edge-&gt;start, $edge-&gt;end)) {
+                $kruskalTree[] = $edge;
+                $sum += $edge-&gt;weight;
+                // n-1 条边
+                if (count($kruskalTree) == $this-&gt;graph-&gt;vNum - 1) {
+                    break;
+                }
+            }
+        }
+        
+        $result = [];
+        foreach ($kruskalTree as $k =&gt; $edge) {
+            $result[$k][] = $this-&gt;graph-&gt;vData[$edge-&gt;start];
+            $result[$k][] = $this-&gt;graph-&gt;vData[$edge-&gt;end];
+            $result[$k][] = $edge-&gt;weight;
+        }
+
+        return [$result, $sum];
+    }
+
+    /**
+     * 判断是否存在回路
+     * 
+     * @param string $start 起始顶点
+     * @param string $end   结束顶点
+     * 
+     * @return void
+     */
+    protected function isLoop($start, $end)
+    {
+        $p = $this-&gt;find($start);
+        $q = $this-&gt;find($end);
+
+        if ($p==$q) {
+            return false;
+        }
+        if ($this-&gt;size[$p] &gt; $this-&gt;size[$q]) {
+            $this-&gt;size[$p]+=$this-&gt;size[$q];
+            $this-&gt;arr[$q]=$p;
+        } else {
+            $this-&gt;size[$q]+=$this-&gt;size[$p];
+            $this-&gt;arr[$p]=$q;
+        }
+        return true;
+    }
+
+    /**
+     * 判断是否存在回路
+     * 
+     * @param string $f 顶点
+     * 
+     * @return void
+     */
+    protected function find($f)
+    {
+        while ($this-&gt;arr[$f]!=$f) {
+            $f = $this-&gt;arr[$f];
+        }
+        return $f;
+    }
+}
+</code></pre></div>
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我们的微信公众帐号，在微信公众帐号中回复◉加群◉即可加入到我们的 kubernetes 讨论群里面共同学习。</p>
+<img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/qrcode.png" alt="wechat-account-qrcode">
+
+  
+          
+            <div class="entry-shang text-center">
+    <p>「真诚赞赏，手留余香」</p>
+    <button class="zs show-zs btn btn-bred">赞赏</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+    <div class="zs-modal-head">
+        <button type="button" class="close">×</button>
+        <span class="author"><img src="/img/avatar.jpeg"/>阳明</span>
+        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
+    </div>
+    <div class="zs-modal-body">
+        <div class="zs-modal-btns">
+            <button class="btn btn-blink" data-num="2">2元</button>
+            <button class="btn btn-blink" data-num="5">5元</button>
+            <button class="btn btn-blink" data-num="10">10元</button>
+            <button class="btn btn-blink" data-num="50">50元</button>
+            <button class="btn btn-blink" data-num="100">100元</button>
+            <button class="btn btn-blink" data-num="1">任意金额</button>
+        </div>
+        <div class="zs-modal-pay">
+            <button class="btn btn-bred" id="pay-text">2元</button>
+            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+            <img src="/img/wechat-2.png" id="pay-image"/>
+        </div>
+    </div>
+    <div class="zs-modal-footer">
+        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
+    </div>
+</div>
+          
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
+        
+          
+
+<h3>相关文章</h3>
+<ul style="margin-bottom: 25px;">
+    
+    <li><a href="/post/algorithms/graph/algorithms-graph-traverse/">图(Graph)-遍历</a></li>
+    
+    <li><a href="/post/algorithms/graph/algorithms-graph-storage/">图(Graph)-存储</a></li>
+    
+    <li><a href="/post/algorithms/graph/algorithms-graph/">图(Graph)</a></li>
+    
+    <li><a href="/post/algorithms/binarytree/algorithms-binarytree-huffmantree/">二叉树(BinaryTree)-哈夫曼树(HuffmanTree)</a></li>
+    
+    <li><a href="/post/algorithms/binarytree/algorithms-binarytree-heap/">二叉树(BinaryTree)-堆(Heap)</a></li>
+    
+    <li><a href="/post/algorithms/binarytree/algorithms-redblacktree/">二叉树(BinaryTree)-红黑树(Red-Black Tree)</a></li>
+    
+    <li><a href="/post/algorithms/binarytree/algorithms-binarytree-avl/">二叉树(BinaryTree)-平衡二叉树(AVL)</a></li>
+    
+    <li><a href="/post/algorithms/binarytree/algorithms-binarytree-search/">二叉树(BinaryTree)-查找</a></li>
+    
+    <li><a href="/post/algorithms/binarytree/algorithms-binarytree-traversal/">二叉树(BinaryTree)-遍历</a></li>
+    
+    <li><a href="/post/algorithms/binarytree/algorithms-binarytree-storage/">二叉树(BinaryTree)-存储</a></li>
+    
+</ul>
+
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="/post/algorithms/graph/algorithms-graph-traverse/" data-toggle="tooltip" data-placement="top" title="图(Graph)-遍历">&larr; 前一篇</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="/post/algorithms/graph/algorithms-graph-shortestpath/" data-toggle="tooltip" data-placement="top" title="图(Graph)-最短路径(ShortestPath)">后一篇 &rarr;</a>
+            </li>
+          
+        </ul>
+        
+
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
+        
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+    var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        labels: ['gitment'],
+        title: '图(Graph)-最小生成树(MinimumSpanningTree)',
+        createIssueManually: true,
+        id: 'Algorithms-Graph-MinimumSpanningTree',      
+        distractionFreeMode: true  
+    });
+    gitalk.render('gitalk-container');
+</script>
+
+
+        
+          
+
+        
+  
+      </div>
+    
+    
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          <img src="/img/wechatmp.png" alt="k8s技术圈">
+          
+          <li>
+            <a href="mailto:icnych@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://github.com/cnych" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://weibo.com/cnych" title="微博">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://instagram.com/cnych" title="Instagram">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="/%20index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+          
+          <a href="/">WoolfBreathe</a>
+          
+          
+
+          &nbsp;&bull;&nbsp;
+          2021
+        </p>
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a
+            href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a
+            href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script> renderMathInElement(document.body); </script>
+<script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
+</script>
+<script>
+  (function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+
+  </body>
+</html>
+

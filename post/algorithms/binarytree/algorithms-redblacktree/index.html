@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+  <title>二叉树(BinaryTree)-红黑树(Red-Black Tree)-WoolfBreathe</title>
+  <meta property="og:title" content="二叉树(BinaryTree)-红黑树(Red-Black Tree)" />
+  <meta name="twitter:title" content="二叉树(BinaryTree)-红黑树(Red-Black Tree)" />
+
+  <meta name="description" content="特性和算法复杂度 平衡二叉树是最理想的二叉排序树，性能最好，也最稳定，但是缺点是维护成本高，需要在插入和删除节点时维护新树的平衡性，所以工程实践中，倾向于使用另一种二叉排序树 —— 红黑树.
+什么是红黑树 红黑树（Red-Black Tree）是每个节点都带有颜色属性的二叉排序（查找）树，具备以下特性：
+节点是红色或黑色； 根节点是黑色的； 每个叶子节点都是黑色的空节点（NIL），也就是说，叶子节点不存储数据； 任何相邻的节点都不能同时为红色，也就是说，红色节点是被黑色节点隔开的； 每个节点，从该节点到达其可达叶子节点的所有路径，都包含相同数目的黑色节点；  示例：
+这些约束保证了红黑树的关键特性：从根节点到叶子节点的最长的可能路径不多于最短的可能路径长度的两倍（每条路径红黑相间，且黑色节点数目相同，所以最短的路径上是两个黑色节点，相应的，此时最长路径节点一定是黑-红-黑-红，正好是其两倍），从而保证红黑树无论怎么插入、删除节点大致上也是平衡的。
+红黑树的算法复杂度 由于红黑树的特性，可以确保即使在最差情况下，红黑树也是大致平衡的，下面我们来简单推导下红黑树的时间复杂度。
+前面我们讲二叉排序树的时候说到二叉排序树的时间复杂度和树的高度成正比，红黑树是红黑相间的，我们可以先把红色的节点去掉，剩下的黑色节点就可能变成四叉树了，比如我们上面示例的那个红黑树。由于红黑树每条路径上黑色节点相同，所以可以继续把这个四叉树转化为完全二叉树，假设黑色节点的数量为 m，这样，这棵树的时间复杂度就是 O(logm) 了；然后我们把红色节点塞回来，红色节点的总数目肯定是小于等于黑色节点的，我们不妨假设等于黑色节点，这样，树的高度就增加一倍，对应的时间复杂度就是 2O(logm) 了，m≈n/2，由于在计算时间复杂度的时候，常量可以舍弃，所以红黑树的时间复杂度也是 O(logn)。虽然这里面都是估算的，但是由于前面提到的红黑树的特性约束，数量级上是没问题的。
+为什么工程上大多使用红黑树 红黑树维护成本比平衡二叉树低，性能上也能大致做到 O(logn)，且比较稳定，可以应付最差的情况。
+实现原理 插入节点 红黑树规定，插入的节点必须是红色的。而且，二叉排序（查找）树中新插入的节点都是放在叶子节点上。首先，两种最简单的情况：
+如果插入节点的父节点是黑色的，那我们什么都不用做，它仍然满足红黑树的定义。 如果插入的节点是根节点，那我们直接把它设置为黑色就可以了。  除此之外，其他情况都会违背红黑树的特性，所以我们需要进行动态调整，与平衡二叉树不同，调整的过程除了左右旋转之外，还涉及到节点颜色的调整。
+新节点插入之后，如果红黑树的平衡被打破，那一般会有下面三种情况。我们只需要根据每种情况的特点，不停地调整，就可以让红黑树继续符合定义，也就是继续保持平衡。
+有了前面平衡二叉树的铺垫，相信理解起来红黑树的构建过程将会更加轻松。为了方便表述，我们把正在处理的节点叫关注节点。
+CASE 1：如果关注节点是 a（待插入节点），它的叔叔节点（父亲的兄弟节点，从二叉排序树的角度来说叫伯伯节点更合适？） d 是红色，我们就依次执行下面的操作：
+将关注节点 a 的父节点 b、叔叔节点 d 的颜色都设置成黑色； 将关注节点 a 的祖父节点 c 的颜色设置成红色； 关注节点变成 a 的祖父节点 c； 跳到下面的 CASE 2 或者 CASE 3 继续处理。  CASE 2：如果关注节点是 a，它的叔叔节点 d 是黑色，关注节点 a 是其父节点 b 的右子节点，我们就依次执行下面的操作：">
+  <meta property="og:description" content="特性和算法复杂度 平衡二叉树是最理想的二叉排序树，性能最好，也最稳定，但是缺点是维护成本高，需要在插入和删除节点时维护新树的平衡性，所以工程实践中，倾向于使用另一种二叉排序树 —— 红黑树.
+什么是红黑树 红黑树（Red-Black Tree）是每个节点都带有颜色属性的二叉排序（查找）树，具备以下特性：
+节点是红色或黑色； 根节点是黑色的； 每个叶子节点都是黑色的空节点（NIL），也就是说，叶子节点不存储数据； 任何相邻的节点都不能同时为红色，也就是说，红色节点是被黑色节点隔开的； 每个节点，从该节点到达其可达叶子节点的所有路径，都包含相同数目的黑色节点；  示例：
+这些约束保证了红黑树的关键特性：从根节点到叶子节点的最长的可能路径不多于最短的可能路径长度的两倍（每条路径红黑相间，且黑色节点数目相同，所以最短的路径上是两个黑色节点，相应的，此时最长路径节点一定是黑-红-黑-红，正好是其两倍），从而保证红黑树无论怎么插入、删除节点大致上也是平衡的。
+红黑树的算法复杂度 由于红黑树的特性，可以确保即使在最差情况下，红黑树也是大致平衡的，下面我们来简单推导下红黑树的时间复杂度。
+前面我们讲二叉排序树的时候说到二叉排序树的时间复杂度和树的高度成正比，红黑树是红黑相间的，我们可以先把红色的节点去掉，剩下的黑色节点就可能变成四叉树了，比如我们上面示例的那个红黑树。由于红黑树每条路径上黑色节点相同，所以可以继续把这个四叉树转化为完全二叉树，假设黑色节点的数量为 m，这样，这棵树的时间复杂度就是 O(logm) 了；然后我们把红色节点塞回来，红色节点的总数目肯定是小于等于黑色节点的，我们不妨假设等于黑色节点，这样，树的高度就增加一倍，对应的时间复杂度就是 2O(logm) 了，m≈n/2，由于在计算时间复杂度的时候，常量可以舍弃，所以红黑树的时间复杂度也是 O(logn)。虽然这里面都是估算的，但是由于前面提到的红黑树的特性约束，数量级上是没问题的。
+为什么工程上大多使用红黑树 红黑树维护成本比平衡二叉树低，性能上也能大致做到 O(logn)，且比较稳定，可以应付最差的情况。
+实现原理 插入节点 红黑树规定，插入的节点必须是红色的。而且，二叉排序（查找）树中新插入的节点都是放在叶子节点上。首先，两种最简单的情况：
+如果插入节点的父节点是黑色的，那我们什么都不用做，它仍然满足红黑树的定义。 如果插入的节点是根节点，那我们直接把它设置为黑色就可以了。  除此之外，其他情况都会违背红黑树的特性，所以我们需要进行动态调整，与平衡二叉树不同，调整的过程除了左右旋转之外，还涉及到节点颜色的调整。
+新节点插入之后，如果红黑树的平衡被打破，那一般会有下面三种情况。我们只需要根据每种情况的特点，不停地调整，就可以让红黑树继续符合定义，也就是继续保持平衡。
+有了前面平衡二叉树的铺垫，相信理解起来红黑树的构建过程将会更加轻松。为了方便表述，我们把正在处理的节点叫关注节点。
+CASE 1：如果关注节点是 a（待插入节点），它的叔叔节点（父亲的兄弟节点，从二叉排序树的角度来说叫伯伯节点更合适？） d 是红色，我们就依次执行下面的操作：
+将关注节点 a 的父节点 b、叔叔节点 d 的颜色都设置成黑色； 将关注节点 a 的祖父节点 c 的颜色设置成红色； 关注节点变成 a 的祖父节点 c； 跳到下面的 CASE 2 或者 CASE 3 继续处理。  CASE 2：如果关注节点是 a，它的叔叔节点 d 是黑色，关注节点 a 是其父节点 b 的右子节点，我们就依次执行下面的操作：">
+  <meta name="twitter:description" content="特性和算法复杂度 平衡二叉树是最理想的二叉排序树，性能最好，也最稳定，但是缺点是维护成本高，需要在插入和删除节点时维护新树的平衡性，所以工程实践中，倾向于使用另一种二叉排序树 —— 红黑树.
+什么是红黑树 红黑树（Red-Black Tree）是每个节点都带有颜色属性的二叉排序（查找）树，具备以下特性：
+节点是红色或黑色； 根节点是黑色的； 每个叶子节点都是黑色的空节点（NIL），也就是说，叶子节 …">
+  <meta name="author" content="WoolfBreathe"/>
+  <link href="/img/favicon.png" rel="icon" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/img/favicon.png"/>
+  <meta property="og:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@username" />
+  <meta name="twitter:creator" content="@username" />
+  <meta property="og:url" content="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="WoolfBreathe" />
+
+  <meta name="generator" content="Hugo 0.68.3" />
+  <link rel="canonical" href="/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="WoolfBreathe">
+
+  
+  
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700%7COpen+Sans:400,700" rel="stylesheet">
+  
+
+  <link rel="stylesheet" href='/css/bundle.min.62de9d30b83723e0d55f82908aedb1c5eb18c910bc24bcf43e530ce754ee1502.css' integrity='sha256-Yt6dMLg3I&#43;DVX4KQiu2xxesYyRC8JLz0PlMM51TuFQI='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
+<meta name="google-site-verification" content="oKxX4fOvB2yYmU02txZFChM93XQbESU4JaG3tNH9Hm8" />
+<meta name="baidu-site-verification" content="F5ojAyqaKU" />
+<meta name="keywords" content="Algorithms, BinaryTree">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d611849735f187dd788dc054908f7d7a";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/" title="WoolfBreathe">
+        <img src="img/avatar-icon.png" style="margin-top: -5px;height: 32px;" alt="WoolfBreathe">
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="首页" href="/">首页</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="归档" href="/archives">归档</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="标签" href="/tags">标签</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于" href="/page/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="RSS" href="/index.xml">RSS</a>
+            </li>
+          
+        
+
+        
+
+        
+
+        
+          <li>
+            <a href="#modalSearch" data-toggle="modal" data-target="#modalSearch" style="outline: none;">
+              <span id="searchGlyph" class="glyphicon glyphicon-search"></span>
+            </a>
+          </li>
+          
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+  <div id="modalSearch" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">搜索</h4>
+        </div>
+        <div class="modal-body">
+            
+<div class="aa-input-container" id="aa-input-container">
+    <input type="search" id="aa-search-input" class="aa-input-search" placeholder="Search for titles or URIs..." name="search" autocomplete="off" />
+    <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
+        <path d="M1806,332c0-123.3-43.8-228.8-131.5-316.5C1586.8-72.2,1481.3-116,1358-116s-228.8,43.8-316.5,131.5  C953.8,103.2,910,208.7,910,332s43.8,228.8,131.5,316.5C1129.2,736.2,1234.7,780,1358,780s228.8-43.8,316.5-131.5  C1762.2,560.8,1806,455.3,1806,332z M2318,1164c0,34.7-12.7,64.7-38,90s-55.3,38-90,38c-36,0-66-12.7-90-38l-343-342  c-119.3,82.7-252.3,124-399,124c-95.3,0-186.5-18.5-273.5-55.5s-162-87-225-150s-113-138-150-225S654,427.3,654,332  s18.5-186.5,55.5-273.5s87-162,150-225s138-113,225-150S1262.7-372,1358-372s186.5,18.5,273.5,55.5s162,87,225,150s113,138,150,225  S2062,236.7,2062,332c0,146.7-41.3,279.7-124,399l343,343C2305.7,1098.7,2318,1128.7,2318,1164z" />
+    </svg>
+</div>
+<script src="/js/algoliasearch.min.js"></script>
+<script src="/js/autocomplete.min.js"></script>
+
+<script>
+var client = algoliasearch("1JDRAS0AZR", "8804ac109158bb3bb60d74ce98fa332f");
+var index = client.initIndex('prod_blog');
+
+autocomplete('#aa-search-input',
+{ hint: false}, {
+    source: autocomplete.sources.hits(index, {hitsPerPage: 5}),
+    
+    displayKey: 'name',
+    
+    templates: {
+        
+        suggestion: function(suggestion) {
+            return '<span>' + '<a href="/post/' + suggestion.slug + '">' +
+            suggestion._highlightResult.title.value + '</a></span>';
+        }
+    }
+});
+</script>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/20200317190406.png" data-img-desc-1="BinaryTree"></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="post-heading">
+                <h1>二叉树(BinaryTree)-红黑树(Red-Black Tree)</h1>
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>二叉树(BinaryTree)-红黑树(Red-Black Tree)</h1>
+                
+                
+                  <span class="post-meta">
+  
+    发表于 2019-08-25
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+  </header>
+
+
+    
+
+
+
+<div class="container" role="main">
+  <div class="row">
+
+    
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div>
+            
+            
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="/tags/algorithms/">Algorithms</a> &nbsp;
+              
+            </h5>
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+          
+            
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <h1 id="特性和算法复杂度">特性和算法复杂度</h1>
+<p>平衡二叉树是最理想的二叉排序树，性能最好，也最稳定，但是缺点是维护成本高，需要在插入和删除节点时维护新树的平衡性，所以工程实践中，倾向于使用另一种二叉排序树 —— 红黑树.</p>
+<h1 id="什么是红黑树">什么是红黑树</h1>
+<p>红黑树（Red-Black Tree）是每个节点都带有颜色属性的二叉排序（查找）树，具备以下特性：</p>
+<pre><code>节点是红色或黑色；
+根节点是黑色的；
+每个叶子节点都是黑色的空节点（NIL），也就是说，叶子节点不存储数据；
+任何相邻的节点都不能同时为红色，也就是说，红色节点是被黑色节点隔开的；
+每个节点，从该节点到达其可达叶子节点的所有路径，都包含相同数目的黑色节点；
+</code></pre>
+<p>示例：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/bde3bed7cba8405e733d7e813d836d11989768fb5bdbccc2c40799dfad3713a3.png" alt="红黑树图示"></p>
+<p>这些约束保证了红黑树的关键特性：从根节点到叶子节点的最长的可能路径不多于最短的可能路径长度的两倍（每条路径红黑相间，且黑色节点数目相同，所以最短的路径上是两个黑色节点，相应的，此时最长路径节点一定是黑-红-黑-红，正好是其两倍），从而保证红黑树无论怎么插入、删除节点大致上也是平衡的。</p>
+<h1 id="红黑树的算法复杂度">红黑树的算法复杂度</h1>
+<p>由于红黑树的特性，可以确保即使在最差情况下，红黑树也是大致平衡的，下面我们来简单推导下红黑树的时间复杂度。</p>
+<p>前面我们讲二叉排序树的时候说到二叉排序树的时间复杂度和树的高度成正比，红黑树是红黑相间的，我们可以先把红色的节点去掉，剩下的黑色节点就可能变成四叉树了，比如我们上面示例的那个红黑树。由于红黑树每条路径上黑色节点相同，所以可以继续把这个四叉树转化为完全二叉树，假设黑色节点的数量为 m，这样，这棵树的时间复杂度就是 O(logm) 了；然后我们把红色节点塞回来，红色节点的总数目肯定是小于等于黑色节点的，我们不妨假设等于黑色节点，这样，树的高度就增加一倍，对应的时间复杂度就是 2O(logm) 了，m≈n/2，由于在计算时间复杂度的时候，常量可以舍弃，所以红黑树的时间复杂度也是 O(logn)。虽然这里面都是估算的，但是由于前面提到的红黑树的特性约束，数量级上是没问题的。</p>
+<h1 id="为什么工程上大多使用红黑树">为什么工程上大多使用红黑树</h1>
+<p>红黑树维护成本比平衡二叉树低，性能上也能大致做到 O(logn)，且比较稳定，可以应付最差的情况。</p>
+<h1 id="实现原理">实现原理</h1>
+<h2 id="插入节点">插入节点</h2>
+<p>红黑树规定，插入的节点必须是红色的。而且，二叉排序（查找）树中新插入的节点都是放在叶子节点上。首先，两种最简单的情况：</p>
+<pre><code>如果插入节点的父节点是黑色的，那我们什么都不用做，它仍然满足红黑树的定义。
+如果插入的节点是根节点，那我们直接把它设置为黑色就可以了。
+</code></pre>
+<p>除此之外，其他情况都会违背红黑树的特性，所以我们需要进行动态调整，与平衡二叉树不同，调整的过程除了左右旋转之外，还涉及到节点颜色的调整。</p>
+<p>新节点插入之后，如果红黑树的平衡被打破，那一般会有下面三种情况。我们只需要根据每种情况的特点，不停地调整，就可以让红黑树继续符合定义，也就是继续保持平衡。</p>
+<p>有了前面平衡二叉树的铺垫，相信理解起来红黑树的构建过程将会更加轻松。为了方便表述，我们把正在处理的节点叫关注节点。</p>
+<p>CASE 1：如果关注节点是 a（待插入节点），它的叔叔节点（父亲的兄弟节点，从二叉排序树的角度来说叫伯伯节点更合适？） d 是红色，我们就依次执行下面的操作：</p>
+<pre><code>将关注节点 a 的父节点 b、叔叔节点 d 的颜色都设置成黑色；
+将关注节点 a 的祖父节点 c 的颜色设置成红色；
+关注节点变成 a 的祖父节点 c；
+跳到下面的 CASE 2 或者 CASE 3 继续处理。
+</code></pre>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/image-1572448446205.png" alt="红黑树插入节点案例一"></p>
+<p>CASE 2：如果关注节点是 a，它的叔叔节点 d 是黑色，关注节点 a 是其父节点 b 的右子节点，我们就依次执行下面的操作：</p>
+<pre><code>关注节点变成节点 a 的父节点 b；
+围绕新的关注节点 b 左旋；
+跳到 CASE 3。
+</code></pre>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/image-1572448547382.png" alt="红黑树插入节点案例二"></p>
+<p>CASE 3：如果关注节点是 a，它的叔叔节点 d 是黑色，关注节点 a 是其父节点 b 的左子节点，我们就依次执行下面的操作：</p>
+<pre><code>围绕关注节点 a 的祖父节点 c 右旋；
+将关注节点 a 的父节点 b、兄弟节点 c 的颜色互换。
+调整结束，至此就构造出来一棵红黑树。
+</code></pre>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/image-1572448609053.png" alt="红黑树插入节点案例三"></p>
+<pre><code>学院君注：在看上面三个 CASE 的时候要动态的去看，从 CASE 1 跳到 CASE 2 或 CASE 3，或者从 CASE 2 跳到 CASE 3，或者从 CASE 3 开始，不要分割开来。如果从 CASE 1 跳到到 CASE 2 或 CASE 3，后两者的关注节点 a 就是 CASE 1 中最终的关注节点 c。
+</code></pre>
+<h2 id="删除节点">删除节点</h2>
+<p>删除节点的平衡调整更加复杂，可以分为两步，第一步是针对删除节点初步调整。初步调整只是保证整棵红黑树在一个节点删除之后，仍然满足最后一条定义的要求，也就是说，每个节点，从该节点到达其可达叶子节点的所有路径，都包含相同数目的黑色节点；第二步是针对关注节点进行二次调整，让它满足红黑树的第三条定义，即不存在相邻的两个红色节点。</p>
+<h3 id="1针对删除节点的初步调整">1、针对删除节点的初步调整</h3>
+<p>这里需要注意一下，红黑树的定义中「只包含红色节点和黑色节点」，经过初步调整之后，为了保证满足红黑树定义的最后一条要求，有些节点会被标记成两种颜色，「红-黑」或者「黑-黑」。如果一个节点被标记为了「黑-黑」，那在计算黑色节点个数的时候，要算成两个黑色节点。</p>
+<p>CASE 1：如果要删除的节点是 a，它只有一个子节点 b，那我们就依次进行下面的操作：</p>
+<pre><code>删除节点 a，并且把节点 b 替换到节点 a 的位置，这一部分操作跟普通的二叉查找树的删除操作一样；
+节点 a 只能是黑色，节点 b 也只能是红色，其他情况均不符合红黑树的定义。这种情况下，我们把节点 b 改为黑色；
+调整结束，不需要进行二次调整。
+</code></pre>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/image-1572448679284.png" alt="红黑树删除节点案例一"></p>
+<p>CASE 2：如果要删除的节点 a 有两个非空子节点，并且它的后继节点就是节点 a 的右子节点 c</p>
+<pre><code>如果节点 a 的后继节点就是右子节点 c，那右子节点 c 肯定没有左子树（否则就不是后继节点了）。我们把节点 a 删除，并且将节点 c 替换到节点 a 的位置。这一部分操作跟普通的二叉查找树的删除操作无异；
+然后把节点 c 的颜色设置为跟节点 a 相同的颜色；
+如果节点 c 是黑色，为了不违反红黑树的最后一条定义，我们给节点 c 的右子节点 d 多加一个黑色，这个时候节点 d 就成了「红-黑」或者「黑-黑」；
+这个时候，关注节点变成了节点 d，第二步的调整操作就会针对关注节点来做。
+</code></pre>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/image-1572448749354.png" alt="红黑树删除节点案例二"></p>
+<p>CASE 3：如果要删除的是节点 a，它有两个非空子节点，并且节点 a 的后继节点不是右子节点，我们就依次进行下面的操作：</p>
+<pre><code>找到后继节点 d，并将它删除，删除后继节点 d 的过程参照 CASE 1；
+将节点 a 替换成后继节点 d；
+把节点 d 的颜色设置为跟节点 a 相同的颜色；
+如果节点 d 是黑色，为了不违反红黑树的最后一条定义，我们给节点 d 的右子节点 c 多加一个黑色，这个时候节点 c 就成了「红-黑」或者「黑-黑」；
+这个时候，关注节点变成了节点 c，第二步的调整操作就会针对关注节点来做。
+</code></pre>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/image-1572448804576.png" alt="红黑树删除节点案例三"></p>
+<h3 id="2针对关注节点的二次调整">2、针对关注节点的二次调整</h3>
+<p>经过初步调整之后，关注节点变成了「红-黑」或者「黑-黑」节点。针对这个关注节点，我们再分四种情况来进行二次调整。二次调整是为了让红黑树中不存在相邻的红色节点。</p>
+<p>CASE 1：如果关注节点是 a，它的兄弟节点 c 是红色的</p>
+<pre><code>围绕关注节点 a 的父节点 b 左旋；
+关注节点 a 的父节点 b 和祖父节点 c 交换颜色；
+关注节点不变；
+继续从四种情况中选择适合的规则来调整。
+</code></pre>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/image-1572448865250.png" alt="红黑树删除节点二次调整案例一"></p>
+<p>CASE 2：如果关注节点是 a，它的兄弟节点 c 是黑色的，并且节点 c 的左右子节点 d、e 都是黑色的</p>
+<pre><code>将关注节点 a 的兄弟节点 c 的颜色变成红色；
+从关注节点 a 中去掉一个黑色，这个时候节点 a 就是单纯的红色或者黑色；
+给关注节点 a 的父节点 b 添加一个黑色，这个时候节点 b 就变成了「红-黑」或者「黑-黑」；
+关注节点从 a 变成其父节点 b；
+继续从四种情况中选择符合的规则来调整。
+</code></pre>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/image-1572448929262.png" alt="红黑树删除节点二次调整案例二"></p>
+<p>CASE 3：如果关注节点是 a，它的兄弟节点 c 是黑色，c 的左子节点 d 是红色，c 的右子节点 e 是黑色，我们就依次进行下面的操作：</p>
+<pre><code>围绕关注节点 a 的兄弟节点 c 右旋；
+节点 c 和节点 d 交换颜色；
+关注节点不变；
+跳转到 CASE 4，继续调整。
+</code></pre>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/image-1572448977012.png" alt="红黑树删除节点二次调整案例三"></p>
+<p>CASE 4：如果关注节点 a 的兄弟节点 c 是黑色的，并且 c 的右子节点是红色的，我们就依次进行下面的操作：</p>
+<pre><code>围绕关注节点 a 的父节点 b 左旋；
+将关注节点 a 的兄弟节点 c 的颜色，跟关注节点 a 的父节点 b 设置成相同的颜色；
+将关注节点 a 的父节点 b 的颜色设置为黑色；
+从关注节点 a 中去掉一个黑色，节点 a 就变成了单纯的红色或者黑色；
+将关注节点 a 的叔叔节点 e 设置为黑色；
+调整结束。
+</code></pre>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/image-1572449039085.png" alt="红黑树删除节点二次调整案例四"></p>
+<h2 id="为什么叶子节点都是黑色的空节点">为什么叶子节点都是黑色的空节点</h2>
+<p>你可能会好奇，为什么叶子节点都是黑色的空节点，其实这就是为了红黑树实现起来更方便。只要满足这一条要求，那在任何时刻，红黑树的平衡操作都可以归结为我们刚刚讲的那几种情况。</p>
+<p>不要担心这么做会浪费存储空间，因为其实只要一个空节点就好了：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/image-1572449069652.png" alt="为什么叶子节点都是黑色的空节点"></p>
+<pre><code>注：以上红黑树的动态平衡过程主要参考了极客时间王争的算法专栏相应教程。关于红黑树的实现原理，了解其大致实现过程就好了，如果觉得复杂，看不懂，也没啥关系，毕竟基本上不会遇到手动实现红黑树的场景。
+
+声明：文中图片引用自极客时间算法专栏。
+</code></pre>
+
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我们的微信公众帐号，在微信公众帐号中回复◉加群◉即可加入到我们的 kubernetes 讨论群里面共同学习。</p>
+<img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/qrcode.png" alt="wechat-account-qrcode">
+
+  
+          
+            <div class="entry-shang text-center">
+    <p>「真诚赞赏，手留余香」</p>
+    <button class="zs show-zs btn btn-bred">赞赏</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+    <div class="zs-modal-head">
+        <button type="button" class="close">×</button>
+        <span class="author"><img src="/img/avatar.jpeg"/>阳明</span>
+        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
+    </div>
+    <div class="zs-modal-body">
+        <div class="zs-modal-btns">
+            <button class="btn btn-blink" data-num="2">2元</button>
+            <button class="btn btn-blink" data-num="5">5元</button>
+            <button class="btn btn-blink" data-num="10">10元</button>
+            <button class="btn btn-blink" data-num="50">50元</button>
+            <button class="btn btn-blink" data-num="100">100元</button>
+            <button class="btn btn-blink" data-num="1">任意金额</button>
+        </div>
+        <div class="zs-modal-pay">
+            <button class="btn btn-bred" id="pay-text">2元</button>
+            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+            <img src="/img/wechat-2.png" id="pay-image"/>
+        </div>
+    </div>
+    <div class="zs-modal-footer">
+        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
+    </div>
+</div>
+          
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
+        
+          
+
+<h3>相关文章</h3>
+<ul style="margin-bottom: 25px;">
+    
+    <li><a href="/post/algorithms/binarytree/algorithms-binarytree-avl/">二叉树(BinaryTree)-平衡二叉树(AVL)</a></li>
+    
+    <li><a href="/post/algorithms/binarytree/algorithms-binarytree-search/">二叉树(BinaryTree)-查找</a></li>
+    
+    <li><a href="/post/algorithms/binarytree/algorithms-binarytree-traversal/">二叉树(BinaryTree)-遍历</a></li>
+    
+    <li><a href="/post/algorithms/binarytree/algorithms-binarytree-storage/">二叉树(BinaryTree)-存储</a></li>
+    
+    <li><a href="/post/algorithms/binarytree/algorithms-binarytree/">二叉树(BinaryTree)</a></li>
+    
+    <li><a href="/post/algorithms/stringmatching/algorithms-stringmatching-kmp/">字符串匹配-KMP</a></li>
+    
+    <li><a href="/post/algorithms/stringmatching/algorithms-stringmatching-trie/">字符串匹配-Trie</a></li>
+    
+    <li><a href="/post/algorithms/stringmatching/algorithms-stringmatching-bf/">字符串匹配-BF(暴力匹配算法)</a></li>
+    
+    <li><a href="/post/algorithms/datastructures/algorithms-datastructures-hashtable/">数据结构-散列表(HashTable, 哈希表)</a></li>
+    
+    <li><a href="/post/algorithms/binarysearch/algorithms-binarysearch-case/">二分查找(BinarySearch)-索引查找</a></li>
+    
+</ul>
+
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="/post/algorithms/binarytree/algorithms-binarytree-avl/" data-toggle="tooltip" data-placement="top" title="二叉树(BinaryTree)-平衡二叉树(AVL)">&larr; 前一篇</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="/post/algorithms/binarytree/algorithms-binarytree-heap/" data-toggle="tooltip" data-placement="top" title="二叉树(BinaryTree)-堆(Heap)">后一篇 &rarr;</a>
+            </li>
+          
+        </ul>
+        
+
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
+        
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+    var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        labels: ['gitment'],
+        title: '二叉树(BinaryTree)-红黑树(Red-Black Tree)',
+        createIssueManually: true,
+        id: 'Algorithms-RedBlackTree',      
+        distractionFreeMode: true  
+    });
+    gitalk.render('gitalk-container');
+</script>
+
+
+        
+          
+
+        
+  
+      </div>
+    
+    
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          <img src="/img/wechatmp.png" alt="k8s技术圈">
+          
+          <li>
+            <a href="mailto:icnych@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://github.com/cnych" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://weibo.com/cnych" title="微博">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://instagram.com/cnych" title="Instagram">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="/%20index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+          
+          <a href="/">WoolfBreathe</a>
+          
+          
+
+          &nbsp;&bull;&nbsp;
+          2021
+        </p>
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a
+            href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a
+            href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script> renderMathInElement(document.body); </script>
+<script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
+</script>
+<script>
+  (function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+
+  </body>
+</html>
+

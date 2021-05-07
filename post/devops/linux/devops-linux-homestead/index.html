@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+  <title>Homestead(Windows系统Laravel环境搭建)-WoolfBreathe</title>
+  <meta property="og:title" content="Homestead(Windows系统Laravel环境搭建)" />
+  <meta name="twitter:title" content="Homestead(Windows系统Laravel环境搭建)" />
+
+  <meta name="description" content="步骤简略  接下来让我们按照这几个步骤来完成整个 Laravel 开发环境的安装及配置： 安装 VirtualBox 安装 Vagrant 导入 Homestead Box 虚拟机盒子 安装 Git 安装 Homestead 管理脚本 配置 Homestead.yaml 文件 启动 Homestead 虚拟机
+ 安装 VirtualBox VirtualBox 是 Oracle 公司的开源虚拟机软件。VirtualBox 号称是最强的免费虚拟机软件，它不仅功能齐全，而且性能也很优异！VirtualBox 支持大部分流行的系统，如：Mac, Windows, Linux 等。
+安装 Vagrant Vagrant 是用来管理虚拟机的工具，支持当前主流的虚拟机系统如 VirtualBox、VMware、AWS 等。Vagrant 的主要作用是提供一个可配置、可移植和复用的软件环境。Vagrant 让你通过编写一个 Vagrantfile 文件来控制虚拟机的启动、虚拟机网络环境的配置、虚拟机与主机间的文件共享，以及启动后自动执行一些配置脚本，如自动执行一个 Shell Script 来安装一些必备的开发工具，如安装配置 MySQL、PHP，甚至是自动配置 Nginx 站点。这意味着，在一个多人开发的项目中，你只需要同步 Vagrantfile 文件，就可以保证参与项目的每个人各自的机器上拥有一致的开发环境。
+Homestead 介绍 Homestead 利用 Vagrantfile 提供的便利，定制了一整套的可配置、可移植和复用的 Laravel 开发环境。Homestead 虚拟机里面包含了 Nginx Web 服务器、PHP 7、MySQL、Postgres、Redis、Memcached、Node，以及所有你在使用 Laravel 开发时需要用到的各种软件。 Homestead 包含了两个东西： Homestead 管理脚本； Homestead Box 虚拟机盒子。 接下来独自说明下。">
+  <meta property="og:description" content="步骤简略  接下来让我们按照这几个步骤来完成整个 Laravel 开发环境的安装及配置： 安装 VirtualBox 安装 Vagrant 导入 Homestead Box 虚拟机盒子 安装 Git 安装 Homestead 管理脚本 配置 Homestead.yaml 文件 启动 Homestead 虚拟机
+ 安装 VirtualBox VirtualBox 是 Oracle 公司的开源虚拟机软件。VirtualBox 号称是最强的免费虚拟机软件，它不仅功能齐全，而且性能也很优异！VirtualBox 支持大部分流行的系统，如：Mac, Windows, Linux 等。
+安装 Vagrant Vagrant 是用来管理虚拟机的工具，支持当前主流的虚拟机系统如 VirtualBox、VMware、AWS 等。Vagrant 的主要作用是提供一个可配置、可移植和复用的软件环境。Vagrant 让你通过编写一个 Vagrantfile 文件来控制虚拟机的启动、虚拟机网络环境的配置、虚拟机与主机间的文件共享，以及启动后自动执行一些配置脚本，如自动执行一个 Shell Script 来安装一些必备的开发工具，如安装配置 MySQL、PHP，甚至是自动配置 Nginx 站点。这意味着，在一个多人开发的项目中，你只需要同步 Vagrantfile 文件，就可以保证参与项目的每个人各自的机器上拥有一致的开发环境。
+Homestead 介绍 Homestead 利用 Vagrantfile 提供的便利，定制了一整套的可配置、可移植和复用的 Laravel 开发环境。Homestead 虚拟机里面包含了 Nginx Web 服务器、PHP 7、MySQL、Postgres、Redis、Memcached、Node，以及所有你在使用 Laravel 开发时需要用到的各种软件。 Homestead 包含了两个东西： Homestead 管理脚本； Homestead Box 虚拟机盒子。 接下来独自说明下。">
+  <meta name="twitter:description" content="步骤简略  接下来让我们按照这几个步骤来完成整个 Laravel 开发环境的安装及配置： 安装 VirtualBox 安装 Vagrant 导入 Homestead Box 虚拟机盒子 安装 Git 安装 Homestead 管理脚本 配置 Homestead.yaml 文件 启动 Homestead 虚拟机
+ 安装 VirtualBox VirtualBox 是 Oracle 公司的开源虚拟机软 …">
+  <meta name="author" content="WoolfBreathe"/>
+  <link href="/img/favicon.png" rel="icon" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/img/favicon.png"/>
+  <meta property="og:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@username" />
+  <meta name="twitter:creator" content="@username" />
+  <meta property="og:url" content="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="WoolfBreathe" />
+
+  <meta name="generator" content="Hugo 0.68.3" />
+  <link rel="canonical" href="/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="WoolfBreathe">
+
+  
+  
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700%7COpen+Sans:400,700" rel="stylesheet">
+  
+
+  <link rel="stylesheet" href='/css/bundle.min.62de9d30b83723e0d55f82908aedb1c5eb18c910bc24bcf43e530ce754ee1502.css' integrity='sha256-Yt6dMLg3I&#43;DVX4KQiu2xxesYyRC8JLz0PlMM51TuFQI='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
+<meta name="google-site-verification" content="oKxX4fOvB2yYmU02txZFChM93XQbESU4JaG3tNH9Hm8" />
+<meta name="baidu-site-verification" content="F5ojAyqaKU" />
+<meta name="keywords" content="DevOps, Vagrant, Homestead">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d611849735f187dd788dc054908f7d7a";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/" title="WoolfBreathe">
+        <img src="img/avatar-icon.png" style="margin-top: -5px;height: 32px;" alt="WoolfBreathe">
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="首页" href="/">首页</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="归档" href="/archives">归档</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="标签" href="/tags">标签</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于" href="/page/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="RSS" href="/index.xml">RSS</a>
+            </li>
+          
+        
+
+        
+
+        
+
+        
+          <li>
+            <a href="#modalSearch" data-toggle="modal" data-target="#modalSearch" style="outline: none;">
+              <span id="searchGlyph" class="glyphicon glyphicon-search"></span>
+            </a>
+          </li>
+          
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+  <div id="modalSearch" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">搜索</h4>
+        </div>
+        <div class="modal-body">
+            
+<div class="aa-input-container" id="aa-input-container">
+    <input type="search" id="aa-search-input" class="aa-input-search" placeholder="Search for titles or URIs..." name="search" autocomplete="off" />
+    <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
+        <path d="M1806,332c0-123.3-43.8-228.8-131.5-316.5C1586.8-72.2,1481.3-116,1358-116s-228.8,43.8-316.5,131.5  C953.8,103.2,910,208.7,910,332s43.8,228.8,131.5,316.5C1129.2,736.2,1234.7,780,1358,780s228.8-43.8,316.5-131.5  C1762.2,560.8,1806,455.3,1806,332z M2318,1164c0,34.7-12.7,64.7-38,90s-55.3,38-90,38c-36,0-66-12.7-90-38l-343-342  c-119.3,82.7-252.3,124-399,124c-95.3,0-186.5-18.5-273.5-55.5s-162-87-225-150s-113-138-150-225S654,427.3,654,332  s18.5-186.5,55.5-273.5s87-162,150-225s138-113,225-150S1262.7-372,1358-372s186.5,18.5,273.5,55.5s162,87,225,150s113,138,150,225  S2062,236.7,2062,332c0,146.7-41.3,279.7-124,399l343,343C2305.7,1098.7,2318,1128.7,2318,1164z" />
+    </svg>
+</div>
+<script src="/js/algoliasearch.min.js"></script>
+<script src="/js/autocomplete.min.js"></script>
+
+<script>
+var client = algoliasearch("1JDRAS0AZR", "8804ac109158bb3bb60d74ce98fa332f");
+var index = client.initIndex('prod_blog');
+
+autocomplete('#aa-search-input',
+{ hint: false}, {
+    source: autocomplete.sources.hits(index, {hitsPerPage: 5}),
+    
+    displayKey: 'name',
+    
+    templates: {
+        
+        suggestion: function(suggestion) {
+            return '<span>' + '<a href="/post/' + suggestion.slug + '">' +
+            suggestion._highlightResult.title.value + '</a></span>';
+        }
+    }
+});
+</script>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/20200317190406.png" ></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="post-heading">
+                <h1>Homestead(Windows系统Laravel环境搭建)</h1>
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Homestead(Windows系统Laravel环境搭建)</h1>
+                
+                
+                  <span class="post-meta">
+  
+    发表于 2019-11-27
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+  </header>
+
+
+    
+
+
+
+<div class="container" role="main">
+  <div class="row">
+
+    
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div>
+            
+            
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="/tags/devops/">DevOps</a> &nbsp;
+              
+                  <a href="/tags/vagrant/">Vagrant</a> &nbsp;
+              
+                  <a href="/tags/homestead/">Homestead</a> &nbsp;
+              
+            </h5>
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+          
+            
+<aside class="toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#homestead-管理脚本">Homestead 管理脚本</a></li>
+    <li><a href="#homestead-box-虚拟机盒子">Homestead Box 虚拟机盒子</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#下载和导入-homestead-box">下载和导入 Homestead Box</a></li>
+    <li><a href="#安装-git">安装 Git</a></li>
+    <li><a href="#下载-homestead-管理脚本">下载 Homestead 管理脚本</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#虚拟机设置">虚拟机设置</a></li>
+    <li><a href="#ssh-秘钥登录配置">SSH 秘钥登录配置</a></li>
+    <li><a href="#站点配置">站点配置</a></li>
+    <li><a href="#数据库配置">数据库配置</a></li>
+    <li><a href="#自定义变量">自定义变量</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#错误vagrant-was-unable-to-mount-virtualbox-shared-folders">错误:Vagrant was unable to mount VirtualBox shared folders</a></li>
+    <li><a href="#错误vboxmanageexe-error-details-code-e_fail-0x80004005">错误:VBoxManage.exe: error: Details: code E_FAIL (0x80004005)</a></li>
+    <li><a href="#yarn安装由于npm不稳定改用yarn-虽然yarn也不咋地">yarn安装(由于npm不稳定改用yarn, 虽然yarn也不咋地)</a></li>
+    <li><a href="#composer-安装报错">composer 安装报错</a></li>
+  </ul>
+</nav>
+</aside>
+
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <h1 id="步骤简略">步骤简略</h1>
+<blockquote>
+<p>接下来让我们按照这几个步骤来完成整个 Laravel 开发环境的安装及配置：
+安装 VirtualBox
+安装 Vagrant
+导入 Homestead Box 虚拟机盒子
+安装 Git
+安装 Homestead 管理脚本
+配置 Homestead.yaml 文件
+启动 Homestead 虚拟机</p>
+</blockquote>
+<h1 id="安装-virtualbox">安装 VirtualBox</h1>
+<p>VirtualBox 是 Oracle 公司的开源虚拟机软件。VirtualBox 号称是最强的免费虚拟机软件，它不仅功能齐全，而且性能也很优异！VirtualBox 支持大部分流行的系统，如：Mac, Windows, Linux 等。</p>
+<h1 id="安装-vagrant">安装 Vagrant</h1>
+<p>Vagrant 是用来管理虚拟机的工具，支持当前主流的虚拟机系统如 VirtualBox、VMware、AWS 等。Vagrant 的主要作用是提供一个可配置、可移植和复用的软件环境。Vagrant 让你通过编写一个 Vagrantfile 文件来控制虚拟机的启动、虚拟机网络环境的配置、虚拟机与主机间的文件共享，以及启动后自动执行一些配置脚本，如自动执行一个 Shell Script 来安装一些必备的开发工具，如安装配置 MySQL、PHP，甚至是自动配置 Nginx 站点。这意味着，在一个多人开发的项目中，你只需要同步 Vagrantfile 文件，就可以保证参与项目的每个人各自的机器上拥有一致的开发环境。</p>
+<h1 id="homestead-介绍">Homestead 介绍</h1>
+<p>Homestead 利用 Vagrantfile 提供的便利，定制了一整套的可配置、可移植和复用的 Laravel 开发环境。Homestead 虚拟机里面包含了 Nginx Web 服务器、PHP 7、MySQL、Postgres、Redis、Memcached、Node，以及所有你在使用 Laravel 开发时需要用到的各种软件。
+Homestead 包含了两个东西：
+Homestead 管理脚本；
+Homestead Box 虚拟机盒子。
+接下来独自说明下。</p>
+<h2 id="homestead-管理脚本">Homestead 管理脚本</h2>
+<p>Homestead 脚本使用 Ruby 和 Shell 脚本编写而成。原理是对 Vagrantfile 文件做定制。将从 ~/Homestead/Homestead.yaml 读取的配置信息，在 provision 时，解析为 Vagrant 命令并进行对虚拟机的配置。Homestead 脚本的作用在于，提供了极其简单易用的接口，使我们只需要通过傻瓜化配置，即可完成复杂的任务。以下是几个常用的任务：
+IP 配置，端口映射；
+Nginx Site 创建；
+数据库创建；
+主机文件夹挂载到虚拟机等任务。
+所有 Homestead 的版本历史在 此处 可以找到。在本书中，为了提高操作的效率，我们将会使用定制版本的 Homestead。</p>
+<h2 id="homestead-box-虚拟机盒子">Homestead Box 虚拟机盒子</h2>
+<p>homestead.box 虚拟机盒子是提前打包好的 Vagrant Box 虚拟机盒子，里面预装了 Nginx Web 服务器、PHP 7、MySQL、Postgres、Redis、Memcached、Node，以及所有你在使用 Laravel 开发时所需要用到的各种软件。
+所有虚拟机盒子版本历史 在此。
+打不开的用户，下图是截屏：</p>
+<p>可以看出 Homestead Box 虚拟机盒子有很多版本。不过，如 Homestead 脚本，为了学习的流畅性，我们接下来将会使用定制版本的虚拟机盒子，你不需要太担心版本的事情。</p>
+<h1 id="安装和使用-homestead">安装和使用 Homestead</h1>
+<p>接下来，我们会讲解：</p>
+<blockquote>
+<p>下载和导入 Homestead Box 虚拟机盒子；
+安装 Git ，为下载 Homestead 管理脚本做准备；
+使用 Git 下载 Homestead 管理脚本；</p>
+</blockquote>
+<h2 id="下载和导入-homestead-box">下载和导入 Homestead Box</h2>
+<p>由于国内的网络环境原因，我们特意为大家定制了适用于国情的 Homestead 安装包，该安装包提供了以下内容：
+Composer 加速，配置了 Composer 中国全量镜像 支持；
+默认集成 Heroku 工具；
+默认集成 Yarn，并为 Yarn 加了淘宝镜像的加速；
+使用 CNPM 对 NPM 进行加速。
+接下来让我们开始进行 Homestead 的安装，首先我们需要下载 Homestead 虚拟机盒子，建议大家使用迅雷离线下载或者其他离线下载方式下载此盒子。
+下载后的文件为 lc-homestead-6.1.1-2018090400.zip，请对其进行 zip 解压操作，解压成功后可以看到目录 lc-homestead-6.1.1-2018090400，此目录下包含两个文件：
+virtualbox.box（教程定制化过的 Homestead 盒子）
+metadata.json（盒子的导入配置文件）
+在解压目录中 lc-homestead-6.1.1-2018090400 运行以下命令导入 Box：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">vagrant box add metadata.json
+</code></pre></div><p>注意：请必须解压到 非中文路径，有同学反馈中文路径会出现不可预知问题。
+如下图所示：</p>
+<p>如果你使用的 Windows 系统在安装 Homestead 的时候报错：The box &lsquo;laravel/homestead&rsquo; could not be found or
+could not be accessed in the remote catalog.，请下载 MS Visual C++ 2010 x86 Redistributables 并进行安装即可修复。
+至此完成 Homestead Vagrant 盒子的导入。
+注：导入成功后，lc-homestead-6.1.1-2018090400 文件夹可任意删除。</p>
+<h2 id="安装-git">安装 Git</h2>
+<p>如果你先前已使用过 Git for Windows 来作为你进行 Laravel 项目开发时的默认命令行工具，则该工具将会默认为你安装好 Git。
+使用以下命令来检测是否成功安装：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">git --version
+git version 2.12.2.windows.2
+</code></pre></div><p>注：不需要担心你的版本与我不同。</p>
+<h2 id="下载-homestead-管理脚本">下载 Homestead 管理脚本</h2>
+<p>因国内网络限制，为方便下载和后续管理脚本的流畅使用，本书中将使用定制版本的 Homestead 脚本，定制版有以下优势：
+从国内 coding.net 网站下载，下载速度会比 官方 更快；
+对脚本进行修改，移除了每一次 provision 时 composer self-update 的卡顿。
+接下来，使用 Git 下载定制版的 Homestead：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#8be9fd;font-style:italic">cd</span> ~
+git clone https://git.coding.net/summerblue/homestead.git Homestead
+</code></pre></div><p>Windows 下，~ 目录代表着 C:\Users\你的用户名，而 ~/Homestead 代表着 C:\Users\你的用户名\Homestead 目录，类似：</p>
+<p>注：我们把 Homestead 放在 ~/Homestead 路径下，为方便后面的讲解，请保持一致。
+下载完成之后我们使用命令行进入 Homestead 目录，再使用 Git 检出我们需要的 Homestead 版本：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#8be9fd;font-style:italic">cd</span> ~/Homestead
+git checkout v7.8.0
+</code></pre></div><p>注：为了保证后续讲解的流畅性，请注意版本的一致性，这里我们使用 v7.8.0。
+接下来我们需要初始化 Homestead：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">bash init.sh
+</code></pre></div><p>运行以上命令后，会在 ~/Homestead 目录下生成以下三个文件：
+Homestead.yaml - 主要配置信息文件，我们可以在此文件中配置 Homestead 的站点和数据库等信息；
+after.sh - 每一次 Homestead 盒子重置后（provision）会调用的 shell 脚本文件；
+aliases - 每一次 Homestead 盒子重置后（provision），会被替换至虚拟机的 ~/.bash_aliases 文件中，aliases 里可以放一些快捷命令的定义。
+接下来我们将会对 Homestead.yaml 文件的各项配置信息进行详细讲解。</p>
+<h1 id="homesteadyaml-配置文件">Homestead.yaml 配置文件</h1>
+<p>Homestead.yaml 文件在 ~/Homestead 文件夹里，在 Git-Bash 里，你可以使用以下命令使用文件夹打开当前命令行所在目录：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">&gt; <span style="color:#8be9fd;font-style:italic">cd</span> ~/Homestead/
+&gt; explorer .
+</code></pre></div><p>可通过运行下面命令快速打开 Homestead.yaml 文件：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&gt; subl ~/Homestead/Homestead.yaml
+</code></pre></div><p>为了行文方便，后面如果没有提示的话， Homestead.yaml 指的是 ~/Homestead/Homestead.yaml 文件。
+Homestead.yaml 里的配置大致可以分为以下几种：</p>
+<blockquote>
+<p>虚拟机设置；
+SSH 秘钥登录配置；
+共享文件夹配置；
+站点配置；
+数据库配置；
+自定义变量；
+接下来我们逐个讲解。</p>
+</blockquote>
+<h2 id="虚拟机设置">虚拟机设置</h2>
+<p>Homestead 支持我们对虚拟机的 IP，内存，CPU，虚拟机的默认提供者进行配置。这里我们基本不需要做任何配置，因此可以跳过。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#ff79c6">ip</span>: <span style="color:#f1fa8c">&#34;192.168.10.10&#34;</span>
+<span style="color:#ff79c6">memory</span>: <span style="color:#bd93f9">2048</span>
+<span style="color:#ff79c6">cpus</span>: <span style="color:#bd93f9">1</span>
+<span style="color:#ff79c6">provider</span>: virtualbox
+</code></pre></div><h2 id="ssh-秘钥登录配置">SSH 秘钥登录配置</h2>
+<p>authorize 选项是指派登录虚拟机授权连接的公钥文件，此文件填写的是主机上的公钥文件地址，虚拟机初始化时，此文件里的内容会被复制存储到虚拟机的 /home/vagrant/.ssh/authorized_keys 文件中，从而实现 SSH 免密码登录。在这里我们默认填写即可。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#ff79c6">authorize</span>: ~/.ssh/id_rsa.pub
+</code></pre></div><p>keys 是数组选项，填写的是本机的 SSH 私钥文件地址。虚拟机初始化时，会将此处填写的所有 SSH 私钥文件复制到虚拟机的 /home/vagrant/.ssh/ 文件夹中，从而使虚拟机能共享主机上的 SSH 私钥文件，使虚拟机具备等同于主机的身份认证。此功能为 SSH 授权提供了便利，例如在后面章节中，我们只需要在 GitHub 上配置一个 SSH 公钥，即可实现 GitHub 对虚拟机和主机共同认证。
+此处我们将公钥和私钥一起同步到虚拟机中：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#ff79c6">keys</span>:
+    - ~/.ssh/id_rsa
+    - ~/.ssh/id_rsa.pub
+</code></pre></div><p>接下来我们来生成 SSH Key，开始之前，我们先使用以下命令来检查主机上是否已经生成过 SSH Key：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">&gt; ls -al ~/.ssh
+</code></pre></div><p>如果存在 id_rsa 和 id_rsa.pub 的话，请跳过以下生成 SSH 的步骤继续阅读剩下内容。
+否则使用以下方法来生成 SSH Key，请将 <a href="mailto:your_email@example.com">your_email@example.com</a> 替换为你的邮箱：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">&gt; ssh-keygen -t rsa -C <span style="color:#f1fa8c">&#34;your_email@example.com&#34;</span>
+Generating public/private rsa key pair.
+</code></pre></div><p>命令行会提示让你指定秘钥的名称，按回车键将 SSH Key 保存到默认文件名即可：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">Enter a file in which to save the key <span style="color:#ff79c6">(</span>/Users/you/.ssh/id_rsa<span style="color:#ff79c6">)</span>: <span style="color:#ff79c6">[</span>Press enter<span style="color:#ff79c6">]</span>
+</code></pre></div><p>接下来会询问你为 SSH Key 设置密码，按回车键即可，默认为空密码：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">Enter passphrase <span style="color:#ff79c6">(</span>empty <span style="color:#ff79c6">for</span> no passphrase<span style="color:#ff79c6">)</span>: <span style="color:#ff79c6">[</span>Type a passphrase<span style="color:#ff79c6">]</span>
+Enter same passphrase again: <span style="color:#ff79c6">[</span>Type passphrase again<span style="color:#ff79c6">]</span>
+</code></pre></div><p>可以都选择默认，一路 Enter 键即可，大致如下：</p>
+<p>这个时候如果我们再使用：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">&gt; ls -al ~/.ssh
+</code></pre></div><p>查看的话，会出现：</p>
+<p>SSH 秘钥的两个文件：
+id_rsa —— SSH 秘钥的 私钥 (Private Key)
+id_rsa.pub —— SSH 秘钥的 公钥 (Public Key)</p>
+<ol start="3">
+<li>共享文件夹配置
+我们可以通过 folders 来指明本机要映射到 Homestead 虚拟机上的文件夹。
+map 对应的是我们本机的文件夹，格式例如：E：/Homestead/Code，以开发者实际项目目录为准。
+to 对应的是 Homestead 上的文件夹。
+为了后续课程讲解，请统一配置如下：</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#ff79c6">folders</span>:
+    - <span style="color:#ff79c6">map</span>: ~/Code
+      <span style="color:#ff79c6">to</span>: /home/vagrant/Code
+</code></pre></div><p>默认 Homestead 会将我们本机的 ~/Code 文件夹映射到 /home/vagrant/Code 文件夹上。现在我们本机还没有 ~/Code 文件夹，让我们来创建一个：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">&gt; <span style="color:#8be9fd;font-style:italic">cd</span> ~
+&gt; mkdir Code
+</code></pre></div><p>执行成功后，同样的，我们可以通过 explorer . 命令在文件夹中打开此目录：</p>
+<p>在后面的章节中，我们将会在该文件夹下放置我们所有的 Laravel 项目，Homestead 会把该文件夹下的项目自动映射到虚拟机的 /home/vagrant/Code 文件夹上。</p>
+<h2 id="站点配置">站点配置</h2>
+<p>站点配置允许你在主机里，通过域名来访问虚拟机里的 Laravel 应用。如下面 sites 配置所示，将 homestead.test 映射到一个 Laravel 项目的 public 目录上。这一行配置，会命令 Homestead 为我们新建一个 Nginx 站点，并且把 Web Root 配置到指定目录下。Laravel 应用的 Nginx 站点 Web Root 配置，默认就是在根目录下的 public 目录。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#ff79c6">sites</span>:
+    - <span style="color:#ff79c6">map</span>: homestead.test
+      <span style="color:#ff79c6">to</span>: /home/vagrant/Code/Laravel/public
+</code></pre></div><p>目前 Laravel 项目并不存在。这里先统一配置为以上，请不用着急，在后续的章节中，我们会创建该 Laravel 项目。
+另外，主机里直接访问虚拟机站点，必须通过绑定 hosts 来实现。接下来我们利用 hosts 文件绑定 homestead.test 到虚拟机 IP 192.168.10.10 上。hosts 文件的完整路径为 C:\Windows\System32\Drivers\etc\hosts，可使用下面命令打开：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">&gt; subl C:/Windows/System32/Drivers/etc/hosts
+</code></pre></div><p>如果你没有集成 subl 命令的话， 请使用编辑器直接打开文件，文件路径在 C:\Windows\System32\Drivers\etc\hosts 。
+在 hosts 文件的最后面加入以下一行：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">192.168.10.10  homestead.test
+</code></pre></div><p>至此站点就配置好了，等我们在后面章节创建 Laravel 项目后，即可通过浏览器访问 homestead.test 站点。</p>
+<h2 id="数据库配置">数据库配置</h2>
+<p>我们可以为 Homestead 指定数据库名称，这里使用默认设置即可。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">databases:
+    - homestead
+</code></pre></div><h2 id="自定义变量">自定义变量</h2>
+<p>最后，如果你需要自定义一些在虚拟机上可以使用的自定义变量，则可以在 variables 中进行定义。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">variables:
+    - key: APP_ENV
+      value: <span style="color:#8be9fd;font-style:italic">local</span>
+</code></pre></div><p>Homestead 自定义变量在本书中并未使用，知悉有此功能即可。</p>
+<p>运行 Vagrant
+完成了 Homestead 的配置，接下来我们要开始启动虚拟机了。
+在命令中输入 vagrant，能看到 Vagrant 为我们提供了一些便利的命令行，下面简单介绍一下 Vagrant 常用的一些命令行的使用：</p>
+<table>
+<thead>
+<tr>
+<th>命令行</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>vagrant init</td>
+<td>初始化 vagrant</td>
+</tr>
+<tr>
+<td>vagrant up</td>
+<td>启动 vagrant</td>
+</tr>
+<tr>
+<td>vagrant halt</td>
+<td>关闭 vagrant</td>
+</tr>
+<tr>
+<td>vagrant ssh</td>
+<td>通过 SSH 登录 vagrant（需要先启动 vagrant）</td>
+</tr>
+<tr>
+<td>vagrant provision</td>
+<td>重新应用更改 vagrant 配置</td>
+</tr>
+<tr>
+<td>vagrant destroy</td>
+<td>删除 vagrant</td>
+</tr>
+</tbody>
+</table>
+<p>让我们开始启动 Homestead：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">&gt; <span style="color:#8be9fd;font-style:italic">cd</span> ~/Homestead <span style="color:#ff79c6">&amp;&amp;</span> vagrant up
+</code></pre></div><p>第一次启动时，Vagrant 会做以下这几件事情：
+以导入的 Homestead 虚拟机盒子为模板，新建一台虚拟机；
+并按照 Homestead.yaml 里的配置信息，对这台新建的虚拟机进行配置；
+配置完成后启动虚拟机。
+成功启动后，还是在 ~/Homestead 目录中，通过以下命令来 SSH 登录 Homestead 虚拟机中：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">&gt; vagrant ssh
+</code></pre></div><p>在我们登录成功后，你能看到类似于如下图的界面，现在我们在该终端界面中输入的所有命令都将运行在 Homestead 虚拟机上。</p>
+<p>在虚拟机界面下可以输入退出虚拟机：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ <span style="color:#8be9fd;font-style:italic">exit</span>
+</code></pre></div><p>最后尝试关闭 Homestead：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">&gt; vagrant halt
+</code></pre></div><h1 id="下载工具下载virtualboxbox后再导入">下载工具下载virtualbox.box后再导入</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 1. bash or git bash</span>
+git clone https://github.com/laravel/homestead.git
+<span style="color:#8be9fd;font-style:italic">cd</span> homestead
+vagrant up <span style="color:#6272a4"># 会显示 virtualbox.box 链接，复制出来下载下, ctrl+c 取消下载（如果下载快可以不用取消），用迅雷等下载工具下载后再导入</span>
+<span style="color:#6272a4"># 下载链接如 https://vagrantcloud.com/laravel/boxes/homestead/versions/9.5.1/providers/virtualbox.box</span>
+<span style="color:#6272a4"># cd /path/to/，里面有virtualbox.box，【下载的可能不是virtualbox.box，手动改下名字】</span>
+<span style="color:#6272a4"># 2. 添加 box</span>
+vagrant box add laravel/homestead virtualbox.box
+
+<span style="color:#6272a4"># 2.1 init 初始化</span>
+<span style="color:#6272a4"># cd ~/homestead</span>
+<span style="color:#6272a4"># vagrant init  laravel/homestead</span> 
+
+<span style="color:#6272a4"># 2.2</span>
+<span style="color:#8be9fd;font-style:italic">cd</span> ~/.vagrant.d/boxes/laravel-VAGRANTSLASH-homestead/
+<span style="color:#6272a4"># 文件夹 0 改为 9.5.1，上面下载的版本，url versions后面的版本号</span>
+mv <span style="color:#bd93f9">0</span> 9.5.1
+<span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#39;https://vagrantcloud.com/laravel/boxes/homestead/&#39;</span> &gt; metadata_url
+
+<span style="color:#6272a4"># 3. 启动</span>
+<span style="color:#6272a4">#cd ~/homestead</span>
+vagrant up
+
+<span style="color:#6272a4"># 更新 homestead.yaml 后，运行下面命令应用更改配置</span>
+vagrant.exe reload --provision
+</code></pre></div><h1 id="其他问题">其他问题</h1>
+<h2 id="错误vagrant-was-unable-to-mount-virtualbox-shared-folders">错误:Vagrant was unable to mount VirtualBox shared folders</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">Vagrant was unable to mount VirtualBox shared folders. This is usually
+because the filesystem <span style="color:#f1fa8c">&#34;vboxsf&#34;</span> is not available. This filesystem is
+made available via the VirtualBox Guest Additions and kernel module.
+Please verify that these guest additions are properly installed in the
+guest. This is not a bug in Vagrant and is usually caused by a faulty
+Vagrant box. For context, the <span style="color:#8be9fd;font-style:italic">command</span> attempted was:
+
+mount -t vboxsf -o <span style="color:#8be9fd;font-style:italic">uid</span><span style="color:#ff79c6">=</span>500,gid<span style="color:#ff79c6">=</span><span style="color:#bd93f9">500</span> vagrant /vagrant
+
+The error output from the <span style="color:#8be9fd;font-style:italic">command</span> was:
+
+/sbin/mount.vboxsf: mounting failed with the error: No such device
+</code></pre></div><p>解决方法:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">vagrant plugin install vagrant-winnfsd
+vagrant plugin install vagrant-vbguest
+vagrant vbguest
+</code></pre></div><h2 id="错误vboxmanageexe-error-details-code-e_fail-0x80004005">错误:VBoxManage.exe: error: Details: code E_FAIL (0x80004005)</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">VirtualBox error:
+
+VBoxManage.exe: error: Could not rename the directory <span style="color:#f1fa8c">&#39;C:\Users\GIGABYTE\VirtualBox VMs\lt-settler_default_1536057652853_60940_1561513394730_21529&#39;</span> to <span style="color:#f1fa8c">&#39;C:\Users\GIGABYTE\VirtualBox VMs\homestead-7&#39;</span> to save the settings file <span style="color:#ff79c6">(</span>VERR_ALREADY_EXISTS<span style="color:#ff79c6">)</span>
+VBoxManage.exe: error: Details: code E_FAIL <span style="color:#ff79c6">(</span>0x80004005<span style="color:#ff79c6">)</span>, component SessionMachine, interface IMachine, callee IUnknown
+VBoxManage.exe: error: Context: <span style="color:#f1fa8c">&#34;SaveSettings()&#34;</span> at line <span style="color:#bd93f9">3135</span> of file VBoxManageModifyVM.cpp
+</code></pre></div><p>解决方法:
+删除 &lsquo;C:\Users\GIGABYTE\VirtualBox VMs\homestead-7&rsquo; 文件夹</p>
+<h2 id="yarn安装由于npm不稳定改用yarn-虽然yarn也不咋地">yarn安装(由于npm不稳定改用yarn, 虽然yarn也不咋地)</h2>
+<p>或者遇到错误 error An unexpected error occurred: &ldquo;EIO: i/o error, symlink</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">yarn install --no-bin-links
+yarn add @fortawesome/fontawesome-free --no-bin-links
+yarn run watch-poll --no-bin-links
+yarn upgrade
+</code></pre></div><p>在根目录下找到 package.json，在文件中把 scripts 中的 cross-env 替换成 node_modules/cross-env/dist/bin/cross-env.js 就可以了</p>
+<h2 id="composer-安装报错">composer 安装报错</h2>
+<p>错误具体描述: PHP Fatal error:  Uncaught TypeError: Argument 1 passed to Composer\Autoload\ClassLoader::addClassMap() must be of the type array</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">rm -rf vendor/composer/autoload_*  
+composer dumpautoload
+composer update
+</code></pre></div>
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我们的微信公众帐号，在微信公众帐号中回复◉加群◉即可加入到我们的 kubernetes 讨论群里面共同学习。</p>
+<img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/qrcode.png" alt="wechat-account-qrcode">
+
+  
+          
+            <div class="entry-shang text-center">
+    <p>「真诚赞赏，手留余香」</p>
+    <button class="zs show-zs btn btn-bred">赞赏</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+    <div class="zs-modal-head">
+        <button type="button" class="close">×</button>
+        <span class="author"><img src="/img/avatar.jpeg"/>阳明</span>
+        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
+    </div>
+    <div class="zs-modal-body">
+        <div class="zs-modal-btns">
+            <button class="btn btn-blink" data-num="2">2元</button>
+            <button class="btn btn-blink" data-num="5">5元</button>
+            <button class="btn btn-blink" data-num="10">10元</button>
+            <button class="btn btn-blink" data-num="50">50元</button>
+            <button class="btn btn-blink" data-num="100">100元</button>
+            <button class="btn btn-blink" data-num="1">任意金额</button>
+        </div>
+        <div class="zs-modal-pay">
+            <button class="btn btn-bred" id="pay-text">2元</button>
+            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+            <img src="/img/wechat-2.png" id="pay-image"/>
+        </div>
+    </div>
+    <div class="zs-modal-footer">
+        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
+    </div>
+</div>
+          
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
+        
+          
+
+<h3>相关文章</h3>
+<ul style="margin-bottom: 25px;">
+    
+    <li><a href="/post/devops/linux/devops-linux-ssh/">Linux SSH</a></li>
+    
+    <li><a href="/post/devops/git/devops-git-multiuser/">Linux 配置多个Git用户SSH登录</a></li>
+    
+    <li><a href="/post/devops/git/devops-git-gitignore/">Git忽略规则及.gitignore规则正确姿势</a></li>
+    
+</ul>
+
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="/post/computerlanguages/php/computerlanguages-php-laravel-phpunit/" data-toggle="tooltip" data-placement="top" title="Laravel使用PHPUnit进行单元测试注意事项">&larr; 前一篇</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="/post/common/common-test/" data-toggle="tooltip" data-placement="top" title="接口自动化测试框架从设计到开发">后一篇 &rarr;</a>
+            </li>
+          
+        </ul>
+        
+
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
+        
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+    var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        labels: ['gitment'],
+        title: 'Homestead(Windows系统Laravel环境搭建)',
+        createIssueManually: true,
+        id: 'DevOps-Linux-Homestead',      
+        distractionFreeMode: true  
+    });
+    gitalk.render('gitalk-container');
+</script>
+
+
+        
+          
+
+        
+  
+      </div>
+    
+    
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          <img src="/img/wechatmp.png" alt="k8s技术圈">
+          
+          <li>
+            <a href="mailto:icnych@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://github.com/cnych" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://weibo.com/cnych" title="微博">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://instagram.com/cnych" title="Instagram">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="/%20index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+          
+          <a href="/">WoolfBreathe</a>
+          
+          
+
+          &nbsp;&bull;&nbsp;
+          2021
+        </p>
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a
+            href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a
+            href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script> renderMathInElement(document.body); </script>
+<script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
+</script>
+<script>
+  (function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+
+  </body>
+</html>
+

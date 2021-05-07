@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>PHPPackage on WoolfBreathe</title>
+    <link>/tags/phppackage/</link>
+    <description>Recent content in PHPPackage on WoolfBreathe</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <managingEditor>youremail@domain.com (WoolfBreathe)</managingEditor>
+    <webMaster>youremail@domain.com (WoolfBreathe)</webMaster>
+    <lastBuildDate>Sun, 05 Jan 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/phppackage/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>PHP扩展包开发</title>
+      <link>/post/computerlanguages/php/computerlanguages-php-phppackage/</link>
+      <pubDate>Sun, 05 Jan 2020 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/computerlanguages/php/computerlanguages-php-phppackage/</guid>
+      <description>现代PHP 现代化的 PHP 开发离不开 Composer、它的诞生也离不开 GitHub，基于它，可以非常方便的管理项目的依赖，有效的进行依赖的版本控制以用版本更新。
+现有的诸多优秀的开源项目大都是基于其它开源项目的，很少有独立开发的，正所谓站在巨人的肩膀上，才能看得更高。比如 Laravel，它就是一个非常典型的基于很多优秀第三方扩展包的模块化开发框架，它的很多核心功能都是基于另外一系列 Symfony 组件 之上构建的。
+日常开发中经常要与非常多优秀的扩展包打交道，比如图片处理包 intervention/image、单元测试框架 PHPUnit、还有非常强大的日期处理类 Carbon、日志处理 Monolog 等等太多太多。
+PHP 扩展包 **PHP 原生扩展
+PHP 原生扩展（PHP Native Extension），通常指基于 C/C++ 语言开发的对 PHP 语言的扩展，需要编译安装，比如最常使用的 phpredis、GD、MySQL、cURL 扩展等，这里有一个 PHP 的扩展列表。
+**PHP 扩展包
+PHP 扩展包（PHP Package）或者 PHP 包，通常指用 PHP 代码编写的代码包。它通常是一些特定功能的封装，比如 Intervention/image，它是基于 PHP 图像处理库 GD/Imagick 实现的图像处理功能包，具有非常强大且优雅的图片处理 API，可以非常便捷的基于它完成常规的图片操作，简化开发工作。
+PHP 扩展包结构说明 weather/ ├── .editorconfig # 编辑器配置文件，比如缩进大小、换行模式等 ├── .gitattributes # git 配置文件，可以设计导出时忽略文件等 ├── .gitignore # git 忽略文件配置列表 ├── .php_cs # PHP-CS-Fixer 配置文件 ├── README.</description>
+    </item>
+    
+  </channel>
+</rss>

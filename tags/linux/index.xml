@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on WoolfBreathe</title>
+    <link>/tags/linux/</link>
+    <description>Recent content in Linux on WoolfBreathe</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <managingEditor>youremail@domain.com (WoolfBreathe)</managingEditor>
+    <webMaster>youremail@domain.com (WoolfBreathe)</webMaster>
+    <lastBuildDate>Thu, 12 Nov 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Linux Rsync 文件同步</title>
+      <link>/post/devops/linux/devops-linux-rsync/</link>
+      <pubDate>Thu, 12 Nov 2020 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/devops/linux/devops-linux-rsync/</guid>
+      <description>安装 服务器配置 配置/etc/rsyncd.conf文件
+uid = root gid = root use chroot = no max connections = 2000 port = 8973 timeout = 900 log file = /var/run/rsyncd.log pid file = /var/run/rsyncd.pid lock file = /var/run/rsyncd.lock log format = %t%a%m%f%b commemt = rsync list = yes read only = yes write only = no # auth users = apprsync # secrets file = /etc/rsyncd.secret ignore errors = yes # hosts allow = 172.</description>
+    </item>
+    
+    <item>
+      <title>Linux Permisssions(文件权限)</title>
+      <link>/post/devops/linux/devops-linux-permisssions/</link>
+      <pubDate>Sat, 27 Jun 2020 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/devops/linux/devops-linux-permisssions/</guid>
+      <description>权限说明 许可和所有权-为什么？ 如果不能访问自己Linux系统的某些文件夹可能是由于文件访问权限的配置错误。如果你是linux的唯一使用者，你也许想知道怎么拥有所有的许可（或者取消所有的），因为它限制了你完全的拥有你的企鹅操作系统！然而，在你扯掉头发前，你因该明白Linux被设计成一个多用户环境。在同一个环境下，有超过一个以上的用户，判断哪些文件是你的，谁能使用它，这些对于一个安全的系统来说是至关重要的！
+甚至如果你是一个普通桌面系统的唯一使用者，文件许可帮助保持你的重要文件安全，阻止外部的和你自己的误操作！ ：）
+理解文件所有权 你的Linux系统的每一个文件，包括目录，被一个特殊的用户和用户组拥有。因此，文件许可对于用户，用户组和其他使用者来说，都是独立的！
+用户：拥有文件的那个人的名字。默认情况下，文件的创建者就是所有者。
+组：用户组拥有文件。所有属于这个组的用户拥有此文件，拥有同样的访问许可。这很有用，例如，如果你有一个项目需要一群不同的用户能够访问特定的文件，而其他人不能访问。在那种情况下，你将添加所有的用户到一个同样的组，确保所要求的文件被哪个组拥有，设置这个文件相应的组许可。
+其他的：一个用户既不属于文件的所有者也不属于文件的组。换句话说，如果你设置一个“other”种类，默认地，他将影响其他用户。因为这个原因，人们常常说起设置“world”许可约束，他们是说设置“other”许可。
+理解文件许可 Linux上有三种类型的访问许可：读，写和执行。这些许可对于文件的所有者，组和其他用户都是独立的。
+读权限：对于一个普通的文件，读权限意味着文件能被打开和读取。对于一个目录，读权限意味着你可以列出目录内容。
+写权限：对于一个普通的文件，这意味着你可以修改文件，又叫做写入新数据到文件。当是目录时，写权限意味着你可以增加，移除和重命名目录里的文件。也就是说，如果一个文件有写权限，你就可以修改文件的内容，但是只有在文件的目录权限允许的情况下你才可以重命名和删除文件。
+执行权限：在普通文件的情况下，你可以把文件作为一个程序或者一个shell脚本执行。如果是目录，执行权限（也叫做“搜索块”）允许你实用cd命令访问目录并进入。例如，记事本尽管有执行块让你进入目录，但是你不能列出它的的内容，除非你有那个目录的读权限。
+怎样查看文件权限 通过使用ls -l 命令列出目录的列表，你可以查看一个文件的访问权限。一个长的目录列表可能如下所示：
+me@puter: /home/writers$ ls -l total 17 drwxr-xr-x 3 nana writers 80 2005-09-20 21:37 dir -rw-r----- 1 nana writers 8187 2005-09-19 13:35 file -rwxr-xr-x 1 nana writers 10348 2005-07-17 20:31 otherfile 文件信息说明 ls -l 输出的是什么意思？
+第一列 显示了文件类型和权限。 第二列 显示链接（与文件相关的目录入口）的数目 第三列 显示文件的所有者， 第四列 显示文件属于哪个组。 其他列显示文件的大小（用byte显示），日期和最后修改时间和文件名。  权限说明 第一列总共10位, 被分成了四个独立的组:
+第一组 一位字符 显示文件的类型 第二组 2、3、4位 给出了文件或目录所有者的权限 第三组 5、6、7位给出了文件或目录所属用户组的权限 第四组 8、9、10位给出了其他用户权限  第一个字符可以是如下任一种:</description>
+    </item>
+    
+    <item>
+      <title>Linux使用Timedatectl修改时区和时间</title>
+      <link>/post/devops/linux/devops-linux-timedatectl/</link>
+      <pubDate>Tue, 18 Feb 2020 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/devops/linux/devops-linux-timedatectl/</guid>
+      <description>Timedatectl常见操作 1.查看当前时间/日期/时区：timedatectl或者 timedatectl status
+2.查看所有可用时区：timedatectl list-timezones
+3.设置时区：timedatectl set-timezone “Asia/Shanghai” 或者 timedatectl set-timezone PRC
+4.设置时间：timedatectl set-time HH:MM:SS
+5.设置日期：timedatectl set-time YYYY-MM-DD
+6.设置日期时间：timedatectl set-time “YYYY-MM-DD HH:MM:SS”
+7.设置硬件时钟为本地时间：timedatectl set-local-rtc 1
+8.设置硬件时钟为UTC时间：timedatectl set-local-rtc 0
+9.启动NTP时间同步（启用NTP服务或者Chrony服务）：timedatectl set-ntp true
+10.禁用NTP时间同步：timedatectl set-ntp false</description>
+    </item>
+    
+    <item>
+      <title>Linux安装Zabbix</title>
+      <link>/post/devops/linux/devops-linux-zabbix/</link>
+      <pubDate>Thu, 09 Jan 2020 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/devops/linux/devops-linux-zabbix/</guid>
+      <description>Zabbix简介 　Zabbix 是一个基于 WEB 界面的提供分布式系统监视以及网络监视功能的企业级的开源解决方案。Zabbix 能监视各种网络参数，保证服务器系统的安全运营；并提供灵活的通知机制以让系统管理员快速定位解决存在的各种问题。
+　Zabbix支持多种网络方式下的监控，可以通过分布式的部署和安装监控代理Zabbix，通过C/S模式采集数据，通过B/S模式在Web端展示和配置。Zabbix Agent监控端口10050。
+(1). Zabbix的主要特点
+　安装配置简单，学习成本低，支持多语言（包括中文），免费开源，自动发现服务器与网络设备分布式监视，Web集中管理，可以无agent监视，用户安全认证和柔软的授权方式，通过Web设置或查看监视结果，email等功能。
+(2). Zabbix的主要功能
+　监控CPU负载、内存使用、磁盘使用、网络状态、端口监控、日志监控、插件开发自定义
+(3). Zabbix运行机制
+　Zabbix由Zabbix server与可选组件Zabbix agent两部分组成。
+　Zabbix Server 可以通过 SNMP，Zabbix agent，Ping，端口监视等方法提供对远程服务器/网络状态的监视，数据收集功能，可以在运行 Linux，Solaris，HP-UX，AIX，FreeBSD，OpenBSD，OS X，Windows多平台。
+　Zabbix Agent 安装在需要被监控的目标服务器上，主要完成对硬件信息与操作系统有关的内存，CPU 等信息收集。
+　Zabbix Server可以单独监视远程服务器的服务状态，同时也可以与Zabbix Agent结合。可以轮询Zabbix Agent主动接收监视数据（trapping传递 方式），同时还可以被动接收Zabbix Agent发送的数据。
+(4). 准备安装包和部署环境
+　注意：日志文件在/tmp/目录下。
+　下载Zabbix的源码包：https://www.Zabbix.com/download_sources。注意下，下载提供了两种版本：LTS版和标准版。LTS是长期支持（Long Term Support）的缩写，Zabbix将为客户提供5年的支持服务。前三年完全支持与后两年有限制支持。前三年包括一般、关键、安全性问题解决，后两年包括关键、安全性问题解决。超出时间不提供技术支持服务；标准版只提供6+1月支持。
+　现在自己电脑上的C:\Windows\Fonts目录下查看是否存在微软雅黑字体，如果有上传一份（ttf格式），如果没有网上下载微软雅黑字体的ttf格式文件。
+　Zabbix自带了数据库导入包，其中包括ibm_db2、mysql、oracle、postgresql和sqlite3。但是Web界面只提供了PHP。所以这里选择在LNMP环境下部署。
+(5). Zabbix监控端部署
+　主机名：web-test　IP地址：192.168.0.101　环境：LNMP（Mysql5.7.19、PHP7.2.24）
+　在Zabbix监控服务器上部署Zabbix Server和Zabbix Agent（监控本身）。
+　监控数据记录在mysql中
+Zabbix Serve安装 下载 (1).</description>
+    </item>
+    
+    <item>
+      <title>Linux安装Nginx源码包</title>
+      <link>/post/devops/linux/devops-linux-nginx/</link>
+      <pubDate>Sun, 29 Dec 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/devops/linux/devops-linux-nginx/</guid>
+      <description>依赖库安装 安装 gcc 环境 sudo yum -y install gcc gcc-c++ # nginx 编译时依赖 gcc 环境 安装 pcre sudo yum -y install pcre pcre-devel # 让 nginx 支持重写功能 安装 zlib # zlib 库提供了很多压缩和解压缩的方式，nginx 使用 zlib 对 http 包内容进行 gzip 压缩 sudo yum -y install zlib zlib-devel 安装 openssl # 安全套接字层密码库，用于通信加密 sudo yum -y install openssl openssl-devel Nginx 源码包安装 Nginx官方下载
+sudo tar -zxvf nginx-1.11.5.tar.gz # 解压缩 生成 makefile 文件 cd nginx-1.11.5 ./configure --prefix=/usr/local/nginx --with-http_stub_status_module --with-http_ssl_module --with-http_flv_module --with-http_gzip_static_module # 检查平台安装环境 # --prefix=/usr/local/nginx 是 nginx 编译安装的目录（推荐），安装完后会在此目录下生成相关文件 进行源码编译并安装 make # 编译 make install # 安装 服务操作命令。 启动服务 /usr/local/nginx/sbin/nginx 重新加载服务 /usr/local/nginx/sbin/nginx -s reload 停止服务 /usr/local/nginx/sbin/nginx -s stop 查看 nginx 服务进程 ps -ef | grep nginx # 查看服务进程 配置 upstream phpserver { server 192.</description>
+    </item>
+    
+    <item>
+      <title>Linux安装PHP源码包</title>
+      <link>/post/devops/linux/devops-linux-php/</link>
+      <pubDate>Sat, 28 Dec 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/devops/linux/devops-linux-php/</guid>
+      <description>依赖库安装 安装 gcc 环境 sudo yum -y install gcc gcc-c++ # 编译时依赖 gcc 环境 安装 libxml2 sudo yum -y install libxml2 libxml2-devel # Libxml2库提供了C语言解析和构造xml文档的接口 安装 libjpeg-devel yum -y install libjpeg-devel libpng-devel # 图片处理 安装 openssl # 安全套接字层密码库，用于通信加密 $ sudo yum -y install openssl openssl-devel yum install freetype-devel libzip 安装sqlite yum install sqlite-devel 创建用户组和用户 groupadd -r www &amp;amp;&amp;amp; useradd -g www -s /sbin/nologin www 安装 Nginx 源码包安装 Nginx官方下载
+sudo tar -zxvf php-7.</description>
+    </item>
+    
+    <item>
+      <title>Linux安装Redis</title>
+      <link>/post/devops/linux/devops-linux-redis/</link>
+      <pubDate>Thu, 26 Dec 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/devops/linux/devops-linux-redis/</guid>
+      <description>安装 下载 wget http://download.redis.io/releases/redis-5.0.3.tar.gz 解压 tar -zxvf redis-5.0.3.tar.gz 执行编译 cd redis-5.0.3 make # PREFIX用于指定目录 make install PREFIX=/usr/local/redis 启动 /usr/local/redis/bin/redis-server redis.conf 创建命令软链接 ln -s /usr/local/redis/bin/redis-cli /usr/bin/redis </description>
+    </item>
+    
+    <item>
+      <title>Linux SSH</title>
+      <link>/post/devops/linux/devops-linux-ssh/</link>
+      <pubDate>Tue, 19 Nov 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/devops/linux/devops-linux-ssh/</guid>
+      <description>SSH通过密钥登录 测试登录命令 ssh -i /root/.ssh/id_rsa root@127.0.0.1 创建密钥 [root@host ~]$ ssh-keygen //建立密钥对 服务器上远程安装公钥 使用ssh-copy-id安装
+ssh-copy-id -i .ssh/id_rsa.pub root@192.168.10.100 手动安装
+[root@host .ssh]$ cd .ssh &amp;amp;&amp;amp; cat id_rsa.pub &amp;gt;&amp;gt; authorized_keys [root@host .ssh]$ chmod 600 authorized_keys [root@host .ssh]$ chmod 700 ~/.ssh 设置SSH打开密钥登录功能 /etc/ssh/sshd_config 打开密钥登录
+RSAAuthentication yes PubkeyAuthentication yes 另外，请留意 root 用户能否通过 SSH 登录：
+PermitRootLogin yes  当完成全部设置，并以密钥方式登录成功后，再禁用密码登录：
+PasswordAuthentication no  设置root用户不能使用密码登录,必须使用密钥; 普通用户可以使用密码登录:
+PermitRootLogin without-password （设置root用户只能用密钥登录） PasswordAuthentication yes （其他用户可以使用密码登录）  首次登录去掉验证 /etc/ssh/ssh_config
+# StrictHostKeyChecking ask 改成 StrictHostKeyChecking no  非root用户设置 需要先设置用户的默认目录(使用该命令请确保该用户下没有运行的软件或进程)</description>
+    </item>
+    
+  </channel>
+</rss>

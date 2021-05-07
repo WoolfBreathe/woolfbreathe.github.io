@@ -8,77 +8,17 @@
     <language>zh-cn</language>
     <managingEditor>youremail@domain.com (WoolfBreathe)</managingEditor>
     <webMaster>youremail@domain.com (WoolfBreathe)</webMaster>
-    <lastBuildDate>Mon, 20 Mar 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 07 May 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Photoswipe Gallery Sample</title>
-      <link>/post/2017-03-20-photoswipe-gallery-sample/</link>
-      <pubDate>Mon, 20 Mar 2017 00:00:00 +0000</pubDate>
-      <author>youremail@domain.com (WoolfBreathe)</author>
-      <guid>/post/2017-03-20-photoswipe-gallery-sample/</guid>
-      <description>&lt;p&gt;Beautiful Hugo adds a few custom shortcodes created by &lt;a href=&#34;https://www.liwen.id.au/heg/&#34;&gt;Li-Wen Yip&lt;/a&gt; and &lt;a href=&#34;https://github.com/GjjvdBurg/HugoPhotoSwipe&#34;&gt;Gert-Jan van den Berg&lt;/a&gt; for making galleries with &lt;a href=&#34;http://photoswipe.com&#34;&gt;PhotoSwipe&lt;/a&gt; .&lt;/p&gt;
-
-
-&lt;div class=&#34;gallery caption-position-bottom caption-effect-fade hover-effect-zoom hover-transition&#34; itemscope itemtype=&#34;http://schema.org/ImageGallery&#34;&gt;
-	  
-  
-&lt;link rel=&#34;stylesheet&#34; href=&#34;/css/hugo-easy-gallery.css&#34; /&gt;
-&lt;div class=&#34;box&#34; &gt;
-  &lt;figure  itemprop=&#34;associatedMedia&#34; itemscope itemtype=&#34;http://schema.org/ImageObject&#34;&gt;
-    &lt;div class=&#34;img&#34; style=&#34;background-image: url(&#39;/img/hexagon-thumb.jpg&#39;);&#34;&gt;
-      &lt;img itemprop=&#34;thumbnail&#34; src=&#34;/img/hexagon-thumb.jpg&#34; /&gt;
-    &lt;/div&gt;
-    &lt;a href=&#34;/img/hexagon.jpg&#34; itemprop=&#34;contentUrl&#34;&gt;&lt;/a&gt;
-  &lt;/figure&gt;
-&lt;/div&gt;
-  
-
-&lt;div class=&#34;box&#34; &gt;
-  &lt;figure  itemprop=&#34;associatedMedia&#34; itemscope itemtype=&#34;http://schema.org/ImageObject&#34;&gt;
-    &lt;div class=&#34;img&#34; style=&#34;background-image: url(&#39;/img/sphere-thumb.jpg&#39;);&#34;&gt;
-      &lt;img itemprop=&#34;thumbnail&#34; src=&#34;/img/sphere-thumb.jpg&#34; alt=&#34;Sphere&#34;/&gt;
-    &lt;/div&gt;
-      &lt;figcaption&gt;
-          &lt;p&gt;Sphere&lt;/p&gt;
-      &lt;/figcaption&gt;
-    &lt;a href=&#34;/img/sphere.jpg&#34; itemprop=&#34;contentUrl&#34;&gt;&lt;/a&gt;
-  &lt;/figure&gt;
-&lt;/div&gt;
-  
-
-&lt;div class=&#34;box&#34; &gt;
-  &lt;figure  itemprop=&#34;associatedMedia&#34; itemscope itemtype=&#34;http://schema.org/ImageObject&#34;&gt;
-    &lt;div class=&#34;img&#34; style=&#34;background-image: url(&#39;/img/triangle-thumb.jpg&#39;);&#34;&gt;
-      &lt;img itemprop=&#34;thumbnail&#34; src=&#34;/img/triangle-thumb.jpg&#34; alt=&#34;This is a long comment about a triangle&#34;/&gt;
-    &lt;/div&gt;
-      &lt;figcaption&gt;
-          &lt;p&gt;Triangle&lt;/p&gt;
-      &lt;/figcaption&gt;
-    &lt;a href=&#34;/img/triangle.jpg&#34; itemprop=&#34;contentUrl&#34;&gt;&lt;/a&gt;
-  &lt;/figure&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;</description>
-    </item>
-    
-    <item>
-      <title>Big Image Sample</title>
-      <link>/post/2017-03-07-bigimg-sample/</link>
-      <pubDate>Tue, 07 Mar 2017 00:00:00 +0000</pubDate>
-      <author>youremail@domain.com (WoolfBreathe)</author>
-      <guid>/post/2017-03-07-bigimg-sample/</guid>
-      <description>&lt;p&gt;The image banners at the top of the page are refered to as &amp;ldquo;bigimg&amp;rdquo; in this theme. They are optional, and one more more can be specified. If more than one is specified, the images rotate every 10 seconds. In the front matter, bigimgs are specified using an array of hashes.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>Math Sample</title>
-      <link>/post/2017-03-05-math-sample/</link>
-      <pubDate>Sun, 05 Mar 2017 00:00:00 +0000</pubDate>
+      <link>/post/2021-05-07-math-sample/</link>
+      <pubDate>Fri, 07 May 2021 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (WoolfBreathe)</author>
-      <guid>/post/2017-03-05-math-sample/</guid>
+      <guid>/post/2021-05-07-math-sample/</guid>
       <description>&lt;p&gt;KaTeX can be used to generate complex math formulas server-side.&lt;/p&gt;
 &lt;p&gt;$$
 \phi = \frac{(1+\sqrt{5})}{2} = 1.6180339887\cdots
@@ -87,79 +27,994 @@ $$&lt;/p&gt;
     </item>
     
     <item>
-      <title>Code Sample</title>
-      <link>/post/2016-03-08-code-sample/</link>
-      <pubDate>Tue, 08 Mar 2016 00:00:00 +0000</pubDate>
+      <title>Docker Install</title>
+      <link>/post/devops/docker/devops-docker-install/</link>
+      <pubDate>Mon, 19 Apr 2021 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (WoolfBreathe)</author>
-      <guid>/post/2016-03-08-code-sample/</guid>
-      <description>&lt;p&gt;The following are two code samples using syntax highlighting.&lt;/p&gt;</description>
+      <guid>/post/devops/docker/devops-docker-install/</guid>
+      <description>Get Docker CE for Ubuntu 要在Ubuntu上开始使用Docker CE，请确保满足先决条件，然后安装Docker。
+先决条件(Prerequisites) Docker EE 用户 要安装Docker Enterprise Edition（Docker EE），请转到获取Ubuntu的Docker EE而不是此主题。
+OS requirements 要安装Docker CE，您需要其中一个64位的Ubuntu版本： Cosmic 18.10 Bionic 18.04 (LTS) Xenial 16.04 (LTS) 在x86_64（或amd64），armhf，arm64，s390x（IBM Z）和ppc64le（IBM Power）体系结构上支持Docker CE。  Uninstall old versions 较旧版本的Docker被称为docker，docker.io或docker引擎。如果已安装，请卸载它们：
+$ sudo apt-get remove docker docker-engine docker.io containerd runc 如果apt-get报告没有安装这些软件包，那就没关系。 保留/var/lib/docker/的内容，包括图像，容器，卷(volumes)和网络。 Docker CE包现在称为docker-ce。
+Supported storage drivers Ubuntu上的Docker CE支持overlay2，aufs和btrfs存储驱动程序。
+对于Linux内核版本4及更高版本的新安装，支持overlay2并优先于aufs。 Docker CE默认使用overlay2存储驱动程序。如果您需要使用aufs，则需要手动配置它。见aufs
+Install Docker CE 使用存储库安装(Install using the repository) 在新主机上首次安装Docker CE之前，需要设置Docker存储库。之后，您可以从存储库安装和更新Docker。 Set up the repository</description>
     </item>
     
     <item>
-      <title>Flake it till you make it</title>
-      <link>/post/2015-02-26-flake-it-till-you-make-it/</link>
-      <pubDate>Thu, 26 Feb 2015 00:00:00 +0000</pubDate>
+      <title>Docker</title>
+      <link>/post/devops/docker/devops-docker-layering/</link>
+      <pubDate>Sun, 18 Apr 2021 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (WoolfBreathe)</author>
-      <guid>/post/2015-02-26-flake-it-till-you-make-it/</guid>
-      <description>Under what circumstances should we step off a path? When is it essential that we finish what we start? If I bought a bag of peanuts and had an allergic reaction, no one would fault me if I threw it out. If I ended a relationship with a woman who hit me, no one would say that I had a commitment problem. But if I walk away from a seemingly secure route because my soul has other ideas, I am a flake?</description>
+      <guid>/post/devops/docker/devops-docker-layering/</guid>
+      <description>Docker 架构 Docker 使用 C/S （客户端/服务器）体系的架构，Docker 客户端与 Docker 守护进程通信，Docker 守护进程负责构建，运行和分发 Docker 容器。Docker 客户端和守护进程可以在同一个系统上运行，也可以将 Docker 客户端连接到远程 Docker 守护进程。Docker 客户端和守护进程使用 REST API 通过UNIX套接字或网络接口进行通信。 docker structrue ​​
+1. Docker Damon：dockerd，用来监听 Docker API 的请求和管理 Docker 对象，比如镜像、容器、网络和 Volume。 2. Docker Client：docker，docker client 是我们和 Docker 进行交互的最主要的方式方法，比如我们可以通过 docker run 命令来运行一个容器，然后我们的这个 client 会把命令发送给上面的 Dockerd，让他来做真正事情。 3. Docker Registry：用来存储 Docker 镜像的仓库，Docker Hub 是 Docker 官方提供的一个公共仓库，而且 Docker 默认也是从 4. Docker Hub 上查找镜像的，当然你也可以很方便的运行一个私有仓库，当我们使用 docker pull 或者 docker run 命令时，就会从我们配置的 Docker 镜像仓库中去拉取镜像，使用 docker push 命令时，会将我们构建的镜像推送到对应的镜像仓库中。 4.</description>
     </item>
     
     <item>
-      <title>Test markdown</title>
-      <link>/post/2015-02-20-test-markdown/</link>
-      <pubDate>Fri, 20 Feb 2015 00:00:00 +0000</pubDate>
+      <title>Docker分层原理</title>
+      <link>/post/devops/docker/devops-docker-layering/</link>
+      <pubDate>Sat, 17 Apr 2021 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (WoolfBreathe)</author>
-      <guid>/post/2015-02-20-test-markdown/</guid>
-      <description>You can write regular markdown here and Hugo will automatically convert it to a nice webpage. I strongly encourage you to take 5 minutes to learn how to write in markdown - it&amp;rsquo;ll teach you how to transform regular text into bold/italics/headings/tables/etc.
-Here is some bold text
-Here is a secondary heading Here&amp;rsquo;s a useless table:
-   Number Next number Previous number     Five Six Four   Ten Eleven Nine   Seven Eight Six   Two Three One    How about a yummy crepe?</description>
+      <guid>/post/devops/docker/devops-docker-layering/</guid>
+      <description></description>
     </item>
     
     <item>
-      <title>To be</title>
-      <link>/post/2015-02-13-hamlet-monologue/</link>
-      <pubDate>Fri, 13 Feb 2015 00:00:00 +0000</pubDate>
+      <title>PHP的运行机制和基本原理</title>
+      <link>/post/computerlanguages/php/computerlanguages-php-principle/</link>
+      <pubDate>Thu, 31 Dec 2020 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (WoolfBreathe)</author>
-      <guid>/post/2015-02-13-hamlet-monologue/</guid>
-      <description>To be, or not to be&amp;ndash;that is the question: Whether &amp;lsquo;tis nobler in the mind to suffer The slings and arrows of outrageous fortune Or to take arms against a sea of troubles And by opposing end them. To die, to sleep&amp;ndash; No more&amp;ndash;and by a sleep to say we end The heartache, and the thousand natural shocks That flesh is heir to. &amp;lsquo;Tis a consummation Devoutly to be wished. To die, to sleep&amp;ndash; To sleep&amp;ndash;perchance to dream: ay, there&amp;rsquo;s the rub, For in that sleep of death what dreams may come When we have shuffled off this mortal coil, Must give us pause.</description>
+      <guid>/post/computerlanguages/php/computerlanguages-php-principle/</guid>
+      <description>PHP说简单，但是要精通也不是一件简单的事。需要知道它底层的工作原理。
+PHP是一种适用于web开发的动态语言。具体点说，就是一个用C语言实现包含大量组件的软件框架。更狭义点看，可以把它认为是一个强大的UI框架。
+了解PHP底层实现的目的是什么？动态语言要像用好首先得了解它，内存管理、框架模型值得我们借鉴，通过扩展开发实现更多更强大的功能，优化我们程序的性能。
+1. PHP的设计理念及特点  多进程模型：由于PHP是多进程模型，不同请求间互不干涉，这样保证了一个请求挂掉不会对全盘服务造成影响。当然，随着时代发展，PHP也早已支持多线程模型。 弱类型语言：和C/C++、Java、C#等语言不同，PHP是一门弱类型语言。一个变量的类型并不是一开始就确定不变，运行中才会确定并可能发生隐式或显式的类型转换，这种机制的灵活性在web开发中非常方便、高效，具体会在后面PHP变量中详述。 引擎(Zend)+组件(ext)的模式降低内部耦合。 中间层(sapi)隔绝web server和PHP。 语法简单灵活，没有太多规范。缺点导致风格混杂，但再差的程序员也不会写出太离谱危害全局的程序。  2. PHP的四层体系 PHP的核心架构如下图：
+从图上可以看出，PHP从下到上是一个4层体系：
+Zend引擎：Zend整体用纯C实现，是PHP的内核部分，它将PHP代码翻译（词法、语法解析等一系列编译过程）为可执行opcode处理，并实现相应的处理方法，实现了基本的数据结构（如hashtable、oo）、内存分配及管理、提供了相应的api方法供外部调用，是一切的核心，所有的外围功能均围绕Zend实现。 Extensions：围绕着Zend引擎，extensions通过组件式的方式提供各种基础服务，我们常见的各种内置函数（如array系列）、标准库等都是通过extension来实现，用户也可以根据需要实现自己的extension以达到功能扩展、性能优化等目的（如贴吧正在使用的PHP中间层、富文本解析就是extension的典型应用）。 Sapi：Sapi全称是Server Application Programming Interface，也就是服务端应用编程接口，Sapi通过一系列钩子函数，使得PHP可以和外围交互数据，这是PHP非常优雅和成功的一个设计，通过sapi成功的将PHP本身和上层应用解耦隔离，PHP可以不再考虑如何针对不同应用进行兼容，而应用本身也可以针对自己的特点实现不同的处理方式。 Application：这就是我们平时编写的PHP程序，通过不同的sapi方式得到各种各样的应用模式，如通过webserver实现web应用、在命令行下以脚本方式运行等等。  如果PHP是一辆车，那么车的框架就是PHP本身，Zend是车的引擎（发动机），Ext下面的各种组件就是车的轮子，Sapi可以看做是公路，车可以跑在不同类型的公路上，而一次PHP程序的执行就是汽车跑在公路上。因此，我们需要：性能优异的引擎+合适的车轮+正确的跑道。
+3. Sapi 如前所述，Sapi通过通过一系列的接口，使得外部应用可以和PHP交换数据，并可以根据不同应用特点实现特定的处理方法，我们常见的一些sapi有：
+apache2handler：这是以apache作为webserver，采用mod_PHP模式运行时候的处理方式。 cgi：这是webserver和PHP直接的另一种交互方式，也就是大名鼎鼎的fastcgi协议，在最近今年fastcgi+PHP得到越来越多的应用，也是异步webserver所唯一支持的方式。 cli：命令行调用的应用模式  4. PHP的执行流程&amp;amp;opcode PHP代码的执行所经过的流程
+从图上可以看到，PHP实现了一个典型的动态语言执行过程：拿到一段代码后，经过词法解析、语法解析等阶段后，源程序会被翻译成一个个指令(opcodes)，然后ZEND虚拟机顺次执行这些指令完成操作。PHP本身是用C实现的，因此最终调用的也都是C的函数，实际上，我们可以把PHP看做是一个C开发的软件。
+PHP的执行的核心是翻译出来的一条一条指令，也即opcode。
+Opcode是PHP程序执行的最基本单位。一个opcode由两个参数(op1,op2)、返回值和处理函数组成。PHP程序最终被翻译为一组opcode处理函数的顺序执行。
+常见的几个处理函数：
+ZEND_ASSIGN_SPEC_CV_CV_HANDLER : 变量分配 （$a=$b） ZEND_DO_FCALL_BY_NAME_SPEC_HANDLER：函数调用 ZEND_CONCAT_SPEC_CV_CV_HANDLER：字符串拼接 $a.$b ZEND_ADD_SPEC_CV_CONST_HANDLER: 加法运算 $a+2 ZEND_IS_EQUAL_SPEC_CV_CONST：判断相等 $a==1 ZEND_IS_IDENTICAL_SPEC_CV_CONST：判断相等 $a===1 5. PHP-FPM CGI  CGI全称是Common Geteway Interface，中文翻译公共网关接口，是HTTP服务器与你或者其他机器上的程序进行会话的一种工具，程序必须运行在网络服务器上。
+Fast-CGI  Fast-CGI是CGI的fast版本，是常驻内存的CGI，并接收进程管理器的调度。不会像CGI每次激活都要fork出一进程来加载解释器导致性能下降的缺点。
+PHP-CGI  PHP-CGI是实现了CGI接口协议的php脚本解析器。
+PHP-FPM  管理和调度PHP-CGI进程，进而实现Fast-CGI协议接口的程序。</description>
     </item>
     
     <item>
-      <title>Dear diary</title>
-      <link>/post/2015-01-27-dear-diary/</link>
-      <pubDate>Tue, 27 Jan 2015 00:00:00 +0000</pubDate>
+      <title>Linux Rsync 文件同步</title>
+      <link>/post/devops/linux/devops-linux-rsync/</link>
+      <pubDate>Thu, 12 Nov 2020 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (WoolfBreathe)</author>
-      <guid>/post/2015-01-27-dear-diary/</guid>
-      <description>What is it with that Mary girl? Dragging me to school every day. As if I had a choice. What you don&amp;rsquo;t hear in those nursery rhymes is that she starves me if I don&amp;rsquo;t go to school with her; it&amp;rsquo;s the only way I can stay alive! I&amp;rsquo;m thinking about being adopted by Little Bo Peep, sure I may get lost, but anything is better than being with Mary and those little brats at school (shudder, shudder).</description>
+      <guid>/post/devops/linux/devops-linux-rsync/</guid>
+      <description>安装 服务器配置 配置/etc/rsyncd.conf文件
+uid = root gid = root use chroot = no max connections = 2000 port = 8973 timeout = 900 log file = /var/run/rsyncd.log pid file = /var/run/rsyncd.pid lock file = /var/run/rsyncd.lock log format = %t%a%m%f%b commemt = rsync list = yes read only = yes write only = no # auth users = apprsync # secrets file = /etc/rsyncd.secret ignore errors = yes # hosts allow = 172.</description>
     </item>
     
     <item>
-      <title>Soccer</title>
-      <link>/post/2015-01-19-soccer/</link>
-      <pubDate>Mon, 19 Jan 2015 00:00:00 +0000</pubDate>
+      <title>Linux Permisssions(文件权限)</title>
+      <link>/post/devops/linux/devops-linux-permisssions/</link>
+      <pubDate>Sat, 27 Jun 2020 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (WoolfBreathe)</author>
-      <guid>/post/2015-01-19-soccer/</guid>
-      <description>From Wikipedia:
-Association football, more commonly known as football or soccer,[2] is a sport played between two teams of eleven players with a spherical ball. It is played by 250 million players in over 200 countries, making it the world&amp;rsquo;s most popular sport.[3][4][5][6] The game is played on a rectangular field with a goal at each end. The object of the game is to score by getting the ball into the opposing goal.</description>
+      <guid>/post/devops/linux/devops-linux-permisssions/</guid>
+      <description>权限说明 许可和所有权-为什么？ 如果不能访问自己Linux系统的某些文件夹可能是由于文件访问权限的配置错误。如果你是linux的唯一使用者，你也许想知道怎么拥有所有的许可（或者取消所有的），因为它限制了你完全的拥有你的企鹅操作系统！然而，在你扯掉头发前，你因该明白Linux被设计成一个多用户环境。在同一个环境下，有超过一个以上的用户，判断哪些文件是你的，谁能使用它，这些对于一个安全的系统来说是至关重要的！
+甚至如果你是一个普通桌面系统的唯一使用者，文件许可帮助保持你的重要文件安全，阻止外部的和你自己的误操作！ ：）
+理解文件所有权 你的Linux系统的每一个文件，包括目录，被一个特殊的用户和用户组拥有。因此，文件许可对于用户，用户组和其他使用者来说，都是独立的！
+用户：拥有文件的那个人的名字。默认情况下，文件的创建者就是所有者。
+组：用户组拥有文件。所有属于这个组的用户拥有此文件，拥有同样的访问许可。这很有用，例如，如果你有一个项目需要一群不同的用户能够访问特定的文件，而其他人不能访问。在那种情况下，你将添加所有的用户到一个同样的组，确保所要求的文件被哪个组拥有，设置这个文件相应的组许可。
+其他的：一个用户既不属于文件的所有者也不属于文件的组。换句话说，如果你设置一个“other”种类，默认地，他将影响其他用户。因为这个原因，人们常常说起设置“world”许可约束，他们是说设置“other”许可。
+理解文件许可 Linux上有三种类型的访问许可：读，写和执行。这些许可对于文件的所有者，组和其他用户都是独立的。
+读权限：对于一个普通的文件，读权限意味着文件能被打开和读取。对于一个目录，读权限意味着你可以列出目录内容。
+写权限：对于一个普通的文件，这意味着你可以修改文件，又叫做写入新数据到文件。当是目录时，写权限意味着你可以增加，移除和重命名目录里的文件。也就是说，如果一个文件有写权限，你就可以修改文件的内容，但是只有在文件的目录权限允许的情况下你才可以重命名和删除文件。
+执行权限：在普通文件的情况下，你可以把文件作为一个程序或者一个shell脚本执行。如果是目录，执行权限（也叫做“搜索块”）允许你实用cd命令访问目录并进入。例如，记事本尽管有执行块让你进入目录，但是你不能列出它的的内容，除非你有那个目录的读权限。
+怎样查看文件权限 通过使用ls -l 命令列出目录的列表，你可以查看一个文件的访问权限。一个长的目录列表可能如下所示：
+me@puter: /home/writers$ ls -l total 17 drwxr-xr-x 3 nana writers 80 2005-09-20 21:37 dir -rw-r----- 1 nana writers 8187 2005-09-19 13:35 file -rwxr-xr-x 1 nana writers 10348 2005-07-17 20:31 otherfile 文件信息说明 ls -l 输出的是什么意思？
+第一列 显示了文件类型和权限。 第二列 显示链接（与文件相关的目录入口）的数目 第三列 显示文件的所有者， 第四列 显示文件属于哪个组。 其他列显示文件的大小（用byte显示），日期和最后修改时间和文件名。  权限说明 第一列总共10位, 被分成了四个独立的组:
+第一组 一位字符 显示文件的类型 第二组 2、3、4位 给出了文件或目录所有者的权限 第三组 5、6、7位给出了文件或目录所属用户组的权限 第四组 8、9、10位给出了其他用户权限  第一个字符可以是如下任一种:</description>
     </item>
     
     <item>
-      <title>Pirates arrrr</title>
-      <link>/post/2015-01-15-pirates/</link>
-      <pubDate>Thu, 15 Jan 2015 00:00:00 +0000</pubDate>
+      <title>Xpath高级用法</title>
+      <link>/post/common/common-xpath/</link>
+      <pubDate>Mon, 22 Jun 2020 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (WoolfBreathe)</author>
-      <guid>/post/2015-01-15-pirates/</guid>
-      <description>Piracy is typically an act of robbery or criminal violence at sea. The term can include acts committed on land, in the air, or in other major bodies of water or on a shore. It does not normally include crimes committed against persons traveling on the same vessel as the perpetrator (e.g. one passenger stealing from others on the same vessel). The term has been used throughout history to refer to raids across land borders by non-state agents.</description>
+      <guid>/post/common/common-xpath/</guid>
+      <description>试验环境 Python lxml.etree
+试验所使用的html代码 &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;title&amp;gt;xpath test&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;div price=&amp;#34;99.8&amp;#34;&amp;gt; &amp;lt;div&amp;gt; &amp;lt;ul&amp;gt; &amp;lt;li&amp;gt;时间&amp;lt;/li&amp;gt; &amp;lt;li&amp;gt;地点&amp;lt;/li&amp;gt; &amp;lt;li&amp;gt;任务&amp;lt;/li&amp;gt; &amp;lt;/ul&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;div id=&amp;#39;testid&amp;#39; data-h=&amp;#34;first&amp;#34;&amp;gt; &amp;lt;h2&amp;gt;这里是个小标题&amp;lt;/h2&amp;gt; &amp;lt;ol&amp;gt; &amp;lt;li data=&amp;#34;one&amp;#34;&amp;gt;1&amp;lt;/li&amp;gt; &amp;lt;li data=&amp;#34;two&amp;#34;&amp;gt;2&amp;lt;/li&amp;gt; &amp;lt;li data=&amp;#34;three&amp;#34;&amp;gt;3&amp;lt;/li&amp;gt; &amp;lt;/ol&amp;gt; &amp;lt;ul&amp;gt; &amp;lt;li code=&amp;#34;84&amp;#34;&amp;gt;84&amp;lt;/li&amp;gt; &amp;lt;li code=&amp;#34;104&amp;#34;&amp;gt;104&amp;lt;/li&amp;gt; &amp;lt;li code=&amp;#34;223&amp;#34;&amp;gt;223&amp;lt;/li&amp;gt; &amp;lt;/ul&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;div&amp;gt; &amp;lt;h3&amp;gt;这里是H3的内容 &amp;lt;a href=&amp;#34;http://www.baidu.com&amp;#34;&amp;gt;百度一下&amp;lt;/a&amp;gt; &amp;lt;ul&amp;gt; &amp;lt;li&amp;gt;test1&amp;lt;/li&amp;gt; &amp;lt;li&amp;gt;test2&amp;lt;/li&amp;gt; &amp;lt;/ul&amp;gt; &amp;lt;/h3&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;div id=&amp;#34;go&amp;#34;&amp;gt; &amp;lt;ul&amp;gt; &amp;lt;li&amp;gt;1&amp;lt;/li&amp;gt; &amp;lt;li&amp;gt;2&amp;lt;/li&amp;gt; &amp;lt;li&amp;gt;3&amp;lt;/li&amp;gt; &amp;lt;li&amp;gt;4&amp;lt;/li&amp;gt; &amp;lt;li&amp;gt;5&amp;lt;/li&amp;gt; &amp;lt;li&amp;gt;6&amp;lt;/li&amp;gt; &amp;lt;li&amp;gt;7&amp;lt;/li&amp;gt; &amp;lt;li&amp;gt;8&amp;lt;/li&amp;gt; &amp;lt;li&amp;gt;9&amp;lt;/li&amp;gt; &amp;lt;li&amp;gt;10&amp;lt;/li&amp;gt; &amp;lt;/ul&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt; 1、匹配某节点下的所有 .</description>
     </item>
     
     <item>
-      <title>First post!</title>
-      <link>/post/2015-01-04-first-post/</link>
-      <pubDate>Mon, 05 Jan 2015 00:00:00 +0000</pubDate>
+      <title>Python ORM SQLAlchemy</title>
+      <link>/post/computerlanguages/python/computerlanguages-python-sqlalchemy/</link>
+      <pubDate>Tue, 16 Jun 2020 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (WoolfBreathe)</author>
-      <guid>/post/2015-01-04-first-post/</guid>
-      <description>This is my first post, how exciting!</description>
+      <guid>/post/computerlanguages/python/computerlanguages-python-sqlalchemy/</guid>
+      <description>官网 (SQLAlchemy Documentation)[https://www.osgeo.cn/sqlalchemy/]
+安装 pip instal sqlalchemy 基本代码 注意: SQLAlchemy多对多关联, 所有数据库实例需要继承一个declarative_base, 否则将会找不到表  from sqlalchemy.ext.declarative import declarative_base from sqlalchemy.orm import sessionmaker from sqlalchemy.orm import relationship from sqlalchemy import create_engine # 连接格式: dialect+driver://username:password@host:port/database engine = create_engine( &amp;#34;mysql+pymysql://homestead:secret@192.168.10.10:3306/gbei_admin?charset=utf8&amp;#34; ) Base = declarative_base() Session = sessionmaker(engine) db_session = Session() 示例 多对多关联示例代码
+class Girl(Base): __tablename__ = &amp;#34;girl&amp;#34; id = Column(Integer, primary_key=True) name = Column(String(32)) # secondary=&amp;#34;Hotel&amp;#34; 表示两个表关联Hotel girl2boy = relationship(&amp;#34;Boy&amp;#34;, secondary=&amp;#34;hotel&amp;#34;, backref=&amp;#34;boy2girl&amp;#34;) class Boy(Base): __tablename__ = &amp;#34;boy&amp;#34; id = Column(Integer, primary_key=True) name = Column(String(32)) class Hotel(Base): __tablename__ = &amp;#34;hotel&amp;#34; id = Column(Integer, primary_key=True) girl_id = Column(Integer, ForeignKey(&amp;#34;girl.</description>
+    </item>
+    
+    <item>
+      <title>Windows VSCode 远程调试 Homestead PHP</title>
+      <link>/post/computerlanguages/php/computerlanguages-php-xdebug/</link>
+      <pubDate>Wed, 29 Apr 2020 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/computerlanguages/php/computerlanguages-php-xdebug/</guid>
+      <description>环境准备 Homestead VSCode 安装 PHP Debug 扩展 Chrome 安装 Xdebug helper 扩展程序 | FireFox 安装 Xdebug helper 扩展程序 Homestead PHP 版本要和 Windows PHP 版本 一致  VSCode 修改 launch.json { &amp;#34;version&amp;#34;: &amp;#34;0.2.0&amp;#34;, &amp;#34;configurations&amp;#34;: [ { &amp;#34;name&amp;#34;: &amp;#34;Listen for XDebug&amp;#34;, &amp;#34;type&amp;#34;: &amp;#34;php&amp;#34;, &amp;#34;request&amp;#34;: &amp;#34;launch&amp;#34;, &amp;#34;port&amp;#34;: 9000, &amp;#34;stopOnEntry&amp;#34;: false, &amp;#34;pathMappings&amp;#34;: { &amp;#34;/home/vagrant/code/production/kwc&amp;#34;:&amp;#34;${workspaceRoot}&amp;#34; }, &amp;#34;log&amp;#34;: true }, { &amp;#34;name&amp;#34;: &amp;#34;Launch currently open script&amp;#34;, &amp;#34;type&amp;#34;: &amp;#34;php&amp;#34;, &amp;#34;request&amp;#34;: &amp;#34;launch&amp;#34;, &amp;#34;program&amp;#34;: &amp;#34;${workspaceRoot}/public/index.php&amp;#34;, &amp;#34;cwd&amp;#34;: &amp;#34;${workspaceRoot}/public/&amp;#34;, &amp;#34;port&amp;#34;: 9000 } ] } 这里主要添加了 pathMappings 配置项：</description>
+    </item>
+    
+    <item>
+      <title>PHP测试替身 Mockery</title>
+      <link>/post/computerlanguages/php/computerlanguages-php-mockery/</link>
+      <pubDate>Sun, 22 Mar 2020 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/computerlanguages/php/computerlanguages-php-mockery/</guid>
+      <description>单元测试：测试替身 Gerard Meszaros 在 Meszaros2007 中介绍了测试替身的概念： 『有时候对被测系统（SUT）进行测试是很困难的，因为它依赖于其他无法在测试环境中使用的组件。这有可能是因为这些组件不可用，它们不会返回测试所需要的结果，或者执行它们会有不良副作用。在其他情况下，的测试策略要求对被测系统的内部行为有更多控制或更多可见性。 如果在编写测试时无法使用（或选择不使用）实际的依赖组件（DOC），可以用测试替身来代替。测试替身不需要和真正的依赖组件有完全一样的的行为方式；他只需要提供和真正的组件同样的 API 即可，这样被测系统就会以为它是真正的组件！』 运行单元测试的环境不一定具有生产环境的系统组件，比如在代码持续集成系统中，通常只有代码与基本的构建环境。为了在测试环境中能保证测试的正常运行，需要对环境依赖使用替身来代替，以达到稳定测试效果，所以在测试时，网络请求组件是需要使用模拟对象（替身）来代替的，并不会真正的去请求 API。 Mockery使用说明 安装
+composer require phpunit/phpunit mockery/mockery 期望 使用with/withArg 判断是否满足期望需要用 \Mockery::close();
+$mock = \Mockery::mock(&amp;#39;MyClass&amp;#39;); $mock-&amp;gt;shouldReceive(&amp;#39;foo&amp;#39;)-&amp;gt;with(&amp;#39;Hello&amp;#39;); $mock-&amp;gt;foo(&amp;#39;Goodbye&amp;#39;); // throws a NoMatchingExpectationException \Mockery::close(); 使用闭包函数
+$mock = \Mockery::mock(&amp;#39;MyClass&amp;#39;); $mock-&amp;gt;shouldReceive(&amp;#39;foo&amp;#39;)-&amp;gt;withArgs(function ($arg) { if ($arg % 2 == 0) { return true; } return false; }); $mock-&amp;gt;foo(4); // matches the expectation $mock-&amp;gt;foo(3); // throws a NoMatchingExpectationException \Mockery::close(); 部分参数期望
+$mock = \Mockery::mock(&amp;#39;MyClass&amp;#39;); $mock-&amp;gt;shouldReceive(&amp;#39;foo&amp;#39;) -&amp;gt;withSomeOfArgs(1, 2); $mock-&amp;gt;foo(1, 2, 3); // matches the expectation $mock-&amp;gt;foo(3, 2, 1); // matches the expectation (passed order doesn&amp;#39;t matter) $mock-&amp;gt;foo(&amp;#39;1&amp;#39;, &amp;#39;2&amp;#39;); // throws a NoMatchingExpectationException (type should be matched) $mock-&amp;gt;foo(3); // throws a NoMatchingExpectationException \Mockery::close(); 系列返回值</description>
+    </item>
+    
+    <item>
+      <title>Selenium &#43; Chrome</title>
+      <link>/post/computerlanguages/python/computerlanguages-python-selenium/</link>
+      <pubDate>Sun, 15 Mar 2020 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/computerlanguages/python/computerlanguages-python-selenium/</guid>
+      <description>简介 Selenium 用于 抓取数据 自动化测试(很多网站API会添加sign验证, 很难破解, Selenium是最优选择)
+Selenium IDE 可以实现录制页面操作功能并且回访的功能, 是非常强大的自动化测试工具, 不需要编程能力一样可以使用
+Selenium 结合 Chrome 使用 Chrome DevTools 可以实现非常强大的功能
+Ubuntu安装 安装Chrome sudo apt-get install libxss1 libappindicator1 libindicator7 libgconf-2-4 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb sudo dpkg -i google-chrome*.deb 运行可能出现错误,按照提示运行 apt --fix-broken install 安装Selenium pip install selenium 安装ChromeDriver wget -N http://chromedriver.storage.googleapis.com/2.29/chromedriver_linux64.zip ##注意，这里2.29要换成实际对应下载的CHROME的版本。目前最新的是：2.43 unzip chromedriver_linux64.zip chmod +x chromedriver sudo mv -f chromedriver /usr/local/share/chromedriver sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver sudo ln -s /usr/local/share/chromedriver /usr/bin/chromedriver 注意: Chrome浏览器版本要 与 chromedrive版本 相符 /usr/bin/google-chrome-stable --version 查看Chrome浏览器版本 /usr/bin/chromedrive -v 查看chromedrive版本  使用教程 Selenium 官网 Selenium Python Chrome DevTools Protocal, Chrome开发者工具协议 API文档: https://chromedevtools.</description>
+    </item>
+    
+    <item>
+      <title>Linux使用Timedatectl修改时区和时间</title>
+      <link>/post/devops/linux/devops-linux-timedatectl/</link>
+      <pubDate>Tue, 18 Feb 2020 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/devops/linux/devops-linux-timedatectl/</guid>
+      <description>Timedatectl常见操作 1.查看当前时间/日期/时区：timedatectl或者 timedatectl status
+2.查看所有可用时区：timedatectl list-timezones
+3.设置时区：timedatectl set-timezone “Asia/Shanghai” 或者 timedatectl set-timezone PRC
+4.设置时间：timedatectl set-time HH:MM:SS
+5.设置日期：timedatectl set-time YYYY-MM-DD
+6.设置日期时间：timedatectl set-time “YYYY-MM-DD HH:MM:SS”
+7.设置硬件时钟为本地时间：timedatectl set-local-rtc 1
+8.设置硬件时钟为UTC时间：timedatectl set-local-rtc 0
+9.启动NTP时间同步（启用NTP服务或者Chrony服务）：timedatectl set-ntp true
+10.禁用NTP时间同步：timedatectl set-ntp false</description>
+    </item>
+    
+    <item>
+      <title>Linux安装Zabbix</title>
+      <link>/post/devops/linux/devops-linux-zabbix/</link>
+      <pubDate>Thu, 09 Jan 2020 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/devops/linux/devops-linux-zabbix/</guid>
+      <description>Zabbix简介 　Zabbix 是一个基于 WEB 界面的提供分布式系统监视以及网络监视功能的企业级的开源解决方案。Zabbix 能监视各种网络参数，保证服务器系统的安全运营；并提供灵活的通知机制以让系统管理员快速定位解决存在的各种问题。
+　Zabbix支持多种网络方式下的监控，可以通过分布式的部署和安装监控代理Zabbix，通过C/S模式采集数据，通过B/S模式在Web端展示和配置。Zabbix Agent监控端口10050。
+(1). Zabbix的主要特点
+　安装配置简单，学习成本低，支持多语言（包括中文），免费开源，自动发现服务器与网络设备分布式监视，Web集中管理，可以无agent监视，用户安全认证和柔软的授权方式，通过Web设置或查看监视结果，email等功能。
+(2). Zabbix的主要功能
+　监控CPU负载、内存使用、磁盘使用、网络状态、端口监控、日志监控、插件开发自定义
+(3). Zabbix运行机制
+　Zabbix由Zabbix server与可选组件Zabbix agent两部分组成。
+　Zabbix Server 可以通过 SNMP，Zabbix agent，Ping，端口监视等方法提供对远程服务器/网络状态的监视，数据收集功能，可以在运行 Linux，Solaris，HP-UX，AIX，FreeBSD，OpenBSD，OS X，Windows多平台。
+　Zabbix Agent 安装在需要被监控的目标服务器上，主要完成对硬件信息与操作系统有关的内存，CPU 等信息收集。
+　Zabbix Server可以单独监视远程服务器的服务状态，同时也可以与Zabbix Agent结合。可以轮询Zabbix Agent主动接收监视数据（trapping传递 方式），同时还可以被动接收Zabbix Agent发送的数据。
+(4). 准备安装包和部署环境
+　注意：日志文件在/tmp/目录下。
+　下载Zabbix的源码包：https://www.Zabbix.com/download_sources。注意下，下载提供了两种版本：LTS版和标准版。LTS是长期支持（Long Term Support）的缩写，Zabbix将为客户提供5年的支持服务。前三年完全支持与后两年有限制支持。前三年包括一般、关键、安全性问题解决，后两年包括关键、安全性问题解决。超出时间不提供技术支持服务；标准版只提供6+1月支持。
+　现在自己电脑上的C:\Windows\Fonts目录下查看是否存在微软雅黑字体，如果有上传一份（ttf格式），如果没有网上下载微软雅黑字体的ttf格式文件。
+　Zabbix自带了数据库导入包，其中包括ibm_db2、mysql、oracle、postgresql和sqlite3。但是Web界面只提供了PHP。所以这里选择在LNMP环境下部署。
+(5). Zabbix监控端部署
+　主机名：web-test　IP地址：192.168.0.101　环境：LNMP（Mysql5.7.19、PHP7.2.24）
+　在Zabbix监控服务器上部署Zabbix Server和Zabbix Agent（监控本身）。
+　监控数据记录在mysql中
+Zabbix Serve安装 下载 (1).</description>
+    </item>
+    
+    <item>
+      <title>Centos7.X下编译安装MySQL Utilities</title>
+      <link>/post/devops/database/devops-linux-mysql-utilities/</link>
+      <pubDate>Wed, 08 Jan 2020 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/devops/database/devops-linux-mysql-utilities/</guid>
+      <description>简介 MySQL Utilities是MySQL官方提供的mysql管理辅助工具，工具非常之多，其功能组件：
+Binary Log Operations(二进制日志操作) mysqlbinlogmove 二进制日志移动 mysqlbinlogpurge 二进制日志清理 mysqlbinlogrotate 二进制日志老化工具 Database Operations(数据库操作) mysqldbexport 数据导出 mysqldbimport 数据导入 mysqldbcopy 库级别数据库复制 mysqldiff 数据库对象级别比较工具 mysqldbcompare 数据库库级别比较工具 General Operations(通用用的操作) mysqldiskusage 磁盘空间查看 mysqlfrm 恢复故障表.frm文件 mysqluserclone 用户克隆工具 mysqluc Utilities帮助工具 mysqlindexcheck 索引检测工具 mysqlmetagrep 元数据过滤器 mysqlprocgrep 进程搜索及清理工具 High Availability Operations(高可用) mysqlreplicate 主从复制工具 mysqlrpladmin 主从复制管理工具 mysqlrplcheck 主从复制检测工具 mysqlrplms 主从多元复制工具 mysqlrplshow 主从复制拓扑图工具 mysqlrplsync 主从复制同步工具 mysqlfailover 主从failover工具 mysqlslavetrx 从库事务跳过工具 Server Operations(服务器操作) mysqlserverinfo 服务器信息查看工具 mysqlserverclone 服务器克隆工具 Specialized Operations(特殊操作) mysqlauditadmin 审计管理工具 mysqlauditgrep 审计日志过滤工具 下载安装 [root@centos7 ~]# wget https://downloads.</description>
+    </item>
+    
+    <item>
+      <title>语义化版本</title>
+      <link>/post/common/common-version/</link>
+      <pubDate>Tue, 07 Jan 2020 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/common/common-version/</guid>
+      <description>摘要 版本格式：主版本号.次版本号.修订号，版本号递增规则如下：
+ 主版本号：当你做了不兼容的 API 修改， 次版本号：当你做了向下兼容的功能性新增， 修订号：当你做了向下兼容的问题修正。  先行版本号及版本编译元数据可以加到“主版本号.次版本号.修订号”的后面，作为延伸。
+简介 在软件管理的领域里存在着被称作“依赖地狱”的死亡之谷，系统规模越大，加入的包越多，你就越有可能在未来的某一天发现自己已深陷绝望之中。
+在依赖高的系统中发布新版本包可能很快会成为噩梦。如果依赖关系过高，可能面临版本控制被锁死的风险（必须对每一个依赖包改版才能完成某次升级）。而如果依赖关系过于松散，又将无法避免版本的混乱（假设兼容于未来的多个版本已超出了合理数量）。当你专案的进展因为版本依赖被锁死或版本混乱变得不够简便和可靠，就意味着你正处于依赖地狱之中。
+作为这个问题的解决方案之一，我提议用一组简单的规则及条件来约束版本号的配置和增长。这些规则是根据（但不局限于）已经被各种封闭、开放源码软件所广泛使用的惯例所设计。为了让这套理论运作，你必须先有定义好的公共 API 。这可以透过文件定义或代码强制要求来实现。无论如何，这套 API 的清楚明了是十分重要的。一旦你定义了公共 API，你就可以透过修改相应的版本号来向大家说明你的修改。考虑使用这样的版本号格式：X.Y.Z （主版本号.次版本号.修订号）修复问题但不影响API 时，递增修订号；API 保持向下兼容的新增及修改时，递增次版本号；进行不向下兼容的修改时，递增主版本号。
+我称这套系统为“语义化的版本控制”，在这套约定下，版本号及其更新方式包含了相邻版本间的底层代码和修改内容的信息。
+语义化版本控制规范（SemVer） 以下关键词 MUST、MUST NOT、REQUIRED、SHALL、SHALL NOT、SHOULD、SHOULD NOT、 RECOMMENDED、MAY、OPTIONAL 依照 RFC 2119 的叙述解读。（译注：为了保持语句顺畅， 以下文件遇到的关键词将依照整句语义进行翻译，在此先不进行个别翻译。）
+  使用语义化版本控制的软件必须（MUST）定义公共 API。该 API 可以在代码中被定义或出现于严谨的文件内。无论何种形式都应该力求精确且完整。
+  标准的版本号必须（MUST）采用 X.Y.Z 的格式，其中 X、Y 和 Z 为非负的整数，且禁止（MUST NOT）在数字前方补零。X 是主版本号、Y 是次版本号、而 Z 为修订号。每个元素必须（MUST）以数值来递增。例如：1.9.1 -&amp;gt; 1.10.0 -&amp;gt; 1.11.0。
+  标记版本号的软件发行后，禁止（MUST NOT）改变该版本软件的内容。任何修改都必须（MUST）以新版本发行。
+  主版本号为零（0.y.z）的软件处于开发初始阶段，一切都可能随时被改变。这样的公共 API 不应该被视为稳定版。
+  1.</description>
+    </item>
+    
+    <item>
+      <title>PHP扩展包开发</title>
+      <link>/post/computerlanguages/php/computerlanguages-php-phppackage/</link>
+      <pubDate>Sun, 05 Jan 2020 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/computerlanguages/php/computerlanguages-php-phppackage/</guid>
+      <description>现代PHP 现代化的 PHP 开发离不开 Composer、它的诞生也离不开 GitHub，基于它，可以非常方便的管理项目的依赖，有效的进行依赖的版本控制以用版本更新。
+现有的诸多优秀的开源项目大都是基于其它开源项目的，很少有独立开发的，正所谓站在巨人的肩膀上，才能看得更高。比如 Laravel，它就是一个非常典型的基于很多优秀第三方扩展包的模块化开发框架，它的很多核心功能都是基于另外一系列 Symfony 组件 之上构建的。
+日常开发中经常要与非常多优秀的扩展包打交道，比如图片处理包 intervention/image、单元测试框架 PHPUnit、还有非常强大的日期处理类 Carbon、日志处理 Monolog 等等太多太多。
+PHP 扩展包 **PHP 原生扩展
+PHP 原生扩展（PHP Native Extension），通常指基于 C/C++ 语言开发的对 PHP 语言的扩展，需要编译安装，比如最常使用的 phpredis、GD、MySQL、cURL 扩展等，这里有一个 PHP 的扩展列表。
+**PHP 扩展包
+PHP 扩展包（PHP Package）或者 PHP 包，通常指用 PHP 代码编写的代码包。它通常是一些特定功能的封装，比如 Intervention/image，它是基于 PHP 图像处理库 GD/Imagick 实现的图像处理功能包，具有非常强大且优雅的图片处理 API，可以非常便捷的基于它完成常规的图片操作，简化开发工作。
+PHP 扩展包结构说明 weather/ ├── .editorconfig # 编辑器配置文件，比如缩进大小、换行模式等 ├── .gitattributes # git 配置文件，可以设计导出时忽略文件等 ├── .gitignore # git 忽略文件配置列表 ├── .php_cs # PHP-CS-Fixer 配置文件 ├── README.</description>
+    </item>
+    
+    <item>
+      <title>Linux安装MySQL</title>
+      <link>/post/devops/database/devops-mysql/</link>
+      <pubDate>Sun, 29 Dec 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/devops/database/devops-mysql/</guid>
+      <description>Mysql搭建 1.下载二进制包(Linux-Generic 线上环境一般用二进制包) 解压到目录 /usr/local/mysql  2.增加执行路径 export PATH=/usr/local/mysql/bin:$PATH 3.创建用户 groupadd -r mysql &amp;amp;&amp;amp; useradd -g mysql -s /sbin/nologin mysql 4.安装数据库 /usr/local/mysql/script/mysql_install_db --user=mysql --basedir=/usr/local/mysql --datadir=/mysqldata/node1 /usr/local/mysql/bin/mysqld --initialize --user=mysql --basedir=/usr/local/mysql --datadir=/data/mysql 5.修改配置并启动 /usr/local/mysql/bin/mysqld_safe --defaults-file=/usr/local/mysql/cnf/my.cnf &amp;amp; 6.创建用户并分配权限 删除多余用户 删除test数据库
+select user,host,password from mysql.user; delete from msyql.user where user=&amp;#39;&amp;#39;; delete from mysql.user where host&amp;lt;&amp;gt;&amp;#39;localhost&amp;#39;; # set password for root@&amp;#39;localhost&amp;#39;=password(&amp;#39;123456&amp;#39;); alter user &amp;#39;test&amp;#39;@&amp;#39;localhost&amp;#39; identified by &amp;#39;123&amp;#39;; flush privileges; 7.停止数据库 /usr/local/mysql/bin/mysqladmin --socket=/data/mysql/mysql.sock shutdown -p Mysql在线升级 1.</description>
+    </item>
+    
+    <item>
+      <title>Linux安装Nginx源码包</title>
+      <link>/post/devops/linux/devops-linux-nginx/</link>
+      <pubDate>Sun, 29 Dec 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/devops/linux/devops-linux-nginx/</guid>
+      <description>依赖库安装 安装 gcc 环境 sudo yum -y install gcc gcc-c++ # nginx 编译时依赖 gcc 环境 安装 pcre sudo yum -y install pcre pcre-devel # 让 nginx 支持重写功能 安装 zlib # zlib 库提供了很多压缩和解压缩的方式，nginx 使用 zlib 对 http 包内容进行 gzip 压缩 sudo yum -y install zlib zlib-devel 安装 openssl # 安全套接字层密码库，用于通信加密 sudo yum -y install openssl openssl-devel Nginx 源码包安装 Nginx官方下载
+sudo tar -zxvf nginx-1.11.5.tar.gz # 解压缩 生成 makefile 文件 cd nginx-1.11.5 ./configure --prefix=/usr/local/nginx --with-http_stub_status_module --with-http_ssl_module --with-http_flv_module --with-http_gzip_static_module # 检查平台安装环境 # --prefix=/usr/local/nginx 是 nginx 编译安装的目录（推荐），安装完后会在此目录下生成相关文件 进行源码编译并安装 make # 编译 make install # 安装 服务操作命令。 启动服务 /usr/local/nginx/sbin/nginx 重新加载服务 /usr/local/nginx/sbin/nginx -s reload 停止服务 /usr/local/nginx/sbin/nginx -s stop 查看 nginx 服务进程 ps -ef | grep nginx # 查看服务进程 配置 upstream phpserver { server 192.</description>
+    </item>
+    
+    <item>
+      <title>Linux安装PHP源码包</title>
+      <link>/post/devops/linux/devops-linux-php/</link>
+      <pubDate>Sat, 28 Dec 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/devops/linux/devops-linux-php/</guid>
+      <description>依赖库安装 安装 gcc 环境 sudo yum -y install gcc gcc-c++ # 编译时依赖 gcc 环境 安装 libxml2 sudo yum -y install libxml2 libxml2-devel # Libxml2库提供了C语言解析和构造xml文档的接口 安装 libjpeg-devel yum -y install libjpeg-devel libpng-devel # 图片处理 安装 openssl # 安全套接字层密码库，用于通信加密 $ sudo yum -y install openssl openssl-devel yum install freetype-devel libzip 安装sqlite yum install sqlite-devel 创建用户组和用户 groupadd -r www &amp;amp;&amp;amp; useradd -g www -s /sbin/nologin www 安装 Nginx 源码包安装 Nginx官方下载
+sudo tar -zxvf php-7.</description>
+    </item>
+    
+    <item>
+      <title>Linux安装Redis</title>
+      <link>/post/devops/linux/devops-linux-redis/</link>
+      <pubDate>Thu, 26 Dec 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/devops/linux/devops-linux-redis/</guid>
+      <description>安装 下载 wget http://download.redis.io/releases/redis-5.0.3.tar.gz 解压 tar -zxvf redis-5.0.3.tar.gz 执行编译 cd redis-5.0.3 make # PREFIX用于指定目录 make install PREFIX=/usr/local/redis 启动 /usr/local/redis/bin/redis-server redis.conf 创建命令软链接 ln -s /usr/local/redis/bin/redis-cli /usr/bin/redis </description>
+    </item>
+    
+    <item>
+      <title>Laravel常用命令</title>
+      <link>/post/computerlanguages/php/computerlanguages-php-laravel-common/</link>
+      <pubDate>Tue, 03 Dec 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/computerlanguages/php/computerlanguages-php-laravel-common/</guid>
+      <description>Laravel多环境配置 新建文件 .env.beta beta预发布环境
+Nginx配置
+location ~ \.php$ { try_files $uri =404; fastcgi_split_path_info ^(.+\.php)(/.+)$; fastcgi_pass phpserver; fastcgi_index index.php; # 添加 APP_ENV 参数, 这个参数设置会覆盖Laravel里的 APP_ENV, 设置后就会读取指定配置文件 .env.beta  fastcgi_param APP_ENV beta; fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name; fastcgi_param QUERY_STRING $query_string; include fastcgi_params; } </description>
+    </item>
+    
+    <item>
+      <title>Laravel各种调试工具和常用工具</title>
+      <link>/post/computerlanguages/php/computerlanguages-php-laravel-component/</link>
+      <pubDate>Mon, 02 Dec 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/computerlanguages/php/computerlanguages-php-laravel-component/</guid>
+      <description>Laravel调试  注意:调试工具切忌不可在正式环境中打开, 否则重要信息会泄露
+ Laravel-ddoc 数据字典 安装
+composer require jormin/laravel-ddoc --dev 发布
+php artisan vendor:publish --provider=&amp;#34;Jormin\DDoc\DDocServiceProvider&amp;#34; Laravel-log-viewer 日志 安装
+composer require rap2hpoutre/laravel-log-viewer --dev 发布
+php artisan vendor:publish --provider=&amp;#34;Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider&amp;#34; 添加路由 routes/web.php 中添加
+Route::get(&amp;#39;logs&amp;#39;, &amp;#39;\Rap2hpoutre\LaravelLogViewer\LogViewerController@index&amp;#39;); Telescope 调试工具 安装
+# 安装 Telescope composer require laravel/telescope --dev # Artisan 命令 telescope:install 发布其公共资源 php artisan telescope:install # 运行 migrate 命令执行数据库变更： php artisan migrate # 更新 Telescope 的时候，需要重新发布公共资源： php artisan telescope:publish 配置
+发布完 Telescope 的公共资源后，配置文件位于 config/telescope.</description>
+    </item>
+    
+    <item>
+      <title>接口自动化测试框架从设计到开发</title>
+      <link>/post/common/common-test/</link>
+      <pubDate>Thu, 28 Nov 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/common/common-test/</guid>
+      <description>入门条件   设计框架 开发框架 重构框架   接口基础  HTTP接口
+ 接口组成 常见接口介绍 接口工具使用 接口基础面试   接口开发   dingo   UnitTest与接口测试结合   UnitTest HTMLTestRunner 断言 Case Requests包的使用   设计 开发 测试框架   设计 工具封装 基类封装 调试错误 接口数据 回写报告 解决数据依赖 结果统计 右键服务 发送报告   接口测试辅助操作   操作数据库 操作Cookie   </description>
+    </item>
+    
+    <item>
+      <title>Homestead(Windows系统Laravel环境搭建)</title>
+      <link>/post/devops/linux/devops-linux-homestead/</link>
+      <pubDate>Wed, 27 Nov 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/devops/linux/devops-linux-homestead/</guid>
+      <description>步骤简略  接下来让我们按照这几个步骤来完成整个 Laravel 开发环境的安装及配置： 安装 VirtualBox 安装 Vagrant 导入 Homestead Box 虚拟机盒子 安装 Git 安装 Homestead 管理脚本 配置 Homestead.yaml 文件 启动 Homestead 虚拟机
+ 安装 VirtualBox VirtualBox 是 Oracle 公司的开源虚拟机软件。VirtualBox 号称是最强的免费虚拟机软件，它不仅功能齐全，而且性能也很优异！VirtualBox 支持大部分流行的系统，如：Mac, Windows, Linux 等。
+安装 Vagrant Vagrant 是用来管理虚拟机的工具，支持当前主流的虚拟机系统如 VirtualBox、VMware、AWS 等。Vagrant 的主要作用是提供一个可配置、可移植和复用的软件环境。Vagrant 让你通过编写一个 Vagrantfile 文件来控制虚拟机的启动、虚拟机网络环境的配置、虚拟机与主机间的文件共享，以及启动后自动执行一些配置脚本，如自动执行一个 Shell Script 来安装一些必备的开发工具，如安装配置 MySQL、PHP，甚至是自动配置 Nginx 站点。这意味着，在一个多人开发的项目中，你只需要同步 Vagrantfile 文件，就可以保证参与项目的每个人各自的机器上拥有一致的开发环境。
+Homestead 介绍 Homestead 利用 Vagrantfile 提供的便利，定制了一整套的可配置、可移植和复用的 Laravel 开发环境。Homestead 虚拟机里面包含了 Nginx Web 服务器、PHP 7、MySQL、Postgres、Redis、Memcached、Node，以及所有你在使用 Laravel 开发时需要用到的各种软件。 Homestead 包含了两个东西： Homestead 管理脚本； Homestead Box 虚拟机盒子。 接下来独自说明下。</description>
+    </item>
+    
+    <item>
+      <title>Laravel使用PHPUnit进行单元测试注意事项</title>
+      <link>/post/computerlanguages/php/computerlanguages-php-laravel-phpunit/</link>
+      <pubDate>Tue, 26 Nov 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/computerlanguages/php/computerlanguages-php-laravel-phpunit/</guid>
+      <description>Laravel单元测试常用示例 # 运行单个测试实例 phpunit tests/Unit/AdministratorTest.php # 单独执行某个测试中的函数 phpunit --filter a_thread_has_a_creator # 带环境变量运行全部(不需要 CsrfToken) APP_ENV=testing phpunit # 带环境变量运行单个函数(不需要 CsrfToken) APP_ENV=testing phpunit --filter an_authenticated_user_may_participate_in_forum_threads Laravel使用PHPUnit注意: class TestHelper { // 任何测试类里都不要使用__construct方法 // 会与PHPUnit @depends @dataProvider方法重置 public function __construct() { } //$this里的属性赋值之后, 在其他方法中是无法拿到值的 private $_store; //设置_store值 public function create($class, $attributes = []) { $this-&amp;gt;_store = 1; return ; } //这里会返回null, public function get() { return $this-&amp;gt;_store; } } PHPUnit 依赖关系使用示例 class StackTest extends TestCase { // 注意:@depends 必须依赖PHPUnit测试方法, 也就是必须以test开头的方法 public function testEmpty() { $stack = []; $this-&amp;gt;assertEmpty($stack); //保持依赖关系的变量名必须一致, 下一个接口参数名必须是$stack return $stack; } /** * 保持依赖关系的变量名必须一致, 上一个接口必须是 return $stack * * @depends testEmpty */ public function testPush(array $stack) { array_push($stack, &amp;#39;foo&amp;#39;); $this-&amp;gt;assertEquals(&amp;#39;foo&amp;#39;, $stack[count($stack)-1]); $this-&amp;gt;assertNotEmpty($stack); return $stack; } /** * @depends testPush */ public function testPop(array $stack) { $this-&amp;gt;assertEquals(&amp;#39;foo&amp;#39;, array_pop($stack)); $this-&amp;gt;assertEmpty($stack); } } </description>
+    </item>
+    
+    <item>
+      <title>Mitmproxy拦截代理</title>
+      <link>/post/computerlanguages/python/computerlanguages-python-mitmproxy/</link>
+      <pubDate>Tue, 26 Nov 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/computerlanguages/python/computerlanguages-python-mitmproxy/</guid>
+      <description>安装 mitmproxy pip install mitmproxy 启动 mitmproxy mitmproxy有三种启动命令： (1) mitmweb -- 提供一个web界面； -- 代理端口：绑定了 *:8080作为代理端口； -- 交互界面地址：localhost:8081； (2) mitmproxy -- 提供命令行界面； -- 可以通过命令过滤请求； (3) mitmdump -- 【TODO】  mitmweb -p 8082 --web-iface 192.168.10.10 --web-port 8081 -p 代理端口 --web-iface 网页访问IP --web-port 网页访问端口 修改WIFI, 连接代理 用户目录下的.mitmproxy目录里
+mitmproxy-ca.pem PEM格式的证书私钥 mitmproxy-ca-cert.pem PEM格式证书，适用于大多数非Windows平台 mitmproxy-ca-cert.p12 PKCS12格式的证书，适用于Windows平台 mitmproxy-ca-cert.cer与mitmproxy-ca-cert.pem相同，只是改变了后缀，适用于部分Android平台 mitmproxy-dhparam.pem PEM格式的秘钥文件，用于增强SSL安全性  安装证书(手机模拟器) 设置-&amp;gt;安全-&amp;gt;从SD卡安装证书
+安装证书(浏览器) 设置-&amp;gt;网络设置-&amp;gt;手动配置代理
+FireFox特殊处理 1、打开 about:config
+2、查找(默认为false，改为true就可以了) security.enterprise_roots.enabled
+3、吐槽，firefox太极端了，这是作死。</description>
+    </item>
+    
+    <item>
+      <title>Linux SSH</title>
+      <link>/post/devops/linux/devops-linux-ssh/</link>
+      <pubDate>Tue, 19 Nov 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/devops/linux/devops-linux-ssh/</guid>
+      <description>SSH通过密钥登录 测试登录命令 ssh -i /root/.ssh/id_rsa root@127.0.0.1 创建密钥 [root@host ~]$ ssh-keygen //建立密钥对 服务器上远程安装公钥 使用ssh-copy-id安装
+ssh-copy-id -i .ssh/id_rsa.pub root@192.168.10.100 手动安装
+[root@host .ssh]$ cd .ssh &amp;amp;&amp;amp; cat id_rsa.pub &amp;gt;&amp;gt; authorized_keys [root@host .ssh]$ chmod 600 authorized_keys [root@host .ssh]$ chmod 700 ~/.ssh 设置SSH打开密钥登录功能 /etc/ssh/sshd_config 打开密钥登录
+RSAAuthentication yes PubkeyAuthentication yes 另外，请留意 root 用户能否通过 SSH 登录：
+PermitRootLogin yes  当完成全部设置，并以密钥方式登录成功后，再禁用密码登录：
+PasswordAuthentication no  设置root用户不能使用密码登录,必须使用密钥; 普通用户可以使用密码登录:
+PermitRootLogin without-password （设置root用户只能用密钥登录） PasswordAuthentication yes （其他用户可以使用密码登录）  首次登录去掉验证 /etc/ssh/ssh_config
+# StrictHostKeyChecking ask 改成 StrictHostKeyChecking no  非root用户设置 需要先设置用户的默认目录(使用该命令请确保该用户下没有运行的软件或进程)</description>
+    </item>
+    
+    <item>
+      <title>Linux 配置多个Git用户SSH登录</title>
+      <link>/post/devops/git/devops-git-multiuser/</link>
+      <pubDate>Mon, 18 Nov 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/devops/git/devops-git-multiuser/</guid>
+      <description>配置 git config 覆盖的优先级是 local &amp;gt; global &amp;gt; default  当前项目配置
+.git/config 添加参数
+# 添加用户 [user] name = admin email = admin@admin.com password = admin # 缓存用户名密码 [credential] helper = store </description>
+    </item>
+    
+    <item>
+      <title>图(Graph)-拓扑排序(TopologicalSort)</title>
+      <link>/post/algorithms/graph/algorithms-graph-topologicalsort/</link>
+      <pubDate>Mon, 02 Sep 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/graph/algorithms-graph-topologicalsort/</guid>
+      <description>拓扑排序 无环图，就是图中没有回路。无环图两个常见的应用就是拓扑排序和关键路径。
+在日常生活中，通常会把软件开发、生产流程、网络设备互联都当成一个项目工程来对待，所有工程都可以分为若干个子工程（或者称之为「活动」），这些子工程之间往往会有一些条件约束，比如其中某些活动必须在另一些活动完成之后才能进行。下面是一个简单的软件开发流程图：
+将整个流程抽象为图这种数据结构，则每个子工程节点就是图的顶点，连接子工程的前后约束就是图的边（并且是有方向的边），并且工程有起始节点，也有结束节点，并且，首尾不会相连，所以综合来看，这样的工程图，一定是无环的有向图。
+在一个表示工程的有向图中，用顶点表示活动，用弧（有方向的边）表示活动之间的优先关系，这样的以顶点表示活动的有向图，称之为 AOV 网（Activity On Vertex Network）。
+拓扑排序的概念。 设 G=(V,E)（其中 V 表示顶点集合，E 表示弧集合）是一个具有 n 个顶点的有向图，V 集合中的顶点满足从顶点 i 到顶点 j 之间有一条路径，并且在顶点序列中 i 一定在 j 之前，则称这样的序列为一个拓扑序列。
+而所谓的拓扑排序，就是对有向图构造拓扑序列的过程。
+构造结果中如果全部顶点都被输出，则说明它是不存在回路的 AOV 网；否则说明存在回路，不是 AOV 网。
+对于不存在回路的 AOV 网，可以应用在各种不同的工程或项目流程图中，满足各种场景的需要，所以拓扑排序在工程中非常有实用价值。
+实现代码 拓扑排序的基本实现思路如下：
+在 AOV 网中，找到一个入度为 0 的顶点，然后删除此顶点，并删除以此顶点为起点的弧，重复此步骤，直到输出所有顶点，或者 AOV 网中不存在入度为 0 的顶点为止。
+和最小生成树和最短路径一样，我们还是通过邻接表来定义一个 AOV 网，考虑到始终需要查找入度为 0 的顶点，我们在原来的顶点数据结构基础上，新增一个入度域 in，用来表示入度值：
+/** * 顶点 * Class VNode */ class VNode extends Node { public $in; // 入度 public function __construct($data, $in) { $this-&amp;gt;in = $in; parent::__construct($data); } } 此外拓扑排序针对的是有向图，而之前实现最小生成树和最短路径的时候，都是基于无向图，所以还要编写一个新的继承自 EdgeWeightedGraph 的子类：</description>
+    </item>
+    
+    <item>
+      <title>图(Graph)-关键路径(CriticalPath)</title>
+      <link>/post/algorithms/graph/algorithms-graph-criticalpath/</link>
+      <pubDate>Sun, 01 Sep 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/graph/algorithms-graph-criticalpath/</guid>
+      <description>关键路径 拓扑排序主要是为了解决一个工程是否可以顺利进行的问题，但有时候还要解决工程完成需要的最短时间问题。
+要对一个流程图计算最短时间，就要分析流程之间的拓扑关系，并且找到当中最关键的流程，这个流程的时间就是最短时间。
+在 AOV 网的基础上，引入一个新的概念，在一个表示工程的带权有向图中，用顶点表示事件，用有向边表示活动，用边上的权值表示活动的持续时间，把这种通过有向图的边表示活动的网称之为 AOE 网（Activity On Edge Network）。AOE 网中入度为 0 的顶点叫做始点或源点，出度为 0 的点叫做终点或汇点。
+一个 AOE 网，总有开始和结束，并且正常情况下，只有一个源点和汇点：
+把路径上各个活动所持续的时间之和称之为路径长度，从源点到汇点具有最大长度的路径称之为关键路径，在关键路径上的活动叫关键活动。比如上图中，从源点 V1 到汇点 V9 的路径及路径之和是：
+V1-&amp;gt;V2-&amp;gt;V5-&amp;gt;V7-&amp;gt;V9：18 V1-&amp;gt;V2-&amp;gt;V5-&amp;gt;V8-&amp;gt;V9：18 V1-&amp;gt;V3-&amp;gt;V5-&amp;gt;V7-&amp;gt;V9：16 V1-&amp;gt;V3-&amp;gt;V5-&amp;gt;V8-&amp;gt;V9：16 V1-&amp;gt;V4-&amp;gt;V6-&amp;gt;V8-&amp;gt;V9：15  所以其关键路径是 V1-&amp;gt;V2-&amp;gt;V5-&amp;gt;V7-&amp;gt;V9。
+尽管 AOE 网和 AOV 网都是针对工程进行建模的，但是两者有明显的不同，主要体现在 AOV 网是顶点表示活动的网，它只描述活动之间的制约关系；而 AOE 网是边表示活动的网，边上的权值表示活动持续的时间，因此 AOE 网建立在活动之间制约关系没有矛盾的基础之上，再来分析整个工程至少需要多少时间，或者为了缩短完成整个工程所需时间，应当加快哪些活动。这也是 AOE 网的主要应用场景。
+实现算法 在 AOE 网中，某些活动可以并行地进行，因此完成工程的最短时间是从源点到汇点的最大路径长度（事件之间耗时最长的活动完成了，才意味着下个事件可以开始，并行的活动并不是可选的，而是都要执行的，这一点需要明确），而找到这条具有最大路径长度的路径，也就找到了关键路径。
+比如示例 AOE 网，其关键路径是 V1-&amp;gt;V2-&amp;gt;V5-&amp;gt;V7-&amp;gt;V9。
+下面我们来探讨如何用抽象的算法来寻找关键路径，为了方便描述这个算法，需要先定义几个变量：
+事件的最早发生时间 etv，即顶点 Vk 的最早发生时间； 事件的最晚发生时间 ltv，即顶点 Vk 的最晚发生时间，超出这个时间就会导致整个工程延期； 活动的最早开始时间 ete，即弧 ak 的最早开始时间； 活动的最晚开始时间 lte，即弧 ak 的最晚开始时间，也就是不会导致工程延期的最晚开始时间。  要找到关键路径，需要找到所有活动的最早开始时间和最晚开始时间，并且比较它们，如果相等则意味着此活动是关键活动（即弧的权值代表时间被填满），活动间的路径是关键路径，否则不是。</description>
+    </item>
+    
+    <item>
+      <title>图(Graph)-最短路径(ShortestPath)</title>
+      <link>/post/algorithms/graph/algorithms-graph-shortestpath/</link>
+      <pubDate>Sun, 01 Sep 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/graph/algorithms-graph-shortestpath/</guid>
+      <description>最短路径 迪杰斯特拉算法（Dijkstra） 在日常生活中，经常面临路径选择的问题，比如从杭州到北京，可以选择汽车、火车、飞机，甚至还可以坐公交车（这不是笑话，最近网上就流传一个从杭州回临沂，转了 35 班公交车，行程 660 多公里，历时 7 天的神奇春运回家路），对于不同的选择，意味着不同的路径，不同的路径意味着不同的成本，这个成本有时间成本，也有经济成本，不差钱的可以选择时间成本低的，比如坐飞机，经济不那么宽裕却有时间的，可以做公交车，我们把杭州和北京看作图上的两个顶点（中间可能会经过其它城市，即多个顶点），把时间成本或者经济成本看作权重，那么从杭州到北京的路径规划就可以抽象为今天我们要分享的话题 —— 图的最短路径问题。
+对于带权重的网图来说，所谓最短路径，指的是两个顶点之间经过的边上权值之和最小的路径，我们将第一个顶点叫做起点，最后一个顶点叫做终点。
+最短路径的实现也有多种算法，和最小生成树一样，两种最常见的实现算法：迪杰斯特拉（Dijkstra）算法和弗洛伊德（Floyd）算法。
+迪杰斯特拉算法（Dijkstra） 迪杰斯特拉（Dijkstra）算法是典型的单源最短路径算法，用于计算一个节点到其他所有节点的最短路径。主要特点是以起始点为中心向外层层扩展，直到扩展到终点为止。
+以下面这个无向图为例：
+通过迪杰斯特拉算法计算最短路径，需要指定起点，用 S 表示图的所有顶点集合，U 表示起点外的其它顶点集合，顶点到自身的距离为 0，到相邻顶点距离为相应边的权值，到不相邻顶点的距离为无穷大（∞）。每一次从 U 中找出路径最短的顶点，并将其加入到 S 中，然后，更新 U 中的剩余顶点和顶点对应的路径，重复该操作，直到遍历完所有顶点：
+实现代码 然后将上述算法实现思路转化为代码，还是以前面创建的无向网图类 EdgeWeightedGraph 类为基础，在其中编写迪杰斯特拉算法实现方法如下：
+// 通过迪杰斯特拉算法实现最短路径 public function dijkstra($start) { $prev = []; // 前驱顶点数组，prev[i]的值是起点到顶点i的最短路径所经历的全部顶点中，i之前的那个顶点。 $dist = []; // 长度数组，dist[i]是起点到顶点i的最短路径的长度 $flag = []; // flag[i] = true 表示起点到顶点 i 的最短路径获取成功 // 初始化 for ($i = 0; $i &amp;lt; $this-&amp;gt;vNum; $i++) { $flag[$i] = false; $prev[$i] = 0; $dist[$i] = $this-&amp;gt;getWeight($start, $i); } // 起点 $flag[$start] = true; $dist[$start] = 0; // 遍历图，每次找出一个顶点的最短路径。 $k = 0; for ($i = 1; $i &amp;lt; $this-&amp;gt;vNum; $i++) { // 在未获取最短路径的顶点中，找到离起点最近的顶点(k)。 $min = INF; for ($j = 0; $j &amp;lt; $this-&amp;gt;vNum; $j++) { if ($flag[$j] == false &amp;amp;&amp;amp; $dist[$j] &amp;lt; $min) { $min = $dist[$j]; $k = $j; } } // 标记顶点k为已经获取到最短路径 $flag[$k] = true; // 当获取顶点k的最短路径之后，更新未获取最短路径的顶点的最短路径和前驱顶点。 for ($j = 0; $j &amp;lt; $this-&amp;gt;vNum; $j++) { $tmp = ($this-&amp;gt;getWeight($k, $j) == INF ?</description>
+    </item>
+    
+    <item>
+      <title>图(Graph)-最小生成树(MinimumSpanningTree)</title>
+      <link>/post/algorithms/graph/algorithms-graph-minimumspanningtree/</link>
+      <pubDate>Sat, 31 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/graph/algorithms-graph-minimumspanningtree/</guid>
+      <description>最小生成树 在介绍图的相关概念的时候，提到过连通图，以无向图为例，如果图的任意两个顶点之间都是想通的，这个图就是连通图，今天我们在此基础上进一步介绍连通图的生成树概念。
+一个连通图的生成树是一个极小的连通子图，它含有图中全部的 n 个顶点，和足以构成一棵树的 n-1 条边，如下图所示：
+图1是一个连通图，图2是该连通图的生成树，反过来说，如果一棵树大于 n-1 条边，则必然构成环。
+构造连通网（带权连通图）的最小代价生成树叫做最小生成树。这个最小代价指的是通过 n-1 条边具有把 n 个顶点的连通图连接起来，并且使所有边的权值和最小。如下图所示，实线部分就是最小生成树：
+最小生成树的应用场景很多，小到欧洲十国游，怎么规划路径让交通费用最低，大到国家的电力网、公路网、通信网，怎么规划路径可以让建设成本最低，学习了最小生成树后，就可以通过算法来计算出最佳路径了，不仅如此，所有涉及连接网络中所有节点的最优路径问题，都可以通过最小生成树来处理。
+最小生成树有多种实现算法，我们这里介绍两种比较常见的：普里姆算法（Prim）和克鲁斯卡尔算法（Kruskal）。
+普里姆（Prim）算法 算法定义 简单来说，普里姆算法从图中某个顶点开始，将其作为一棵树的根节点，然后这棵树会逐步长大，一直长大到覆盖图中的每一个顶点为止，每一步都会从剩下的与当前操作节点相邻的顶点中找到一条权重最小的边加入到树中，当算法终止时，这棵树就是一棵最小生成树。
+下面是图示过程：
+从 V1 开始，从与其相邻的顶点中找到权重最小的边，连接的是 V3，然后从 V3 开始，在于 V3 相邻的顶点中找到权重最小的边，连接的是 V6，再从 V6 开始，依次类推，当到达某个顶点，与该顶点相邻的所有顶点都已经访问过，则需要往前回溯，从所有前驱节点中找到权重最小的一条未添加的边开始，继续上述流程，直到所有顶点都已经覆盖，此时，通过 n-1 条边连接 n 个顶点构成的树就是最小生成树。
+代码实现 在开始编写实现代码之前，需要做一些准备工作，因为最小生成树操作的图的边是有权重的，所以需要先构建一个带权重的图，此外，还需要对之前通过邻接表存储图的代码做一些扩展，因为之前保存的无向图是没有权重的，将邻接表中存储顶点节点和边节点的节点类分开加以区分：
+/** * 带权重的边节点 * Class ENode */ class ENode extends Node { public $weight; // 边的权重值 public function __construct($data, $weight) { $this-&amp;gt;weight = $weight; parent::__construct($data); } } /** * 顶点 * Class VNode */ class VNode extends Node { } 对于存储图的邻接链表类也要稍作调整，将属性改成受保护的，以便可以在子类中继承，然后修改插入节点方法如下：</description>
+    </item>
+    
+    <item>
+      <title>图(Graph)-遍历</title>
+      <link>/post/algorithms/graph/algorithms-graph-traverse/</link>
+      <pubDate>Fri, 30 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/graph/algorithms-graph-traverse/</guid>
+      <description>图的遍历 图的遍历和树的遍历类似，最直接的理解就是，在图中某个顶点出发，访遍图中其余顶点，并且其中每个顶点仅被访问一次，这个过程就是图的遍历。
+图的遍历主要有两种方式，一种是深度优先搜索，一种是广度优先搜索。我们先来看深度优先搜索。
+深度优先搜索定义 深度优先搜索（Depth First Search），简称 DFS，这种算法有点像走迷宫，沿着一条路径一直走，如果某个路径不通，则回到前驱节点，以此为出发点继续尝试下一条路径，以此类推，直到访遍所有顶点。
+深度优先搜索也是这样，它从图的某个顶点出发，访问此顶点，然后从该顶点未被访问的邻接顶点出发，深度遍历图，在未遇到已访问过的重复顶点前，我们约定右手优先原则，一直往前走，遇到已经访问过的顶点，则回溯到前驱顶点，访问与其相邻路径对应的邻接顶点，继续做上述判断，依次类推，直到图中所有与该顶点路径想通的顶点都被访问到，如下图所示：
+如果还有顶点未被访问，则将其作为起点，重复上述过程，直到图中所有顶点都被访问到。
+代码实现 首先将所有顶点的邻接顶点设置为空链表，然后我们可以通过 addEdge 方法为图添加边（$s 和 $t 分别代表边的两个顶点），从而完成图的构建。
+有了完整的图之后，就可以编写深度优先搜索方法对其进行遍历了。
+public function dfs($s, $t) { $this-&amp;gt;found = false; for ($i = 0; $i &amp;lt;= $this-&amp;gt;v; $i++) { $visited[$i] = 0; } for ($i = 0; $i &amp;lt;= $this-&amp;gt;v; $i++) { $prev[$i] = -1; } $this-&amp;gt;recurDfs($s, $t, $visited, $prev); $this-&amp;gt;printPath($prev, $s, $t); } public function recurDfs($w, $t, $visited, $prev) { if ($this-&amp;gt;found == true) { return; } $visited[$w] = 1; if ($w == $t) { $this-&amp;gt;found = true; return true; } for ($i = 0; $i &amp;lt; $this-&amp;gt;adj[$w]-&amp;gt;getSize(); $i++) { $q = $this-&amp;gt;adj[$w]-&amp;gt;get($i)-&amp;gt;data; if (!</description>
+    </item>
+    
+    <item>
+      <title>图(Graph)-存储</title>
+      <link>/post/algorithms/graph/algorithms-graph-storage/</link>
+      <pubDate>Thu, 29 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/graph/algorithms-graph-storage/</guid>
+      <description>图的存储 由于图这种数据结构比较复杂，单纯的数组和链表已经无法表示了，需要通过更复杂的结构来存储。
+两种存储图的方式，一种是基于数组，一种是基于链表，但是不是简单的数组和链表，下面我们就一起来看看到底是如何存储图的。
+邻接矩阵 显然，通过一维数组是无法存储图的，因为图包含顶点和边，而且每个顶点都可能与其他顶点有关联，所以我们通过两个数组来存储图：一个一维数组用于存储所有顶点，一个二维数组来存储连接顶点的边/弧，边或弧连接的是两个顶点，所以需要二维数组来存储。我们把这种存储图的方式叫做邻接矩阵。
+说概念很抽象，下面我们通过实例来演示，对于无向图而言，由于边没有方向，所以存储无向图边的二维数组是一个对称矩阵（矩阵是一个数学概念，一个 m x n 的矩阵是一个由 m 行 n 列元素排列成的矩形阵列）：
+对于有向图而言，由于边是有方向的，我们将二维数组中指向某个顶点的元素值设置为 1，否则设置为 0，比如下面 v1v0 为 1，而 v0v1 为 0（注意存储顺序，先横后纵，横向表示某个顶点的出度，纵向表示某个顶点的入度）：
+对于带权的有向图，要更复杂一些，在存储弧的二维数组中，相邻的顶点对应元素值等于权重（入度），自己指向自己的对应元素值为 0，否则等于无穷大（∞）：
+对于邻接矩阵而言，初始化的时间复杂度等于边数组构建的复杂度，对于有 n 个顶点的图而言，时间复杂度是 O(n^2)，空间复杂度也是如此，而且如果图比较稀疏的话（稀疏图），边数组会存在巨大的空间浪费。但是优点是实现起来非常简单，对于稠密图或者非常简单的图来说，用邻接矩阵是比较方便的。
+邻接表 既然稀疏图用邻接矩阵存储不合适，那要怎么存储呢？有了前面的数据结构基础，我们很容易会联想到基于链表替代边数组来存储边，这样就可以避免对空间的浪费了。这种存储方式还是通过一个一维数组来存储顶点，只是将边/弧通过链表来表示，我们把这种存储方式叫做邻接表。
+对于无向图来说，通过邻接表来存储，可以这么实现：
+每个顶点上通过 data 保存数据，通过 firstedge 指向第一个邻接顶点，指向节点上 adjvex 存储的是对应顶点的数组下标，如果该顶点有多个邻接顶点，可以通过 next 指向下一个邻接顶点，如果没有的话，则将对应指针设置为空。
+对于有向图来说，原理也是类似，只不过有向图的边有方向而已，链表指针指向基于出度，所以很容易计算出某个顶点的出度：
+显然，邻接表的构建时间复杂度要比邻接矩阵好，对于一个有 n 个顶点和 e 条边的图而言，时间复杂度是 O(n+e)，而且不存在任何空间的浪费，比较高效，可用于存储任何图。
+但邻接表也不是十全十美，对于有向图来说，如果要计算某个顶点的入度，需要遍历整个图才能实现，要解决这个问题，我们可以通过逆邻接表来实现。所谓逆邻接表，就是和邻接表相反，指针指向基于入度，比如上面这个有向图，我们可以这样通过逆邻接表来构建：
+对于有权重的有向图（网图），还要通过一个额外的 weight 域来存储权重：
+代码示例 创建链表类 LinkedList 及对应的节点类 Node：
+/** * Class Node * 链表节点类 */ class Node { public $data; /** * @var Node */ public $next; public function __construct($data = null) { $this-&amp;gt;data = $data; } } /** * Class LinkedList * 链表类 */ class LinkedList { private $head = null; private $count = 0; public function __construct() { $emptyNode = new Node(); $this-&amp;gt;head = $emptyNode; } public function insert($data) { if ($this-&amp;gt;head == null) { return; } $newNode = new Node($data); $newNode-&amp;gt;next = $this-&amp;gt;head-&amp;gt;next; $this-&amp;gt;head-&amp;gt;next = $newNode; $this-&amp;gt;count++; } public function remove(Node $node) { if ($node == null) { return false; } $preNode = $this-&amp;gt;pre($node); $preNode-&amp;gt;next = $node-&amp;gt;next; $this-&amp;gt;count--; } public function get($index) { if ($index &amp;gt;= $this-&amp;gt;count) { return false; } $node = $this-&amp;gt;head-&amp;gt;next; $i = 0; while ($node) { if ($i == $index) { return $node; } else { $node = $node-&amp;gt;next; $i++; } } return false; } public function pre(Node $node) { if ($node == null) { return false; } $preNode = $this-&amp;gt;head; $curNode = $this-&amp;gt;head-&amp;gt;next; while ($curNode) { if ($curNode === $node) { return $preNode; } else { $preNode = $curNode; $curNode = $preNode-&amp;gt;next; } } return false; } public function getSize() { return $this-&amp;gt;count; } public function __toString() { $node = $this-&amp;gt;head-&amp;gt;next; $arr = []; $i = 0; while ($node) { $arr[] = &amp;#39;Node[&amp;#39; .</description>
+    </item>
+    
+    <item>
+      <title>图(Graph)</title>
+      <link>/post/algorithms/graph/algorithms-graph/</link>
+      <pubDate>Wed, 28 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/graph/algorithms-graph/</guid>
+      <description>图的相关概念 图会综合运用前面所介绍的所有数据结构，所以说，学好了图，也就等同于掌握了数据结构的精髓。
+图的基本定义 图（Graph）由顶点（Vertex）和边（Edge）组成。图中的元素叫顶点，图不能为空，在线性表中，相邻元素有前后关系，在树中，相邻元素有层次关系，在图中，任意两个元素之间都可能有关系，顶点之间的关系通过边来表示。图可以表示为 G(V,E)，其中 G 表示图，V 表示顶点的集合，E 表示边的集合。
+下面就是一个典型的图：
+其中字母标识的节点就是图的顶点，节点之间的连线就是图的边。
+无向图与有向图 没有方向的边叫无向边，任意两个顶点之间都是无向边的图叫无向图，比如上面那个示例图就是无向图。在无向图中，任意两个顶点之间都有边的图叫无向完全图。
+与之相对的，有方向的边叫有向边（也叫弧），任意两个顶点之间都是有向边的图叫有向图，例如下面这个图就是有向图：
+在有向图中，任意两个顶点之间都有方向相反的两条有向边的图叫有向完全图。
+按照边的数目，我们将边数很少的图叫稀疏图，边数很多的图叫稠密图。
+有些图的边还拥有与其相关的数字，我们把这个数字叫做权，这种带权的图通常称作网。
+顶点与边的关系 顶点的度指的是与顶点相连接的边数，整个图的度数是所有顶点度数之和。
+在无向图中，边不分方向，边数是图的度数/2。
+在有向图中，边有方向，按照方向将有向图顶点的度分为出度和入度，出度表示有多少条边是以这个顶点为起点指向其他顶点；入度表示有多少条边指向这个顶点。
+在树中，顶点到任意节点的路径是唯一的，而在图中，顶点到任意顶点的路径却不是唯一的。比如上述示例有向图中，从 B 到 A 就有 B-&amp;gt;A、B-&amp;gt;C-&amp;gt;A 两条路径，示例无向图中还有 B-&amp;gt;C-&amp;gt;D-&amp;gt;A 这条路径。
+连通图 在无向图 G 中，如果顶点 v 到顶点 v&amp;rsquo; 有路径，则称 v 和 v&amp;rsquo; 是连通的，如果任意两个顶点都是连通的，则称 G 是连通图。比如上述示例无向图就是连通图。
+在有向图 G 中，对于每一对顶点，如果相互之间都存在路径，则 G 是强连通图。上述示例有向图不是强连通图，因为 A 到 D 存在路径，而 D 到 A 不存在。
+图的典型应用 图的应用场景很多，比如社交网络中用户之间的关系，网络设备之间的拓扑结构，以及显示生活中形形色色的网：公路网、铁路网、地铁网等等，都可以通过图来表示。</description>
+    </item>
+    
+    <item>
+      <title>二叉树(BinaryTree)-哈夫曼树(HuffmanTree)</title>
+      <link>/post/algorithms/binarytree/algorithms-binarytree-huffmantree/</link>
+      <pubDate>Mon, 26 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/binarytree/algorithms-binarytree-huffmantree/</guid>
+      <description>赫夫曼树 在中小学每年期末考试结束后都会领到成绩单，成绩单上列出我们考试分数的等级，比如优秀（&amp;gt;=90）、良好(&amp;gt;=80)、合格(&amp;gt;=60)、不合格(&amp;lt;60)，以某个班为例，总人数是100人，不同成绩区间的比例如下：
+不考虑效率因素的话，可以这么实现成绩等级判定：
+这种情况下，比例占80%以上的分数都需要经历三次以上的判断才能得到结果，显然不合理，可以对判断逻辑进行改进：
+大部分同学的成绩都在 80 分左右，因此我们判断的逻辑改成了先通过 80 分对成绩进行划分，看起来效率是提升了，这其中的原理是每个分数都要循环调用此逻辑，将 80 分放到入口判断，总体判断次数更少，效率更高。
+这就是赫夫曼树的雏形。显然，上述流程图可以抽象为一棵二叉树，每个等级的人数看作路径权重，
+带权路径长度（权重x路径求和）最小的树叫做 赫夫曼树  把上面两个流程图抽象为带路径权重的二叉树如下：
+二叉树 a 的带权路径长度是 $15+215+340+430+410 = 315$，二叉树 b 的带权路径长度是 $240+35+153+230+102 = 220$，这意味着，对于人数 100 的班级，通过第一种方式要做 315 次比较，对于第二种方式，只需要 220 次比较，显然二叉树 b 比二叉树 a 更优。
+赫夫曼树的构建 当然，上述二叉树 b 还不是赫夫曼树，因为它不是最优的，赫夫曼树的构造方式如下：
+1. 把有权值的节点按照从小到大顺序进行排序：A5、E10、B15、D30、C40； 2. 取最小的两个节点作为某个新节点 N1 的子节点，较小的作为左子结点； 3. 然后将 N1 替代 A5 和 E10，插入上述有序序列，保持从小到大排序：N115、B15、D30、C40； 4. 重复步骤2，将 N1 和 B 作为一个新节点 N2 的左右节点，依次类推，直到把所有节点纳入树中。  最终形成的二叉树如下所示：
+对应的带权路径长度是 $140+230+315+45+4*10 = 205$，对于 100 个学生而言，需要进行 205 次判断。比前面的二叉树 b 更优，同时也是最优的二叉树，所以是赫夫曼树。</description>
+    </item>
+    
+    <item>
+      <title>二叉树(BinaryTree)-堆(Heap)</title>
+      <link>/post/algorithms/binarytree/algorithms-binarytree-heap/</link>
+      <pubDate>Mon, 26 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/binarytree/algorithms-binarytree-heap/</guid>
+      <description>定义 堆是一种特殊的二叉树，具备以下特性：
+堆是一个完全二叉树 每个节点的值都必须大于等于（或小于等于）其左右孩子节点的值  如果每个节点的值都大于等于左右孩子节点的值，这样的堆叫大顶堆；如果每个节点的值都小于等于左右孩子节点的值，这样的堆叫小顶堆。
+上图中，左侧的堆是大顶堆，右侧的堆是小顶堆，我们还可以得出这个结论：对应大顶堆，堆顶一定是最大值；对于小顶堆，堆顶一定是最小值。
+构建 由于完全二叉树的特殊性，可以通过数组来存储，堆也是完全二叉树，所以我们完全可以通过数组来存储。在使用数组存储堆的时候，把第一个索引位置留空，从第二个索引位置开始存储堆元素，这样，对于索引值为 i 的元素而言，其子节点索引分别为 2i 和 2i+1。
+下面我们就来看如何在堆中插入新节点，以大顶堆为例，从叶子结点插入，如果比父级元素大，则与父级元素交换位置，依次类推，直到到达根节点（小顶堆恰好相反）：
+注：构建堆的过程叫堆化。  构建实现 下面是对应的 PHP 实现代码：
+&amp;lt;?php class Heap { private $a = []; private $n; private $count; public function __construct($capacity = 10) { $this-&amp;gt;n = $capacity; $this-&amp;gt;count = 0; } public function insert($data) { if ($this-&amp;gt;count &amp;gt;= $this-&amp;gt;n) { return false; } $this-&amp;gt;count++; $this-&amp;gt;a[$this-&amp;gt;count] = $data; $i = $this-&amp;gt;count; while (floor($i/2) &amp;gt; 0 &amp;amp;&amp;amp; $this-&amp;gt;a[floor($i/2)] &amp;lt; $this-&amp;gt;a[$i]) { $temp = $this-&amp;gt;a[$i]; $this-&amp;gt;a[$i] = $this-&amp;gt;a[floor($i/2)]; $this-&amp;gt;a[floor($i/2)] = $temp; $i = $i / 2; } return true; } public function __toString() { return json_encode(array_values($this-&amp;gt;a)); } } 打印结果如下，符合堆定义，表明堆构建成功：</description>
+    </item>
+    
+    <item>
+      <title>二叉树(BinaryTree)-红黑树(Red-Black Tree)</title>
+      <link>/post/algorithms/binarytree/algorithms-redblacktree/</link>
+      <pubDate>Sun, 25 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/binarytree/algorithms-redblacktree/</guid>
+      <description>特性和算法复杂度 平衡二叉树是最理想的二叉排序树，性能最好，也最稳定，但是缺点是维护成本高，需要在插入和删除节点时维护新树的平衡性，所以工程实践中，倾向于使用另一种二叉排序树 —— 红黑树.
+什么是红黑树 红黑树（Red-Black Tree）是每个节点都带有颜色属性的二叉排序（查找）树，具备以下特性：
+节点是红色或黑色； 根节点是黑色的； 每个叶子节点都是黑色的空节点（NIL），也就是说，叶子节点不存储数据； 任何相邻的节点都不能同时为红色，也就是说，红色节点是被黑色节点隔开的； 每个节点，从该节点到达其可达叶子节点的所有路径，都包含相同数目的黑色节点；  示例：
+这些约束保证了红黑树的关键特性：从根节点到叶子节点的最长的可能路径不多于最短的可能路径长度的两倍（每条路径红黑相间，且黑色节点数目相同，所以最短的路径上是两个黑色节点，相应的，此时最长路径节点一定是黑-红-黑-红，正好是其两倍），从而保证红黑树无论怎么插入、删除节点大致上也是平衡的。
+红黑树的算法复杂度 由于红黑树的特性，可以确保即使在最差情况下，红黑树也是大致平衡的，下面我们来简单推导下红黑树的时间复杂度。
+前面我们讲二叉排序树的时候说到二叉排序树的时间复杂度和树的高度成正比，红黑树是红黑相间的，我们可以先把红色的节点去掉，剩下的黑色节点就可能变成四叉树了，比如我们上面示例的那个红黑树。由于红黑树每条路径上黑色节点相同，所以可以继续把这个四叉树转化为完全二叉树，假设黑色节点的数量为 m，这样，这棵树的时间复杂度就是 O(logm) 了；然后我们把红色节点塞回来，红色节点的总数目肯定是小于等于黑色节点的，我们不妨假设等于黑色节点，这样，树的高度就增加一倍，对应的时间复杂度就是 2O(logm) 了，m≈n/2，由于在计算时间复杂度的时候，常量可以舍弃，所以红黑树的时间复杂度也是 O(logn)。虽然这里面都是估算的，但是由于前面提到的红黑树的特性约束，数量级上是没问题的。
+为什么工程上大多使用红黑树 红黑树维护成本比平衡二叉树低，性能上也能大致做到 O(logn)，且比较稳定，可以应付最差的情况。
+实现原理 插入节点 红黑树规定，插入的节点必须是红色的。而且，二叉排序（查找）树中新插入的节点都是放在叶子节点上。首先，两种最简单的情况：
+如果插入节点的父节点是黑色的，那我们什么都不用做，它仍然满足红黑树的定义。 如果插入的节点是根节点，那我们直接把它设置为黑色就可以了。  除此之外，其他情况都会违背红黑树的特性，所以我们需要进行动态调整，与平衡二叉树不同，调整的过程除了左右旋转之外，还涉及到节点颜色的调整。
+新节点插入之后，如果红黑树的平衡被打破，那一般会有下面三种情况。我们只需要根据每种情况的特点，不停地调整，就可以让红黑树继续符合定义，也就是继续保持平衡。
+有了前面平衡二叉树的铺垫，相信理解起来红黑树的构建过程将会更加轻松。为了方便表述，我们把正在处理的节点叫关注节点。
+CASE 1：如果关注节点是 a（待插入节点），它的叔叔节点（父亲的兄弟节点，从二叉排序树的角度来说叫伯伯节点更合适？） d 是红色，我们就依次执行下面的操作：
+将关注节点 a 的父节点 b、叔叔节点 d 的颜色都设置成黑色； 将关注节点 a 的祖父节点 c 的颜色设置成红色； 关注节点变成 a 的祖父节点 c； 跳到下面的 CASE 2 或者 CASE 3 继续处理。  CASE 2：如果关注节点是 a，它的叔叔节点 d 是黑色，关注节点 a 是其父节点 b 的右子节点，我们就依次执行下面的操作：</description>
+    </item>
+    
+    <item>
+      <title>二叉树(BinaryTree)-平衡二叉树(AVL)</title>
+      <link>/post/algorithms/binarytree/algorithms-binarytree-avl/</link>
+      <pubDate>Sat, 24 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/binarytree/algorithms-binarytree-avl/</guid>
+      <description>引子 二叉排序树，理想情况下，二叉排序树的插入、删除、查找时间复杂度都是 O(logn)，非常高效，而且它是一种动态的数据结构，插入删除性能合查找一样好，不像之前提到的二分查找，虽然查找性能也是 O(logn)，但是需要先对线性表进行排序，二排序的最好时间复杂度也是 O(nlogn)，所以二分查找不适合动态结构的排序。
+但是如果二叉排序树构造的不好的话就会退化成斜树：
+此时按照之前的实现算法性能退化成了 O(n)，所以如何构造二叉排序树很重要，我们的理想情况是满二叉树和完全二叉树，它们的性能都是 O(logn)，所以我们在构造二叉排序树的时候要尽可能像它们靠近，才能得到最佳的操作性能，由此引出平衡二叉树。
+什么是平衡二叉树 平衡二叉树的英文名是 Self-Balancing Binary Search Tree 或者 Height-Balancing Binary Search Tree，译作自平衡的二叉查找树，或者高度平衡的二叉查找树，二叉查找树和二叉排序树是一个意思，只是叫法不同，简称平衡二叉树，也叫 AVL 树（平衡二叉树作者的名字首字母），所以平衡二叉树首先是二叉排序树，并且这个二叉排序树是左右高度平衡的，这么讲有点抽象，具体来说，平衡二叉树要求每个节点的左子树和右子树的高度差至多等于 1，这个高度（深度）差的值叫做平衡因子 BF，也就是说 BF 的值不能大于1，否则就不是平衡二叉树。
+示例：
+图1满足平衡二叉树的定义，是平衡二叉树； 图2所示二叉树不是二叉排序树，所有不是平衡二叉树； 图3不满足平衡因子小于等于1的要求，对58这个节点来说，平衡因子BF的值是3，因而不是平衡二叉树； 图4满足平衡二叉树的定义，是平衡二叉树；  之所以这么约束平衡二叉树，是为了保证它能够始终做到插入、删除、查找的时间复杂度是 O(logn)。
+平衡二叉树的实现原理 平衡二叉树的基本实现思路，是在构建二叉排序树的时候，每插入一个节点，都要检查这个节点的插入是否破坏了原有的平衡性，如果是的话，则找出最小不平衡子树，在保证整体二叉排序树的前提下，通过左旋或者右旋的方式将其调整为平衡子树。从而动态维护这棵平衡二叉树。
+这里面有几个概念需要解释一下：
+1、最小不平衡子树 距离插入节点最近的，且平衡因子绝对值大于 1 的节点为根的子树，叫做最小不平衡子树：
+比如上图中以存储元素 58 的节点为根的子树叫做最小不平衡子树。
+2、左旋/右旋 所谓左旋和右旋指的是最小不平衡子树旋转的方向。
+如果平衡因子小于 -1，即右子树高度值比较大，则需要左旋：
+反之，如果平衡因子大于1，即左子树高度值比较大，则需要右旋：
+当然为了方便你理解原理，我们这里给出的都是最简化的情况，实际处理过程中比这个更复杂，下一篇我们将具体给你演示如何通过代码在各种情况下实现平衡二叉树并讨论对应的时间复杂度。
+演示 一棵二叉树：
+虽然这也是一棵二叉排序树，但是层数达到 8，显然可以通过平衡二叉树来降低层数，提高性能，如果把它转化为平衡二叉树，会是这个样子：
+层数降低了一半，变成了 4 层，显然性能要比之前要高。那么这个平衡二叉树是怎么构建的呢？假设插入节点的顺序是{3,2,1,4,5,6,7,10,9,8}，两个节点之前不用考虑，我们从第三个节点开始分析：
+插入第三个节点 1 时，左子树高度是 2，右子树高度是 0，高度差的绝对值是 2，不符合平衡二叉树的要求，需要把以 3 为根节点的子树进行右旋，到右图那个样子，左右子树高度差为 0，符合平衡二叉树要求，完成调整。同理，插入第四个节点 4 的时候，左右子树高度为 -1，符合平衡二叉树要求，继续插入第五个节点，此时又不符合平衡二叉树的要求了，这个时候右子树比较高，需要左旋：
+旋转的时候以最小不平衡子树为单位，此时最小的不平衡子树是 3、4、5 节点构成的子树，我们以 4 为中心进行左旋，将树结构调整为右图所示的样子，满足了平衡二叉树的要求，停止调整。注意到我们每次新增节点的时候，会调整以每个节点为根节点的左右子树的高度差，然后从最小子树开始进行调整，直到以每个节点为根节点的子树符合平衡二叉树的要求，这样整棵树就符合平衡二叉树的要求了。</description>
+    </item>
+    
+    <item>
+      <title>二叉树(BinaryTree)-查找</title>
+      <link>/post/algorithms/binarytree/algorithms-binarytree-search/</link>
+      <pubDate>Fri, 23 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/binarytree/algorithms-binarytree-search/</guid>
+      <description>为什么要引入二叉排序树 前面已经介绍了很多数据结构，比如数组、链表、散列表等，数组查找性能高，但是插入、删除性能差，链表插入、删除性能高，但查找性能差，在不考虑散列冲突的话，散列表的插入、删除、查找性能都很高，但是前提是没有散列冲突，此外，散列表存储的数据是无序的，散列表的扩容非常麻烦，涉及到散列冲突时，性能不稳定，另外，散列表用起来爽，构造起来可不简单，要考虑散列函数的设计、哈希冲突的解决、扩容缩容等一系列问题，有没有一种插入、删除、查找性能都不错，构建起来也不是很复杂，性能还很稳定的数据结构呢？这就要介绍的数据结构 —— 二叉排序树。
+什么是二叉排序树 二叉排序树是一种特殊的二叉树，重点关注 「排序」 二字，二叉排序树要求，在树中的任意一个节点，其左子树中的每个节点的值，都要小于这个节点的值，而右子树节点的值都大于这个节点的值，所以这么看来，二叉排序树是天然有序的，如果按照昨天讲的中序遍历，得到将是一个从小到大的有序数据集。但是构造二叉排序树的目的，并不是为了排序，而是为了提高查找、插入和删除的速度。不管怎么说，在一个有序数据集上查找数据肯定比无序数据集要快，同时二叉排序树这种非线性结构，也非常有利于插入和删除的实现。
+注：二叉排序树也叫做二叉查找树，二叉搜索树，你如果看到类似概念，它们是一个意思。  二叉排序树的插入 首先我们先定义好基本的类结构，还是通过二叉链表来存储二叉排序树，对应的节点类如下：
+class Node { public $data; public $left = null; public $right = null; public function __construct($data) { $this-&amp;gt;data = $data; } } 然后，我们定义下二叉排序树对应类的基本结构：
+class BinarySortedTree { /** * @var Node */ private $tree; public function getTree() { return $this-&amp;gt;tree; } } 然后我们按照二叉排序树的定义，实现对应二叉排序树节点的插入方法：
+// 插入节点数据 public function insert(int $data) { // 如果是空树，则将数据插入到根节点 if (!$this-&amp;gt;tree) { $this-&amp;gt;tree = new Node($data); return; } $p = $this-&amp;gt;tree; while ($p) { if ($data &amp;lt; $p-&amp;gt;data) { if (!</description>
+    </item>
+    
+    <item>
+      <title>二叉树(BinaryTree)-遍历</title>
+      <link>/post/algorithms/binarytree/algorithms-binarytree-traversal/</link>
+      <pubDate>Thu, 22 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/binarytree/algorithms-binarytree-traversal/</guid>
+      <description>二叉树的遍历指的是从根节点出发，按照某种次序依次访问二叉树中的所有结点，使得每个结点被访问一次且仅被访问一次。
+有多种方式可以遍历二叉树，如果限制从左到右的习惯方式，主要分为三种：前序遍历、中序遍历和后序遍历。下面我们简单介绍这几种遍历方式及对应实现算法，所谓的前序、中序和后序都是以根节点作为参照系。
+前序遍历 如果二叉树为空，则返回空，否则从根节点开始，先遍历左子树，再遍历右子树：
+中序遍历 同样，如果是空树，返回空，否则从左子树最左侧的节点开始，然后从左到右依次遍历左子树，真正的根节点，最后是右子树（依然是从最左侧节点开始从左到右的顺序遍历）：
+后序遍历 如果是空树，返回空，否则还是从左子树最左侧的节点开始，先遍历完叶子节点，再遍历父节点，遍历完左子树后，直接从右子树最左侧节点开始，按照和左子树同样的顺序遍历完右子树，最后访问根节点：
+不同的遍历方式从不同维度将二叉树这种非线性的结构变成了某种意义上的线性序列，从而方便计算机操作。
+遍历实现代码 二叉树的遍历其实就是个递归的过程，所以对应算法也采用递归来实现。
+我们以二叉链表的方式来存储数组，对应的前序、中序、后序实现代码如下：
+&amp;lt;?php // 二叉链表节点 class Node { public $data; public $left = null; public $right = null; public function __construct($data) { $this-&amp;gt;data = $data; } } /** * 前序遍历 * @param Node $tree */ function preOrderTraverse($tree) { if ($tree == null) { return; } printf(&amp;#34;%s\n&amp;#34;, $tree-&amp;gt;data); preOrderTraverse($tree-&amp;gt;left); preOrderTraverse($tree-&amp;gt;right); } /** * 中序遍历 * @param Node $tree */ function midOrderTraverse($tree) { if ($tree == null) { return; } midOrderTraverse($tree-&amp;gt;left); printf(&amp;#34;%s\n&amp;#34;, $tree-&amp;gt;data); midOrderTraverse($tree-&amp;gt;right); } /** * 后序遍历 * @param Node $tree */ function postOrderTraverse($tree) { if ($tree == null) { return; } postOrderTraverse($tree-&amp;gt;left); postOrderTraverse($tree-&amp;gt;right); printf(&amp;#34;%s\n&amp;#34;, $tree-&amp;gt;data); } 对应的输出结果如下，表明三种遍历都没有问题：</description>
+    </item>
+    
+    <item>
+      <title>二叉树(BinaryTree)-存储</title>
+      <link>/post/algorithms/binarytree/algorithms-binarytree-storage/</link>
+      <pubDate>Wed, 21 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/binarytree/algorithms-binarytree-storage/</guid>
+      <description>树这种结构不能简单通过线性表的前后关系来存储，在线性表中，一个节点只有至多一个前驱节点和至多一个后驱节点，树则不然，一个节点可能有多个后驱节点，这个时候，我们需要通过更加复杂的结构才能存储树。二叉树是一种特殊的树，比多叉树要简单，因为特定节点至多只有两个节点，这就极大简化了相应的数据结构，使得通过线性表就可以实现二叉树的存储。我们后面基本只讨论二叉树，下面我们通过数组和链表来演示如何存储二叉树。
+通过数组存储二叉树 对于特定的二叉树而言，比如满二叉树、完全二叉树，它们的节点之间是有一定关联关系的，以下面这棵完全二叉树为例：
+按照从上到下，从左到右对所有节点编号，可以看到，下一层的左右子节点和对应父节点序号存在某种数学关系，如果父节点的序号是 i，其对应左子节点位于 2i 的位置上，对应右子节点位于 2i + 1 的位置上，我们可以参照这个规则将上述完全二叉树存储到数组中：
+注意我们的下标从 1 开始（根节点），索引为 0 的下标舍弃，浪费这个空间，以方便计算。这样，我们就可以从根节点开始，依次将所有节点元素存放到数组中，并且可以根据节点间的数学关系很方便地遍历整棵树。此外，由于完全二叉树的特殊性，除了第一个元素之外，该数组不存在任何空间的浪费。由于满二叉树是完全二叉树的子集，所以也可以通过这种方式来存储。
+那么其它二叉树呢？当然也可以按照这种思路来做，我们把不存在的节点补全，比如假设上述序号为 4、6、8、9 的元素不存在：
+可以看到，不存在的元素补上，只是对应位置值为 null，缺失的节点越多，数组的「空洞」也就越多，如果是极端情况，比如二叉树只包含 1、3、7 三个元素，那么数组中将会存在大量的「空洞」，浪费大量的空间，而且也会影响性能。
+综上，数组适合满二叉树、完全二叉树这些特殊二叉树的存储，一些比较稠密的二叉树也可以用数组，如果二叉树比较稀疏就不适合用数组了，我们可以通过链表来存储它们。
+通过链表存储二叉树 理论上来说，链表适用于所有的二叉树存储，只不过这里我们需要对线性表中的链表进行扩展，因为二叉树特定节点最多有两个子节点，所有我们在链表结点上设置两个指针域，分别指向左右子节点，所以这种链表结构又被称作二叉链表。我们可以通过一个类表示二叉链表的结点：
+class Node { public $data; public $left = null; public $right = null; public function __construct($data) { $this-&amp;gt;data = $data; } } 如果要用二叉链表表示上面的完全二叉树，对应的图示如下：
+不管是什么样结构的二叉树，用链表来存储都不会存在空间的浪费。关于二叉树的创建、查找和删除，需要等到介绍完二叉树的遍历才能开始，下一篇我们就来探讨如何遍历二叉树。</description>
+    </item>
+    
+    <item>
+      <title>二叉树(BinaryTree)</title>
+      <link>/post/algorithms/binarytree/algorithms-binarytree/</link>
+      <pubDate>Tue, 20 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/binarytree/algorithms-binarytree/</guid>
+      <description>树的相关概念 树的相关概念
+树这种数据结构模拟了自然界中树的概念，自然界中的树有根、叶子、枝干，数据结构中的树也是如此，只不过是倒过来的：
+其中的每个元素叫做节点。树的顶点（没有父元素的节点）叫根节点，如 E；每个分支的末端节点（没有子元素的节点）叫叶子节点，如 G、H、I、J、K、L；用来连接相邻节点之间的关系叫父子关系，比如 E 是 A、F 的父节点，A、F 是 E 的子节点；具有同一个父节点的多个子节点叫做兄弟节点，比如 A、F 是兄弟节点。
+节点拥有的子节点数目叫做节点的度，显然，叶子节点的度为 0，树的度是树内各节点度的最大值。
+除此之外，树还有高度、深度和层的概念：
+注：其实线性表也可以看作一种特殊的树，只不过所有节点都在一个分支上，第一个元素是根节点，最后一个元素是子节点，没有兄弟节点。层数就是线性表的长度。  另外，也有些地方将二叉树的深度定义为结点的最大层次数，比如《大话数据结构》就是这样定义的，这个问题不大，完全就是个定义而已：
+多个互不相交的树可以构成森林。
+二叉树的定义 二叉树是平时遇到的最常见的树结构，它是一种特殊的树，顾名思义，就是每个节点最多有两个「分叉」，即两个子节点，分别是左子节点和右子节点，不过，二叉树并不要求每个节点都有两个子节点，有的节点只有左子结点，有的节点只有右子节点。比如下面这些都是二叉树：
+根据左右子节点的饱和度，我们又从二叉树中提取出两种特殊的二叉树 —— 满二叉树和完全二叉树。满二叉树即所有分支节点都有左右子节点，并且所有叶子节点都在同一层上，如上面的图2便是满二叉树。完全二叉树要复杂一些，深度为 k 有 n 个节点的二叉树，当且仅当其中的每一节点，都可以和同样深度 k 的满二叉树，序号为 1 到 n 的节点一对一对应时，称为完全二叉树，比如上面的图3就是完全二叉树。
+二叉树的特性 在讨论二叉树的创建和存储之前，我们先来总结下二叉树的一些特性，以便后续用到（这里二叉树数的深度定义采用的最大层次数，如果从 0 开始计算的话，可以自行推演一下）：
+性质1：
+在第 i 层最多有 $2^{i-1}$ 个节点。
+性质2：
+深度为 k 的二叉树最多有 $2^k-1$ 个节点。
+性质3：
+对于任何一个二叉树，叶子节点数为 n0，度为 2 的节点数为 n2，则 n0 = n2+1。
+性质4：
+具有n个节点的完全二叉树深为 $\log_2 x + 1$（其中x表示不大于n的最大整数）。
+性质5：
+若对一棵有n个节点的完全二叉树进行顺序编号（1≤i≤n），那么，对于编号为i（i≥1）的节点： 当i=1时，该节点为根，它无双亲节点 。 当i&amp;gt;1时，该节点的双亲节点的编号为i/2 。 若2i≤n，则有编号为2的左孩子，否则没有左孩子 。 若2+1≤n，则有编号为2i+1的右孩子，否则没有右孩子 。</description>
+    </item>
+    
+    <item>
+      <title>字符串匹配-KMP</title>
+      <link>/post/algorithms/stringmatching/algorithms-stringmatching-kmp/</link>
+      <pubDate>Sun, 18 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/stringmatching/algorithms-stringmatching-kmp/</guid>
+      <description>简介 KMP 算法可以说是字符串匹配算法中最知名的算法了，KMP 算法是根据三位作者（D.E.Knuth，J.H.Morris 和 V.R.Pratt）的名字来命名的，算法的全称是 Knuth Morris Pratt 算法，简称为 KMP 算法。
+原理 假设主串是 a，模式串是 b。在模式串与主串匹配的过程中，当遇到不可匹配的字符的时候，我们希望找到一些规律，可以将模式串往后多滑动几位，跳过那些肯定不会匹配的情况，从而避免 BF 算法这种暴力匹配，提高算法性能。下面我们来探讨下这个规律如何找到。
+参考下面个主串和模式串的匹配，当模式串移动到当前位置，比对到最后一个字符 D 时，发现与主串不匹配，如果按照 BF 算法，就是把模式串往后移一位，再逐个比较，这样做固然可以，但是效率很差：
+一个基本事实是，当 D 与主串不匹配时，我们已知前面的主串序列是 ABCDA，如果把模式串往后移一位肯定和主串不匹配，我们可不可以直接把模式串移到下一个可能和 A 匹配的主串位置？
+实际上，KMP 算法正是基于这一理念，设法利用这个已知信息，不把模式串移到已经比较过的位置，继续把它向后移，这样综合下来就极大提高了搜索匹配效率。
+怎么找到这个规律，确定把模式串往后移多少位呢？在模式串和主串匹配的过程中，我们把不能匹配的那个字符仍然叫作「坏字符」，把已经匹配的那段字符串叫作「好前缀」：
+在模式串和主串匹配的过程中，当遇到坏字符后，对于已经比对过的好前缀，我们只需要拿好前缀本身，在它的后缀子串中，查找最长的那个可以跟好前缀的前缀子串匹配的下标位置，然后将模式串后移到该位置即可。
+这里，我们要解释几个概念：
+后缀子串：以某个字符串最后一个字符为尾字符的子串（不包含字符串自身），比如上面的 ababa，后缀子串为 baba、aba、ba、a； 前缀子串：以某个字符串第一个字符为首字符的子串（不包含字符串自身），还是以 ababa 为例，前缀子串为 a、aba、abab； 最长可匹配后缀子串：后缀子串与前缀子串最长可匹配子串，也可叫做共有子串，以 ababa 为例，自然是 aba 了，长度为 3； 最长可匹配前缀子串：与上面定义相对，即前缀子串与后缀子串最长可匹配子串。最长可匹配前缀子串和最长可匹配后缀子串肯定是一样的。  假设坏字符所在位置是 j，最长可匹配后缀子串长度为 k，则模式串需要后移的位数为 j-k。每当我们遇到坏字符，就将模式串后移 j-k 位，直到模式串与对应主串字符完全匹配；如果移到最后还是不匹配，则返回 -1。这就是 KMP 算法的核心思想。
+KMP 算法的实现 了解了核心思想，接下来，就可以考虑如何实现 KMP 算法了，实现 KMP 算法最核心的部分是构建一个用来存储模式串中每个前缀子串（这些前缀都有可能是好前缀）最长可匹配前缀子串的结尾字符下标数组，我们把这个数组叫做 next 数组，对于上面 ababacd 这个模式串而言，对应的 next 数组如下：</description>
+    </item>
+    
+    <item>
+      <title>字符串匹配-Trie</title>
+      <link>/post/algorithms/stringmatching/algorithms-stringmatching-trie/</link>
+      <pubDate>Sun, 18 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/stringmatching/algorithms-stringmatching-trie/</guid>
+      <description>定义 Trie 树，也叫「前缀树」或「字典树」，顾名思义，它是一个树形结构，专门用于处理字符串匹配，用来解决在一组字符串集合中快速查找某个字符串的问题。
+注：Trie 这个术语来自于单词「retrieval」，你可以把它读作 tree，也可以读作 try。  Trie 树的本质，就是利用字符串之间的公共前缀，将重复的前缀合并在一起，比如有[&amp;ldquo;hello&amp;rdquo;,&amp;ldquo;her&amp;rdquo;,&amp;ldquo;hi&amp;rdquo;,&amp;ldquo;how&amp;rdquo;,&amp;ldquo;seo&amp;rdquo;,&amp;ldquo;so&amp;rdquo;] 这个字符串集合，可以将其构建成下面这棵 Trie 树：
+每个节点表示一个字符串中的字符，从根节点到红色节点的一条路径表示一个字符串（红色节点表示是某个单词的结束字符，但不一定都是叶子节点）。
+这样，就可以通过遍历这棵树来检索是否存在待匹配的字符串了，比如要在这棵 Trie 树中查询 her，只需从 h 开始，依次往下匹配，在子节点中找到 e，然后继续匹配子节点，在 e 的子节点中找到 r，则表示匹配成功，否则匹配失败。通常，可以通过 Trie 树来构建敏感词或关键词匹配系统。
+实现 从刚刚 Trie 树的介绍来看，Trie 树主要有两个操作，一个是将字符串集合构造成 Trie 树。这个过程分解开来的话，就是一个将字符串插入到 Trie 树的过程。另一个是在 Trie 树中查询一个字符串。
+Trie 树是个多叉树，二叉树中，一个节点的左右子节点是通过两个指针来存储的，对于多叉树来说，怎么存储一个节点的所有子节点的指针呢？
+将 Trie 树的每个节点抽象为一个节点对象，对象包含的属性有节点字符、子节点引用和是否是字符串结束字符标志位：
+class TrieNode { public $data; // 节点字符 public $children = []; // 存放子节点引用（因为有任意个子节点，所以靠数组来存储） public $isEndingChar = false; // 是否是字符串结束字符 public function __construct($data) { $this-&amp;gt;data = $data; } } 要构造一棵完整的 Trie 树，关键在于存储子节点引用的 $children 属性的实现。借助散列表的思想，通过一个下标与字符一一映射的数组，来构造 $children：将字符串中每个字符转化为 ASCII 码作为数组下标，将对应节点对象引用作为数组值，依次插入所有字符串，从而构造出 Trie 树。对应 PHP 实现代码如下：</description>
+    </item>
+    
+    <item>
+      <title>字符串匹配-BF(暴力匹配算法)</title>
+      <link>/post/algorithms/stringmatching/algorithms-stringmatching-bf/</link>
+      <pubDate>Sat, 17 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/stringmatching/algorithms-stringmatching-bf/</guid>
+      <description>原理 最简单的字符串匹配算法 —— BF 算法说起，BF 是 Brute Force 的缩写，中文译作暴力匹配算法，也叫朴素匹配算法。
+BF 算法的原理很简单，在继续介绍之前，我们先引入两个术语：主串和模式串。简单来说，我们要在字符串 A 中查找子串 B，那么 A 就是主串，B 就是模式串。
+作为最简单、最暴力的字符串匹配算法，BF 算法的思想可以用一句话来概括，那就是，如果主串长度为 n，模式串长度为 m，我们在主串中检查起始位置分别是 0、1、2…n-m 且长度为 m 的 n-m+1 个子串，看有没有跟模式串匹配的。图示如下：
+结合上图，具体来说，就是每次拿模式串和主串对齐，然后从左到右依次比较每个字符，如果出现不相等，则把模式串往后移一个位置，再次重复上述步骤，直到模式串每个字符与对应主串位置字符都相等，则返回主串对应下标，表示找到，否则返回 -1，表示没找到。
+这个算法很好理解，因为这就是我们正常都能想到的暴力匹配，BF 算法的时间复杂度最差是 O(n*m)，意味着要模式串要移到主串 n-m 的位置上，并且模式串每个字符都要与子串比较。
+尽管 BF 算法复杂度看起来很高，但是在日常开发中，如果主串和模式串规模不大的话，该算法依然比较常用，因为足够简单，实现起来容易，不容易出错。另外，在规模不大的情况下，开销也可以接受，毕竟 O(n*m) 是最差的表现，大部分时候，执行效率比这个都要高。
+但是对于对时间要求比较敏感，或者需要高频匹配，数据规模较大的情况下，比如编辑器中的匹配功能、敏感词匹配系统等，BF 算法就不适用了。</description>
+    </item>
+    
+    <item>
+      <title>数据结构-散列表(HashTable, 哈希表)</title>
+      <link>/post/algorithms/datastructures/algorithms-datastructures-hashtable/</link>
+      <pubDate>Fri, 16 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/datastructures/algorithms-datastructures-hashtable/</guid>
+      <description>散列表(HashTable, 哈希表) 散列表（HashTable，也叫哈希表），是根据键（Key）直接访问在内存存储位置的数据结构。
+其实现原理是：通过散列函数（也叫哈希函数）将元素的键映射为数组下标（转化后的值叫做散列值或哈希值），然后在对应下标位置存储记录值。按照键值查询元素时，就是用同样的散列函数，将键值转化数组下标，从对应的数组下标的位置取数据：
+散列表用的是数组支持按照下标随机访问数据的特性，所以散列表其实就是数组的一种扩展，由数组演化而来。可以说，如果没有数组，就没有散列表。而 PHP 的关联数组干脆就是基于散列表实现。
+散列技术既是一种存储方法，也是一种查找方法。与之前的查找方法不同的是散列技术的记录之间不存在逻辑关系，因此主要是面向查找的数据结构。最适合求解的问题是查找给定值相等的记录。
+散列表中有两个关键的概念，一个是散列函数（或者哈希函数），一个是散列冲突（或者哈希冲突）。
+散列函数 散列函数用于将键值经过处理后转化为散列值。具有以下特性：
+散列函数计算得到的散列值是非负整数 如果 key1 == key2，则 hash(key1) == hash(key2) 如果 key1 != key2，则 hash(key1) != hash(key2)  散列冲突 所谓散列冲突，简单来说，指的是 key1 != key2 的情况下，通过散列函数处理，hash(key1) == hash(key2)，这个时候，发生了散列冲突。设计再好的散列函数也无法避免散列冲突，原因是散列值是非负整数，总量是有限的，但是现实世界中要处理的键值是无限的，将无限的数据映射到有限的集合，肯定避免不了冲突。
+事实上，如果不考虑散列冲突，散列表的查找效率是非常高的，时间复杂度是 O(1)，比二分查找效率还要高，但是因为无法避免散列冲突，所以散列表查找的时间复杂度取决于散列冲突，最坏的情况可能是 O(n)，退化为顺序查找。这种情况在散列函数设计不合理的情况下更糟。
+散列函数设计 $arr[&amp;lsquo;test&amp;rsquo;] = 123 这段代码，PHP 底层会将键值 test 通过散列函数转化为散列码，然后将 123 映射到这个散列码上。在不考虑哈希冲突的情况下，散列表查找、删除、插入的时间复杂度都是 O(1)，非常高效。
+要减少哈希冲突，提高散列表操作效率，设计一个优秀的散列函数至关重要，平时经常使用的 md5 函数就是一个散列函数，但是其实还有其他很多自定义的设计实现，要根据不同场景，设计不同的散列函数来减少散列冲突，而且散列函数本身也要很简单，否则执行散列函数本身会成为散列表的瓶颈。日常很少会自己去设计散列函数，但是做一些简单的了解还是有必要的。
+通常有以下几种散列函数构造方法：
+直接定址法：即 f(key) = a*key + b，f 表示散列函数，a、b 是常量，key 是键值 数字分析法：即对数字做左移、右移、反转等操作获取散列值 除数留余法：即 f(key) = key % p，p 表示容器数量，这种方式通常用在将数据存放到指定容器中，如何决定哪个数据放到哪个容器，比如分表后插入数据如何处理（此时 p 表示拆分后数据表的数量），分布式 Redis 如何存放数据（此时 p 表示几台 Redis 服务器） 随机数法：即 f(key) = random(key)，比如负载均衡的 random 机制  以上只是一些比较场景的散列函数设计思路，还有很多其他的设计方法，这里就不一一列举了。</description>
+    </item>
+    
+    <item>
+      <title>二分查找(BinarySearch)-索引查找</title>
+      <link>/post/algorithms/binarysearch/algorithms-binarysearch-case/</link>
+      <pubDate>Thu, 15 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/binarysearch/algorithms-binarysearch-case/</guid>
+      <description>IP 地址对应城市查询 每个城市都有对应的 IP 地址段，这个在网上搜一下就能拿到。然后可以将这些不同城市 IP 地址段起始值转化为整型数字（转化函数Google/百度搜下就能找到），进而对其进行排序，就可以得到一个有序的序列。比如杭州和北京，IP区间分别是 [183.128.0.0,183.159.255.255] 和 [110.96.0.0,110.127.255.255]，转化为数字后对应区间分别是 [3078619136,3080716287] 和 [1851785216,1853882367]，这样，就可以对这两个区间起始值排序为 [1851785216,3078619136]。
+此外我们还需要存储每个区间值对应的城市，以便找到对应位置后可以快速定位对应城市，可以把这个映射关系存储到数据库里面，存储字段包括城市、起始 IP、结束 IP，这里有一个前提是不同城市区间值不可能交叉，否则没法玩。
+接下来就是二分查找排上用场的时候了，将待查找 IP 转化为数字，然后在排序序列中查找最后一个起始 IP 小于等于待查找 IP 的位置，通过该起始 IP 在数据库中定位到对应记录，判断待查找 IP 是否在这个 IP 区间范围内，如果在的话则返回对应城市，不在的话，就返回没找到。
+稠密索引（数据库索引技术基础） 二分查找适用于有序线性表的查找，此外针对二分查找还有升级版的插值查找，以及利用斐波那契原理进行查找的斐波那契查找.
+二分查找不适用于高速增长的海量数据，因为维护这个排序非常麻烦，所以我们引出索引这种数据结构。
+索引是为了加快查找速度而设计的一种数据结构。索引就是把一个关键字与它对应的记录相关联的过程，一个索引由若干索引项构成，每个索引项至少包含关键字和其对应记录在存储器中的位置等信息。
+由此可见，索引技术是组织大型数据库和磁盘文件的一种重要技术。
+索引技术分为线性索引、树形索引和多级索引，这里我们只介绍线性索引。所谓线性索引就是将索引项集合组织为线性结构，也称索引表。以下是一个索引表的示例图：
+在线性索引中，我们重点介绍三种：稠密索引、分块索引和倒排索引。
+首先是稠密索引。稠密索引是指在线性表中，将数据集中的每个记录对应一个索引项。就像上面示例图中的那样。以主键为例，可以将其抽象化如下：
+对于稠密索引这个索引表来说，索引项一定按照关键码有序排列，这样可以应用二分查找，以免索引查找本身影响性能。可见，稠密索引性能可以做到和二分查找相当（找到对应关键码就可以通过指针直接指向对应记录），但是索引项长度和数据集一样长，空间复杂度高，如果数据太多需要存放到磁盘上，反复读取磁盘对性能影响很大。
+分块索引（数据库索引技术基础） 为了减少索引项个数，对数据集进行分块，并使其分块有序，然后再给每个分块建立一个索引项（索引值是分块中最大关键码），至于分块内部，则不管其有序性，从而减少索引项的个数。在查找的时候在索引项中通过二分查找找到指定索引项，然后根据该索引项中的关键码去相应分块遍历查找指定元素，这是一种折中方案，既兼顾了空间复杂度，又兼顾了时间复杂度。
+分块索引图示如下：
+这里面有几个概念需要阐述下，首先是分块有序，需要满足两个先决条件：
+块内无序。即每一块内的记录不要求有序。当然，有序更理想，只不过要花费大量时间和空间的代价。 块间有序。即要求后一块的所有关键字都大于前一块的所有关键字。只有块间有序，才能给查找带来效率。  其次，分块索引的索引项包含三个数据项：
+最大关键码：它存储每一块中的最大关键字。这样做的好处是在它之后的下一块中最小的关键字也能比这一块最大的关键字要大。 块长：存储块中的记录个数，以便于循环时使用。 块首指针：用于指向块首数据元素的指针，便于开始对这一块的记录开始遍历。  最后，在分块索引中查找，分两块进行：
+在分块索引表中查找要查找关键字所在的块。由于块间有序，所以可以通过二分查找快速定位（通过不小于给定值的第一个元素，不大于给定值的最后一个元素确定区间，以前面给出的示例图为例，58位于57和96之间，则会去第三块中查找）。 根据块首指针找到相应的块，并在块中顺序查找指定值（即关键码，块中无序所以只能顺序查找）。  分块索引的时间复杂度是：O(log(m)+n)，其中 m 是分块数，n 是块内元素个数，在索引表长度和块内元素相等时，时间复杂度最优。性能要优于顺序查找，但是比二分查找要差。
+总体来说，分块索引在兼顾存储空间和查找性能的情况下，被普遍用于数据库查找等技术中。
+倒排索引（搜素引擎技术基础） 百度、Google 等搜索引擎为我们日常查找信息带来了巨大的方便，你是否思考过搜索引擎是如何从海量 HTML 文档中通过关键词查找资源的？今天给大家介绍最简单，也是最基础的搜索引擎技术 —— 倒排索引。
+有倒排索引，就有正向索引，正向索引指的是通过文档 ID 找到对应的文档，如果通过文档ID查找对应文档，再在文档中匹配关键词，意味着要扫描所有文档，最后还要排序，对于互联网上的海量资源来说，显然是不可取的。</description>
+    </item>
+    
+    <item>
+      <title>二分查找(BinarySearch)-区间查找</title>
+      <link>/post/algorithms/binarysearch/algorithms-binarysearch-interval/</link>
+      <pubDate>Wed, 14 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/binarysearch/algorithms-binarysearch-interval/</guid>
+      <description>实现原理 二分查找的第三个变形版本：在给定排序序列中查找第一个大于等于给定值的元素。
+有了昨天的基础，来解决今天这个问题，是不是很简单？所不同的是判断节点不一样了，我们之前的需求都是查找等于给定值，现在变成了大于等于给定值，所以我们要在 $nums[$mid] &amp;gt;= $num 这个判断条件上做文章，思路还是和之前两个变形版本类似，当 $mid 已经是最左边的元素，或者 $mid 的前一个元素值小于给定查询值，则 $mid 对应元素即为满足条件的元素，否则继续往前查找。
+示例代码 对应的 PHP 实现代码如下：
+&amp;lt;?php /** * 二分查找变形版：查找第一个大于等于给定值的元素（数组中包含重复数据） */ function binary_search($nums, $num) { if (count($nums) &amp;lt;= 1) { return 0; } return binary_search_internal($nums, $num, 0, count($nums) - 1); } function binary_search_internal($nums, $num, $low, $high) { if ($low &amp;gt; $high) { return -1; } $mid = floor(($low + $high) / 2); if ($num &amp;lt;= $nums[$mid]) { if ($mid == 0 || $nums[$mid - 1] &amp;lt; $num) { return $mid; } else { return binary_search_internal($nums, $num, $low, $mid - 1); } } elseif ($num &amp;gt; $nums[$mid]) { return binary_search_internal($nums, $num, $mid + 1, $high); } } $nums = [1, 2, 3, 3, 4, 5, 6]; $index = binary_search($nums, 3); print $index; 同样，与之相对的，还有我们这次分享中最后要讨论的一个二分查找的变形版本：在给定序列中查找最后一个小于等于给定值的元素。</description>
+    </item>
+    
+    <item>
+      <title>二分查找(BinarySearch)-数组含有重复值</title>
+      <link>/post/algorithms/binarysearch/algorithms-binarysearch-repeat/</link>
+      <pubDate>Tue, 13 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/binarysearch/algorithms-binarysearch-repeat/</guid>
+      <description>日常开发过程中，除了正常的二分查找，还有很多二分查找的变形版本。
+符合标准的二分查找条件的序列一般是比较理想的情况，如果要查找的元素在序列中有多个怎么办？所以第一个常见的变形版本，就是在一个给定排序序列中查找第一个等于给定值的元素。
+其实关键节点就在于在序列中找到值等于待查找元素值时的处理。如果此时 $mid 位置已经到了序列的最左边，不能再往左了，或者序列中索引小于 $mid 的上一个元素值不等于待查找元素值，那么此时 $mid 就是第一个等于待查找元素值的位置；否则还要继续往前找。
+对应的 PHP 实现代码如下，其他地方都一样，就是 $num == $nums[$mid] 时的处理逻辑变了：
+&amp;lt;?php /** * 二分查找变形版：查找第一个值等于给定值的元素（数组中包含重复数据） */ function binary_search($nums, $num) { if (count($nums) &amp;lt;= 1) { return 0; } return binary_search_internal($nums, $num, 0, count($nums) - 1); } function binary_search_internal($nums, $num, $low, $high) { if ($low &amp;gt; $high) { return -1; } $mid = floor(($low + $high) / 2); if ($num &amp;lt; $nums[$mid]) { return binary_search_internal($nums, $num, $low, $mid - 1); } elseif ($num &amp;gt; $nums[$mid]) { return binary_search_internal($nums, $num, $mid + 1, $high); } else { if ($mid == 0 || $nums[$mid-1] !</description>
+    </item>
+    
+    <item>
+      <title>二分查找(BinarySearch)</title>
+      <link>/post/algorithms/binarysearch/algorithms-binarysearch-base/</link>
+      <pubDate>Mon, 12 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/binarysearch/algorithms-binarysearch-base/</guid>
+      <description>二分查找(BinarySearch) 在介绍二分查找之前，对于基于数字索引的数组元素的查找，第一反应都是遍历这个数组，直到给定数组元素值和待查找的值相等时，返回索引值并退出，否则一直遍历到最后一个元素，如果还是没有找到则返回 -1，这样的查找虽然是简单粗暴了点，但是对于规模不大的数据集，也是没什么问题的，不过很明显，对于 n 个元素的数组，这种查找的时间复杂度是 O(n)，随着数据规模的增加，性能会越来越差，设想如果数据集的长度是 40 亿（约 2 的 32 次方），那么最差的情况需要遍历数组 40 亿次，简直不敢想象需要花费多长时间！那有没有性能搞好的算法来解决这个问题呢？
+在进一步探讨这个问题之前，先来看一个生活中的例子。日常生活中，很多人应该有这种经历，朋友、同学或者同事淘了个宝贝，神秘兮兮的过来让大家猜多少钱，在约定一个价格范围之后（比如 10-100），大家会七嘴八舌的猜起价格来：
+同事A：新淘了个宝贝，猜猜多少钱？ 同事B：50块。 同事A：高了。 同事C：30块。 同事A：低了。 同事D：40块。 同事A：高了。 同事E：36块。 同事A：对了。  如果用顺序遍历的逻辑，最差需要 91 次，才能猜到价格，现实生活中，没人会这么干，我们采用上面这种逻辑，只需要 4 次就猜到价格了，快了几十倍，而且数据量越大，优势越明显。基于这种思路，我算法科学家提炼出了二分查找算法，帮助在给定数据集中快速定位要查找的元素。
+实现原理 所谓二分查找，针对的是一个有序的数据集合（这点很重要），查找思想有点类似分治思想。每次都通过跟区间的中间元素对比，将待查找的区间缩小为之前的一半，直到找到要查找的元素，或者区间被缩小为 0。注意到二分查找针对的必须是已经排序过的有序数组，否则不能使用该算法。图示如下：
+示例代码 思路比较简单，我们将其通过 PHP 代码实现如下：
+&amp;lt;?php function binary_search($nums, $num) { return binary_search_internal($nums, $num, 0, count($nums) - 1); } function binary_search_internal($nums, $num, $low, $high) { if ($low &amp;gt; $high) { return -1; } $mid = floor(($low + $high) / 2); if ($num &amp;gt; $nums[$mid]) { return binary_search_internal($nums, $num, $mid + 1, $high); } elseif ($num &amp;lt; $nums[$mid]) { return binary_search_internal($nums, $num, $low, $mid - 1); } else { return $mid; } } $nums = [1, 2, 3, 4, 5, 6]; $index = binary_search($nums, 5); print $index; 性能分析 很显然，二分查找的时间复杂度是 O(logn)。这是一个非常恐怖的数量级，有时候甚至比 O(1) 还要高效，比如要在开头提到的 40 亿个数字中查找某一个元素，也只需要32次（2 的 32 次方是 40 亿数量级），这真的是非常高效了，正因如此二分查找在线性表结构中的应用非常广泛。</description>
+    </item>
+    
+    <item>
+      <title>排序算法-选择排序(SelectionSort)</title>
+      <link>/post/algorithms/sort/algorithms-sort-selectionsort/</link>
+      <pubDate>Fri, 09 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/sort/algorithms-sort-selectionsort/</guid>
+      <description>实现原理 选择排序算法的实现思路有点类似插入排序，也分已排序区间和未排序区间。但是选择排序每次会从未排序区间中找到最小的元素，将其放到已排序区间的末尾。图示如下： 光看定义有点抽象，用图来演示，假设待排序数字是 4、5、6、3、2、1，第一次排序的流程是这样的：
+在这里搭配动态图查看效果更佳：https://visualgo.net/zh/sorting。
+&amp;lt;?php /** * 选择排序算法实现 */ function selection_sort($nums) { if (count($nums) &amp;lt;= 1) { return $nums; } for ($i = 0; $i &amp;lt; count($nums); $i++) { $min= $i; for ($j = $i + 1; $j &amp;lt; count($nums); $j++) { if ($nums[$j] &amp;lt; $nums[$min]) { $min = $j; } } if ($min != $i) { $temp = $nums[$i]; $nums[$i] = $nums[$min]; $nums[$min] = $temp; } } return $nums; } $nums = [4, 5, 6, 3, 2, 1]; $nums = selection_sort($nums); print_r($nums); 性能分析 很显然，选择排序的时间复杂度也是 O(n2) 由于不涉及额外的存储空间，所以是原地排序； 由于涉及非相邻元素的位置交换，所以是不稳定的排序算法。  综合比较前面介绍的三个排序算法，时间复杂度都是一样的，也都是原地排序，但是选择排序是不稳定的排序算法，此外，插入排序和冒泡排序相比较，在将插入排序的时候讲到，插入排序只需要一条语句，而冒泡排序需要三条，在同等条件下，或者数据量很大的情况下，插入排序性能是要优于冒泡排序的，所以综合比较下来，三者的优先级是插入排序 &amp;gt; 冒泡排序 &amp;raquo; 选择排序。</description>
+    </item>
+    
+    <item>
+      <title>排序算法-选择排序(InsertionSort)</title>
+      <link>/post/algorithms/sort/algorithms-sort-insertionsort/</link>
+      <pubDate>Thu, 08 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/sort/algorithms-sort-insertionsort/</guid>
+      <description>实现原理 插入排序的原理是：将数组中的数据分为两个区间，已排序区间和未排序区间。初始已排序区间只有一个元素，就是数组的第一个元素。插入算法的核心思想是取未排序区间中的元素，在已排序区间中找到合适的插入位置将其插入，并保证已排序区间数据一直有序。重复这个过程，直到未排序区间中元素为空，算法结束。
+光看定义有点抽象，用图来演示，假设待排序数字是 4、5、6、3、2、1，第一次排序的流程是这样的：
+在这里搭配动态图查看效果更佳：https://visualgo.net/zh/sorting。
+&amp;lt;?php /** * 插入排序实现函数（PHP） * @param $nums * @return mixed */ function insertion_sort($nums) { if (count($nums) &amp;lt;= 1) { return $nums; } for ($i = 0; $i &amp;lt; count($nums); $i++) { $value = $nums[$i]; $j = $i - 1; for (; $j &amp;gt;= 0; $j--) { if ($nums[$j] &amp;gt; $value) { $nums[$j+1] = $nums[$j]; } else { break; } } $nums[$j+1] = $value; } return $nums; } $nums = [4, 5, 6, 3, 2, 1]; $nums = insertion_sort($nums); print_r($nums); 性能分析 插入排序需要两个嵌套的循环，时间复杂度是O(n2)； 没有额外的存储空间，是原地排序算法； 不涉及相等元素位置交换，是稳定的排序算法。  插入排序的时间复杂度和冒泡排序一样，也不是很理想，但是插入排序不涉及数据交换，从更细粒度来区分，性能要略优于冒泡排序。</description>
+    </item>
+    
+    <item>
+      <title>排序算法-冒泡排序(BubbleSort)</title>
+      <link>/post/algorithms/sort/algorithms-sort-bubblesort/</link>
+      <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/sort/algorithms-sort-bubblesort/</guid>
+      <description>冒泡排序(BubbleSort) 常见基于选择的排序算法有冒泡排序、插入排序、选择排序、归并排序和快速排序，在选择排序算法的时候，通常会根据以下几个维度来考虑：
+时间复杂度 空间复杂度（对内存空间的消耗） 算法的稳定性（如果待排序的序列中存在值相等的元素，经过排序之后，相等元素之间原有的先后顺序不变）  实现原理 冒泡排序只会操作相邻的两个数据。每次冒泡操作都会对相邻的两个元素进行比较，看是否满足大小关系要求，如果不满足就让它俩互换。一次冒泡会让至少一个元素移动到它应该在的位置，重复 n 次，就完成了 n 个数据的排序工作。
+光看定义有点抽象，用图来演示，假设待排序数字是 4、5、6、3、2、1，第一次排序的流程是这样的：
+看这个图的时候要结合定义一起看，否则也比较懵逼，当然如果去 VisuAlgo 上看动态图的话就更形象了：https://visualgo.net/zh/sorting，经过 n 次冒泡，最终完成排序（所谓冒泡，以升序来看，就是每次把待排序序列中的最大值插到已排序序列的最前面，这个过程就像冒泡一样）：
+示例代码
+重要的是理解冒泡排序的原理，懂了原理就是把这个排序过程翻译成代码而已，以下是 PHP 代码实现的冒泡排序：
+&amp;lt;?php /** * 冒泡排序实现函数（PHP） * @param $nums * @return mixed */ function bubble_sort($nums) { if (count($nums) &amp;lt;= 1) { return $nums; } for ($i = 0; $i &amp;lt; count($nums); $i++) { $flag = false; for ($j = 0; $j &amp;lt; count($nums) - $i - 1; $j++) { if ($nums[$j] &amp;gt; $nums[$j+1]) { $temp = $nums[$j]; $nums[$j] = $nums[$j+1]; $nums[$j+1] = $temp; $flag = true; } } if (!</description>
+    </item>
+    
+    <item>
+      <title>排序算法-归并排序(MergeSort)</title>
+      <link>/post/algorithms/sort/algorithms-sort-mergesort/</link>
+      <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/sort/algorithms-sort-mergesort/</guid>
+      <description>实现原理 排序算法性能更好的排序算法，归并排序。
+所谓归并排序，指的是如果要排序一个数组，我们先把数组从中间分成前后两部分，然后对前后两部分分别排序，再将排好序的两部分合并在一起，这样整个数组就都有序了。
+归并排序使用了分治思想，分治，顾名思义，就是分而治之，将一个大问题分解成小的子问题来解决。说到这里，可能你就能联想起我们之前讲到的一个编程技巧 —— 递归，没错，归并排序就是通过递归来实现的。这个递归的公式是每次都将传入的待排序数组一分为二，直到不能分割，然后将排序后序列合并，最终返回排序后的数组。
+原理图如下所示：
+由于涉及到递归，所以归并排序从理解上要比前面三个排序要困难一些，还是建议通过这个动态图帮助理解：https://visualgo.net/zh/sorting，在界面顶部选择归并排序，然后在左下角点击执行即可。
+示例代码 &amp;lt;?php function merge_sort($nums) { if (count($nums) &amp;lt;= 1) { return $nums; } merge_sort_c($nums, 0, count($nums) - 1); return $nums; } function merge_sort_c(&amp;amp;$nums, $p, $r) { if ($p &amp;gt;= $r) { return; } $q = floor(($p + $r) / 2); merge_sort_c($nums, $p, $q); merge_sort_c($nums, $q + 1, $r); merge($nums, [&amp;#39;start&amp;#39; =&amp;gt; $p, &amp;#39;end&amp;#39; =&amp;gt; $q], [&amp;#39;start&amp;#39; =&amp;gt; $q + 1, &amp;#39;end&amp;#39; =&amp;gt; $r]); } function merge(&amp;amp;$nums, $nums_p, $nums_q) { $temp = []; $i = $nums_p[&amp;#39;start&amp;#39;]; $j = $nums_q[&amp;#39;start&amp;#39;]; $k = 0; while ($i &amp;lt;= $nums_p[&amp;#39;end&amp;#39;] &amp;amp;&amp;amp; $j &amp;lt;= $nums_q[&amp;#39;end&amp;#39;]) { if ($nums[$i] &amp;lt;= $nums[$j]) { $temp[$k++] = $nums[$i++]; } else { $temp[$k++] = $nums[$j++]; } } if ($i &amp;lt;= $nums_p[&amp;#39;end&amp;#39;]) { for (; $i &amp;lt;= $nums_p[&amp;#39;end&amp;#39;]; $i++) { $temp[$k++] = $nums[$i]; } } if ($j &amp;lt;= $nums_q[&amp;#39;end&amp;#39;]) { for (; $j &amp;lt;= $nums_q[&amp;#39;end&amp;#39;]; $j++) { $temp[$k++] = $nums[$j]; } } for ($x = 0; $x &amp;lt; $k; $x++) { $nums[$nums_p[&amp;#39;start&amp;#39;] + $x] = $temp[$x]; } } $nums = [4, 5, 6, 3, 2, 1]; $nums = merge_sort($nums); print_r($nums); 性能分析 总结，归并排序不涉及相等元素位置交换，是稳定的排序算法，时间复杂度是 O(nlogn)，要优于冒泡排序和插入排序的 O(n2)，但是归并排序需要额外的空间存放排序数据，不是原地排序，最多需要和待排序数组同样大小的空间，所以空间复杂度是 O(n)。</description>
+    </item>
+    
+    <item>
+      <title>排序算法-快速排序(QuickSort)</title>
+      <link>/post/algorithms/sort/algorithms-sort-quicksort/</link>
+      <pubDate>Wed, 07 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/sort/algorithms-sort-quicksort/</guid>
+      <description>实现原理 归并排序算法虽好，但是不是原地排序算法，需要消耗额外的内存空间，是常规排序里综合排名最高的排序算法：快速排序，江湖人称「快排」。
+快排的核心思想是这样的：
+如果要排序数组中下标从 p 到 r 之间的一组数据，选择 p 到 r 之间的任意一个数据作为 pivot（分区点）。
+遍历 p 到 r 之间的数据，将小于 pivot 的放到左边，将大于 pivot 的放到右边，将 pivot 放到中间。经过这一步骤之后，数组 p 到 r 之间的数据就被分成了三个部分，前面 p 到 q-1 之间都是小于 pivot 的，中间是 pivot，后面的 q+1 到 r 之间是大于 pivot 的。
+图示如下：
+根据分治、递归的处理思想，可以用递归排序下标从 p 到 q-1 之间的数据和下标从 q+1 到 r 之间的数据，直到区间缩小为 1，就说明所有的数据都有序了，而且可以看到不需要像归并排序那样做合并操作，也就不需要额外的内存空间，在算法复杂度和归并排序一样的情况下，有着更好的空间复杂度表现。
+快速排序首先要找到分区点 pivot，一般我们会将数组最后一个元素或者第一个元素作为 pivot，比如我们以最后一个元素作为分区点，然后通过两个变量 i 和 j 作为下标来循环数组，当下标 j 对应数据小于 pivot 时，交换 i 和 j 对应数据，并且将 i 往前移动一位，否则 i 不动，下标 j 始终是往前移动的，j 到达终点后，将 pivot 与下标 i 对应数据交换，这样最终将 pivot 置于数组中间，[0&amp;hellip;i-1] 区间的数据都比 pivot 小，[i+1&amp;hellip;j] 之间的数据都比 pivot 大，我们以递归的方式处理该流程，最终整个数组都会变成有序的，对应的算法操作流程如下：</description>
+    </item>
+    
+    <item>
+      <title>数据结构-递归(Recursion)</title>
+      <link>/post/algorithms/datastructures/algorithms-datastructures-recursion/</link>
+      <pubDate>Tue, 06 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/datastructures/algorithms-datastructures-recursion/</guid>
+      <description>递归(Recursion) 递归算不上任何数据结构和算法，但确实是一种很重要的编程技巧，很多算法也会用到递归来实现，比如归并排序、快速排序、二分查找等。
+递归，简单来讲就是在函数定义中调用函数自身，从之前学习数学解题经验来讲，就是将一个大的问题拆分成多个小问题，逐一击破后最后归并结果。判断一个问题是否可以通过递归来解决，主要看它是否满足以下三个条件：
+ 一个问题的解可以分解为几个子问题的解 这个问题与分解之后的子问题，除了数据规模不同，求解思路完全一样 存在递归终止条件  递归一定要有终止条件，否则会导致函数被无限调用最终致使内存溢出。
+通过以上分析，可以整理出递归代码的编写思路：写出递归公式，找到终止条件。有句话叫做「人理解迭代，神理解递归」，说的就是递归代码可读性不好，理论上看，递归代码都是可以转化成迭代实现的，但是递归代码更简洁，更显逼格，在通过递归实现代码的时候，切忌试图通过人脑去分解每个步骤，那样会把自己搞晕的，这种重复迭代的事情交给计算机去做，要做的就是抽象出规律，写递归公式，找终止条件，再把它们转化为递归代码，就完事了。
+说了这么多，最后通过一个案例来帮助理解和实际运用。递归的应用案例很多，比如经典的汉诺塔、斐波那契数列等，以斐波那契数列来演示下递归代码的编写，斐波那契数列是这样一组数列：0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, …(可以去网上搜一下了解下这个数列的现实由来），求第n个数列的值。
+按照前面列出的递归问题解题思路，首先抽象出这组数列的一般规律，将其整理成递归公式，会得出如下结论（索引从0开始，即第零项）：
+F0 = 0 F1 = 1 ... F(n) = F(n-1) + F(n-2) 这样，同时有了终止条件和递归公式，接下来，就是将其转化为递归代码了：
+&amp;lt;?php /** * 通过递归实现斐波那契数列 */ function fibonacci($n) { if ($n == 0) { return 0; } if ($n == 1) { return 1; } return fibonacci($n - 2) + fibonacci($n - 1); } print fibonacci(5); # 5 print fibonacci(8); # 21 通过递归，用非常简洁的代码就实现了复杂的斐波那契数列的求解，如果要用迭代来实现这个逻辑，不定要写多少代码呢。</description>
+    </item>
+    
+    <item>
+      <title>数据结构-队列(Queue)</title>
+      <link>/post/algorithms/datastructures/algorithms-datastructures-queue/</link>
+      <pubDate>Mon, 05 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/datastructures/algorithms-datastructures-queue/</guid>
+      <description>队列(Queue) 数据结构 —— 队列，和栈一样，队列也是一中特殊的线性表结构，只不过队列是在一端插入，另一端删除，就跟平常排队一样的道理，从队尾入队，在队头出去，所以队列的特性是先入先出（FIFO），允许插入的一端叫队尾，允许删除的一端叫队头。
+一张图可以形象的体现两者的差别：
+和栈一样，队列也可以通过数组和链表实现，通过数组实现的叫顺序队列，通过链表实现的叫做链式队列，栈只需要一个栈顶指针就可以了，因为只允许在栈顶插入删除，但是队列需要两个指针，一个指向队头，一个指向队尾。先来看通过 PHP 数组实现的顺序队列代码：
+&amp;lt;?php /** * 通过 PHP 数组实现的队列 */ class SimpleQueue { private $_queue = []; private $_size = 0; public function __construct($size = 10) { $this-&amp;gt;_size = $size; } // 入队 public function enqueue($value) { if (count($this-&amp;gt;_queue) &amp;gt; $this-&amp;gt;_size) { return false; } array_push($this-&amp;gt;_queue, $value); } // 出队 public function dequeue() { if (count($this-&amp;gt;_queue) == 0) { return false; } return array_shift($this-&amp;gt;_queue); } public function size() { return count($this-&amp;gt;_queue); } } $queue = new SimpleQueue(5); $queue-&amp;gt;enqueue(1); $queue-&amp;gt;enqueue(3); $queue-&amp;gt;enqueue(5); var_dump($queue-&amp;gt;dequeue()); # 1 var_dump($queue-&amp;gt;size()); # 2 通过数组实现的顺序队列有一个问题，就是随着队列元素的插入和删除，队尾指针和队头指针不断后移，而导致队尾指针指向末尾无法插入数据，这时候有可能队列头部还是有剩余空间的，如下图所示：</description>
+    </item>
+    
+    <item>
+      <title>数据结构-栈(Stack)</title>
+      <link>/post/algorithms/datastructures/algorithms-datastructures-stack/</link>
+      <pubDate>Sun, 04 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/datastructures/algorithms-datastructures-stack/</guid>
+      <description>栈(Stack) 数组和链表，从逻辑角度来说，它们都是线性结构（就是排成一条线的结构，只有前后两个方向，非线性结构包括树、图等，后面会讲到），从存储角度来说，一个是顺序存储，一个是链式存储，各有利弊，数组需要预先申请连续内存，超出限制会溢出，但是对明确知道规模的小型数据集而言，使用数组会更加高效，随机访问的特性也更加方面数组读取，但插入和删除性能要差一些；链表的话没有空间限制，但是需要额外空间存储指针，插入、删除效率很高，但不支持随机访问。
+虽说 PHP 中很少接触到这些，但是学习使用 C 语言的话这些基础还是需要了解的。接下来要介绍两种特殊的线性结构，或者说用于满足特定场景需求的线性结构：栈和队列。
+栈又叫堆栈，是限定只能在一端进行插入和删除操作的线性表，并且满足后进先出（LIFO）的特点。把允许插入和删除的一端叫做栈顶，另一个端叫做栈底，不含任何数据的栈叫做空栈。
+栈支持通过数组/链表实现，通过数组实现的通常叫做顺序栈，通过链表实现的叫做链栈。下面简单演示下如何在 PHP 中通过数组实现一个简单的顺序栈：
+&amp;lt;?php /** * 通过 PHP 数组实现简单的顺序栈 */ class SimpleStack { private $_stack = []; private $_size = 0; public function __construct($size = 10) { $this-&amp;gt;_size = $size; } // 获取栈顶元素 public function pop() { // 空栈 if (count($this-&amp;gt;_stack) == 0) { return false; } return array_pop($this-&amp;gt;_stack); } // 推送元素到栈顶 public function push($value) { // 满栈 if (count($this-&amp;gt;_stack) == $this-&amp;gt;_size) { return false; } array_push($this-&amp;gt;_stack, $value); return true; } public function isEmpty() { // 是否是空栈 return current($this-&amp;gt;_stack) == false; } public function size() { return count($this-&amp;gt;_stack); } } $stack = new SimpleStack(15); var_dump($stack-&amp;gt;isEmpty()); # true $stack-&amp;gt;push(111); $stack-&amp;gt;push(&amp;#39;学院君&amp;#39;); var_dump($stack-&amp;gt;pop()); # 学院君 var_dump($stack-&amp;gt;size()); # 1 在 PHP 底层 SPL 库中也提供了堆栈的实现类 SplStack，堆栈的概念比较简单，理解起来也不复杂，下面给出一个图示，帮助了解栈的操作流程：</description>
+    </item>
+    
+    <item>
+      <title>数据结构-链表(LinkedList)</title>
+      <link>/post/algorithms/datastructures/algorithms-datastructures-linkedlist/</link>
+      <pubDate>Sat, 03 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/datastructures/algorithms-datastructures-linkedlist/</guid>
+      <description>链表(LinkedList) 链表并不需要一块连续的内存空间，它通过“指针”将一组零散的内存块串联起来使用，如图所示：
+单链表 链表有多种类型，最简单的是单链表，单链表是最原生的链表，其结构如图所示： 单链表中有两个节点比较特殊，分别是第一个结点和最后一个结点。通常把第一个结点叫作头结点，把最后一个结点叫作尾结点。其中，头结点用来记录链表的基地址，有了它，就可以遍历得到整条链表。而尾结点特殊的地方是：指针不是指向下一个结点，而是指向一个空地址 NULL，表示这是链表上最后一个结点。对单链表而言，理论上来说，插入和删除节点的时间复杂度是 O(1)，查询节点的时间复杂度是 O(n)。
+循环链表 然后还有在单链表的基础上扩展还有循环链表，循环链表和单链表的区别是尾节点指向了头结点，从而首尾相连，有点像贪吃蛇，可用于解决「约瑟夫环」问题，循环链表的结构如图所示：
+双向链表 顾名思义，与单链表的区别是双向链表除了有一个指向下一个节点的指针外，还有一个用于指向上一个节点的指针，从而实现通过 O(1) 复杂度找到上一个节点。正是因为这个节点，使得双向链表在插入、删除节点时比单链表更高效，虽然前面已经提到单链表插入、删除时间复杂度已经是 O(1) 了，但是这没有考虑还只是针对插入、删除操作本身而言，以删除为例，删除某个节点后，需要将其前驱节点的指针指向被删除节点的下一个节点，这样，还需要获取其前驱节点，在单链表中获取前驱节点的时间复杂度是 O(n)，所以综合来看单链表的删除、插入操作时间复杂度也是 O(n)，而双向链表则不然，它有一个指针指向上一个节点，所以其插入和删除时间复杂度才是真正的 O(1)。
+此外，对于有序链表而言，双向链表的查询效率显然也要高于单链表，不过更优的时间复杂度是靠更差的空间复杂度换取的，双向链表始终需要单链表的两倍空间，但是正如之前说的，在 Web 应用中，时间效率优先级更高，所以通常都是空间换时间来提高性能，Java 的 LinkedHashMap 底层就用到了双向链表。
+双向链表的结构如图所示：
+双向循环链表 最后要介绍的是结合循环链表和双向链表为一体的双向循环链表：
+其实就是将双向链表的首尾通过指针连接起来。 通过数组函数模拟实现单链表
+在 PHP 中由于没有指针，可以借助数组的 next、current、key 等函数实现链表这个数据结构：
+&amp;lt;?php /** * 通过 PHP 数组模拟实现单链表 */ class LinkedList { private $list = []; // 获取链表指定位置的元素值，从0开始 public function get($index) { $value = NULL; while (current($this-&amp;gt;list)) { if (key($this-&amp;gt;list) == $index) { $value = current($this-&amp;gt;list); } next($this-&amp;gt;list); } reset($this-&amp;gt;list); return $value; } // 在链表指定位置插入值，默认插到链表头部 public function add($value, $index = 0) { array_splice($this-&amp;gt;list, $index, 0, $value); } // 从链表指定位置删除元素 public function remove($index) { array_splice($this-&amp;gt;list, $index, 1); } public function isEmpty() { return !</description>
+    </item>
+    
+    <item>
+      <title>数据结构-数组(Array)</title>
+      <link>/post/algorithms/datastructures/algorithms-datastructures-array/</link>
+      <pubDate>Fri, 02 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/datastructures/algorithms-datastructures-array/</guid>
+      <description>数组(Array) 数组（Array）是一种线性表数据结构，它用一组连续的内存空间，来存储一组具有相同类型的数据。如果学习过 C 语言，应该对这段定义很熟悉，但是在 PHP 这种动态语言中，因为数组底层是通过散列表实现的，所以功能异常强大，这段常规的数组定义在 PHP 中并不成立，PHP 的数组可以存储任何类型数据，如果与 Java 对比的话，PHP 数组集成了 Java 的数组、List、Set、Map 于一身，所以写代码的效率比 Java 高了几个量级。
+抛开 PHP 或 JavaScript 这种动态语言，对于传统的数组，比如 C 语言和 Java 中的数组，在使用之前都需要声明数组存储数据的类型和数组的大小，数组的优点是可以通过下标值随机访问数组内的任何元素，算法复杂度是 O(1)，非常高效，但是缺点是删除/插入元素比较费劲，以删除为例，需要在删除某个元素后，将后续元素都往前移一位，如果是插入，则需要将插入位置之后的元素都往后移，所以对数组的插入/删除而言，算法复杂度是 O(n)，当然了，这个是针对 C / Java 这种语言而言，PHP 不受此约束，因为它不是传统一样上的数组嘛。</description>
+    </item>
+    
+    <item>
+      <title>算法(Algorithms)-概念</title>
+      <link>/post/algorithms/basis/algorithms-base-conception/</link>
+      <pubDate>Fri, 02 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/basis/algorithms-base-conception/</guid>
+      <description>概念 算法 算法就是任何良定义的计算过程，该过程将某个值或值的集合作为输入并产生某个值或值得集合作为输出；亦可将算法看作是用于求正确解的计算问题的工具。
+良定义（well defined） 就是指无歧义的、不会导致矛盾的、符合其应满足的所有要求的定义
+问题实例 由该问题所必须的输入所组成.
+算法特征
+  存在许多候选解, 但绝大多数候选解没有解决手头问题. 寻找一个真正的解或一个最好的解可能是一个很大的挑战.
+  存在实际应用.
+  循环不变式 初始化：循环的第一次迭代之前，它为真。 保持： 如果循环的某次迭代之前它为真，那么下次迭代之前它仍为真。 终止： 在循环终止时，不变式为我们提供一个有用的性质，该性质有助于证明算法是正确的。</description>
+    </item>
+    
+    <item>
+      <title>Scrapy</title>
+      <link>/post/computerlanguages/python/computerlanguages-python-scrapy/</link>
+      <pubDate>Tue, 16 Jul 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/computerlanguages/python/computerlanguages-python-scrapy/</guid>
+      <description>安装 服务器系统： Centos7.2
+准备工作： 编译前准备其他库的安装(使用sudo命令)
+yum -y groupinstall &amp;#34;Development tools&amp;#34; 3.7版本需要一个新的包libffi-devel，安装此包之后再次进行编译安装即可。
+yum install libffi-devel zlib zlib-devel gcc gcc-c++ wget -y 升级openssh和openssl 旧版本openssl1.0.2k 新版本openssl1.1.1 备份(重要)
+mv /usr/bin/openssl /usr/bin/openssl.old mv /usr/include/openssl /usr/include/openssl.old mv /usr/lib/libssl.so.1.0.1e /usr/lib/libssl.so.1.0.1e.old mv /usr/lib/libcrypto.so.1.0.1e /usr/lib/libcrypto.so.1.0.1e.old 下载主程序
+wget https://www.openssl.org/source/openssl-1.1.1.tar.gz 解压缩
+tar zxvf openssl-1.1.1.tar.gz 配置程序安装目录
+cd opensll-1.1.1 ./config shared zlib --prefix=/usr/local/openssl --openssldir=/usr/local/openssl/ssl 显示配置数据
+perl configdata.pm --dump 编译安装
+make -j 4 &amp;amp;&amp;amp; make install 查看新安装版本
+cd /usr/local/openssl/bin ./openssl version -a 此处显示错误，说明找到不libssl.so.1.1库
+./openssl: error while loading shared libraries: libssl.</description>
+    </item>
+    
+    <item>
+      <title>Git忽略规则及.gitignore规则正确姿势</title>
+      <link>/post/devops/git/devops-git-gitignore/</link>
+      <pubDate>Mon, 16 Jul 2018 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/devops/git/devops-git-gitignore/</guid>
+      <description>实现需求 在git中如果想忽略掉某个文件或者文件夹，不想这个文件或者文件夹提交到版本库中，可以使用修改根目录中 .gitignore 文件的方法（如无，则需自己手工建立此文件）。这个文件每一行保存了一个匹配的规则例如：
+创建gitignore文件 touch .gitignore 注释Git忽略规则 # 此为注释 – 将被 Git 忽略 *.a # 忽略所有 .a 结尾的文件 !lib.a # 但 lib.a 除外 /-liberxuesite # 仅仅忽略项目根目录下的 liberxuesite 文件，不包括 subdir/liberxuesite liberxue/ # 忽略 liberxue文件夹/ 目录下的所有文件以及文件夹本身 doc/*.txt # 会忽略 doc/notes.txt 但不包括 doc/server/arch.txt gitignore忽略规则不生效原因 规则很简单，不做过多解释，但是有时候在项目开发过程中，突然心血来潮想把某些目录或文件加入忽略规则，按照上述方法定义后发现并未生效，原因是.gitignore只能忽略那些原来没有被track的文件，如果某些文件已经被纳入了版本管理中，则修改.gitignore是无效的。那么解决方法就是先把本地缓存删除（改变成未track状态），然后再提交：
+git rm -r --cached . git add . git commit -m &amp;#39;update .gitignore&amp;#39; </description>
     </item>
     
     <item>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Test on WoolfBreathe</title>
+    <link>/tags/test/</link>
+    <description>Recent content in Test on WoolfBreathe</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <managingEditor>youremail@domain.com (WoolfBreathe)</managingEditor>
+    <webMaster>youremail@domain.com (WoolfBreathe)</webMaster>
+    <lastBuildDate>Thu, 28 Nov 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/test/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>接口自动化测试框架从设计到开发</title>
+      <link>/post/common/common-test/</link>
+      <pubDate>Thu, 28 Nov 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/common/common-test/</guid>
+      <description>入门条件   设计框架 开发框架 重构框架   接口基础  HTTP接口
+ 接口组成 常见接口介绍 接口工具使用 接口基础面试   接口开发   dingo   UnitTest与接口测试结合   UnitTest HTMLTestRunner 断言 Case Requests包的使用   设计 开发 测试框架   设计 工具封装 基类封装 调试错误 接口数据 回写报告 解决数据依赖 结果统计 右键服务 发送报告   接口测试辅助操作   操作数据库 操作Cookie   </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+  <title>二叉树(BinaryTree)-平衡二叉树(AVL)-WoolfBreathe</title>
+  <meta property="og:title" content="二叉树(BinaryTree)-平衡二叉树(AVL)" />
+  <meta name="twitter:title" content="二叉树(BinaryTree)-平衡二叉树(AVL)" />
+
+  <meta name="description" content="引子 二叉排序树，理想情况下，二叉排序树的插入、删除、查找时间复杂度都是 O(logn)，非常高效，而且它是一种动态的数据结构，插入删除性能合查找一样好，不像之前提到的二分查找，虽然查找性能也是 O(logn)，但是需要先对线性表进行排序，二排序的最好时间复杂度也是 O(nlogn)，所以二分查找不适合动态结构的排序。
+但是如果二叉排序树构造的不好的话就会退化成斜树：
+此时按照之前的实现算法性能退化成了 O(n)，所以如何构造二叉排序树很重要，我们的理想情况是满二叉树和完全二叉树，它们的性能都是 O(logn)，所以我们在构造二叉排序树的时候要尽可能像它们靠近，才能得到最佳的操作性能，由此引出平衡二叉树。
+什么是平衡二叉树 平衡二叉树的英文名是 Self-Balancing Binary Search Tree 或者 Height-Balancing Binary Search Tree，译作自平衡的二叉查找树，或者高度平衡的二叉查找树，二叉查找树和二叉排序树是一个意思，只是叫法不同，简称平衡二叉树，也叫 AVL 树（平衡二叉树作者的名字首字母），所以平衡二叉树首先是二叉排序树，并且这个二叉排序树是左右高度平衡的，这么讲有点抽象，具体来说，平衡二叉树要求每个节点的左子树和右子树的高度差至多等于 1，这个高度（深度）差的值叫做平衡因子 BF，也就是说 BF 的值不能大于1，否则就不是平衡二叉树。
+示例：
+图1满足平衡二叉树的定义，是平衡二叉树； 图2所示二叉树不是二叉排序树，所有不是平衡二叉树； 图3不满足平衡因子小于等于1的要求，对58这个节点来说，平衡因子BF的值是3，因而不是平衡二叉树； 图4满足平衡二叉树的定义，是平衡二叉树；  之所以这么约束平衡二叉树，是为了保证它能够始终做到插入、删除、查找的时间复杂度是 O(logn)。
+平衡二叉树的实现原理 平衡二叉树的基本实现思路，是在构建二叉排序树的时候，每插入一个节点，都要检查这个节点的插入是否破坏了原有的平衡性，如果是的话，则找出最小不平衡子树，在保证整体二叉排序树的前提下，通过左旋或者右旋的方式将其调整为平衡子树。从而动态维护这棵平衡二叉树。
+这里面有几个概念需要解释一下：
+1、最小不平衡子树 距离插入节点最近的，且平衡因子绝对值大于 1 的节点为根的子树，叫做最小不平衡子树：
+比如上图中以存储元素 58 的节点为根的子树叫做最小不平衡子树。
+2、左旋/右旋 所谓左旋和右旋指的是最小不平衡子树旋转的方向。
+如果平衡因子小于 -1，即右子树高度值比较大，则需要左旋：
+反之，如果平衡因子大于1，即左子树高度值比较大，则需要右旋：
+当然为了方便你理解原理，我们这里给出的都是最简化的情况，实际处理过程中比这个更复杂，下一篇我们将具体给你演示如何通过代码在各种情况下实现平衡二叉树并讨论对应的时间复杂度。
+演示 一棵二叉树：
+虽然这也是一棵二叉排序树，但是层数达到 8，显然可以通过平衡二叉树来降低层数，提高性能，如果把它转化为平衡二叉树，会是这个样子：
+层数降低了一半，变成了 4 层，显然性能要比之前要高。那么这个平衡二叉树是怎么构建的呢？假设插入节点的顺序是{3,2,1,4,5,6,7,10,9,8}，两个节点之前不用考虑，我们从第三个节点开始分析：
+插入第三个节点 1 时，左子树高度是 2，右子树高度是 0，高度差的绝对值是 2，不符合平衡二叉树的要求，需要把以 3 为根节点的子树进行右旋，到右图那个样子，左右子树高度差为 0，符合平衡二叉树要求，完成调整。同理，插入第四个节点 4 的时候，左右子树高度为 -1，符合平衡二叉树要求，继续插入第五个节点，此时又不符合平衡二叉树的要求了，这个时候右子树比较高，需要左旋：
+旋转的时候以最小不平衡子树为单位，此时最小的不平衡子树是 3、4、5 节点构成的子树，我们以 4 为中心进行左旋，将树结构调整为右图所示的样子，满足了平衡二叉树的要求，停止调整。注意到我们每次新增节点的时候，会调整以每个节点为根节点的左右子树的高度差，然后从最小子树开始进行调整，直到以每个节点为根节点的子树符合平衡二叉树的要求，这样整棵树就符合平衡二叉树的要求了。">
+  <meta property="og:description" content="引子 二叉排序树，理想情况下，二叉排序树的插入、删除、查找时间复杂度都是 O(logn)，非常高效，而且它是一种动态的数据结构，插入删除性能合查找一样好，不像之前提到的二分查找，虽然查找性能也是 O(logn)，但是需要先对线性表进行排序，二排序的最好时间复杂度也是 O(nlogn)，所以二分查找不适合动态结构的排序。
+但是如果二叉排序树构造的不好的话就会退化成斜树：
+此时按照之前的实现算法性能退化成了 O(n)，所以如何构造二叉排序树很重要，我们的理想情况是满二叉树和完全二叉树，它们的性能都是 O(logn)，所以我们在构造二叉排序树的时候要尽可能像它们靠近，才能得到最佳的操作性能，由此引出平衡二叉树。
+什么是平衡二叉树 平衡二叉树的英文名是 Self-Balancing Binary Search Tree 或者 Height-Balancing Binary Search Tree，译作自平衡的二叉查找树，或者高度平衡的二叉查找树，二叉查找树和二叉排序树是一个意思，只是叫法不同，简称平衡二叉树，也叫 AVL 树（平衡二叉树作者的名字首字母），所以平衡二叉树首先是二叉排序树，并且这个二叉排序树是左右高度平衡的，这么讲有点抽象，具体来说，平衡二叉树要求每个节点的左子树和右子树的高度差至多等于 1，这个高度（深度）差的值叫做平衡因子 BF，也就是说 BF 的值不能大于1，否则就不是平衡二叉树。
+示例：
+图1满足平衡二叉树的定义，是平衡二叉树； 图2所示二叉树不是二叉排序树，所有不是平衡二叉树； 图3不满足平衡因子小于等于1的要求，对58这个节点来说，平衡因子BF的值是3，因而不是平衡二叉树； 图4满足平衡二叉树的定义，是平衡二叉树；  之所以这么约束平衡二叉树，是为了保证它能够始终做到插入、删除、查找的时间复杂度是 O(logn)。
+平衡二叉树的实现原理 平衡二叉树的基本实现思路，是在构建二叉排序树的时候，每插入一个节点，都要检查这个节点的插入是否破坏了原有的平衡性，如果是的话，则找出最小不平衡子树，在保证整体二叉排序树的前提下，通过左旋或者右旋的方式将其调整为平衡子树。从而动态维护这棵平衡二叉树。
+这里面有几个概念需要解释一下：
+1、最小不平衡子树 距离插入节点最近的，且平衡因子绝对值大于 1 的节点为根的子树，叫做最小不平衡子树：
+比如上图中以存储元素 58 的节点为根的子树叫做最小不平衡子树。
+2、左旋/右旋 所谓左旋和右旋指的是最小不平衡子树旋转的方向。
+如果平衡因子小于 -1，即右子树高度值比较大，则需要左旋：
+反之，如果平衡因子大于1，即左子树高度值比较大，则需要右旋：
+当然为了方便你理解原理，我们这里给出的都是最简化的情况，实际处理过程中比这个更复杂，下一篇我们将具体给你演示如何通过代码在各种情况下实现平衡二叉树并讨论对应的时间复杂度。
+演示 一棵二叉树：
+虽然这也是一棵二叉排序树，但是层数达到 8，显然可以通过平衡二叉树来降低层数，提高性能，如果把它转化为平衡二叉树，会是这个样子：
+层数降低了一半，变成了 4 层，显然性能要比之前要高。那么这个平衡二叉树是怎么构建的呢？假设插入节点的顺序是{3,2,1,4,5,6,7,10,9,8}，两个节点之前不用考虑，我们从第三个节点开始分析：
+插入第三个节点 1 时，左子树高度是 2，右子树高度是 0，高度差的绝对值是 2，不符合平衡二叉树的要求，需要把以 3 为根节点的子树进行右旋，到右图那个样子，左右子树高度差为 0，符合平衡二叉树要求，完成调整。同理，插入第四个节点 4 的时候，左右子树高度为 -1，符合平衡二叉树要求，继续插入第五个节点，此时又不符合平衡二叉树的要求了，这个时候右子树比较高，需要左旋：
+旋转的时候以最小不平衡子树为单位，此时最小的不平衡子树是 3、4、5 节点构成的子树，我们以 4 为中心进行左旋，将树结构调整为右图所示的样子，满足了平衡二叉树的要求，停止调整。注意到我们每次新增节点的时候，会调整以每个节点为根节点的左右子树的高度差，然后从最小子树开始进行调整，直到以每个节点为根节点的子树符合平衡二叉树的要求，这样整棵树就符合平衡二叉树的要求了。">
+  <meta name="twitter:description" content="引子 二叉排序树，理想情况下，二叉排序树的插入、删除、查找时间复杂度都是 O(logn)，非常高效，而且它是一种动态的数据结构，插入删除性能合查找一样好，不像之前提到的二分查找，虽然查找性能也是 O(logn)，但是需要先对线性表进行排序，二排序的最好时间复杂度也是 O(nlogn)，所以二分查找不适合动态结构的排序。
+但是如果二叉排序树构造的不好的话就会退化成斜树：
+此时按照之前的实现算法性能退 …">
+  <meta name="author" content="WoolfBreathe"/>
+  <link href="/img/favicon.png" rel="icon" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/img/favicon.png"/>
+  <meta property="og:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@username" />
+  <meta name="twitter:creator" content="@username" />
+  <meta property="og:url" content="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="WoolfBreathe" />
+
+  <meta name="generator" content="Hugo 0.68.3" />
+  <link rel="canonical" href="/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="WoolfBreathe">
+
+  
+  
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700%7COpen+Sans:400,700" rel="stylesheet">
+  
+
+  <link rel="stylesheet" href='/css/bundle.min.62de9d30b83723e0d55f82908aedb1c5eb18c910bc24bcf43e530ce754ee1502.css' integrity='sha256-Yt6dMLg3I&#43;DVX4KQiu2xxesYyRC8JLz0PlMM51TuFQI='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
+<meta name="google-site-verification" content="oKxX4fOvB2yYmU02txZFChM93XQbESU4JaG3tNH9Hm8" />
+<meta name="baidu-site-verification" content="F5ojAyqaKU" />
+<meta name="keywords" content="Algorithms, BinaryTree">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d611849735f187dd788dc054908f7d7a";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/" title="WoolfBreathe">
+        <img src="img/avatar-icon.png" style="margin-top: -5px;height: 32px;" alt="WoolfBreathe">
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="首页" href="/">首页</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="归档" href="/archives">归档</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="标签" href="/tags">标签</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于" href="/page/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="RSS" href="/index.xml">RSS</a>
+            </li>
+          
+        
+
+        
+
+        
+
+        
+          <li>
+            <a href="#modalSearch" data-toggle="modal" data-target="#modalSearch" style="outline: none;">
+              <span id="searchGlyph" class="glyphicon glyphicon-search"></span>
+            </a>
+          </li>
+          
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+  <div id="modalSearch" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">搜索</h4>
+        </div>
+        <div class="modal-body">
+            
+<div class="aa-input-container" id="aa-input-container">
+    <input type="search" id="aa-search-input" class="aa-input-search" placeholder="Search for titles or URIs..." name="search" autocomplete="off" />
+    <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
+        <path d="M1806,332c0-123.3-43.8-228.8-131.5-316.5C1586.8-72.2,1481.3-116,1358-116s-228.8,43.8-316.5,131.5  C953.8,103.2,910,208.7,910,332s43.8,228.8,131.5,316.5C1129.2,736.2,1234.7,780,1358,780s228.8-43.8,316.5-131.5  C1762.2,560.8,1806,455.3,1806,332z M2318,1164c0,34.7-12.7,64.7-38,90s-55.3,38-90,38c-36,0-66-12.7-90-38l-343-342  c-119.3,82.7-252.3,124-399,124c-95.3,0-186.5-18.5-273.5-55.5s-162-87-225-150s-113-138-150-225S654,427.3,654,332  s18.5-186.5,55.5-273.5s87-162,150-225s138-113,225-150S1262.7-372,1358-372s186.5,18.5,273.5,55.5s162,87,225,150s113,138,150,225  S2062,236.7,2062,332c0,146.7-41.3,279.7-124,399l343,343C2305.7,1098.7,2318,1128.7,2318,1164z" />
+    </svg>
+</div>
+<script src="/js/algoliasearch.min.js"></script>
+<script src="/js/autocomplete.min.js"></script>
+
+<script>
+var client = algoliasearch("1JDRAS0AZR", "8804ac109158bb3bb60d74ce98fa332f");
+var index = client.initIndex('prod_blog');
+
+autocomplete('#aa-search-input',
+{ hint: false}, {
+    source: autocomplete.sources.hits(index, {hitsPerPage: 5}),
+    
+    displayKey: 'name',
+    
+    templates: {
+        
+        suggestion: function(suggestion) {
+            return '<span>' + '<a href="/post/' + suggestion.slug + '">' +
+            suggestion._highlightResult.title.value + '</a></span>';
+        }
+    }
+});
+</script>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/20200317190406.png" data-img-desc-1="BinaryTree"></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="post-heading">
+                <h1>二叉树(BinaryTree)-平衡二叉树(AVL)</h1>
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>二叉树(BinaryTree)-平衡二叉树(AVL)</h1>
+                
+                
+                  <span class="post-meta">
+  
+    发表于 2019-08-24
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+  </header>
+
+
+    
+
+
+
+<div class="container" role="main">
+  <div class="row">
+
+    
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div>
+            
+            
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="/tags/algorithms/">Algorithms</a> &nbsp;
+              
+            </h5>
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+          
+            
+<aside class="toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#1最小不平衡子树">1、最小不平衡子树</a></li>
+    <li><a href="#2左旋右旋">2、左旋/右旋</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#节点类">节点类</a></li>
+    <li><a href="#插入节点实现">插入节点实现</a></li>
+  </ul>
+</nav>
+</aside>
+
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <h1 id="引子">引子</h1>
+<p>二叉排序树，理想情况下，二叉排序树的插入、删除、查找时间复杂度都是 O(logn)，非常高效，而且它是一种动态的数据结构，插入删除性能合查找一样好，不像之前提到的二分查找，虽然查找性能也是 O(logn)，但是需要先对线性表进行排序，二排序的最好时间复杂度也是 O(nlogn)，所以二分查找不适合动态结构的排序。</p>
+<p>但是如果二叉排序树构造的不好的话就会退化成斜树：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/f4ce7fbdd214be4143d736cdfad8d2d369e742a6103d866c9bac3c64c5a08365.png" alt="斜树"></p>
+<p>此时按照之前的实现算法性能退化成了 O(n)，所以如何构造二叉排序树很重要，我们的理想情况是满二叉树和完全二叉树，它们的性能都是 O(logn)，所以我们在构造二叉排序树的时候要尽可能像它们靠近，才能得到最佳的操作性能，由此引出平衡二叉树。</p>
+<h1 id="什么是平衡二叉树">什么是平衡二叉树</h1>
+<p>平衡二叉树的英文名是 Self-Balancing Binary Search Tree 或者 Height-Balancing Binary Search Tree，译作自平衡的二叉查找树，或者高度平衡的二叉查找树，二叉查找树和二叉排序树是一个意思，只是叫法不同，简称平衡二叉树，也叫 AVL 树（平衡二叉树作者的名字首字母），所以平衡二叉树首先是二叉排序树，并且这个二叉排序树是左右高度平衡的，这么讲有点抽象，具体来说，平衡二叉树要求每个节点的左子树和右子树的高度差至多等于 1，这个高度（深度）差的值叫做平衡因子 BF，也就是说 BF 的值不能大于1，否则就不是平衡二叉树。</p>
+<p>示例：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/e1c4552bbf35a11a85288d2c11002b81e8c12edc5e305d625bf0879e90d86792.png" alt="平衡二叉树"></p>
+<pre><code>图1满足平衡二叉树的定义，是平衡二叉树；
+图2所示二叉树不是二叉排序树，所有不是平衡二叉树；
+图3不满足平衡因子小于等于1的要求，对58这个节点来说，平衡因子BF的值是3，因而不是平衡二叉树；
+图4满足平衡二叉树的定义，是平衡二叉树；
+</code></pre>
+<p>之所以这么约束平衡二叉树，是为了保证它能够始终做到插入、删除、查找的时间复杂度是 O(logn)。</p>
+<h1 id="平衡二叉树的实现原理">平衡二叉树的实现原理</h1>
+<p>平衡二叉树的基本实现思路，是在构建二叉排序树的时候，每插入一个节点，都要检查这个节点的插入是否破坏了原有的平衡性，如果是的话，则找出最小不平衡子树，在保证整体二叉排序树的前提下，通过左旋或者右旋的方式将其调整为平衡子树。从而动态维护这棵平衡二叉树。</p>
+<p>这里面有几个概念需要解释一下：</p>
+<h2 id="1最小不平衡子树">1、最小不平衡子树</h2>
+<p>距离插入节点最近的，且平衡因子绝对值大于 1 的节点为根的子树，叫做最小不平衡子树：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/560ba1184079d07fb5c102dcdead8a724a906e5ecff6a6821dd2bcc57deac43c.png" alt="最小不平衡树"></p>
+<p>比如上图中以存储元素 58 的节点为根的子树叫做最小不平衡子树。</p>
+<h2 id="2左旋右旋">2、左旋/右旋</h2>
+<p>所谓左旋和右旋指的是最小不平衡子树旋转的方向。</p>
+<p>如果平衡因子小于 -1，即右子树高度值比较大，则需要左旋：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/d4e78d41ac170a6ce8764f6d6e23453fc1c84d7c70fe1eead21397afb9970c57.png" alt="左旋"></p>
+<p>反之，如果平衡因子大于1，即左子树高度值比较大，则需要右旋：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/b1bda0930a1317036be9a3ea29bb5059ed0882dbdd1f5c135a021ee40bc6ad27.png" alt="右旋"></p>
+<p>当然为了方便你理解原理，我们这里给出的都是最简化的情况，实际处理过程中比这个更复杂，下一篇我们将具体给你演示如何通过代码在各种情况下实现平衡二叉树并讨论对应的时间复杂度。</p>
+<h1 id="演示">演示</h1>
+<p>一棵二叉树：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/653d4e5bda46eb10a6fd4b51e3c4a8e3b980d9562f6f8df852ab01d1e83abe90.png" alt="图1"></p>
+<p>虽然这也是一棵二叉排序树，但是层数达到 8，显然可以通过平衡二叉树来降低层数，提高性能，如果把它转化为平衡二叉树，会是这个样子：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/7ab308ffbea171824385a324adb4be53066b956394dd14170879f97844fa44d1.png" alt="图2"></p>
+<p>层数降低了一半，变成了 4 层，显然性能要比之前要高。那么这个平衡二叉树是怎么构建的呢？假设插入节点的顺序是{3,2,1,4,5,6,7,10,9,8}，两个节点之前不用考虑，我们从第三个节点开始分析：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/c5d12919facbac791209313711ce32fd231f9de2395c296929252c4f941f3d56.png" alt="右旋"></p>
+<p>插入第三个节点 1 时，左子树高度是 2，右子树高度是 0，高度差的绝对值是 2，不符合平衡二叉树的要求，需要把以 3 为根节点的子树进行右旋，到右图那个样子，左右子树高度差为 0，符合平衡二叉树要求，完成调整。同理，插入第四个节点 4 的时候，左右子树高度为 -1，符合平衡二叉树要求，继续插入第五个节点，此时又不符合平衡二叉树的要求了，这个时候右子树比较高，需要左旋：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/2e2f9543b95fae19d39b505ef3ad3da57bad0171ebdb909c2091278535cd958b.png" alt="右旋"></p>
+<p>旋转的时候以最小不平衡子树为单位，此时最小的不平衡子树是 3、4、5 节点构成的子树，我们以 4 为中心进行左旋，将树结构调整为右图所示的样子，满足了平衡二叉树的要求，停止调整。注意到我们每次新增节点的时候，会调整以每个节点为根节点的左右子树的高度差，然后从最小子树开始进行调整，直到以每个节点为根节点的子树符合平衡二叉树的要求，这样整棵树就符合平衡二叉树的要求了。</p>
+<p>继续增加节点，当插入节点 6 时，发现根节点 2 上维护的高度差值为 -2，又不满足平衡二叉树了，这个时候，需要以 2 为中心对树进行左旋，最终调整为右图所示的结构满足平衡二叉树要求（右子树中旋转到根节点的节点对应子树需要移到旋转后二叉树的左子树中）：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/697e7b4d5b782159f7bc3d810144883a48ec33e2cc79ab9a48279db3898f6221.png" alt="右旋"></p>
+<p>继续增加节点 7，此时以 5 为根节点的最小子树不满足平衡二叉树的要求了，需要左旋：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/b18bd7018a676866c03cdd2697d19db34475375762c8a578866b1672f0973099.png" alt="右旋"></p>
+<p>继续增加节点 10，满足平衡二叉树要求，再插入节点 9，又不满足了：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/cdd834f714e6f61ca2887e0199e9fc5d4aa87083f21e94ae8356237cdc352af8.png" alt="右旋"></p>
+<p>这个时候，情况有点微妙，不像之前旋转的时候时候处理情况都比较简单，单纯左转满足不了需求，需要先将以 10 作为根节点的子树做一次右转，再将以 7 为根节点的子树做一次左转，让这棵不平衡子树转化为平衡子树：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/5a0eee58d7308072ab11f8551adc4a13a7ddcf4754b07799ad36f9ba8584dcf3.png" alt="右旋"></p>
+<p>这样整棵二叉树就满足平衡二叉树的要求了：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/d0d23a18cc43b848d7aa070c09e9ed8d53e671d5055d65cc6a8808c1baa320e8.png" alt="右旋"></p>
+<p>最后，插入节点 8，此时情况和刚才类似，这个时候，我们以 9 为根节点对子树进行右旋，再以 6 为根节点对子树进行左旋，最终达到平衡状态：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/5056cae18428cc376cb502bcc36ae689909c9d29137a0f256b3a2e9a27c5d4cb.png" alt="右旋"></p>
+<p>总结一下，大体的思路是平衡因子 BF 的值大于 1 时，右旋，小于 -1 时左旋，如果最小不平衡子树的 BF 值和其子树的 BF 值符号相反时，需要先将子树进行旋转使两者 BF 值符号相同，再旋转最小不平衡子树。单纯的左旋、右旋叫做单旋处理，将需要两次旋转处理的操作叫做双旋处理。</p>
+<h1 id="实现代码">实现代码</h1>
+<h2 id="节点类">节点类</h2>
+<p>是使用二叉链表来实现二叉树的存储，对应的节点类如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">class AVLNode
+{
+    public $data;             // 节点数据
+    public $left = null;      // 左子结点
+    public $right = null;     // 右子节点
+    public $bf = 0;           // 平衡因子BF
+    public $parent = null;    // 存储父节点
+
+    public function __construct($data)
+    {
+        $this-&gt;data = $data;
+    }
+}
+</code></pre></div><p>和普通二叉树节点相比，新增了一个 $bf 属性用于存放平衡因子，以及一个 $parent 属性用于存放父级节点。</p>
+<h2 id="插入节点实现">插入节点实现</h2>
+<p>平衡二叉树也是二叉排序树，所以查找实现和二叉排序树一样。下面我们来实现最关键的插入节点算法，我们创建了一个新的 AVLTree 类用来实现平衡二叉树的相关操作，编写新增节点相关方法如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">class AVLTree
+{
+    /**
+     * 根节点
+     * @var AVLNode
+     */
+    private $root;
+
+    const LH = 1;   // 左子树高（高度差）
+    const EH = 0;   // 等高
+    const RH = -1;  // 右子树高（高度差）
+
+    public function getTree()
+    {
+        return $this-&gt;root;
+    }
+
+    /**
+     * @param int $data
+     */
+    public function insert(int $data)
+    {
+        $this-&gt;insert_node($data, $this-&gt;root);
+    }
+
+    /**
+     * 插入节点
+     * @param int $data
+     * @param AVLNode $tree
+     * @return bool
+     */
+    protected function insert_node(int $data, &amp;$tree)
+    {
+        if (!$tree) {
+            $tree = new AVLNode($data);
+            $tree-&gt;bf = self::EH;
+            return true;
+        }
+
+        if ($data &lt; $tree-&gt;data) {
+            if (!$this-&gt;insert_node($data, $tree-&gt;left)) {
+                return false;
+            } else {
+                if (empty($tree-&gt;left-&gt;parent)) {
+                    $tree-&gt;left-&gt;parent = $tree;
+                }
+                switch ($tree-&gt;bf) {
+                    case self::LH:
+                        $this-&gt;left_balance($tree);
+                        return false;
+                    case self::EH:
+                        $tree-&gt;bf = self::LH;
+                        return true;
+                    case self::RH:
+                        $tree-&gt;bf = self::EH;
+                        return false;
+                }
+            }
+        } else {
+            if (!$this-&gt;insert_node($data, $tree-&gt;right)) {
+                return false;
+            } else {
+                if (empty($tree-&gt;right-&gt;parent)) {
+                    $tree-&gt;right-&gt;parent = $tree;
+                }
+                switch ($tree-&gt;bf) {
+                    case self::LH:
+                        $tree-&gt;bf = self::EH;
+                        return false;
+                    case self::EH:
+                        $tree-&gt;bf = self::RH;
+                        return true;
+                    case self::RH:
+                        $this-&gt;right_balance($tree);
+                        return false;
+                }
+            }
+        }
+    }
+
+    /**
+     * 右旋操作
+     * @param AVLNode $tree
+     */
+    protected function right_rotate(&amp;$tree)
+    {
+        $subTree = $tree-&gt;left;  // 将子树的左节点作为新的子树根节点
+        if ($tree-&gt;parent) {
+            $subTree-&gt;parent = $tree-&gt;parent;  // 更新新子树根节点的父节点
+            $left = false;
+            if ($tree-&gt;parent-&gt;left == $tree) {
+                $left = true;
+            }
+        } else {
+            $subTree-&gt;parent = null;
+        }
+        $tree-&gt;left = $subTree-&gt;right;  // 将原来左节点的右子树挂到老的根节点的左子树
+        $tree-&gt;parent = $subTree;
+        $subTree-&gt;right = $tree;  // 将老的根节点作为新的根节点的右子树
+        $tree = $subTree;
+        if (!$tree-&gt;parent) {
+            $this-&gt;root = $tree;
+        } else {
+            // 更新老的子树根节点父节点指针指向新的根节点
+            if ($left) {
+                $tree-&gt;parent-&gt;left = $tree;
+            } else {
+                $tree-&gt;parent-&gt;right = $tree;
+            }
+        }
+    }
+
+    /**
+     * 左旋操作
+     * @param AVLNode $tree
+     */
+    protected function left_rotate(&amp;$tree)
+    {
+        $subTree = $tree-&gt;right;     // 逻辑和右旋正好相反
+        $oldTree = clone $tree;
+        if ($tree-&gt;parent) {
+            $subTree-&gt;parent = $tree-&gt;parent;
+            $left = true;
+            if ($tree-&gt;parent-&gt;right == $tree) {
+                $left = false;
+            }
+        } else {
+            $subTree-&gt;parent = null;
+        }
+        $tree-&gt;right = $subTree-&gt;left;
+        $tree-&gt;parent = $subTree;
+        $subTree-&gt;left = $tree;
+        $tree = $subTree;
+        if (!$tree-&gt;parent) {
+            $this-&gt;root = $tree;
+        } else {
+            if ($left) {
+                $tree-&gt;parent-&gt;left = $tree;
+            } else {
+                $tree-&gt;parent-&gt;right = $tree;
+            }
+        }
+    }
+
+    /**
+     * 左子树平衡旋转处理
+     * @param AVLNode $tree
+     */
+    protected function left_balance(&amp;$tree)
+    {
+        $subTree = $tree-&gt;left;
+        switch ($subTree-&gt;bf) {
+            case self::LH:
+                // 新插入节点在左子节点的左子树上要做右单旋处理
+                $tree-&gt;bf = $subTree-&gt;bf = self::EH;
+                $this-&gt;right_rotate($tree);
+                break;
+            case self::RH:
+                // 新插入节点在左子节点的右子树上要做双旋处理
+                $subTree_r = $subTree-&gt;right;
+                switch ($subTree_r-&gt;bf) {
+                    case self::LH:
+                        $tree-&gt;bf = self::RH;
+                        $subTree-&gt;bf = self::EH;
+                        break;
+                    case self::EH:
+                        $tree-&gt;bf = $subTree-&gt;bf = self::EH;
+                        break;
+                    case self::RH:
+                        $tree-&gt;bf = self::EH;
+                        $subTree-&gt;bf = self::LH;
+                        break;
+                }
+                $subTree_r-&gt;bf = self::EH;
+                $this-&gt;left_rotate($subTree);
+                $this-&gt;right_rotate($tree);
+        }
+    }
+
+    /**
+     * 右子树平衡旋转处理
+     */
+    protected function right_balance(&amp;$tree)
+    {
+        $subTree = $tree-&gt;right;
+        switch ($subTree-&gt;bf) {
+            case self::RH:
+                // 新插入节点在右子节点的右子树上要做左单旋处理
+                $tree-&gt;bf = $subTree-&gt;bf = self::EH;
+                $this-&gt;left_rotate($tree);
+                break;
+            case self::LH:
+                // 新插入节点在右子节点的左子树上要做双旋处理
+                $subTree_l = $subTree-&gt;left;
+                switch ($subTree_l-&gt;bf) {
+                    case self::RH:
+                        $tree-&gt;bf = self::LH;
+                        $subTree-&gt;bf = self::EH;
+                        break;
+                    case self::EH:
+                        $tree-&gt;bf = $subTree-&gt;bf = self::EH;
+                        break;
+                    case self::LH:
+                        $tree-&gt;bf = self::EH;
+                        $subTree-&gt;bf = self::RH;
+                        break;
+                }
+                $subTree_l-&gt;bf = self::EH;
+                $this-&gt;right_rotate($subTree);
+                $this-&gt;left_rotate($tree);
+        }
+    }
+}
+</code></pre></div><p>这段代码理解起来不太轻松，你可以结合上一篇分享的图示分解过程，对比着理解这段插入节点时不断旋转子树构建平衡二叉树的代码。
+编写简单的测试代码</p>
+<p>接下来，我们编写一段简单的测试代码来测试上述代码是否能够正常工作：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$avlTree = new AVLTree();
+$avlTree-&gt;insert(3);
+$avlTree-&gt;insert(2);
+$avlTree-&gt;insert(1);
+$avlTree-&gt;insert(4);
+$avlTree-&gt;insert(5);
+$avlTree-&gt;insert(6);
+$avlTree-&gt;insert(7);
+$avlTree-&gt;insert(10);
+$avlTree-&gt;insert(9);
+$avlTree-&gt;insert(8);
+// 中序遍历生成的二叉树看是否是二叉排序树
+midOrderTraverse($avlTree-&gt;getTree());
+// 以数组形式打印构建的二叉树看是否是平衡二叉树
+print_r($avlTree-&gt;getTree());
+</code></pre></div><p>以上一篇分享的示例数据为例，通过上述插入节点代码将这些数据插入到二叉树中，看最终生成的二叉树是否是平衡二叉树。结果符合我们的预期，构建的二叉树和下面这个二叉树一模一样：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/7ab308ffbea171824385a324adb4be53066b956394dd14170879f97844fa44d1.png" alt="平衡二叉树"></p>
+<p>平衡二叉树的节点删除也要不断去判断删除节点后是否还满足平衡二叉树的要求，感兴趣的同学可以去参考节点插入逻辑自行实现下。
+算法复杂度</p>
+<p>二叉排序树的插入、删除、查找，最理想的情况下，时间复杂度是 O(logn)，而平衡二叉树就是这种理想情况，虽然平衡二叉树性能是最好的，也是最稳定的，但是这套算法实现起来比较复杂，每次插入节点和删除节点都需要判断剩下节点构成的二叉排序树是否满足平衡二叉树的要求，如果不满足需要做相应的左旋右旋处理，维护成本高，因此，在工程实践上，更多时候使用的是红黑树这种二叉排序树，它是一种不严格的平衡二叉树，实现起来更加简单，性能也接近严格的平衡二叉树。</p>
+
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我们的微信公众帐号，在微信公众帐号中回复◉加群◉即可加入到我们的 kubernetes 讨论群里面共同学习。</p>
+<img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/qrcode.png" alt="wechat-account-qrcode">
+
+  
+          
+            <div class="entry-shang text-center">
+    <p>「真诚赞赏，手留余香」</p>
+    <button class="zs show-zs btn btn-bred">赞赏</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+    <div class="zs-modal-head">
+        <button type="button" class="close">×</button>
+        <span class="author"><img src="/img/avatar.jpeg"/>阳明</span>
+        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
+    </div>
+    <div class="zs-modal-body">
+        <div class="zs-modal-btns">
+            <button class="btn btn-blink" data-num="2">2元</button>
+            <button class="btn btn-blink" data-num="5">5元</button>
+            <button class="btn btn-blink" data-num="10">10元</button>
+            <button class="btn btn-blink" data-num="50">50元</button>
+            <button class="btn btn-blink" data-num="100">100元</button>
+            <button class="btn btn-blink" data-num="1">任意金额</button>
+        </div>
+        <div class="zs-modal-pay">
+            <button class="btn btn-bred" id="pay-text">2元</button>
+            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+            <img src="/img/wechat-2.png" id="pay-image"/>
+        </div>
+    </div>
+    <div class="zs-modal-footer">
+        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
+    </div>
+</div>
+          
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
+        
+          
+
+<h3>相关文章</h3>
+<ul style="margin-bottom: 25px;">
+    
+    <li><a href="/post/algorithms/binarytree/algorithms-binarytree-search/">二叉树(BinaryTree)-查找</a></li>
+    
+    <li><a href="/post/algorithms/binarytree/algorithms-binarytree-traversal/">二叉树(BinaryTree)-遍历</a></li>
+    
+    <li><a href="/post/algorithms/binarytree/algorithms-binarytree-storage/">二叉树(BinaryTree)-存储</a></li>
+    
+    <li><a href="/post/algorithms/binarytree/algorithms-binarytree/">二叉树(BinaryTree)</a></li>
+    
+    <li><a href="/post/algorithms/stringmatching/algorithms-stringmatching-kmp/">字符串匹配-KMP</a></li>
+    
+    <li><a href="/post/algorithms/stringmatching/algorithms-stringmatching-trie/">字符串匹配-Trie</a></li>
+    
+    <li><a href="/post/algorithms/stringmatching/algorithms-stringmatching-bf/">字符串匹配-BF(暴力匹配算法)</a></li>
+    
+    <li><a href="/post/algorithms/datastructures/algorithms-datastructures-hashtable/">数据结构-散列表(HashTable, 哈希表)</a></li>
+    
+    <li><a href="/post/algorithms/binarysearch/algorithms-binarysearch-case/">二分查找(BinarySearch)-索引查找</a></li>
+    
+    <li><a href="/post/algorithms/binarysearch/algorithms-binarysearch-interval/">二分查找(BinarySearch)-区间查找</a></li>
+    
+</ul>
+
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="/post/algorithms/binarytree/algorithms-binarytree-search/" data-toggle="tooltip" data-placement="top" title="二叉树(BinaryTree)-查找">&larr; 前一篇</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="/post/algorithms/binarytree/algorithms-redblacktree/" data-toggle="tooltip" data-placement="top" title="二叉树(BinaryTree)-红黑树(Red-Black Tree)">后一篇 &rarr;</a>
+            </li>
+          
+        </ul>
+        
+
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
+        
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+    var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        labels: ['gitment'],
+        title: '二叉树(BinaryTree)-平衡二叉树(AVL)',
+        createIssueManually: true,
+        id: 'Algorithms-BinaryTree-AVL',      
+        distractionFreeMode: true  
+    });
+    gitalk.render('gitalk-container');
+</script>
+
+
+        
+          
+
+        
+  
+      </div>
+    
+    
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          <img src="/img/wechatmp.png" alt="k8s技术圈">
+          
+          <li>
+            <a href="mailto:icnych@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://github.com/cnych" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://weibo.com/cnych" title="微博">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://instagram.com/cnych" title="Instagram">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="/%20index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+          
+          <a href="/">WoolfBreathe</a>
+          
+          
+
+          &nbsp;&bull;&nbsp;
+          2021
+        </p>
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a
+            href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a
+            href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script> renderMathInElement(document.body); </script>
+<script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
+</script>
+<script>
+  (function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+
+  </body>
+</html>
+

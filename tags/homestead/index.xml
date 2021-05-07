@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Homestead on WoolfBreathe</title>
+    <link>/tags/homestead/</link>
+    <description>Recent content in Homestead on WoolfBreathe</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <managingEditor>youremail@domain.com (WoolfBreathe)</managingEditor>
+    <webMaster>youremail@domain.com (WoolfBreathe)</webMaster>
+    <lastBuildDate>Wed, 27 Nov 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/homestead/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Homestead(Windows系统Laravel环境搭建)</title>
+      <link>/post/devops/linux/devops-linux-homestead/</link>
+      <pubDate>Wed, 27 Nov 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/devops/linux/devops-linux-homestead/</guid>
+      <description>步骤简略  接下来让我们按照这几个步骤来完成整个 Laravel 开发环境的安装及配置： 安装 VirtualBox 安装 Vagrant 导入 Homestead Box 虚拟机盒子 安装 Git 安装 Homestead 管理脚本 配置 Homestead.yaml 文件 启动 Homestead 虚拟机
+ 安装 VirtualBox VirtualBox 是 Oracle 公司的开源虚拟机软件。VirtualBox 号称是最强的免费虚拟机软件，它不仅功能齐全，而且性能也很优异！VirtualBox 支持大部分流行的系统，如：Mac, Windows, Linux 等。
+安装 Vagrant Vagrant 是用来管理虚拟机的工具，支持当前主流的虚拟机系统如 VirtualBox、VMware、AWS 等。Vagrant 的主要作用是提供一个可配置、可移植和复用的软件环境。Vagrant 让你通过编写一个 Vagrantfile 文件来控制虚拟机的启动、虚拟机网络环境的配置、虚拟机与主机间的文件共享，以及启动后自动执行一些配置脚本，如自动执行一个 Shell Script 来安装一些必备的开发工具，如安装配置 MySQL、PHP，甚至是自动配置 Nginx 站点。这意味着，在一个多人开发的项目中，你只需要同步 Vagrantfile 文件，就可以保证参与项目的每个人各自的机器上拥有一致的开发环境。
+Homestead 介绍 Homestead 利用 Vagrantfile 提供的便利，定制了一整套的可配置、可移植和复用的 Laravel 开发环境。Homestead 虚拟机里面包含了 Nginx Web 服务器、PHP 7、MySQL、Postgres、Redis、Memcached、Node，以及所有你在使用 Laravel 开发时需要用到的各种软件。 Homestead 包含了两个东西： Homestead 管理脚本； Homestead Box 虚拟机盒子。 接下来独自说明下。</description>
+    </item>
+    
+  </channel>
+</rss>

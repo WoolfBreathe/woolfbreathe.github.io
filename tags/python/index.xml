@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Python on WoolfBreathe</title>
+    <link>/tags/python/</link>
+    <description>Recent content in Python on WoolfBreathe</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <managingEditor>youremail@domain.com (WoolfBreathe)</managingEditor>
+    <webMaster>youremail@domain.com (WoolfBreathe)</webMaster>
+    <lastBuildDate>Tue, 16 Jun 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Python ORM SQLAlchemy</title>
+      <link>/post/computerlanguages/python/computerlanguages-python-sqlalchemy/</link>
+      <pubDate>Tue, 16 Jun 2020 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/computerlanguages/python/computerlanguages-python-sqlalchemy/</guid>
+      <description>官网 (SQLAlchemy Documentation)[https://www.osgeo.cn/sqlalchemy/]
+安装 pip instal sqlalchemy 基本代码 注意: SQLAlchemy多对多关联, 所有数据库实例需要继承一个declarative_base, 否则将会找不到表  from sqlalchemy.ext.declarative import declarative_base from sqlalchemy.orm import sessionmaker from sqlalchemy.orm import relationship from sqlalchemy import create_engine # 连接格式: dialect+driver://username:password@host:port/database engine = create_engine( &amp;#34;mysql+pymysql://homestead:secret@192.168.10.10:3306/gbei_admin?charset=utf8&amp;#34; ) Base = declarative_base() Session = sessionmaker(engine) db_session = Session() 示例 多对多关联示例代码
+class Girl(Base): __tablename__ = &amp;#34;girl&amp;#34; id = Column(Integer, primary_key=True) name = Column(String(32)) # secondary=&amp;#34;Hotel&amp;#34; 表示两个表关联Hotel girl2boy = relationship(&amp;#34;Boy&amp;#34;, secondary=&amp;#34;hotel&amp;#34;, backref=&amp;#34;boy2girl&amp;#34;) class Boy(Base): __tablename__ = &amp;#34;boy&amp;#34; id = Column(Integer, primary_key=True) name = Column(String(32)) class Hotel(Base): __tablename__ = &amp;#34;hotel&amp;#34; id = Column(Integer, primary_key=True) girl_id = Column(Integer, ForeignKey(&amp;#34;girl.</description>
+    </item>
+    
+    <item>
+      <title>Selenium &#43; Chrome</title>
+      <link>/post/computerlanguages/python/computerlanguages-python-selenium/</link>
+      <pubDate>Sun, 15 Mar 2020 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/computerlanguages/python/computerlanguages-python-selenium/</guid>
+      <description>简介 Selenium 用于 抓取数据 自动化测试(很多网站API会添加sign验证, 很难破解, Selenium是最优选择)
+Selenium IDE 可以实现录制页面操作功能并且回访的功能, 是非常强大的自动化测试工具, 不需要编程能力一样可以使用
+Selenium 结合 Chrome 使用 Chrome DevTools 可以实现非常强大的功能
+Ubuntu安装 安装Chrome sudo apt-get install libxss1 libappindicator1 libindicator7 libgconf-2-4 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb sudo dpkg -i google-chrome*.deb 运行可能出现错误,按照提示运行 apt --fix-broken install 安装Selenium pip install selenium 安装ChromeDriver wget -N http://chromedriver.storage.googleapis.com/2.29/chromedriver_linux64.zip ##注意，这里2.29要换成实际对应下载的CHROME的版本。目前最新的是：2.43 unzip chromedriver_linux64.zip chmod +x chromedriver sudo mv -f chromedriver /usr/local/share/chromedriver sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver sudo ln -s /usr/local/share/chromedriver /usr/bin/chromedriver 注意: Chrome浏览器版本要 与 chromedrive版本 相符 /usr/bin/google-chrome-stable --version 查看Chrome浏览器版本 /usr/bin/chromedrive -v 查看chromedrive版本  使用教程 Selenium 官网 Selenium Python Chrome DevTools Protocal, Chrome开发者工具协议 API文档: https://chromedevtools.</description>
+    </item>
+    
+    <item>
+      <title>Mitmproxy拦截代理</title>
+      <link>/post/computerlanguages/python/computerlanguages-python-mitmproxy/</link>
+      <pubDate>Tue, 26 Nov 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/computerlanguages/python/computerlanguages-python-mitmproxy/</guid>
+      <description>安装 mitmproxy pip install mitmproxy 启动 mitmproxy mitmproxy有三种启动命令： (1) mitmweb -- 提供一个web界面； -- 代理端口：绑定了 *:8080作为代理端口； -- 交互界面地址：localhost:8081； (2) mitmproxy -- 提供命令行界面； -- 可以通过命令过滤请求； (3) mitmdump -- 【TODO】  mitmweb -p 8082 --web-iface 192.168.10.10 --web-port 8081 -p 代理端口 --web-iface 网页访问IP --web-port 网页访问端口 修改WIFI, 连接代理 用户目录下的.mitmproxy目录里
+mitmproxy-ca.pem PEM格式的证书私钥 mitmproxy-ca-cert.pem PEM格式证书，适用于大多数非Windows平台 mitmproxy-ca-cert.p12 PKCS12格式的证书，适用于Windows平台 mitmproxy-ca-cert.cer与mitmproxy-ca-cert.pem相同，只是改变了后缀，适用于部分Android平台 mitmproxy-dhparam.pem PEM格式的秘钥文件，用于增强SSL安全性  安装证书(手机模拟器) 设置-&amp;gt;安全-&amp;gt;从SD卡安装证书
+安装证书(浏览器) 设置-&amp;gt;网络设置-&amp;gt;手动配置代理
+FireFox特殊处理 1、打开 about:config
+2、查找(默认为false，改为true就可以了) security.enterprise_roots.enabled
+3、吐槽，firefox太极端了，这是作死。</description>
+    </item>
+    
+    <item>
+      <title>Scrapy</title>
+      <link>/post/computerlanguages/python/computerlanguages-python-scrapy/</link>
+      <pubDate>Tue, 16 Jul 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/computerlanguages/python/computerlanguages-python-scrapy/</guid>
+      <description>安装 服务器系统： Centos7.2
+准备工作： 编译前准备其他库的安装(使用sudo命令)
+yum -y groupinstall &amp;#34;Development tools&amp;#34; 3.7版本需要一个新的包libffi-devel，安装此包之后再次进行编译安装即可。
+yum install libffi-devel zlib zlib-devel gcc gcc-c++ wget -y 升级openssh和openssl 旧版本openssl1.0.2k 新版本openssl1.1.1 备份(重要)
+mv /usr/bin/openssl /usr/bin/openssl.old mv /usr/include/openssl /usr/include/openssl.old mv /usr/lib/libssl.so.1.0.1e /usr/lib/libssl.so.1.0.1e.old mv /usr/lib/libcrypto.so.1.0.1e /usr/lib/libcrypto.so.1.0.1e.old 下载主程序
+wget https://www.openssl.org/source/openssl-1.1.1.tar.gz 解压缩
+tar zxvf openssl-1.1.1.tar.gz 配置程序安装目录
+cd opensll-1.1.1 ./config shared zlib --prefix=/usr/local/openssl --openssldir=/usr/local/openssl/ssl 显示配置数据
+perl configdata.pm --dump 编译安装
+make -j 4 &amp;amp;&amp;amp; make install 查看新安装版本
+cd /usr/local/openssl/bin ./openssl version -a 此处显示错误，说明找到不libssl.so.1.1库
+./openssl: error while loading shared libraries: libssl.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+  <title>图(Graph)-拓扑排序(TopologicalSort)-WoolfBreathe</title>
+  <meta property="og:title" content="图(Graph)-拓扑排序(TopologicalSort)" />
+  <meta name="twitter:title" content="图(Graph)-拓扑排序(TopologicalSort)" />
+
+  <meta name="description" content="拓扑排序 无环图，就是图中没有回路。无环图两个常见的应用就是拓扑排序和关键路径。
+在日常生活中，通常会把软件开发、生产流程、网络设备互联都当成一个项目工程来对待，所有工程都可以分为若干个子工程（或者称之为「活动」），这些子工程之间往往会有一些条件约束，比如其中某些活动必须在另一些活动完成之后才能进行。下面是一个简单的软件开发流程图：
+将整个流程抽象为图这种数据结构，则每个子工程节点就是图的顶点，连接子工程的前后约束就是图的边（并且是有方向的边），并且工程有起始节点，也有结束节点，并且，首尾不会相连，所以综合来看，这样的工程图，一定是无环的有向图。
+在一个表示工程的有向图中，用顶点表示活动，用弧（有方向的边）表示活动之间的优先关系，这样的以顶点表示活动的有向图，称之为 AOV 网（Activity On Vertex Network）。
+拓扑排序的概念。 设 G=(V,E)（其中 V 表示顶点集合，E 表示弧集合）是一个具有 n 个顶点的有向图，V 集合中的顶点满足从顶点 i 到顶点 j 之间有一条路径，并且在顶点序列中 i 一定在 j 之前，则称这样的序列为一个拓扑序列。
+而所谓的拓扑排序，就是对有向图构造拓扑序列的过程。
+构造结果中如果全部顶点都被输出，则说明它是不存在回路的 AOV 网；否则说明存在回路，不是 AOV 网。
+对于不存在回路的 AOV 网，可以应用在各种不同的工程或项目流程图中，满足各种场景的需要，所以拓扑排序在工程中非常有实用价值。
+实现代码 拓扑排序的基本实现思路如下：
+在 AOV 网中，找到一个入度为 0 的顶点，然后删除此顶点，并删除以此顶点为起点的弧，重复此步骤，直到输出所有顶点，或者 AOV 网中不存在入度为 0 的顶点为止。
+和最小生成树和最短路径一样，我们还是通过邻接表来定义一个 AOV 网，考虑到始终需要查找入度为 0 的顶点，我们在原来的顶点数据结构基础上，新增一个入度域 in，用来表示入度值：
+/** * 顶点 * Class VNode */ class VNode extends Node { public $in; // 入度 public function __construct($data, $in) { $this-&gt;in = $in; parent::__construct($data); } } 此外拓扑排序针对的是有向图，而之前实现最小生成树和最短路径的时候，都是基于无向图，所以还要编写一个新的继承自 EdgeWeightedGraph 的子类：">
+  <meta property="og:description" content="拓扑排序 无环图，就是图中没有回路。无环图两个常见的应用就是拓扑排序和关键路径。
+在日常生活中，通常会把软件开发、生产流程、网络设备互联都当成一个项目工程来对待，所有工程都可以分为若干个子工程（或者称之为「活动」），这些子工程之间往往会有一些条件约束，比如其中某些活动必须在另一些活动完成之后才能进行。下面是一个简单的软件开发流程图：
+将整个流程抽象为图这种数据结构，则每个子工程节点就是图的顶点，连接子工程的前后约束就是图的边（并且是有方向的边），并且工程有起始节点，也有结束节点，并且，首尾不会相连，所以综合来看，这样的工程图，一定是无环的有向图。
+在一个表示工程的有向图中，用顶点表示活动，用弧（有方向的边）表示活动之间的优先关系，这样的以顶点表示活动的有向图，称之为 AOV 网（Activity On Vertex Network）。
+拓扑排序的概念。 设 G=(V,E)（其中 V 表示顶点集合，E 表示弧集合）是一个具有 n 个顶点的有向图，V 集合中的顶点满足从顶点 i 到顶点 j 之间有一条路径，并且在顶点序列中 i 一定在 j 之前，则称这样的序列为一个拓扑序列。
+而所谓的拓扑排序，就是对有向图构造拓扑序列的过程。
+构造结果中如果全部顶点都被输出，则说明它是不存在回路的 AOV 网；否则说明存在回路，不是 AOV 网。
+对于不存在回路的 AOV 网，可以应用在各种不同的工程或项目流程图中，满足各种场景的需要，所以拓扑排序在工程中非常有实用价值。
+实现代码 拓扑排序的基本实现思路如下：
+在 AOV 网中，找到一个入度为 0 的顶点，然后删除此顶点，并删除以此顶点为起点的弧，重复此步骤，直到输出所有顶点，或者 AOV 网中不存在入度为 0 的顶点为止。
+和最小生成树和最短路径一样，我们还是通过邻接表来定义一个 AOV 网，考虑到始终需要查找入度为 0 的顶点，我们在原来的顶点数据结构基础上，新增一个入度域 in，用来表示入度值：
+/** * 顶点 * Class VNode */ class VNode extends Node { public $in; // 入度 public function __construct($data, $in) { $this-&gt;in = $in; parent::__construct($data); } } 此外拓扑排序针对的是有向图，而之前实现最小生成树和最短路径的时候，都是基于无向图，所以还要编写一个新的继承自 EdgeWeightedGraph 的子类：">
+  <meta name="twitter:description" content="拓扑排序 无环图，就是图中没有回路。无环图两个常见的应用就是拓扑排序和关键路径。
+在日常生活中，通常会把软件开发、生产流程、网络设备互联都当成一个项目工程来对待，所有工程都可以分为若干个子工程（或者称之为「活动」），这些子工程之间往往会有一些条件约束，比如其中某些活动必须在另一些活动完成之后才能进行。下面是一个简单的软件开发流程图：
+将整个流程抽象为图这种数据结构，则每个子工程节点就是图的顶点，连 …">
+  <meta name="author" content="WoolfBreathe"/>
+  <link href="/img/favicon.png" rel="icon" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/img/favicon.png"/>
+  <meta property="og:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@username" />
+  <meta name="twitter:creator" content="@username" />
+  <meta property="og:url" content="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="WoolfBreathe" />
+
+  <meta name="generator" content="Hugo 0.68.3" />
+  <link rel="canonical" href="/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="WoolfBreathe">
+
+  
+  
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700%7COpen+Sans:400,700" rel="stylesheet">
+  
+
+  <link rel="stylesheet" href='/css/bundle.min.62de9d30b83723e0d55f82908aedb1c5eb18c910bc24bcf43e530ce754ee1502.css' integrity='sha256-Yt6dMLg3I&#43;DVX4KQiu2xxesYyRC8JLz0PlMM51TuFQI='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
+<meta name="google-site-verification" content="oKxX4fOvB2yYmU02txZFChM93XQbESU4JaG3tNH9Hm8" />
+<meta name="baidu-site-verification" content="F5ojAyqaKU" />
+<meta name="keywords" content="Algorithms, Graph">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d611849735f187dd788dc054908f7d7a";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/" title="WoolfBreathe">
+        <img src="img/avatar-icon.png" style="margin-top: -5px;height: 32px;" alt="WoolfBreathe">
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="首页" href="/">首页</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="归档" href="/archives">归档</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="标签" href="/tags">标签</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于" href="/page/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="RSS" href="/index.xml">RSS</a>
+            </li>
+          
+        
+
+        
+
+        
+
+        
+          <li>
+            <a href="#modalSearch" data-toggle="modal" data-target="#modalSearch" style="outline: none;">
+              <span id="searchGlyph" class="glyphicon glyphicon-search"></span>
+            </a>
+          </li>
+          
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+  <div id="modalSearch" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">搜索</h4>
+        </div>
+        <div class="modal-body">
+            
+<div class="aa-input-container" id="aa-input-container">
+    <input type="search" id="aa-search-input" class="aa-input-search" placeholder="Search for titles or URIs..." name="search" autocomplete="off" />
+    <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
+        <path d="M1806,332c0-123.3-43.8-228.8-131.5-316.5C1586.8-72.2,1481.3-116,1358-116s-228.8,43.8-316.5,131.5  C953.8,103.2,910,208.7,910,332s43.8,228.8,131.5,316.5C1129.2,736.2,1234.7,780,1358,780s228.8-43.8,316.5-131.5  C1762.2,560.8,1806,455.3,1806,332z M2318,1164c0,34.7-12.7,64.7-38,90s-55.3,38-90,38c-36,0-66-12.7-90-38l-343-342  c-119.3,82.7-252.3,124-399,124c-95.3,0-186.5-18.5-273.5-55.5s-162-87-225-150s-113-138-150-225S654,427.3,654,332  s18.5-186.5,55.5-273.5s87-162,150-225s138-113,225-150S1262.7-372,1358-372s186.5,18.5,273.5,55.5s162,87,225,150s113,138,150,225  S2062,236.7,2062,332c0,146.7-41.3,279.7-124,399l343,343C2305.7,1098.7,2318,1128.7,2318,1164z" />
+    </svg>
+</div>
+<script src="/js/algoliasearch.min.js"></script>
+<script src="/js/autocomplete.min.js"></script>
+
+<script>
+var client = algoliasearch("1JDRAS0AZR", "8804ac109158bb3bb60d74ce98fa332f");
+var index = client.initIndex('prod_blog');
+
+autocomplete('#aa-search-input',
+{ hint: false}, {
+    source: autocomplete.sources.hits(index, {hitsPerPage: 5}),
+    
+    displayKey: 'name',
+    
+    templates: {
+        
+        suggestion: function(suggestion) {
+            return '<span>' + '<a href="/post/' + suggestion.slug + '">' +
+            suggestion._highlightResult.title.value + '</a></span>';
+        }
+    }
+});
+</script>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/20200317190406.png" ></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="post-heading">
+                <h1>图(Graph)-拓扑排序(TopologicalSort)</h1>
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>图(Graph)-拓扑排序(TopologicalSort)</h1>
+                
+                
+                  <span class="post-meta">
+  
+    发表于 2019-09-02
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+  </header>
+
+
+    
+
+
+
+<div class="container" role="main">
+  <div class="row">
+
+    
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div>
+            
+            
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="/tags/algorithms/">Algorithms</a> &nbsp;
+              
+                  <a href="/tags/graph/">Graph</a> &nbsp;
+              
+            </h5>
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+          
+            
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <h1 id="拓扑排序">拓扑排序</h1>
+<p><strong>无环图，就是图中没有回路</strong>。无环图两个常见的应用就是拓扑排序和关键路径。</p>
+<p>在日常生活中，通常会把软件开发、生产流程、网络设备互联都当成一个项目工程来对待，所有工程都可以分为若干个子工程（或者称之为「活动」），这些子工程之间往往会有一些条件约束，比如其中某些活动必须在另一些活动完成之后才能进行。下面是一个简单的软件开发流程图：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/Graph/image-1572887562497.png" alt="软件开发流程图"></p>
+<p>将整个流程抽象为图这种数据结构，则每个子工程节点就是图的顶点，连接子工程的前后约束就是图的边（并且是有方向的边），并且工程有起始节点，也有结束节点，并且，首尾不会相连，所以综合来看，这样的工程图，一定是无环的有向图。</p>
+<p>在一个表示工程的有向图中，用顶点表示活动，用弧（有方向的边）表示活动之间的优先关系，这样的以顶点表示活动的有向图，<strong>称之为 AOV 网（Activity On Vertex Network）</strong>。</p>
+<h2 id="拓扑排序的概念">拓扑排序的概念。</h2>
+<p>设 G=(V,E)（其中 V 表示顶点集合，E 表示弧集合）是一个具有 n 个顶点的有向图，V 集合中的顶点满足从顶点 i 到顶点 j 之间有一条路径，并且在顶点序列中 i 一定在 j 之前，则称这样的序列为一个拓扑序列。</p>
+<p>而所谓的<strong>拓扑排序，就是对有向图构造拓扑序列的过程。</strong></p>
+<p>构造结果中如果全部顶点都被输出，则说明它是不存在回路的 AOV 网；否则说明存在回路，不是 AOV 网。</p>
+<p>对于不存在回路的 AOV 网，可以应用在各种不同的工程或项目流程图中，满足各种场景的需要，所以拓扑排序在工程中非常有实用价值。</p>
+<h2 id="实现代码">实现代码</h2>
+<p>拓扑排序的基本实现思路如下：</p>
+<p>在 AOV 网中，找到一个入度为 0 的顶点，然后删除此顶点，并删除以此顶点为起点的弧，重复此步骤，直到输出所有顶点，或者 AOV 网中不存在入度为 0 的顶点为止。</p>
+<p>和最小生成树和最短路径一样，我们还是通过邻接表来定义一个 AOV 网，考虑到始终需要查找入度为 0 的顶点，我们在原来的顶点数据结构基础上，新增一个入度域 in，用来表示入度值：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">/**
+ * 顶点
+ * Class VNode
+ */
+class VNode extends Node
+{
+    public $in;  // 入度
+
+    public function __construct($data, $in)
+    {
+        $this-&gt;in = $in;
+        parent::__construct($data);
+    }
+}
+</code></pre></div><p>此外拓扑排序针对的是有向图，而之前实现最小生成树和最短路径的时候，都是基于无向图，所以还要编写一个新的继承自 EdgeWeightedGraph 的子类：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">class DirectedWeightedGraph extends EdgeWeightedGraph
+{
+    // 添加边
+    public function addEdge($s, $t, $weight)
+    {
+        $etNode = new ENode($t, $weight);
+        $this-&gt;adj[$s]-&gt;insertENode($etNode);
+        $this-&gt;edges[] = new Edge($s, $t, $weight);
+        // 将指向顶点入度值加1
+        $vNode = $this-&gt;getVertex($t);
+        $vNode-&gt;in += 1;
+    }
+
+    /**
+     * @param $position
+     * @return bool|VNode
+     */
+    public function getVertex($position)
+    {
+        $vertex = $this-&gt;adj[$position]-&gt;get(0);
+        return $vertex;
+    }
+
+}
+</code></pre></div><p>在表示有向图的子类 DirectedWeightedGraph 中重写了 addEdge 方法，因为有向图的方向是固定的，需要和无向图区分开来，另外，在新增弧的时候，还为弧指向的顶点更新了入度值。</p>
+<pre><code>注：记得将父类 EdgeWeightedGraph 中的所有属性可见性调整为 protected，以便在子类中可以访问。
+</code></pre>
+<p>做了以上准备工作后，接下来，我们在子类 DirectedWeightedGraph 中编写拓扑排序实现方法 TopologicalSort：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">public function TopologicalSort()
+{
+    $stack = [];  // 存放入度为零的顶点（以栈的方式实现）
+    $count = 0;   // 统计输出顶点数
+    $sorted = []; // 存储拓扑排序结果
+    foreach ($this-&gt;vData as $pos =&gt; $data) {
+        $vertex = $this-&gt;getVertex($pos);
+        if ($vertex &amp;&amp; $vertex-&gt;in == 0) {
+            $stack[] = $pos;
+        }
+    }
+    while ($stack) {
+        $start = array_pop($stack);  // 开始顶点
+        $vertex = $this-&gt;getVertex($start);
+        if (!in_array($vertex-&gt;data, $sorted)) {
+            $sorted[$start] = $vertex-&gt;data;
+        }
+        $count++;
+        $eNode = $vertex-&gt;next;
+        while ($eNode) {
+            $k = $eNode-&gt;data;  // 与起点相邻的顶点
+            $oVertex = $this-&gt;getVertex($k);
+            if (!(--$oVertex-&gt;in)) {  // 「删除」该弧，将对应顶点入度值减1
+                $stack[] = $k;  // 若为0则入栈，以便下次循环输出
+            }
+            $eNode = $eNode-&gt;next;
+        }
+    }
+
+    if ($count &lt; $this-&gt;vNum) {
+        return false;   // 存在环
+    }
+
+    return $sorted;
+}
+</code></pre></div><h2 id="复杂度分析">复杂度分析</h2>
+<p>实现逻辑很简单，分析整个算法，对于一个有 n 个顶点和 e 条边的有向图来说，扫描顶点表查找入度为 0 的顶点的时间复杂度为 O(n)，而之后的 while 循环中，每个顶点进一次栈，出一次栈，总共执行此次数为 e，所以整个算法的时间复杂度为 O(n+e)。</p>
+
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我们的微信公众帐号，在微信公众帐号中回复◉加群◉即可加入到我们的 kubernetes 讨论群里面共同学习。</p>
+<img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/qrcode.png" alt="wechat-account-qrcode">
+
+  
+          
+            <div class="entry-shang text-center">
+    <p>「真诚赞赏，手留余香」</p>
+    <button class="zs show-zs btn btn-bred">赞赏</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+    <div class="zs-modal-head">
+        <button type="button" class="close">×</button>
+        <span class="author"><img src="/img/avatar.jpeg"/>阳明</span>
+        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
+    </div>
+    <div class="zs-modal-body">
+        <div class="zs-modal-btns">
+            <button class="btn btn-blink" data-num="2">2元</button>
+            <button class="btn btn-blink" data-num="5">5元</button>
+            <button class="btn btn-blink" data-num="10">10元</button>
+            <button class="btn btn-blink" data-num="50">50元</button>
+            <button class="btn btn-blink" data-num="100">100元</button>
+            <button class="btn btn-blink" data-num="1">任意金额</button>
+        </div>
+        <div class="zs-modal-pay">
+            <button class="btn btn-bred" id="pay-text">2元</button>
+            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+            <img src="/img/wechat-2.png" id="pay-image"/>
+        </div>
+    </div>
+    <div class="zs-modal-footer">
+        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
+    </div>
+</div>
+          
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
+        
+          
+
+<h3>相关文章</h3>
+<ul style="margin-bottom: 25px;">
+    
+    <li><a href="/post/algorithms/graph/algorithms-graph-criticalpath/">图(Graph)-关键路径(CriticalPath)</a></li>
+    
+    <li><a href="/post/algorithms/graph/algorithms-graph-shortestpath/">图(Graph)-最短路径(ShortestPath)</a></li>
+    
+    <li><a href="/post/algorithms/graph/algorithms-graph-minimumspanningtree/">图(Graph)-最小生成树(MinimumSpanningTree)</a></li>
+    
+    <li><a href="/post/algorithms/graph/algorithms-graph-traverse/">图(Graph)-遍历</a></li>
+    
+    <li><a href="/post/algorithms/graph/algorithms-graph-storage/">图(Graph)-存储</a></li>
+    
+    <li><a href="/post/algorithms/graph/algorithms-graph/">图(Graph)</a></li>
+    
+    <li><a href="/post/algorithms/binarytree/algorithms-binarytree-huffmantree/">二叉树(BinaryTree)-哈夫曼树(HuffmanTree)</a></li>
+    
+    <li><a href="/post/algorithms/binarytree/algorithms-binarytree-heap/">二叉树(BinaryTree)-堆(Heap)</a></li>
+    
+    <li><a href="/post/algorithms/binarytree/algorithms-redblacktree/">二叉树(BinaryTree)-红黑树(Red-Black Tree)</a></li>
+    
+    <li><a href="/post/algorithms/binarytree/algorithms-binarytree-avl/">二叉树(BinaryTree)-平衡二叉树(AVL)</a></li>
+    
+</ul>
+
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="/post/algorithms/graph/algorithms-graph-criticalpath/" data-toggle="tooltip" data-placement="top" title="图(Graph)-关键路径(CriticalPath)">&larr; 前一篇</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="/post/devops/git/devops-git-multiuser/" data-toggle="tooltip" data-placement="top" title="Linux 配置多个Git用户SSH登录">后一篇 &rarr;</a>
+            </li>
+          
+        </ul>
+        
+
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
+        
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+    var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        labels: ['gitment'],
+        title: '图(Graph)-拓扑排序(TopologicalSort)',
+        createIssueManually: true,
+        id: 'Algorithms-Graph-TopologicalSort',      
+        distractionFreeMode: true  
+    });
+    gitalk.render('gitalk-container');
+</script>
+
+
+        
+          
+
+        
+  
+      </div>
+    
+    
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          <img src="/img/wechatmp.png" alt="k8s技术圈">
+          
+          <li>
+            <a href="mailto:icnych@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://github.com/cnych" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://weibo.com/cnych" title="微博">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://instagram.com/cnych" title="Instagram">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="/%20index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+          
+          <a href="/">WoolfBreathe</a>
+          
+          
+
+          &nbsp;&bull;&nbsp;
+          2021
+        </p>
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a
+            href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a
+            href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script> renderMathInElement(document.body); </script>
+<script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
+</script>
+<script>
+  (function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+
+  </body>
+</html>
+

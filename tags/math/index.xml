@@ -8,17 +8,17 @@
     <language>zh-cn</language>
     <managingEditor>youremail@domain.com (WoolfBreathe)</managingEditor>
     <webMaster>youremail@domain.com (WoolfBreathe)</webMaster>
-    <lastBuildDate>Sun, 05 Mar 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 07 May 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/math/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Math Sample</title>
-      <link>/post/2017-03-05-math-sample/</link>
-      <pubDate>Sun, 05 Mar 2017 00:00:00 +0000</pubDate>
+      <link>/post/2021-05-07-math-sample/</link>
+      <pubDate>Fri, 07 May 2021 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (WoolfBreathe)</author>
-      <guid>/post/2017-03-05-math-sample/</guid>
+      <guid>/post/2021-05-07-math-sample/</guid>
       <description>&lt;p&gt;KaTeX can be used to generate complex math formulas server-side.&lt;/p&gt;
 &lt;p&gt;$$
 \phi = \frac{(1+\sqrt{5})}{2} = 1.6180339887\cdots

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mitmproxy on WoolfBreathe</title>
+    <link>/tags/mitmproxy/</link>
+    <description>Recent content in Mitmproxy on WoolfBreathe</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <managingEditor>youremail@domain.com (WoolfBreathe)</managingEditor>
+    <webMaster>youremail@domain.com (WoolfBreathe)</webMaster>
+    <lastBuildDate>Tue, 26 Nov 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/mitmproxy/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Mitmproxy拦截代理</title>
+      <link>/post/computerlanguages/python/computerlanguages-python-mitmproxy/</link>
+      <pubDate>Tue, 26 Nov 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/computerlanguages/python/computerlanguages-python-mitmproxy/</guid>
+      <description>安装 mitmproxy pip install mitmproxy 启动 mitmproxy mitmproxy有三种启动命令： (1) mitmweb -- 提供一个web界面； -- 代理端口：绑定了 *:8080作为代理端口； -- 交互界面地址：localhost:8081； (2) mitmproxy -- 提供命令行界面； -- 可以通过命令过滤请求； (3) mitmdump -- 【TODO】  mitmweb -p 8082 --web-iface 192.168.10.10 --web-port 8081 -p 代理端口 --web-iface 网页访问IP --web-port 网页访问端口 修改WIFI, 连接代理 用户目录下的.mitmproxy目录里
+mitmproxy-ca.pem PEM格式的证书私钥 mitmproxy-ca-cert.pem PEM格式证书，适用于大多数非Windows平台 mitmproxy-ca-cert.p12 PKCS12格式的证书，适用于Windows平台 mitmproxy-ca-cert.cer与mitmproxy-ca-cert.pem相同，只是改变了后缀，适用于部分Android平台 mitmproxy-dhparam.pem PEM格式的秘钥文件，用于增强SSL安全性  安装证书(手机模拟器) 设置-&amp;gt;安全-&amp;gt;从SD卡安装证书
+安装证书(浏览器) 设置-&amp;gt;网络设置-&amp;gt;手动配置代理
+FireFox特殊处理 1、打开 about:config
+2、查找(默认为false，改为true就可以了) security.enterprise_roots.enabled
+3、吐槽，firefox太极端了，这是作死。</description>
+    </item>
+    
+  </channel>
+</rss>

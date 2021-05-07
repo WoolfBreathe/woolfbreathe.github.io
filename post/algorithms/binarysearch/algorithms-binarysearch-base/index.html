@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+  <title>二分查找(BinarySearch)-WoolfBreathe</title>
+  <meta property="og:title" content="二分查找(BinarySearch)" />
+  <meta name="twitter:title" content="二分查找(BinarySearch)" />
+
+  <meta name="description" content="二分查找(BinarySearch) 在介绍二分查找之前，对于基于数字索引的数组元素的查找，第一反应都是遍历这个数组，直到给定数组元素值和待查找的值相等时，返回索引值并退出，否则一直遍历到最后一个元素，如果还是没有找到则返回 -1，这样的查找虽然是简单粗暴了点，但是对于规模不大的数据集，也是没什么问题的，不过很明显，对于 n 个元素的数组，这种查找的时间复杂度是 O(n)，随着数据规模的增加，性能会越来越差，设想如果数据集的长度是 40 亿（约 2 的 32 次方），那么最差的情况需要遍历数组 40 亿次，简直不敢想象需要花费多长时间！那有没有性能搞好的算法来解决这个问题呢？
+在进一步探讨这个问题之前，先来看一个生活中的例子。日常生活中，很多人应该有这种经历，朋友、同学或者同事淘了个宝贝，神秘兮兮的过来让大家猜多少钱，在约定一个价格范围之后（比如 10-100），大家会七嘴八舌的猜起价格来：
+同事A：新淘了个宝贝，猜猜多少钱？ 同事B：50块。 同事A：高了。 同事C：30块。 同事A：低了。 同事D：40块。 同事A：高了。 同事E：36块。 同事A：对了。  如果用顺序遍历的逻辑，最差需要 91 次，才能猜到价格，现实生活中，没人会这么干，我们采用上面这种逻辑，只需要 4 次就猜到价格了，快了几十倍，而且数据量越大，优势越明显。基于这种思路，我算法科学家提炼出了二分查找算法，帮助在给定数据集中快速定位要查找的元素。
+实现原理 所谓二分查找，针对的是一个有序的数据集合（这点很重要），查找思想有点类似分治思想。每次都通过跟区间的中间元素对比，将待查找的区间缩小为之前的一半，直到找到要查找的元素，或者区间被缩小为 0。注意到二分查找针对的必须是已经排序过的有序数组，否则不能使用该算法。图示如下：
+示例代码 思路比较简单，我们将其通过 PHP 代码实现如下：
+&lt;?php function binary_search($nums, $num) { return binary_search_internal($nums, $num, 0, count($nums) - 1); } function binary_search_internal($nums, $num, $low, $high) { if ($low &gt; $high) { return -1; } $mid = floor(($low &#43; $high) / 2); if ($num &gt; $nums[$mid]) { return binary_search_internal($nums, $num, $mid &#43; 1, $high); } elseif ($num &lt; $nums[$mid]) { return binary_search_internal($nums, $num, $low, $mid - 1); } else { return $mid; } } $nums = [1, 2, 3, 4, 5, 6]; $index = binary_search($nums, 5); print $index; 性能分析 很显然，二分查找的时间复杂度是 O(logn)。这是一个非常恐怖的数量级，有时候甚至比 O(1) 还要高效，比如要在开头提到的 40 亿个数字中查找某一个元素，也只需要32次（2 的 32 次方是 40 亿数量级），这真的是非常高效了，正因如此二分查找在线性表结构中的应用非常广泛。">
+  <meta property="og:description" content="二分查找(BinarySearch) 在介绍二分查找之前，对于基于数字索引的数组元素的查找，第一反应都是遍历这个数组，直到给定数组元素值和待查找的值相等时，返回索引值并退出，否则一直遍历到最后一个元素，如果还是没有找到则返回 -1，这样的查找虽然是简单粗暴了点，但是对于规模不大的数据集，也是没什么问题的，不过很明显，对于 n 个元素的数组，这种查找的时间复杂度是 O(n)，随着数据规模的增加，性能会越来越差，设想如果数据集的长度是 40 亿（约 2 的 32 次方），那么最差的情况需要遍历数组 40 亿次，简直不敢想象需要花费多长时间！那有没有性能搞好的算法来解决这个问题呢？
+在进一步探讨这个问题之前，先来看一个生活中的例子。日常生活中，很多人应该有这种经历，朋友、同学或者同事淘了个宝贝，神秘兮兮的过来让大家猜多少钱，在约定一个价格范围之后（比如 10-100），大家会七嘴八舌的猜起价格来：
+同事A：新淘了个宝贝，猜猜多少钱？ 同事B：50块。 同事A：高了。 同事C：30块。 同事A：低了。 同事D：40块。 同事A：高了。 同事E：36块。 同事A：对了。  如果用顺序遍历的逻辑，最差需要 91 次，才能猜到价格，现实生活中，没人会这么干，我们采用上面这种逻辑，只需要 4 次就猜到价格了，快了几十倍，而且数据量越大，优势越明显。基于这种思路，我算法科学家提炼出了二分查找算法，帮助在给定数据集中快速定位要查找的元素。
+实现原理 所谓二分查找，针对的是一个有序的数据集合（这点很重要），查找思想有点类似分治思想。每次都通过跟区间的中间元素对比，将待查找的区间缩小为之前的一半，直到找到要查找的元素，或者区间被缩小为 0。注意到二分查找针对的必须是已经排序过的有序数组，否则不能使用该算法。图示如下：
+示例代码 思路比较简单，我们将其通过 PHP 代码实现如下：
+&lt;?php function binary_search($nums, $num) { return binary_search_internal($nums, $num, 0, count($nums) - 1); } function binary_search_internal($nums, $num, $low, $high) { if ($low &gt; $high) { return -1; } $mid = floor(($low &#43; $high) / 2); if ($num &gt; $nums[$mid]) { return binary_search_internal($nums, $num, $mid &#43; 1, $high); } elseif ($num &lt; $nums[$mid]) { return binary_search_internal($nums, $num, $low, $mid - 1); } else { return $mid; } } $nums = [1, 2, 3, 4, 5, 6]; $index = binary_search($nums, 5); print $index; 性能分析 很显然，二分查找的时间复杂度是 O(logn)。这是一个非常恐怖的数量级，有时候甚至比 O(1) 还要高效，比如要在开头提到的 40 亿个数字中查找某一个元素，也只需要32次（2 的 32 次方是 40 亿数量级），这真的是非常高效了，正因如此二分查找在线性表结构中的应用非常广泛。">
+  <meta name="twitter:description" content="二分查找(BinarySearch) 在介绍二分查找之前，对于基于数字索引的数组元素的查找，第一反应都是遍历这个数组，直到给定数组元素值和待查找的值相等时，返回索引值并退出，否则一直遍历到最后一个元素，如果还是没有找到则返回 -1，这样的查找虽然是简单粗暴了点，但是对于规模不大的数据集，也是没什么问题的，不过很明显，对于 n 个元素的数组，这种查找的时间复杂度是 O(n)，随着数据规模的增加，性能 …">
+  <meta name="author" content="WoolfBreathe"/>
+  <link href="/img/favicon.png" rel="icon" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/img/favicon.png"/>
+  <meta property="og:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@username" />
+  <meta name="twitter:creator" content="@username" />
+  <meta property="og:url" content="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="WoolfBreathe" />
+
+  <meta name="generator" content="Hugo 0.68.3" />
+  <link rel="canonical" href="/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="WoolfBreathe">
+
+  
+  
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700%7COpen+Sans:400,700" rel="stylesheet">
+  
+
+  <link rel="stylesheet" href='/css/bundle.min.62de9d30b83723e0d55f82908aedb1c5eb18c910bc24bcf43e530ce754ee1502.css' integrity='sha256-Yt6dMLg3I&#43;DVX4KQiu2xxesYyRC8JLz0PlMM51TuFQI='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
+<meta name="google-site-verification" content="oKxX4fOvB2yYmU02txZFChM93XQbESU4JaG3tNH9Hm8" />
+<meta name="baidu-site-verification" content="F5ojAyqaKU" />
+<meta name="keywords" content="Algorithms, BinarySearch">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d611849735f187dd788dc054908f7d7a";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/" title="WoolfBreathe">
+        <img src="img/avatar-icon.png" style="margin-top: -5px;height: 32px;" alt="WoolfBreathe">
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="首页" href="/">首页</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="归档" href="/archives">归档</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="标签" href="/tags">标签</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于" href="/page/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="RSS" href="/index.xml">RSS</a>
+            </li>
+          
+        
+
+        
+
+        
+
+        
+          <li>
+            <a href="#modalSearch" data-toggle="modal" data-target="#modalSearch" style="outline: none;">
+              <span id="searchGlyph" class="glyphicon glyphicon-search"></span>
+            </a>
+          </li>
+          
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+  <div id="modalSearch" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">搜索</h4>
+        </div>
+        <div class="modal-body">
+            
+<div class="aa-input-container" id="aa-input-container">
+    <input type="search" id="aa-search-input" class="aa-input-search" placeholder="Search for titles or URIs..." name="search" autocomplete="off" />
+    <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
+        <path d="M1806,332c0-123.3-43.8-228.8-131.5-316.5C1586.8-72.2,1481.3-116,1358-116s-228.8,43.8-316.5,131.5  C953.8,103.2,910,208.7,910,332s43.8,228.8,131.5,316.5C1129.2,736.2,1234.7,780,1358,780s228.8-43.8,316.5-131.5  C1762.2,560.8,1806,455.3,1806,332z M2318,1164c0,34.7-12.7,64.7-38,90s-55.3,38-90,38c-36,0-66-12.7-90-38l-343-342  c-119.3,82.7-252.3,124-399,124c-95.3,0-186.5-18.5-273.5-55.5s-162-87-225-150s-113-138-150-225S654,427.3,654,332  s18.5-186.5,55.5-273.5s87-162,150-225s138-113,225-150S1262.7-372,1358-372s186.5,18.5,273.5,55.5s162,87,225,150s113,138,150,225  S2062,236.7,2062,332c0,146.7-41.3,279.7-124,399l343,343C2305.7,1098.7,2318,1128.7,2318,1164z" />
+    </svg>
+</div>
+<script src="/js/algoliasearch.min.js"></script>
+<script src="/js/autocomplete.min.js"></script>
+
+<script>
+var client = algoliasearch("1JDRAS0AZR", "8804ac109158bb3bb60d74ce98fa332f");
+var index = client.initIndex('prod_blog');
+
+autocomplete('#aa-search-input',
+{ hint: false}, {
+    source: autocomplete.sources.hits(index, {hitsPerPage: 5}),
+    
+    displayKey: 'name',
+    
+    templates: {
+        
+        suggestion: function(suggestion) {
+            return '<span>' + '<a href="/post/' + suggestion.slug + '">' +
+            suggestion._highlightResult.title.value + '</a></span>';
+        }
+    }
+});
+</script>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/20200317190406.png" data-img-desc-1="BinarySearch"></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="post-heading">
+                <h1>二分查找(BinarySearch)</h1>
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>二分查找(BinarySearch)</h1>
+                
+                
+                  <span class="post-meta">
+  
+    发表于 2019-08-12
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+  </header>
+
+
+    
+
+
+
+<div class="container" role="main">
+  <div class="row">
+
+    
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div>
+            
+            
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="/tags/algorithms/">Algorithms</a> &nbsp;
+              
+                  <a href="/tags/binarysearch/">BinarySearch</a> &nbsp;
+              
+            </h5>
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+          
+            
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <h1 id="二分查找binarysearch">二分查找(BinarySearch)</h1>
+<p>在介绍二分查找之前，对于基于数字索引的数组元素的查找，第一反应都是遍历这个数组，直到给定数组元素值和待查找的值相等时，返回索引值并退出，否则一直遍历到最后一个元素，如果还是没有找到则返回 -1，这样的查找虽然是简单粗暴了点，但是对于规模不大的数据集，也是没什么问题的，不过很明显，对于 n 个元素的数组，这种查找的时间复杂度是 O(n)，随着数据规模的增加，性能会越来越差，设想如果数据集的长度是 40 亿（约 2 的 32 次方），那么最差的情况需要遍历数组 40 亿次，简直不敢想象需要花费多长时间！那有没有性能搞好的算法来解决这个问题呢？</p>
+<p>在进一步探讨这个问题之前，先来看一个生活中的例子。日常生活中，很多人应该有这种经历，朋友、同学或者同事淘了个宝贝，神秘兮兮的过来让大家猜多少钱，在约定一个价格范围之后（比如 10-100），大家会七嘴八舌的猜起价格来：</p>
+<pre><code>同事A：新淘了个宝贝，猜猜多少钱？
+
+同事B：50块。
+
+同事A：高了。
+
+同事C：30块。
+
+同事A：低了。
+
+同事D：40块。
+
+同事A：高了。
+
+同事E：36块。
+
+同事A：对了。
+</code></pre>
+<p>如果用顺序遍历的逻辑，最差需要 91 次，才能猜到价格，现实生活中，没人会这么干，我们采用上面这种逻辑，只需要 4 次就猜到价格了，快了几十倍，而且数据量越大，优势越明显。基于这种思路，我算法科学家提炼出了二分查找算法，帮助在给定数据集中快速定位要查找的元素。</p>
+<h1 id="实现原理">实现原理</h1>
+<p>所谓二分查找，针对的是一个有序的数据集合（这点很重要），查找思想有点类似分治思想。每次都通过跟区间的中间元素对比，将待查找的区间缩小为之前的一半，直到找到要查找的元素，或者区间被缩小为 0。注意到二分查找针对的必须是已经排序过的有序数组，否则不能使用该算法。图示如下：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinarySearch/Fn-Z80LROtQOqkY5Dwi7oeTuLuu-.png" alt="二分查找图示"></p>
+<h1 id="示例代码">示例代码</h1>
+<p>思路比较简单，我们将其通过 PHP 代码实现如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&lt;?php
+    
+    function binary_search($nums, $num)
+    {
+        return binary_search_internal($nums, $num, 0, count($nums) - 1);
+    }
+    
+    function binary_search_internal($nums, $num, $low, $high)
+    {
+        if ($low &gt; $high) {
+            return -1;
+        }
+    
+        $mid = floor(($low + $high) / 2);
+        if ($num &gt; $nums[$mid]) {
+            return binary_search_internal($nums, $num, $mid + 1, $high);
+        } elseif ($num &lt; $nums[$mid]) {
+            return binary_search_internal($nums, $num, $low, $mid - 1);
+        } else {
+            return $mid;
+        }
+    }
+    
+    $nums = [1, 2, 3, 4, 5, 6];
+    $index = binary_search($nums, 5);
+    print $index;
+</code></pre></div><h1 id="性能分析">性能分析</h1>
+<p>很显然，二分查找的时间复杂度是 O(logn)。这是一个非常恐怖的数量级，有时候甚至比 O(1) 还要高效，比如要在开头提到的 40 亿个数字中查找某一个元素，也只需要32次（2 的 32 次方是 40 亿数量级），这真的是非常高效了，正因如此二分查找在线性表结构中的应用非常广泛。</p>
+<p>但是使用二分查找需要注意一个前提:</p>
+<pre><code>二分查找是针对有序数组的查找算法
+</code></pre>
+<p>换言之:</p>
+<pre><code>二分查找适用于变动不是很频繁的静态序列集
+</code></pre>
+<p>如果序列集变动很频繁，经常进行插入删除操作，那么就要不断维护这个序列集的排序，这个成本也很高，因此，这种情况下就不适用二分查找了，比如我们的数据库查询，增删改查很频繁，显然不是通过二分查找来进行查询的，后面会讨论，如何针对动态变化的序列集进行查询操作。</p>
+
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我们的微信公众帐号，在微信公众帐号中回复◉加群◉即可加入到我们的 kubernetes 讨论群里面共同学习。</p>
+<img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/qrcode.png" alt="wechat-account-qrcode">
+
+  
+          
+            <div class="entry-shang text-center">
+    <p>「真诚赞赏，手留余香」</p>
+    <button class="zs show-zs btn btn-bred">赞赏</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+    <div class="zs-modal-head">
+        <button type="button" class="close">×</button>
+        <span class="author"><img src="/img/avatar.jpeg"/>阳明</span>
+        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
+    </div>
+    <div class="zs-modal-body">
+        <div class="zs-modal-btns">
+            <button class="btn btn-blink" data-num="2">2元</button>
+            <button class="btn btn-blink" data-num="5">5元</button>
+            <button class="btn btn-blink" data-num="10">10元</button>
+            <button class="btn btn-blink" data-num="50">50元</button>
+            <button class="btn btn-blink" data-num="100">100元</button>
+            <button class="btn btn-blink" data-num="1">任意金额</button>
+        </div>
+        <div class="zs-modal-pay">
+            <button class="btn btn-bred" id="pay-text">2元</button>
+            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+            <img src="/img/wechat-2.png" id="pay-image"/>
+        </div>
+    </div>
+    <div class="zs-modal-footer">
+        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
+    </div>
+</div>
+          
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
+        
+          
+
+<h3>相关文章</h3>
+<ul style="margin-bottom: 25px;">
+    
+    <li><a href="/post/algorithms/sort/algorithms-sort-selectionsort/">排序算法-选择排序(SelectionSort)</a></li>
+    
+    <li><a href="/post/algorithms/sort/algorithms-sort-insertionsort/">排序算法-选择排序(InsertionSort)</a></li>
+    
+    <li><a href="/post/algorithms/sort/algorithms-sort-bubblesort/">排序算法-冒泡排序(BubbleSort)</a></li>
+    
+    <li><a href="/post/algorithms/sort/algorithms-sort-mergesort/">排序算法-归并排序(MergeSort)</a></li>
+    
+    <li><a href="/post/algorithms/sort/algorithms-sort-quicksort/">排序算法-快速排序(QuickSort)</a></li>
+    
+    <li><a href="/post/algorithms/datastructures/algorithms-datastructures-recursion/">数据结构-递归(Recursion)</a></li>
+    
+    <li><a href="/post/algorithms/datastructures/algorithms-datastructures-queue/">数据结构-队列(Queue)</a></li>
+    
+    <li><a href="/post/algorithms/datastructures/algorithms-datastructures-stack/">数据结构-栈(Stack)</a></li>
+    
+    <li><a href="/post/algorithms/datastructures/algorithms-datastructures-linkedlist/">数据结构-链表(LinkedList)</a></li>
+    
+    <li><a href="/post/algorithms/datastructures/algorithms-datastructures-array/">数据结构-数组(Array)</a></li>
+    
+</ul>
+
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="/post/algorithms/sort/algorithms-sort-selectionsort/" data-toggle="tooltip" data-placement="top" title="排序算法-选择排序(SelectionSort)">&larr; 前一篇</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="/post/algorithms/binarysearch/algorithms-binarysearch-repeat/" data-toggle="tooltip" data-placement="top" title="二分查找(BinarySearch)-数组含有重复值">后一篇 &rarr;</a>
+            </li>
+          
+        </ul>
+        
+
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
+        
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+    var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        labels: ['gitment'],
+        title: '二分查找(BinarySearch)',
+        createIssueManually: true,
+        id: 'Algorithms-BinarySearch-Base',      
+        distractionFreeMode: true  
+    });
+    gitalk.render('gitalk-container');
+</script>
+
+
+        
+          
+
+        
+  
+      </div>
+    
+    
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          <img src="/img/wechatmp.png" alt="k8s技术圈">
+          
+          <li>
+            <a href="mailto:icnych@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://github.com/cnych" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://weibo.com/cnych" title="微博">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://instagram.com/cnych" title="Instagram">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="/%20index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+          
+          <a href="/">WoolfBreathe</a>
+          
+          
+
+          &nbsp;&bull;&nbsp;
+          2021
+        </p>
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a
+            href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a
+            href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script> renderMathInElement(document.body); </script>
+<script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
+</script>
+<script>
+  (function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+
+  </body>
+</html>
+

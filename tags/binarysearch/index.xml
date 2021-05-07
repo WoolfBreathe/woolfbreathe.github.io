@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>BinarySearch on WoolfBreathe</title>
+    <link>/tags/binarysearch/</link>
+    <description>Recent content in BinarySearch on WoolfBreathe</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <managingEditor>youremail@domain.com (WoolfBreathe)</managingEditor>
+    <webMaster>youremail@domain.com (WoolfBreathe)</webMaster>
+    <lastBuildDate>Thu, 15 Aug 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/binarysearch/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>二分查找(BinarySearch)-索引查找</title>
+      <link>/post/algorithms/binarysearch/algorithms-binarysearch-case/</link>
+      <pubDate>Thu, 15 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/binarysearch/algorithms-binarysearch-case/</guid>
+      <description>IP 地址对应城市查询 每个城市都有对应的 IP 地址段，这个在网上搜一下就能拿到。然后可以将这些不同城市 IP 地址段起始值转化为整型数字（转化函数Google/百度搜下就能找到），进而对其进行排序，就可以得到一个有序的序列。比如杭州和北京，IP区间分别是 [183.128.0.0,183.159.255.255] 和 [110.96.0.0,110.127.255.255]，转化为数字后对应区间分别是 [3078619136,3080716287] 和 [1851785216,1853882367]，这样，就可以对这两个区间起始值排序为 [1851785216,3078619136]。
+此外我们还需要存储每个区间值对应的城市，以便找到对应位置后可以快速定位对应城市，可以把这个映射关系存储到数据库里面，存储字段包括城市、起始 IP、结束 IP，这里有一个前提是不同城市区间值不可能交叉，否则没法玩。
+接下来就是二分查找排上用场的时候了，将待查找 IP 转化为数字，然后在排序序列中查找最后一个起始 IP 小于等于待查找 IP 的位置，通过该起始 IP 在数据库中定位到对应记录，判断待查找 IP 是否在这个 IP 区间范围内，如果在的话则返回对应城市，不在的话，就返回没找到。
+稠密索引（数据库索引技术基础） 二分查找适用于有序线性表的查找，此外针对二分查找还有升级版的插值查找，以及利用斐波那契原理进行查找的斐波那契查找.
+二分查找不适用于高速增长的海量数据，因为维护这个排序非常麻烦，所以我们引出索引这种数据结构。
+索引是为了加快查找速度而设计的一种数据结构。索引就是把一个关键字与它对应的记录相关联的过程，一个索引由若干索引项构成，每个索引项至少包含关键字和其对应记录在存储器中的位置等信息。
+由此可见，索引技术是组织大型数据库和磁盘文件的一种重要技术。
+索引技术分为线性索引、树形索引和多级索引，这里我们只介绍线性索引。所谓线性索引就是将索引项集合组织为线性结构，也称索引表。以下是一个索引表的示例图：
+在线性索引中，我们重点介绍三种：稠密索引、分块索引和倒排索引。
+首先是稠密索引。稠密索引是指在线性表中，将数据集中的每个记录对应一个索引项。就像上面示例图中的那样。以主键为例，可以将其抽象化如下：
+对于稠密索引这个索引表来说，索引项一定按照关键码有序排列，这样可以应用二分查找，以免索引查找本身影响性能。可见，稠密索引性能可以做到和二分查找相当（找到对应关键码就可以通过指针直接指向对应记录），但是索引项长度和数据集一样长，空间复杂度高，如果数据太多需要存放到磁盘上，反复读取磁盘对性能影响很大。
+分块索引（数据库索引技术基础） 为了减少索引项个数，对数据集进行分块，并使其分块有序，然后再给每个分块建立一个索引项（索引值是分块中最大关键码），至于分块内部，则不管其有序性，从而减少索引项的个数。在查找的时候在索引项中通过二分查找找到指定索引项，然后根据该索引项中的关键码去相应分块遍历查找指定元素，这是一种折中方案，既兼顾了空间复杂度，又兼顾了时间复杂度。
+分块索引图示如下：
+这里面有几个概念需要阐述下，首先是分块有序，需要满足两个先决条件：
+块内无序。即每一块内的记录不要求有序。当然，有序更理想，只不过要花费大量时间和空间的代价。 块间有序。即要求后一块的所有关键字都大于前一块的所有关键字。只有块间有序，才能给查找带来效率。  其次，分块索引的索引项包含三个数据项：
+最大关键码：它存储每一块中的最大关键字。这样做的好处是在它之后的下一块中最小的关键字也能比这一块最大的关键字要大。 块长：存储块中的记录个数，以便于循环时使用。 块首指针：用于指向块首数据元素的指针，便于开始对这一块的记录开始遍历。  最后，在分块索引中查找，分两块进行：
+在分块索引表中查找要查找关键字所在的块。由于块间有序，所以可以通过二分查找快速定位（通过不小于给定值的第一个元素，不大于给定值的最后一个元素确定区间，以前面给出的示例图为例，58位于57和96之间，则会去第三块中查找）。 根据块首指针找到相应的块，并在块中顺序查找指定值（即关键码，块中无序所以只能顺序查找）。  分块索引的时间复杂度是：O(log(m)+n)，其中 m 是分块数，n 是块内元素个数，在索引表长度和块内元素相等时，时间复杂度最优。性能要优于顺序查找，但是比二分查找要差。
+总体来说，分块索引在兼顾存储空间和查找性能的情况下，被普遍用于数据库查找等技术中。
+倒排索引（搜素引擎技术基础） 百度、Google 等搜索引擎为我们日常查找信息带来了巨大的方便，你是否思考过搜索引擎是如何从海量 HTML 文档中通过关键词查找资源的？今天给大家介绍最简单，也是最基础的搜索引擎技术 —— 倒排索引。
+有倒排索引，就有正向索引，正向索引指的是通过文档 ID 找到对应的文档，如果通过文档ID查找对应文档，再在文档中匹配关键词，意味着要扫描所有文档，最后还要排序，对于互联网上的海量资源来说，显然是不可取的。</description>
+    </item>
+    
+    <item>
+      <title>二分查找(BinarySearch)-区间查找</title>
+      <link>/post/algorithms/binarysearch/algorithms-binarysearch-interval/</link>
+      <pubDate>Wed, 14 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/binarysearch/algorithms-binarysearch-interval/</guid>
+      <description>实现原理 二分查找的第三个变形版本：在给定排序序列中查找第一个大于等于给定值的元素。
+有了昨天的基础，来解决今天这个问题，是不是很简单？所不同的是判断节点不一样了，我们之前的需求都是查找等于给定值，现在变成了大于等于给定值，所以我们要在 $nums[$mid] &amp;gt;= $num 这个判断条件上做文章，思路还是和之前两个变形版本类似，当 $mid 已经是最左边的元素，或者 $mid 的前一个元素值小于给定查询值，则 $mid 对应元素即为满足条件的元素，否则继续往前查找。
+示例代码 对应的 PHP 实现代码如下：
+&amp;lt;?php /** * 二分查找变形版：查找第一个大于等于给定值的元素（数组中包含重复数据） */ function binary_search($nums, $num) { if (count($nums) &amp;lt;= 1) { return 0; } return binary_search_internal($nums, $num, 0, count($nums) - 1); } function binary_search_internal($nums, $num, $low, $high) { if ($low &amp;gt; $high) { return -1; } $mid = floor(($low + $high) / 2); if ($num &amp;lt;= $nums[$mid]) { if ($mid == 0 || $nums[$mid - 1] &amp;lt; $num) { return $mid; } else { return binary_search_internal($nums, $num, $low, $mid - 1); } } elseif ($num &amp;gt; $nums[$mid]) { return binary_search_internal($nums, $num, $mid + 1, $high); } } $nums = [1, 2, 3, 3, 4, 5, 6]; $index = binary_search($nums, 3); print $index; 同样，与之相对的，还有我们这次分享中最后要讨论的一个二分查找的变形版本：在给定序列中查找最后一个小于等于给定值的元素。</description>
+    </item>
+    
+    <item>
+      <title>二分查找(BinarySearch)-数组含有重复值</title>
+      <link>/post/algorithms/binarysearch/algorithms-binarysearch-repeat/</link>
+      <pubDate>Tue, 13 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/binarysearch/algorithms-binarysearch-repeat/</guid>
+      <description>日常开发过程中，除了正常的二分查找，还有很多二分查找的变形版本。
+符合标准的二分查找条件的序列一般是比较理想的情况，如果要查找的元素在序列中有多个怎么办？所以第一个常见的变形版本，就是在一个给定排序序列中查找第一个等于给定值的元素。
+其实关键节点就在于在序列中找到值等于待查找元素值时的处理。如果此时 $mid 位置已经到了序列的最左边，不能再往左了，或者序列中索引小于 $mid 的上一个元素值不等于待查找元素值，那么此时 $mid 就是第一个等于待查找元素值的位置；否则还要继续往前找。
+对应的 PHP 实现代码如下，其他地方都一样，就是 $num == $nums[$mid] 时的处理逻辑变了：
+&amp;lt;?php /** * 二分查找变形版：查找第一个值等于给定值的元素（数组中包含重复数据） */ function binary_search($nums, $num) { if (count($nums) &amp;lt;= 1) { return 0; } return binary_search_internal($nums, $num, 0, count($nums) - 1); } function binary_search_internal($nums, $num, $low, $high) { if ($low &amp;gt; $high) { return -1; } $mid = floor(($low + $high) / 2); if ($num &amp;lt; $nums[$mid]) { return binary_search_internal($nums, $num, $low, $mid - 1); } elseif ($num &amp;gt; $nums[$mid]) { return binary_search_internal($nums, $num, $mid + 1, $high); } else { if ($mid == 0 || $nums[$mid-1] !</description>
+    </item>
+    
+    <item>
+      <title>二分查找(BinarySearch)</title>
+      <link>/post/algorithms/binarysearch/algorithms-binarysearch-base/</link>
+      <pubDate>Mon, 12 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/binarysearch/algorithms-binarysearch-base/</guid>
+      <description>二分查找(BinarySearch) 在介绍二分查找之前，对于基于数字索引的数组元素的查找，第一反应都是遍历这个数组，直到给定数组元素值和待查找的值相等时，返回索引值并退出，否则一直遍历到最后一个元素，如果还是没有找到则返回 -1，这样的查找虽然是简单粗暴了点，但是对于规模不大的数据集，也是没什么问题的，不过很明显，对于 n 个元素的数组，这种查找的时间复杂度是 O(n)，随着数据规模的增加，性能会越来越差，设想如果数据集的长度是 40 亿（约 2 的 32 次方），那么最差的情况需要遍历数组 40 亿次，简直不敢想象需要花费多长时间！那有没有性能搞好的算法来解决这个问题呢？
+在进一步探讨这个问题之前，先来看一个生活中的例子。日常生活中，很多人应该有这种经历，朋友、同学或者同事淘了个宝贝，神秘兮兮的过来让大家猜多少钱，在约定一个价格范围之后（比如 10-100），大家会七嘴八舌的猜起价格来：
+同事A：新淘了个宝贝，猜猜多少钱？ 同事B：50块。 同事A：高了。 同事C：30块。 同事A：低了。 同事D：40块。 同事A：高了。 同事E：36块。 同事A：对了。  如果用顺序遍历的逻辑，最差需要 91 次，才能猜到价格，现实生活中，没人会这么干，我们采用上面这种逻辑，只需要 4 次就猜到价格了，快了几十倍，而且数据量越大，优势越明显。基于这种思路，我算法科学家提炼出了二分查找算法，帮助在给定数据集中快速定位要查找的元素。
+实现原理 所谓二分查找，针对的是一个有序的数据集合（这点很重要），查找思想有点类似分治思想。每次都通过跟区间的中间元素对比，将待查找的区间缩小为之前的一半，直到找到要查找的元素，或者区间被缩小为 0。注意到二分查找针对的必须是已经排序过的有序数组，否则不能使用该算法。图示如下：
+示例代码 思路比较简单，我们将其通过 PHP 代码实现如下：
+&amp;lt;?php function binary_search($nums, $num) { return binary_search_internal($nums, $num, 0, count($nums) - 1); } function binary_search_internal($nums, $num, $low, $high) { if ($low &amp;gt; $high) { return -1; } $mid = floor(($low + $high) / 2); if ($num &amp;gt; $nums[$mid]) { return binary_search_internal($nums, $num, $mid + 1, $high); } elseif ($num &amp;lt; $nums[$mid]) { return binary_search_internal($nums, $num, $low, $mid - 1); } else { return $mid; } } $nums = [1, 2, 3, 4, 5, 6]; $index = binary_search($nums, 5); print $index; 性能分析 很显然，二分查找的时间复杂度是 O(logn)。这是一个非常恐怖的数量级，有时候甚至比 O(1) 还要高效，比如要在开头提到的 40 亿个数字中查找某一个元素，也只需要32次（2 的 32 次方是 40 亿数量级），这真的是非常高效了，正因如此二分查找在线性表结构中的应用非常广泛。</description>
+    </item>
+    
+  </channel>
+</rss>

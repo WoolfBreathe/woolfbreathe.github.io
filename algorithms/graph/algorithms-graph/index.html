@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+  <title>图(Graph)-WoolfBreathe</title>
+  <meta property="og:title" content="图(Graph)" />
+  <meta name="twitter:title" content="图(Graph)" />
+
+  <meta name="description" content="图的相关概念 图会综合运用前面所介绍的所有数据结构，所以说，学好了图，也就等同于掌握了数据结构的精髓。
+图的基本定义 图（Graph）由顶点（Vertex）和边（Edge）组成。图中的元素叫顶点，图不能为空，在线性表中，相邻元素有前后关系，在树中，相邻元素有层次关系，在图中，任意两个元素之间都可能有关系，顶点之间的关系通过边来表示。图可以表示为 G(V,E)，其中 G 表示图，V 表示顶点的集合，E 表示边的集合。
+下面就是一个典型的图：
+其中字母标识的节点就是图的顶点，节点之间的连线就是图的边。
+无向图与有向图 没有方向的边叫无向边，任意两个顶点之间都是无向边的图叫无向图，比如上面那个示例图就是无向图。在无向图中，任意两个顶点之间都有边的图叫无向完全图。
+与之相对的，有方向的边叫有向边（也叫弧），任意两个顶点之间都是有向边的图叫有向图，例如下面这个图就是有向图：
+在有向图中，任意两个顶点之间都有方向相反的两条有向边的图叫有向完全图。
+按照边的数目，我们将边数很少的图叫稀疏图，边数很多的图叫稠密图。
+有些图的边还拥有与其相关的数字，我们把这个数字叫做权，这种带权的图通常称作网。
+顶点与边的关系 顶点的度指的是与顶点相连接的边数，整个图的度数是所有顶点度数之和。
+在无向图中，边不分方向，边数是图的度数/2。
+在有向图中，边有方向，按照方向将有向图顶点的度分为出度和入度，出度表示有多少条边是以这个顶点为起点指向其他顶点；入度表示有多少条边指向这个顶点。
+在树中，顶点到任意节点的路径是唯一的，而在图中，顶点到任意顶点的路径却不是唯一的。比如上述示例有向图中，从 B 到 A 就有 B-&gt;A、B-&gt;C-&gt;A 两条路径，示例无向图中还有 B-&gt;C-&gt;D-&gt;A 这条路径。
+连通图 在无向图 G 中，如果顶点 v 到顶点 v&rsquo; 有路径，则称 v 和 v&rsquo; 是连通的，如果任意两个顶点都是连通的，则称 G 是连通图。比如上述示例无向图就是连通图。
+在有向图 G 中，对于每一对顶点，如果相互之间都存在路径，则 G 是强连通图。上述示例有向图不是强连通图，因为 A 到 D 存在路径，而 D 到 A 不存在。
+图的典型应用 图的应用场景很多，比如社交网络中用户之间的关系，网络设备之间的拓扑结构，以及显示生活中形形色色的网：公路网、铁路网、地铁网等等，都可以通过图来表示。">
+  <meta property="og:description" content="图的相关概念 图会综合运用前面所介绍的所有数据结构，所以说，学好了图，也就等同于掌握了数据结构的精髓。
+图的基本定义 图（Graph）由顶点（Vertex）和边（Edge）组成。图中的元素叫顶点，图不能为空，在线性表中，相邻元素有前后关系，在树中，相邻元素有层次关系，在图中，任意两个元素之间都可能有关系，顶点之间的关系通过边来表示。图可以表示为 G(V,E)，其中 G 表示图，V 表示顶点的集合，E 表示边的集合。
+下面就是一个典型的图：
+其中字母标识的节点就是图的顶点，节点之间的连线就是图的边。
+无向图与有向图 没有方向的边叫无向边，任意两个顶点之间都是无向边的图叫无向图，比如上面那个示例图就是无向图。在无向图中，任意两个顶点之间都有边的图叫无向完全图。
+与之相对的，有方向的边叫有向边（也叫弧），任意两个顶点之间都是有向边的图叫有向图，例如下面这个图就是有向图：
+在有向图中，任意两个顶点之间都有方向相反的两条有向边的图叫有向完全图。
+按照边的数目，我们将边数很少的图叫稀疏图，边数很多的图叫稠密图。
+有些图的边还拥有与其相关的数字，我们把这个数字叫做权，这种带权的图通常称作网。
+顶点与边的关系 顶点的度指的是与顶点相连接的边数，整个图的度数是所有顶点度数之和。
+在无向图中，边不分方向，边数是图的度数/2。
+在有向图中，边有方向，按照方向将有向图顶点的度分为出度和入度，出度表示有多少条边是以这个顶点为起点指向其他顶点；入度表示有多少条边指向这个顶点。
+在树中，顶点到任意节点的路径是唯一的，而在图中，顶点到任意顶点的路径却不是唯一的。比如上述示例有向图中，从 B 到 A 就有 B-&gt;A、B-&gt;C-&gt;A 两条路径，示例无向图中还有 B-&gt;C-&gt;D-&gt;A 这条路径。
+连通图 在无向图 G 中，如果顶点 v 到顶点 v&rsquo; 有路径，则称 v 和 v&rsquo; 是连通的，如果任意两个顶点都是连通的，则称 G 是连通图。比如上述示例无向图就是连通图。
+在有向图 G 中，对于每一对顶点，如果相互之间都存在路径，则 G 是强连通图。上述示例有向图不是强连通图，因为 A 到 D 存在路径，而 D 到 A 不存在。
+图的典型应用 图的应用场景很多，比如社交网络中用户之间的关系，网络设备之间的拓扑结构，以及显示生活中形形色色的网：公路网、铁路网、地铁网等等，都可以通过图来表示。">
+  <meta name="twitter:description" content="图的相关概念 图会综合运用前面所介绍的所有数据结构，所以说，学好了图，也就等同于掌握了数据结构的精髓。
+图的基本定义 图（Graph）由顶点（Vertex）和边（Edge）组成。图中的元素叫顶点，图不能为空，在线性表中，相邻元素有前后关系，在树中，相邻元素有层次关系，在图中，任意两个元素之间都可能有关系，顶点之间的关系通过边来表示。图可以表示为 G(V,E)，其中 G 表示图，V 表示顶点的集 …">
+  <meta name="author" content="WoolfBreathe"/>
+  <link href="/img/favicon.png" rel="icon" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/img/favicon.png"/>
+  <meta property="og:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@username" />
+  <meta name="twitter:creator" content="@username" />
+  <meta property="og:url" content="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="WoolfBreathe" />
+
+  <meta name="generator" content="Hugo 0.68.3" />
+  <link rel="canonical" href="/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="WoolfBreathe">
+
+  
+  
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700%7COpen+Sans:400,700" rel="stylesheet">
+  
+
+  <link rel="stylesheet" href='/css/bundle.min.62de9d30b83723e0d55f82908aedb1c5eb18c910bc24bcf43e530ce754ee1502.css' integrity='sha256-Yt6dMLg3I&#43;DVX4KQiu2xxesYyRC8JLz0PlMM51TuFQI='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
+<meta name="google-site-verification" content="oKxX4fOvB2yYmU02txZFChM93XQbESU4JaG3tNH9Hm8" />
+<meta name="baidu-site-verification" content="F5ojAyqaKU" />
+<meta name="keywords" content="Algorithms, Graph">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d611849735f187dd788dc054908f7d7a";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/" title="WoolfBreathe">
+        <img src="img/avatar-icon.png" style="margin-top: -5px;height: 32px;" alt="WoolfBreathe">
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="首页" href="/">首页</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="归档" href="/archives">归档</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="标签" href="/tags">标签</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于" href="/page/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="RSS" href="/index.xml">RSS</a>
+            </li>
+          
+        
+
+        
+
+        
+
+        
+          <li>
+            <a href="#modalSearch" data-toggle="modal" data-target="#modalSearch" style="outline: none;">
+              <span id="searchGlyph" class="glyphicon glyphicon-search"></span>
+            </a>
+          </li>
+          
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+  <div id="modalSearch" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">搜索</h4>
+        </div>
+        <div class="modal-body">
+            
+<div class="aa-input-container" id="aa-input-container">
+    <input type="search" id="aa-search-input" class="aa-input-search" placeholder="Search for titles or URIs..." name="search" autocomplete="off" />
+    <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
+        <path d="M1806,332c0-123.3-43.8-228.8-131.5-316.5C1586.8-72.2,1481.3-116,1358-116s-228.8,43.8-316.5,131.5  C953.8,103.2,910,208.7,910,332s43.8,228.8,131.5,316.5C1129.2,736.2,1234.7,780,1358,780s228.8-43.8,316.5-131.5  C1762.2,560.8,1806,455.3,1806,332z M2318,1164c0,34.7-12.7,64.7-38,90s-55.3,38-90,38c-36,0-66-12.7-90-38l-343-342  c-119.3,82.7-252.3,124-399,124c-95.3,0-186.5-18.5-273.5-55.5s-162-87-225-150s-113-138-150-225S654,427.3,654,332  s18.5-186.5,55.5-273.5s87-162,150-225s138-113,225-150S1262.7-372,1358-372s186.5,18.5,273.5,55.5s162,87,225,150s113,138,150,225  S2062,236.7,2062,332c0,146.7-41.3,279.7-124,399l343,343C2305.7,1098.7,2318,1128.7,2318,1164z" />
+    </svg>
+</div>
+<script src="/js/algoliasearch.min.js"></script>
+<script src="/js/autocomplete.min.js"></script>
+
+<script>
+var client = algoliasearch("1JDRAS0AZR", "8804ac109158bb3bb60d74ce98fa332f");
+var index = client.initIndex('prod_blog');
+
+autocomplete('#aa-search-input',
+{ hint: false}, {
+    source: autocomplete.sources.hits(index, {hitsPerPage: 5}),
+    
+    displayKey: 'name',
+    
+    templates: {
+        
+        suggestion: function(suggestion) {
+            return '<span>' + '<a href="/post/' + suggestion.slug + '">' +
+            suggestion._highlightResult.title.value + '</a></span>';
+        }
+    }
+});
+</script>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/20200317190406.png" ></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="Algorithms-heading">
+                <h1>图(Graph)</h1>
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="Algorithms-heading">
+              <h1>图(Graph)</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+  </header>
+
+
+    
+
+
+
+<div class="container" role="main">
+  <div class="row">
+
+    
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div>
+            
+            
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="/tags/algorithms/">Algorithms</a> &nbsp;
+              
+                  <a href="/tags/graph/">Graph</a> &nbsp;
+              
+            </h5>
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+          
+            
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <h1 id="图的相关概念">图的相关概念</h1>
+<p>图会综合运用前面所介绍的所有数据结构，所以说，学好了图，也就等同于掌握了数据结构的精髓。</p>
+<h2 id="图的基本定义">图的基本定义</h2>
+<p>图（Graph）由顶点（Vertex）和边（Edge）组成。图中的元素叫顶点，图不能为空，在线性表中，相邻元素有前后关系，在树中，相邻元素有层次关系，在图中，任意两个元素之间都可能有关系，顶点之间的关系通过边来表示。图可以表示为 G(V,E)，其中 G 表示图，V 表示顶点的集合，E 表示边的集合。</p>
+<p>下面就是一个典型的图：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/Graph/image-1572532058891.png" alt="图"></p>
+<p>其中字母标识的节点就是图的顶点，节点之间的连线就是图的边。</p>
+<h2 id="无向图与有向图">无向图与有向图</h2>
+<p>没有方向的边叫无向边，任意两个顶点之间都是无向边的图叫无向图，比如上面那个示例图就是无向图。在无向图中，任意两个顶点之间都有边的图叫无向完全图。</p>
+<p>与之相对的，有方向的边叫有向边（也叫<strong>弧</strong>），任意两个顶点之间都是有向边的图叫有向图，例如下面这个图就是有向图：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/Graph/image-1572532076617.png" alt="有向图"></p>
+<p>在有向图中，任意两个顶点之间都有方向相反的两条有向边的图叫<strong>有向完全图</strong>。</p>
+<p>按照边的数目，我们将边数很少的图叫稀疏图，边数很多的图叫稠密图。</p>
+<p>有些图的边还拥有与其相关的数字，我们把这个数字叫做<strong>权</strong>，这种带权的图通常称作<strong>网</strong>。</p>
+<h2 id="顶点与边的关系">顶点与边的关系</h2>
+<p><strong>顶点的度</strong>指的是与顶点相连接的边数，整个图的度数是所有顶点度数之和。</p>
+<p>在无向图中，边不分方向，边数是图的度数/2。</p>
+<p>在有向图中，边有方向，按照方向将有向图顶点的度分为出度和入度，出度表示有多少条边是以这个顶点为起点指向其他顶点；入度表示有多少条边指向这个顶点。</p>
+<p>在树中，顶点到任意节点的路径是唯一的，而在图中，顶点到任意顶点的路径却不是唯一的。比如上述示例有向图中，从 B 到 A 就有 B-&gt;A、B-&gt;C-&gt;A 两条路径，示例无向图中还有 B-&gt;C-&gt;D-&gt;A 这条路径。</p>
+<h2 id="连通图">连通图</h2>
+<p>在<em>无向图</em> G 中，如果顶点 v 到顶点 v&rsquo; 有路径，则称 v 和 v&rsquo; 是<strong>连通</strong>的，如果任意两个顶点都是连通的，则称 G 是<strong>连通图</strong>。比如上述示例无向图就是连通图。</p>
+<p>在<em>有向图</em> G 中，对于每一对顶点，如果相互之间都存在路径，则 G 是<strong>强连通图</strong>。上述示例有向图不是强连通图，因为 A 到 D 存在路径，而 D 到 A 不存在。</p>
+<h2 id="图的典型应用">图的典型应用</h2>
+<p>图的应用场景很多，比如社交网络中用户之间的关系，网络设备之间的拓扑结构，以及显示生活中形形色色的网：公路网、铁路网、地铁网等等，都可以通过图来表示。</p>
+
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我们的微信公众帐号，在微信公众帐号中回复◉加群◉即可加入到我们的 kubernetes 讨论群里面共同学习。</p>
+<img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/qrcode.png" alt="wechat-account-qrcode">
+
+  
+          
+            <div class="entry-shang text-center">
+    <p>「真诚赞赏，手留余香」</p>
+    <button class="zs show-zs btn btn-bred">赞赏</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+    <div class="zs-modal-head">
+        <button type="button" class="close">×</button>
+        <span class="author"><img src="/img/avatar.jpeg"/>阳明</span>
+        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
+    </div>
+    <div class="zs-modal-body">
+        <div class="zs-modal-btns">
+            <button class="btn btn-blink" data-num="2">2元</button>
+            <button class="btn btn-blink" data-num="5">5元</button>
+            <button class="btn btn-blink" data-num="10">10元</button>
+            <button class="btn btn-blink" data-num="50">50元</button>
+            <button class="btn btn-blink" data-num="100">100元</button>
+            <button class="btn btn-blink" data-num="1">任意金额</button>
+        </div>
+        <div class="zs-modal-pay">
+            <button class="btn btn-bred" id="pay-text">2元</button>
+            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+            <img src="/img/wechat-2.png" id="pay-image"/>
+        </div>
+    </div>
+    <div class="zs-modal-footer">
+        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
+    </div>
+</div>
+          
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
+        
+          
+
+<h3>相关文章</h3>
+<ul style="margin-bottom: 25px;">
+    
+    <li><a href="/algorithms/binarytree/algorithms-binarytree-huffmantree/">二叉树(BinaryTree)-哈夫曼树(HuffmanTree)</a></li>
+    
+    <li><a href="/algorithms/binarytree/algorithms-binarytree-heap/">二叉树(BinaryTree)-堆(Heap)</a></li>
+    
+    <li><a href="/algorithms/binarytree/algorithms-redblacktree/">二叉树(BinaryTree)-红黑树(Red-Black Tree)</a></li>
+    
+    <li><a href="/algorithms/binarytree/algorithms-binarytree-avl/">二叉树(BinaryTree)-平衡二叉树(AVL)</a></li>
+    
+    <li><a href="/algorithms/binarytree/algorithms-binarytree-search/">二叉树(BinaryTree)-查找</a></li>
+    
+    <li><a href="/algorithms/binarytree/algorithms-binarytree-traversal/">二叉树(BinaryTree)-遍历</a></li>
+    
+    <li><a href="/algorithms/binarytree/algorithms-binarytree-storage/">二叉树(BinaryTree)-存储</a></li>
+    
+    <li><a href="/algorithms/binarytree/algorithms-binarytree/">二叉树(BinaryTree)</a></li>
+    
+    <li><a href="/algorithms/stringmatching/algorithms-stringmatching-kmp/">字符串匹配-KMP</a></li>
+    
+    <li><a href="/algorithms/stringmatching/algorithms-stringmatching-trie/">字符串匹配-Trie</a></li>
+    
+</ul>
+
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="/algorithms/binarytree/algorithms-binarytree-huffmantree/" data-toggle="tooltip" data-placement="top" title="二叉树(BinaryTree)-哈夫曼树(HuffmanTree)">&larr; 前一篇</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="/algorithms/graph/algorithms-graph-storage/" data-toggle="tooltip" data-placement="top" title="图(Graph)-存储">后一篇 &rarr;</a>
+            </li>
+          
+        </ul>
+        
+
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
+        
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+    var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        labels: ['gitment'],
+        title: '图(Graph)',
+        createIssueManually: true,
+        id: 'Algorithms-Graph',      
+        distractionFreeMode: true  
+    });
+    gitalk.render('gitalk-container');
+</script>
+
+
+        
+          
+
+        
+  
+      </div>
+    
+    
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          <img src="/img/wechatmp.png" alt="k8s技术圈">
+          
+              <li>
+                <a href="mailto:icnych@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://github.com/cnych" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://weibo.com/cnych" title="微博">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://instagram.com/cnych" title="Instagram">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          
+          <li>
+            <a href="/index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="/">WoolfBreathe</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2021
+        </p>
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
+</script>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script >
+$(document).ready(function() {
+  var int = setInterval(fixCount, 50);  
+  
+  var initPVCount = 584976;
+  var initUVCount = 153191;
+  function fixCount() {                   
+    if ($("#busuanzi_container_site_pv").css("display") != "none") {
+        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
+        clearInterval(int); 
+    }
+    if ($("#busuanzi_container_site_uv").css("display") != "none") {
+      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
+      clearInterval(int); 
+    }  
+  }           
+});
+</script>
+ <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery-migrate@1.2.1/dist/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+$('.carousel').slick({
+    dots: true,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear',
+    centerMode: true,
+    prevArrow: '<button type="button" class="slick-prev"></button>',
+    nextArrow: '<button type="button" class="slick-next"></button>',
+});
+</script>
+
+  </body>
+</html>
+

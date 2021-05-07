@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Graph on WoolfBreathe</title>
+    <link>/tags/graph/</link>
+    <description>Recent content in Graph on WoolfBreathe</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <managingEditor>youremail@domain.com (WoolfBreathe)</managingEditor>
+    <webMaster>youremail@domain.com (WoolfBreathe)</webMaster>
+    <lastBuildDate>Mon, 02 Sep 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/graph/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>图(Graph)-拓扑排序(TopologicalSort)</title>
+      <link>/post/algorithms/graph/algorithms-graph-topologicalsort/</link>
+      <pubDate>Mon, 02 Sep 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/graph/algorithms-graph-topologicalsort/</guid>
+      <description>拓扑排序 无环图，就是图中没有回路。无环图两个常见的应用就是拓扑排序和关键路径。
+在日常生活中，通常会把软件开发、生产流程、网络设备互联都当成一个项目工程来对待，所有工程都可以分为若干个子工程（或者称之为「活动」），这些子工程之间往往会有一些条件约束，比如其中某些活动必须在另一些活动完成之后才能进行。下面是一个简单的软件开发流程图：
+将整个流程抽象为图这种数据结构，则每个子工程节点就是图的顶点，连接子工程的前后约束就是图的边（并且是有方向的边），并且工程有起始节点，也有结束节点，并且，首尾不会相连，所以综合来看，这样的工程图，一定是无环的有向图。
+在一个表示工程的有向图中，用顶点表示活动，用弧（有方向的边）表示活动之间的优先关系，这样的以顶点表示活动的有向图，称之为 AOV 网（Activity On Vertex Network）。
+拓扑排序的概念。 设 G=(V,E)（其中 V 表示顶点集合，E 表示弧集合）是一个具有 n 个顶点的有向图，V 集合中的顶点满足从顶点 i 到顶点 j 之间有一条路径，并且在顶点序列中 i 一定在 j 之前，则称这样的序列为一个拓扑序列。
+而所谓的拓扑排序，就是对有向图构造拓扑序列的过程。
+构造结果中如果全部顶点都被输出，则说明它是不存在回路的 AOV 网；否则说明存在回路，不是 AOV 网。
+对于不存在回路的 AOV 网，可以应用在各种不同的工程或项目流程图中，满足各种场景的需要，所以拓扑排序在工程中非常有实用价值。
+实现代码 拓扑排序的基本实现思路如下：
+在 AOV 网中，找到一个入度为 0 的顶点，然后删除此顶点，并删除以此顶点为起点的弧，重复此步骤，直到输出所有顶点，或者 AOV 网中不存在入度为 0 的顶点为止。
+和最小生成树和最短路径一样，我们还是通过邻接表来定义一个 AOV 网，考虑到始终需要查找入度为 0 的顶点，我们在原来的顶点数据结构基础上，新增一个入度域 in，用来表示入度值：
+/** * 顶点 * Class VNode */ class VNode extends Node { public $in; // 入度 public function __construct($data, $in) { $this-&amp;gt;in = $in; parent::__construct($data); } } 此外拓扑排序针对的是有向图，而之前实现最小生成树和最短路径的时候，都是基于无向图，所以还要编写一个新的继承自 EdgeWeightedGraph 的子类：</description>
+    </item>
+    
+    <item>
+      <title>图(Graph)-关键路径(CriticalPath)</title>
+      <link>/post/algorithms/graph/algorithms-graph-criticalpath/</link>
+      <pubDate>Sun, 01 Sep 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/graph/algorithms-graph-criticalpath/</guid>
+      <description>关键路径 拓扑排序主要是为了解决一个工程是否可以顺利进行的问题，但有时候还要解决工程完成需要的最短时间问题。
+要对一个流程图计算最短时间，就要分析流程之间的拓扑关系，并且找到当中最关键的流程，这个流程的时间就是最短时间。
+在 AOV 网的基础上，引入一个新的概念，在一个表示工程的带权有向图中，用顶点表示事件，用有向边表示活动，用边上的权值表示活动的持续时间，把这种通过有向图的边表示活动的网称之为 AOE 网（Activity On Edge Network）。AOE 网中入度为 0 的顶点叫做始点或源点，出度为 0 的点叫做终点或汇点。
+一个 AOE 网，总有开始和结束，并且正常情况下，只有一个源点和汇点：
+把路径上各个活动所持续的时间之和称之为路径长度，从源点到汇点具有最大长度的路径称之为关键路径，在关键路径上的活动叫关键活动。比如上图中，从源点 V1 到汇点 V9 的路径及路径之和是：
+V1-&amp;gt;V2-&amp;gt;V5-&amp;gt;V7-&amp;gt;V9：18 V1-&amp;gt;V2-&amp;gt;V5-&amp;gt;V8-&amp;gt;V9：18 V1-&amp;gt;V3-&amp;gt;V5-&amp;gt;V7-&amp;gt;V9：16 V1-&amp;gt;V3-&amp;gt;V5-&amp;gt;V8-&amp;gt;V9：16 V1-&amp;gt;V4-&amp;gt;V6-&amp;gt;V8-&amp;gt;V9：15  所以其关键路径是 V1-&amp;gt;V2-&amp;gt;V5-&amp;gt;V7-&amp;gt;V9。
+尽管 AOE 网和 AOV 网都是针对工程进行建模的，但是两者有明显的不同，主要体现在 AOV 网是顶点表示活动的网，它只描述活动之间的制约关系；而 AOE 网是边表示活动的网，边上的权值表示活动持续的时间，因此 AOE 网建立在活动之间制约关系没有矛盾的基础之上，再来分析整个工程至少需要多少时间，或者为了缩短完成整个工程所需时间，应当加快哪些活动。这也是 AOE 网的主要应用场景。
+实现算法 在 AOE 网中，某些活动可以并行地进行，因此完成工程的最短时间是从源点到汇点的最大路径长度（事件之间耗时最长的活动完成了，才意味着下个事件可以开始，并行的活动并不是可选的，而是都要执行的，这一点需要明确），而找到这条具有最大路径长度的路径，也就找到了关键路径。
+比如示例 AOE 网，其关键路径是 V1-&amp;gt;V2-&amp;gt;V5-&amp;gt;V7-&amp;gt;V9。
+下面我们来探讨如何用抽象的算法来寻找关键路径，为了方便描述这个算法，需要先定义几个变量：
+事件的最早发生时间 etv，即顶点 Vk 的最早发生时间； 事件的最晚发生时间 ltv，即顶点 Vk 的最晚发生时间，超出这个时间就会导致整个工程延期； 活动的最早开始时间 ete，即弧 ak 的最早开始时间； 活动的最晚开始时间 lte，即弧 ak 的最晚开始时间，也就是不会导致工程延期的最晚开始时间。  要找到关键路径，需要找到所有活动的最早开始时间和最晚开始时间，并且比较它们，如果相等则意味着此活动是关键活动（即弧的权值代表时间被填满），活动间的路径是关键路径，否则不是。</description>
+    </item>
+    
+    <item>
+      <title>图(Graph)-最短路径(ShortestPath)</title>
+      <link>/post/algorithms/graph/algorithms-graph-shortestpath/</link>
+      <pubDate>Sun, 01 Sep 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/graph/algorithms-graph-shortestpath/</guid>
+      <description>最短路径 迪杰斯特拉算法（Dijkstra） 在日常生活中，经常面临路径选择的问题，比如从杭州到北京，可以选择汽车、火车、飞机，甚至还可以坐公交车（这不是笑话，最近网上就流传一个从杭州回临沂，转了 35 班公交车，行程 660 多公里，历时 7 天的神奇春运回家路），对于不同的选择，意味着不同的路径，不同的路径意味着不同的成本，这个成本有时间成本，也有经济成本，不差钱的可以选择时间成本低的，比如坐飞机，经济不那么宽裕却有时间的，可以做公交车，我们把杭州和北京看作图上的两个顶点（中间可能会经过其它城市，即多个顶点），把时间成本或者经济成本看作权重，那么从杭州到北京的路径规划就可以抽象为今天我们要分享的话题 —— 图的最短路径问题。
+对于带权重的网图来说，所谓最短路径，指的是两个顶点之间经过的边上权值之和最小的路径，我们将第一个顶点叫做起点，最后一个顶点叫做终点。
+最短路径的实现也有多种算法，和最小生成树一样，两种最常见的实现算法：迪杰斯特拉（Dijkstra）算法和弗洛伊德（Floyd）算法。
+迪杰斯特拉算法（Dijkstra） 迪杰斯特拉（Dijkstra）算法是典型的单源最短路径算法，用于计算一个节点到其他所有节点的最短路径。主要特点是以起始点为中心向外层层扩展，直到扩展到终点为止。
+以下面这个无向图为例：
+通过迪杰斯特拉算法计算最短路径，需要指定起点，用 S 表示图的所有顶点集合，U 表示起点外的其它顶点集合，顶点到自身的距离为 0，到相邻顶点距离为相应边的权值，到不相邻顶点的距离为无穷大（∞）。每一次从 U 中找出路径最短的顶点，并将其加入到 S 中，然后，更新 U 中的剩余顶点和顶点对应的路径，重复该操作，直到遍历完所有顶点：
+实现代码 然后将上述算法实现思路转化为代码，还是以前面创建的无向网图类 EdgeWeightedGraph 类为基础，在其中编写迪杰斯特拉算法实现方法如下：
+// 通过迪杰斯特拉算法实现最短路径 public function dijkstra($start) { $prev = []; // 前驱顶点数组，prev[i]的值是起点到顶点i的最短路径所经历的全部顶点中，i之前的那个顶点。 $dist = []; // 长度数组，dist[i]是起点到顶点i的最短路径的长度 $flag = []; // flag[i] = true 表示起点到顶点 i 的最短路径获取成功 // 初始化 for ($i = 0; $i &amp;lt; $this-&amp;gt;vNum; $i++) { $flag[$i] = false; $prev[$i] = 0; $dist[$i] = $this-&amp;gt;getWeight($start, $i); } // 起点 $flag[$start] = true; $dist[$start] = 0; // 遍历图，每次找出一个顶点的最短路径。 $k = 0; for ($i = 1; $i &amp;lt; $this-&amp;gt;vNum; $i++) { // 在未获取最短路径的顶点中，找到离起点最近的顶点(k)。 $min = INF; for ($j = 0; $j &amp;lt; $this-&amp;gt;vNum; $j++) { if ($flag[$j] == false &amp;amp;&amp;amp; $dist[$j] &amp;lt; $min) { $min = $dist[$j]; $k = $j; } } // 标记顶点k为已经获取到最短路径 $flag[$k] = true; // 当获取顶点k的最短路径之后，更新未获取最短路径的顶点的最短路径和前驱顶点。 for ($j = 0; $j &amp;lt; $this-&amp;gt;vNum; $j++) { $tmp = ($this-&amp;gt;getWeight($k, $j) == INF ?</description>
+    </item>
+    
+    <item>
+      <title>图(Graph)-最小生成树(MinimumSpanningTree)</title>
+      <link>/post/algorithms/graph/algorithms-graph-minimumspanningtree/</link>
+      <pubDate>Sat, 31 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/graph/algorithms-graph-minimumspanningtree/</guid>
+      <description>最小生成树 在介绍图的相关概念的时候，提到过连通图，以无向图为例，如果图的任意两个顶点之间都是想通的，这个图就是连通图，今天我们在此基础上进一步介绍连通图的生成树概念。
+一个连通图的生成树是一个极小的连通子图，它含有图中全部的 n 个顶点，和足以构成一棵树的 n-1 条边，如下图所示：
+图1是一个连通图，图2是该连通图的生成树，反过来说，如果一棵树大于 n-1 条边，则必然构成环。
+构造连通网（带权连通图）的最小代价生成树叫做最小生成树。这个最小代价指的是通过 n-1 条边具有把 n 个顶点的连通图连接起来，并且使所有边的权值和最小。如下图所示，实线部分就是最小生成树：
+最小生成树的应用场景很多，小到欧洲十国游，怎么规划路径让交通费用最低，大到国家的电力网、公路网、通信网，怎么规划路径可以让建设成本最低，学习了最小生成树后，就可以通过算法来计算出最佳路径了，不仅如此，所有涉及连接网络中所有节点的最优路径问题，都可以通过最小生成树来处理。
+最小生成树有多种实现算法，我们这里介绍两种比较常见的：普里姆算法（Prim）和克鲁斯卡尔算法（Kruskal）。
+普里姆（Prim）算法 算法定义 简单来说，普里姆算法从图中某个顶点开始，将其作为一棵树的根节点，然后这棵树会逐步长大，一直长大到覆盖图中的每一个顶点为止，每一步都会从剩下的与当前操作节点相邻的顶点中找到一条权重最小的边加入到树中，当算法终止时，这棵树就是一棵最小生成树。
+下面是图示过程：
+从 V1 开始，从与其相邻的顶点中找到权重最小的边，连接的是 V3，然后从 V3 开始，在于 V3 相邻的顶点中找到权重最小的边，连接的是 V6，再从 V6 开始，依次类推，当到达某个顶点，与该顶点相邻的所有顶点都已经访问过，则需要往前回溯，从所有前驱节点中找到权重最小的一条未添加的边开始，继续上述流程，直到所有顶点都已经覆盖，此时，通过 n-1 条边连接 n 个顶点构成的树就是最小生成树。
+代码实现 在开始编写实现代码之前，需要做一些准备工作，因为最小生成树操作的图的边是有权重的，所以需要先构建一个带权重的图，此外，还需要对之前通过邻接表存储图的代码做一些扩展，因为之前保存的无向图是没有权重的，将邻接表中存储顶点节点和边节点的节点类分开加以区分：
+/** * 带权重的边节点 * Class ENode */ class ENode extends Node { public $weight; // 边的权重值 public function __construct($data, $weight) { $this-&amp;gt;weight = $weight; parent::__construct($data); } } /** * 顶点 * Class VNode */ class VNode extends Node { } 对于存储图的邻接链表类也要稍作调整，将属性改成受保护的，以便可以在子类中继承，然后修改插入节点方法如下：</description>
+    </item>
+    
+    <item>
+      <title>图(Graph)-遍历</title>
+      <link>/post/algorithms/graph/algorithms-graph-traverse/</link>
+      <pubDate>Fri, 30 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/graph/algorithms-graph-traverse/</guid>
+      <description>图的遍历 图的遍历和树的遍历类似，最直接的理解就是，在图中某个顶点出发，访遍图中其余顶点，并且其中每个顶点仅被访问一次，这个过程就是图的遍历。
+图的遍历主要有两种方式，一种是深度优先搜索，一种是广度优先搜索。我们先来看深度优先搜索。
+深度优先搜索定义 深度优先搜索（Depth First Search），简称 DFS，这种算法有点像走迷宫，沿着一条路径一直走，如果某个路径不通，则回到前驱节点，以此为出发点继续尝试下一条路径，以此类推，直到访遍所有顶点。
+深度优先搜索也是这样，它从图的某个顶点出发，访问此顶点，然后从该顶点未被访问的邻接顶点出发，深度遍历图，在未遇到已访问过的重复顶点前，我们约定右手优先原则，一直往前走，遇到已经访问过的顶点，则回溯到前驱顶点，访问与其相邻路径对应的邻接顶点，继续做上述判断，依次类推，直到图中所有与该顶点路径想通的顶点都被访问到，如下图所示：
+如果还有顶点未被访问，则将其作为起点，重复上述过程，直到图中所有顶点都被访问到。
+代码实现 首先将所有顶点的邻接顶点设置为空链表，然后我们可以通过 addEdge 方法为图添加边（$s 和 $t 分别代表边的两个顶点），从而完成图的构建。
+有了完整的图之后，就可以编写深度优先搜索方法对其进行遍历了。
+public function dfs($s, $t) { $this-&amp;gt;found = false; for ($i = 0; $i &amp;lt;= $this-&amp;gt;v; $i++) { $visited[$i] = 0; } for ($i = 0; $i &amp;lt;= $this-&amp;gt;v; $i++) { $prev[$i] = -1; } $this-&amp;gt;recurDfs($s, $t, $visited, $prev); $this-&amp;gt;printPath($prev, $s, $t); } public function recurDfs($w, $t, $visited, $prev) { if ($this-&amp;gt;found == true) { return; } $visited[$w] = 1; if ($w == $t) { $this-&amp;gt;found = true; return true; } for ($i = 0; $i &amp;lt; $this-&amp;gt;adj[$w]-&amp;gt;getSize(); $i++) { $q = $this-&amp;gt;adj[$w]-&amp;gt;get($i)-&amp;gt;data; if (!</description>
+    </item>
+    
+    <item>
+      <title>图(Graph)-存储</title>
+      <link>/post/algorithms/graph/algorithms-graph-storage/</link>
+      <pubDate>Thu, 29 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/graph/algorithms-graph-storage/</guid>
+      <description>图的存储 由于图这种数据结构比较复杂，单纯的数组和链表已经无法表示了，需要通过更复杂的结构来存储。
+两种存储图的方式，一种是基于数组，一种是基于链表，但是不是简单的数组和链表，下面我们就一起来看看到底是如何存储图的。
+邻接矩阵 显然，通过一维数组是无法存储图的，因为图包含顶点和边，而且每个顶点都可能与其他顶点有关联，所以我们通过两个数组来存储图：一个一维数组用于存储所有顶点，一个二维数组来存储连接顶点的边/弧，边或弧连接的是两个顶点，所以需要二维数组来存储。我们把这种存储图的方式叫做邻接矩阵。
+说概念很抽象，下面我们通过实例来演示，对于无向图而言，由于边没有方向，所以存储无向图边的二维数组是一个对称矩阵（矩阵是一个数学概念，一个 m x n 的矩阵是一个由 m 行 n 列元素排列成的矩形阵列）：
+对于有向图而言，由于边是有方向的，我们将二维数组中指向某个顶点的元素值设置为 1，否则设置为 0，比如下面 v1v0 为 1，而 v0v1 为 0（注意存储顺序，先横后纵，横向表示某个顶点的出度，纵向表示某个顶点的入度）：
+对于带权的有向图，要更复杂一些，在存储弧的二维数组中，相邻的顶点对应元素值等于权重（入度），自己指向自己的对应元素值为 0，否则等于无穷大（∞）：
+对于邻接矩阵而言，初始化的时间复杂度等于边数组构建的复杂度，对于有 n 个顶点的图而言，时间复杂度是 O(n^2)，空间复杂度也是如此，而且如果图比较稀疏的话（稀疏图），边数组会存在巨大的空间浪费。但是优点是实现起来非常简单，对于稠密图或者非常简单的图来说，用邻接矩阵是比较方便的。
+邻接表 既然稀疏图用邻接矩阵存储不合适，那要怎么存储呢？有了前面的数据结构基础，我们很容易会联想到基于链表替代边数组来存储边，这样就可以避免对空间的浪费了。这种存储方式还是通过一个一维数组来存储顶点，只是将边/弧通过链表来表示，我们把这种存储方式叫做邻接表。
+对于无向图来说，通过邻接表来存储，可以这么实现：
+每个顶点上通过 data 保存数据，通过 firstedge 指向第一个邻接顶点，指向节点上 adjvex 存储的是对应顶点的数组下标，如果该顶点有多个邻接顶点，可以通过 next 指向下一个邻接顶点，如果没有的话，则将对应指针设置为空。
+对于有向图来说，原理也是类似，只不过有向图的边有方向而已，链表指针指向基于出度，所以很容易计算出某个顶点的出度：
+显然，邻接表的构建时间复杂度要比邻接矩阵好，对于一个有 n 个顶点和 e 条边的图而言，时间复杂度是 O(n+e)，而且不存在任何空间的浪费，比较高效，可用于存储任何图。
+但邻接表也不是十全十美，对于有向图来说，如果要计算某个顶点的入度，需要遍历整个图才能实现，要解决这个问题，我们可以通过逆邻接表来实现。所谓逆邻接表，就是和邻接表相反，指针指向基于入度，比如上面这个有向图，我们可以这样通过逆邻接表来构建：
+对于有权重的有向图（网图），还要通过一个额外的 weight 域来存储权重：
+代码示例 创建链表类 LinkedList 及对应的节点类 Node：
+/** * Class Node * 链表节点类 */ class Node { public $data; /** * @var Node */ public $next; public function __construct($data = null) { $this-&amp;gt;data = $data; } } /** * Class LinkedList * 链表类 */ class LinkedList { private $head = null; private $count = 0; public function __construct() { $emptyNode = new Node(); $this-&amp;gt;head = $emptyNode; } public function insert($data) { if ($this-&amp;gt;head == null) { return; } $newNode = new Node($data); $newNode-&amp;gt;next = $this-&amp;gt;head-&amp;gt;next; $this-&amp;gt;head-&amp;gt;next = $newNode; $this-&amp;gt;count++; } public function remove(Node $node) { if ($node == null) { return false; } $preNode = $this-&amp;gt;pre($node); $preNode-&amp;gt;next = $node-&amp;gt;next; $this-&amp;gt;count--; } public function get($index) { if ($index &amp;gt;= $this-&amp;gt;count) { return false; } $node = $this-&amp;gt;head-&amp;gt;next; $i = 0; while ($node) { if ($i == $index) { return $node; } else { $node = $node-&amp;gt;next; $i++; } } return false; } public function pre(Node $node) { if ($node == null) { return false; } $preNode = $this-&amp;gt;head; $curNode = $this-&amp;gt;head-&amp;gt;next; while ($curNode) { if ($curNode === $node) { return $preNode; } else { $preNode = $curNode; $curNode = $preNode-&amp;gt;next; } } return false; } public function getSize() { return $this-&amp;gt;count; } public function __toString() { $node = $this-&amp;gt;head-&amp;gt;next; $arr = []; $i = 0; while ($node) { $arr[] = &amp;#39;Node[&amp;#39; .</description>
+    </item>
+    
+    <item>
+      <title>图(Graph)</title>
+      <link>/post/algorithms/graph/algorithms-graph/</link>
+      <pubDate>Wed, 28 Aug 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/algorithms/graph/algorithms-graph/</guid>
+      <description>图的相关概念 图会综合运用前面所介绍的所有数据结构，所以说，学好了图，也就等同于掌握了数据结构的精髓。
+图的基本定义 图（Graph）由顶点（Vertex）和边（Edge）组成。图中的元素叫顶点，图不能为空，在线性表中，相邻元素有前后关系，在树中，相邻元素有层次关系，在图中，任意两个元素之间都可能有关系，顶点之间的关系通过边来表示。图可以表示为 G(V,E)，其中 G 表示图，V 表示顶点的集合，E 表示边的集合。
+下面就是一个典型的图：
+其中字母标识的节点就是图的顶点，节点之间的连线就是图的边。
+无向图与有向图 没有方向的边叫无向边，任意两个顶点之间都是无向边的图叫无向图，比如上面那个示例图就是无向图。在无向图中，任意两个顶点之间都有边的图叫无向完全图。
+与之相对的，有方向的边叫有向边（也叫弧），任意两个顶点之间都是有向边的图叫有向图，例如下面这个图就是有向图：
+在有向图中，任意两个顶点之间都有方向相反的两条有向边的图叫有向完全图。
+按照边的数目，我们将边数很少的图叫稀疏图，边数很多的图叫稠密图。
+有些图的边还拥有与其相关的数字，我们把这个数字叫做权，这种带权的图通常称作网。
+顶点与边的关系 顶点的度指的是与顶点相连接的边数，整个图的度数是所有顶点度数之和。
+在无向图中，边不分方向，边数是图的度数/2。
+在有向图中，边有方向，按照方向将有向图顶点的度分为出度和入度，出度表示有多少条边是以这个顶点为起点指向其他顶点；入度表示有多少条边指向这个顶点。
+在树中，顶点到任意节点的路径是唯一的，而在图中，顶点到任意顶点的路径却不是唯一的。比如上述示例有向图中，从 B 到 A 就有 B-&amp;gt;A、B-&amp;gt;C-&amp;gt;A 两条路径，示例无向图中还有 B-&amp;gt;C-&amp;gt;D-&amp;gt;A 这条路径。
+连通图 在无向图 G 中，如果顶点 v 到顶点 v&amp;rsquo; 有路径，则称 v 和 v&amp;rsquo; 是连通的，如果任意两个顶点都是连通的，则称 G 是连通图。比如上述示例无向图就是连通图。
+在有向图 G 中，对于每一对顶点，如果相互之间都存在路径，则 G 是强连通图。上述示例有向图不是强连通图，因为 A 到 D 存在路径，而 D 到 A 不存在。
+图的典型应用 图的应用场景很多，比如社交网络中用户之间的关系，网络设备之间的拓扑结构，以及显示生活中形形色色的网：公路网、铁路网、地铁网等等，都可以通过图来表示。</description>
+    </item>
+    
+  </channel>
+</rss>

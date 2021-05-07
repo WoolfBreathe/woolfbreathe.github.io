@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+  <title>Algorithms-WoolfBreathe</title>
+  <meta property="og:title" content="Algorithms" />
+  <meta name="twitter:title" content="Algorithms" />
+
+  <meta name="author" content="WoolfBreathe"/>
+  <link href="/img/favicon.png" rel="icon" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/img/favicon.png"/>
+  <meta property="og:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@username" />
+  <meta name="twitter:creator" content="@username" />
+  <meta property="og:url" content="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="WoolfBreathe" />
+
+  <meta name="generator" content="Hugo 0.68.3" />
+  <link rel="canonical" href="/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="WoolfBreathe">
+
+  
+  
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700%7COpen+Sans:400,700" rel="stylesheet">
+  
+
+  <link rel="stylesheet" href='/css/bundle.min.62de9d30b83723e0d55f82908aedb1c5eb18c910bc24bcf43e530ce754ee1502.css' integrity='sha256-Yt6dMLg3I&#43;DVX4KQiu2xxesYyRC8JLz0PlMM51TuFQI='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
+<meta name="google-site-verification" content="oKxX4fOvB2yYmU02txZFChM93XQbESU4JaG3tNH9Hm8" />
+<meta name="baidu-site-verification" content="F5ojAyqaKU" />
+<meta name="keywords" content="">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d611849735f187dd788dc054908f7d7a";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/" title="WoolfBreathe">
+        <img src="img/avatar-icon.png" style="margin-top: -5px;height: 32px;" alt="WoolfBreathe">
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="首页" href="/">首页</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="归档" href="/archives">归档</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="标签" href="/tags">标签</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于" href="/page/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="RSS" href="/index.xml">RSS</a>
+            </li>
+          
+        
+
+        
+
+        
+
+        
+          <li>
+            <a href="#modalSearch" data-toggle="modal" data-target="#modalSearch" style="outline: none;">
+              <span id="searchGlyph" class="glyphicon glyphicon-search"></span>
+            </a>
+          </li>
+          
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+  <div id="modalSearch" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">搜索</h4>
+        </div>
+        <div class="modal-body">
+            
+<div class="aa-input-container" id="aa-input-container">
+    <input type="search" id="aa-search-input" class="aa-input-search" placeholder="Search for titles or URIs..." name="search" autocomplete="off" />
+    <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
+        <path d="M1806,332c0-123.3-43.8-228.8-131.5-316.5C1586.8-72.2,1481.3-116,1358-116s-228.8,43.8-316.5,131.5  C953.8,103.2,910,208.7,910,332s43.8,228.8,131.5,316.5C1129.2,736.2,1234.7,780,1358,780s228.8-43.8,316.5-131.5  C1762.2,560.8,1806,455.3,1806,332z M2318,1164c0,34.7-12.7,64.7-38,90s-55.3,38-90,38c-36,0-66-12.7-90-38l-343-342  c-119.3,82.7-252.3,124-399,124c-95.3,0-186.5-18.5-273.5-55.5s-162-87-225-150s-113-138-150-225S654,427.3,654,332  s18.5-186.5,55.5-273.5s87-162,150-225s138-113,225-150S1262.7-372,1358-372s186.5,18.5,273.5,55.5s162,87,225,150s113,138,150,225  S2062,236.7,2062,332c0,146.7-41.3,279.7-124,399l343,343C2305.7,1098.7,2318,1128.7,2318,1164z" />
+    </svg>
+</div>
+<script src="/js/algoliasearch.min.js"></script>
+<script src="/js/autocomplete.min.js"></script>
+
+<script>
+var client = algoliasearch("1JDRAS0AZR", "8804ac109158bb3bb60d74ce98fa332f");
+var index = client.initIndex('prod_blog');
+
+autocomplete('#aa-search-input',
+{ hint: false}, {
+    source: autocomplete.sources.hits(index, {hitsPerPage: 5}),
+    
+    displayKey: 'name',
+    
+    templates: {
+        
+        suggestion: function(suggestion) {
+            return '<span>' + '<a href="/post/' + suggestion.slug + '">' +
+            suggestion._highlightResult.title.value + '</a></span>';
+        }
+    }
+});
+</script>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+  <header class="header-section ">
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="page-heading">
+              <h1>#Algorithms</h1>
+              <hr class="small">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+    
+  <div class="container" role="main">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+        <div class="posts-list">
+          
+            <article class="post-preview">
+              <a href="/post/algorithms/sort/algorithms-sort-insertionsort/">
+                <h2 class="post-title">排序算法-选择排序(InsertionSort)</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-08-08
+              </p>
+              <div class="post-entry">
+                
+                  <h1 id="实现原理">实现原理</h1>
+<p>插入排序的原理是：将数组中的数据分为两个区间，已排序区间和未排序区间。初始已排序区间只有一个元素，就是数组的第一个元素。插入算法的核心思想是取未排序区间中的元素，在已排序区间中找到合适的插入位置将其插入，并保证已排序区间数据一直有序。重复这个过程，直到未排序区间中元素为空，算法结束。</p>
+<p>光看定义有点抽象，用图来演示，假设待排序数字是 4、5、6、3、2、1，第一次排序的流程是这样的：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/InsertionSort/Fp2wlQjdiEtuhI9MQaYSqM17Q40G.png" alt="插入排序"></p>
+<p>在这里搭配动态图查看效果更佳：https://visualgo.net/zh/sorting。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&lt;?php
+    
+    /**
+     * 插入排序实现函数（PHP）
+     * @param $nums
+     * @return mixed
+     */
+    function insertion_sort($nums) {
+        if (count($nums) &lt;= 1) {
+            return $nums;
+        }
+    
+        for ($i = 0; $i &lt; count($nums); $i++) {
+            $value = $nums[$i];
+            $j = $i - 1;
+            for (; $j &gt;= 0; $j--) {
+                if ($nums[$j] &gt; $value) {
+                    $nums[$j+1] = $nums[$j];
+                } else {
+                    break;
+                }
+            }
+            $nums[$j+1] = $value;
+        }
+    
+        return $nums;
+    }
+    
+    $nums = [4, 5, 6, 3, 2, 1];
+    $nums = insertion_sort($nums);
+    print_r($nums);
+</code></pre></div><h1 id="性能分析">性能分析</h1>
+<pre><code>插入排序需要两个嵌套的循环，时间复杂度是O(n2)；
+没有额外的存储空间，是原地排序算法；
+不涉及相等元素位置交换，是稳定的排序算法。
+</code></pre>
+<p>插入排序的时间复杂度和冒泡排序一样，也不是很理想，但是插入排序不涉及数据交换，从更细粒度来区分，性能要略优于冒泡排序。</p>
+
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/post/algorithms/sort/algorithms-sort-bubblesort/">
+                <h2 class="post-title">排序算法-冒泡排序(BubbleSort)</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-08-07
+              </p>
+              <div class="post-entry">
+                
+                  冒泡排序(BubbleSort) 常见基于选择的排序算法有冒泡排序、插入排序、选择排序、归并排序和快速排序，在选择排序算法的时候，通常会根据以下几个维度来考虑：
+时间复杂度 空间复杂度（对内存空间的消耗） 算法的稳定性（如果待排序的序列中存在值相等的元素，经过排序之后，相等元素之间原有的先后顺序不变）  实现原理 冒泡排序只会操作相邻的两个数据。每次冒泡操作都会对相邻的两个元素进行比较，看是否满足大小关系要求，如果不满足就让它俩互换。一次冒泡会让至少一个元素移动到它应该在的位置，重复 n 次，就完成了 n 个数据的排序工作。
+光看定义有点抽象，用图来演示，假设待排序数字是 4、5、6、3、2、1，第一次排序的流程是这样的：
+看这个图的时候要结合定义一起看，否则也比较懵逼，当然如果去 VisuAlgo 上看动态图的话就更形象了：https://visualgo.net/zh/sorting，经过 n 次冒泡，最终完成排序（所谓冒泡，以升序来看，就是每次把待排序序列中的最大值插到已排序序列的最前面，这个过程就像冒泡一样）：
+示例代码
+重要的是理解冒泡排序的原理，懂了原理就是把这个排序过程翻译成代码而已，以下是 PHP 代码实现的冒泡排序：
+&lt;?php /** * 冒泡排序实现函数（PHP） * @param $nums * @return mixed */ function bubble_sort($nums) { if (count($nums) &lt;= 1) { return $nums; } for ($i = 0; $i &lt; count($nums); $i++) { $flag = false; for ($j = 0; $j &lt; count($nums) - $i - 1; $j++) { if ($nums[$j] &gt; $nums[$j+1]) { $temp = $nums[$j]; $nums[$j] = $nums[$j+1]; $nums[$j+1] = $temp; $flag = true; } } if (!
+                  <a href="/post/algorithms/sort/algorithms-sort-bubblesort/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/post/algorithms/sort/algorithms-sort-mergesort/">
+                <h2 class="post-title">排序算法-归并排序(MergeSort)</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-08-07
+              </p>
+              <div class="post-entry">
+                
+                  实现原理 排序算法性能更好的排序算法，归并排序。
+所谓归并排序，指的是如果要排序一个数组，我们先把数组从中间分成前后两部分，然后对前后两部分分别排序，再将排好序的两部分合并在一起，这样整个数组就都有序了。
+归并排序使用了分治思想，分治，顾名思义，就是分而治之，将一个大问题分解成小的子问题来解决。说到这里，可能你就能联想起我们之前讲到的一个编程技巧 —— 递归，没错，归并排序就是通过递归来实现的。这个递归的公式是每次都将传入的待排序数组一分为二，直到不能分割，然后将排序后序列合并，最终返回排序后的数组。
+原理图如下所示：
+由于涉及到递归，所以归并排序从理解上要比前面三个排序要困难一些，还是建议通过这个动态图帮助理解：https://visualgo.net/zh/sorting，在界面顶部选择归并排序，然后在左下角点击执行即可。
+示例代码 &lt;?php function merge_sort($nums) { if (count($nums) &lt;= 1) { return $nums; } merge_sort_c($nums, 0, count($nums) - 1); return $nums; } function merge_sort_c(&amp;$nums, $p, $r) { if ($p &gt;= $r) { return; } $q = floor(($p + $r) / 2); merge_sort_c($nums, $p, $q); merge_sort_c($nums, $q + 1, $r); merge($nums, [&#39;start&#39; =&gt; $p, &#39;end&#39; =&gt; $q], [&#39;start&#39; =&gt; $q + 1, &#39;end&#39; =&gt; $r]); } function merge(&amp;$nums, $nums_p, $nums_q) { $temp = []; $i = $nums_p[&#39;start&#39;]; $j = $nums_q[&#39;start&#39;]; $k = 0; while ($i &lt;= $nums_p[&#39;end&#39;] &amp;&amp; $j &lt;= $nums_q[&#39;end&#39;]) { if ($nums[$i] &lt;= $nums[$j]) { $temp[$k++] = $nums[$i++]; } else { $temp[$k++] = $nums[$j++]; } } if ($i &lt;= $nums_p[&#39;end&#39;]) { for (; $i &lt;= $nums_p[&#39;end&#39;]; $i++) { $temp[$k++] = $nums[$i]; } } if ($j &lt;= $nums_q[&#39;end&#39;]) { for (; $j &lt;= $nums_q[&#39;end&#39;]; $j++) { $temp[$k++] = $nums[$j]; } } for ($x = 0; $x &lt; $k; $x++) { $nums[$nums_p[&#39;start&#39;] + $x] = $temp[$x]; } } $nums = [4, 5, 6, 3, 2, 1]; $nums = merge_sort($nums); print_r($nums); 性能分析 总结，归并排序不涉及相等元素位置交换，是稳定的排序算法，时间复杂度是 O(nlogn)，要优于冒泡排序和插入排序的 O(n2)，但是归并排序需要额外的空间存放排序数据，不是原地排序，最多需要和待排序数组同样大小的空间，所以空间复杂度是 O(n)。
+                  <a href="/post/algorithms/sort/algorithms-sort-mergesort/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/post/algorithms/sort/algorithms-sort-quicksort/">
+                <h2 class="post-title">排序算法-快速排序(QuickSort)</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-08-07
+              </p>
+              <div class="post-entry">
+                
+                  实现原理 归并排序算法虽好，但是不是原地排序算法，需要消耗额外的内存空间，是常规排序里综合排名最高的排序算法：快速排序，江湖人称「快排」。
+快排的核心思想是这样的：
+如果要排序数组中下标从 p 到 r 之间的一组数据，选择 p 到 r 之间的任意一个数据作为 pivot（分区点）。
+遍历 p 到 r 之间的数据，将小于 pivot 的放到左边，将大于 pivot 的放到右边，将 pivot 放到中间。经过这一步骤之后，数组 p 到 r 之间的数据就被分成了三个部分，前面 p 到 q-1 之间都是小于 pivot 的，中间是 pivot，后面的 q+1 到 r 之间是大于 pivot 的。
+图示如下：
+根据分治、递归的处理思想，可以用递归排序下标从 p 到 q-1 之间的数据和下标从 q+1 到 r 之间的数据，直到区间缩小为 1，就说明所有的数据都有序了，而且可以看到不需要像归并排序那样做合并操作，也就不需要额外的内存空间，在算法复杂度和归并排序一样的情况下，有着更好的空间复杂度表现。
+快速排序首先要找到分区点 pivot，一般我们会将数组最后一个元素或者第一个元素作为 pivot，比如我们以最后一个元素作为分区点，然后通过两个变量 i 和 j 作为下标来循环数组，当下标 j 对应数据小于 pivot 时，交换 i 和 j 对应数据，并且将 i 往前移动一位，否则 i 不动，下标 j 始终是往前移动的，j 到达终点后，将 pivot 与下标 i 对应数据交换，这样最终将 pivot 置于数组中间，[0&hellip;i-1] 区间的数据都比 pivot 小，[i+1&hellip;j] 之间的数据都比 pivot 大，我们以递归的方式处理该流程，最终整个数组都会变成有序的，对应的算法操作流程如下：
+                  <a href="/post/algorithms/sort/algorithms-sort-quicksort/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/post/algorithms/datastructures/algorithms-datastructures-recursion/">
+                <h2 class="post-title">数据结构-递归(Recursion)</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-08-06
+              </p>
+              <div class="post-entry">
+                
+                  递归(Recursion) 递归算不上任何数据结构和算法，但确实是一种很重要的编程技巧，很多算法也会用到递归来实现，比如归并排序、快速排序、二分查找等。
+递归，简单来讲就是在函数定义中调用函数自身，从之前学习数学解题经验来讲，就是将一个大的问题拆分成多个小问题，逐一击破后最后归并结果。判断一个问题是否可以通过递归来解决，主要看它是否满足以下三个条件：
+ 一个问题的解可以分解为几个子问题的解 这个问题与分解之后的子问题，除了数据规模不同，求解思路完全一样 存在递归终止条件  递归一定要有终止条件，否则会导致函数被无限调用最终致使内存溢出。
+通过以上分析，可以整理出递归代码的编写思路：写出递归公式，找到终止条件。有句话叫做「人理解迭代，神理解递归」，说的就是递归代码可读性不好，理论上看，递归代码都是可以转化成迭代实现的，但是递归代码更简洁，更显逼格，在通过递归实现代码的时候，切忌试图通过人脑去分解每个步骤，那样会把自己搞晕的，这种重复迭代的事情交给计算机去做，要做的就是抽象出规律，写递归公式，找终止条件，再把它们转化为递归代码，就完事了。
+说了这么多，最后通过一个案例来帮助理解和实际运用。递归的应用案例很多，比如经典的汉诺塔、斐波那契数列等，以斐波那契数列来演示下递归代码的编写，斐波那契数列是这样一组数列：0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, …(可以去网上搜一下了解下这个数列的现实由来），求第n个数列的值。
+按照前面列出的递归问题解题思路，首先抽象出这组数列的一般规律，将其整理成递归公式，会得出如下结论（索引从0开始，即第零项）：
+F0 = 0 F1 = 1 ... F(n) = F(n-1) + F(n-2) 这样，同时有了终止条件和递归公式，接下来，就是将其转化为递归代码了：
+&lt;?php /** * 通过递归实现斐波那契数列 */ function fibonacci($n) { if ($n == 0) { return 0; } if ($n == 1) { return 1; } return fibonacci($n - 2) + fibonacci($n - 1); } print fibonacci(5); # 5 print fibonacci(8); # 21 通过递归，用非常简洁的代码就实现了复杂的斐波那契数列的求解，如果要用迭代来实现这个逻辑，不定要写多少代码呢。
+                  <a href="/post/algorithms/datastructures/algorithms-datastructures-recursion/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/post/algorithms/datastructures/algorithms-datastructures-queue/">
+                <h2 class="post-title">数据结构-队列(Queue)</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-08-05
+              </p>
+              <div class="post-entry">
+                
+                  队列(Queue) 数据结构 —— 队列，和栈一样，队列也是一中特殊的线性表结构，只不过队列是在一端插入，另一端删除，就跟平常排队一样的道理，从队尾入队，在队头出去，所以队列的特性是先入先出（FIFO），允许插入的一端叫队尾，允许删除的一端叫队头。
+一张图可以形象的体现两者的差别：
+和栈一样，队列也可以通过数组和链表实现，通过数组实现的叫顺序队列，通过链表实现的叫做链式队列，栈只需要一个栈顶指针就可以了，因为只允许在栈顶插入删除，但是队列需要两个指针，一个指向队头，一个指向队尾。先来看通过 PHP 数组实现的顺序队列代码：
+&lt;?php /** * 通过 PHP 数组实现的队列 */ class SimpleQueue { private $_queue = []; private $_size = 0; public function __construct($size = 10) { $this-&gt;_size = $size; } // 入队 public function enqueue($value) { if (count($this-&gt;_queue) &gt; $this-&gt;_size) { return false; } array_push($this-&gt;_queue, $value); } // 出队 public function dequeue() { if (count($this-&gt;_queue) == 0) { return false; } return array_shift($this-&gt;_queue); } public function size() { return count($this-&gt;_queue); } } $queue = new SimpleQueue(5); $queue-&gt;enqueue(1); $queue-&gt;enqueue(3); $queue-&gt;enqueue(5); var_dump($queue-&gt;dequeue()); # 1 var_dump($queue-&gt;size()); # 2 通过数组实现的顺序队列有一个问题，就是随着队列元素的插入和删除，队尾指针和队头指针不断后移，而导致队尾指针指向末尾无法插入数据，这时候有可能队列头部还是有剩余空间的，如下图所示：
+                  <a href="/post/algorithms/datastructures/algorithms-datastructures-queue/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/post/algorithms/datastructures/algorithms-datastructures-stack/">
+                <h2 class="post-title">数据结构-栈(Stack)</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-08-04
+              </p>
+              <div class="post-entry">
+                
+                  栈(Stack) 数组和链表，从逻辑角度来说，它们都是线性结构（就是排成一条线的结构，只有前后两个方向，非线性结构包括树、图等，后面会讲到），从存储角度来说，一个是顺序存储，一个是链式存储，各有利弊，数组需要预先申请连续内存，超出限制会溢出，但是对明确知道规模的小型数据集而言，使用数组会更加高效，随机访问的特性也更加方面数组读取，但插入和删除性能要差一些；链表的话没有空间限制，但是需要额外空间存储指针，插入、删除效率很高，但不支持随机访问。
+虽说 PHP 中很少接触到这些，但是学习使用 C 语言的话这些基础还是需要了解的。接下来要介绍两种特殊的线性结构，或者说用于满足特定场景需求的线性结构：栈和队列。
+栈又叫堆栈，是限定只能在一端进行插入和删除操作的线性表，并且满足后进先出（LIFO）的特点。把允许插入和删除的一端叫做栈顶，另一个端叫做栈底，不含任何数据的栈叫做空栈。
+栈支持通过数组/链表实现，通过数组实现的通常叫做顺序栈，通过链表实现的叫做链栈。下面简单演示下如何在 PHP 中通过数组实现一个简单的顺序栈：
+&lt;?php /** * 通过 PHP 数组实现简单的顺序栈 */ class SimpleStack { private $_stack = []; private $_size = 0; public function __construct($size = 10) { $this-&gt;_size = $size; } // 获取栈顶元素 public function pop() { // 空栈 if (count($this-&gt;_stack) == 0) { return false; } return array_pop($this-&gt;_stack); } // 推送元素到栈顶 public function push($value) { // 满栈 if (count($this-&gt;_stack) == $this-&gt;_size) { return false; } array_push($this-&gt;_stack, $value); return true; } public function isEmpty() { // 是否是空栈 return current($this-&gt;_stack) == false; } public function size() { return count($this-&gt;_stack); } } $stack = new SimpleStack(15); var_dump($stack-&gt;isEmpty()); # true $stack-&gt;push(111); $stack-&gt;push(&#39;学院君&#39;); var_dump($stack-&gt;pop()); # 学院君 var_dump($stack-&gt;size()); # 1 在 PHP 底层 SPL 库中也提供了堆栈的实现类 SplStack，堆栈的概念比较简单，理解起来也不复杂，下面给出一个图示，帮助了解栈的操作流程：
+                  <a href="/post/algorithms/datastructures/algorithms-datastructures-stack/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/post/algorithms/datastructures/algorithms-datastructures-linkedlist/">
+                <h2 class="post-title">数据结构-链表(LinkedList)</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-08-03
+              </p>
+              <div class="post-entry">
+                
+                  链表(LinkedList) 链表并不需要一块连续的内存空间，它通过“指针”将一组零散的内存块串联起来使用，如图所示：
+单链表 链表有多种类型，最简单的是单链表，单链表是最原生的链表，其结构如图所示： 单链表中有两个节点比较特殊，分别是第一个结点和最后一个结点。通常把第一个结点叫作头结点，把最后一个结点叫作尾结点。其中，头结点用来记录链表的基地址，有了它，就可以遍历得到整条链表。而尾结点特殊的地方是：指针不是指向下一个结点，而是指向一个空地址 NULL，表示这是链表上最后一个结点。对单链表而言，理论上来说，插入和删除节点的时间复杂度是 O(1)，查询节点的时间复杂度是 O(n)。
+循环链表 然后还有在单链表的基础上扩展还有循环链表，循环链表和单链表的区别是尾节点指向了头结点，从而首尾相连，有点像贪吃蛇，可用于解决「约瑟夫环」问题，循环链表的结构如图所示：
+双向链表 顾名思义，与单链表的区别是双向链表除了有一个指向下一个节点的指针外，还有一个用于指向上一个节点的指针，从而实现通过 O(1) 复杂度找到上一个节点。正是因为这个节点，使得双向链表在插入、删除节点时比单链表更高效，虽然前面已经提到单链表插入、删除时间复杂度已经是 O(1) 了，但是这没有考虑还只是针对插入、删除操作本身而言，以删除为例，删除某个节点后，需要将其前驱节点的指针指向被删除节点的下一个节点，这样，还需要获取其前驱节点，在单链表中获取前驱节点的时间复杂度是 O(n)，所以综合来看单链表的删除、插入操作时间复杂度也是 O(n)，而双向链表则不然，它有一个指针指向上一个节点，所以其插入和删除时间复杂度才是真正的 O(1)。
+此外，对于有序链表而言，双向链表的查询效率显然也要高于单链表，不过更优的时间复杂度是靠更差的空间复杂度换取的，双向链表始终需要单链表的两倍空间，但是正如之前说的，在 Web 应用中，时间效率优先级更高，所以通常都是空间换时间来提高性能，Java 的 LinkedHashMap 底层就用到了双向链表。
+双向链表的结构如图所示：
+双向循环链表 最后要介绍的是结合循环链表和双向链表为一体的双向循环链表：
+其实就是将双向链表的首尾通过指针连接起来。 通过数组函数模拟实现单链表
+在 PHP 中由于没有指针，可以借助数组的 next、current、key 等函数实现链表这个数据结构：
+&lt;?php /** * 通过 PHP 数组模拟实现单链表 */ class LinkedList { private $list = []; // 获取链表指定位置的元素值，从0开始 public function get($index) { $value = NULL; while (current($this-&gt;list)) { if (key($this-&gt;list) == $index) { $value = current($this-&gt;list); } next($this-&gt;list); } reset($this-&gt;list); return $value; } // 在链表指定位置插入值，默认插到链表头部 public function add($value, $index = 0) { array_splice($this-&gt;list, $index, 0, $value); } // 从链表指定位置删除元素 public function remove($index) { array_splice($this-&gt;list, $index, 1); } public function isEmpty() { return !
+                  <a href="/post/algorithms/datastructures/algorithms-datastructures-linkedlist/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/post/algorithms/datastructures/algorithms-datastructures-array/">
+                <h2 class="post-title">数据结构-数组(Array)</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-08-02
+              </p>
+              <div class="post-entry">
+                
+                  <h1 id="数组array">数组(Array)</h1>
+<p>数组（Array）是一种线性表数据结构，它用一组连续的内存空间，来存储一组具有相同类型的数据。如果学习过 C 语言，应该对这段定义很熟悉，但是在 PHP 这种动态语言中，因为数组底层是通过散列表实现的，所以功能异常强大，这段常规的数组定义在 PHP 中并不成立，PHP 的数组可以存储任何类型数据，如果与 Java 对比的话，PHP 数组集成了 Java 的数组、List、Set、Map 于一身，所以写代码的效率比 Java 高了几个量级。</p>
+<p>抛开 PHP 或 JavaScript 这种动态语言，对于传统的数组，比如 C 语言和 Java 中的数组，在使用之前都需要声明数组存储数据的类型和数组的大小，数组的优点是可以通过下标值随机访问数组内的任何元素，算法复杂度是 O(1)，非常高效，但是缺点是删除/插入元素比较费劲，以删除为例，需要在删除某个元素后，将后续元素都往前移一位，如果是插入，则需要将插入位置之后的元素都往后移，所以对数组的插入/删除而言，算法复杂度是 O(n)，当然了，这个是针对 C / Java 这种语言而言，PHP 不受此约束，因为它不是传统一样上的数组嘛。</p>
+
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/post/algorithms/basis/algorithms-base-conception/">
+                <h2 class="post-title">算法(Algorithms)-概念</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-08-02
+              </p>
+              <div class="post-entry">
+                
+                  <h1 id="概念">概念</h1>
+<p><strong>算法</strong>
+算法就是任何良定义的计算过程，该过程将某个值或值的集合作为输入并产生某个值或值得集合作为输出；亦可将算法看作是用于求正确解的计算问题的工具。</p>
+<p><strong>良定义（well defined）</strong>
+就是指无歧义的、不会导致矛盾的、符合其应满足的所有要求的定义</p>
+<p><strong>问题实例</strong>
+由该问题所必须的输入所组成.</p>
+<p><strong>算法特征</strong></p>
+<ol>
+<li>
+<p>存在许多候选解, 但绝大多数候选解没有解决手头问题. 寻找一个真正的解或一个最好的解可能是一个很大的挑战.</p>
+</li>
+<li>
+<p>存在实际应用.</p>
+</li>
+</ol>
+<p><strong>循环不变式</strong>
+初始化：循环的第一次迭代之前，它为真。
+保持：  如果循环的某次迭代之前它为真，那么下次迭代之前它仍为真。
+终止：  在循环终止时，不变式为我们提供一个有用的性质，该性质有助于证明算法是正确的。</p>
+
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+        </div>
+        
+          <ul class="pager main-pager">
+            
+              <li class="previous">
+                <a href="page/2">&larr; 上一页</a>
+              </li>
+            
+            
+          </ul>
+        
+      </div>
+    </div>
+  </div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          <img src="/img/wechatmp.png" alt="k8s技术圈">
+          
+          <li>
+            <a href="mailto:icnych@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://github.com/cnych" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://weibo.com/cnych" title="微博">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://instagram.com/cnych" title="Instagram">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="/%20index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+          
+          <a href="/">WoolfBreathe</a>
+          
+          
+
+          &nbsp;&bull;&nbsp;
+          2021
+        </p>
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a
+            href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a
+            href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script> renderMathInElement(document.body); </script>
+<script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
+</script>
+<script>
+  (function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+
+  </body>
+</html>
+

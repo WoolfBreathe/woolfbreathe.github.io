@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>GIT on WoolfBreathe</title>
+    <link>/tags/git/</link>
+    <description>Recent content in GIT on WoolfBreathe</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <managingEditor>youremail@domain.com (WoolfBreathe)</managingEditor>
+    <webMaster>youremail@domain.com (WoolfBreathe)</webMaster>
+    <lastBuildDate>Mon, 18 Nov 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Linux 配置多个Git用户SSH登录</title>
+      <link>/post/devops/git/devops-git-multiuser/</link>
+      <pubDate>Mon, 18 Nov 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/devops/git/devops-git-multiuser/</guid>
+      <description>配置 git config 覆盖的优先级是 local &amp;gt; global &amp;gt; default  当前项目配置
+.git/config 添加参数
+# 添加用户 [user] name = admin email = admin@admin.com password = admin # 缓存用户名密码 [credential] helper = store </description>
+    </item>
+    
+    <item>
+      <title>Git忽略规则及.gitignore规则正确姿势</title>
+      <link>/post/devops/git/devops-git-gitignore/</link>
+      <pubDate>Mon, 16 Jul 2018 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/devops/git/devops-git-gitignore/</guid>
+      <description>实现需求 在git中如果想忽略掉某个文件或者文件夹，不想这个文件或者文件夹提交到版本库中，可以使用修改根目录中 .gitignore 文件的方法（如无，则需自己手工建立此文件）。这个文件每一行保存了一个匹配的规则例如：
+创建gitignore文件 touch .gitignore 注释Git忽略规则 # 此为注释 – 将被 Git 忽略 *.a # 忽略所有 .a 结尾的文件 !lib.a # 但 lib.a 除外 /-liberxuesite # 仅仅忽略项目根目录下的 liberxuesite 文件，不包括 subdir/liberxuesite liberxue/ # 忽略 liberxue文件夹/ 目录下的所有文件以及文件夹本身 doc/*.txt # 会忽略 doc/notes.txt 但不包括 doc/server/arch.txt gitignore忽略规则不生效原因 规则很简单，不做过多解释，但是有时候在项目开发过程中，突然心血来潮想把某些目录或文件加入忽略规则，按照上述方法定义后发现并未生效，原因是.gitignore只能忽略那些原来没有被track的文件，如果某些文件已经被纳入了版本管理中，则修改.gitignore是无效的。那么解决方法就是先把本地缓存删除（改变成未track状态），然后再提交：
+git rm -r --cached . git add . git commit -m &amp;#39;update .gitignore&amp;#39; </description>
+    </item>
+    
+  </channel>
+</rss>

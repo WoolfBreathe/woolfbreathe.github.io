@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+  <title>Xpath高级用法-WoolfBreathe</title>
+  <meta property="og:title" content="Xpath高级用法" />
+  <meta name="twitter:title" content="Xpath高级用法" />
+
+  <meta name="description" content="试验环境 Python lxml.etree
+试验所使用的html代码 &lt;!DOCTYPE html&gt; &lt;html&gt; &lt;head&gt; &lt;title&gt;xpath test&lt;/title&gt; &lt;/head&gt; &lt;body&gt; &lt;div price=&#34;99.8&#34;&gt; &lt;div&gt; &lt;ul&gt; &lt;li&gt;时间&lt;/li&gt; &lt;li&gt;地点&lt;/li&gt; &lt;li&gt;任务&lt;/li&gt; &lt;/ul&gt; &lt;/div&gt; &lt;div id=&#39;testid&#39; data-h=&#34;first&#34;&gt; &lt;h2&gt;这里是个小标题&lt;/h2&gt; &lt;ol&gt; &lt;li data=&#34;one&#34;&gt;1&lt;/li&gt; &lt;li data=&#34;two&#34;&gt;2&lt;/li&gt; &lt;li data=&#34;three&#34;&gt;3&lt;/li&gt; &lt;/ol&gt; &lt;ul&gt; &lt;li code=&#34;84&#34;&gt;84&lt;/li&gt; &lt;li code=&#34;104&#34;&gt;104&lt;/li&gt; &lt;li code=&#34;223&#34;&gt;223&lt;/li&gt; &lt;/ul&gt; &lt;/div&gt; &lt;div&gt; &lt;h3&gt;这里是H3的内容 &lt;a href=&#34;http://www.baidu.com&#34;&gt;百度一下&lt;/a&gt; &lt;ul&gt; &lt;li&gt;test1&lt;/li&gt; &lt;li&gt;test2&lt;/li&gt; &lt;/ul&gt; &lt;/h3&gt; &lt;/div&gt; &lt;div id=&#34;go&#34;&gt; &lt;ul&gt; &lt;li&gt;1&lt;/li&gt; &lt;li&gt;2&lt;/li&gt; &lt;li&gt;3&lt;/li&gt; &lt;li&gt;4&lt;/li&gt; &lt;li&gt;5&lt;/li&gt; &lt;li&gt;6&lt;/li&gt; &lt;li&gt;7&lt;/li&gt; &lt;li&gt;8&lt;/li&gt; &lt;li&gt;9&lt;/li&gt; &lt;li&gt;10&lt;/li&gt; &lt;/ul&gt; &lt;/div&gt; &lt;/div&gt; &lt;/body&gt; &lt;/html&gt; 1、匹配某节点下的所有 .">
+  <meta property="og:description" content="试验环境 Python lxml.etree
+试验所使用的html代码 &lt;!DOCTYPE html&gt; &lt;html&gt; &lt;head&gt; &lt;title&gt;xpath test&lt;/title&gt; &lt;/head&gt; &lt;body&gt; &lt;div price=&#34;99.8&#34;&gt; &lt;div&gt; &lt;ul&gt; &lt;li&gt;时间&lt;/li&gt; &lt;li&gt;地点&lt;/li&gt; &lt;li&gt;任务&lt;/li&gt; &lt;/ul&gt; &lt;/div&gt; &lt;div id=&#39;testid&#39; data-h=&#34;first&#34;&gt; &lt;h2&gt;这里是个小标题&lt;/h2&gt; &lt;ol&gt; &lt;li data=&#34;one&#34;&gt;1&lt;/li&gt; &lt;li data=&#34;two&#34;&gt;2&lt;/li&gt; &lt;li data=&#34;three&#34;&gt;3&lt;/li&gt; &lt;/ol&gt; &lt;ul&gt; &lt;li code=&#34;84&#34;&gt;84&lt;/li&gt; &lt;li code=&#34;104&#34;&gt;104&lt;/li&gt; &lt;li code=&#34;223&#34;&gt;223&lt;/li&gt; &lt;/ul&gt; &lt;/div&gt; &lt;div&gt; &lt;h3&gt;这里是H3的内容 &lt;a href=&#34;http://www.baidu.com&#34;&gt;百度一下&lt;/a&gt; &lt;ul&gt; &lt;li&gt;test1&lt;/li&gt; &lt;li&gt;test2&lt;/li&gt; &lt;/ul&gt; &lt;/h3&gt; &lt;/div&gt; &lt;div id=&#34;go&#34;&gt; &lt;ul&gt; &lt;li&gt;1&lt;/li&gt; &lt;li&gt;2&lt;/li&gt; &lt;li&gt;3&lt;/li&gt; &lt;li&gt;4&lt;/li&gt; &lt;li&gt;5&lt;/li&gt; &lt;li&gt;6&lt;/li&gt; &lt;li&gt;7&lt;/li&gt; &lt;li&gt;8&lt;/li&gt; &lt;li&gt;9&lt;/li&gt; &lt;li&gt;10&lt;/li&gt; &lt;/ul&gt; &lt;/div&gt; &lt;/div&gt; &lt;/body&gt; &lt;/html&gt; 1、匹配某节点下的所有 .">
+  <meta name="twitter:description" content="试验环境 Python lxml.etree
+试验所使用的html代码 &lt;!DOCTYPE html&gt; &lt;html&gt; &lt;head&gt; &lt;title&gt;xpath test&lt;/title&gt; &lt;/head&gt; &lt;body&gt; &lt;div price=&#34;99.8&#34;&gt; &lt;div&gt; …">
+  <meta name="author" content="WoolfBreathe"/>
+  <link href="/img/favicon.png" rel="icon" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/img/favicon.png"/>
+  <meta property="og:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@username" />
+  <meta name="twitter:creator" content="@username" />
+  <meta property="og:url" content="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="WoolfBreathe" />
+
+  <meta name="generator" content="Hugo 0.68.3" />
+  <link rel="canonical" href="/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="WoolfBreathe">
+
+  
+  
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700%7COpen+Sans:400,700" rel="stylesheet">
+  
+
+  <link rel="stylesheet" href='/css/bundle.min.62de9d30b83723e0d55f82908aedb1c5eb18c910bc24bcf43e530ce754ee1502.css' integrity='sha256-Yt6dMLg3I&#43;DVX4KQiu2xxesYyRC8JLz0PlMM51TuFQI='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
+<meta name="google-site-verification" content="oKxX4fOvB2yYmU02txZFChM93XQbESU4JaG3tNH9Hm8" />
+<meta name="baidu-site-verification" content="F5ojAyqaKU" />
+<meta name="keywords" content="Xpath">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d611849735f187dd788dc054908f7d7a";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/" title="WoolfBreathe">
+        <img src="img/avatar-icon.png" style="margin-top: -5px;height: 32px;" alt="WoolfBreathe">
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="首页" href="/">首页</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="归档" href="/archives">归档</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="标签" href="/tags">标签</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于" href="/page/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="RSS" href="/index.xml">RSS</a>
+            </li>
+          
+        
+
+        
+
+        
+
+        
+          <li>
+            <a href="#modalSearch" data-toggle="modal" data-target="#modalSearch" style="outline: none;">
+              <span id="searchGlyph" class="glyphicon glyphicon-search"></span>
+            </a>
+          </li>
+          
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+  <div id="modalSearch" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">搜索</h4>
+        </div>
+        <div class="modal-body">
+            
+<div class="aa-input-container" id="aa-input-container">
+    <input type="search" id="aa-search-input" class="aa-input-search" placeholder="Search for titles or URIs..." name="search" autocomplete="off" />
+    <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
+        <path d="M1806,332c0-123.3-43.8-228.8-131.5-316.5C1586.8-72.2,1481.3-116,1358-116s-228.8,43.8-316.5,131.5  C953.8,103.2,910,208.7,910,332s43.8,228.8,131.5,316.5C1129.2,736.2,1234.7,780,1358,780s228.8-43.8,316.5-131.5  C1762.2,560.8,1806,455.3,1806,332z M2318,1164c0,34.7-12.7,64.7-38,90s-55.3,38-90,38c-36,0-66-12.7-90-38l-343-342  c-119.3,82.7-252.3,124-399,124c-95.3,0-186.5-18.5-273.5-55.5s-162-87-225-150s-113-138-150-225S654,427.3,654,332  s18.5-186.5,55.5-273.5s87-162,150-225s138-113,225-150S1262.7-372,1358-372s186.5,18.5,273.5,55.5s162,87,225,150s113,138,150,225  S2062,236.7,2062,332c0,146.7-41.3,279.7-124,399l343,343C2305.7,1098.7,2318,1128.7,2318,1164z" />
+    </svg>
+</div>
+<script src="/js/algoliasearch.min.js"></script>
+<script src="/js/autocomplete.min.js"></script>
+
+<script>
+var client = algoliasearch("1JDRAS0AZR", "8804ac109158bb3bb60d74ce98fa332f");
+var index = client.initIndex('prod_blog');
+
+autocomplete('#aa-search-input',
+{ hint: false}, {
+    source: autocomplete.sources.hits(index, {hitsPerPage: 5}),
+    
+    displayKey: 'name',
+    
+    templates: {
+        
+        suggestion: function(suggestion) {
+            return '<span>' + '<a href="/post/' + suggestion.slug + '">' +
+            suggestion._highlightResult.title.value + '</a></span>';
+        }
+    }
+});
+</script>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/20200317190406.png" ></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="post-heading">
+                <h1>Xpath高级用法</h1>
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Xpath高级用法</h1>
+                
+                
+                  <span class="post-meta">
+  
+    发表于 2020-06-22
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+  </header>
+
+
+    
+
+
+
+<div class="container" role="main">
+  <div class="row">
+
+    
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div>
+            
+            
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="/tags/common/">Common</a> &nbsp;
+              
+            </h5>
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+          
+            
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <h1 id="试验环境">试验环境</h1>
+<p>Python
+lxml.etree</p>
+<h1 id="试验所使用的html代码">试验所使用的html代码</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;xpath test&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div price=&#34;99.8&#34;&gt;
+    &lt;div&gt;
+        &lt;ul&gt;
+            &lt;li&gt;时间&lt;/li&gt;
+            &lt;li&gt;地点&lt;/li&gt;
+            &lt;li&gt;任务&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;div id=&#39;testid&#39; data-h=&#34;first&#34;&gt;
+        &lt;h2&gt;这里是个小标题&lt;/h2&gt;
+        &lt;ol&gt;
+            &lt;li data=&#34;one&#34;&gt;1&lt;/li&gt;
+            &lt;li data=&#34;two&#34;&gt;2&lt;/li&gt;
+            &lt;li data=&#34;three&#34;&gt;3&lt;/li&gt;
+        &lt;/ol&gt;
+        &lt;ul&gt;
+            &lt;li code=&#34;84&#34;&gt;84&lt;/li&gt;
+            &lt;li code=&#34;104&#34;&gt;104&lt;/li&gt;
+            &lt;li code=&#34;223&#34;&gt;223&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+        &lt;h3&gt;这里是H3的内容
+            &lt;a href=&#34;http://www.baidu.com&#34;&gt;百度一下&lt;/a&gt;
+            &lt;ul&gt;
+                &lt;li&gt;test1&lt;/li&gt;
+                &lt;li&gt;test2&lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/h3&gt;
+    &lt;/div&gt;
+    &lt;div id=&#34;go&#34;&gt;
+        &lt;ul&gt;
+            &lt;li&gt;1&lt;/li&gt;
+            &lt;li&gt;2&lt;/li&gt;
+            &lt;li&gt;3&lt;/li&gt;
+            &lt;li&gt;4&lt;/li&gt;
+            &lt;li&gt;5&lt;/li&gt;
+            &lt;li&gt;6&lt;/li&gt;
+            &lt;li&gt;7&lt;/li&gt;
+            &lt;li&gt;8&lt;/li&gt;
+            &lt;li&gt;9&lt;/li&gt;
+            &lt;li&gt;10&lt;/li&gt;
+        &lt;/ul&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre></div><p><strong>1、匹配某节点下的所有 .//</strong>
+<code>//</code>
+获取文档中所有匹配的节点，.获取当前节点，获取当前节点下的所有节点，.//一定要结合.使用//，否则都会获取整个文档的匹配结果.</p>
+<p><strong>2、匹配包含某属性的所有的属性值 //@lang</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">print tree.xpath(&#39;//@code&#39;) #匹配所有带有code属性的属性值
+&gt;&gt;[&#39;84&#39;, &#39;104&#39;, &#39;223&#39;]
+</code></pre></div><p><strong>3、选取若干路径 |</strong></p>
+<p>这个符号用于在一个xpath中写多个表达式用，用|分开，每个表达式互不干扰</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">print tree.xpath(&#39;//div[@id=&#34;testid&#34;]/h2/text() | //li[@data]/text()&#39;) #多个匹配条件
+&gt;&gt;[u&#39;\u8fd9\u91cc\u662f\u4e2a\u5c0f\u6807\u9898&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;]
+</code></pre></div><p><strong>4、 Axes（轴）</strong></p>
+<p>child：选取当前节点的所有子元素</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&gt;&gt;print tree.xpath(&#39;//div[@id=&#34;testid&#34;]/child::ul/li/text()&#39;) #child子节点定位
+&gt;&gt;[&#39;84&#39;, &#39;104&#39;, &#39;223&#39;]
+
+&gt;&gt;print tree.xpath(&#39;//div[@id=&#34;testid&#34;]/child::*&#39;) #child::*当前节点的所有子元素
+&gt;&gt;[&lt;Element h2 at 0x21bd148&gt;, &lt;Element ol at 0x21bd108&gt;, &lt;Element ul at 0x21bd0c8&gt;]
+
+
+&gt;&gt;#定位某节点下为ol的子节点下的所有节点
+&gt;&gt;print tree.xpath(&#39;//div[@id=&#34;testid&#34;]/child::ol/child::*/text()&#39;) 
+&gt;&gt;[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;]
+</code></pre></div><p>attribute：选取当前节点的所有属性</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&gt;&gt;print tree.xpath(&#39;//div/attribute::id&#39;) #attribute定位id属性值
+&gt;&gt;[&#39;testid&#39;, &#39;go&#39;]
+
+&gt;&gt;print tree.xpath(&#39;//div[@id=&#34;testid&#34;]/attribute::*&#39;) #定位当前节点的所有属性
+&gt;&gt;[&#39;testid&#39;, &#39;first&#39;]
+</code></pre></div><p>ancestor：父辈元素 / ancestor-or-self：父辈元素及当前元素</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&gt;&gt;print tree.xpath(&#39;//div[@id=&#34;testid&#34;]/ancestor::div/@price&#39;) #定位父辈div元素的price属性
+&gt;&gt;[&#39;99.8&#39;]
+
+
+&gt;&gt;print tree.xpath(&#39;//div[@id=&#34;testid&#34;]/ancestor::div&#39;) #所有父辈div元素
+&gt;&gt;print tree.xpath(&#39;//div[@id=&#34;testid&#34;]/ancestor-or-self::div&#39;) #所有父辈及当前节点div元素
+&gt;&gt;[&lt;Element div at 0x23fc108&gt;]
+&gt;&gt;[&lt;Element div at 0x23fc108&gt;, &lt;Element div at 0x23fc0c8&gt;]
+</code></pre></div><p>descendant：后代 / descendant-or-self：后代及当前节点本身
+使用方法同上
+following :选取文档中当前节点的结束标签之后的所有节点
+#定位testid之后不包含id属性的div标签下所有的li中第一个li的text属性</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&gt;&gt;print tree.xpath(&#39;//div[@id=&#34;testid&#34;]/following::div[not(@id)]/.//li[1]/text()&#39;) 
+&gt;&gt;[&#39;test1&#39;]
+</code></pre></div><p>namespace：选取当前节点的所有命名空间节点</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&gt;&gt;print tree.xpath(&#39;//div[@id=&#34;testid&#34;]/namespace::*&#39;) #选取命名空间节点
+&gt;&gt;[(&#39;xml&#39;, &#39;http://www.w3.org/XML/1998/namespace&#39;)]
+</code></pre></div><p>parent：选取当前节点的父节点</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&gt;&gt;#选取data值为one的父节点的子节点中最后一个节点的值
+&gt;&gt;print tree.xpath(&#39;//li[@data=&#34;one&#34;]/parent::ol/li[last()]/text()&#39;) 
+&gt;&gt;[&#39;3&#39;]
+&gt;&gt;#注意这里的用法，parent::父节点的名字
+</code></pre></div><p>preceding：选取文档中当前节点的开始标签之前的所有节点</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&gt;&gt;#记住是标签开始之前，同级前节点及其子节点
+&gt;&gt;print tree.xpath(&#39;//div[@id=&#34;testid&#34;]/preceding::div/ul/li[1]/text()&#39;)[0] 
+&gt;&gt;时间
+&gt;&gt;#下面这两条可以看到其顺序是靠近testid节点的优先
+&gt;&gt;print tree.xpath(&#39;//div[@id=&#34;testid&#34;]/preceding::li[1]/text()&#39;)[0]
+&gt;&gt;print tree.xpath(&#39;//div[@id=&#34;testid&#34;]/preceding::li[3]/text()&#39;)[0]
+&gt;&gt;任务
+&gt;&gt;时间
+</code></pre></div><p>preceding-sibling：选取当前节点之前的所有同级节点</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&gt;&gt;#记住只能是同级节点
+&gt;&gt;print tree.xpath(&#39;//div[@id=&#34;testid&#34;]/preceding-sibling::div/ul/li[2]/text()&#39;)[0]
+&gt;&gt;print tree.xpath(&#39;//div[@id=&#34;testid&#34;]/preceding-sibling::li&#39;) #这里返回的就是空的了
+&gt;&gt;地点
+&gt;&gt;[]
+</code></pre></div><p>self：选取当前节点</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&gt;&gt;#选取带id属性值的div中包含data-h属性的标签的所有属性值
+&gt;&gt;print tree.xpath(&#39;//div[@id]/self::div[@data-h]/attribute::*&#39;) 
+&gt;&gt;[&#39;testid&#39;, &#39;first&#39;]
+</code></pre></div><p>组合拳
+#定位id值为testid下的ol下的li属性值data为two的父元素ol的兄弟前节点h2的text值</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&gt;&gt;print tree.xpath(&#39;//*[@id=&#34;testid&#34;]/ol/li[@data=&#34;two&#34;]/parent::ol/preceding-sibling::h2/text()&#39;)[0] 
+&gt;&gt;这里是个小标题
+</code></pre></div><p><strong>5、position定位</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&gt;&gt;print tree.xpath(&#39;//*[@id=&#34;testid&#34;]/ol/li[position()=2]/text()&#39;)[0] 
+&gt;&gt;2
+</code></pre></div><p><strong>6、条件</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&gt;&gt;定位所有h2标签中text值为`这里是个小标题`
+&gt;&gt;print tree.xpath(u&#39;//h2[text()=&#34;这里是个小标题&#34;]/text()&#39;)[0]
+&gt;&gt;这里是个小标题
+</code></pre></div><p><strong>7、函数</strong>
+count：统计</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&gt;&gt;print tree.xpath(&#39;count(//li[@data])&#39;) #节点统计
+&gt;&gt;3.0
+</code></pre></div><p>concat：字符串连接</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&gt;&gt;print tree.xpath(&#39;concat(//li[@data=&#34;one&#34;]/text(),//li[@data=&#34;three&#34;]/text())&#39;)
+&gt;&gt;13
+</code></pre></div><p>string：解析当前节点下的字符</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&gt;&gt;#string只能解析匹配到的第一个节点下的值，也就是作用于list时只匹配第一个
+&gt;&gt;print tree.xpath(&#39;string(//li)&#39;) 
+&gt;&gt;时间
+</code></pre></div><p>local-name：解析节点名称</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&gt;&gt;print tree.xpath(&#39;local-name(//*[@id=&#34;testid&#34;])&#39;) #local-name解析节点名称
+&gt;&gt;div
+</code></pre></div><p>contains(string1,string2)：如果 string1 包含 string2，则返回 true，否则返回 false</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&gt;&gt;tree.xpath(&#39;//h3[contains(text(),&#34;H3&#34;)]/a/text()&#39;)[0] #使用字符内容来辅助定位
+&gt;&gt;百度一下
+
+&gt;&gt;一记组合拳
+&gt;&gt;#匹配带有href属性的a标签的先辈节点中的div，其兄弟节点中前一个div节点下ul下li中text属性包含“务”字的节点的值
+&gt;&gt;print tree.xpath(u&#39;//a[@href]/ancestor::div/preceding::div/ul/li[contains(text(),&#34;务&#34;)]/text()&#39;)[0] 
+&gt;&gt;任务
+</code></pre></div><p>注意：兄弟节点后一个节点可以使用：following-sibling
+not：布尔值（否）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&gt;&gt;print tree.xpath(&#39;count(//li[not(@data)])&#39;) #不包含data属性的li标签统计
+&gt;&gt;18.0
+
+string-length：返回指定字符串的长度
+&gt;&gt;#string-length函数+local-name函数定位节点名长度小于2的元素
+&gt;&gt;print tree.xpath(&#39;//*[string-length(local-name())&lt;2]/text()&#39;)[0] 
+&gt;&gt;百度一下
+</code></pre></div><p>组合拳2</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&gt;&gt;#contains函数+local-name函数定位节点名包含di的元素
+&gt;&gt;print tree.xpath(&#39;//div[@id=&#34;testid&#34;]/following::div[contains(local-name(),&#34;di&#34;)]&#39;) 
+&gt;&gt;[&lt;Element div at 0x225e108&gt;, &lt;Element div at 0x225e0c8&gt;]
+</code></pre></div><p>or：多条件匹配</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&gt;&gt;print tree.xpath(&#39;//li[@data=&#34;one&#34; or @code=&#34;84&#34;]/text()&#39;) #or匹配多个条件
+&gt;&gt;[&#39;1&#39;, &#39;84&#39;]
+&gt;&gt;#也可使用|
+&gt;&gt;print tree.xpath(&#39;//li[@data=&#34;one&#34;]/text() | //li[@code=&#34;84&#34;]/text()&#39;) #|匹配多个条件
+&gt;&gt;[&#39;1&#39;, &#39;84&#39;]
+</code></pre></div><p>组合拳3：floor + div除法 + ceiling</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&gt;&gt;#position定位+last+div除法，选取中间两个
+&gt;&gt;tree.xpath(&#39;//div[@id=&#34;go&#34;]/ul/li[position()=floor(last() div 2+0.5) or position()=ceiling(last() div 2+0.5)]/text()&#39;) 
+&gt;&gt;[&#39;5&#39;, &#39;6&#39;]
+</code></pre></div><p>组合拳4隔行定位：position+mod取余</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&gt;&gt;#position+取余运算隔行定位
+&gt;&gt;tree.xpath(&#39;//div[@id=&#34;go&#34;]/ul/li[position()=((position() mod 2)=0)]/text()&#39;) 
+
+starts-with：以。。开始
+&gt;&gt;#starts-with定位属性值以8开头的li元素
+&gt;&gt;print tree.xpath(&#39;//li[starts-with(@code,&#34;8&#34;)]/text()&#39;)[0]
+&gt;&gt;84
+</code></pre></div><p>8、数值比较
+&lt;：小于</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&gt;&gt;#所有li的code属性小于200的节点
+&gt;&gt;print tree.xpath(&#39;//li[@code&lt;200]/text()&#39;)
+&gt;&gt;[&#39;84&#39;, &#39;104&#39;]
+</code></pre></div><p>div：对某两个节点的属性值做除法</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&gt;&gt;print tree.xpath(&#39;//div[@id=&#34;testid&#34;]/ul/li[3]/@code div //div[@id=&#34;testid&#34;]/ul/li[1]/@code&#39;)
+&gt;&gt;2.65476190476
+</code></pre></div><p>组合拳4：根据节点下的某一节点数量定位</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&gt;&gt;#选取所有ul下li节点数大于5的ul节点
+&gt;&gt;print tree.xpath(&#39;//ul[count(li)&gt;5]/li/text()&#39;)
+&gt;&gt;[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;, &#39;9&#39;, &#39;10&#39;]
+</code></pre></div><p>9、将对象还原为字符串</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&gt;&gt;&gt; s = tree.xpath(&#39;//*[@id=&#34;testid&#34;]&#39;)[0] #使用xpath定位一个节点
+&gt;&gt;&gt; s
+&lt;Element div at 0x2b6ffc8&gt;
+&gt;&gt;&gt; s2 = etree.tostring(s) #还原这个对象为html字符串
+&gt;&gt;&gt; s2
+&#39;&lt;div id=&#34;testid&#34;&gt;\n\t\t&lt;h2&gt;&amp;#213;&amp;#226;&amp;#192;&amp;#239;&amp;#202;&amp;#199;&amp;#184;&amp;#246;&amp;#208;&amp;#161;&amp;#177;&amp;#234;&amp;#204;&amp;#226;&lt;/h2&gt;\n\t\t&lt;ol&gt;\n\t\t\t&lt;li data=&#34;one&#34;&gt;1&lt;/li&gt;\n\t\t\t&lt;li data=&#34;two&#34;&gt;2&lt;/li&gt;\n\t\t\t&lt;li data=&#34;three&#34;&gt;3&lt;/li&gt;\n\t\t&lt;/ol&gt;\n\t\t&lt;ul&gt;\n\t\t\t&lt;li code=&#34;84&#34;&gt;84&lt;/li&gt;\n\t\t\t&lt;li code=&#34;104&#34;&gt;104&lt;/li&gt;\n\t\t\t&lt;li code=&#34;223&#34;&gt;223&lt;/li&gt;\n\t\t&lt;/ul&gt;\n\t&lt;/div&gt;\n\t&#39;
+</code></pre></div><p><strong>10、选取一个属性中的多个值</strong>
+举例：<!-- raw HTML omitted -->
+选择这个div的方案网上有说用and的，但是似乎只能针对不同的属性的单个值
+本次使用contains</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&gt;&gt;.xpath(&#39;div[contains(@class,&#34;mp-city-list-container mp-privince-city&#34;)]&#39;)
+&gt;&gt;当然也可以直接选取其属性的第二个值
+&gt;&gt;.xpath(&#39;div[contains(@class,&#34;mp-privince-city&#34;)]&#39;)
+&gt;&gt;重点是class需要添加一个@符号
+本次验证否定了网上的and，使用了contains,验证环境在scrapy的response.xpath下
+</code></pre></div><p>以上就是整理出的全部内容，说明一点，xpath虽快，但是使用时尽量使用简洁高效的方式，本文旨在定位那些较难的地方使用，刻意追求晦涩难懂的技巧会影响其效率，并不可取。</p>
+<p>参考:
+<a href="https://baike.baidu.com/item/XPath/5574064?fr=aladdin">https://baike.baidu.com/item/XPath/5574064?fr=aladdin</a></p>
+
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我们的微信公众帐号，在微信公众帐号中回复◉加群◉即可加入到我们的 kubernetes 讨论群里面共同学习。</p>
+<img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/qrcode.png" alt="wechat-account-qrcode">
+
+  
+          
+            <div class="entry-shang text-center">
+    <p>「真诚赞赏，手留余香」</p>
+    <button class="zs show-zs btn btn-bred">赞赏</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+    <div class="zs-modal-head">
+        <button type="button" class="close">×</button>
+        <span class="author"><img src="/img/avatar.jpeg"/>阳明</span>
+        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
+    </div>
+    <div class="zs-modal-body">
+        <div class="zs-modal-btns">
+            <button class="btn btn-blink" data-num="2">2元</button>
+            <button class="btn btn-blink" data-num="5">5元</button>
+            <button class="btn btn-blink" data-num="10">10元</button>
+            <button class="btn btn-blink" data-num="50">50元</button>
+            <button class="btn btn-blink" data-num="100">100元</button>
+            <button class="btn btn-blink" data-num="1">任意金额</button>
+        </div>
+        <div class="zs-modal-pay">
+            <button class="btn btn-bred" id="pay-text">2元</button>
+            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+            <img src="/img/wechat-2.png" id="pay-image"/>
+        </div>
+    </div>
+    <div class="zs-modal-footer">
+        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
+    </div>
+</div>
+          
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
+        
+          
+
+<h3>相关文章</h3>
+<ul style="margin-bottom: 25px;">
+    
+    <li><a href="/post/common/common-version/">语义化版本</a></li>
+    
+</ul>
+
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="/post/computerlanguages/python/computerlanguages-python-sqlalchemy/" data-toggle="tooltip" data-placement="top" title="Python ORM SQLAlchemy">&larr; 前一篇</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="/post/devops/linux/devops-linux-permisssions/" data-toggle="tooltip" data-placement="top" title="Linux Permisssions(文件权限)">后一篇 &rarr;</a>
+            </li>
+          
+        </ul>
+        
+
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
+        
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+    var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        labels: ['gitment'],
+        title: 'Xpath高级用法',
+        createIssueManually: true,
+        id: 'Common-Xpath',      
+        distractionFreeMode: true  
+    });
+    gitalk.render('gitalk-container');
+</script>
+
+
+        
+          
+
+        
+  
+      </div>
+    
+    
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          <img src="/img/wechatmp.png" alt="k8s技术圈">
+          
+          <li>
+            <a href="mailto:icnych@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://github.com/cnych" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://weibo.com/cnych" title="微博">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://instagram.com/cnych" title="Instagram">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="/%20index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+          
+          <a href="/">WoolfBreathe</a>
+          
+          
+
+          &nbsp;&bull;&nbsp;
+          2021
+        </p>
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a
+            href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a
+            href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script> renderMathInElement(document.body); </script>
+<script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
+</script>
+<script>
+  (function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+
+  </body>
+</html>
+

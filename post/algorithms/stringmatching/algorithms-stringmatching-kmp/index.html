@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+  <title>字符串匹配-KMP-WoolfBreathe</title>
+  <meta property="og:title" content="字符串匹配-KMP" />
+  <meta name="twitter:title" content="字符串匹配-KMP" />
+
+  <meta name="description" content="简介 KMP 算法可以说是字符串匹配算法中最知名的算法了，KMP 算法是根据三位作者（D.E.Knuth，J.H.Morris 和 V.R.Pratt）的名字来命名的，算法的全称是 Knuth Morris Pratt 算法，简称为 KMP 算法。
+原理 假设主串是 a，模式串是 b。在模式串与主串匹配的过程中，当遇到不可匹配的字符的时候，我们希望找到一些规律，可以将模式串往后多滑动几位，跳过那些肯定不会匹配的情况，从而避免 BF 算法这种暴力匹配，提高算法性能。下面我们来探讨下这个规律如何找到。
+参考下面个主串和模式串的匹配，当模式串移动到当前位置，比对到最后一个字符 D 时，发现与主串不匹配，如果按照 BF 算法，就是把模式串往后移一位，再逐个比较，这样做固然可以，但是效率很差：
+一个基本事实是，当 D 与主串不匹配时，我们已知前面的主串序列是 ABCDA，如果把模式串往后移一位肯定和主串不匹配，我们可不可以直接把模式串移到下一个可能和 A 匹配的主串位置？
+实际上，KMP 算法正是基于这一理念，设法利用这个已知信息，不把模式串移到已经比较过的位置，继续把它向后移，这样综合下来就极大提高了搜索匹配效率。
+怎么找到这个规律，确定把模式串往后移多少位呢？在模式串和主串匹配的过程中，我们把不能匹配的那个字符仍然叫作「坏字符」，把已经匹配的那段字符串叫作「好前缀」：
+在模式串和主串匹配的过程中，当遇到坏字符后，对于已经比对过的好前缀，我们只需要拿好前缀本身，在它的后缀子串中，查找最长的那个可以跟好前缀的前缀子串匹配的下标位置，然后将模式串后移到该位置即可。
+这里，我们要解释几个概念：
+后缀子串：以某个字符串最后一个字符为尾字符的子串（不包含字符串自身），比如上面的 ababa，后缀子串为 baba、aba、ba、a； 前缀子串：以某个字符串第一个字符为首字符的子串（不包含字符串自身），还是以 ababa 为例，前缀子串为 a、aba、abab； 最长可匹配后缀子串：后缀子串与前缀子串最长可匹配子串，也可叫做共有子串，以 ababa 为例，自然是 aba 了，长度为 3； 最长可匹配前缀子串：与上面定义相对，即前缀子串与后缀子串最长可匹配子串。最长可匹配前缀子串和最长可匹配后缀子串肯定是一样的。  假设坏字符所在位置是 j，最长可匹配后缀子串长度为 k，则模式串需要后移的位数为 j-k。每当我们遇到坏字符，就将模式串后移 j-k 位，直到模式串与对应主串字符完全匹配；如果移到最后还是不匹配，则返回 -1。这就是 KMP 算法的核心思想。
+KMP 算法的实现 了解了核心思想，接下来，就可以考虑如何实现 KMP 算法了，实现 KMP 算法最核心的部分是构建一个用来存储模式串中每个前缀子串（这些前缀都有可能是好前缀）最长可匹配前缀子串的结尾字符下标数组，我们把这个数组叫做 next 数组，对于上面 ababacd 这个模式串而言，对应的 next 数组如下：">
+  <meta property="og:description" content="简介 KMP 算法可以说是字符串匹配算法中最知名的算法了，KMP 算法是根据三位作者（D.E.Knuth，J.H.Morris 和 V.R.Pratt）的名字来命名的，算法的全称是 Knuth Morris Pratt 算法，简称为 KMP 算法。
+原理 假设主串是 a，模式串是 b。在模式串与主串匹配的过程中，当遇到不可匹配的字符的时候，我们希望找到一些规律，可以将模式串往后多滑动几位，跳过那些肯定不会匹配的情况，从而避免 BF 算法这种暴力匹配，提高算法性能。下面我们来探讨下这个规律如何找到。
+参考下面个主串和模式串的匹配，当模式串移动到当前位置，比对到最后一个字符 D 时，发现与主串不匹配，如果按照 BF 算法，就是把模式串往后移一位，再逐个比较，这样做固然可以，但是效率很差：
+一个基本事实是，当 D 与主串不匹配时，我们已知前面的主串序列是 ABCDA，如果把模式串往后移一位肯定和主串不匹配，我们可不可以直接把模式串移到下一个可能和 A 匹配的主串位置？
+实际上，KMP 算法正是基于这一理念，设法利用这个已知信息，不把模式串移到已经比较过的位置，继续把它向后移，这样综合下来就极大提高了搜索匹配效率。
+怎么找到这个规律，确定把模式串往后移多少位呢？在模式串和主串匹配的过程中，我们把不能匹配的那个字符仍然叫作「坏字符」，把已经匹配的那段字符串叫作「好前缀」：
+在模式串和主串匹配的过程中，当遇到坏字符后，对于已经比对过的好前缀，我们只需要拿好前缀本身，在它的后缀子串中，查找最长的那个可以跟好前缀的前缀子串匹配的下标位置，然后将模式串后移到该位置即可。
+这里，我们要解释几个概念：
+后缀子串：以某个字符串最后一个字符为尾字符的子串（不包含字符串自身），比如上面的 ababa，后缀子串为 baba、aba、ba、a； 前缀子串：以某个字符串第一个字符为首字符的子串（不包含字符串自身），还是以 ababa 为例，前缀子串为 a、aba、abab； 最长可匹配后缀子串：后缀子串与前缀子串最长可匹配子串，也可叫做共有子串，以 ababa 为例，自然是 aba 了，长度为 3； 最长可匹配前缀子串：与上面定义相对，即前缀子串与后缀子串最长可匹配子串。最长可匹配前缀子串和最长可匹配后缀子串肯定是一样的。  假设坏字符所在位置是 j，最长可匹配后缀子串长度为 k，则模式串需要后移的位数为 j-k。每当我们遇到坏字符，就将模式串后移 j-k 位，直到模式串与对应主串字符完全匹配；如果移到最后还是不匹配，则返回 -1。这就是 KMP 算法的核心思想。
+KMP 算法的实现 了解了核心思想，接下来，就可以考虑如何实现 KMP 算法了，实现 KMP 算法最核心的部分是构建一个用来存储模式串中每个前缀子串（这些前缀都有可能是好前缀）最长可匹配前缀子串的结尾字符下标数组，我们把这个数组叫做 next 数组，对于上面 ababacd 这个模式串而言，对应的 next 数组如下：">
+  <meta name="twitter:description" content="简介 KMP 算法可以说是字符串匹配算法中最知名的算法了，KMP 算法是根据三位作者（D.E.Knuth，J.H.Morris 和 V.R.Pratt）的名字来命名的，算法的全称是 Knuth Morris Pratt 算法，简称为 KMP 算法。
+原理 假设主串是 a，模式串是 b。在模式串与主串匹配的过程中，当遇到不可匹配的字符的时候，我们希望找到一些规律，可以将模式串往后多滑动几位，跳过那些 …">
+  <meta name="author" content="WoolfBreathe"/>
+  <link href="/img/favicon.png" rel="icon" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/img/favicon.png"/>
+  <meta property="og:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@username" />
+  <meta name="twitter:creator" content="@username" />
+  <meta property="og:url" content="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="WoolfBreathe" />
+
+  <meta name="generator" content="Hugo 0.68.3" />
+  <link rel="canonical" href="/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="WoolfBreathe">
+
+  
+  
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700%7COpen+Sans:400,700" rel="stylesheet">
+  
+
+  <link rel="stylesheet" href='/css/bundle.min.62de9d30b83723e0d55f82908aedb1c5eb18c910bc24bcf43e530ce754ee1502.css' integrity='sha256-Yt6dMLg3I&#43;DVX4KQiu2xxesYyRC8JLz0PlMM51TuFQI='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
+<meta name="google-site-verification" content="oKxX4fOvB2yYmU02txZFChM93XQbESU4JaG3tNH9Hm8" />
+<meta name="baidu-site-verification" content="F5ojAyqaKU" />
+<meta name="keywords" content="Algorithms, StringMatching">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d611849735f187dd788dc054908f7d7a";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/" title="WoolfBreathe">
+        <img src="img/avatar-icon.png" style="margin-top: -5px;height: 32px;" alt="WoolfBreathe">
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="首页" href="/">首页</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="归档" href="/archives">归档</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="标签" href="/tags">标签</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于" href="/page/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="RSS" href="/index.xml">RSS</a>
+            </li>
+          
+        
+
+        
+
+        
+
+        
+          <li>
+            <a href="#modalSearch" data-toggle="modal" data-target="#modalSearch" style="outline: none;">
+              <span id="searchGlyph" class="glyphicon glyphicon-search"></span>
+            </a>
+          </li>
+          
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+  <div id="modalSearch" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">搜索</h4>
+        </div>
+        <div class="modal-body">
+            
+<div class="aa-input-container" id="aa-input-container">
+    <input type="search" id="aa-search-input" class="aa-input-search" placeholder="Search for titles or URIs..." name="search" autocomplete="off" />
+    <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
+        <path d="M1806,332c0-123.3-43.8-228.8-131.5-316.5C1586.8-72.2,1481.3-116,1358-116s-228.8,43.8-316.5,131.5  C953.8,103.2,910,208.7,910,332s43.8,228.8,131.5,316.5C1129.2,736.2,1234.7,780,1358,780s228.8-43.8,316.5-131.5  C1762.2,560.8,1806,455.3,1806,332z M2318,1164c0,34.7-12.7,64.7-38,90s-55.3,38-90,38c-36,0-66-12.7-90-38l-343-342  c-119.3,82.7-252.3,124-399,124c-95.3,0-186.5-18.5-273.5-55.5s-162-87-225-150s-113-138-150-225S654,427.3,654,332  s18.5-186.5,55.5-273.5s87-162,150-225s138-113,225-150S1262.7-372,1358-372s186.5,18.5,273.5,55.5s162,87,225,150s113,138,150,225  S2062,236.7,2062,332c0,146.7-41.3,279.7-124,399l343,343C2305.7,1098.7,2318,1128.7,2318,1164z" />
+    </svg>
+</div>
+<script src="/js/algoliasearch.min.js"></script>
+<script src="/js/autocomplete.min.js"></script>
+
+<script>
+var client = algoliasearch("1JDRAS0AZR", "8804ac109158bb3bb60d74ce98fa332f");
+var index = client.initIndex('prod_blog');
+
+autocomplete('#aa-search-input',
+{ hint: false}, {
+    source: autocomplete.sources.hits(index, {hitsPerPage: 5}),
+    
+    displayKey: 'name',
+    
+    templates: {
+        
+        suggestion: function(suggestion) {
+            return '<span>' + '<a href="/post/' + suggestion.slug + '">' +
+            suggestion._highlightResult.title.value + '</a></span>';
+        }
+    }
+});
+</script>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/20200317190406.png" ></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="post-heading">
+                <h1>字符串匹配-KMP</h1>
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>字符串匹配-KMP</h1>
+                
+                
+                  <span class="post-meta">
+  
+    发表于 2019-08-18
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+  </header>
+
+
+    
+
+
+
+<div class="container" role="main">
+  <div class="row">
+
+    
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div>
+            
+            
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="/tags/algorithms/">Algorithms</a> &nbsp;
+              
+                  <a href="/tags/stringmatching/">StringMatching</a> &nbsp;
+              
+            </h5>
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+          
+            
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <h1 id="简介">简介</h1>
+<p>KMP 算法可以说是字符串匹配算法中最知名的算法了，KMP 算法是根据三位作者（D.E.Knuth，J.H.Morris 和 V.R.Pratt）的名字来命名的，算法的全称是 Knuth Morris Pratt 算法，简称为 KMP 算法。</p>
+<h1 id="原理">原理</h1>
+<p>假设主串是 a，模式串是 b。在模式串与主串匹配的过程中，当遇到不可匹配的字符的时候，我们希望找到一些规律，可以将模式串往后多滑动几位，跳过那些肯定不会匹配的情况，从而避免 BF 算法这种暴力匹配，提高算法性能。下面我们来探讨下这个规律如何找到。</p>
+<p>参考下面个主串和模式串的匹配，当模式串移动到当前位置，比对到最后一个字符 D 时，发现与主串不匹配，如果按照 BF 算法，就是把模式串往后移一位，再逐个比较，这样做固然可以，但是效率很差：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/StringMatching/f32cb5bea6b13b6bf914a05e19459506846a3d5be8b6d849277675e78e43f1e7.png" alt="字符串匹配算法"></p>
+<p>一个基本事实是，当 D 与主串不匹配时，我们已知前面的主串序列是 ABCDA，如果把模式串往后移一位肯定和主串不匹配，我们可不可以直接把模式串移到下一个可能和 A 匹配的主串位置？</p>
+<p>实际上，KMP 算法正是基于这一理念，设法利用这个已知信息，不把模式串移到已经比较过的位置，继续把它向后移，这样综合下来就极大提高了搜索匹配效率。</p>
+<p>怎么找到这个规律，确定把模式串往后移多少位呢？在模式串和主串匹配的过程中，我们把不能匹配的那个字符仍然叫作「坏字符」，把已经匹配的那段字符串叫作「好前缀」：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/StringMatching/646e2e9490956313a6244c6572c8a5cc9ceade39b2033c06f23dbbc8978eacb6.png" alt="KMP匹配算法图示"></p>
+<p>在模式串和主串匹配的过程中，当遇到坏字符后，对于已经比对过的好前缀，我们只需要拿好前缀本身，在它的后缀子串中，查找最长的那个可以跟好前缀的前缀子串匹配的下标位置，然后将模式串后移到该位置即可。</p>
+<p>这里，我们要解释几个概念：</p>
+<pre><code>后缀子串：以某个字符串最后一个字符为尾字符的子串（不包含字符串自身），比如上面的 ababa，后缀子串为 baba、aba、ba、a；
+前缀子串：以某个字符串第一个字符为首字符的子串（不包含字符串自身），还是以 ababa 为例，前缀子串为 a、aba、abab；
+最长可匹配后缀子串：后缀子串与前缀子串最长可匹配子串，也可叫做共有子串，以 ababa 为例，自然是 aba 了，长度为 3；
+最长可匹配前缀子串：与上面定义相对，即前缀子串与后缀子串最长可匹配子串。最长可匹配前缀子串和最长可匹配后缀子串肯定是一样的。
+</code></pre>
+<p>假设坏字符所在位置是 j，最长可匹配后缀子串长度为 k，则模式串需要后移的位数为 j-k。每当我们遇到坏字符，就将模式串后移 j-k 位，直到模式串与对应主串字符完全匹配；如果移到最后还是不匹配，则返回 -1。这就是 KMP 算法的核心思想。</p>
+<h1 id="kmp-算法的实现">KMP 算法的实现</h1>
+<p>了解了核心思想，接下来，就可以考虑如何实现 KMP 算法了，实现 KMP 算法最核心的部分是构建一个用来存储模式串中每个前缀子串（这些前缀都有可能是好前缀）最长可匹配前缀子串的结尾字符下标数组，我们把这个数组叫做 next 数组，对于上面 ababacd 这个模式串而言，对应的 next 数组如下：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/StringMatching/c60323efa0cbafd86bc377f12769309fc05497d0c2e39a903de6633ea870b895.png" alt="KMP算法实现"></p>
+<p>其中，数组的下标是前缀子串结尾字符下标，数组的值是这个前缀的最长可匹配前缀子串的结尾字符下标。</p>
+<p>有了这个 next 数组，我们就可以实现 KMP 匹配算法的核心代码了：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">// KMP 算法 PHP 实现代码，$a 表示主串，$n 表示主串长度，$b 表示模式串，$m 表示模式串长度
+function kmp($a, $n, $b, $m)
+{
+    $next = generateNexts($b, $m);   // 生成 next 数组
+    $j = 0;
+    for ($i = 0; $i &lt; $n; $i++) {  // 遍历主串
+        while ($j &gt; 0 &amp;&amp; $a[$i] != $b[$j]) {  
+            // 如果主串字符和模式串字符不相等，
+            // 更新模式串坏字符下标位置为好前缀最长可匹配前缀子串尾字符下标+1
+            // 然后从这个位置重新开始与主串匹配
+            // 相当于前面提到的把模式串向后移动 j - k 位
+            $j = $next[$j - 1] + 1;
+        }
+        if ($a[$i] == $b[$j]) {
+            $j++;
+        }
+        if ($j == $m) {
+            return $n - $m + 1;  // 全部相等，找到匹配位置
+        }
+    }
+    return -1;
+}
+</code></pre></div><p>接下来就是如何生成 next 数组了，这一步是最难的，我们现在可以参考上面 next 数组生成原理通过循环比对前缀子串和后缀子串的方式去理解，毕竟我们在实际开发中不太可能自己去实现 KMP 算法，了解原理即可，以后讲到动态规划，会用动态规划来实现它。这里就不再深入探究了。</p>
+<p>更详细的参考连接:
+<a href="https://www.cnblogs.com/zhangtianq/p/5839909.html">https://www.cnblogs.com/zhangtianq/p/5839909.html</a></p>
+
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我们的微信公众帐号，在微信公众帐号中回复◉加群◉即可加入到我们的 kubernetes 讨论群里面共同学习。</p>
+<img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/qrcode.png" alt="wechat-account-qrcode">
+
+  
+          
+            <div class="entry-shang text-center">
+    <p>「真诚赞赏，手留余香」</p>
+    <button class="zs show-zs btn btn-bred">赞赏</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+    <div class="zs-modal-head">
+        <button type="button" class="close">×</button>
+        <span class="author"><img src="/img/avatar.jpeg"/>阳明</span>
+        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
+    </div>
+    <div class="zs-modal-body">
+        <div class="zs-modal-btns">
+            <button class="btn btn-blink" data-num="2">2元</button>
+            <button class="btn btn-blink" data-num="5">5元</button>
+            <button class="btn btn-blink" data-num="10">10元</button>
+            <button class="btn btn-blink" data-num="50">50元</button>
+            <button class="btn btn-blink" data-num="100">100元</button>
+            <button class="btn btn-blink" data-num="1">任意金额</button>
+        </div>
+        <div class="zs-modal-pay">
+            <button class="btn btn-bred" id="pay-text">2元</button>
+            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+            <img src="/img/wechat-2.png" id="pay-image"/>
+        </div>
+    </div>
+    <div class="zs-modal-footer">
+        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
+    </div>
+</div>
+          
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
+        
+          
+
+<h3>相关文章</h3>
+<ul style="margin-bottom: 25px;">
+    
+    <li><a href="/post/algorithms/stringmatching/algorithms-stringmatching-trie/">字符串匹配-Trie</a></li>
+    
+    <li><a href="/post/algorithms/stringmatching/algorithms-stringmatching-bf/">字符串匹配-BF(暴力匹配算法)</a></li>
+    
+    <li><a href="/post/algorithms/datastructures/algorithms-datastructures-hashtable/">数据结构-散列表(HashTable, 哈希表)</a></li>
+    
+    <li><a href="/post/algorithms/binarysearch/algorithms-binarysearch-case/">二分查找(BinarySearch)-索引查找</a></li>
+    
+    <li><a href="/post/algorithms/binarysearch/algorithms-binarysearch-interval/">二分查找(BinarySearch)-区间查找</a></li>
+    
+    <li><a href="/post/algorithms/binarysearch/algorithms-binarysearch-repeat/">二分查找(BinarySearch)-数组含有重复值</a></li>
+    
+    <li><a href="/post/algorithms/binarysearch/algorithms-binarysearch-base/">二分查找(BinarySearch)</a></li>
+    
+    <li><a href="/post/algorithms/sort/algorithms-sort-selectionsort/">排序算法-选择排序(SelectionSort)</a></li>
+    
+    <li><a href="/post/algorithms/sort/algorithms-sort-insertionsort/">排序算法-选择排序(InsertionSort)</a></li>
+    
+    <li><a href="/post/algorithms/sort/algorithms-sort-bubblesort/">排序算法-冒泡排序(BubbleSort)</a></li>
+    
+</ul>
+
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="/post/algorithms/stringmatching/algorithms-stringmatching-trie/" data-toggle="tooltip" data-placement="top" title="字符串匹配-Trie">&larr; 前一篇</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="/post/algorithms/binarytree/algorithms-binarytree/" data-toggle="tooltip" data-placement="top" title="二叉树(BinaryTree)">后一篇 &rarr;</a>
+            </li>
+          
+        </ul>
+        
+
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
+        
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+    var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        labels: ['gitment'],
+        title: '字符串匹配-KMP',
+        createIssueManually: true,
+        id: 'Algorithms-StringMatching-KMP',      
+        distractionFreeMode: true  
+    });
+    gitalk.render('gitalk-container');
+</script>
+
+
+        
+          
+
+        
+  
+      </div>
+    
+    
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          <img src="/img/wechatmp.png" alt="k8s技术圈">
+          
+          <li>
+            <a href="mailto:icnych@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://github.com/cnych" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://weibo.com/cnych" title="微博">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://instagram.com/cnych" title="Instagram">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="/%20index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+          
+          <a href="/">WoolfBreathe</a>
+          
+          
+
+          &nbsp;&bull;&nbsp;
+          2021
+        </p>
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a
+            href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a
+            href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script> renderMathInElement(document.body); </script>
+<script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
+</script>
+<script>
+  (function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+
+  </body>
+</html>
+

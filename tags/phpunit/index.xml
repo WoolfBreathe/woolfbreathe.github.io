@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>PHPUnit on WoolfBreathe</title>
+    <link>/tags/phpunit/</link>
+    <description>Recent content in PHPUnit on WoolfBreathe</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <managingEditor>youremail@domain.com (WoolfBreathe)</managingEditor>
+    <webMaster>youremail@domain.com (WoolfBreathe)</webMaster>
+    <lastBuildDate>Sun, 22 Mar 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/phpunit/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>PHP测试替身 Mockery</title>
+      <link>/post/computerlanguages/php/computerlanguages-php-mockery/</link>
+      <pubDate>Sun, 22 Mar 2020 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/computerlanguages/php/computerlanguages-php-mockery/</guid>
+      <description>单元测试：测试替身 Gerard Meszaros 在 Meszaros2007 中介绍了测试替身的概念： 『有时候对被测系统（SUT）进行测试是很困难的，因为它依赖于其他无法在测试环境中使用的组件。这有可能是因为这些组件不可用，它们不会返回测试所需要的结果，或者执行它们会有不良副作用。在其他情况下，的测试策略要求对被测系统的内部行为有更多控制或更多可见性。 如果在编写测试时无法使用（或选择不使用）实际的依赖组件（DOC），可以用测试替身来代替。测试替身不需要和真正的依赖组件有完全一样的的行为方式；他只需要提供和真正的组件同样的 API 即可，这样被测系统就会以为它是真正的组件！』 运行单元测试的环境不一定具有生产环境的系统组件，比如在代码持续集成系统中，通常只有代码与基本的构建环境。为了在测试环境中能保证测试的正常运行，需要对环境依赖使用替身来代替，以达到稳定测试效果，所以在测试时，网络请求组件是需要使用模拟对象（替身）来代替的，并不会真正的去请求 API。 Mockery使用说明 安装
+composer require phpunit/phpunit mockery/mockery 期望 使用with/withArg 判断是否满足期望需要用 \Mockery::close();
+$mock = \Mockery::mock(&amp;#39;MyClass&amp;#39;); $mock-&amp;gt;shouldReceive(&amp;#39;foo&amp;#39;)-&amp;gt;with(&amp;#39;Hello&amp;#39;); $mock-&amp;gt;foo(&amp;#39;Goodbye&amp;#39;); // throws a NoMatchingExpectationException \Mockery::close(); 使用闭包函数
+$mock = \Mockery::mock(&amp;#39;MyClass&amp;#39;); $mock-&amp;gt;shouldReceive(&amp;#39;foo&amp;#39;)-&amp;gt;withArgs(function ($arg) { if ($arg % 2 == 0) { return true; } return false; }); $mock-&amp;gt;foo(4); // matches the expectation $mock-&amp;gt;foo(3); // throws a NoMatchingExpectationException \Mockery::close(); 部分参数期望
+$mock = \Mockery::mock(&amp;#39;MyClass&amp;#39;); $mock-&amp;gt;shouldReceive(&amp;#39;foo&amp;#39;) -&amp;gt;withSomeOfArgs(1, 2); $mock-&amp;gt;foo(1, 2, 3); // matches the expectation $mock-&amp;gt;foo(3, 2, 1); // matches the expectation (passed order doesn&amp;#39;t matter) $mock-&amp;gt;foo(&amp;#39;1&amp;#39;, &amp;#39;2&amp;#39;); // throws a NoMatchingExpectationException (type should be matched) $mock-&amp;gt;foo(3); // throws a NoMatchingExpectationException \Mockery::close(); 系列返回值</description>
+    </item>
+    
+  </channel>
+</rss>

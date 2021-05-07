@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+  <title>Algorithms-WoolfBreathe</title>
+  <meta property="og:title" content="Algorithms" />
+  <meta name="twitter:title" content="Algorithms" />
+
+  <meta name="author" content="WoolfBreathe"/>
+  <link href="/img/favicon.png" rel="icon" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/img/favicon.png"/>
+  <meta property="og:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@username" />
+  <meta name="twitter:creator" content="@username" />
+  <meta property="og:url" content="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="WoolfBreathe" />
+
+  <meta name="generator" content="Hugo 0.68.3" />
+  <link rel="canonical" href="/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="WoolfBreathe">
+
+  
+  
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700%7COpen+Sans:400,700" rel="stylesheet">
+  
+
+  <link rel="stylesheet" href='/css/bundle.min.62de9d30b83723e0d55f82908aedb1c5eb18c910bc24bcf43e530ce754ee1502.css' integrity='sha256-Yt6dMLg3I&#43;DVX4KQiu2xxesYyRC8JLz0PlMM51TuFQI='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
+<meta name="google-site-verification" content="oKxX4fOvB2yYmU02txZFChM93XQbESU4JaG3tNH9Hm8" />
+<meta name="baidu-site-verification" content="F5ojAyqaKU" />
+<meta name="keywords" content="">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d611849735f187dd788dc054908f7d7a";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/" title="WoolfBreathe">
+        <img src="img/avatar-icon.png" style="margin-top: -5px;height: 32px;" alt="WoolfBreathe">
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="首页" href="/">首页</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="归档" href="/archives">归档</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="标签" href="/tags">标签</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于" href="/page/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="RSS" href="/index.xml">RSS</a>
+            </li>
+          
+        
+
+        
+
+        
+
+        
+          <li>
+            <a href="#modalSearch" data-toggle="modal" data-target="#modalSearch" style="outline: none;">
+              <span id="searchGlyph" class="glyphicon glyphicon-search"></span>
+            </a>
+          </li>
+          
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+  <div id="modalSearch" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">搜索</h4>
+        </div>
+        <div class="modal-body">
+            
+<div class="aa-input-container" id="aa-input-container">
+    <input type="search" id="aa-search-input" class="aa-input-search" placeholder="Search for titles or URIs..." name="search" autocomplete="off" />
+    <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
+        <path d="M1806,332c0-123.3-43.8-228.8-131.5-316.5C1586.8-72.2,1481.3-116,1358-116s-228.8,43.8-316.5,131.5  C953.8,103.2,910,208.7,910,332s43.8,228.8,131.5,316.5C1129.2,736.2,1234.7,780,1358,780s228.8-43.8,316.5-131.5  C1762.2,560.8,1806,455.3,1806,332z M2318,1164c0,34.7-12.7,64.7-38,90s-55.3,38-90,38c-36,0-66-12.7-90-38l-343-342  c-119.3,82.7-252.3,124-399,124c-95.3,0-186.5-18.5-273.5-55.5s-162-87-225-150s-113-138-150-225S654,427.3,654,332  s18.5-186.5,55.5-273.5s87-162,150-225s138-113,225-150S1262.7-372,1358-372s186.5,18.5,273.5,55.5s162,87,225,150s113,138,150,225  S2062,236.7,2062,332c0,146.7-41.3,279.7-124,399l343,343C2305.7,1098.7,2318,1128.7,2318,1164z" />
+    </svg>
+</div>
+<script src="/js/algoliasearch.min.js"></script>
+<script src="/js/autocomplete.min.js"></script>
+
+<script>
+var client = algoliasearch("1JDRAS0AZR", "8804ac109158bb3bb60d74ce98fa332f");
+var index = client.initIndex('prod_blog');
+
+autocomplete('#aa-search-input',
+{ hint: false}, {
+    source: autocomplete.sources.hits(index, {hitsPerPage: 5}),
+    
+    displayKey: 'name',
+    
+    templates: {
+        
+        suggestion: function(suggestion) {
+            return '<span>' + '<a href="/post/' + suggestion.slug + '">' +
+            suggestion._highlightResult.title.value + '</a></span>';
+        }
+    }
+});
+</script>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+  <header class="header-section ">
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="page-heading">
+              <h1>#Algorithms</h1>
+              <hr class="small">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+    
+  <div class="container" role="main">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+        <div class="posts-list">
+          
+            <article class="post-preview">
+              <a href="/algorithms/binarysearch/algorithms-binarysearch-interval/">
+                <h2 class="post-title">二分查找(BinarySearch)-区间查找</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-08-14
+              </p>
+              <div class="post-entry">
+                
+                  实现原理 二分查找的第三个变形版本：在给定排序序列中查找第一个大于等于给定值的元素。
+有了昨天的基础，来解决今天这个问题，是不是很简单？所不同的是判断节点不一样了，我们之前的需求都是查找等于给定值，现在变成了大于等于给定值，所以我们要在 $nums[$mid] &gt;= $num 这个判断条件上做文章，思路还是和之前两个变形版本类似，当 $mid 已经是最左边的元素，或者 $mid 的前一个元素值小于给定查询值，则 $mid 对应元素即为满足条件的元素，否则继续往前查找。
+示例代码 对应的 PHP 实现代码如下：
+&lt;?php/*** 二分查找变形版：查找第一个大于等于给定值的元素（数组中包含重复数据）*/function binary_search($nums, $num){if (count($nums) &lt;= 1) {return 0;}return binary_search_internal($nums, $num, 0, count($nums) - 1);}function binary_search_internal($nums, $num, $low, $high){if ($low &gt; $high) {return -1;}$mid = floor(($low + $high) / 2);if ($num &lt;= $nums[$mid]) {if ($mid == 0 || $nums[$mid - 1] &lt; $num) {return $mid;} else {return binary_search_internal($nums, $num, $low, $mid - 1);}} elseif ($num &gt; $nums[$mid]) {return binary_search_internal($nums, $num, $mid + 1, $high);}}$nums = [1, 2, 3, 3, 4, 5, 6];$index = binary_search($nums, 3);print $index;同样，与之相对的，还有我们这次分享中最后要讨论的一个二分查找的变形版本：在给定序列中查找最后一个小于等于给定值的元素。
+                  <a href="/algorithms/binarysearch/algorithms-binarysearch-interval/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                  
+                    #<a href="/tags/binarysearch/">BinarySearch</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/algorithms/binarysearch/algorithms-binarysearch-repeat/">
+                <h2 class="post-title">二分查找(BinarySearch)-数组含有重复值</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-08-13
+              </p>
+              <div class="post-entry">
+                
+                  日常开发过程中，除了正常的二分查找，还有很多二分查找的变形版本。
+符合标准的二分查找条件的序列一般是比较理想的情况，如果要查找的元素在序列中有多个怎么办？所以第一个常见的变形版本，就是在一个给定排序序列中查找第一个等于给定值的元素。
+其实关键节点就在于在序列中找到值等于待查找元素值时的处理。如果此时 $mid 位置已经到了序列的最左边，不能再往左了，或者序列中索引小于 $mid 的上一个元素值不等于待查找元素值，那么此时 $mid 就是第一个等于待查找元素值的位置；否则还要继续往前找。
+对应的 PHP 实现代码如下，其他地方都一样，就是 $num == $nums[$mid] 时的处理逻辑变了：
+&lt;?php/*** 二分查找变形版：查找第一个值等于给定值的元素（数组中包含重复数据）*/function binary_search($nums, $num){if (count($nums) &lt;= 1) {return 0;}return binary_search_internal($nums, $num, 0, count($nums) - 1);}function binary_search_internal($nums, $num, $low, $high){if ($low &gt; $high) {return -1;}$mid = floor(($low + $high) / 2);if ($num &lt; $nums[$mid]) {return binary_search_internal($nums, $num, $low, $mid - 1);} elseif ($num &gt; $nums[$mid]) {return binary_search_internal($nums, $num, $mid + 1, $high);} else {if ($mid == 0 || $nums[$mid-1] !
+                  <a href="/algorithms/binarysearch/algorithms-binarysearch-repeat/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                  
+                    #<a href="/tags/binarysearch/">BinarySearch</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/algorithms/binarysearch/algorithms-binarysearch-base/">
+                <h2 class="post-title">二分查找(BinarySearch)</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-08-12
+              </p>
+              <div class="post-entry">
+                
+                  二分查找(BinarySearch) 在介绍二分查找之前，对于基于数字索引的数组元素的查找，第一反应都是遍历这个数组，直到给定数组元素值和待查找的值相等时，返回索引值并退出，否则一直遍历到最后一个元素，如果还是没有找到则返回 -1，这样的查找虽然是简单粗暴了点，但是对于规模不大的数据集，也是没什么问题的，不过很明显，对于 n 个元素的数组，这种查找的时间复杂度是 O(n)，随着数据规模的增加，性能会越来越差，设想如果数据集的长度是 40 亿（约 2 的 32 次方），那么最差的情况需要遍历数组 40 亿次，简直不敢想象需要花费多长时间！那有没有性能搞好的算法来解决这个问题呢？
+在进一步探讨这个问题之前，先来看一个生活中的例子。日常生活中，很多人应该有这种经历，朋友、同学或者同事淘了个宝贝，神秘兮兮的过来让大家猜多少钱，在约定一个价格范围之后（比如 10-100），大家会七嘴八舌的猜起价格来：
+同事A：新淘了个宝贝，猜猜多少钱？同事B：50块。同事A：高了。同事C：30块。同事A：低了。同事D：40块。同事A：高了。同事E：36块。同事A：对了。 如果用顺序遍历的逻辑，最差需要 91 次，才能猜到价格，现实生活中，没人会这么干，我们采用上面这种逻辑，只需要 4 次就猜到价格了，快了几十倍，而且数据量越大，优势越明显。基于这种思路，我算法科学家提炼出了二分查找算法，帮助在给定数据集中快速定位要查找的元素。
+实现原理 所谓二分查找，针对的是一个有序的数据集合（这点很重要），查找思想有点类似分治思想。每次都通过跟区间的中间元素对比，将待查找的区间缩小为之前的一半，直到找到要查找的元素，或者区间被缩小为 0。注意到二分查找针对的必须是已经排序过的有序数组，否则不能使用该算法。图示如下：
+示例代码 思路比较简单，我们将其通过 PHP 代码实现如下：
+&lt;?phpfunction binary_search($nums, $num){return binary_search_internal($nums, $num, 0, count($nums) - 1);}function binary_search_internal($nums, $num, $low, $high){if ($low &gt; $high) {return -1;}$mid = floor(($low + $high) / 2);if ($num &gt; $nums[$mid]) {return binary_search_internal($nums, $num, $mid + 1, $high);} elseif ($num &lt; $nums[$mid]) {return binary_search_internal($nums, $num, $low, $mid - 1);} else {return $mid;}}$nums = [1, 2, 3, 4, 5, 6];$index = binary_search($nums, 5);print $index;性能分析 很显然，二分查找的时间复杂度是 O(logn)。这是一个非常恐怖的数量级，有时候甚至比 O(1) 还要高效，比如要在开头提到的 40 亿个数字中查找某一个元素，也只需要32次（2 的 32 次方是 40 亿数量级），这真的是非常高效了，正因如此二分查找在线性表结构中的应用非常广泛。
+                  <a href="/algorithms/binarysearch/algorithms-binarysearch-base/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                  
+                    #<a href="/tags/binarysearch/">BinarySearch</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/algorithms/sort/algorithms-sort-selectionsort/">
+                <h2 class="post-title">排序算法-选择排序(SelectionSort)</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-08-09
+              </p>
+              <div class="post-entry">
+                
+                  实现原理 选择排序算法的实现思路有点类似插入排序，也分已排序区间和未排序区间。但是选择排序每次会从未排序区间中找到最小的元素，将其放到已排序区间的末尾。图示如下： 光看定义有点抽象，用图来演示，假设待排序数字是 4、5、6、3、2、1，第一次排序的流程是这样的：
+在这里搭配动态图查看效果更佳：https://visualgo.net/zh/sorting。
+&lt;?php/*** 选择排序算法实现*/function selection_sort($nums){if (count($nums) &lt;= 1) {return $nums;}for ($i = 0; $i &lt; count($nums); $i++) {$min= $i;for ($j = $i + 1; $j &lt; count($nums); $j++) {if ($nums[$j] &lt; $nums[$min]) {$min = $j;}}if ($min != $i) {$temp = $nums[$i];$nums[$i] = $nums[$min];$nums[$min] = $temp;}}return $nums;}$nums = [4, 5, 6, 3, 2, 1];$nums = selection_sort($nums);print_r($nums);性能分析 很显然，选择排序的时间复杂度也是 O(n2)由于不涉及额外的存储空间，所以是原地排序；由于涉及非相邻元素的位置交换，所以是不稳定的排序算法。 综合比较前面介绍的三个排序算法，时间复杂度都是一样的，也都是原地排序，但是选择排序是不稳定的排序算法，此外，插入排序和冒泡排序相比较，在将插入排序的时候讲到，插入排序只需要一条语句，而冒泡排序需要三条，在同等条件下，或者数据量很大的情况下，插入排序性能是要优于冒泡排序的，所以综合比较下来，三者的优先级是插入排序 &gt; 冒泡排序 &raquo; 选择排序。
+                  <a href="/algorithms/sort/algorithms-sort-selectionsort/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+        </div>
+        
+          <ul class="pager main-pager">
+            
+              <li class="previous">
+                <a href="page/5">&larr; 上一页</a>
+              </li>
+            
+            
+              <li class="next">
+                <a href="page/7">下一页 &rarr;</a>
+              </li>
+            
+          </ul>
+        
+      </div>
+    </div>
+  </div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          <img src="/img/wechatmp.png" alt="k8s技术圈">
+          
+              <li>
+                <a href="mailto:icnych@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://github.com/cnych" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://weibo.com/cnych" title="微博">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://instagram.com/cnych" title="Instagram">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          
+          <li>
+            <a href="/index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="/">WoolfBreathe</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2021
+        </p>
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
+</script>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script >
+$(document).ready(function() {
+  var int = setInterval(fixCount, 50);  
+  
+  var initPVCount = 584976;
+  var initUVCount = 153191;
+  function fixCount() {                   
+    if ($("#busuanzi_container_site_pv").css("display") != "none") {
+        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
+        clearInterval(int); 
+    }
+    if ($("#busuanzi_container_site_uv").css("display") != "none") {
+      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
+      clearInterval(int); 
+    }  
+  }           
+});
+</script>
+ <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery-migrate@1.2.1/dist/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+$('.carousel').slick({
+    dots: true,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear',
+    centerMode: true,
+    prevArrow: '<button type="button" class="slick-prev"></button>',
+    nextArrow: '<button type="button" class="slick-next"></button>',
+});
+</script>
+
+  </body>
+</html>
+

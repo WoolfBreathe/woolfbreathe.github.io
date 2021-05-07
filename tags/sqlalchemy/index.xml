@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>SQLAlchemy on WoolfBreathe</title>
+    <link>/tags/sqlalchemy/</link>
+    <description>Recent content in SQLAlchemy on WoolfBreathe</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <managingEditor>youremail@domain.com (WoolfBreathe)</managingEditor>
+    <webMaster>youremail@domain.com (WoolfBreathe)</webMaster>
+    <lastBuildDate>Tue, 16 Jun 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/sqlalchemy/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Python ORM SQLAlchemy</title>
+      <link>/post/computerlanguages/python/computerlanguages-python-sqlalchemy/</link>
+      <pubDate>Tue, 16 Jun 2020 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/computerlanguages/python/computerlanguages-python-sqlalchemy/</guid>
+      <description>官网 (SQLAlchemy Documentation)[https://www.osgeo.cn/sqlalchemy/]
+安装 pip instal sqlalchemy 基本代码 注意: SQLAlchemy多对多关联, 所有数据库实例需要继承一个declarative_base, 否则将会找不到表  from sqlalchemy.ext.declarative import declarative_base from sqlalchemy.orm import sessionmaker from sqlalchemy.orm import relationship from sqlalchemy import create_engine # 连接格式: dialect+driver://username:password@host:port/database engine = create_engine( &amp;#34;mysql+pymysql://homestead:secret@192.168.10.10:3306/gbei_admin?charset=utf8&amp;#34; ) Base = declarative_base() Session = sessionmaker(engine) db_session = Session() 示例 多对多关联示例代码
+class Girl(Base): __tablename__ = &amp;#34;girl&amp;#34; id = Column(Integer, primary_key=True) name = Column(String(32)) # secondary=&amp;#34;Hotel&amp;#34; 表示两个表关联Hotel girl2boy = relationship(&amp;#34;Boy&amp;#34;, secondary=&amp;#34;hotel&amp;#34;, backref=&amp;#34;boy2girl&amp;#34;) class Boy(Base): __tablename__ = &amp;#34;boy&amp;#34; id = Column(Integer, primary_key=True) name = Column(String(32)) class Hotel(Base): __tablename__ = &amp;#34;hotel&amp;#34; id = Column(Integer, primary_key=True) girl_id = Column(Integer, ForeignKey(&amp;#34;girl.</description>
+    </item>
+    
+  </channel>
+</rss>

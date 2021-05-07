@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+  <title>Docker Install-WoolfBreathe</title>
+  <meta property="og:title" content="Docker Install" />
+  <meta name="twitter:title" content="Docker Install" />
+
+  <meta name="description" content="Get Docker CE for Ubuntu 要在Ubuntu上开始使用Docker CE，请确保满足先决条件，然后安装Docker。
+先决条件(Prerequisites) Docker EE 用户 要安装Docker Enterprise Edition（Docker EE），请转到获取Ubuntu的Docker EE而不是此主题。
+OS requirements 要安装Docker CE，您需要其中一个64位的Ubuntu版本： Cosmic 18.10 Bionic 18.04 (LTS) Xenial 16.04 (LTS) 在x86_64（或amd64），armhf，arm64，s390x（IBM Z）和ppc64le（IBM Power）体系结构上支持Docker CE。  Uninstall old versions 较旧版本的Docker被称为docker，docker.io或docker引擎。如果已安装，请卸载它们：
+$ sudo apt-get remove docker docker-engine docker.io containerd runc 如果apt-get报告没有安装这些软件包，那就没关系。 保留/var/lib/docker/的内容，包括图像，容器，卷(volumes)和网络。 Docker CE包现在称为docker-ce。
+Supported storage drivers Ubuntu上的Docker CE支持overlay2，aufs和btrfs存储驱动程序。
+对于Linux内核版本4及更高版本的新安装，支持overlay2并优先于aufs。 Docker CE默认使用overlay2存储驱动程序。如果您需要使用aufs，则需要手动配置它。见aufs
+Install Docker CE 使用存储库安装(Install using the repository) 在新主机上首次安装Docker CE之前，需要设置Docker存储库。之后，您可以从存储库安装和更新Docker。 Set up the repository">
+  <meta property="og:description" content="Get Docker CE for Ubuntu 要在Ubuntu上开始使用Docker CE，请确保满足先决条件，然后安装Docker。
+先决条件(Prerequisites) Docker EE 用户 要安装Docker Enterprise Edition（Docker EE），请转到获取Ubuntu的Docker EE而不是此主题。
+OS requirements 要安装Docker CE，您需要其中一个64位的Ubuntu版本： Cosmic 18.10 Bionic 18.04 (LTS) Xenial 16.04 (LTS) 在x86_64（或amd64），armhf，arm64，s390x（IBM Z）和ppc64le（IBM Power）体系结构上支持Docker CE。  Uninstall old versions 较旧版本的Docker被称为docker，docker.io或docker引擎。如果已安装，请卸载它们：
+$ sudo apt-get remove docker docker-engine docker.io containerd runc 如果apt-get报告没有安装这些软件包，那就没关系。 保留/var/lib/docker/的内容，包括图像，容器，卷(volumes)和网络。 Docker CE包现在称为docker-ce。
+Supported storage drivers Ubuntu上的Docker CE支持overlay2，aufs和btrfs存储驱动程序。
+对于Linux内核版本4及更高版本的新安装，支持overlay2并优先于aufs。 Docker CE默认使用overlay2存储驱动程序。如果您需要使用aufs，则需要手动配置它。见aufs
+Install Docker CE 使用存储库安装(Install using the repository) 在新主机上首次安装Docker CE之前，需要设置Docker存储库。之后，您可以从存储库安装和更新Docker。 Set up the repository">
+  <meta name="twitter:description" content="Get Docker CE for Ubuntu 要在Ubuntu上开始使用Docker CE，请确保满足先决条件，然后安装Docker。
+先决条件(Prerequisites) Docker EE 用户 要安装Docker Enterprise Edition（Docker EE），请转到获取Ubuntu的Docker EE而不是此主题。
+OS requirements 要安装Docker …">
+  <meta name="author" content="WoolfBreathe"/>
+  <link href="/img/favicon.png" rel="icon" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/img/favicon.png"/>
+  <meta property="og:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@username" />
+  <meta name="twitter:creator" content="@username" />
+  <meta property="og:url" content="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="WoolfBreathe" />
+
+  <meta name="generator" content="Hugo 0.68.3" />
+  <link rel="canonical" href="/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="WoolfBreathe">
+
+  
+  
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700%7COpen+Sans:400,700" rel="stylesheet">
+  
+
+  <link rel="stylesheet" href='/css/bundle.min.62de9d30b83723e0d55f82908aedb1c5eb18c910bc24bcf43e530ce754ee1502.css' integrity='sha256-Yt6dMLg3I&#43;DVX4KQiu2xxesYyRC8JLz0PlMM51TuFQI='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
+<meta name="google-site-verification" content="oKxX4fOvB2yYmU02txZFChM93XQbESU4JaG3tNH9Hm8" />
+<meta name="baidu-site-verification" content="F5ojAyqaKU" />
+<meta name="keywords" content="DevOps, Docker">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d611849735f187dd788dc054908f7d7a";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/" title="WoolfBreathe">
+        <img src="img/avatar-icon.png" style="margin-top: -5px;height: 32px;" alt="WoolfBreathe">
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="首页" href="/">首页</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="归档" href="/archives">归档</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="标签" href="/tags">标签</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于" href="/page/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="RSS" href="/index.xml">RSS</a>
+            </li>
+          
+        
+
+        
+
+        
+
+        
+          <li>
+            <a href="#modalSearch" data-toggle="modal" data-target="#modalSearch" style="outline: none;">
+              <span id="searchGlyph" class="glyphicon glyphicon-search"></span>
+            </a>
+          </li>
+          
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+  <div id="modalSearch" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">搜索</h4>
+        </div>
+        <div class="modal-body">
+            
+<div class="aa-input-container" id="aa-input-container">
+    <input type="search" id="aa-search-input" class="aa-input-search" placeholder="Search for titles or URIs..." name="search" autocomplete="off" />
+    <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
+        <path d="M1806,332c0-123.3-43.8-228.8-131.5-316.5C1586.8-72.2,1481.3-116,1358-116s-228.8,43.8-316.5,131.5  C953.8,103.2,910,208.7,910,332s43.8,228.8,131.5,316.5C1129.2,736.2,1234.7,780,1358,780s228.8-43.8,316.5-131.5  C1762.2,560.8,1806,455.3,1806,332z M2318,1164c0,34.7-12.7,64.7-38,90s-55.3,38-90,38c-36,0-66-12.7-90-38l-343-342  c-119.3,82.7-252.3,124-399,124c-95.3,0-186.5-18.5-273.5-55.5s-162-87-225-150s-113-138-150-225S654,427.3,654,332  s18.5-186.5,55.5-273.5s87-162,150-225s138-113,225-150S1262.7-372,1358-372s186.5,18.5,273.5,55.5s162,87,225,150s113,138,150,225  S2062,236.7,2062,332c0,146.7-41.3,279.7-124,399l343,343C2305.7,1098.7,2318,1128.7,2318,1164z" />
+    </svg>
+</div>
+<script src="/js/algoliasearch.min.js"></script>
+<script src="/js/autocomplete.min.js"></script>
+
+<script>
+var client = algoliasearch("1JDRAS0AZR", "8804ac109158bb3bb60d74ce98fa332f");
+var index = client.initIndex('prod_blog');
+
+autocomplete('#aa-search-input',
+{ hint: false}, {
+    source: autocomplete.sources.hits(index, {hitsPerPage: 5}),
+    
+    displayKey: 'name',
+    
+    templates: {
+        
+        suggestion: function(suggestion) {
+            return '<span>' + '<a href="/post/' + suggestion.slug + '">' +
+            suggestion._highlightResult.title.value + '</a></span>';
+        }
+    }
+});
+</script>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/20200317190406.png" ></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="post-heading">
+                <h1>Docker Install</h1>
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Docker Install</h1>
+                
+                
+                  <span class="post-meta">
+  
+    发表于 2021-04-19
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+  </header>
+
+
+    
+
+
+
+<div class="container" role="main">
+  <div class="row">
+
+    
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div>
+            
+            
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="/tags/devops/">DevOps</a> &nbsp;
+              
+                  <a href="/tags/docker/">Docker</a> &nbsp;
+              
+            </h5>
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+          
+            
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <h1 id="get-docker-ce-for-ubuntu">Get Docker CE for Ubuntu</h1>
+<p>要在Ubuntu上开始使用Docker CE，请确保满足先决条件，然后安装Docker。</p>
+<h2 id="先决条件prerequisites">先决条件(Prerequisites)</h2>
+<h3 id="docker-ee-用户">Docker EE 用户</h3>
+<p>要安装Docker Enterprise Edition（Docker EE），请转到获取Ubuntu的Docker EE而不是此主题。</p>
+<h3 id="os-requirements">OS requirements</h3>
+<h3 id="要安装docker-ce您需要其中一个64位的ubuntu版本">要安装Docker CE，您需要其中一个64位的Ubuntu版本：</h3>
+<pre><code>Cosmic 18.10
+Bionic 18.04 (LTS)
+Xenial 16.04 (LTS)
+在x86_64（或amd64），armhf，arm64，s390x（IBM Z）和ppc64le（IBM Power）体系结构上支持Docker CE。
+</code></pre>
+<h3 id="uninstall-old-versions">Uninstall old versions</h3>
+<p>较旧版本的Docker被称为docker，docker.io或docker引擎。如果已安装，请卸载它们：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ sudo apt-get remove docker docker-engine docker.io containerd runc
+</code></pre></div><p>如果apt-get报告没有安装这些软件包，那就没关系。
+保留/var/lib/docker/的内容，包括图像，容器，卷(volumes)和网络。 Docker CE包现在称为docker-ce。</p>
+<h3 id="supported-storage-drivers">Supported storage drivers</h3>
+<p>Ubuntu上的Docker CE支持overlay2，aufs和btrfs存储驱动程序。</p>
+<p>对于Linux内核版本4及更高版本的新安装，支持overlay2并优先于aufs。 Docker CE默认使用overlay2存储驱动程序。如果您需要使用aufs，则需要手动配置它。见aufs</p>
+<h2 id="install-docker-ce">Install Docker CE</h2>
+<h3 id="使用存储库安装install-using-the-repository">使用存储库安装(Install using the repository)</h3>
+<p>在新主机上首次安装Docker CE之前，需要设置Docker存储库。之后，您可以从存储库安装和更新Docker。
+Set up the repository</p>
+<ol>
+<li>更新apt包索引：</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ sudo apt-get update
+</code></pre></div><ol start="2">
+<li>安装包以允许apt通过HTTPS使用存储库：</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ sudo apt-get install <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    apt-transport-https <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    ca-certificates <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    curl <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    gnupg-agent <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    software-properties-common
+</code></pre></div><ol start="3">
+<li>添加Docker的官方GPG密钥：</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+</code></pre></div><p>验证您现在拥有带指纹的密钥
+9DC8 5822 9FC7 DD38 854A E2D8 8D81 803C 0EBF CD88,通过搜索指纹的最后8个字符。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ sudo apt-key fingerprint 0EBFCD88
+    
+pub   rsa4096 2017-02-22 <span style="color:#ff79c6">[</span>SCEA<span style="color:#ff79c6">]</span>
+      9DC8 <span style="color:#bd93f9">5822</span> 9FC7 DD38 854A  E2D8 8D81 803C 0EBF CD88
+uid           <span style="color:#ff79c6">[</span> unknown<span style="color:#ff79c6">]</span> Docker Release <span style="color:#ff79c6">(</span>CE deb<span style="color:#ff79c6">)</span> &lt;docker@docker.com&gt;
+sub   rsa4096 2017-02-22 <span style="color:#ff79c6">[</span>S<span style="color:#ff79c6">]</span>
+</code></pre></div><ol start="4">
+<li>使用以下命令设置稳定存储库。要添加夜间或测试存储库，请在下面的命令中添加单词nightly或在单词stable之后测试了解夜间和测试频道。
+对于x86_64 / amd64,使用以下指令</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ sudo add-apt-repository <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>   <span style="color:#f1fa8c">&#34;deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+</span><span style="color:#f1fa8c">   </span><span style="color:#ff79c6">$(</span>lsb_release -cs<span style="color:#ff79c6">)</span><span style="color:#f1fa8c"> \
+</span><span style="color:#f1fa8c">   stable&#34;</span>
+</code></pre></div><h3 id="install-docker-ce-1">Install Docker CE</h3>
+<ol>
+<li>更新apt包索引</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ sudo apt-get update
+</code></pre></div><pre><code>1
+</code></pre>
+<ol start="2">
+<li>安装最新版本的Docker CE和容器，或者转到下一步安装特定版本：</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ sudo apt-get install docker-ce docker-ce-cli containerd.io
+</code></pre></div><ol start="3">
+<li>要安装特定版本的Docker CE，请在repo中列出可用版本，然后选择并安装：</li>
+</ol>
+<p>列出您的仓库中可用的版本：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ apt-cache madison docker-ce
+
+  docker-ce | 5:18.09.1~3-0~ubuntu-xenial | https://download.docker.com/linux/ubuntu  xenial/stable amd64 Packages
+  docker-ce | 5:18.09.0~3-0~ubuntu-xenial | https://download.docker.com/linux/ubuntu  xenial/stable amd64 Packages
+  docker-ce | 18.06.1~ce~3-0~ubuntu       | https://download.docker.com/linux/ubuntu  xenial/stable amd64 Packages
+  docker-ce | 18.06.0~ce~3-0~ubuntu       | https://download.docker.com/linux/ubuntu  xenial/stable amd64 Packages
+  ...
+</code></pre></div><p>使用第二列中的版本字符串安装特定版本，例如，5:18.09.13-0ubuntu-xenial</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ sudo apt-get install docker-ce<span style="color:#ff79c6">=</span>&lt;VERSION_STRING&gt; docker-ce-cli<span style="color:#ff79c6">=</span>&lt;VERSION_STRING&gt; containerd.io
+</code></pre></div><ol start="4">
+<li>通过运行hello-world映像(image)验证是否正确安装了Docker CE</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ sudo docker run hello-world
+</code></pre></div><p>此命令下载测试映像(image)并在容器中运行它。当容器运行时，它会打印一条信息性消息并退出。</p>
+<p>Docker CE已安装并正在运行。已创建docker组，但未向其添加任何用户。您需要使用sudo来运行Docker命令。继续Linux postinstall以允许非特权用户运行Docker命令和其他可选配置步骤。</p>
+<h3 id="更新-docker-ce">更新 Docker CE</h3>
+<p>要升级Docker CE，首先运行sudo apt-get update，然后按照安装说明选择要安装的新版本。</p>
+<h3 id="uninstall-docker-ce">Uninstall Docker CE</h3>
+<ol>
+<li>卸载Docker CE软件包</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ sudo apt-get purge docker-ce
+</code></pre></div><ol start="2">
+<li>Host上的图像(Images)，容器，卷(volumes)或自定义配置文件不会自动删除。要删除所有图像(Images)，容器，卷(volumes)：</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ sudo rm -rf /var/lib/docker
+</code></pre></div><p>您必须手动删除任何已编辑的配置文件。</p>
+<h2 id="其他问题">其他问题</h2>
+<ol>
+<li>提示下面的错误时</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker daemon running
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo usermod -aG docker <span style="color:#8be9fd;font-style:italic">$USER</span>
+sudo service docker start
+</code></pre></div><ol start="2">
+<li>docker 安装完成后测试hello-world出现问题（Unable to find image &lsquo;hello-world:latest&rsquo; locally）
+docker在本地没有找到hello-world镜像，也没有从docker仓库中拉取镜像，出项这个问题的原因：是应为docker服务器再国外，我们在国内
+无法正常拉取镜像，所以就需要我们为docker设置国内阿里云的镜像加速器；
+需要修改配置文件      /etc/docker/daemon.json  如下:</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">{</span> 
+<span style="color:#f1fa8c">&#34;registry-mirrors&#34;</span>: <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;https://alzgoonw.mirror.aliyuncs.com&#34;</span><span style="color:#ff79c6">]</span> 
+<span style="color:#ff79c6">}</span>
+</code></pre></div><p>然后重启服务:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo systemctl restart docker
+</code></pre></div>
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我们的微信公众帐号，在微信公众帐号中回复◉加群◉即可加入到我们的 kubernetes 讨论群里面共同学习。</p>
+<img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/qrcode.png" alt="wechat-account-qrcode">
+
+  
+          
+            <div class="entry-shang text-center">
+    <p>「真诚赞赏，手留余香」</p>
+    <button class="zs show-zs btn btn-bred">赞赏</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+    <div class="zs-modal-head">
+        <button type="button" class="close">×</button>
+        <span class="author"><img src="/img/avatar.jpeg"/>阳明</span>
+        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
+    </div>
+    <div class="zs-modal-body">
+        <div class="zs-modal-btns">
+            <button class="btn btn-blink" data-num="2">2元</button>
+            <button class="btn btn-blink" data-num="5">5元</button>
+            <button class="btn btn-blink" data-num="10">10元</button>
+            <button class="btn btn-blink" data-num="50">50元</button>
+            <button class="btn btn-blink" data-num="100">100元</button>
+            <button class="btn btn-blink" data-num="1">任意金额</button>
+        </div>
+        <div class="zs-modal-pay">
+            <button class="btn btn-bred" id="pay-text">2元</button>
+            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+            <img src="/img/wechat-2.png" id="pay-image"/>
+        </div>
+    </div>
+    <div class="zs-modal-footer">
+        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
+    </div>
+</div>
+          
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
+        
+          
+
+<h3>相关文章</h3>
+<ul style="margin-bottom: 25px;">
+    
+    <li><a href="/post/devops/docker/devops-docker-layering/">Docker</a></li>
+    
+    <li><a href="/post/devops/docker/devops-docker-layering/">Docker分层原理</a></li>
+    
+    <li><a href="/post/devops/linux/devops-linux-rsync/">Linux Rsync 文件同步</a></li>
+    
+    <li><a href="/post/devops/linux/devops-linux-permisssions/">Linux Permisssions(文件权限)</a></li>
+    
+    <li><a href="/post/devops/linux/devops-linux-timedatectl/">Linux使用Timedatectl修改时区和时间</a></li>
+    
+    <li><a href="/post/devops/linux/devops-linux-zabbix/">Linux安装Zabbix</a></li>
+    
+    <li><a href="/post/devops/database/devops-linux-mysql-utilities/">Centos7.X下编译安装MySQL Utilities</a></li>
+    
+    <li><a href="/post/devops/database/devops-mysql/">Linux安装MySQL</a></li>
+    
+    <li><a href="/post/devops/linux/devops-linux-nginx/">Linux安装Nginx源码包</a></li>
+    
+    <li><a href="/post/devops/linux/devops-linux-php/">Linux安装PHP源码包</a></li>
+    
+</ul>
+
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="/post/devops/docker/devops-docker-layering/" data-toggle="tooltip" data-placement="top" title="Docker">&larr; 前一篇</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="/post/2021-05-07-math-sample/" data-toggle="tooltip" data-placement="top" title="Math Sample">后一篇 &rarr;</a>
+            </li>
+          
+        </ul>
+        
+
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
+        
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+    var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        labels: ['gitment'],
+        title: 'Docker Install',
+        createIssueManually: true,
+        id: 'DevOps-Docker-Install',      
+        distractionFreeMode: true  
+    });
+    gitalk.render('gitalk-container');
+</script>
+
+
+        
+          
+
+        
+  
+      </div>
+    
+    
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          <img src="/img/wechatmp.png" alt="k8s技术圈">
+          
+          <li>
+            <a href="mailto:icnych@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://github.com/cnych" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://weibo.com/cnych" title="微博">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://instagram.com/cnych" title="Instagram">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="/%20index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+          
+          <a href="/">WoolfBreathe</a>
+          
+          
+
+          &nbsp;&bull;&nbsp;
+          2021
+        </p>
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a
+            href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a
+            href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script> renderMathInElement(document.body); </script>
+<script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
+</script>
+<script>
+  (function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+
+  </body>
+</html>
+

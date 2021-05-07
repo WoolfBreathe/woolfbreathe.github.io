@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+  <title>二叉树(BinaryTree)-WoolfBreathe</title>
+  <meta property="og:title" content="二叉树(BinaryTree)" />
+  <meta name="twitter:title" content="二叉树(BinaryTree)" />
+
+  <meta name="description" content="树的相关概念 树的相关概念
+树这种数据结构模拟了自然界中树的概念，自然界中的树有根、叶子、枝干，数据结构中的树也是如此，只不过是倒过来的：
+其中的每个元素叫做节点。树的顶点（没有父元素的节点）叫根节点，如 E；每个分支的末端节点（没有子元素的节点）叫叶子节点，如 G、H、I、J、K、L；用来连接相邻节点之间的关系叫父子关系，比如 E 是 A、F 的父节点，A、F 是 E 的子节点；具有同一个父节点的多个子节点叫做兄弟节点，比如 A、F 是兄弟节点。
+节点拥有的子节点数目叫做节点的度，显然，叶子节点的度为 0，树的度是树内各节点度的最大值。
+除此之外，树还有高度、深度和层的概念：
+注：其实线性表也可以看作一种特殊的树，只不过所有节点都在一个分支上，第一个元素是根节点，最后一个元素是子节点，没有兄弟节点。层数就是线性表的长度。  另外，也有些地方将二叉树的深度定义为结点的最大层次数，比如《大话数据结构》就是这样定义的，这个问题不大，完全就是个定义而已：
+多个互不相交的树可以构成森林。
+二叉树的定义 二叉树是平时遇到的最常见的树结构，它是一种特殊的树，顾名思义，就是每个节点最多有两个「分叉」，即两个子节点，分别是左子节点和右子节点，不过，二叉树并不要求每个节点都有两个子节点，有的节点只有左子结点，有的节点只有右子节点。比如下面这些都是二叉树：
+根据左右子节点的饱和度，我们又从二叉树中提取出两种特殊的二叉树 —— 满二叉树和完全二叉树。满二叉树即所有分支节点都有左右子节点，并且所有叶子节点都在同一层上，如上面的图2便是满二叉树。完全二叉树要复杂一些，深度为 k 有 n 个节点的二叉树，当且仅当其中的每一节点，都可以和同样深度 k 的满二叉树，序号为 1 到 n 的节点一对一对应时，称为完全二叉树，比如上面的图3就是完全二叉树。
+二叉树的特性 在讨论二叉树的创建和存储之前，我们先来总结下二叉树的一些特性，以便后续用到（这里二叉树数的深度定义采用的最大层次数，如果从 0 开始计算的话，可以自行推演一下）：
+性质1：
+在第 i 层最多有 $2^{i-1}$ 个节点。
+性质2：
+深度为 k 的二叉树最多有 $2^k-1$ 个节点。
+性质3：
+对于任何一个二叉树，叶子节点数为 n0，度为 2 的节点数为 n2，则 n0 = n2&#43;1。
+性质4：
+具有n个节点的完全二叉树深为 $\log_2 x &#43; 1$（其中x表示不大于n的最大整数）。
+性质5：
+若对一棵有n个节点的完全二叉树进行顺序编号（1≤i≤n），那么，对于编号为i（i≥1）的节点： 当i=1时，该节点为根，它无双亲节点 。 当i&gt;1时，该节点的双亲节点的编号为i/2 。 若2i≤n，则有编号为2的左孩子，否则没有左孩子 。 若2&#43;1≤n，则有编号为2i&#43;1的右孩子，否则没有右孩子 。">
+  <meta property="og:description" content="树的相关概念 树的相关概念
+树这种数据结构模拟了自然界中树的概念，自然界中的树有根、叶子、枝干，数据结构中的树也是如此，只不过是倒过来的：
+其中的每个元素叫做节点。树的顶点（没有父元素的节点）叫根节点，如 E；每个分支的末端节点（没有子元素的节点）叫叶子节点，如 G、H、I、J、K、L；用来连接相邻节点之间的关系叫父子关系，比如 E 是 A、F 的父节点，A、F 是 E 的子节点；具有同一个父节点的多个子节点叫做兄弟节点，比如 A、F 是兄弟节点。
+节点拥有的子节点数目叫做节点的度，显然，叶子节点的度为 0，树的度是树内各节点度的最大值。
+除此之外，树还有高度、深度和层的概念：
+注：其实线性表也可以看作一种特殊的树，只不过所有节点都在一个分支上，第一个元素是根节点，最后一个元素是子节点，没有兄弟节点。层数就是线性表的长度。  另外，也有些地方将二叉树的深度定义为结点的最大层次数，比如《大话数据结构》就是这样定义的，这个问题不大，完全就是个定义而已：
+多个互不相交的树可以构成森林。
+二叉树的定义 二叉树是平时遇到的最常见的树结构，它是一种特殊的树，顾名思义，就是每个节点最多有两个「分叉」，即两个子节点，分别是左子节点和右子节点，不过，二叉树并不要求每个节点都有两个子节点，有的节点只有左子结点，有的节点只有右子节点。比如下面这些都是二叉树：
+根据左右子节点的饱和度，我们又从二叉树中提取出两种特殊的二叉树 —— 满二叉树和完全二叉树。满二叉树即所有分支节点都有左右子节点，并且所有叶子节点都在同一层上，如上面的图2便是满二叉树。完全二叉树要复杂一些，深度为 k 有 n 个节点的二叉树，当且仅当其中的每一节点，都可以和同样深度 k 的满二叉树，序号为 1 到 n 的节点一对一对应时，称为完全二叉树，比如上面的图3就是完全二叉树。
+二叉树的特性 在讨论二叉树的创建和存储之前，我们先来总结下二叉树的一些特性，以便后续用到（这里二叉树数的深度定义采用的最大层次数，如果从 0 开始计算的话，可以自行推演一下）：
+性质1：
+在第 i 层最多有 $2^{i-1}$ 个节点。
+性质2：
+深度为 k 的二叉树最多有 $2^k-1$ 个节点。
+性质3：
+对于任何一个二叉树，叶子节点数为 n0，度为 2 的节点数为 n2，则 n0 = n2&#43;1。
+性质4：
+具有n个节点的完全二叉树深为 $\log_2 x &#43; 1$（其中x表示不大于n的最大整数）。
+性质5：
+若对一棵有n个节点的完全二叉树进行顺序编号（1≤i≤n），那么，对于编号为i（i≥1）的节点： 当i=1时，该节点为根，它无双亲节点 。 当i&gt;1时，该节点的双亲节点的编号为i/2 。 若2i≤n，则有编号为2的左孩子，否则没有左孩子 。 若2&#43;1≤n，则有编号为2i&#43;1的右孩子，否则没有右孩子 。">
+  <meta name="twitter:description" content="树的相关概念 树的相关概念
+树这种数据结构模拟了自然界中树的概念，自然界中的树有根、叶子、枝干，数据结构中的树也是如此，只不过是倒过来的：
+其中的每个元素叫做节点。树的顶点（没有父元素的节点）叫根节点，如 E；每个分支的末端节点（没有子元素的节点）叫叶子节点，如 G、H、I、J、K、L；用来连接相邻节点之间的关系叫父子关系，比如 E 是 A、F 的父节点，A、F 是 E 的子节点；具有同一个父节点 …">
+  <meta name="author" content="WoolfBreathe"/>
+  <link href="/img/favicon.png" rel="icon" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/img/favicon.png"/>
+  <meta property="og:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@username" />
+  <meta name="twitter:creator" content="@username" />
+  <meta property="og:url" content="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="WoolfBreathe" />
+
+  <meta name="generator" content="Hugo 0.68.3" />
+  <link rel="canonical" href="/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="WoolfBreathe">
+
+  
+  
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700%7COpen+Sans:400,700" rel="stylesheet">
+  
+
+  <link rel="stylesheet" href='/css/bundle.min.62de9d30b83723e0d55f82908aedb1c5eb18c910bc24bcf43e530ce754ee1502.css' integrity='sha256-Yt6dMLg3I&#43;DVX4KQiu2xxesYyRC8JLz0PlMM51TuFQI='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
+<meta name="google-site-verification" content="oKxX4fOvB2yYmU02txZFChM93XQbESU4JaG3tNH9Hm8" />
+<meta name="baidu-site-verification" content="F5ojAyqaKU" />
+<meta name="keywords" content="Algorithms, BinaryTree">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d611849735f187dd788dc054908f7d7a";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/" title="WoolfBreathe">
+        <img src="img/avatar-icon.png" style="margin-top: -5px;height: 32px;" alt="WoolfBreathe">
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="首页" href="/">首页</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="归档" href="/archives">归档</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="标签" href="/tags">标签</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于" href="/page/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="RSS" href="/index.xml">RSS</a>
+            </li>
+          
+        
+
+        
+
+        
+
+        
+          <li>
+            <a href="#modalSearch" data-toggle="modal" data-target="#modalSearch" style="outline: none;">
+              <span id="searchGlyph" class="glyphicon glyphicon-search"></span>
+            </a>
+          </li>
+          
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+  <div id="modalSearch" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">搜索</h4>
+        </div>
+        <div class="modal-body">
+            
+<div class="aa-input-container" id="aa-input-container">
+    <input type="search" id="aa-search-input" class="aa-input-search" placeholder="Search for titles or URIs..." name="search" autocomplete="off" />
+    <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
+        <path d="M1806,332c0-123.3-43.8-228.8-131.5-316.5C1586.8-72.2,1481.3-116,1358-116s-228.8,43.8-316.5,131.5  C953.8,103.2,910,208.7,910,332s43.8,228.8,131.5,316.5C1129.2,736.2,1234.7,780,1358,780s228.8-43.8,316.5-131.5  C1762.2,560.8,1806,455.3,1806,332z M2318,1164c0,34.7-12.7,64.7-38,90s-55.3,38-90,38c-36,0-66-12.7-90-38l-343-342  c-119.3,82.7-252.3,124-399,124c-95.3,0-186.5-18.5-273.5-55.5s-162-87-225-150s-113-138-150-225S654,427.3,654,332  s18.5-186.5,55.5-273.5s87-162,150-225s138-113,225-150S1262.7-372,1358-372s186.5,18.5,273.5,55.5s162,87,225,150s113,138,150,225  S2062,236.7,2062,332c0,146.7-41.3,279.7-124,399l343,343C2305.7,1098.7,2318,1128.7,2318,1164z" />
+    </svg>
+</div>
+<script src="/js/algoliasearch.min.js"></script>
+<script src="/js/autocomplete.min.js"></script>
+
+<script>
+var client = algoliasearch("1JDRAS0AZR", "8804ac109158bb3bb60d74ce98fa332f");
+var index = client.initIndex('prod_blog');
+
+autocomplete('#aa-search-input',
+{ hint: false}, {
+    source: autocomplete.sources.hits(index, {hitsPerPage: 5}),
+    
+    displayKey: 'name',
+    
+    templates: {
+        
+        suggestion: function(suggestion) {
+            return '<span>' + '<a href="/post/' + suggestion.slug + '">' +
+            suggestion._highlightResult.title.value + '</a></span>';
+        }
+    }
+});
+</script>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/20200317190406.png" data-img-desc-1="BinaryTree"></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="post-heading">
+                <h1>二叉树(BinaryTree)</h1>
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>二叉树(BinaryTree)</h1>
+                
+                
+                  <span class="post-meta">
+  
+    发表于 2019-08-20
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+  </header>
+
+
+    
+
+
+
+<div class="container" role="main">
+  <div class="row">
+
+    
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div>
+            
+            
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="/tags/algorithms/">Algorithms</a> &nbsp;
+              
+            </h5>
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+          
+            
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <h1 id="树的相关概念">树的相关概念</h1>
+<p>树的相关概念</p>
+<p>树这种数据结构模拟了自然界中树的概念，自然界中的树有根、叶子、枝干，数据结构中的树也是如此，只不过是倒过来的：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/image-1571818138580.png" alt="二叉树图示"></p>
+<p>其中的每个元素叫做<strong>节点</strong>。树的顶点（没有父元素的节点）叫<strong>根节点</strong>，如 E；每个分支的末端节点（没有子元素的节点）叫<strong>叶子节点</strong>，如 G、H、I、J、K、L；用来连接相邻节点之间的关系叫父子关系，比如 E 是 A、F 的父节点，A、F 是 E 的<strong>子节点</strong>；具有同一个父节点的多个子节点叫做兄弟节点，比如 A、F 是<strong>兄弟节点</strong>。</p>
+<p>节点拥有的子节点数目叫做节点的<strong>度</strong>，显然，叶子节点的度为 0，树的度是树内各节点度的最大值。</p>
+<p>除此之外，树还有高度、深度和层的概念：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/image-1571818206467.png" alt="树的高度、深度和层"></p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/image-1571818238752.png" alt="树的高度、深度和层"></p>
+<pre><code>注：其实线性表也可以看作一种特殊的树，只不过所有节点都在一个分支上，第一个元素是根节点，最后一个元素是子节点，没有兄弟节点。层数就是线性表的长度。
+</code></pre>
+<p>另外，也有些地方将二叉树的深度定义为结点的最大层次数，比如《大话数据结构》就是这样定义的，这个问题不大，完全就是个定义而已：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/Jietu20200330-211806.jpg" alt="二叉树的深度"></p>
+<p>多个互不相交的树可以构成森林。</p>
+<h1 id="二叉树的定义">二叉树的定义</h1>
+<p>二叉树是平时遇到的最常见的树结构，它是一种特殊的树，顾名思义，就是每个节点最多有两个「分叉」，即两个子节点，分别是左子节点和右子节点，不过，二叉树并不要求每个节点都有两个子节点，有的节点只有左子结点，有的节点只有右子节点。比如下面这些都是二叉树：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/image-1571818363331.png" alt="二叉树"></p>
+<p>根据左右子节点的饱和度，我们又从二叉树中提取出两种特殊的二叉树 —— 满二叉树和完全二叉树。满二叉树即所有分支节点都有左右子节点，并且所有叶子节点都在同一层上，如上面的图2便是满二叉树。完全二叉树要复杂一些，深度为 k 有 n 个节点的二叉树，当且仅当其中的每一节点，都可以和同样深度 k 的满二叉树，序号为 1 到 n 的节点一对一对应时，称为完全二叉树，比如上面的图3就是完全二叉树。</p>
+<h1 id="二叉树的特性">二叉树的特性</h1>
+<p>在讨论二叉树的创建和存储之前，我们先来总结下二叉树的一些特性，以便后续用到（这里二叉树数的深度定义采用的最大层次数，如果从 0 开始计算的话，可以自行推演一下）：</p>
+<p><strong>性质1：</strong></p>
+<p>在第 i 层最多有 $2^{i-1}$ 个节点。</p>
+<p><strong>性质2：</strong></p>
+<p>深度为 k 的二叉树最多有 $2^k-1$ 个节点。</p>
+<p><strong>性质3：</strong></p>
+<p>对于任何一个二叉树，叶子节点数为 n0，度为 2 的节点数为 n2，则 n0 = n2+1。</p>
+<p><strong>性质4：</strong></p>
+<p>具有n个节点的完全二叉树深为 $\log_2 x + 1$（其中x表示不大于n的最大整数）。</p>
+<p><strong>性质5：</strong></p>
+<p>若对一棵有n个节点的完全二叉树进行顺序编号（1≤i≤n），那么，对于编号为i（i≥1）的节点：
+当i=1时，该节点为根，它无双亲节点 。
+当i&gt;1时，该节点的双亲节点的编号为i/2 。
+若2i≤n，则有编号为2的左孩子，否则没有左孩子 。
+若2+1≤n，则有编号为2i+1的右孩子，否则没有右孩子 。</p>
+
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我们的微信公众帐号，在微信公众帐号中回复◉加群◉即可加入到我们的 kubernetes 讨论群里面共同学习。</p>
+<img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/qrcode.png" alt="wechat-account-qrcode">
+
+  
+          
+            <div class="entry-shang text-center">
+    <p>「真诚赞赏，手留余香」</p>
+    <button class="zs show-zs btn btn-bred">赞赏</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+    <div class="zs-modal-head">
+        <button type="button" class="close">×</button>
+        <span class="author"><img src="/img/avatar.jpeg"/>阳明</span>
+        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
+    </div>
+    <div class="zs-modal-body">
+        <div class="zs-modal-btns">
+            <button class="btn btn-blink" data-num="2">2元</button>
+            <button class="btn btn-blink" data-num="5">5元</button>
+            <button class="btn btn-blink" data-num="10">10元</button>
+            <button class="btn btn-blink" data-num="50">50元</button>
+            <button class="btn btn-blink" data-num="100">100元</button>
+            <button class="btn btn-blink" data-num="1">任意金额</button>
+        </div>
+        <div class="zs-modal-pay">
+            <button class="btn btn-bred" id="pay-text">2元</button>
+            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+            <img src="/img/wechat-2.png" id="pay-image"/>
+        </div>
+    </div>
+    <div class="zs-modal-footer">
+        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
+    </div>
+</div>
+          
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
+        
+          
+
+<h3>相关文章</h3>
+<ul style="margin-bottom: 25px;">
+    
+    <li><a href="/post/algorithms/stringmatching/algorithms-stringmatching-kmp/">字符串匹配-KMP</a></li>
+    
+    <li><a href="/post/algorithms/stringmatching/algorithms-stringmatching-trie/">字符串匹配-Trie</a></li>
+    
+    <li><a href="/post/algorithms/stringmatching/algorithms-stringmatching-bf/">字符串匹配-BF(暴力匹配算法)</a></li>
+    
+    <li><a href="/post/algorithms/datastructures/algorithms-datastructures-hashtable/">数据结构-散列表(HashTable, 哈希表)</a></li>
+    
+    <li><a href="/post/algorithms/binarysearch/algorithms-binarysearch-case/">二分查找(BinarySearch)-索引查找</a></li>
+    
+    <li><a href="/post/algorithms/binarysearch/algorithms-binarysearch-interval/">二分查找(BinarySearch)-区间查找</a></li>
+    
+    <li><a href="/post/algorithms/binarysearch/algorithms-binarysearch-repeat/">二分查找(BinarySearch)-数组含有重复值</a></li>
+    
+    <li><a href="/post/algorithms/binarysearch/algorithms-binarysearch-base/">二分查找(BinarySearch)</a></li>
+    
+    <li><a href="/post/algorithms/sort/algorithms-sort-selectionsort/">排序算法-选择排序(SelectionSort)</a></li>
+    
+    <li><a href="/post/algorithms/sort/algorithms-sort-insertionsort/">排序算法-选择排序(InsertionSort)</a></li>
+    
+</ul>
+
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="/post/algorithms/stringmatching/algorithms-stringmatching-kmp/" data-toggle="tooltip" data-placement="top" title="字符串匹配-KMP">&larr; 前一篇</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="/post/algorithms/binarytree/algorithms-binarytree-storage/" data-toggle="tooltip" data-placement="top" title="二叉树(BinaryTree)-存储">后一篇 &rarr;</a>
+            </li>
+          
+        </ul>
+        
+
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
+        
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+    var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        labels: ['gitment'],
+        title: '二叉树(BinaryTree)',
+        createIssueManually: true,
+        id: 'Algorithms-BinaryTree',      
+        distractionFreeMode: true  
+    });
+    gitalk.render('gitalk-container');
+</script>
+
+
+        
+          
+
+        
+  
+      </div>
+    
+    
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          <img src="/img/wechatmp.png" alt="k8s技术圈">
+          
+          <li>
+            <a href="mailto:icnych@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://github.com/cnych" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://weibo.com/cnych" title="微博">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://instagram.com/cnych" title="Instagram">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="/%20index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+          
+          <a href="/">WoolfBreathe</a>
+          
+          
+
+          &nbsp;&bull;&nbsp;
+          2021
+        </p>
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a
+            href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a
+            href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script> renderMathInElement(document.body); </script>
+<script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
+</script>
+<script>
+  (function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+
+  </body>
+</html>
+

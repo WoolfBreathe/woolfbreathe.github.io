@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+  <title>图(Graph)-关键路径(CriticalPath)-WoolfBreathe</title>
+  <meta property="og:title" content="图(Graph)-关键路径(CriticalPath)" />
+  <meta name="twitter:title" content="图(Graph)-关键路径(CriticalPath)" />
+
+  <meta name="description" content="关键路径 拓扑排序主要是为了解决一个工程是否可以顺利进行的问题，但有时候还要解决工程完成需要的最短时间问题。
+要对一个流程图计算最短时间，就要分析流程之间的拓扑关系，并且找到当中最关键的流程，这个流程的时间就是最短时间。
+在 AOV 网的基础上，引入一个新的概念，在一个表示工程的带权有向图中，用顶点表示事件，用有向边表示活动，用边上的权值表示活动的持续时间，把这种通过有向图的边表示活动的网称之为 AOE 网（Activity On Edge Network）。AOE 网中入度为 0 的顶点叫做始点或源点，出度为 0 的点叫做终点或汇点。
+一个 AOE 网，总有开始和结束，并且正常情况下，只有一个源点和汇点：
+把路径上各个活动所持续的时间之和称之为路径长度，从源点到汇点具有最大长度的路径称之为关键路径，在关键路径上的活动叫关键活动。比如上图中，从源点 V1 到汇点 V9 的路径及路径之和是：
+V1-&gt;V2-&gt;V5-&gt;V7-&gt;V9：18V1-&gt;V2-&gt;V5-&gt;V8-&gt;V9：18V1-&gt;V3-&gt;V5-&gt;V7-&gt;V9：16V1-&gt;V3-&gt;V5-&gt;V8-&gt;V9：16V1-&gt;V4-&gt;V6-&gt;V8-&gt;V9：15 所以其关键路径是 V1-&gt;V2-&gt;V5-&gt;V7-&gt;V9。
+尽管 AOE 网和 AOV 网都是针对工程进行建模的，但是两者有明显的不同，主要体现在 AOV 网是顶点表示活动的网，它只描述活动之间的制约关系；而 AOE 网是边表示活动的网，边上的权值表示活动持续的时间，因此 AOE 网建立在活动之间制约关系没有矛盾的基础之上，再来分析整个工程至少需要多少时间，或者为了缩短完成整个工程所需时间，应当加快哪些活动。这也是 AOE 网的主要应用场景。
+实现算法 在 AOE 网中，某些活动可以并行地进行，因此完成工程的最短时间是从源点到汇点的最大路径长度（事件之间耗时最长的活动完成了，才意味着下个事件可以开始，并行的活动并不是可选的，而是都要执行的，这一点需要明确），而找到这条具有最大路径长度的路径，也就找到了关键路径。
+比如示例 AOE 网，其关键路径是 V1-&gt;V2-&gt;V5-&gt;V7-&gt;V9。
+下面我们来探讨如何用抽象的算法来寻找关键路径，为了方便描述这个算法，需要先定义几个变量：
+事件的最早发生时间 etv，即顶点 Vk 的最早发生时间；事件的最晚发生时间 ltv，即顶点 Vk 的最晚发生时间，超出这个时间就会导致整个工程延期；活动的最早开始时间 ete，即弧 ak 的最早开始时间；活动的最晚开始时间 lte，即弧 ak 的最晚开始时间，也就是不会导致工程延期的最晚开始时间。 要找到关键路径，需要找到所有活动的最早开始时间和最晚开始时间，并且比较它们，如果相等则意味着此活动是关键活动（即弧的权值代表时间被填满），活动间的路径是关键路径，否则不是。">
+  <meta property="og:description" content="关键路径 拓扑排序主要是为了解决一个工程是否可以顺利进行的问题，但有时候还要解决工程完成需要的最短时间问题。
+要对一个流程图计算最短时间，就要分析流程之间的拓扑关系，并且找到当中最关键的流程，这个流程的时间就是最短时间。
+在 AOV 网的基础上，引入一个新的概念，在一个表示工程的带权有向图中，用顶点表示事件，用有向边表示活动，用边上的权值表示活动的持续时间，把这种通过有向图的边表示活动的网称之为 AOE 网（Activity On Edge Network）。AOE 网中入度为 0 的顶点叫做始点或源点，出度为 0 的点叫做终点或汇点。
+一个 AOE 网，总有开始和结束，并且正常情况下，只有一个源点和汇点：
+把路径上各个活动所持续的时间之和称之为路径长度，从源点到汇点具有最大长度的路径称之为关键路径，在关键路径上的活动叫关键活动。比如上图中，从源点 V1 到汇点 V9 的路径及路径之和是：
+V1-&gt;V2-&gt;V5-&gt;V7-&gt;V9：18V1-&gt;V2-&gt;V5-&gt;V8-&gt;V9：18V1-&gt;V3-&gt;V5-&gt;V7-&gt;V9：16V1-&gt;V3-&gt;V5-&gt;V8-&gt;V9：16V1-&gt;V4-&gt;V6-&gt;V8-&gt;V9：15 所以其关键路径是 V1-&gt;V2-&gt;V5-&gt;V7-&gt;V9。
+尽管 AOE 网和 AOV 网都是针对工程进行建模的，但是两者有明显的不同，主要体现在 AOV 网是顶点表示活动的网，它只描述活动之间的制约关系；而 AOE 网是边表示活动的网，边上的权值表示活动持续的时间，因此 AOE 网建立在活动之间制约关系没有矛盾的基础之上，再来分析整个工程至少需要多少时间，或者为了缩短完成整个工程所需时间，应当加快哪些活动。这也是 AOE 网的主要应用场景。
+实现算法 在 AOE 网中，某些活动可以并行地进行，因此完成工程的最短时间是从源点到汇点的最大路径长度（事件之间耗时最长的活动完成了，才意味着下个事件可以开始，并行的活动并不是可选的，而是都要执行的，这一点需要明确），而找到这条具有最大路径长度的路径，也就找到了关键路径。
+比如示例 AOE 网，其关键路径是 V1-&gt;V2-&gt;V5-&gt;V7-&gt;V9。
+下面我们来探讨如何用抽象的算法来寻找关键路径，为了方便描述这个算法，需要先定义几个变量：
+事件的最早发生时间 etv，即顶点 Vk 的最早发生时间；事件的最晚发生时间 ltv，即顶点 Vk 的最晚发生时间，超出这个时间就会导致整个工程延期；活动的最早开始时间 ete，即弧 ak 的最早开始时间；活动的最晚开始时间 lte，即弧 ak 的最晚开始时间，也就是不会导致工程延期的最晚开始时间。 要找到关键路径，需要找到所有活动的最早开始时间和最晚开始时间，并且比较它们，如果相等则意味着此活动是关键活动（即弧的权值代表时间被填满），活动间的路径是关键路径，否则不是。">
+  <meta name="twitter:description" content="关键路径 拓扑排序主要是为了解决一个工程是否可以顺利进行的问题，但有时候还要解决工程完成需要的最短时间问题。
+要对一个流程图计算最短时间，就要分析流程之间的拓扑关系，并且找到当中最关键的流程，这个流程的时间就是最短时间。
+在 AOV 网的基础上，引入一个新的概念，在一个表示工程的带权有向图中，用顶点表示事件，用有向边表示活动，用边上的权值表示活动的持续时间， …">
+  <meta name="author" content="WoolfBreathe"/>
+  <link href="/img/favicon.png" rel="icon" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/img/favicon.png"/>
+  <meta property="og:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@username" />
+  <meta name="twitter:creator" content="@username" />
+  <meta property="og:url" content="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="WoolfBreathe" />
+
+  <meta name="generator" content="Hugo 0.68.3" />
+  <link rel="canonical" href="/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="WoolfBreathe">
+
+  
+  
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700%7COpen+Sans:400,700" rel="stylesheet">
+  
+
+  <link rel="stylesheet" href='/css/bundle.min.62de9d30b83723e0d55f82908aedb1c5eb18c910bc24bcf43e530ce754ee1502.css' integrity='sha256-Yt6dMLg3I&#43;DVX4KQiu2xxesYyRC8JLz0PlMM51TuFQI='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
+<meta name="google-site-verification" content="oKxX4fOvB2yYmU02txZFChM93XQbESU4JaG3tNH9Hm8" />
+<meta name="baidu-site-verification" content="F5ojAyqaKU" />
+<meta name="keywords" content="Algorithms, Graph">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d611849735f187dd788dc054908f7d7a";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/" title="WoolfBreathe">
+        <img src="img/avatar-icon.png" style="margin-top: -5px;height: 32px;" alt="WoolfBreathe">
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="首页" href="/">首页</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="归档" href="/archives">归档</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="标签" href="/tags">标签</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于" href="/page/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="RSS" href="/index.xml">RSS</a>
+            </li>
+          
+        
+
+        
+
+        
+
+        
+          <li>
+            <a href="#modalSearch" data-toggle="modal" data-target="#modalSearch" style="outline: none;">
+              <span id="searchGlyph" class="glyphicon glyphicon-search"></span>
+            </a>
+          </li>
+          
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+  <div id="modalSearch" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">搜索</h4>
+        </div>
+        <div class="modal-body">
+            
+<div class="aa-input-container" id="aa-input-container">
+    <input type="search" id="aa-search-input" class="aa-input-search" placeholder="Search for titles or URIs..." name="search" autocomplete="off" />
+    <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
+        <path d="M1806,332c0-123.3-43.8-228.8-131.5-316.5C1586.8-72.2,1481.3-116,1358-116s-228.8,43.8-316.5,131.5  C953.8,103.2,910,208.7,910,332s43.8,228.8,131.5,316.5C1129.2,736.2,1234.7,780,1358,780s228.8-43.8,316.5-131.5  C1762.2,560.8,1806,455.3,1806,332z M2318,1164c0,34.7-12.7,64.7-38,90s-55.3,38-90,38c-36,0-66-12.7-90-38l-343-342  c-119.3,82.7-252.3,124-399,124c-95.3,0-186.5-18.5-273.5-55.5s-162-87-225-150s-113-138-150-225S654,427.3,654,332  s18.5-186.5,55.5-273.5s87-162,150-225s138-113,225-150S1262.7-372,1358-372s186.5,18.5,273.5,55.5s162,87,225,150s113,138,150,225  S2062,236.7,2062,332c0,146.7-41.3,279.7-124,399l343,343C2305.7,1098.7,2318,1128.7,2318,1164z" />
+    </svg>
+</div>
+<script src="/js/algoliasearch.min.js"></script>
+<script src="/js/autocomplete.min.js"></script>
+
+<script>
+var client = algoliasearch("1JDRAS0AZR", "8804ac109158bb3bb60d74ce98fa332f");
+var index = client.initIndex('prod_blog');
+
+autocomplete('#aa-search-input',
+{ hint: false}, {
+    source: autocomplete.sources.hits(index, {hitsPerPage: 5}),
+    
+    displayKey: 'name',
+    
+    templates: {
+        
+        suggestion: function(suggestion) {
+            return '<span>' + '<a href="/post/' + suggestion.slug + '">' +
+            suggestion._highlightResult.title.value + '</a></span>';
+        }
+    }
+});
+</script>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/20200317190406.png" ></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="Algorithms-heading">
+                <h1>图(Graph)-关键路径(CriticalPath)</h1>
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="Algorithms-heading">
+              <h1>图(Graph)-关键路径(CriticalPath)</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+  </header>
+
+
+    
+
+
+
+<div class="container" role="main">
+  <div class="row">
+
+    
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div>
+            
+            
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="/tags/algorithms/">Algorithms</a> &nbsp;
+              
+                  <a href="/tags/graph/">Graph</a> &nbsp;
+              
+            </h5>
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+          
+            
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <h1 id="关键路径">关键路径</h1>
+<p>拓扑排序主要是为了解决一个工程是否可以顺利进行的问题，但有时候还要解决工程完成需要的最短时间问题。</p>
+<p>要对一个流程图计算最短时间，就要分析流程之间的拓扑关系，并且找到当中最关键的流程，这个流程的时间就是最短时间。</p>
+<p>在 AOV 网的基础上，引入一个新的概念，在一个表示工程的带权有向图中，用顶点表示事件，用有向边表示活动，用边上的权值表示活动的持续时间，<strong>把这种通过有向图的边表示活动的网称之为 AOE 网（Activity On Edge Network）</strong>。AOE 网中入度为 0 的顶点叫做始点或源点，出度为 0 的点叫做终点或汇点。</p>
+<p>一个 AOE 网，总有开始和结束，并且正常情况下，只有一个源点和汇点：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/Graph/image-1572888009998.png" alt="AOE网"></p>
+<p>把路径上各个活动所持续的时间之和称之为路径长度，从源点到汇点具有最大长度的路径称之为关键路径，在关键路径上的活动叫关键活动。比如上图中，从源点 V1 到汇点 V9 的路径及路径之和是：</p>
+<pre><code>V1-&gt;V2-&gt;V5-&gt;V7-&gt;V9：18
+V1-&gt;V2-&gt;V5-&gt;V8-&gt;V9：18
+V1-&gt;V3-&gt;V5-&gt;V7-&gt;V9：16
+V1-&gt;V3-&gt;V5-&gt;V8-&gt;V9：16
+V1-&gt;V4-&gt;V6-&gt;V8-&gt;V9：15
+</code></pre>
+<p>所以其关键路径是 V1-&gt;V2-&gt;V5-&gt;V7-&gt;V9。</p>
+<p>尽管 AOE 网和 AOV 网都是针对工程进行建模的，但是两者有明显的不同，主要体现在 AOV 网是顶点表示活动的网，它只描述活动之间的制约关系；而 AOE 网是边表示活动的网，边上的权值表示活动持续的时间，因此 AOE 网建立在活动之间制约关系没有矛盾的基础之上，再来分析整个工程至少需要多少时间，或者为了缩短完成整个工程所需时间，应当加快哪些活动。这也是 AOE 网的主要应用场景。</p>
+<h2 id="实现算法">实现算法</h2>
+<p>在 AOE 网中，某些活动可以并行地进行，因此完成工程的最短时间是从源点到汇点的最大路径长度（事件之间耗时最长的活动完成了，才意味着下个事件可以开始，并行的活动并不是可选的，而是都要执行的，这一点需要明确），而找到这条具有最大路径长度的路径，也就找到了关键路径。</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/Graph/image-1572888217265.png" alt="AOE网"></p>
+<p>比如示例 AOE 网，其关键路径是 V1-&gt;V2-&gt;V5-&gt;V7-&gt;V9。</p>
+<p>下面我们来探讨如何用抽象的算法来寻找关键路径，为了方便描述这个算法，需要先定义几个变量：</p>
+<pre><code>事件的最早发生时间 etv，即顶点 Vk 的最早发生时间；
+事件的最晚发生时间 ltv，即顶点 Vk 的最晚发生时间，超出这个时间就会导致整个工程延期；
+活动的最早开始时间 ete，即弧 ak 的最早开始时间；
+活动的最晚开始时间 lte，即弧 ak 的最晚开始时间，也就是不会导致工程延期的最晚开始时间。
+</code></pre>
+<p>要找到关键路径，需要找到所有活动的最早开始时间和最晚开始时间，并且比较它们，如果相等则意味着此活动是关键活动（即弧的权值代表时间被填满），活动间的路径是关键路径，否则不是。</p>
+<p>在上面几个变量中，通过 1、2 可以推导出 3、4，所以，通过 etv[k] 与 ltv[k] 是否相等即可判断 ak 是否是关键活动，对应的路径是否是关键路径。</p>
+<p>下面，我们通过代码来实现上述算法。由于 AOE 网基于 AOV 网之上，只是弧上有权值，所以完全可以基于在拓扑排序中定义的数据结构 DirectedWeightedGraph 类来实现 AOE 网的存储，并且计算所有顶点 etv 的过程，就是对 AOE 网从头到尾进行拓扑排序的过程，只是需要对代码略微做一些调整。</p>
+<p>首先需要为 DirectedWeightedGraph 类新增几个属性：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">protected $etv = [];  // 存储所有顶点最早开始时间
+protected $ltv = [];  // 存储所有顶点最晚开始时间
+</code></pre></div><p>然后修改拓扑排序实现方法 TopologicalSort 代码如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">public function topologicalSort()
+{
+    $stack = [];  // 存放入度为零的顶点（以栈的方式实现）
+    $count = 0;   // 统计输出顶点数
+    $sorted = []; // 存储拓扑排序结果
+    foreach ($this-&gt;vData as $pos =&gt; $data) {
+        $vertex = $this-&gt;getVertex($pos);
+        if ($vertex &amp;&amp; $vertex-&gt;in == 0) {
+            $stack[] = $pos;
+        }
+        $this-&gt;etv[$pos] = 0;  // 初始化 etv
+    }
+    while ($stack) {
+        $start = array_pop($stack);  // 开始顶点
+        $sorted[] = $start;
+        $vertex = $this-&gt;getVertex($start);
+        $count++;
+        $eNode = $vertex-&gt;next;
+        while ($eNode) {
+            $k = $eNode-&gt;data;  // 与起点相邻的顶点
+            $oVertex = $this-&gt;getVertex($k);
+            if (!(--$oVertex-&gt;in)) {  // 「删除」该弧，将对应顶点入度值减1
+                $stack[] = $k;  // 若为0则入栈，以便下次循环输出
+            }
+            // 求各顶点（事件）最早发生时间
+            if ($this-&gt;etv[$start] + $eNode-&gt;weight &gt; $this-&gt;etv[$start]) {
+                $this-&gt;etv[$k] = $this-&gt;etv[$start] + $eNode-&gt;weight;
+            }
+            $eNode = $eNode-&gt;next;
+        }
+    }
+
+    if ($count &lt; $this-&gt;vNum) {
+        return false;   // 存在环
+    }
+
+    return $sorted;
+}
+</code></pre></div><p>有了拓扑排序结果和 etv 数据后，我们接下来来实现关键路径算法，在 DirectedWeightedGraph 类中新增一个 CriticalPath 方法：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">/**
+ * 关键路径
+ */
+public function criticalPath()
+{
+    $sorted = $this-&gt;topologicalSort();
+    for ($i = 0; $i &lt; $this-&gt;vNum; $i++) {
+        $this-&gt;ltv[$i] = $this-&gt;etv[$this-&gt;vNum - 1];  // 初始化 ltv
+    }
+    while ($sorted) {
+        $start = array_pop($sorted);
+        $vertex = $this-&gt;getVertex($start);
+        $eNode = $vertex-&gt;next;
+        while ($eNode) {
+            $k = $eNode-&gt;data;
+            // 求各顶点（事件）最晚发生时间
+            if ($this-&gt;ltv[$k] - $eNode-&gt;weight &lt; $this-&gt;ltv[$start]) {
+                $this-&gt;ltv[$start] = $this-&gt;ltv[$k] - $eNode-&gt;weight;
+            }
+            $eNode = $eNode-&gt;next;
+        }
+    }
+    // 计算关键路径
+    for ($i = 0; $i &lt; $this-&gt;vNum; $i++) {
+        $vNode = $this-&gt;getVertex($i);
+        $eNode = $vNode-&gt;next;
+        while ($eNode) {
+            $k = $eNode-&gt;data;  
+            $ete = $this-&gt;etv[$i];  // 活动最早发生时间
+            $lte = $this-&gt;ltv[$k] - $eNode-&gt;weight;  // 活动最迟发生时间
+            if ($ete == $lte) {     // 两者相等意味着在关键路径上
+                printf(&#34;&lt;<span style="color:#ff79c6">V</span>%<span style="color:#50fa7b">s</span>, <span style="color:#50fa7b">V</span>%<span style="color:#50fa7b">s</span>&gt; length: %d , &#34;,
+                    $vNode-&gt;data, $this-&gt;vData[$eNode-&gt;data], $eNode-&gt;weight);
+            }
+            $eNode = $eNode-&gt;next;
+        }
+    }
+}
+</code></pre></div><p>分析整个关键路径的算法，对于有 n 个顶点和 e 条弧的 AOE 网而言，拓扑排序的时间复杂度是 O(n+e)，计算事件最晚发生时间事件复杂度也是 O(n+e)，最后计算关键路路径的时间复杂度还是 O(n+e)，所以整体的时间复杂度依然是 O(n+e)。</p>
+
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我们的微信公众帐号，在微信公众帐号中回复◉加群◉即可加入到我们的 kubernetes 讨论群里面共同学习。</p>
+<img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/qrcode.png" alt="wechat-account-qrcode">
+
+  
+          
+            <div class="entry-shang text-center">
+    <p>「真诚赞赏，手留余香」</p>
+    <button class="zs show-zs btn btn-bred">赞赏</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+    <div class="zs-modal-head">
+        <button type="button" class="close">×</button>
+        <span class="author"><img src="/img/avatar.jpeg"/>阳明</span>
+        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
+    </div>
+    <div class="zs-modal-body">
+        <div class="zs-modal-btns">
+            <button class="btn btn-blink" data-num="2">2元</button>
+            <button class="btn btn-blink" data-num="5">5元</button>
+            <button class="btn btn-blink" data-num="10">10元</button>
+            <button class="btn btn-blink" data-num="50">50元</button>
+            <button class="btn btn-blink" data-num="100">100元</button>
+            <button class="btn btn-blink" data-num="1">任意金额</button>
+        </div>
+        <div class="zs-modal-pay">
+            <button class="btn btn-bred" id="pay-text">2元</button>
+            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+            <img src="/img/wechat-2.png" id="pay-image"/>
+        </div>
+    </div>
+    <div class="zs-modal-footer">
+        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
+    </div>
+</div>
+          
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
+        
+          
+
+<h3>相关文章</h3>
+<ul style="margin-bottom: 25px;">
+    
+    <li><a href="/algorithms/graph/algorithms-graph-shortestpath/">图(Graph)-最短路径(ShortestPath)</a></li>
+    
+    <li><a href="/algorithms/graph/algorithms-graph-minimumspanningtree/">图(Graph)-最小生成树(MinimumSpanningTree)</a></li>
+    
+    <li><a href="/algorithms/graph/algorithms-graph-traverse/">图(Graph)-遍历</a></li>
+    
+    <li><a href="/algorithms/graph/algorithms-graph-storage/">图(Graph)-存储</a></li>
+    
+    <li><a href="/algorithms/graph/algorithms-graph/">图(Graph)</a></li>
+    
+    <li><a href="/algorithms/binarytree/algorithms-binarytree-huffmantree/">二叉树(BinaryTree)-哈夫曼树(HuffmanTree)</a></li>
+    
+    <li><a href="/algorithms/binarytree/algorithms-binarytree-heap/">二叉树(BinaryTree)-堆(Heap)</a></li>
+    
+    <li><a href="/algorithms/binarytree/algorithms-redblacktree/">二叉树(BinaryTree)-红黑树(Red-Black Tree)</a></li>
+    
+    <li><a href="/algorithms/binarytree/algorithms-binarytree-avl/">二叉树(BinaryTree)-平衡二叉树(AVL)</a></li>
+    
+    <li><a href="/algorithms/binarytree/algorithms-binarytree-search/">二叉树(BinaryTree)-查找</a></li>
+    
+</ul>
+
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="/algorithms/graph/algorithms-graph-shortestpath/" data-toggle="tooltip" data-placement="top" title="图(Graph)-最短路径(ShortestPath)">&larr; 前一篇</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="/algorithms/graph/algorithms-graph-topologicalsort/" data-toggle="tooltip" data-placement="top" title="图(Graph)-拓扑排序(TopologicalSort)">后一篇 &rarr;</a>
+            </li>
+          
+        </ul>
+        
+
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
+        
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+    var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        labels: ['gitment'],
+        title: '图(Graph)-关键路径(CriticalPath)',
+        createIssueManually: true,
+        id: 'Algorithms-Graph-CriticalPath',      
+        distractionFreeMode: true  
+    });
+    gitalk.render('gitalk-container');
+</script>
+
+
+        
+          
+
+        
+  
+      </div>
+    
+    
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          <img src="/img/wechatmp.png" alt="k8s技术圈">
+          
+              <li>
+                <a href="mailto:icnych@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://github.com/cnych" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://weibo.com/cnych" title="微博">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://instagram.com/cnych" title="Instagram">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          
+          <li>
+            <a href="/index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="/">WoolfBreathe</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2021
+        </p>
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
+</script>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script >
+$(document).ready(function() {
+  var int = setInterval(fixCount, 50);  
+  
+  var initPVCount = 584976;
+  var initUVCount = 153191;
+  function fixCount() {                   
+    if ($("#busuanzi_container_site_pv").css("display") != "none") {
+        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
+        clearInterval(int); 
+    }
+    if ($("#busuanzi_container_site_uv").css("display") != "none") {
+      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
+      clearInterval(int); 
+    }  
+  }           
+});
+</script>
+ <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery-migrate@1.2.1/dist/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+$('.carousel').slick({
+    dots: true,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear',
+    centerMode: true,
+    prevArrow: '<button type="button" class="slick-prev"></button>',
+    nextArrow: '<button type="button" class="slick-next"></button>',
+});
+</script>
+
+  </body>
+</html>
+

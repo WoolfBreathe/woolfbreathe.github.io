@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+  <title>Posts-WoolfBreathe</title>
+  <meta property="og:title" content="Posts" />
+  <meta name="twitter:title" content="Posts" />
+
+  <meta name="author" content="WoolfBreathe"/>
+  <link href="/img/favicon.png" rel="icon" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/img/favicon.png"/>
+  <meta property="og:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@username" />
+  <meta name="twitter:creator" content="@username" />
+  <meta property="og:url" content="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="WoolfBreathe" />
+
+  <meta name="generator" content="Hugo 0.68.3" />
+  <link rel="canonical" href="/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="WoolfBreathe">
+
+  
+  
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700%7COpen+Sans:400,700" rel="stylesheet">
+  
+
+  <link rel="stylesheet" href='/css/bundle.min.62de9d30b83723e0d55f82908aedb1c5eb18c910bc24bcf43e530ce754ee1502.css' integrity='sha256-Yt6dMLg3I&#43;DVX4KQiu2xxesYyRC8JLz0PlMM51TuFQI='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
+<meta name="google-site-verification" content="oKxX4fOvB2yYmU02txZFChM93XQbESU4JaG3tNH9Hm8" />
+<meta name="baidu-site-verification" content="F5ojAyqaKU" />
+<meta name="keywords" content="">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d611849735f187dd788dc054908f7d7a";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/" title="WoolfBreathe">
+        <img src="img/avatar-icon.png" style="margin-top: -5px;height: 32px;" alt="WoolfBreathe">
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="首页" href="/">首页</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="归档" href="/archives">归档</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="标签" href="/tags">标签</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于" href="/page/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="RSS" href="/index.xml">RSS</a>
+            </li>
+          
+        
+
+        
+
+        
+
+        
+          <li>
+            <a href="#modalSearch" data-toggle="modal" data-target="#modalSearch" style="outline: none;">
+              <span id="searchGlyph" class="glyphicon glyphicon-search"></span>
+            </a>
+          </li>
+          
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+  <div id="modalSearch" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">搜索</h4>
+        </div>
+        <div class="modal-body">
+            
+<div class="aa-input-container" id="aa-input-container">
+    <input type="search" id="aa-search-input" class="aa-input-search" placeholder="Search for titles or URIs..." name="search" autocomplete="off" />
+    <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
+        <path d="M1806,332c0-123.3-43.8-228.8-131.5-316.5C1586.8-72.2,1481.3-116,1358-116s-228.8,43.8-316.5,131.5  C953.8,103.2,910,208.7,910,332s43.8,228.8,131.5,316.5C1129.2,736.2,1234.7,780,1358,780s228.8-43.8,316.5-131.5  C1762.2,560.8,1806,455.3,1806,332z M2318,1164c0,34.7-12.7,64.7-38,90s-55.3,38-90,38c-36,0-66-12.7-90-38l-343-342  c-119.3,82.7-252.3,124-399,124c-95.3,0-186.5-18.5-273.5-55.5s-162-87-225-150s-113-138-150-225S654,427.3,654,332  s18.5-186.5,55.5-273.5s87-162,150-225s138-113,225-150S1262.7-372,1358-372s186.5,18.5,273.5,55.5s162,87,225,150s113,138,150,225  S2062,236.7,2062,332c0,146.7-41.3,279.7-124,399l343,343C2305.7,1098.7,2318,1128.7,2318,1164z" />
+    </svg>
+</div>
+<script src="/js/algoliasearch.min.js"></script>
+<script src="/js/autocomplete.min.js"></script>
+
+<script>
+var client = algoliasearch("1JDRAS0AZR", "8804ac109158bb3bb60d74ce98fa332f");
+var index = client.initIndex('prod_blog');
+
+autocomplete('#aa-search-input',
+{ hint: false}, {
+    source: autocomplete.sources.hits(index, {hitsPerPage: 5}),
+    
+    displayKey: 'name',
+    
+    templates: {
+        
+        suggestion: function(suggestion) {
+            return '<span>' + '<a href="/post/' + suggestion.slug + '">' +
+            suggestion._highlightResult.title.value + '</a></span>';
+        }
+    }
+});
+</script>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+  <header class="header-section ">
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="page-heading">
+              <h1>Posts</h1>
+              <hr class="small">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+    
+  <div class="container" role="main">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+        <div class="posts-list">
+          
+            <article class="post-preview">
+              <a href="/post/algorithms/binarytree/algorithms-binarytree-huffmantree/">
+                <h2 class="post-title">二叉树(BinaryTree)-哈夫曼树(HuffmanTree)</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-08-26
+              </p>
+              <div class="post-entry">
+                
+                  赫夫曼树 在中小学每年期末考试结束后都会领到成绩单，成绩单上列出我们考试分数的等级，比如优秀（&gt;=90）、良好(&gt;=80)、合格(&gt;=60)、不合格(&lt;60)，以某个班为例，总人数是100人，不同成绩区间的比例如下：
+不考虑效率因素的话，可以这么实现成绩等级判定：
+这种情况下，比例占80%以上的分数都需要经历三次以上的判断才能得到结果，显然不合理，可以对判断逻辑进行改进：
+大部分同学的成绩都在 80 分左右，因此我们判断的逻辑改成了先通过 80 分对成绩进行划分，看起来效率是提升了，这其中的原理是每个分数都要循环调用此逻辑，将 80 分放到入口判断，总体判断次数更少，效率更高。
+这就是赫夫曼树的雏形。显然，上述流程图可以抽象为一棵二叉树，每个等级的人数看作路径权重，
+带权路径长度（权重x路径求和）最小的树叫做 赫夫曼树  把上面两个流程图抽象为带路径权重的二叉树如下：
+二叉树 a 的带权路径长度是 $15+215+340+430+410 = 315$，二叉树 b 的带权路径长度是 $240+35+153+230+102 = 220$，这意味着，对于人数 100 的班级，通过第一种方式要做 315 次比较，对于第二种方式，只需要 220 次比较，显然二叉树 b 比二叉树 a 更优。
+赫夫曼树的构建 当然，上述二叉树 b 还不是赫夫曼树，因为它不是最优的，赫夫曼树的构造方式如下：
+1. 把有权值的节点按照从小到大顺序进行排序：A5、E10、B15、D30、C40； 2. 取最小的两个节点作为某个新节点 N1 的子节点，较小的作为左子结点； 3. 然后将 N1 替代 A5 和 E10，插入上述有序序列，保持从小到大排序：N115、B15、D30、C40； 4. 重复步骤2，将 N1 和 B 作为一个新节点 N2 的左右节点，依次类推，直到把所有节点纳入树中。  最终形成的二叉树如下所示：
+对应的带权路径长度是 $140+230+315+45+4*10 = 205$，对于 100 个学生而言，需要进行 205 次判断。比前面的二叉树 b 更优，同时也是最优的二叉树，所以是赫夫曼树。
+                  <a href="/post/algorithms/binarytree/algorithms-binarytree-huffmantree/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/post/algorithms/binarytree/algorithms-binarytree-heap/">
+                <h2 class="post-title">二叉树(BinaryTree)-堆(Heap)</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-08-26
+              </p>
+              <div class="post-entry">
+                
+                  定义 堆是一种特殊的二叉树，具备以下特性：
+堆是一个完全二叉树 每个节点的值都必须大于等于（或小于等于）其左右孩子节点的值  如果每个节点的值都大于等于左右孩子节点的值，这样的堆叫大顶堆；如果每个节点的值都小于等于左右孩子节点的值，这样的堆叫小顶堆。
+上图中，左侧的堆是大顶堆，右侧的堆是小顶堆，我们还可以得出这个结论：对应大顶堆，堆顶一定是最大值；对于小顶堆，堆顶一定是最小值。
+构建 由于完全二叉树的特殊性，可以通过数组来存储，堆也是完全二叉树，所以我们完全可以通过数组来存储。在使用数组存储堆的时候，把第一个索引位置留空，从第二个索引位置开始存储堆元素，这样，对于索引值为 i 的元素而言，其子节点索引分别为 2i 和 2i+1。
+下面我们就来看如何在堆中插入新节点，以大顶堆为例，从叶子结点插入，如果比父级元素大，则与父级元素交换位置，依次类推，直到到达根节点（小顶堆恰好相反）：
+注：构建堆的过程叫堆化。  构建实现 下面是对应的 PHP 实现代码：
+&lt;?php class Heap { private $a = []; private $n; private $count; public function __construct($capacity = 10) { $this-&gt;n = $capacity; $this-&gt;count = 0; } public function insert($data) { if ($this-&gt;count &gt;= $this-&gt;n) { return false; } $this-&gt;count++; $this-&gt;a[$this-&gt;count] = $data; $i = $this-&gt;count; while (floor($i/2) &gt; 0 &amp;&amp; $this-&gt;a[floor($i/2)] &lt; $this-&gt;a[$i]) { $temp = $this-&gt;a[$i]; $this-&gt;a[$i] = $this-&gt;a[floor($i/2)]; $this-&gt;a[floor($i/2)] = $temp; $i = $i / 2; } return true; } public function __toString() { return json_encode(array_values($this-&gt;a)); } } 打印结果如下，符合堆定义，表明堆构建成功：
+                  <a href="/post/algorithms/binarytree/algorithms-binarytree-heap/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/post/algorithms/binarytree/algorithms-redblacktree/">
+                <h2 class="post-title">二叉树(BinaryTree)-红黑树(Red-Black Tree)</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-08-25
+              </p>
+              <div class="post-entry">
+                
+                  特性和算法复杂度 平衡二叉树是最理想的二叉排序树，性能最好，也最稳定，但是缺点是维护成本高，需要在插入和删除节点时维护新树的平衡性，所以工程实践中，倾向于使用另一种二叉排序树 —— 红黑树.
+什么是红黑树 红黑树（Red-Black Tree）是每个节点都带有颜色属性的二叉排序（查找）树，具备以下特性：
+节点是红色或黑色； 根节点是黑色的； 每个叶子节点都是黑色的空节点（NIL），也就是说，叶子节点不存储数据； 任何相邻的节点都不能同时为红色，也就是说，红色节点是被黑色节点隔开的； 每个节点，从该节点到达其可达叶子节点的所有路径，都包含相同数目的黑色节点；  示例：
+这些约束保证了红黑树的关键特性：从根节点到叶子节点的最长的可能路径不多于最短的可能路径长度的两倍（每条路径红黑相间，且黑色节点数目相同，所以最短的路径上是两个黑色节点，相应的，此时最长路径节点一定是黑-红-黑-红，正好是其两倍），从而保证红黑树无论怎么插入、删除节点大致上也是平衡的。
+红黑树的算法复杂度 由于红黑树的特性，可以确保即使在最差情况下，红黑树也是大致平衡的，下面我们来简单推导下红黑树的时间复杂度。
+前面我们讲二叉排序树的时候说到二叉排序树的时间复杂度和树的高度成正比，红黑树是红黑相间的，我们可以先把红色的节点去掉，剩下的黑色节点就可能变成四叉树了，比如我们上面示例的那个红黑树。由于红黑树每条路径上黑色节点相同，所以可以继续把这个四叉树转化为完全二叉树，假设黑色节点的数量为 m，这样，这棵树的时间复杂度就是 O(logm) 了；然后我们把红色节点塞回来，红色节点的总数目肯定是小于等于黑色节点的，我们不妨假设等于黑色节点，这样，树的高度就增加一倍，对应的时间复杂度就是 2O(logm) 了，m≈n/2，由于在计算时间复杂度的时候，常量可以舍弃，所以红黑树的时间复杂度也是 O(logn)。虽然这里面都是估算的，但是由于前面提到的红黑树的特性约束，数量级上是没问题的。
+为什么工程上大多使用红黑树 红黑树维护成本比平衡二叉树低，性能上也能大致做到 O(logn)，且比较稳定，可以应付最差的情况。
+实现原理 插入节点 红黑树规定，插入的节点必须是红色的。而且，二叉排序（查找）树中新插入的节点都是放在叶子节点上。首先，两种最简单的情况：
+如果插入节点的父节点是黑色的，那我们什么都不用做，它仍然满足红黑树的定义。 如果插入的节点是根节点，那我们直接把它设置为黑色就可以了。  除此之外，其他情况都会违背红黑树的特性，所以我们需要进行动态调整，与平衡二叉树不同，调整的过程除了左右旋转之外，还涉及到节点颜色的调整。
+新节点插入之后，如果红黑树的平衡被打破，那一般会有下面三种情况。我们只需要根据每种情况的特点，不停地调整，就可以让红黑树继续符合定义，也就是继续保持平衡。
+有了前面平衡二叉树的铺垫，相信理解起来红黑树的构建过程将会更加轻松。为了方便表述，我们把正在处理的节点叫关注节点。
+CASE 1：如果关注节点是 a（待插入节点），它的叔叔节点（父亲的兄弟节点，从二叉排序树的角度来说叫伯伯节点更合适？） d 是红色，我们就依次执行下面的操作：
+将关注节点 a 的父节点 b、叔叔节点 d 的颜色都设置成黑色； 将关注节点 a 的祖父节点 c 的颜色设置成红色； 关注节点变成 a 的祖父节点 c； 跳到下面的 CASE 2 或者 CASE 3 继续处理。  CASE 2：如果关注节点是 a，它的叔叔节点 d 是黑色，关注节点 a 是其父节点 b 的右子节点，我们就依次执行下面的操作：
+                  <a href="/post/algorithms/binarytree/algorithms-redblacktree/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/post/algorithms/binarytree/algorithms-binarytree-avl/">
+                <h2 class="post-title">二叉树(BinaryTree)-平衡二叉树(AVL)</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-08-24
+              </p>
+              <div class="post-entry">
+                
+                  引子 二叉排序树，理想情况下，二叉排序树的插入、删除、查找时间复杂度都是 O(logn)，非常高效，而且它是一种动态的数据结构，插入删除性能合查找一样好，不像之前提到的二分查找，虽然查找性能也是 O(logn)，但是需要先对线性表进行排序，二排序的最好时间复杂度也是 O(nlogn)，所以二分查找不适合动态结构的排序。
+但是如果二叉排序树构造的不好的话就会退化成斜树：
+此时按照之前的实现算法性能退化成了 O(n)，所以如何构造二叉排序树很重要，我们的理想情况是满二叉树和完全二叉树，它们的性能都是 O(logn)，所以我们在构造二叉排序树的时候要尽可能像它们靠近，才能得到最佳的操作性能，由此引出平衡二叉树。
+什么是平衡二叉树 平衡二叉树的英文名是 Self-Balancing Binary Search Tree 或者 Height-Balancing Binary Search Tree，译作自平衡的二叉查找树，或者高度平衡的二叉查找树，二叉查找树和二叉排序树是一个意思，只是叫法不同，简称平衡二叉树，也叫 AVL 树（平衡二叉树作者的名字首字母），所以平衡二叉树首先是二叉排序树，并且这个二叉排序树是左右高度平衡的，这么讲有点抽象，具体来说，平衡二叉树要求每个节点的左子树和右子树的高度差至多等于 1，这个高度（深度）差的值叫做平衡因子 BF，也就是说 BF 的值不能大于1，否则就不是平衡二叉树。
+示例：
+图1满足平衡二叉树的定义，是平衡二叉树； 图2所示二叉树不是二叉排序树，所有不是平衡二叉树； 图3不满足平衡因子小于等于1的要求，对58这个节点来说，平衡因子BF的值是3，因而不是平衡二叉树； 图4满足平衡二叉树的定义，是平衡二叉树；  之所以这么约束平衡二叉树，是为了保证它能够始终做到插入、删除、查找的时间复杂度是 O(logn)。
+平衡二叉树的实现原理 平衡二叉树的基本实现思路，是在构建二叉排序树的时候，每插入一个节点，都要检查这个节点的插入是否破坏了原有的平衡性，如果是的话，则找出最小不平衡子树，在保证整体二叉排序树的前提下，通过左旋或者右旋的方式将其调整为平衡子树。从而动态维护这棵平衡二叉树。
+这里面有几个概念需要解释一下：
+1、最小不平衡子树 距离插入节点最近的，且平衡因子绝对值大于 1 的节点为根的子树，叫做最小不平衡子树：
+比如上图中以存储元素 58 的节点为根的子树叫做最小不平衡子树。
+2、左旋/右旋 所谓左旋和右旋指的是最小不平衡子树旋转的方向。
+如果平衡因子小于 -1，即右子树高度值比较大，则需要左旋：
+反之，如果平衡因子大于1，即左子树高度值比较大，则需要右旋：
+当然为了方便你理解原理，我们这里给出的都是最简化的情况，实际处理过程中比这个更复杂，下一篇我们将具体给你演示如何通过代码在各种情况下实现平衡二叉树并讨论对应的时间复杂度。
+演示 一棵二叉树：
+虽然这也是一棵二叉排序树，但是层数达到 8，显然可以通过平衡二叉树来降低层数，提高性能，如果把它转化为平衡二叉树，会是这个样子：
+层数降低了一半，变成了 4 层，显然性能要比之前要高。那么这个平衡二叉树是怎么构建的呢？假设插入节点的顺序是{3,2,1,4,5,6,7,10,9,8}，两个节点之前不用考虑，我们从第三个节点开始分析：
+插入第三个节点 1 时，左子树高度是 2，右子树高度是 0，高度差的绝对值是 2，不符合平衡二叉树的要求，需要把以 3 为根节点的子树进行右旋，到右图那个样子，左右子树高度差为 0，符合平衡二叉树要求，完成调整。同理，插入第四个节点 4 的时候，左右子树高度为 -1，符合平衡二叉树要求，继续插入第五个节点，此时又不符合平衡二叉树的要求了，这个时候右子树比较高，需要左旋：
+旋转的时候以最小不平衡子树为单位，此时最小的不平衡子树是 3、4、5 节点构成的子树，我们以 4 为中心进行左旋，将树结构调整为右图所示的样子，满足了平衡二叉树的要求，停止调整。注意到我们每次新增节点的时候，会调整以每个节点为根节点的左右子树的高度差，然后从最小子树开始进行调整，直到以每个节点为根节点的子树符合平衡二叉树的要求，这样整棵树就符合平衡二叉树的要求了。
+                  <a href="/post/algorithms/binarytree/algorithms-binarytree-avl/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/post/algorithms/binarytree/algorithms-binarytree-search/">
+                <h2 class="post-title">二叉树(BinaryTree)-查找</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-08-23
+              </p>
+              <div class="post-entry">
+                
+                  为什么要引入二叉排序树 前面已经介绍了很多数据结构，比如数组、链表、散列表等，数组查找性能高，但是插入、删除性能差，链表插入、删除性能高，但查找性能差，在不考虑散列冲突的话，散列表的插入、删除、查找性能都很高，但是前提是没有散列冲突，此外，散列表存储的数据是无序的，散列表的扩容非常麻烦，涉及到散列冲突时，性能不稳定，另外，散列表用起来爽，构造起来可不简单，要考虑散列函数的设计、哈希冲突的解决、扩容缩容等一系列问题，有没有一种插入、删除、查找性能都不错，构建起来也不是很复杂，性能还很稳定的数据结构呢？这就要介绍的数据结构 —— 二叉排序树。
+什么是二叉排序树 二叉排序树是一种特殊的二叉树，重点关注 「排序」 二字，二叉排序树要求，在树中的任意一个节点，其左子树中的每个节点的值，都要小于这个节点的值，而右子树节点的值都大于这个节点的值，所以这么看来，二叉排序树是天然有序的，如果按照昨天讲的中序遍历，得到将是一个从小到大的有序数据集。但是构造二叉排序树的目的，并不是为了排序，而是为了提高查找、插入和删除的速度。不管怎么说，在一个有序数据集上查找数据肯定比无序数据集要快，同时二叉排序树这种非线性结构，也非常有利于插入和删除的实现。
+注：二叉排序树也叫做二叉查找树，二叉搜索树，你如果看到类似概念，它们是一个意思。  二叉排序树的插入 首先我们先定义好基本的类结构，还是通过二叉链表来存储二叉排序树，对应的节点类如下：
+class Node { public $data; public $left = null; public $right = null; public function __construct($data) { $this-&gt;data = $data; } } 然后，我们定义下二叉排序树对应类的基本结构：
+class BinarySortedTree { /** * @var Node */ private $tree; public function getTree() { return $this-&gt;tree; } } 然后我们按照二叉排序树的定义，实现对应二叉排序树节点的插入方法：
+// 插入节点数据 public function insert(int $data) { // 如果是空树，则将数据插入到根节点 if (!$this-&gt;tree) { $this-&gt;tree = new Node($data); return; } $p = $this-&gt;tree; while ($p) { if ($data &lt; $p-&gt;data) { if (!
+                  <a href="/post/algorithms/binarytree/algorithms-binarytree-search/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/post/algorithms/binarytree/algorithms-binarytree-traversal/">
+                <h2 class="post-title">二叉树(BinaryTree)-遍历</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-08-22
+              </p>
+              <div class="post-entry">
+                
+                  <p>二叉树的遍历指的是从根节点出发，按照某种次序依次访问二叉树中的所有结点，使得每个结点被访问一次且仅被访问一次。</p>
+<p>有多种方式可以遍历二叉树，如果限制从左到右的习惯方式，主要分为三种：前序遍历、中序遍历和后序遍历。下面我们简单介绍这几种遍历方式及对应实现算法，所谓的前序、中序和后序都是以根节点作为参照系。</p>
+<h2 id="前序遍历">前序遍历</h2>
+<p>如果二叉树为空，则返回空，否则从根节点开始，先遍历左子树，再遍历右子树：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/87eceb3154bc88a58a470e5fb6dff444a9d74a61a6c82ebd842e0d42dc959673.png" alt="前序遍历"></p>
+<h2 id="中序遍历">中序遍历</h2>
+<p>同样，如果是空树，返回空，否则从左子树最左侧的节点开始，然后从左到右依次遍历左子树，真正的根节点，最后是右子树（依然是从最左侧节点开始从左到右的顺序遍历）：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/3bb2338085adc868f5d4548fd9368ddd1d6b7f7dfffb7719aa5cbd20829089f1.png" alt="中序遍历"></p>
+<h2 id="后序遍历">后序遍历</h2>
+<p>如果是空树，返回空，否则还是从左子树最左侧的节点开始，先遍历完叶子节点，再遍历父节点，遍历完左子树后，直接从右子树最左侧节点开始，按照和左子树同样的顺序遍历完右子树，最后访问根节点：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/e72f8a1215fc27864efc60e8daeed22cd2c082db38db7536edd6d351c36745bc.png" alt="后序遍历"></p>
+<p>不同的遍历方式从不同维度将二叉树这种非线性的结构变成了某种意义上的线性序列，从而方便计算机操作。</p>
+<h2 id="遍历实现代码">遍历实现代码</h2>
+<p>二叉树的遍历其实就是个递归的过程，所以对应算法也采用递归来实现。</p>
+<p>我们以二叉链表的方式来存储数组，对应的前序、中序、后序实现代码如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&lt;?php
+
+// 二叉链表节点
+class Node
+{
+    public $data;
+    public $left = null;
+    public $right = null;
+
+    public function __construct($data)
+    {
+        $this-&gt;data = $data;
+    }
+}
+
+/**
+ * 前序遍历
+ * @param Node $tree
+ */
+function preOrderTraverse($tree)
+{
+    if ($tree == null) {
+        return;
+    }
+    printf(&#34;%s\n&#34;, $tree-&gt;data);
+    preOrderTraverse($tree-&gt;left);
+    preOrderTraverse($tree-&gt;right);
+}
+
+/**
+ * 中序遍历
+ * @param Node $tree
+ */
+function midOrderTraverse($tree)
+{
+    if ($tree == null) {
+        return;
+    }
+    midOrderTraverse($tree-&gt;left);
+    printf(&#34;%s\n&#34;, $tree-&gt;data);
+    midOrderTraverse($tree-&gt;right);
+}
+
+/**
+ * 后序遍历
+ * @param Node $tree
+ */
+function postOrderTraverse($tree)
+{
+    if ($tree == null) {
+        return;
+    }
+    postOrderTraverse($tree-&gt;left);
+    postOrderTraverse($tree-&gt;right);
+    printf(&#34;%s\n&#34;, $tree-&gt;data);
+}
+</code></pre></div><p>对应的输出结果如下，表明三种遍历都没有问题：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/77e0e42b813a53dab4fe7ababd0bedce9144f7b4140b50483ab5b8d51101f88b.png" alt="二叉树遍历演示"></p>
+
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/post/algorithms/binarytree/algorithms-binarytree-storage/">
+                <h2 class="post-title">二叉树(BinaryTree)-存储</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-08-21
+              </p>
+              <div class="post-entry">
+                
+                  <p>树这种结构不能简单通过线性表的前后关系来存储，在线性表中，一个节点只有至多一个前驱节点和至多一个后驱节点，树则不然，一个节点可能有多个后驱节点，这个时候，我们需要通过更加复杂的结构才能存储树。二叉树是一种特殊的树，比多叉树要简单，因为特定节点至多只有两个节点，这就极大简化了相应的数据结构，使得通过线性表就可以实现二叉树的存储。我们后面基本只讨论二叉树，下面我们通过数组和链表来演示如何存储二叉树。</p>
+<h1 id="通过数组存储二叉树">通过数组存储二叉树</h1>
+<p>对于特定的二叉树而言，比如满二叉树、完全二叉树，它们的节点之间是有一定关联关系的，以下面这棵完全二叉树为例：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/image-1571818975547.png" alt="完全二叉树"></p>
+<p>按照从上到下，从左到右对所有节点编号，可以看到，下一层的左右子节点和对应父节点序号存在某种数学关系，如果父节点的序号是 i，其对应左子节点位于 2i 的位置上，对应右子节点位于 2i + 1 的位置上，我们可以参照这个规则将上述完全二叉树存储到数组中：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/image-1571819020160.png" alt="数组存储二叉树"></p>
+<p>注意我们的下标从 1 开始（根节点），索引为 0 的下标舍弃，浪费这个空间，以方便计算。这样，我们就可以从根节点开始，依次将所有节点元素存放到数组中，并且可以根据节点间的数学关系很方便地遍历整棵树。此外，由于完全二叉树的特殊性，除了第一个元素之外，该数组不存在任何空间的浪费。由于满二叉树是完全二叉树的子集，所以也可以通过这种方式来存储。</p>
+<p>那么其它二叉树呢？当然也可以按照这种思路来做，我们把不存在的节点补全，比如假设上述序号为 4、6、8、9 的元素不存在：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/image-1571819069689.png" alt="二叉树存储"></p>
+<p>可以看到，不存在的元素补上，只是对应位置值为 null，缺失的节点越多，数组的「空洞」也就越多，如果是极端情况，比如二叉树只包含 1、3、7 三个元素，那么数组中将会存在大量的「空洞」，浪费大量的空间，而且也会影响性能。</p>
+<p>综上，数组适合满二叉树、完全二叉树这些特殊二叉树的存储，一些比较稠密的二叉树也可以用数组，如果二叉树比较稀疏就不适合用数组了，我们可以通过链表来存储它们。</p>
+<h1 id="通过链表存储二叉树">通过链表存储二叉树</h1>
+<p>理论上来说，链表适用于所有的二叉树存储，只不过这里我们需要对线性表中的链表进行扩展，因为二叉树特定节点最多有两个子节点，所有我们在链表结点上设置两个指针域，分别指向左右子节点，所以这种链表结构又被称作二叉链表。我们可以通过一个类表示二叉链表的结点：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">class Node
+{
+    public $data;
+    public $left = null;
+    public $right = null;
+
+    public function __construct($data)
+    {
+        $this-&gt;data = $data;
+    }
+}
+</code></pre></div><p>如果要用二叉链表表示上面的完全二叉树，对应的图示如下：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/image-1571819153229.png" alt="链表存储二叉树"></p>
+<p>不管是什么样结构的二叉树，用链表来存储都不会存在空间的浪费。关于二叉树的创建、查找和删除，需要等到介绍完二叉树的遍历才能开始，下一篇我们就来探讨如何遍历二叉树。</p>
+
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/post/algorithms/binarytree/algorithms-binarytree/">
+                <h2 class="post-title">二叉树(BinaryTree)</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-08-20
+              </p>
+              <div class="post-entry">
+                
+                  <h1 id="树的相关概念">树的相关概念</h1>
+<p>树的相关概念</p>
+<p>树这种数据结构模拟了自然界中树的概念，自然界中的树有根、叶子、枝干，数据结构中的树也是如此，只不过是倒过来的：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/image-1571818138580.png" alt="二叉树图示"></p>
+<p>其中的每个元素叫做<strong>节点</strong>。树的顶点（没有父元素的节点）叫<strong>根节点</strong>，如 E；每个分支的末端节点（没有子元素的节点）叫<strong>叶子节点</strong>，如 G、H、I、J、K、L；用来连接相邻节点之间的关系叫父子关系，比如 E 是 A、F 的父节点，A、F 是 E 的<strong>子节点</strong>；具有同一个父节点的多个子节点叫做兄弟节点，比如 A、F 是<strong>兄弟节点</strong>。</p>
+<p>节点拥有的子节点数目叫做节点的<strong>度</strong>，显然，叶子节点的度为 0，树的度是树内各节点度的最大值。</p>
+<p>除此之外，树还有高度、深度和层的概念：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/image-1571818206467.png" alt="树的高度、深度和层"></p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/image-1571818238752.png" alt="树的高度、深度和层"></p>
+<pre><code>注：其实线性表也可以看作一种特殊的树，只不过所有节点都在一个分支上，第一个元素是根节点，最后一个元素是子节点，没有兄弟节点。层数就是线性表的长度。
+</code></pre>
+<p>另外，也有些地方将二叉树的深度定义为结点的最大层次数，比如《大话数据结构》就是这样定义的，这个问题不大，完全就是个定义而已：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/Jietu20200330-211806.jpg" alt="二叉树的深度"></p>
+<p>多个互不相交的树可以构成森林。</p>
+<h1 id="二叉树的定义">二叉树的定义</h1>
+<p>二叉树是平时遇到的最常见的树结构，它是一种特殊的树，顾名思义，就是每个节点最多有两个「分叉」，即两个子节点，分别是左子节点和右子节点，不过，二叉树并不要求每个节点都有两个子节点，有的节点只有左子结点，有的节点只有右子节点。比如下面这些都是二叉树：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/image-1571818363331.png" alt="二叉树"></p>
+<p>根据左右子节点的饱和度，我们又从二叉树中提取出两种特殊的二叉树 —— 满二叉树和完全二叉树。满二叉树即所有分支节点都有左右子节点，并且所有叶子节点都在同一层上，如上面的图2便是满二叉树。完全二叉树要复杂一些，深度为 k 有 n 个节点的二叉树，当且仅当其中的每一节点，都可以和同样深度 k 的满二叉树，序号为 1 到 n 的节点一对一对应时，称为完全二叉树，比如上面的图3就是完全二叉树。</p>
+<h1 id="二叉树的特性">二叉树的特性</h1>
+<p>在讨论二叉树的创建和存储之前，我们先来总结下二叉树的一些特性，以便后续用到（这里二叉树数的深度定义采用的最大层次数，如果从 0 开始计算的话，可以自行推演一下）：</p>
+<p><strong>性质1：</strong></p>
+<p>在第 i 层最多有 $2^{i-1}$ 个节点。</p>
+<p><strong>性质2：</strong></p>
+<p>深度为 k 的二叉树最多有 $2^k-1$ 个节点。</p>
+<p><strong>性质3：</strong></p>
+<p>对于任何一个二叉树，叶子节点数为 n0，度为 2 的节点数为 n2，则 n0 = n2+1。</p>
+<p><strong>性质4：</strong></p>
+<p>具有n个节点的完全二叉树深为 $\log_2 x + 1$（其中x表示不大于n的最大整数）。</p>
+<p><strong>性质5：</strong></p>
+<p>若对一棵有n个节点的完全二叉树进行顺序编号（1≤i≤n），那么，对于编号为i（i≥1）的节点：
+当i=1时，该节点为根，它无双亲节点 。
+当i&gt;1时，该节点的双亲节点的编号为i/2 。
+若2i≤n，则有编号为2的左孩子，否则没有左孩子 。
+若2+1≤n，则有编号为2i+1的右孩子，否则没有右孩子 。</p>
+
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/post/algorithms/stringmatching/algorithms-stringmatching-kmp/">
+                <h2 class="post-title">字符串匹配-KMP</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-08-18
+              </p>
+              <div class="post-entry">
+                
+                  简介 KMP 算法可以说是字符串匹配算法中最知名的算法了，KMP 算法是根据三位作者（D.E.Knuth，J.H.Morris 和 V.R.Pratt）的名字来命名的，算法的全称是 Knuth Morris Pratt 算法，简称为 KMP 算法。
+原理 假设主串是 a，模式串是 b。在模式串与主串匹配的过程中，当遇到不可匹配的字符的时候，我们希望找到一些规律，可以将模式串往后多滑动几位，跳过那些肯定不会匹配的情况，从而避免 BF 算法这种暴力匹配，提高算法性能。下面我们来探讨下这个规律如何找到。
+参考下面个主串和模式串的匹配，当模式串移动到当前位置，比对到最后一个字符 D 时，发现与主串不匹配，如果按照 BF 算法，就是把模式串往后移一位，再逐个比较，这样做固然可以，但是效率很差：
+一个基本事实是，当 D 与主串不匹配时，我们已知前面的主串序列是 ABCDA，如果把模式串往后移一位肯定和主串不匹配，我们可不可以直接把模式串移到下一个可能和 A 匹配的主串位置？
+实际上，KMP 算法正是基于这一理念，设法利用这个已知信息，不把模式串移到已经比较过的位置，继续把它向后移，这样综合下来就极大提高了搜索匹配效率。
+怎么找到这个规律，确定把模式串往后移多少位呢？在模式串和主串匹配的过程中，我们把不能匹配的那个字符仍然叫作「坏字符」，把已经匹配的那段字符串叫作「好前缀」：
+在模式串和主串匹配的过程中，当遇到坏字符后，对于已经比对过的好前缀，我们只需要拿好前缀本身，在它的后缀子串中，查找最长的那个可以跟好前缀的前缀子串匹配的下标位置，然后将模式串后移到该位置即可。
+这里，我们要解释几个概念：
+后缀子串：以某个字符串最后一个字符为尾字符的子串（不包含字符串自身），比如上面的 ababa，后缀子串为 baba、aba、ba、a； 前缀子串：以某个字符串第一个字符为首字符的子串（不包含字符串自身），还是以 ababa 为例，前缀子串为 a、aba、abab； 最长可匹配后缀子串：后缀子串与前缀子串最长可匹配子串，也可叫做共有子串，以 ababa 为例，自然是 aba 了，长度为 3； 最长可匹配前缀子串：与上面定义相对，即前缀子串与后缀子串最长可匹配子串。最长可匹配前缀子串和最长可匹配后缀子串肯定是一样的。  假设坏字符所在位置是 j，最长可匹配后缀子串长度为 k，则模式串需要后移的位数为 j-k。每当我们遇到坏字符，就将模式串后移 j-k 位，直到模式串与对应主串字符完全匹配；如果移到最后还是不匹配，则返回 -1。这就是 KMP 算法的核心思想。
+KMP 算法的实现 了解了核心思想，接下来，就可以考虑如何实现 KMP 算法了，实现 KMP 算法最核心的部分是构建一个用来存储模式串中每个前缀子串（这些前缀都有可能是好前缀）最长可匹配前缀子串的结尾字符下标数组，我们把这个数组叫做 next 数组，对于上面 ababacd 这个模式串而言，对应的 next 数组如下：
+                  <a href="/post/algorithms/stringmatching/algorithms-stringmatching-kmp/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                  
+                    #<a href="/tags/stringmatching/">StringMatching</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/post/algorithms/stringmatching/algorithms-stringmatching-trie/">
+                <h2 class="post-title">字符串匹配-Trie</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-08-18
+              </p>
+              <div class="post-entry">
+                
+                  定义 Trie 树，也叫「前缀树」或「字典树」，顾名思义，它是一个树形结构，专门用于处理字符串匹配，用来解决在一组字符串集合中快速查找某个字符串的问题。
+注：Trie 这个术语来自于单词「retrieval」，你可以把它读作 tree，也可以读作 try。  Trie 树的本质，就是利用字符串之间的公共前缀，将重复的前缀合并在一起，比如有[&ldquo;hello&rdquo;,&ldquo;her&rdquo;,&ldquo;hi&rdquo;,&ldquo;how&rdquo;,&ldquo;seo&rdquo;,&ldquo;so&rdquo;] 这个字符串集合，可以将其构建成下面这棵 Trie 树：
+每个节点表示一个字符串中的字符，从根节点到红色节点的一条路径表示一个字符串（红色节点表示是某个单词的结束字符，但不一定都是叶子节点）。
+这样，就可以通过遍历这棵树来检索是否存在待匹配的字符串了，比如要在这棵 Trie 树中查询 her，只需从 h 开始，依次往下匹配，在子节点中找到 e，然后继续匹配子节点，在 e 的子节点中找到 r，则表示匹配成功，否则匹配失败。通常，可以通过 Trie 树来构建敏感词或关键词匹配系统。
+实现 从刚刚 Trie 树的介绍来看，Trie 树主要有两个操作，一个是将字符串集合构造成 Trie 树。这个过程分解开来的话，就是一个将字符串插入到 Trie 树的过程。另一个是在 Trie 树中查询一个字符串。
+Trie 树是个多叉树，二叉树中，一个节点的左右子节点是通过两个指针来存储的，对于多叉树来说，怎么存储一个节点的所有子节点的指针呢？
+将 Trie 树的每个节点抽象为一个节点对象，对象包含的属性有节点字符、子节点引用和是否是字符串结束字符标志位：
+class TrieNode { public $data; // 节点字符 public $children = []; // 存放子节点引用（因为有任意个子节点，所以靠数组来存储） public $isEndingChar = false; // 是否是字符串结束字符 public function __construct($data) { $this-&gt;data = $data; } } 要构造一棵完整的 Trie 树，关键在于存储子节点引用的 $children 属性的实现。借助散列表的思想，通过一个下标与字符一一映射的数组，来构造 $children：将字符串中每个字符转化为 ASCII 码作为数组下标，将对应节点对象引用作为数组值，依次插入所有字符串，从而构造出 Trie 树。对应 PHP 实现代码如下：
+                  <a href="/post/algorithms/stringmatching/algorithms-stringmatching-trie/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                  
+                    #<a href="/tags/stringmatching/">StringMatching</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/post/algorithms/stringmatching/algorithms-stringmatching-bf/">
+                <h2 class="post-title">字符串匹配-BF(暴力匹配算法)</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-08-17
+              </p>
+              <div class="post-entry">
+                
+                  <h1 id="原理">原理</h1>
+<p>最简单的字符串匹配算法 —— BF 算法说起，BF 是 Brute Force 的缩写，中文译作暴力匹配算法，也叫朴素匹配算法。</p>
+<p>BF 算法的原理很简单，在继续介绍之前，我们先引入两个术语：主串和模式串。简单来说，我们要在字符串 A 中查找子串 B，那么 A 就是主串，B 就是模式串。</p>
+<p>作为最简单、最暴力的字符串匹配算法，BF 算法的思想可以用一句话来概括，那就是，如果主串长度为 n，模式串长度为 m，我们在主串中检查起始位置分别是 0、1、2…n-m 且长度为 m 的 n-m+1 个子串，看有没有跟模式串匹配的。图示如下：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/StringMatching/1b463b1483d77731af561b5748d5eefa9568c11566c3f54624771e6f2c2ab128.png" alt="BF算法图示"></p>
+<p>结合上图，具体来说，就是每次拿模式串和主串对齐，然后从左到右依次比较每个字符，如果出现不相等，则把模式串往后移一个位置，再次重复上述步骤，直到模式串每个字符与对应主串位置字符都相等，则返回主串对应下标，表示找到，否则返回 -1，表示没找到。</p>
+<p>这个算法很好理解，因为这就是我们正常都能想到的暴力匹配，BF 算法的时间复杂度最差是 O(n*m)，意味着要模式串要移到主串 n-m 的位置上，并且模式串每个字符都要与子串比较。</p>
+<p>尽管 BF 算法复杂度看起来很高，但是在日常开发中，如果主串和模式串规模不大的话，该算法依然比较常用，因为足够简单，实现起来容易，不容易出错。另外，在规模不大的情况下，开销也可以接受，毕竟 O(n*m) 是最差的表现，大部分时候，执行效率比这个都要高。</p>
+<p>但是对于对时间要求比较敏感，或者需要高频匹配，数据规模较大的情况下，比如编辑器中的匹配功能、敏感词匹配系统等，BF 算法就不适用了。</p>
+
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                  
+                    #<a href="/tags/stringmatching/">StringMatching</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/post/algorithms/datastructures/algorithms-datastructures-hashtable/">
+                <h2 class="post-title">数据结构-散列表(HashTable, 哈希表)</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-08-16
+              </p>
+              <div class="post-entry">
+                
+                  散列表(HashTable, 哈希表) 散列表（HashTable，也叫哈希表），是根据键（Key）直接访问在内存存储位置的数据结构。
+其实现原理是：通过散列函数（也叫哈希函数）将元素的键映射为数组下标（转化后的值叫做散列值或哈希值），然后在对应下标位置存储记录值。按照键值查询元素时，就是用同样的散列函数，将键值转化数组下标，从对应的数组下标的位置取数据：
+散列表用的是数组支持按照下标随机访问数据的特性，所以散列表其实就是数组的一种扩展，由数组演化而来。可以说，如果没有数组，就没有散列表。而 PHP 的关联数组干脆就是基于散列表实现。
+散列技术既是一种存储方法，也是一种查找方法。与之前的查找方法不同的是散列技术的记录之间不存在逻辑关系，因此主要是面向查找的数据结构。最适合求解的问题是查找给定值相等的记录。
+散列表中有两个关键的概念，一个是散列函数（或者哈希函数），一个是散列冲突（或者哈希冲突）。
+散列函数 散列函数用于将键值经过处理后转化为散列值。具有以下特性：
+散列函数计算得到的散列值是非负整数 如果 key1 == key2，则 hash(key1) == hash(key2) 如果 key1 != key2，则 hash(key1) != hash(key2)  散列冲突 所谓散列冲突，简单来说，指的是 key1 != key2 的情况下，通过散列函数处理，hash(key1) == hash(key2)，这个时候，发生了散列冲突。设计再好的散列函数也无法避免散列冲突，原因是散列值是非负整数，总量是有限的，但是现实世界中要处理的键值是无限的，将无限的数据映射到有限的集合，肯定避免不了冲突。
+事实上，如果不考虑散列冲突，散列表的查找效率是非常高的，时间复杂度是 O(1)，比二分查找效率还要高，但是因为无法避免散列冲突，所以散列表查找的时间复杂度取决于散列冲突，最坏的情况可能是 O(n)，退化为顺序查找。这种情况在散列函数设计不合理的情况下更糟。
+散列函数设计 $arr[&lsquo;test&rsquo;] = 123 这段代码，PHP 底层会将键值 test 通过散列函数转化为散列码，然后将 123 映射到这个散列码上。在不考虑哈希冲突的情况下，散列表查找、删除、插入的时间复杂度都是 O(1)，非常高效。
+要减少哈希冲突，提高散列表操作效率，设计一个优秀的散列函数至关重要，平时经常使用的 md5 函数就是一个散列函数，但是其实还有其他很多自定义的设计实现，要根据不同场景，设计不同的散列函数来减少散列冲突，而且散列函数本身也要很简单，否则执行散列函数本身会成为散列表的瓶颈。日常很少会自己去设计散列函数，但是做一些简单的了解还是有必要的。
+通常有以下几种散列函数构造方法：
+直接定址法：即 f(key) = a*key + b，f 表示散列函数，a、b 是常量，key 是键值 数字分析法：即对数字做左移、右移、反转等操作获取散列值 除数留余法：即 f(key) = key % p，p 表示容器数量，这种方式通常用在将数据存放到指定容器中，如何决定哪个数据放到哪个容器，比如分表后插入数据如何处理（此时 p 表示拆分后数据表的数量），分布式 Redis 如何存放数据（此时 p 表示几台 Redis 服务器） 随机数法：即 f(key) = random(key)，比如负载均衡的 random 机制  以上只是一些比较场景的散列函数设计思路，还有很多其他的设计方法，这里就不一一列举了。
+                  <a href="/post/algorithms/datastructures/algorithms-datastructures-hashtable/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+        </div>
+        
+          <ul class="pager main-pager">
+            
+              <li class="previous">
+                <a href="page/3">&larr; 上一页</a>
+              </li>
+            
+            
+              <li class="next">
+                <a href="page/5">下一页 &rarr;</a>
+              </li>
+            
+          </ul>
+        
+      </div>
+    </div>
+  </div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          <img src="/img/wechatmp.png" alt="k8s技术圈">
+          
+          <li>
+            <a href="mailto:icnych@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://github.com/cnych" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://weibo.com/cnych" title="微博">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://instagram.com/cnych" title="Instagram">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="/%20index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+          
+          <a href="/">WoolfBreathe</a>
+          
+          
+
+          &nbsp;&bull;&nbsp;
+          2021
+        </p>
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a
+            href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a
+            href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script> renderMathInElement(document.body); </script>
+<script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
+</script>
+<script>
+  (function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+
+  </body>
+</html>
+

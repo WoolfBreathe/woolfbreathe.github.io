@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+  <title>图(Graph)-存储-WoolfBreathe</title>
+  <meta property="og:title" content="图(Graph)-存储" />
+  <meta name="twitter:title" content="图(Graph)-存储" />
+
+  <meta name="description" content="图的存储 由于图这种数据结构比较复杂，单纯的数组和链表已经无法表示了，需要通过更复杂的结构来存储。
+两种存储图的方式，一种是基于数组，一种是基于链表，但是不是简单的数组和链表，下面我们就一起来看看到底是如何存储图的。
+邻接矩阵 显然，通过一维数组是无法存储图的，因为图包含顶点和边，而且每个顶点都可能与其他顶点有关联，所以我们通过两个数组来存储图：一个一维数组用于存储所有顶点，一个二维数组来存储连接顶点的边/弧，边或弧连接的是两个顶点，所以需要二维数组来存储。我们把这种存储图的方式叫做邻接矩阵。
+说概念很抽象，下面我们通过实例来演示，对于无向图而言，由于边没有方向，所以存储无向图边的二维数组是一个对称矩阵（矩阵是一个数学概念，一个 m x n 的矩阵是一个由 m 行 n 列元素排列成的矩形阵列）：
+对于有向图而言，由于边是有方向的，我们将二维数组中指向某个顶点的元素值设置为 1，否则设置为 0，比如下面 v1v0 为 1，而 v0v1 为 0（注意存储顺序，先横后纵，横向表示某个顶点的出度，纵向表示某个顶点的入度）：
+对于带权的有向图，要更复杂一些，在存储弧的二维数组中，相邻的顶点对应元素值等于权重（入度），自己指向自己的对应元素值为 0，否则等于无穷大（∞）：
+对于邻接矩阵而言，初始化的时间复杂度等于边数组构建的复杂度，对于有 n 个顶点的图而言，时间复杂度是 O(n^2)，空间复杂度也是如此，而且如果图比较稀疏的话（稀疏图），边数组会存在巨大的空间浪费。但是优点是实现起来非常简单，对于稠密图或者非常简单的图来说，用邻接矩阵是比较方便的。
+邻接表 既然稀疏图用邻接矩阵存储不合适，那要怎么存储呢？有了前面的数据结构基础，我们很容易会联想到基于链表替代边数组来存储边，这样就可以避免对空间的浪费了。这种存储方式还是通过一个一维数组来存储顶点，只是将边/弧通过链表来表示，我们把这种存储方式叫做邻接表。
+对于无向图来说，通过邻接表来存储，可以这么实现：
+每个顶点上通过 data 保存数据，通过 firstedge 指向第一个邻接顶点，指向节点上 adjvex 存储的是对应顶点的数组下标，如果该顶点有多个邻接顶点，可以通过 next 指向下一个邻接顶点，如果没有的话，则将对应指针设置为空。
+对于有向图来说，原理也是类似，只不过有向图的边有方向而已，链表指针指向基于出度，所以很容易计算出某个顶点的出度：
+显然，邻接表的构建时间复杂度要比邻接矩阵好，对于一个有 n 个顶点和 e 条边的图而言，时间复杂度是 O(n&#43;e)，而且不存在任何空间的浪费，比较高效，可用于存储任何图。
+但邻接表也不是十全十美，对于有向图来说，如果要计算某个顶点的入度，需要遍历整个图才能实现，要解决这个问题，我们可以通过逆邻接表来实现。所谓逆邻接表，就是和邻接表相反，指针指向基于入度，比如上面这个有向图，我们可以这样通过逆邻接表来构建：
+对于有权重的有向图（网图），还要通过一个额外的 weight 域来存储权重：
+代码示例 创建链表类 LinkedList 及对应的节点类 Node：
+/*** Class Node* 链表节点类*/class Node{public $data;/*** @var Node*/public $next;public function __construct($data = null){$this-&gt;data = $data;}}/*** Class LinkedList* 链表类*/class LinkedList{private $head = null;private $count = 0;public function __construct(){$emptyNode = new Node();$this-&gt;head = $emptyNode;}public function insert($data){if ($this-&gt;head == null) {return;}$newNode = new Node($data);$newNode-&gt;next = $this-&gt;head-&gt;next;$this-&gt;head-&gt;next = $newNode;$this-&gt;count&#43;&#43;;}public function remove(Node $node){if ($node == null) {return false;}$preNode = $this-&gt;pre($node);$preNode-&gt;next = $node-&gt;next;$this-&gt;count--;}public function get($index){if ($index &gt;= $this-&gt;count) {return false;}$node = $this-&gt;head-&gt;next;$i = 0;while ($node) {if ($i == $index) {return $node;} else {$node = $node-&gt;next;$i&#43;&#43;;}}return false;}public function pre(Node $node){if ($node == null) {return false;}$preNode = $this-&gt;head;$curNode = $this-&gt;head-&gt;next;while ($curNode) {if ($curNode === $node) {return $preNode;} else {$preNode = $curNode;$curNode = $preNode-&gt;next;}}return false;}public function getSize(){return $this-&gt;count;}public function __toString(){$node = $this-&gt;head-&gt;next;$arr = [];$i = 0;while ($node) {$arr[] = &#39;Node[&#39; .">
+  <meta property="og:description" content="图的存储 由于图这种数据结构比较复杂，单纯的数组和链表已经无法表示了，需要通过更复杂的结构来存储。
+两种存储图的方式，一种是基于数组，一种是基于链表，但是不是简单的数组和链表，下面我们就一起来看看到底是如何存储图的。
+邻接矩阵 显然，通过一维数组是无法存储图的，因为图包含顶点和边，而且每个顶点都可能与其他顶点有关联，所以我们通过两个数组来存储图：一个一维数组用于存储所有顶点，一个二维数组来存储连接顶点的边/弧，边或弧连接的是两个顶点，所以需要二维数组来存储。我们把这种存储图的方式叫做邻接矩阵。
+说概念很抽象，下面我们通过实例来演示，对于无向图而言，由于边没有方向，所以存储无向图边的二维数组是一个对称矩阵（矩阵是一个数学概念，一个 m x n 的矩阵是一个由 m 行 n 列元素排列成的矩形阵列）：
+对于有向图而言，由于边是有方向的，我们将二维数组中指向某个顶点的元素值设置为 1，否则设置为 0，比如下面 v1v0 为 1，而 v0v1 为 0（注意存储顺序，先横后纵，横向表示某个顶点的出度，纵向表示某个顶点的入度）：
+对于带权的有向图，要更复杂一些，在存储弧的二维数组中，相邻的顶点对应元素值等于权重（入度），自己指向自己的对应元素值为 0，否则等于无穷大（∞）：
+对于邻接矩阵而言，初始化的时间复杂度等于边数组构建的复杂度，对于有 n 个顶点的图而言，时间复杂度是 O(n^2)，空间复杂度也是如此，而且如果图比较稀疏的话（稀疏图），边数组会存在巨大的空间浪费。但是优点是实现起来非常简单，对于稠密图或者非常简单的图来说，用邻接矩阵是比较方便的。
+邻接表 既然稀疏图用邻接矩阵存储不合适，那要怎么存储呢？有了前面的数据结构基础，我们很容易会联想到基于链表替代边数组来存储边，这样就可以避免对空间的浪费了。这种存储方式还是通过一个一维数组来存储顶点，只是将边/弧通过链表来表示，我们把这种存储方式叫做邻接表。
+对于无向图来说，通过邻接表来存储，可以这么实现：
+每个顶点上通过 data 保存数据，通过 firstedge 指向第一个邻接顶点，指向节点上 adjvex 存储的是对应顶点的数组下标，如果该顶点有多个邻接顶点，可以通过 next 指向下一个邻接顶点，如果没有的话，则将对应指针设置为空。
+对于有向图来说，原理也是类似，只不过有向图的边有方向而已，链表指针指向基于出度，所以很容易计算出某个顶点的出度：
+显然，邻接表的构建时间复杂度要比邻接矩阵好，对于一个有 n 个顶点和 e 条边的图而言，时间复杂度是 O(n&#43;e)，而且不存在任何空间的浪费，比较高效，可用于存储任何图。
+但邻接表也不是十全十美，对于有向图来说，如果要计算某个顶点的入度，需要遍历整个图才能实现，要解决这个问题，我们可以通过逆邻接表来实现。所谓逆邻接表，就是和邻接表相反，指针指向基于入度，比如上面这个有向图，我们可以这样通过逆邻接表来构建：
+对于有权重的有向图（网图），还要通过一个额外的 weight 域来存储权重：
+代码示例 创建链表类 LinkedList 及对应的节点类 Node：
+/*** Class Node* 链表节点类*/class Node{public $data;/*** @var Node*/public $next;public function __construct($data = null){$this-&gt;data = $data;}}/*** Class LinkedList* 链表类*/class LinkedList{private $head = null;private $count = 0;public function __construct(){$emptyNode = new Node();$this-&gt;head = $emptyNode;}public function insert($data){if ($this-&gt;head == null) {return;}$newNode = new Node($data);$newNode-&gt;next = $this-&gt;head-&gt;next;$this-&gt;head-&gt;next = $newNode;$this-&gt;count&#43;&#43;;}public function remove(Node $node){if ($node == null) {return false;}$preNode = $this-&gt;pre($node);$preNode-&gt;next = $node-&gt;next;$this-&gt;count--;}public function get($index){if ($index &gt;= $this-&gt;count) {return false;}$node = $this-&gt;head-&gt;next;$i = 0;while ($node) {if ($i == $index) {return $node;} else {$node = $node-&gt;next;$i&#43;&#43;;}}return false;}public function pre(Node $node){if ($node == null) {return false;}$preNode = $this-&gt;head;$curNode = $this-&gt;head-&gt;next;while ($curNode) {if ($curNode === $node) {return $preNode;} else {$preNode = $curNode;$curNode = $preNode-&gt;next;}}return false;}public function getSize(){return $this-&gt;count;}public function __toString(){$node = $this-&gt;head-&gt;next;$arr = [];$i = 0;while ($node) {$arr[] = &#39;Node[&#39; .">
+  <meta name="twitter:description" content="图的存储 由于图这种数据结构比较复杂，单纯的数组和链表已经无法表示了，需要通过更复杂的结构来存储。
+两种存储图的方式，一种是基于数组，一种是基于链表，但是不是简单的数组和链表，下面我们就一起来看看到底是如何存储图的。
+邻接矩阵 显然，通过一维数组是无法存储图的，因为图包含顶点和边，而且每个顶点都可能与其他顶点有关联，所以我们通过两个数组来存储图：一个一维数组用于存储所有顶点，一个二维数组来存储连接 …">
+  <meta name="author" content="WoolfBreathe"/>
+  <link href="/img/favicon.png" rel="icon" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/img/favicon.png"/>
+  <meta property="og:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@username" />
+  <meta name="twitter:creator" content="@username" />
+  <meta property="og:url" content="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="WoolfBreathe" />
+
+  <meta name="generator" content="Hugo 0.68.3" />
+  <link rel="canonical" href="/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="WoolfBreathe">
+
+  
+  
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700%7COpen+Sans:400,700" rel="stylesheet">
+  
+
+  <link rel="stylesheet" href='/css/bundle.min.62de9d30b83723e0d55f82908aedb1c5eb18c910bc24bcf43e530ce754ee1502.css' integrity='sha256-Yt6dMLg3I&#43;DVX4KQiu2xxesYyRC8JLz0PlMM51TuFQI='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
+<meta name="google-site-verification" content="oKxX4fOvB2yYmU02txZFChM93XQbESU4JaG3tNH9Hm8" />
+<meta name="baidu-site-verification" content="F5ojAyqaKU" />
+<meta name="keywords" content="Algorithms, Graph">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d611849735f187dd788dc054908f7d7a";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/" title="WoolfBreathe">
+        <img src="img/avatar-icon.png" style="margin-top: -5px;height: 32px;" alt="WoolfBreathe">
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="首页" href="/">首页</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="归档" href="/archives">归档</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="标签" href="/tags">标签</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于" href="/page/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="RSS" href="/index.xml">RSS</a>
+            </li>
+          
+        
+
+        
+
+        
+
+        
+          <li>
+            <a href="#modalSearch" data-toggle="modal" data-target="#modalSearch" style="outline: none;">
+              <span id="searchGlyph" class="glyphicon glyphicon-search"></span>
+            </a>
+          </li>
+          
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+  <div id="modalSearch" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">搜索</h4>
+        </div>
+        <div class="modal-body">
+            
+<div class="aa-input-container" id="aa-input-container">
+    <input type="search" id="aa-search-input" class="aa-input-search" placeholder="Search for titles or URIs..." name="search" autocomplete="off" />
+    <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
+        <path d="M1806,332c0-123.3-43.8-228.8-131.5-316.5C1586.8-72.2,1481.3-116,1358-116s-228.8,43.8-316.5,131.5  C953.8,103.2,910,208.7,910,332s43.8,228.8,131.5,316.5C1129.2,736.2,1234.7,780,1358,780s228.8-43.8,316.5-131.5  C1762.2,560.8,1806,455.3,1806,332z M2318,1164c0,34.7-12.7,64.7-38,90s-55.3,38-90,38c-36,0-66-12.7-90-38l-343-342  c-119.3,82.7-252.3,124-399,124c-95.3,0-186.5-18.5-273.5-55.5s-162-87-225-150s-113-138-150-225S654,427.3,654,332  s18.5-186.5,55.5-273.5s87-162,150-225s138-113,225-150S1262.7-372,1358-372s186.5,18.5,273.5,55.5s162,87,225,150s113,138,150,225  S2062,236.7,2062,332c0,146.7-41.3,279.7-124,399l343,343C2305.7,1098.7,2318,1128.7,2318,1164z" />
+    </svg>
+</div>
+<script src="/js/algoliasearch.min.js"></script>
+<script src="/js/autocomplete.min.js"></script>
+
+<script>
+var client = algoliasearch("1JDRAS0AZR", "8804ac109158bb3bb60d74ce98fa332f");
+var index = client.initIndex('prod_blog');
+
+autocomplete('#aa-search-input',
+{ hint: false}, {
+    source: autocomplete.sources.hits(index, {hitsPerPage: 5}),
+    
+    displayKey: 'name',
+    
+    templates: {
+        
+        suggestion: function(suggestion) {
+            return '<span>' + '<a href="/post/' + suggestion.slug + '">' +
+            suggestion._highlightResult.title.value + '</a></span>';
+        }
+    }
+});
+</script>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/20200317190406.png" ></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="Algorithms-heading">
+                <h1>图(Graph)-存储</h1>
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="Algorithms-heading">
+              <h1>图(Graph)-存储</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+  </header>
+
+
+    
+
+
+
+<div class="container" role="main">
+  <div class="row">
+
+    
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div>
+            
+            
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="/tags/algorithms/">Algorithms</a> &nbsp;
+              
+                  <a href="/tags/graph/">Graph</a> &nbsp;
+              
+            </h5>
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+          
+            
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <h1 id="图的存储">图的存储</h1>
+<p>由于图这种数据结构比较复杂，单纯的数组和链表已经无法表示了，需要通过更复杂的结构来存储。</p>
+<p>两种存储图的方式，一种是基于数组，一种是基于链表，但是不是简单的数组和链表，下面我们就一起来看看到底是如何存储图的。</p>
+<h2 id="邻接矩阵">邻接矩阵</h2>
+<p>显然，通过一维数组是无法存储图的，因为图包含顶点和边，而且每个顶点都可能与其他顶点有关联，所以我们通过两个数组来存储图：一个一维数组用于存储所有顶点，一个二维数组来存储连接顶点的边/弧，边或弧连接的是两个顶点，所以需要二维数组来存储。我们把这种存储图的方式叫做邻接矩阵。</p>
+<p>说概念很抽象，下面我们通过实例来演示，对于无向图而言，由于边没有方向，所以存储无向图边的二维数组是一个对称矩阵（矩阵是一个数学概念，一个 m x n 的矩阵是一个由 m 行 n 列元素排列成的矩形阵列）：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/Graph/image-1572532373655.png" alt="矩阵"></p>
+<p>对于有向图而言，由于边是有方向的，我们将二维数组中指向某个顶点的元素值设置为 1，否则设置为 0，比如下面 v1v0 为 1，而 v0v1 为 0（注意存储顺序，先横后纵，横向表示某个顶点的出度，纵向表示某个顶点的入度）：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/Graph/image-1572532460648.png" alt="设置矩阵顶点值"></p>
+<p>对于带权的有向图，要更复杂一些，在存储弧的二维数组中，相邻的顶点对应元素值等于权重（入度），自己指向自己的对应元素值为 0，否则等于无穷大（∞）：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/Graph/image-1572532518484.png" alt="设置矩阵权重值"></p>
+<p>对于邻接矩阵而言，初始化的时间复杂度等于边数组构建的复杂度，对于有 n 个顶点的图而言，时间复杂度是 O(n^2)，空间复杂度也是如此，而且如果图比较稀疏的话（稀疏图），边数组会存在巨大的空间浪费。但是优点是实现起来非常简单，对于稠密图或者非常简单的图来说，用邻接矩阵是比较方便的。</p>
+<h2 id="邻接表">邻接表</h2>
+<p>既然稀疏图用邻接矩阵存储不合适，那要怎么存储呢？有了前面的数据结构基础，我们很容易会联想到基于链表替代边数组来存储边，这样就可以避免对空间的浪费了。这种存储方式还是通过一个一维数组来存储顶点，只是将边/弧通过链表来表示，我们把这种存储方式叫做邻接表。</p>
+<p>对于无向图来说，通过邻接表来存储，可以这么实现：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/Graph/image-1572532569383.png" alt="设置矩阵权重值"></p>
+<p>每个顶点上通过 data 保存数据，通过 firstedge 指向第一个邻接顶点，指向节点上 adjvex 存储的是对应顶点的数组下标，如果该顶点有多个邻接顶点，可以通过 next 指向下一个邻接顶点，如果没有的话，则将对应指针设置为空。</p>
+<p>对于有向图来说，原理也是类似，只不过有向图的边有方向而已，链表指针指向基于出度，所以很容易计算出某个顶点的出度：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/Graph/image-1572532654272.png" alt="顶点出度"></p>
+<p>显然，邻接表的构建时间复杂度要比邻接矩阵好，对于一个有 n 个顶点和 e 条边的图而言，时间复杂度是 O(n+e)，而且不存在任何空间的浪费，比较高效，可用于存储任何图。</p>
+<p>但邻接表也不是十全十美，对于有向图来说，如果要计算某个顶点的入度，需要遍历整个图才能实现，要解决这个问题，我们可以通过逆邻接表来实现。所谓逆邻接表，就是和邻接表相反，指针指向基于入度，比如上面这个有向图，我们可以这样通过逆邻接表来构建：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/Graph/image-1572532680470.png" alt="逆邻接表"></p>
+<p>对于有权重的有向图（网图），还要通过一个额外的 weight 域来存储权重：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/Graph/image-1572532702543.png" alt="带权重的邻接表"></p>
+<h2 id="代码示例">代码示例</h2>
+<p>创建链表类 LinkedList 及对应的节点类 Node：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">/**
+ * Class Node
+ * 链表节点类
+ */
+class Node
+{
+    public $data;
+    /**
+     * @var Node
+     */
+    public $next;
+
+    public function __construct($data = null)
+    {
+        $this-&gt;data = $data;
+    }
+}
+
+/**
+ * Class LinkedList
+ * 链表类
+ */
+class LinkedList
+{
+    private $head = null;
+    private $count = 0;
+
+    public function __construct()
+    {
+        $emptyNode = new Node();
+        $this-&gt;head = $emptyNode;
+    }
+
+    public function insert($data)
+    {
+        if ($this-&gt;head == null) {
+            return;
+        }
+        $newNode = new Node($data);
+        $newNode-&gt;next = $this-&gt;head-&gt;next;
+        $this-&gt;head-&gt;next = $newNode;
+        $this-&gt;count++;
+    }
+
+    public function remove(Node $node)
+    {
+        if ($node == null) {
+            return false;
+        }
+        $preNode = $this-&gt;pre($node);
+        $preNode-&gt;next = $node-&gt;next;
+        $this-&gt;count--;
+    }
+
+    public function get($index)
+    {
+        if ($index &gt;= $this-&gt;count) {
+            return false;
+        }
+        $node = $this-&gt;head-&gt;next;
+        $i = 0;
+        while ($node) {
+            if ($i == $index) {
+                return $node;
+            } else {
+                $node = $node-&gt;next;
+                $i++;
+            }
+        }
+        return false;
+    }
+
+    public function pre(Node $node)
+    {
+        if ($node == null) {
+            return false;
+        }
+        $preNode = $this-&gt;head;
+        $curNode = $this-&gt;head-&gt;next;
+        while ($curNode) {
+            if ($curNode === $node) {
+                return $preNode;
+            } else {
+                $preNode = $curNode;
+                $curNode = $preNode-&gt;next;
+            }
+        }
+        return false;
+    }
+
+    public function getSize()
+    {
+        return $this-&gt;count;
+    }
+
+    public function __toString()
+    {
+        $node = $this-&gt;head-&gt;next;
+        $arr = [];
+        $i = 0;
+        while ($node) {
+            $arr[] = &#39;Node[&#39; . $i . &#39;]:data=&gt;&#39; . $node-&gt;data . &#39;,next=&gt;&#39; . json_encode($node-&gt;next);
+            $i++;
+            $node = $node-&gt;next;
+        }
+        return implode(&#34;\n&#34;, $arr);
+    }
+}
+</code></pre></div><p>定义一个 Graph 类通过邻接表来存储图：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">/**
+ * Class Graph
+ * 通过邻接表存储图
+ */
+class Graph
+{
+    private $v;  # 顶点个数
+    /**
+     * @var LinkedList[]
+     */
+    private $adj = [];  # 邻接表
+    private $found = false;
+
+    public function __construct(int $v)
+    {
+        $this-&gt;v = $v;
+        for ($i = 0; $i &lt; $v; $i++) {
+            $this-&gt;adj[$i] = new LinkedList();
+        }
+    }
+
+    // 无向图同一条边要存两次
+    public function addEdge($s, $t)
+    {
+        $this-&gt;adj[$s] = $t;
+        $this-&gt;adj[$t] = $s;
+    }
+    
+}
+</code></pre></div>
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我们的微信公众帐号，在微信公众帐号中回复◉加群◉即可加入到我们的 kubernetes 讨论群里面共同学习。</p>
+<img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/qrcode.png" alt="wechat-account-qrcode">
+
+  
+          
+            <div class="entry-shang text-center">
+    <p>「真诚赞赏，手留余香」</p>
+    <button class="zs show-zs btn btn-bred">赞赏</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+    <div class="zs-modal-head">
+        <button type="button" class="close">×</button>
+        <span class="author"><img src="/img/avatar.jpeg"/>阳明</span>
+        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
+    </div>
+    <div class="zs-modal-body">
+        <div class="zs-modal-btns">
+            <button class="btn btn-blink" data-num="2">2元</button>
+            <button class="btn btn-blink" data-num="5">5元</button>
+            <button class="btn btn-blink" data-num="10">10元</button>
+            <button class="btn btn-blink" data-num="50">50元</button>
+            <button class="btn btn-blink" data-num="100">100元</button>
+            <button class="btn btn-blink" data-num="1">任意金额</button>
+        </div>
+        <div class="zs-modal-pay">
+            <button class="btn btn-bred" id="pay-text">2元</button>
+            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+            <img src="/img/wechat-2.png" id="pay-image"/>
+        </div>
+    </div>
+    <div class="zs-modal-footer">
+        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
+    </div>
+</div>
+          
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
+        
+          
+
+<h3>相关文章</h3>
+<ul style="margin-bottom: 25px;">
+    
+    <li><a href="/algorithms/graph/algorithms-graph/">图(Graph)</a></li>
+    
+    <li><a href="/algorithms/binarytree/algorithms-binarytree-huffmantree/">二叉树(BinaryTree)-哈夫曼树(HuffmanTree)</a></li>
+    
+    <li><a href="/algorithms/binarytree/algorithms-binarytree-heap/">二叉树(BinaryTree)-堆(Heap)</a></li>
+    
+    <li><a href="/algorithms/binarytree/algorithms-redblacktree/">二叉树(BinaryTree)-红黑树(Red-Black Tree)</a></li>
+    
+    <li><a href="/algorithms/binarytree/algorithms-binarytree-avl/">二叉树(BinaryTree)-平衡二叉树(AVL)</a></li>
+    
+    <li><a href="/algorithms/binarytree/algorithms-binarytree-search/">二叉树(BinaryTree)-查找</a></li>
+    
+    <li><a href="/algorithms/binarytree/algorithms-binarytree-traversal/">二叉树(BinaryTree)-遍历</a></li>
+    
+    <li><a href="/algorithms/binarytree/algorithms-binarytree-storage/">二叉树(BinaryTree)-存储</a></li>
+    
+    <li><a href="/algorithms/binarytree/algorithms-binarytree/">二叉树(BinaryTree)</a></li>
+    
+    <li><a href="/algorithms/stringmatching/algorithms-stringmatching-kmp/">字符串匹配-KMP</a></li>
+    
+</ul>
+
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="/algorithms/graph/algorithms-graph/" data-toggle="tooltip" data-placement="top" title="图(Graph)">&larr; 前一篇</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="/algorithms/graph/algorithms-graph-traverse/" data-toggle="tooltip" data-placement="top" title="图(Graph)-遍历">后一篇 &rarr;</a>
+            </li>
+          
+        </ul>
+        
+
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
+        
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+    var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        labels: ['gitment'],
+        title: '图(Graph)-存储',
+        createIssueManually: true,
+        id: 'Algorithms-Graph-Storage',      
+        distractionFreeMode: true  
+    });
+    gitalk.render('gitalk-container');
+</script>
+
+
+        
+          
+
+        
+  
+      </div>
+    
+    
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          <img src="/img/wechatmp.png" alt="k8s技术圈">
+          
+              <li>
+                <a href="mailto:icnych@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://github.com/cnych" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://weibo.com/cnych" title="微博">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://instagram.com/cnych" title="Instagram">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          
+          <li>
+            <a href="/index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="/">WoolfBreathe</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2021
+        </p>
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
+</script>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script >
+$(document).ready(function() {
+  var int = setInterval(fixCount, 50);  
+  
+  var initPVCount = 584976;
+  var initUVCount = 153191;
+  function fixCount() {                   
+    if ($("#busuanzi_container_site_pv").css("display") != "none") {
+        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
+        clearInterval(int); 
+    }
+    if ($("#busuanzi_container_site_uv").css("display") != "none") {
+      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
+      clearInterval(int); 
+    }  
+  }           
+});
+</script>
+ <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery-migrate@1.2.1/dist/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+$('.carousel').slick({
+    dots: true,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear',
+    centerMode: true,
+    prevArrow: '<button type="button" class="slick-prev"></button>',
+    nextArrow: '<button type="button" class="slick-next"></button>',
+});
+</script>
+
+  </body>
+</html>
+

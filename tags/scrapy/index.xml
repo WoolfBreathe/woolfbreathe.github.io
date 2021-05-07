@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Scrapy on WoolfBreathe</title>
+    <link>/tags/scrapy/</link>
+    <description>Recent content in Scrapy on WoolfBreathe</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <managingEditor>youremail@domain.com (WoolfBreathe)</managingEditor>
+    <webMaster>youremail@domain.com (WoolfBreathe)</webMaster>
+    <lastBuildDate>Tue, 16 Jul 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/scrapy/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Scrapy</title>
+      <link>/post/computerlanguages/python/computerlanguages-python-scrapy/</link>
+      <pubDate>Tue, 16 Jul 2019 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/computerlanguages/python/computerlanguages-python-scrapy/</guid>
+      <description>安装 服务器系统： Centos7.2
+准备工作： 编译前准备其他库的安装(使用sudo命令)
+yum -y groupinstall &amp;#34;Development tools&amp;#34; 3.7版本需要一个新的包libffi-devel，安装此包之后再次进行编译安装即可。
+yum install libffi-devel zlib zlib-devel gcc gcc-c++ wget -y 升级openssh和openssl 旧版本openssl1.0.2k 新版本openssl1.1.1 备份(重要)
+mv /usr/bin/openssl /usr/bin/openssl.old mv /usr/include/openssl /usr/include/openssl.old mv /usr/lib/libssl.so.1.0.1e /usr/lib/libssl.so.1.0.1e.old mv /usr/lib/libcrypto.so.1.0.1e /usr/lib/libcrypto.so.1.0.1e.old 下载主程序
+wget https://www.openssl.org/source/openssl-1.1.1.tar.gz 解压缩
+tar zxvf openssl-1.1.1.tar.gz 配置程序安装目录
+cd opensll-1.1.1 ./config shared zlib --prefix=/usr/local/openssl --openssldir=/usr/local/openssl/ssl 显示配置数据
+perl configdata.pm --dump 编译安装
+make -j 4 &amp;amp;&amp;amp; make install 查看新安装版本
+cd /usr/local/openssl/bin ./openssl version -a 此处显示错误，说明找到不libssl.so.1.1库
+./openssl: error while loading shared libraries: libssl.</description>
+    </item>
+    
+  </channel>
+</rss>

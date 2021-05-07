@@ -197,60 +197,38 @@ autocomplete('#aa-search-input',
         <div class="posts-list">
           
             <article class="post-preview">
-              <a href="/post/2015-02-26-flake-it-till-you-make-it/">
-                <h2 class="post-title">Flake it till you make it</h2>
+              <a href="/post/devops/linux/devops-linux-timedatectl/">
+                <h2 class="post-title">Linux使用Timedatectl修改时区和时间</h2>
 
-                
-                  <h3 class="post-subtitle">
-                    Excerpt from Soulshaping by Jeff Brown
-                  </h3>
                 
               </a>
 
               <p class="post-meta">
-                发表于 2015-02-26
+                发表于 2020-02-18
               </p>
               <div class="post-entry">
                 
-                  Under what circumstances should we step off a path? When is it essential that we finish what we start? If I bought a bag of peanuts and had an allergic reaction, no one would fault me if I threw it out. If I ended a relationship with a woman who hit me, no one would say that I had a commitment problem. But if I walk away from a seemingly secure route because my soul has other ideas, I am a flake?
-                  <a href="/post/2015-02-26-flake-it-till-you-make-it/" class="post-read-more">[阅读全文]</a>
-                
-              </div>
+                  <h1 id="timedatectl常见操作">Timedatectl常见操作</h1>
+<p>1.查看当前时间/日期/时区：timedatectl或者 timedatectl status</p>
+<p>2.查看所有可用时区：timedatectl list-timezones</p>
+<p>3.设置时区：timedatectl set-timezone “Asia/Shanghai”   或者  timedatectl set-timezone PRC</p>
+<p>4.设置时间：timedatectl set-time HH:MM:SS</p>
+<p>5.设置日期：timedatectl set-time YYYY-MM-DD</p>
+<p>6.设置日期时间：timedatectl set-time “YYYY-MM-DD HH:MM:SS”</p>
+<p>7.设置硬件时钟为本地时间：timedatectl set-local-rtc 1</p>
+<p>8.设置硬件时钟为UTC时间：timedatectl set-local-rtc 0</p>
+<p>9.启动NTP时间同步（启用NTP服务或者Chrony服务）：timedatectl set-ntp true</p>
+<p>10.禁用NTP时间同步：timedatectl set-ntp false</p>
 
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="/post/2015-02-20-test-markdown/">
-                <h2 class="post-title">Test markdown</h2>
-
-                
-                  <h3 class="post-subtitle">
-                    Each post also has a subtitle
-                  </h3>
-                
-              </a>
-
-              <p class="post-meta">
-                发表于 2015-02-20
-              </p>
-              <div class="post-entry">
-                
-                  You can write regular markdown here and Hugo will automatically convert it to a nice webpage. I strongly encourage you to take 5 minutes to learn how to write in markdown - it&rsquo;ll teach you how to transform regular text into bold/italics/headings/tables/etc.
-Here is some bold text
-Here is a secondary heading Here&rsquo;s a useless table:
-   Number Next number Previous number     Five Six Four   Ten Eleven Nine   Seven Eight Six   Two Three One    How about a yummy crepe?
-                  <a href="/post/2015-02-20-test-markdown/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
               
                 <span class="post-meta">
                   
-                    #<a href="/tags/example/">example</a>&nbsp;
+                    #<a href="/tags/devops/">DevOps</a>&nbsp;
                   
-                    #<a href="/tags/markdown/">markdown</a>&nbsp;
+                    #<a href="/tags/linux/">Linux</a>&nbsp;
                   
                 </span>
               
@@ -258,47 +236,450 @@ Here is a secondary heading Here&rsquo;s a useless table:
             </article>
           
             <article class="post-preview">
-              <a href="/post/2015-02-13-hamlet-monologue/">
-                <h2 class="post-title">To be</h2>
+              <a href="/post/devops/linux/devops-linux-zabbix/">
+                <h2 class="post-title">Linux安装Zabbix</h2>
 
-                
-                  <h3 class="post-subtitle">
-                    ... or not to be?
-                  </h3>
                 
               </a>
 
               <p class="post-meta">
-                发表于 2015-02-13
+                发表于 2020-01-09
               </p>
               <div class="post-entry">
                 
-                  To be, or not to be&ndash;that is the question: Whether &lsquo;tis nobler in the mind to suffer The slings and arrows of outrageous fortune Or to take arms against a sea of troubles And by opposing end them. To die, to sleep&ndash; No more&ndash;and by a sleep to say we end The heartache, and the thousand natural shocks That flesh is heir to. &lsquo;Tis a consummation Devoutly to be wished. To die, to sleep&ndash; To sleep&ndash;perchance to dream: ay, there&rsquo;s the rub, For in that sleep of death what dreams may come When we have shuffled off this mortal coil, Must give us pause.
-                  <a href="/post/2015-02-13-hamlet-monologue/" class="post-read-more">[阅读全文]</a>
+                  Zabbix简介 　Zabbix 是一个基于 WEB 界面的提供分布式系统监视以及网络监视功能的企业级的开源解决方案。Zabbix 能监视各种网络参数，保证服务器系统的安全运营；并提供灵活的通知机制以让系统管理员快速定位解决存在的各种问题。
+　Zabbix支持多种网络方式下的监控，可以通过分布式的部署和安装监控代理Zabbix，通过C/S模式采集数据，通过B/S模式在Web端展示和配置。Zabbix Agent监控端口10050。
+(1). Zabbix的主要特点
+　安装配置简单，学习成本低，支持多语言（包括中文），免费开源，自动发现服务器与网络设备分布式监视，Web集中管理，可以无agent监视，用户安全认证和柔软的授权方式，通过Web设置或查看监视结果，email等功能。
+(2). Zabbix的主要功能
+　监控CPU负载、内存使用、磁盘使用、网络状态、端口监控、日志监控、插件开发自定义
+(3). Zabbix运行机制
+　Zabbix由Zabbix server与可选组件Zabbix agent两部分组成。
+　Zabbix Server 可以通过 SNMP，Zabbix agent，Ping，端口监视等方法提供对远程服务器/网络状态的监视，数据收集功能，可以在运行 Linux，Solaris，HP-UX，AIX，FreeBSD，OpenBSD，OS X，Windows多平台。
+　Zabbix Agent 安装在需要被监控的目标服务器上，主要完成对硬件信息与操作系统有关的内存，CPU 等信息收集。
+　Zabbix Server可以单独监视远程服务器的服务状态，同时也可以与Zabbix Agent结合。可以轮询Zabbix Agent主动接收监视数据（trapping传递 方式），同时还可以被动接收Zabbix Agent发送的数据。
+(4). 准备安装包和部署环境
+　注意：日志文件在/tmp/目录下。
+　下载Zabbix的源码包：https://www.Zabbix.com/download_sources。注意下，下载提供了两种版本：LTS版和标准版。LTS是长期支持（Long Term Support）的缩写，Zabbix将为客户提供5年的支持服务。前三年完全支持与后两年有限制支持。前三年包括一般、关键、安全性问题解决，后两年包括关键、安全性问题解决。超出时间不提供技术支持服务；标准版只提供6+1月支持。
+　现在自己电脑上的C:\Windows\Fonts目录下查看是否存在微软雅黑字体，如果有上传一份（ttf格式），如果没有网上下载微软雅黑字体的ttf格式文件。
+　Zabbix自带了数据库导入包，其中包括ibm_db2、mysql、oracle、postgresql和sqlite3。但是Web界面只提供了PHP。所以这里选择在LNMP环境下部署。
+(5). Zabbix监控端部署
+　主机名：web-test　IP地址：192.168.0.101　环境：LNMP（Mysql5.7.19、PHP7.2.24）
+　在Zabbix监控服务器上部署Zabbix Server和Zabbix Agent（监控本身）。
+　监控数据记录在mysql中
+Zabbix Serve安装 下载 (1).
+                  <a href="/post/devops/linux/devops-linux-zabbix/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/devops/">DevOps</a>&nbsp;
+                  
+                    #<a href="/tags/linux/">Linux</a>&nbsp;
+                  
+                </span>
               
 
             </article>
           
             <article class="post-preview">
-              <a href="/post/2015-01-27-dear-diary/">
-                <h2 class="post-title">Dear diary</h2>
+              <a href="/post/devops/database/devops-linux-mysql-utilities/">
+                <h2 class="post-title">Centos7.X下编译安装MySQL Utilities</h2>
 
                 
               </a>
 
               <p class="post-meta">
-                发表于 2015-01-27
+                发表于 2020-01-08
               </p>
               <div class="post-entry">
                 
-                  What is it with that Mary girl? Dragging me to school every day. As if I had a choice. What you don&rsquo;t hear in those nursery rhymes is that she starves me if I don&rsquo;t go to school with her; it&rsquo;s the only way I can stay alive! I&rsquo;m thinking about being adopted by Little Bo Peep, sure I may get lost, but anything is better than being with Mary and those little brats at school (shudder, shudder).
-                  <a href="/post/2015-01-27-dear-diary/" class="post-read-more">[阅读全文]</a>
+                  简介 MySQL Utilities是MySQL官方提供的mysql管理辅助工具，工具非常之多，其功能组件：
+Binary Log Operations(二进制日志操作) mysqlbinlogmove 二进制日志移动 mysqlbinlogpurge 二进制日志清理 mysqlbinlogrotate 二进制日志老化工具 Database Operations(数据库操作) mysqldbexport 数据导出 mysqldbimport 数据导入 mysqldbcopy 库级别数据库复制 mysqldiff 数据库对象级别比较工具 mysqldbcompare 数据库库级别比较工具 General Operations(通用用的操作) mysqldiskusage 磁盘空间查看 mysqlfrm 恢复故障表.frm文件 mysqluserclone 用户克隆工具 mysqluc Utilities帮助工具 mysqlindexcheck 索引检测工具 mysqlmetagrep 元数据过滤器 mysqlprocgrep 进程搜索及清理工具 High Availability Operations(高可用) mysqlreplicate 主从复制工具 mysqlrpladmin 主从复制管理工具 mysqlrplcheck 主从复制检测工具 mysqlrplms 主从多元复制工具 mysqlrplshow 主从复制拓扑图工具 mysqlrplsync 主从复制同步工具 mysqlfailover 主从failover工具 mysqlslavetrx 从库事务跳过工具 Server Operations(服务器操作) mysqlserverinfo 服务器信息查看工具 mysqlserverclone 服务器克隆工具 Specialized Operations(特殊操作) mysqlauditadmin 审计管理工具 mysqlauditgrep 审计日志过滤工具 下载安装 [root@centos7 ~]# wget https://downloads.
+                  <a href="/post/devops/database/devops-linux-mysql-utilities/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/devops/">DevOps</a>&nbsp;
+                  
+                    #<a href="/tags/mysql/">MySQL</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/post/common/common-version/">
+                <h2 class="post-title">语义化版本</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2020-01-07
+              </p>
+              <div class="post-entry">
+                
+                  摘要 版本格式：主版本号.次版本号.修订号，版本号递增规则如下：
+ 主版本号：当你做了不兼容的 API 修改， 次版本号：当你做了向下兼容的功能性新增， 修订号：当你做了向下兼容的问题修正。  先行版本号及版本编译元数据可以加到“主版本号.次版本号.修订号”的后面，作为延伸。
+简介 在软件管理的领域里存在着被称作“依赖地狱”的死亡之谷，系统规模越大，加入的包越多，你就越有可能在未来的某一天发现自己已深陷绝望之中。
+在依赖高的系统中发布新版本包可能很快会成为噩梦。如果依赖关系过高，可能面临版本控制被锁死的风险（必须对每一个依赖包改版才能完成某次升级）。而如果依赖关系过于松散，又将无法避免版本的混乱（假设兼容于未来的多个版本已超出了合理数量）。当你专案的进展因为版本依赖被锁死或版本混乱变得不够简便和可靠，就意味着你正处于依赖地狱之中。
+作为这个问题的解决方案之一，我提议用一组简单的规则及条件来约束版本号的配置和增长。这些规则是根据（但不局限于）已经被各种封闭、开放源码软件所广泛使用的惯例所设计。为了让这套理论运作，你必须先有定义好的公共 API 。这可以透过文件定义或代码强制要求来实现。无论如何，这套 API 的清楚明了是十分重要的。一旦你定义了公共 API，你就可以透过修改相应的版本号来向大家说明你的修改。考虑使用这样的版本号格式：X.Y.Z （主版本号.次版本号.修订号）修复问题但不影响API 时，递增修订号；API 保持向下兼容的新增及修改时，递增次版本号；进行不向下兼容的修改时，递增主版本号。
+我称这套系统为“语义化的版本控制”，在这套约定下，版本号及其更新方式包含了相邻版本间的底层代码和修改内容的信息。
+语义化版本控制规范（SemVer） 以下关键词 MUST、MUST NOT、REQUIRED、SHALL、SHALL NOT、SHOULD、SHOULD NOT、 RECOMMENDED、MAY、OPTIONAL 依照 RFC 2119 的叙述解读。（译注：为了保持语句顺畅， 以下文件遇到的关键词将依照整句语义进行翻译，在此先不进行个别翻译。）
+  使用语义化版本控制的软件必须（MUST）定义公共 API。该 API 可以在代码中被定义或出现于严谨的文件内。无论何种形式都应该力求精确且完整。
+  标准的版本号必须（MUST）采用 X.Y.Z 的格式，其中 X、Y 和 Z 为非负的整数，且禁止（MUST NOT）在数字前方补零。X 是主版本号、Y 是次版本号、而 Z 为修订号。每个元素必须（MUST）以数值来递增。例如：1.9.1 -&gt; 1.10.0 -&gt; 1.11.0。
+  标记版本号的软件发行后，禁止（MUST NOT）改变该版本软件的内容。任何修改都必须（MUST）以新版本发行。
+  主版本号为零（0.y.z）的软件处于开发初始阶段，一切都可能随时被改变。这样的公共 API 不应该被视为稳定版。
+  1.
+                  <a href="/post/common/common-version/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/common/">Common</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/post/computerlanguages/php/computerlanguages-php-phppackage/">
+                <h2 class="post-title">PHP扩展包开发</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2020-01-05
+              </p>
+              <div class="post-entry">
+                
+                  现代PHP 现代化的 PHP 开发离不开 Composer、它的诞生也离不开 GitHub，基于它，可以非常方便的管理项目的依赖，有效的进行依赖的版本控制以用版本更新。
+现有的诸多优秀的开源项目大都是基于其它开源项目的，很少有独立开发的，正所谓站在巨人的肩膀上，才能看得更高。比如 Laravel，它就是一个非常典型的基于很多优秀第三方扩展包的模块化开发框架，它的很多核心功能都是基于另外一系列 Symfony 组件 之上构建的。
+日常开发中经常要与非常多优秀的扩展包打交道，比如图片处理包 intervention/image、单元测试框架 PHPUnit、还有非常强大的日期处理类 Carbon、日志处理 Monolog 等等太多太多。
+PHP 扩展包 **PHP 原生扩展
+PHP 原生扩展（PHP Native Extension），通常指基于 C/C++ 语言开发的对 PHP 语言的扩展，需要编译安装，比如最常使用的 phpredis、GD、MySQL、cURL 扩展等，这里有一个 PHP 的扩展列表。
+**PHP 扩展包
+PHP 扩展包（PHP Package）或者 PHP 包，通常指用 PHP 代码编写的代码包。它通常是一些特定功能的封装，比如 Intervention/image，它是基于 PHP 图像处理库 GD/Imagick 实现的图像处理功能包，具有非常强大且优雅的图片处理 API，可以非常便捷的基于它完成常规的图片操作，简化开发工作。
+PHP 扩展包结构说明 weather/ ├── .editorconfig # 编辑器配置文件，比如缩进大小、换行模式等 ├── .gitattributes # git 配置文件，可以设计导出时忽略文件等 ├── .gitignore # git 忽略文件配置列表 ├── .php_cs # PHP-CS-Fixer 配置文件 ├── README.
+                  <a href="/post/computerlanguages/php/computerlanguages-php-phppackage/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/php/">PHP</a>&nbsp;
+                  
+                    #<a href="/tags/laravel/">Laravel</a>&nbsp;
+                  
+                    #<a href="/tags/phppackage/">PHPPackage</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/post/devops/database/devops-mysql/">
+                <h2 class="post-title">Linux安装MySQL</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-12-29
+              </p>
+              <div class="post-entry">
+                
+                  Mysql搭建 1.下载二进制包(Linux-Generic 线上环境一般用二进制包) 解压到目录 /usr/local/mysql  2.增加执行路径 export PATH=/usr/local/mysql/bin:$PATH 3.创建用户 groupadd -r mysql &amp;&amp; useradd -g mysql -s /sbin/nologin mysql 4.安装数据库 /usr/local/mysql/script/mysql_install_db --user=mysql --basedir=/usr/local/mysql --datadir=/mysqldata/node1 /usr/local/mysql/bin/mysqld --initialize --user=mysql --basedir=/usr/local/mysql --datadir=/data/mysql 5.修改配置并启动 /usr/local/mysql/bin/mysqld_safe --defaults-file=/usr/local/mysql/cnf/my.cnf &amp; 6.创建用户并分配权限 删除多余用户 删除test数据库
+select user,host,password from mysql.user; delete from msyql.user where user=&#39;&#39;; delete from mysql.user where host&lt;&gt;&#39;localhost&#39;; # set password for root@&#39;localhost&#39;=password(&#39;123456&#39;); alter user &#39;test&#39;@&#39;localhost&#39; identified by &#39;123&#39;; flush privileges; 7.停止数据库 /usr/local/mysql/bin/mysqladmin --socket=/data/mysql/mysql.sock shutdown -p Mysql在线升级 1.
+                  <a href="/post/devops/database/devops-mysql/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/devops/">DevOps</a>&nbsp;
+                  
+                    #<a href="/tags/mysql/">MySQL</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/post/devops/linux/devops-linux-nginx/">
+                <h2 class="post-title">Linux安装Nginx源码包</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-12-29
+              </p>
+              <div class="post-entry">
+                
+                  依赖库安装 安装 gcc 环境 sudo yum -y install gcc gcc-c++ # nginx 编译时依赖 gcc 环境 安装 pcre sudo yum -y install pcre pcre-devel # 让 nginx 支持重写功能 安装 zlib # zlib 库提供了很多压缩和解压缩的方式，nginx 使用 zlib 对 http 包内容进行 gzip 压缩 sudo yum -y install zlib zlib-devel 安装 openssl # 安全套接字层密码库，用于通信加密 sudo yum -y install openssl openssl-devel Nginx 源码包安装 Nginx官方下载
+sudo tar -zxvf nginx-1.11.5.tar.gz # 解压缩 生成 makefile 文件 cd nginx-1.11.5 ./configure --prefix=/usr/local/nginx --with-http_stub_status_module --with-http_ssl_module --with-http_flv_module --with-http_gzip_static_module # 检查平台安装环境 # --prefix=/usr/local/nginx 是 nginx 编译安装的目录（推荐），安装完后会在此目录下生成相关文件 进行源码编译并安装 make # 编译 make install # 安装 服务操作命令。 启动服务 /usr/local/nginx/sbin/nginx 重新加载服务 /usr/local/nginx/sbin/nginx -s reload 停止服务 /usr/local/nginx/sbin/nginx -s stop 查看 nginx 服务进程 ps -ef | grep nginx # 查看服务进程 配置 upstream phpserver { server 192.
+                  <a href="/post/devops/linux/devops-linux-nginx/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/devops/">DevOps</a>&nbsp;
+                  
+                    #<a href="/tags/linux/">Linux</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/post/devops/linux/devops-linux-php/">
+                <h2 class="post-title">Linux安装PHP源码包</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-12-28
+              </p>
+              <div class="post-entry">
+                
+                  依赖库安装 安装 gcc 环境 sudo yum -y install gcc gcc-c++ # 编译时依赖 gcc 环境 安装 libxml2 sudo yum -y install libxml2 libxml2-devel # Libxml2库提供了C语言解析和构造xml文档的接口 安装 libjpeg-devel yum -y install libjpeg-devel libpng-devel # 图片处理 安装 openssl # 安全套接字层密码库，用于通信加密 $ sudo yum -y install openssl openssl-devel yum install freetype-devel libzip 安装sqlite yum install sqlite-devel 创建用户组和用户 groupadd -r www &amp;&amp; useradd -g www -s /sbin/nologin www 安装 Nginx 源码包安装 Nginx官方下载
+sudo tar -zxvf php-7.
+                  <a href="/post/devops/linux/devops-linux-php/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/devops/">DevOps</a>&nbsp;
+                  
+                    #<a href="/tags/linux/">Linux</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/post/devops/linux/devops-linux-redis/">
+                <h2 class="post-title">Linux安装Redis</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-12-26
+              </p>
+              <div class="post-entry">
+                
+                  <h1 id="安装">安装</h1>
+<h2 id="下载">下载</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">wget http://download.redis.io/releases/redis-5.0.3.tar.gz
+</code></pre></div><h2 id="解压">解压</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">tar -zxvf redis-5.0.3.tar.gz
+</code></pre></div><h2 id="执行编译">执行编译</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cd redis-5.0.3
+make
+# PREFIX用于指定目录
+make install PREFIX=/usr/local/redis
+</code></pre></div><h2 id="启动">启动</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">/usr/local/redis/bin/redis-server redis.conf
+</code></pre></div><h2 id="创建命令软链接">创建命令软链接</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ln -s /usr/local/redis/bin/redis-cli /usr/bin/redis
+</code></pre></div>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/devops/">DevOps</a>&nbsp;
+                  
+                    #<a href="/tags/linux/">Linux</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/post/computerlanguages/php/computerlanguages-php-laravel-common/">
+                <h2 class="post-title">Laravel常用命令</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-12-03
+              </p>
+              <div class="post-entry">
+                
+                  <h1 id="laravel多环境配置">Laravel多环境配置</h1>
+<p><strong>新建文件</strong>
+.env.beta beta预发布环境</p>
+<p><strong>Nginx配置</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nginx" data-lang="nginx">        <span style="color:#ff79c6">location</span> ~ <span style="color:#f1fa8c">\.php$</span> {
+            <span style="color:#ff79c6">try_files</span> <span style="color:#8be9fd;font-style:italic">$uri</span> =<span style="color:#bd93f9">404</span>;
+            <span style="color:#ff79c6">fastcgi_split_path_info</span> <span style="color:#f1fa8c">^(.+\.php)(/.+)</span>$;
+            <span style="color:#ff79c6">fastcgi_pass</span> <span style="color:#f1fa8c">phpserver</span>;
+            <span style="color:#ff79c6">fastcgi_index</span> <span style="color:#f1fa8c">index.php</span>;
+            <span style="color:#6272a4"># 添加 APP_ENV 参数, 这个参数设置会覆盖Laravel里的 APP_ENV, 设置后就会读取指定配置文件 .env.beta
+</span><span style="color:#6272a4"></span>            <span style="color:#ff79c6">fastcgi_param</span> <span style="color:#f1fa8c">APP_ENV</span> <span style="color:#f1fa8c">beta</span>;
+
+            <span style="color:#ff79c6">fastcgi_param</span> <span style="color:#f1fa8c">SCRIPT_FILENAME</span> <span style="color:#8be9fd;font-style:italic">$document_root$fastcgi_script_name</span>;
+            <span style="color:#ff79c6">fastcgi_param</span>  <span style="color:#f1fa8c">QUERY_STRING</span>       <span style="color:#8be9fd;font-style:italic">$query_string</span>;
+            <span style="color:#ff79c6">include</span>        <span style="color:#f1fa8c">fastcgi_params</span>;
+        }
+</code></pre></div>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/php/">PHP</a>&nbsp;
+                  
+                    #<a href="/tags/laravel/">Laravel</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/post/computerlanguages/php/computerlanguages-php-laravel-component/">
+                <h2 class="post-title">Laravel各种调试工具和常用工具</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-12-02
+              </p>
+              <div class="post-entry">
+                
+                  Laravel调试  注意:调试工具切忌不可在正式环境中打开, 否则重要信息会泄露
+ Laravel-ddoc 数据字典 安装
+composer require jormin/laravel-ddoc --dev 发布
+php artisan vendor:publish --provider=&#34;Jormin\DDoc\DDocServiceProvider&#34; Laravel-log-viewer 日志 安装
+composer require rap2hpoutre/laravel-log-viewer --dev 发布
+php artisan vendor:publish --provider=&#34;Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider&#34; 添加路由 routes/web.php 中添加
+Route::get(&#39;logs&#39;, &#39;\Rap2hpoutre\LaravelLogViewer\LogViewerController@index&#39;); Telescope 调试工具 安装
+# 安装 Telescope composer require laravel/telescope --dev # Artisan 命令 telescope:install 发布其公共资源 php artisan telescope:install # 运行 migrate 命令执行数据库变更： php artisan migrate # 更新 Telescope 的时候，需要重新发布公共资源： php artisan telescope:publish 配置
+发布完 Telescope 的公共资源后，配置文件位于 config/telescope.
+                  <a href="/post/computerlanguages/php/computerlanguages-php-laravel-component/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/php/">PHP</a>&nbsp;
+                  
+                    #<a href="/tags/laravel/">Laravel</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/post/common/common-test/">
+                <h2 class="post-title">接口自动化测试框架从设计到开发</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-11-28
+              </p>
+              <div class="post-entry">
+                
+                  <h1 id="入门条件">入门条件</h1>
+<blockquote>
+<ul>
+<li>设计框架</li>
+<li>开发框架</li>
+<li>重构框架</li>
+</ul>
+</blockquote>
+<h1 id="接口基础">接口基础</h1>
+<blockquote>
+<p>HTTP接口</p>
+<ul>
+<li>接口组成</li>
+<li>常见接口介绍</li>
+<li>接口工具使用</li>
+<li>接口基础面试</li>
+</ul>
+</blockquote>
+<h1 id="接口开发">接口开发</h1>
+<blockquote>
+<ul>
+<li>dingo</li>
+</ul>
+</blockquote>
+<h1 id="unittest与接口测试结合">UnitTest与接口测试结合</h1>
+<blockquote>
+<ul>
+<li>UnitTest</li>
+<li>HTMLTestRunner</li>
+<li>断言 Case</li>
+<li>Requests包的使用</li>
+</ul>
+</blockquote>
+<h1 id="设计-开发-测试框架">设计 开发 测试框架</h1>
+<blockquote>
+<ul>
+<li>设计</li>
+<li>工具封装</li>
+<li>基类封装</li>
+<li>调试错误</li>
+<li>接口数据</li>
+<li>回写报告</li>
+<li>解决数据依赖</li>
+<li>结果统计</li>
+<li>右键服务</li>
+<li>发送报告</li>
+</ul>
+</blockquote>
+<h1 id="接口测试辅助操作">接口测试辅助操作</h1>
+<blockquote>
+<ul>
+<li>操作数据库</li>
+<li>操作Cookie</li>
+</ul>
+</blockquote>
+
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/test/">Test</a>&nbsp;
+                  
+                </span>
               
 
             </article>
@@ -329,45 +710,45 @@ Here is a secondary heading Here&rsquo;s a useless table:
         <ul class="list-inline text-center footer-links">
           <img src="/img/wechatmp.png" alt="k8s技术圈">
           
-              <li>
-                <a href="mailto:icnych@gmail.com" title="Email me">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
+          <li>
+            <a href="mailto:icnych@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
           
-              <li>
-                <a href="https://github.com/cnych" title="GitHub">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
+          <li>
+            <a href="https://github.com/cnych" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
           
-              <li>
-                <a href="https://weibo.com/cnych" title="微博">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
+          <li>
+            <a href="https://weibo.com/cnych" title="微博">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
           
-              <li>
-                <a href="https://instagram.com/cnych" title="Instagram">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
+          <li>
+            <a href="https://instagram.com/cnych" title="Instagram">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
           
           
           <li>
-            <a href="/index.xml" title="RSS">
+            <a href="/%20index.xml" title="RSS">
               <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
@@ -378,13 +759,13 @@ Here is a secondary heading Here&rsquo;s a useless table:
         </ul>
         <p class="credits copyright text-muted">
           
-            
-              <a href="/">WoolfBreathe</a>
-            
+          
+          <a href="/">WoolfBreathe</a>
+          
           
 
           &nbsp;&bull;&nbsp;
-          2017
+          2021
         </p>
         <p class="text-center text-muted">
           <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
@@ -398,7 +779,9 @@ Here is a secondary heading Here&rsquo;s a useless table:
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a
+            href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a
+            href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
           
         </p>
       </div>
@@ -406,67 +789,35 @@ Here is a secondary heading Here&rsquo;s a useless table:
   </div>
 </footer>
 
-
+<script> renderMathInElement(document.body); </script>
 <script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
 
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag() { dataLayer.push(arguments); }
   gtag('js', new Date());
   gtag('config', 'UA-69668147-3');
 </script>
 <script>
-(function(){
+  (function () {
     var bp = document.createElement('script');
     var curProtocol = window.location.protocol.split(':')[0];
     if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
     }
     else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
     }
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(bp, s);
-})();
+  })();
 </script>
-<script >
-$(document).ready(function() {
-  var int = setInterval(fixCount, 50);  
-  
-  var initPVCount = 584976;
-  var initUVCount = 153191;
-  function fixCount() {                   
-    if ($("#busuanzi_container_site_pv").css("display") != "none") {
-        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
-        clearInterval(int); 
-    }
-    if ($("#busuanzi_container_site_uv").css("display") != "none") {
-      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
-      clearInterval(int); 
-    }  
-  }           
-});
-</script>
- <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery-migrate@1.2.1/dist/jquery-migrate.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script type="text/javascript">
-$('.carousel').slick({
-    dots: true,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    infinite: true,
-    speed: 500,
-    fade: true,
-    cssEase: 'linear',
-    centerMode: true,
-    prevArrow: '<button type="button" class="slick-prev"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
-});
-</script>
+
+
+
+
 
   </body>
 </html>

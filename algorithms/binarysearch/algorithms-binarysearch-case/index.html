@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+  <title>二分查找(BinarySearch)-索引查找-WoolfBreathe</title>
+  <meta property="og:title" content="二分查找(BinarySearch)-索引查找" />
+  <meta name="twitter:title" content="二分查找(BinarySearch)-索引查找" />
+
+  <meta name="description" content="IP 地址对应城市查询 每个城市都有对应的 IP 地址段，这个在网上搜一下就能拿到。然后可以将这些不同城市 IP 地址段起始值转化为整型数字（转化函数Google/百度搜下就能找到），进而对其进行排序，就可以得到一个有序的序列。比如杭州和北京，IP区间分别是 [183.128.0.0,183.159.255.255] 和 [110.96.0.0,110.127.255.255]，转化为数字后对应区间分别是 [3078619136,3080716287] 和 [1851785216,1853882367]，这样，就可以对这两个区间起始值排序为 [1851785216,3078619136]。
+此外我们还需要存储每个区间值对应的城市，以便找到对应位置后可以快速定位对应城市，可以把这个映射关系存储到数据库里面，存储字段包括城市、起始 IP、结束 IP，这里有一个前提是不同城市区间值不可能交叉，否则没法玩。
+接下来就是二分查找排上用场的时候了，将待查找 IP 转化为数字，然后在排序序列中查找最后一个起始 IP 小于等于待查找 IP 的位置，通过该起始 IP 在数据库中定位到对应记录，判断待查找 IP 是否在这个 IP 区间范围内，如果在的话则返回对应城市，不在的话，就返回没找到。
+稠密索引（数据库索引技术基础） 二分查找适用于有序线性表的查找，此外针对二分查找还有升级版的插值查找，以及利用斐波那契原理进行查找的斐波那契查找.
+二分查找不适用于高速增长的海量数据，因为维护这个排序非常麻烦，所以我们引出索引这种数据结构。
+索引是为了加快查找速度而设计的一种数据结构。索引就是把一个关键字与它对应的记录相关联的过程，一个索引由若干索引项构成，每个索引项至少包含关键字和其对应记录在存储器中的位置等信息。
+由此可见，索引技术是组织大型数据库和磁盘文件的一种重要技术。
+索引技术分为线性索引、树形索引和多级索引，这里我们只介绍线性索引。所谓线性索引就是将索引项集合组织为线性结构，也称索引表。以下是一个索引表的示例图：
+在线性索引中，我们重点介绍三种：稠密索引、分块索引和倒排索引。
+首先是稠密索引。稠密索引是指在线性表中，将数据集中的每个记录对应一个索引项。就像上面示例图中的那样。以主键为例，可以将其抽象化如下：
+对于稠密索引这个索引表来说，索引项一定按照关键码有序排列，这样可以应用二分查找，以免索引查找本身影响性能。可见，稠密索引性能可以做到和二分查找相当（找到对应关键码就可以通过指针直接指向对应记录），但是索引项长度和数据集一样长，空间复杂度高，如果数据太多需要存放到磁盘上，反复读取磁盘对性能影响很大。
+分块索引（数据库索引技术基础） 为了减少索引项个数，对数据集进行分块，并使其分块有序，然后再给每个分块建立一个索引项（索引值是分块中最大关键码），至于分块内部，则不管其有序性，从而减少索引项的个数。在查找的时候在索引项中通过二分查找找到指定索引项，然后根据该索引项中的关键码去相应分块遍历查找指定元素，这是一种折中方案，既兼顾了空间复杂度，又兼顾了时间复杂度。
+分块索引图示如下：
+这里面有几个概念需要阐述下，首先是分块有序，需要满足两个先决条件：
+块内无序。即每一块内的记录不要求有序。当然，有序更理想，只不过要花费大量时间和空间的代价。块间有序。即要求后一块的所有关键字都大于前一块的所有关键字。只有块间有序，才能给查找带来效率。 其次，分块索引的索引项包含三个数据项：
+最大关键码：它存储每一块中的最大关键字。这样做的好处是在它之后的下一块中最小的关键字也能比这一块最大的关键字要大。块长：存储块中的记录个数，以便于循环时使用。块首指针：用于指向块首数据元素的指针，便于开始对这一块的记录开始遍历。 最后，在分块索引中查找，分两块进行：
+在分块索引表中查找要查找关键字所在的块。由于块间有序，所以可以通过二分查找快速定位（通过不小于给定值的第一个元素，不大于给定值的最后一个元素确定区间，以前面给出的示例图为例，58位于57和96之间，则会去第三块中查找）。根据块首指针找到相应的块，并在块中顺序查找指定值（即关键码，块中无序所以只能顺序查找）。 分块索引的时间复杂度是：O(log(m)&#43;n)，其中 m 是分块数，n 是块内元素个数，在索引表长度和块内元素相等时，时间复杂度最优。性能要优于顺序查找，但是比二分查找要差。
+总体来说，分块索引在兼顾存储空间和查找性能的情况下，被普遍用于数据库查找等技术中。
+倒排索引（搜素引擎技术基础） 百度、Google 等搜索引擎为我们日常查找信息带来了巨大的方便，你是否思考过搜索引擎是如何从海量 HTML 文档中通过关键词查找资源的？今天给大家介绍最简单，也是最基础的搜索引擎技术 —— 倒排索引。
+有倒排索引，就有正向索引，正向索引指的是通过文档 ID 找到对应的文档，如果通过文档ID查找对应文档，再在文档中匹配关键词，意味着要扫描所有文档，最后还要排序，对于互联网上的海量资源来说，显然是不可取的。">
+  <meta property="og:description" content="IP 地址对应城市查询 每个城市都有对应的 IP 地址段，这个在网上搜一下就能拿到。然后可以将这些不同城市 IP 地址段起始值转化为整型数字（转化函数Google/百度搜下就能找到），进而对其进行排序，就可以得到一个有序的序列。比如杭州和北京，IP区间分别是 [183.128.0.0,183.159.255.255] 和 [110.96.0.0,110.127.255.255]，转化为数字后对应区间分别是 [3078619136,3080716287] 和 [1851785216,1853882367]，这样，就可以对这两个区间起始值排序为 [1851785216,3078619136]。
+此外我们还需要存储每个区间值对应的城市，以便找到对应位置后可以快速定位对应城市，可以把这个映射关系存储到数据库里面，存储字段包括城市、起始 IP、结束 IP，这里有一个前提是不同城市区间值不可能交叉，否则没法玩。
+接下来就是二分查找排上用场的时候了，将待查找 IP 转化为数字，然后在排序序列中查找最后一个起始 IP 小于等于待查找 IP 的位置，通过该起始 IP 在数据库中定位到对应记录，判断待查找 IP 是否在这个 IP 区间范围内，如果在的话则返回对应城市，不在的话，就返回没找到。
+稠密索引（数据库索引技术基础） 二分查找适用于有序线性表的查找，此外针对二分查找还有升级版的插值查找，以及利用斐波那契原理进行查找的斐波那契查找.
+二分查找不适用于高速增长的海量数据，因为维护这个排序非常麻烦，所以我们引出索引这种数据结构。
+索引是为了加快查找速度而设计的一种数据结构。索引就是把一个关键字与它对应的记录相关联的过程，一个索引由若干索引项构成，每个索引项至少包含关键字和其对应记录在存储器中的位置等信息。
+由此可见，索引技术是组织大型数据库和磁盘文件的一种重要技术。
+索引技术分为线性索引、树形索引和多级索引，这里我们只介绍线性索引。所谓线性索引就是将索引项集合组织为线性结构，也称索引表。以下是一个索引表的示例图：
+在线性索引中，我们重点介绍三种：稠密索引、分块索引和倒排索引。
+首先是稠密索引。稠密索引是指在线性表中，将数据集中的每个记录对应一个索引项。就像上面示例图中的那样。以主键为例，可以将其抽象化如下：
+对于稠密索引这个索引表来说，索引项一定按照关键码有序排列，这样可以应用二分查找，以免索引查找本身影响性能。可见，稠密索引性能可以做到和二分查找相当（找到对应关键码就可以通过指针直接指向对应记录），但是索引项长度和数据集一样长，空间复杂度高，如果数据太多需要存放到磁盘上，反复读取磁盘对性能影响很大。
+分块索引（数据库索引技术基础） 为了减少索引项个数，对数据集进行分块，并使其分块有序，然后再给每个分块建立一个索引项（索引值是分块中最大关键码），至于分块内部，则不管其有序性，从而减少索引项的个数。在查找的时候在索引项中通过二分查找找到指定索引项，然后根据该索引项中的关键码去相应分块遍历查找指定元素，这是一种折中方案，既兼顾了空间复杂度，又兼顾了时间复杂度。
+分块索引图示如下：
+这里面有几个概念需要阐述下，首先是分块有序，需要满足两个先决条件：
+块内无序。即每一块内的记录不要求有序。当然，有序更理想，只不过要花费大量时间和空间的代价。块间有序。即要求后一块的所有关键字都大于前一块的所有关键字。只有块间有序，才能给查找带来效率。 其次，分块索引的索引项包含三个数据项：
+最大关键码：它存储每一块中的最大关键字。这样做的好处是在它之后的下一块中最小的关键字也能比这一块最大的关键字要大。块长：存储块中的记录个数，以便于循环时使用。块首指针：用于指向块首数据元素的指针，便于开始对这一块的记录开始遍历。 最后，在分块索引中查找，分两块进行：
+在分块索引表中查找要查找关键字所在的块。由于块间有序，所以可以通过二分查找快速定位（通过不小于给定值的第一个元素，不大于给定值的最后一个元素确定区间，以前面给出的示例图为例，58位于57和96之间，则会去第三块中查找）。根据块首指针找到相应的块，并在块中顺序查找指定值（即关键码，块中无序所以只能顺序查找）。 分块索引的时间复杂度是：O(log(m)&#43;n)，其中 m 是分块数，n 是块内元素个数，在索引表长度和块内元素相等时，时间复杂度最优。性能要优于顺序查找，但是比二分查找要差。
+总体来说，分块索引在兼顾存储空间和查找性能的情况下，被普遍用于数据库查找等技术中。
+倒排索引（搜素引擎技术基础） 百度、Google 等搜索引擎为我们日常查找信息带来了巨大的方便，你是否思考过搜索引擎是如何从海量 HTML 文档中通过关键词查找资源的？今天给大家介绍最简单，也是最基础的搜索引擎技术 —— 倒排索引。
+有倒排索引，就有正向索引，正向索引指的是通过文档 ID 找到对应的文档，如果通过文档ID查找对应文档，再在文档中匹配关键词，意味着要扫描所有文档，最后还要排序，对于互联网上的海量资源来说，显然是不可取的。">
+  <meta name="twitter:description" content="IP 地址对应城市查询 每个城市都有对应的 IP 地址段，这个在网上搜一下就能拿到。然后可以将这些不同城市 IP 地址段起始值转化为整型数字（转化函数Google/百度搜下就能找到），进而对其进行排序，就可以得到一个有序的序列。比如杭州和北京，IP区间分别是 [183.128.0.0,183.159.255.255] 和 [110.96.0.0,110.127.255.255]，转化为数字后对应区 …">
+  <meta name="author" content="WoolfBreathe"/>
+  <link href="/img/favicon.png" rel="icon" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/img/favicon.png"/>
+  <meta property="og:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@username" />
+  <meta name="twitter:creator" content="@username" />
+  <meta property="og:url" content="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="WoolfBreathe" />
+
+  <meta name="generator" content="Hugo 0.68.3" />
+  <link rel="canonical" href="/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="WoolfBreathe">
+
+  
+  
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700%7COpen+Sans:400,700" rel="stylesheet">
+  
+
+  <link rel="stylesheet" href='/css/bundle.min.62de9d30b83723e0d55f82908aedb1c5eb18c910bc24bcf43e530ce754ee1502.css' integrity='sha256-Yt6dMLg3I&#43;DVX4KQiu2xxesYyRC8JLz0PlMM51TuFQI='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
+<meta name="google-site-verification" content="oKxX4fOvB2yYmU02txZFChM93XQbESU4JaG3tNH9Hm8" />
+<meta name="baidu-site-verification" content="F5ojAyqaKU" />
+<meta name="keywords" content="Algorithms, BinarySearch">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d611849735f187dd788dc054908f7d7a";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/" title="WoolfBreathe">
+        <img src="img/avatar-icon.png" style="margin-top: -5px;height: 32px;" alt="WoolfBreathe">
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="首页" href="/">首页</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="归档" href="/archives">归档</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="标签" href="/tags">标签</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于" href="/page/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="RSS" href="/index.xml">RSS</a>
+            </li>
+          
+        
+
+        
+
+        
+
+        
+          <li>
+            <a href="#modalSearch" data-toggle="modal" data-target="#modalSearch" style="outline: none;">
+              <span id="searchGlyph" class="glyphicon glyphicon-search"></span>
+            </a>
+          </li>
+          
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+  <div id="modalSearch" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">搜索</h4>
+        </div>
+        <div class="modal-body">
+            
+<div class="aa-input-container" id="aa-input-container">
+    <input type="search" id="aa-search-input" class="aa-input-search" placeholder="Search for titles or URIs..." name="search" autocomplete="off" />
+    <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
+        <path d="M1806,332c0-123.3-43.8-228.8-131.5-316.5C1586.8-72.2,1481.3-116,1358-116s-228.8,43.8-316.5,131.5  C953.8,103.2,910,208.7,910,332s43.8,228.8,131.5,316.5C1129.2,736.2,1234.7,780,1358,780s228.8-43.8,316.5-131.5  C1762.2,560.8,1806,455.3,1806,332z M2318,1164c0,34.7-12.7,64.7-38,90s-55.3,38-90,38c-36,0-66-12.7-90-38l-343-342  c-119.3,82.7-252.3,124-399,124c-95.3,0-186.5-18.5-273.5-55.5s-162-87-225-150s-113-138-150-225S654,427.3,654,332  s18.5-186.5,55.5-273.5s87-162,150-225s138-113,225-150S1262.7-372,1358-372s186.5,18.5,273.5,55.5s162,87,225,150s113,138,150,225  S2062,236.7,2062,332c0,146.7-41.3,279.7-124,399l343,343C2305.7,1098.7,2318,1128.7,2318,1164z" />
+    </svg>
+</div>
+<script src="/js/algoliasearch.min.js"></script>
+<script src="/js/autocomplete.min.js"></script>
+
+<script>
+var client = algoliasearch("1JDRAS0AZR", "8804ac109158bb3bb60d74ce98fa332f");
+var index = client.initIndex('prod_blog');
+
+autocomplete('#aa-search-input',
+{ hint: false}, {
+    source: autocomplete.sources.hits(index, {hitsPerPage: 5}),
+    
+    displayKey: 'name',
+    
+    templates: {
+        
+        suggestion: function(suggestion) {
+            return '<span>' + '<a href="/post/' + suggestion.slug + '">' +
+            suggestion._highlightResult.title.value + '</a></span>';
+        }
+    }
+});
+</script>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/20200317190406.png" data-img-desc-1="BinarySearch"></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="Algorithms-heading">
+                <h1>二分查找(BinarySearch)-索引查找</h1>
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="Algorithms-heading">
+              <h1>二分查找(BinarySearch)-索引查找</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+  </header>
+
+
+    
+
+
+
+<div class="container" role="main">
+  <div class="row">
+
+    
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div>
+            
+            
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="/tags/algorithms/">Algorithms</a> &nbsp;
+              
+                  <a href="/tags/binarysearch/">BinarySearch</a> &nbsp;
+              
+            </h5>
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+          
+            
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <h1 id="ip-地址对应城市查询">IP 地址对应城市查询</h1>
+<p>每个城市都有对应的 IP 地址段，这个在网上搜一下就能拿到。然后可以将这些不同城市 IP 地址段起始值转化为整型数字（转化函数Google/百度搜下就能找到），进而对其进行排序，就可以得到一个有序的序列。比如杭州和北京，IP区间分别是 [183.128.0.0,183.159.255.255] 和 [110.96.0.0,110.127.255.255]，转化为数字后对应区间分别是 [3078619136,3080716287] 和 [1851785216,1853882367]，这样，就可以对这两个区间起始值排序为 [1851785216,3078619136]。</p>
+<p>此外我们还需要存储每个区间值对应的城市，以便找到对应位置后可以快速定位对应城市，可以把这个映射关系存储到数据库里面，存储字段包括城市、起始 IP、结束 IP，这里有一个前提是不同城市区间值不可能交叉，否则没法玩。</p>
+<p>接下来就是二分查找排上用场的时候了，将待查找 IP 转化为数字，然后在排序序列中查找最后一个起始 IP 小于等于待查找 IP 的位置，通过该起始 IP 在数据库中定位到对应记录，判断待查找 IP 是否在这个 IP 区间范围内，如果在的话则返回对应城市，不在的话，就返回没找到。</p>
+<h1 id="稠密索引数据库索引技术基础">稠密索引（数据库索引技术基础）</h1>
+<p>二分查找适用于有序线性表的查找，此外针对二分查找还有升级版的插值查找，以及利用斐波那契原理进行查找的斐波那契查找.</p>
+<p>二分查找不适用于高速增长的海量数据，因为维护这个排序非常麻烦，所以我们引出索引这种数据结构。</p>
+<p>索引是为了加快查找速度而设计的一种数据结构。索引就是把一个关键字与它对应的记录相关联的过程，一个索引由若干索引项构成，每个索引项至少包含关键字和其对应记录在存储器中的位置等信息。</p>
+<p>由此可见，索引技术是组织大型数据库和磁盘文件的一种重要技术。</p>
+<p>索引技术分为线性索引、树形索引和多级索引，这里我们只介绍线性索引。所谓线性索引就是将索引项集合组织为线性结构，也称索引表。以下是一个索引表的示例图：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinarySearch/Fu6H6Hvd3V8AH2ZXCFOofypRNuWh.png" alt="索引表"></p>
+<p>在线性索引中，我们重点介绍三种：稠密索引、分块索引和倒排索引。</p>
+<p>首先是稠密索引。稠密索引是指在线性表中，将数据集中的每个记录对应一个索引项。就像上面示例图中的那样。以主键为例，可以将其抽象化如下：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinarySearch/Frd3saNagbVah0OqZTRTX8JlSQti.png" alt="稠密索引"></p>
+<p>对于稠密索引这个索引表来说，索引项一定按照关键码有序排列，这样可以应用二分查找，以免索引查找本身影响性能。可见，稠密索引性能可以做到和二分查找相当（找到对应关键码就可以通过指针直接指向对应记录），但是索引项长度和数据集一样长，空间复杂度高，如果数据太多需要存放到磁盘上，反复读取磁盘对性能影响很大。</p>
+<h1 id="分块索引数据库索引技术基础">分块索引（数据库索引技术基础）</h1>
+<p>为了减少索引项个数，对数据集进行分块，并使其分块有序，然后再给每个分块建立一个索引项（索引值是分块中最大关键码），至于分块内部，则不管其有序性，从而减少索引项的个数。在查找的时候在索引项中通过二分查找找到指定索引项，然后根据该索引项中的关键码去相应分块遍历查找指定元素，这是一种折中方案，既兼顾了空间复杂度，又兼顾了时间复杂度。</p>
+<p>分块索引图示如下：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinarySearch/Fr8CaNY2LsA-aL6fH3LEt2nMXD4D.png" alt="分块索引"></p>
+<p>这里面有几个概念需要阐述下，首先是分块有序，需要满足两个先决条件：</p>
+<pre><code>块内无序。即每一块内的记录不要求有序。当然，有序更理想，只不过要花费大量时间和空间的代价。
+块间有序。即要求后一块的所有关键字都大于前一块的所有关键字。只有块间有序，才能给查找带来效率。
+</code></pre>
+<p>其次，分块索引的索引项包含三个数据项：</p>
+<pre><code>最大关键码：它存储每一块中的最大关键字。这样做的好处是在它之后的下一块中最小的关键字也能比这一块最大的关键字要大。
+
+块长：存储块中的记录个数，以便于循环时使用。
+
+块首指针：用于指向块首数据元素的指针，便于开始对这一块的记录开始遍历。
+</code></pre>
+<p>最后，在分块索引中查找，分两块进行：</p>
+<pre><code>在分块索引表中查找要查找关键字所在的块。由于块间有序，所以可以通过二分查找快速定位（通过不小于给定值的第一个元素，不大于给定值的最后一个元素确定区间，以前面给出的示例图为例，58位于57和96之间，则会去第三块中查找）。
+根据块首指针找到相应的块，并在块中顺序查找指定值（即关键码，块中无序所以只能顺序查找）。
+</code></pre>
+<p>分块索引的时间复杂度是：O(log(m)+n)，其中 m 是分块数，n 是块内元素个数，在索引表长度和块内元素相等时，时间复杂度最优。性能要优于顺序查找，但是比二分查找要差。</p>
+<p>总体来说，分块索引在兼顾存储空间和查找性能的情况下，被普遍用于数据库查找等技术中。</p>
+<h1 id="倒排索引搜素引擎技术基础">倒排索引（搜素引擎技术基础）</h1>
+<p>百度、Google 等搜索引擎为我们日常查找信息带来了巨大的方便，你是否思考过搜索引擎是如何从海量 HTML 文档中通过关键词查找资源的？今天给大家介绍最简单，也是最基础的搜索引擎技术 —— 倒排索引。</p>
+<p>有倒排索引，就有正向索引，正向索引指的是通过文档 ID 找到对应的文档，如果通过文档ID查找对应文档，再在文档中匹配关键词，意味着要扫描所有文档，最后还要排序，对于互联网上的海量资源来说，显然是不可取的。</p>
+<p>所以搜索引擎反其道行之，通过分析每个文档，提取其中的关键字，并建立关键词与文档 ID 的映射关系，每个关键词都对应着多个文档 ID。由于不是通过文档来确定属性（这里的属性是关键词），而是通过属性来确定文档，故而将其称作倒排索引。</p>
+<p>我们以两个句子为例（把句子看作文章）：</p>
+<pre><code>Laravel学院，致力于提供优质 Laravel 中文学习资源。
+Laravel学院，优质中文学习资源平台。
+</code></pre>
+<p>对应的倒排索引结构如下：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinarySearch/FucbghnjEv9miTYnMfWzEL3mcRWq.png" alt="倒排索引"></p>
+<p>显然，在涉及中文的文章中，还要进行中文分词。</p>
+<p>倒排索引在很多开源搜索工具中，也有应用，比如 Elasticsearch、Lucene 等。</p>
+
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我们的微信公众帐号，在微信公众帐号中回复◉加群◉即可加入到我们的 kubernetes 讨论群里面共同学习。</p>
+<img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/qrcode.png" alt="wechat-account-qrcode">
+
+  
+          
+            <div class="entry-shang text-center">
+    <p>「真诚赞赏，手留余香」</p>
+    <button class="zs show-zs btn btn-bred">赞赏</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+    <div class="zs-modal-head">
+        <button type="button" class="close">×</button>
+        <span class="author"><img src="/img/avatar.jpeg"/>阳明</span>
+        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
+    </div>
+    <div class="zs-modal-body">
+        <div class="zs-modal-btns">
+            <button class="btn btn-blink" data-num="2">2元</button>
+            <button class="btn btn-blink" data-num="5">5元</button>
+            <button class="btn btn-blink" data-num="10">10元</button>
+            <button class="btn btn-blink" data-num="50">50元</button>
+            <button class="btn btn-blink" data-num="100">100元</button>
+            <button class="btn btn-blink" data-num="1">任意金额</button>
+        </div>
+        <div class="zs-modal-pay">
+            <button class="btn btn-bred" id="pay-text">2元</button>
+            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+            <img src="/img/wechat-2.png" id="pay-image"/>
+        </div>
+    </div>
+    <div class="zs-modal-footer">
+        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
+    </div>
+</div>
+          
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
+        
+          
+
+<h3>相关文章</h3>
+<ul style="margin-bottom: 25px;">
+    
+    <li><a href="/algorithms/binarysearch/algorithms-binarysearch-interval/">二分查找(BinarySearch)-区间查找</a></li>
+    
+    <li><a href="/algorithms/binarysearch/algorithms-binarysearch-repeat/">二分查找(BinarySearch)-数组含有重复值</a></li>
+    
+    <li><a href="/algorithms/binarysearch/algorithms-binarysearch-base/">二分查找(BinarySearch)</a></li>
+    
+    <li><a href="/algorithms/sort/algorithms-sort-selectionsort/">排序算法-选择排序(SelectionSort)</a></li>
+    
+    <li><a href="/algorithms/sort/algorithms-sort-insertionsort/">排序算法-选择排序(InsertionSort)</a></li>
+    
+    <li><a href="/algorithms/sort/algorithms-sort-bubblesort/">排序算法-冒泡排序(BubbleSort)</a></li>
+    
+    <li><a href="/algorithms/sort/algorithms-sort-mergesort/">排序算法-归并排序(MergeSort)</a></li>
+    
+    <li><a href="/algorithms/sort/algorithms-sort-quicksort/">排序算法-快速排序(QuickSort)</a></li>
+    
+    <li><a href="/algorithms/datastructures/algorithms-datastructures-recursion/">数据结构-递归(Recursion)</a></li>
+    
+    <li><a href="/algorithms/datastructures/algorithms-datastructures-queue/">数据结构-队列(Queue)</a></li>
+    
+</ul>
+
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="/algorithms/binarysearch/algorithms-binarysearch-interval/" data-toggle="tooltip" data-placement="top" title="二分查找(BinarySearch)-区间查找">&larr; 前一篇</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="/algorithms/datastructures/algorithms-datastructures-hashtable/" data-toggle="tooltip" data-placement="top" title="数据结构-散列表(HashTable, 哈希表)">后一篇 &rarr;</a>
+            </li>
+          
+        </ul>
+        
+
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
+        
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+    var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        labels: ['gitment'],
+        title: '二分查找(BinarySearch)-索引查找',
+        createIssueManually: true,
+        id: 'Algorithms-BinarySearch-Case',      
+        distractionFreeMode: true  
+    });
+    gitalk.render('gitalk-container');
+</script>
+
+
+        
+          
+
+        
+  
+      </div>
+    
+    
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          <img src="/img/wechatmp.png" alt="k8s技术圈">
+          
+              <li>
+                <a href="mailto:icnych@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://github.com/cnych" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://weibo.com/cnych" title="微博">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://instagram.com/cnych" title="Instagram">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          
+          <li>
+            <a href="/index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="/">WoolfBreathe</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2021
+        </p>
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
+</script>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script >
+$(document).ready(function() {
+  var int = setInterval(fixCount, 50);  
+  
+  var initPVCount = 584976;
+  var initUVCount = 153191;
+  function fixCount() {                   
+    if ($("#busuanzi_container_site_pv").css("display") != "none") {
+        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
+        clearInterval(int); 
+    }
+    if ($("#busuanzi_container_site_uv").css("display") != "none") {
+      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
+      clearInterval(int); 
+    }  
+  }           
+});
+</script>
+ <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery-migrate@1.2.1/dist/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+$('.carousel').slick({
+    dots: true,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear',
+    centerMode: true,
+    prevArrow: '<button type="button" class="slick-prev"></button>',
+    nextArrow: '<button type="button" class="slick-next"></button>',
+});
+</script>
+
+  </body>
+</html>
+

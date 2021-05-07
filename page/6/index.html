@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+  <title>WoolfBreathe-云原生|神经网络</title>
+  <meta name="keywords" content="Kubernetes,k8s,Docker,istio,Python,Django,Golang,Hugo,Prometheus,Cloud Native,云原生,微服务">
+  <meta name="description" content="kubernetes、istio、devops、prometheus、python、django、golang、云原生、微服务等技术的个人博客。">
+  <meta property="og:title" content="WoolfBreathe" />
+  <meta name="twitter:title" content="WoolfBreathe" />
+
+  <meta name="description" content="Front Page Content beautifulhugo supports content on your front page. Edit /content/_index.md to change what appears here. Delete /content/_index.md if you don&rsquo;t want any content here.">
+  <meta property="og:description" content="Front Page Content beautifulhugo supports content on your front page. Edit /content/_index.md to change what appears here. Delete /content/_index.md if you don&rsquo;t want any content here.">
+  <meta name="twitter:description" content="Front Page Content beautifulhugo supports content on your front page. Edit /content/_index.md to change what appears here. Delete /content/_index.md if you don&rsquo;t want any content here.">
+  <meta name="author" content="WoolfBreathe"/>
+  <link href="/img/favicon.png" rel="icon" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/img/favicon.png"/>
+  <meta property="og:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@username" />
+  <meta name="twitter:creator" content="@username" />
+  <meta property="og:url" content="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="WoolfBreathe" />
+
+  <meta name="generator" content="Hugo 0.68.3" />
+  <link rel="canonical" href="/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="WoolfBreathe">
+
+  
+  
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700%7COpen+Sans:400,700" rel="stylesheet">
+  
+
+  <link rel="stylesheet" href='/css/bundle.min.62de9d30b83723e0d55f82908aedb1c5eb18c910bc24bcf43e530ce754ee1502.css' integrity='sha256-Yt6dMLg3I&#43;DVX4KQiu2xxesYyRC8JLz0PlMM51TuFQI='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
+<meta name="google-site-verification" content="oKxX4fOvB2yYmU02txZFChM93XQbESU4JaG3tNH9Hm8" />
+<meta name="baidu-site-verification" content="F5ojAyqaKU" />
+<meta name="keywords" content="">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d611849735f187dd788dc054908f7d7a";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/" title="WoolfBreathe">
+        <img src="img/avatar-icon.png" style="margin-top: -5px;height: 32px;" alt="WoolfBreathe">
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="首页" href="/">首页</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="归档" href="/archives">归档</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="标签" href="/tags">标签</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于" href="/page/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="RSS" href="/index.xml">RSS</a>
+            </li>
+          
+        
+
+        
+
+        
+
+        
+          <li>
+            <a href="#modalSearch" data-toggle="modal" data-target="#modalSearch" style="outline: none;">
+              <span id="searchGlyph" class="glyphicon glyphicon-search"></span>
+            </a>
+          </li>
+          
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+  <div id="modalSearch" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">搜索</h4>
+        </div>
+        <div class="modal-body">
+            
+<div class="aa-input-container" id="aa-input-container">
+    <input type="search" id="aa-search-input" class="aa-input-search" placeholder="Search for titles or URIs..." name="search" autocomplete="off" />
+    <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
+        <path d="M1806,332c0-123.3-43.8-228.8-131.5-316.5C1586.8-72.2,1481.3-116,1358-116s-228.8,43.8-316.5,131.5  C953.8,103.2,910,208.7,910,332s43.8,228.8,131.5,316.5C1129.2,736.2,1234.7,780,1358,780s228.8-43.8,316.5-131.5  C1762.2,560.8,1806,455.3,1806,332z M2318,1164c0,34.7-12.7,64.7-38,90s-55.3,38-90,38c-36,0-66-12.7-90-38l-343-342  c-119.3,82.7-252.3,124-399,124c-95.3,0-186.5-18.5-273.5-55.5s-162-87-225-150s-113-138-150-225S654,427.3,654,332  s18.5-186.5,55.5-273.5s87-162,150-225s138-113,225-150S1262.7-372,1358-372s186.5,18.5,273.5,55.5s162,87,225,150s113,138,150,225  S2062,236.7,2062,332c0,146.7-41.3,279.7-124,399l343,343C2305.7,1098.7,2318,1128.7,2318,1164z" />
+    </svg>
+</div>
+<script src="/js/algoliasearch.min.js"></script>
+<script src="/js/autocomplete.min.js"></script>
+
+<script>
+var client = algoliasearch("1JDRAS0AZR", "8804ac109158bb3bb60d74ce98fa332f");
+var index = client.initIndex('prod_blog');
+
+autocomplete('#aa-search-input',
+{ hint: false}, {
+    source: autocomplete.sources.hits(index, {hitsPerPage: 5}),
+    
+    displayKey: 'name',
+    
+    templates: {
+        
+        suggestion: function(suggestion) {
+            return '<span>' + '<a href="/post/' + suggestion.slug + '">' +
+            suggestion._highlightResult.title.value + '</a></span>';
+        }
+    }
+});
+</script>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    
+    
+    
+  </header>
+
+
+    
+
+  <div class="main-banner">
+      
+      <div class="main-banner-box">
+        <div class="carousel banner">
+          
+          <div class="carousel-item">
+            <a href="/post/promotion-51/" title="打造独当一面的 Kubernetes 运维、开发工程师" class="banner-link">
+              <img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/k8s-banner-k8scourse.jpg" class="banner-img" alt="打造独当一面的 Kubernetes 运维、开发工程师">
+            </a>
+          </div>
+          
+          <div class="carousel-item">
+            <a href="https://edu.aliyun.com/roadmap/cloudnative?spm=a1z389.11499242.0.0.65452413qdXfZ7&amp;utm_content=g_1000093512" title="云原生技术公开课" class="banner-link">
+              <img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/aliyun-cloudnative-edu1.jpeg" class="banner-img" alt="云原生技术公开课">
+            </a>
+          </div>
+          
+          <div class="carousel-item">
+            <a href="https://youdianzhishi.com/?utm_source=blog&amp;utm_campaign=referral&amp;utm_medium=banner" title="优点知识" class="banner-link">
+              <img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/k8s-banner-ydzs.jpg" class="banner-img" alt="优点知识">
+            </a>
+          </div>
+          
+          <div class="carousel-item">
+            <a href="https://detail.tmall.com/item.htm?spm=a212k0.12153887.0.0.64a3687dQ6nSzh&amp;id=590161370307" title="《深入浅出 Prometheus》" class="banner-link">
+              <img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/k8s-banner-promebook.jpg" class="banner-img" alt="《深入浅出 Prometheus》">
+            </a>
+          </div>
+          
+        </div>
+      </div>
+      
+    
+      
+      <div class="minor-banner-box container">
+        <div class="minor-banner row">
+          
+          <li class="minor-item col-md-3">
+            <a href="https://youdianzhishi.com/web/course/1018?utm_source=blog&amp;utm_campaign=referral&amp;utm_medium=tophero" title="Kubernetes 开发课">
+              <img src="https://sdn.youdianzhishi.com/covers/2020/7/14/066c90abafe0441686a868e7c8943b4f.png?imageMogr/v2/auto-orient/thumbnail/600x" alt="Kubernetes 开发课">
+            </a>
+          </li>
+          
+          <li class="minor-item col-md-3">
+            <a href="https://youdianzhishi.com/web/course/1023?utm_source=blog&amp;utm_campaign=referral&amp;utm_medium=tophero" title="CKA 线上直播班">
+              <img src="https://sdn.youdianzhishi.com/covers/2021/1/22/24da438bbef842cc8145e018c086e388.png?imageMogr/v2/auto-orient/thumbnail/600x" alt="CKA 线上直播班">
+            </a>
+          </li>
+          
+          <li class="minor-item col-md-3">
+            <a href="https://youdianzhishi.com/web/course/1013?utm_source=blog&amp;utm_campaign=referral&amp;utm_medium=tophero" title="基于 Jenkins 的 DevOps 流水线实践">
+              <img src="https://sdn.haimaxy.com/covers/2019/12/30/bca85adf15d94da39c9e5b6b45d7e412.png?x-oss-process=image/resize,w_400" alt="基于 Jenkins 的 DevOps 流水线实践">
+            </a>
+          </li>
+          
+          <li class="minor-item col-md-3">
+            <a href="https://youdianzhishi.com/web/course/1021?utm_source=blog&amp;utm_campaign=referral&amp;utm_medium=tophero" title="Kubernetes 网络训练营">
+              <img src="https://sdn.youdianzhishi.com/covers/2020/10/5/e29660a558a64d119a61438ae9e6b155.png?imageMogr/v2/auto-orient/thumbnail/600x" alt="Kubernetes 网络训练营">
+            </a>
+          </li>
+          
+        </div>
+      </div>
+      
+
+  </div>
+
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-lg-8 col-md-10">
+        <div class="posts-list">
+          
+          
+
+          	
+
+            <article class="post-preview">
+              <a href="/post/algorithms/datastructures/algorithms-datastructures-linkedlist/">
+                <h2 class="post-title">数据结构-链表(LinkedList)</h2>
+                
+              </a>
+
+              <span class="post-meta">
+  
+    发表于 2019-08-03
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  链表(LinkedList) 链表并不需要一块连续的内存空间，它通过“指针”将一组零散的内存块串联起来使用，如图所示：
+单链表 链表有多种类型，最简单的是单链表，单链表是最原生的链表，其结构如图所示： 单链表中有两个节点比较特殊，分别是第一个结点和最后一个结点。通常把第一个结点叫作头结点，把最后一个结点叫作尾结点。其中，头结点用来记录链表的基地址，有了它，就可以遍历得到整条链表。而尾结点特殊的地方是：指针不是指向下一个结点，而是指向一个空地址 NULL，表示这是链表上最后一个结点。对单链表而言，理论上来说，插入和删除节点的时间复杂度是 O(1)，查询节点的时间复杂度是 O(n)。
+循环链表 然后还有在单链表的基础上扩展还有循环链表，循环链表和单链表的区别是尾节点指向了头结点，从而首尾相连，有点像贪吃蛇，可用于解决「约瑟夫环」问题，循环链表的结构如图所示：
+双向链表 顾名思义，与单链表的区别是双向链表除了有一个指向下一个节点的指针外，还有一个用于指向上一个节点的指针，从而实现通过 O(1) 复杂度找到上一个节点。正是因为这个节点，使得双向链表在插入、删除节点时比单链表更高效，虽然前面已经提到单链表插入、删除时间复杂度已经是 O(1) 了，但是这没有考虑还只是针对插入、删除操作本身而言，以删除为例，删除某个节点后，需要将其前驱节点的指针指向被删除节点的下一个节点，这样，还需要获取其前驱节点，在单链表中获取前驱节点的时间复杂度是 O(n)，所以综合来看单链表的删除、插入操作时间复杂度也是 O(n)，而双向链表则不然，它有一个指针指向上一个节点，所以其插入和删除时间复杂度才是真正的 O(1)。
+此外，对于有序链表而言，双向链表的查询效率显然也要高于单链表，不过更优的时间复杂度是靠更差的空间复杂度换取的，双向链表始终需要单链表的两倍空间，但是正如之前说的，在 Web 应用中，时间效率优先级更高，所以通常都是空间换时间来提高性能，Java 的 LinkedHashMap 底层就用到了双向链表。
+双向链表的结构如图所示：
+双向循环链表 最后要介绍的是结合循环链表和双向链表为一体的双向循环链表：
+其实就是将双向链表的首尾通过指针连接起来。 通过数组函数模拟实现单链表
+在 PHP 中由于没有指针，可以借助数组的 next、current、key 等函数实现链表这个数据结构：
+&lt;?php /** * 通过 PHP 数组模拟实现单链表 */ class LinkedList { private $list = []; // 获取链表指定位置的元素值，从0开始 public function get($index) { $value = NULL; while (current($this-&gt;list)) { if (key($this-&gt;list) == $index) { $value = current($this-&gt;list); } next($this-&gt;list); } reset($this-&gt;list); return $value; } // 在链表指定位置插入值，默认插到链表头部 public function add($value, $index = 0) { array_splice($this-&gt;list, $index, 0, $value); } // 从链表指定位置删除元素 public function remove($index) { array_splice($this-&gt;list, $index, 1); } public function isEmpty() { return !
+                  <a href="/post/algorithms/datastructures/algorithms-datastructures-linkedlist/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                
+                </span>
+              
+            </article>
+
+          
+
+          	
+
+            <article class="post-preview">
+              <a href="/post/algorithms/datastructures/algorithms-datastructures-array/">
+                <h2 class="post-title">数据结构-数组(Array)</h2>
+                
+              </a>
+
+              <span class="post-meta">
+  
+    发表于 2019-08-02
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <h1 id="数组array">数组(Array)</h1>
+<p>数组（Array）是一种线性表数据结构，它用一组连续的内存空间，来存储一组具有相同类型的数据。如果学习过 C 语言，应该对这段定义很熟悉，但是在 PHP 这种动态语言中，因为数组底层是通过散列表实现的，所以功能异常强大，这段常规的数组定义在 PHP 中并不成立，PHP 的数组可以存储任何类型数据，如果与 Java 对比的话，PHP 数组集成了 Java 的数组、List、Set、Map 于一身，所以写代码的效率比 Java 高了几个量级。</p>
+<p>抛开 PHP 或 JavaScript 这种动态语言，对于传统的数组，比如 C 语言和 Java 中的数组，在使用之前都需要声明数组存储数据的类型和数组的大小，数组的优点是可以通过下标值随机访问数组内的任何元素，算法复杂度是 O(1)，非常高效，但是缺点是删除/插入元素比较费劲，以删除为例，需要在删除某个元素后，将后续元素都往前移一位，如果是插入，则需要将插入位置之后的元素都往后移，所以对数组的插入/删除而言，算法复杂度是 O(n)，当然了，这个是针对 C / Java 这种语言而言，PHP 不受此约束，因为它不是传统一样上的数组嘛。</p>
+
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                
+                </span>
+              
+            </article>
+
+          
+
+          	
+
+            <article class="post-preview">
+              <a href="/post/algorithms/basis/algorithms-base-conception/">
+                <h2 class="post-title">算法(Algorithms)-概念</h2>
+                
+              </a>
+
+              <span class="post-meta">
+  
+    发表于 2019-08-02
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <h1 id="概念">概念</h1>
+<p><strong>算法</strong>
+算法就是任何良定义的计算过程，该过程将某个值或值的集合作为输入并产生某个值或值得集合作为输出；亦可将算法看作是用于求正确解的计算问题的工具。</p>
+<p><strong>良定义（well defined）</strong>
+就是指无歧义的、不会导致矛盾的、符合其应满足的所有要求的定义</p>
+<p><strong>问题实例</strong>
+由该问题所必须的输入所组成.</p>
+<p><strong>算法特征</strong></p>
+<ol>
+<li>
+<p>存在许多候选解, 但绝大多数候选解没有解决手头问题. 寻找一个真正的解或一个最好的解可能是一个很大的挑战.</p>
+</li>
+<li>
+<p>存在实际应用.</p>
+</li>
+</ol>
+<p><strong>循环不变式</strong>
+初始化：循环的第一次迭代之前，它为真。
+保持：  如果循环的某次迭代之前它为真，那么下次迭代之前它仍为真。
+终止：  在循环终止时，不变式为我们提供一个有用的性质，该性质有助于证明算法是正确的。</p>
+
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                
+                </span>
+              
+            </article>
+
+          
+
+          	
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>	
+            <ins class="adsbygoogle"	
+                style="display:block"	
+                data-ad-format="fluid"	
+                data-ad-layout-key="-49+ch+3h-db+7h"	
+                data-ad-client="ca-pub-5376999672787220"	
+                data-ad-slot="7981888143"></ins>	
+            <script>	
+                (adsbygoogle = window.adsbygoogle || []).push({});	
+            </script>	
+          	
+
+            <article class="post-preview">
+              <a href="/post/computerlanguages/python/computerlanguages-python-scrapy/">
+                <h2 class="post-title">Scrapy</h2>
+                
+              </a>
+
+              <span class="post-meta">
+  
+    发表于 2019-07-16
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  安装 服务器系统： Centos7.2
+准备工作： 编译前准备其他库的安装(使用sudo命令)
+yum -y groupinstall &#34;Development tools&#34; 3.7版本需要一个新的包libffi-devel，安装此包之后再次进行编译安装即可。
+yum install libffi-devel zlib zlib-devel gcc gcc-c++ wget -y 升级openssh和openssl 旧版本openssl1.0.2k 新版本openssl1.1.1 备份(重要)
+mv /usr/bin/openssl /usr/bin/openssl.old mv /usr/include/openssl /usr/include/openssl.old mv /usr/lib/libssl.so.1.0.1e /usr/lib/libssl.so.1.0.1e.old mv /usr/lib/libcrypto.so.1.0.1e /usr/lib/libcrypto.so.1.0.1e.old 下载主程序
+wget https://www.openssl.org/source/openssl-1.1.1.tar.gz 解压缩
+tar zxvf openssl-1.1.1.tar.gz 配置程序安装目录
+cd opensll-1.1.1 ./config shared zlib --prefix=/usr/local/openssl --openssldir=/usr/local/openssl/ssl 显示配置数据
+perl configdata.pm --dump 编译安装
+make -j 4 &amp;&amp; make install 查看新安装版本
+cd /usr/local/openssl/bin ./openssl version -a 此处显示错误，说明找到不libssl.so.1.1库
+./openssl: error while loading shared libraries: libssl.
+                  <a href="/post/computerlanguages/python/computerlanguages-python-scrapy/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="/tags/python/">Python</a>&nbsp;
+                
+                  #<a href="/tags/scrapy/">Scrapy</a>&nbsp;
+                
+                </span>
+              
+            </article>
+
+          
+
+          	
+
+            <article class="post-preview">
+              <a href="/post/devops/git/devops-git-gitignore/">
+                <h2 class="post-title">Git忽略规则及.gitignore规则正确姿势</h2>
+                
+              </a>
+
+              <span class="post-meta">
+  
+    发表于 2018-07-16
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <h1 id="实现需求">实现需求</h1>
+<p>在git中如果想忽略掉某个文件或者文件夹，不想这个文件或者文件夹提交到版本库中，可以使用修改根目录中 .gitignore 文件的方法（如无，则需自己手工建立此文件）。这个文件每一行保存了一个匹配的规则例如：</p>
+<h1 id="创建gitignore文件">创建gitignore文件</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">touch .gitignore
+</code></pre></div><h2 id="注释git忽略规则">注释Git忽略规则</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"># 此为注释 – 将被 Git 忽略
+ 
+*.a       # 忽略所有 .a 结尾的文件
+!lib.a    # 但 lib.a 除外
+/-liberxuesite     # 仅仅忽略项目根目录下的 liberxuesite 文件，不包括 subdir/liberxuesite
+liberxue/    # 忽略 liberxue文件夹/ 目录下的所有文件以及文件夹本身
+doc/*.txt # 会忽略 doc/notes.txt 但不包括 doc/server/arch.txt
+</code></pre></div><h2 id="gitignore忽略规则不生效原因">gitignore忽略规则不生效原因</h2>
+<p>规则很简单，不做过多解释，但是有时候在项目开发过程中，突然心血来潮想把某些目录或文件加入忽略规则，按照上述方法定义后发现并未生效，原因是.gitignore只能忽略那些原来没有被track的文件，如果某些文件已经被纳入了版本管理中，则修改.gitignore是无效的。那么解决方法就是先把本地缓存删除（改变成未track状态），然后再提交：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">git rm -r --cached .
+git add .
+git commit -m &#39;update .gitignore&#39;
+
+</code></pre></div>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="/tags/devops/">DevOps</a>&nbsp;
+                
+                  #<a href="/tags/git/">GIT</a>&nbsp;
+                
+                </span>
+              
+            </article>
+
+          
+
+          	
+
+            <article class="post-preview">
+              <a href="/page/about/">
+                <h2 class="post-title">About me</h2>
+                
+                  <h3 class="post-subtitle">
+                  Why you&#39;d want to go on a date with me
+                  </h3>
+                
+              </a>
+
+              <span class="post-meta">
+  
+    发表于 0001-01-01
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <p><code>Nothing in the world can take the place of Persistence.</code> Talent will not; nothing is more common than unsuccessful men with talent. Genius will not; unrewarded genius is almost a proverb. Education will not; the world is full of educated derelicts. Persistence and Determination alone are omnipotent. The slogan “Press On” has solved and will always solve the problems of the human race.</p>
+<p><img src="/img/posts/wexin-qrcode.jpeg" alt="qrcode"></p>
+
+                
+              </div>
+
+              
+            </article>
+
+          
+
+          	
+
+            <article class="post-preview">
+              <a href="/page/archive/">
+                <h2 class="post-title">Archive</h2>
+                
+              </a>
+
+              <span class="post-meta">
+  
+    发表于 0001-01-01
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  关注容器、kubernetes、devops、python、golang、微服务等技术。
+ Kubernetes/Docker  你应该了解的10个 Kubernetes 安全上下文设置 如何收集管理多行日志？ 通过 Traefik 使用 Kubernetes Service APIs 进行流量路由 Kubernetes Service APIs 简介 给 Pod 添加 DNS 记录 理解 Linux 网络命名空间 自己动手写一个 Kubernetes YAML 模板化工具 图解 Kubernetes Ingress 图解 Kubernetes Service 在 Kubernetes 上运行高可用的 Kafka 集群 使用 KinD 加速 CI/CD 流水线 使用 Kustomize 定制 Helm Charts 更新一个 10 年有效期的 Kubernetes 证书 Grafana Loki 简明教程 使用 GitLab CI 与 Argo CD 进行 GitOps 实践 使用 Elastic 技术栈构建 K8S 全栈监控(4/4) 使用 Elastic 技术栈构建 K8S 全栈监控(3/4) 使用 Elastic 技术栈构建 K8S 全栈监控(2/4) 使用 Elastic 技术栈构建 K8S 全栈监控(1/4) Prometheus 监控外部 Kubernetes 集群 使用 Sealed Secrets 加密 Kubernetes Secrets Kubernetes 中 PV 和 PVC 的状态变化 在 Kubernetes 中运行 Kubernetes 在 Windows 下使用 WSL2 搭建 Kubernetes 集群 使用 Loki 进行日志监控和报警 使用 Tekton 创建 CI/CD 流水线（3/4） GitOps - 在 Kubernetes 中进行 DevOps 的方式 Jenkins 共享库示例 解决 CoreDNS 自定义域名失效的问题 请使用 JSON 格式记录日志[译] 使用 PyCharm、Okteto 和 Kubernetes 搭建远程开发环境 可视化创建 Kubernetes 微服务应用 使用 Tekton 创建 CI/CD 流水线（2/2） 使用 Tekton 创建 CI/CD 流水线（1/2） 加速开发流程的 Dockerfile 最佳实践 在 Kubernetes 上搭建 EFK 日志收集系统 使用编程语言描述 Kubernetes 应用 - cdk8s 在 Kubernetes 集群中使用 NodeLocal DNSCache Kubernetes HPA 使用详解 Envoy 简单入门示例 ingress-nginx 控制器工作原理 用 Kubernetes 资源对象创建 Grafana Dashboard AlertManager 何时报警 优秀的 Grafana K8S 插件 - DevOpsProdigy KubeGraf 在 Kubernetes 集群上部署 Kafka Kubernetes 集群均衡器 Descheduler 有时光机的 Kubernetes Dashboard - Kubevious 获取客户端访问真实 IP 在 Kubernetes 上部署 Vault 在 Kubernetes 上部署 Spinnaker Kubernetes 零宕机滚动更新 在 Kubernetes 集群上部署 VSCode 自定义 Traefik2 中间件 Traefik2.
+                  <a href="/page/archive/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+            </article>
+
+          
+
+          	
+
+            <article class="post-preview">
+              <a href="/page/kubernetes.io/">
+                <h2 class="post-title">Kubernetes</h2>
+                
+                  <h3 class="post-subtitle">
+                  生产级别的容器编排系统
+                  </h3>
+                
+              </a>
+
+              <span class="post-meta">
+  
+    发表于 0001-01-01
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <p>Kubernetes 是用于自动部署，扩展和管理容器化应用程序的开源系统。 它将组成应用程序的容器组合成逻辑单元，以便于管理和服务发现，Kubernetes 构建在 Google 15 年生产环境经验基础之上，并结合来自社区的最佳创意和实践。</p>
+<h3 id="kubernetes-特性1">Kubernetes 特性1</h3>
+<ul>
+<li>全球规模：基于允许 Google 每周运行数十亿个容器的原则进行设计，Kubernetes 可以在不增加您的运维团队的情况下进行弹性扩展。</li>
+<li>永不过时：无论您应用运行在本地还是运行于全球任何地域，Kubernetes 的灵活性都可以随着您的需求复杂度不断增加，还可以持续、轻松地对外提供服务。</li>
+<li>随处运行：Kubernetes 是开源的，可以让您自由地部署在企业内部，私有云、混合云或公有云基础架构，使您轻松将应用迁移至任何位置。</li>
+</ul>
+<h3 id="kubernetes-特性2">Kubernetes 特性2</h3>
+<ul>
+<li>自动包装：根据资源需求和其他约束自动放置容器，同时不会牺牲可用性，混合关键和最大努力的工作负载，以提高资源利用率并节省更多资源。</li>
+<li>自我修复：重新启动失败的容器，在节点不可用时，替换和重新调度节点上的容器，对用户定义的健康检查不响应的容器会被中止，并且在容器准备好服务之前不会把其向客户端广播。</li>
+<li>横向缩放：使用简单的命令或 UI，或者根据 CPU 的使用情况自动调整应用程序副本数。</li>
+<li>服务发现和负载均衡：不需要修改您的应用程序来使用不熟悉的服务发现机制，Kubernetes 为容器提供了自己的 IP 地址和一组容器的单个 DNS 名称，并可以在它们之间进行负载均衡。</li>
+</ul>
+<p><a href="https://kubernetes.io/zh/"><img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/1zB8cS.jpg" alt="kubernetes.io"></a></p>
+
+                
+              </div>
+
+              
+            </article>
+
+          
+
+          	
+
+            <article class="post-preview">
+              <a href="/page/kubernetes.org.cn/">
+                <h2 class="post-title">Kubernetes中文社区</h2>
+                
+                  <h3 class="post-subtitle">
+                  分享最新K8S资讯、教程、实践和中文文档
+                  </h3>
+                
+              </a>
+
+              <span class="post-meta">
+  
+    发表于 0001-01-01
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <p><code>Kubernetes中文社区</code> <a href="http://www.kubernetes.org.cn">www.kubernetes.org.cn</a> 致力于让K8S技术人员便捷地获取信息，掌握K8S相关知识。推崇开源理念，推广K8S开源项目。</p>
+
+                
+              </div>
+
+              
+            </article>
+
+          
+
+          	
+
+            <article class="post-preview">
+              <a href="/page/friend/">
+                <h2 class="post-title">友情链接</h2>
+                
+              </a>
+
+              <span class="post-meta">
+  
+    发表于 0001-01-01
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <h2 id="阳明的一些朋友">阳明的一些朋友</h2>
+<ul>
+<li><a href="http://lijinxiu.com?utm_source=qikqiak">JACK LEE</a></li>
+<li><a href="https://fuckcloudnative.io?utm_source=qikqiak">云原生实验室</a></li>
+<li><a href="https://imroc.io?utm_source=qikqiak">Roc</a></li>
+<li><a href="http://www.recall704.com?utm_source=qikqiak">RECALL&rsquo;s Blog</a></li>
+<li><a href="http://www.devopser.org?utm_source=qikqiak">devopser</a></li>
+<li><a href="https://sealyun.com?utm_source=qikqiak">sealyun</a></li>
+<li><a href="https://wujunze.com?utm_source=qikqiak">wujunze</a></li>
+<li><a href="https://wind-nest.com?utm_source=qikqiak">风巢知识导航</a></li>
+<li><a href="https://ops-coffee.cn?utm_source=qikqiak">运维咖啡吧</a></li>
+<li><a href="https://i4t.com/?utm_source=qikqiak">abcdocker 运维博客</a></li>
+<li><a href="https://dbawsp.com/?utm_source=qikqiak">鸡书之家</a></li>
+<li><a href="https://www.anonym0x1.com/?utm_source=qikqiak">anonym0x1</a></li>
+</ul>
+
+                
+              </div>
+
+              
+            </article>
+
+          
+        </div>
+
+        <div align="center" class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          
+
+<ul class="pagination">
+    
+    <li class="page-item">
+        <a href="/" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+    </li>
+    
+    <li class="page-item">
+    <a href="/page/5/" class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+    </li>
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/">1</a></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/page/2/">2</a></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/page/3/">3</a></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item disabled"><span aria-hidden="true">&nbsp;&hellip;&nbsp;</span></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/page/5/">5</a></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item active"><a class="page-link" href="/page/6/">6</a></li>
+    
+    
+    <li class="page-item disabled">
+    <a  class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+    </li>
+    
+    <li class="page-item">
+        <a href="/page/6/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    </li>
+    
+</ul>
+
+
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+          
+        </div>
+
+      </div>
+
+      <div class="col-lg-4 col-md-2">
+
+        
+
+        <div class="sidebar-wrap sidebar-about">
+          <div class="about-img">
+            <img src="https://www.qikqiak.com/img/avatar.jpeg" alt="阳明" class="rounded-circle">
+          </div>
+          <h4 class="py-2">Hi! -That's Me</h4>
+          <p class="about-text">大家好，我是WoolfBreathe，一个有着产品思维的工程师，现在也在努力将自己的产品思维体系化，对互联网产品有自己独到的见解，现阶段专注kubernetes和istio。</p>
+          <ul class="list-inline social-link">
+            <li class="list-inline-item"><a href="mailto:icnych@gmail.com"><i class="fa fa-envelope"></i></a></li>
+            <li class="list-inline-item"><a href="https://github.com/cnych"><i class="fa fa-github"></i></a></li>
+            <li class="list-inline-item"><a href="https://weibo.com/cnych"><i class="fa fa-weibo"></i></a></li>
+            <li class="list-inline-item"><a href="/index.xml"><i class="fa fa-rss"></i></a></li>
+            <li class="list-inline-item"><a href="https://instagram.com/cnych"><i class="fa fa-instagram"></i></a></li>
+          </ul>
+          
+          <img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/qrcode_for_gh_d6dd87b6ceb4_344.jpg" alt="k8s技术圈">
+          
+          
+          
+          
+            
+          
+        </div>
+
+        
+
+        
+        <div class="sidebar-wrap">
+          <div class="sidebar-block course-wrap">
+            <h4 class="sidebar-title">文档资料</h4>
+            
+            <a class="course-post" href="/envoy-book/?utm_source=blog&amp;utm_campaign=referral&amp;utm_medium=sidemenu" title="Envoy 入门教程">
+              <img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/envoy-book-cover.png" alt="Envoy 入门教程" class="img-fluid">
+            </a>
+            
+            <a class="course-post" href="/k8s-book/?utm_source=blog&amp;utm_campaign=referral&amp;utm_medium=sidemenu" title="从 Docker 到 Kubernetes 进阶">
+              <img src="https://sdn.haimaxy.com/covers/2018/9/14/0b8530ca670b477d813e3ad7e24165f3.png" alt="从 Docker 到 Kubernetes 进阶" class="img-fluid">
+            </a>
+            
+            <a class="course-post" href="https://edu.aliyun.com/roadmap/cloudnative?spm=a1z389.11499242.0.0.65452413qdXfZ7&amp;utm_content=g_1000093512" title="云原生技术公开课">
+              <img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/aliyun-cloudnative-edu2.jpeg" alt="云原生技术公开课" class="img-fluid">
+            </a>
+            
+          </div>
+        </div>
+        
+        
+        
+        <div class="sidebar-wrap">
+          <div class="sidebar-block latest-post">
+            <h4 class="sidebar-title">热门文章</h4>
+            <ol class="list-unstyled">
+              
+              <li>
+                <a href="/post/how-to-learn-kubernetes/">
+                  <div class="rpost-img">
+                    <img src="/img/posts/photo-1535383494412-9bdda0d6d9f3.jpeg" alt="如何学习 Kubernetes？" class="img-fluid">
+                  </div>
+                  <h5>如何学习 Kubernetes？</h5>
+                  <p class="text-muted">August 29, 2018</p>
+                </a>
+              </li>
+              
+              <li>
+                <a href="/post/manual-install-high-available-kubernetes-cluster/">
+                  <div class="rpost-img">
+                    <img src="/img/posts/WX20171110-105351.png" alt="手动搭建高可用的 Kubernetes 集群" class="img-fluid">
+                  </div>
+                  <h5>手动搭建高可用的 Kubernetes 集群</h5>
+                  <p class="text-muted">November 6, 2017</p>
+                </a>
+              </li>
+              
+              <li>
+                <a href="/post/use-kubeadm-install-kubernetes-1.10/">
+                  <div class="rpost-img">
+                    <img src="/img/posts/kubeadm-dashboard.png" alt="使用 kubeadm 搭建 kubernetes1.10 集群" class="img-fluid">
+                  </div>
+                  <h5>使用 kubeadm 搭建 kubernetes1.10 集群</h5>
+                  <p class="text-muted">April 14, 2018</p>
+                </a>
+              </li>
+              
+              <li>
+                <a href="/post/huawei-cloudnativelives-k8s-course/">
+                  <div class="rpost-img">
+                    <img src="/img/posts/cloudnativelives-video.png" alt="华为 CloudNativeLives Kubernetes 系列课程" class="img-fluid">
+                  </div>
+                  <h5>华为 CloudNativeLives Kubernetes 系列课程</h5>
+                  <p class="text-muted">August 31, 2018</p>
+                </a>
+              </li>
+              
+              <li>
+                <a href="/post/dockerfile-best-practice/">
+                  <div class="rpost-img">
+                    <img src="/img/posts/photo-1536620752150-a7e9e62a62ee.jpeg" alt="Dockerfile 最佳实践" class="img-fluid">
+                  </div>
+                  <h5>Dockerfile 最佳实践</h5>
+                  <p class="text-muted">September 12, 2018</p>
+                </a>
+              </li>
+              
+              <li>
+                <a href="/post/kubernetes-jenkins1/">
+                  <div class="rpost-img">
+                    <img src="/img/posts/k8s-jenkins-slave.png" alt="基于 kubernetes 的动态 jenkins slave" class="img-fluid">
+                  </div>
+                  <h5>基于 kubernetes 的动态 jenkins slave</h5>
+                  <p class="text-muted">July 28, 2018</p>
+                </a>
+              </li>
+              
+              <li>
+                <a href="/post/kubernetes-jenkins2/">
+                  <div class="rpost-img">
+                    <img src="/img/posts/pipeline-demo5.png" alt="Jenkins Pipeline 部署 Kubernetes 应用" class="img-fluid">
+                  </div>
+                  <h5>Jenkins Pipeline 部署 Kubernetes 应用</h5>
+                  <p class="text-muted">July 28, 2018</p>
+                </a>
+              </li>
+              
+              <li>
+                <a href="/post/kubernetes-jenkins3/">
+                  <div class="rpost-img">
+                    <img src="/img/posts/blue-demo7.png" alt="Jenkins Blue Ocean 的使用" class="img-fluid">
+                  </div>
+                  <h5>Jenkins Blue Ocean 的使用</h5>
+                  <p class="text-muted">August 2, 2018</p>
+                </a>
+              </li>
+              
+              <li>
+                <a href="/post/prometheus-operator-advance/">
+                  <div class="rpost-img">
+                    <img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/lfrvk.jpg" alt="Prometheus Operator 高级配置" class="img-fluid">
+                  </div>
+                  <h5>Prometheus Operator 高级配置</h5>
+                  <p class="text-muted">December 20, 2018</p>
+                </a>
+              </li>
+              
+              <li>
+                <a href="/post/automatic-kubernetes-ingress-https-with-lets-encrypt/">
+                  <div class="rpost-img">
+                    <img src="/img/posts/traefik-dashboard-acme.png" alt="使用 Let&#39;s Encrypt 实现 Kubernetes Ingress 自动化 HTTPS" class="img-fluid">
+                  </div>
+                  <h5>使用 Let&#39;s Encrypt 实现 Kubernetes Ingress 自动化 HTTPS</h5>
+                  <p class="text-muted">December 5, 2018</p>
+                </a>
+              </li>
+              
+              <li>
+                <a href="/post/python-virtualenv-all-know/">
+                  <div class="rpost-img">
+                    <img src="/img/posts/django2-index.jpg" alt="Python 虚拟环境全知道" class="img-fluid">
+                  </div>
+                  <h5>Python 虚拟环境全知道</h5>
+                  <p class="text-muted">January 9, 2018</p>
+                </a>
+              </li>
+              
+              <li>
+                <a href="/post/use-rbac-in-k8s/">
+                  <div class="rpost-img">
+                    <img src="/img/posts/WX20180118-150156.png" alt="深入理解 Kubernetes RBAC 的用法" class="img-fluid">
+                  </div>
+                  <h5>深入理解 Kubernetes RBAC 的用法</h5>
+                  <p class="text-muted">June 22, 2018</p>
+                </a>
+              </li>
+              
+            </ol>
+          </div>
+        </div>
+        
+        
+        
+        
+      </div>
+    </div>
+  </div>
+
+  
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          <img src="/img/wechatmp.png" alt="k8s技术圈">
+          
+          <li>
+            <a href="mailto:icnych@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://github.com/cnych" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://weibo.com/cnych" title="微博">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://instagram.com/cnych" title="Instagram">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="/%20index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+          
+          <a href="/">WoolfBreathe</a>
+          
+          
+
+          &nbsp;&bull;&nbsp;
+          2021
+        </p>
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a
+            href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a
+            href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script> renderMathInElement(document.body); </script>
+<script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
+</script>
+<script>
+  (function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+
+  </body>
+</html>
+

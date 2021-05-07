@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+  <title>Laravel各种调试工具和常用工具-WoolfBreathe</title>
+  <meta property="og:title" content="Laravel各种调试工具和常用工具" />
+  <meta name="twitter:title" content="Laravel各种调试工具和常用工具" />
+
+  <meta name="description" content="Laravel调试  注意:调试工具切忌不可在正式环境中打开, 否则重要信息会泄露
+ Laravel-ddoc 数据字典 安装
+composer require jormin/laravel-ddoc --dev 发布
+php artisan vendor:publish --provider=&#34;Jormin\DDoc\DDocServiceProvider&#34; Laravel-log-viewer 日志 安装
+composer require rap2hpoutre/laravel-log-viewer --dev 发布
+php artisan vendor:publish --provider=&#34;Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider&#34; 添加路由 routes/web.php 中添加
+Route::get(&#39;logs&#39;, &#39;\Rap2hpoutre\LaravelLogViewer\LogViewerController@index&#39;); Telescope 调试工具 安装
+# 安装 Telescope composer require laravel/telescope --dev # Artisan 命令 telescope:install 发布其公共资源 php artisan telescope:install # 运行 migrate 命令执行数据库变更： php artisan migrate # 更新 Telescope 的时候，需要重新发布公共资源： php artisan telescope:publish 配置
+发布完 Telescope 的公共资源后，配置文件位于 config/telescope.">
+  <meta property="og:description" content="Laravel调试  注意:调试工具切忌不可在正式环境中打开, 否则重要信息会泄露
+ Laravel-ddoc 数据字典 安装
+composer require jormin/laravel-ddoc --dev 发布
+php artisan vendor:publish --provider=&#34;Jormin\DDoc\DDocServiceProvider&#34; Laravel-log-viewer 日志 安装
+composer require rap2hpoutre/laravel-log-viewer --dev 发布
+php artisan vendor:publish --provider=&#34;Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider&#34; 添加路由 routes/web.php 中添加
+Route::get(&#39;logs&#39;, &#39;\Rap2hpoutre\LaravelLogViewer\LogViewerController@index&#39;); Telescope 调试工具 安装
+# 安装 Telescope composer require laravel/telescope --dev # Artisan 命令 telescope:install 发布其公共资源 php artisan telescope:install # 运行 migrate 命令执行数据库变更： php artisan migrate # 更新 Telescope 的时候，需要重新发布公共资源： php artisan telescope:publish 配置
+发布完 Telescope 的公共资源后，配置文件位于 config/telescope.">
+  <meta name="twitter:description" content="Laravel调试  注意:调试工具切忌不可在正式环境中打开, 否则重要信息会泄露
+ Laravel-ddoc 数据字典 安装
+composer require jormin/laravel-ddoc --dev 发布
+php artisan vendor:publish --provider=&#34;Jormin\DDoc\DDocServiceProvider&#34; …">
+  <meta name="author" content="WoolfBreathe"/>
+  <link href="/img/favicon.png" rel="icon" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/img/favicon.png"/>
+  <meta property="og:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@username" />
+  <meta name="twitter:creator" content="@username" />
+  <meta property="og:url" content="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="WoolfBreathe" />
+
+  <meta name="generator" content="Hugo 0.68.3" />
+  <link rel="canonical" href="/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="WoolfBreathe">
+
+  
+  
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700%7COpen+Sans:400,700" rel="stylesheet">
+  
+
+  <link rel="stylesheet" href='/css/bundle.min.62de9d30b83723e0d55f82908aedb1c5eb18c910bc24bcf43e530ce754ee1502.css' integrity='sha256-Yt6dMLg3I&#43;DVX4KQiu2xxesYyRC8JLz0PlMM51TuFQI='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
+<meta name="google-site-verification" content="oKxX4fOvB2yYmU02txZFChM93XQbESU4JaG3tNH9Hm8" />
+<meta name="baidu-site-verification" content="F5ojAyqaKU" />
+<meta name="keywords" content="PHP, Laravel">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d611849735f187dd788dc054908f7d7a";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/" title="WoolfBreathe">
+        <img src="img/avatar-icon.png" style="margin-top: -5px;height: 32px;" alt="WoolfBreathe">
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="首页" href="/">首页</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="归档" href="/archives">归档</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="标签" href="/tags">标签</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于" href="/page/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="RSS" href="/index.xml">RSS</a>
+            </li>
+          
+        
+
+        
+
+        
+
+        
+          <li>
+            <a href="#modalSearch" data-toggle="modal" data-target="#modalSearch" style="outline: none;">
+              <span id="searchGlyph" class="glyphicon glyphicon-search"></span>
+            </a>
+          </li>
+          
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+  <div id="modalSearch" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">搜索</h4>
+        </div>
+        <div class="modal-body">
+            
+<div class="aa-input-container" id="aa-input-container">
+    <input type="search" id="aa-search-input" class="aa-input-search" placeholder="Search for titles or URIs..." name="search" autocomplete="off" />
+    <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
+        <path d="M1806,332c0-123.3-43.8-228.8-131.5-316.5C1586.8-72.2,1481.3-116,1358-116s-228.8,43.8-316.5,131.5  C953.8,103.2,910,208.7,910,332s43.8,228.8,131.5,316.5C1129.2,736.2,1234.7,780,1358,780s228.8-43.8,316.5-131.5  C1762.2,560.8,1806,455.3,1806,332z M2318,1164c0,34.7-12.7,64.7-38,90s-55.3,38-90,38c-36,0-66-12.7-90-38l-343-342  c-119.3,82.7-252.3,124-399,124c-95.3,0-186.5-18.5-273.5-55.5s-162-87-225-150s-113-138-150-225S654,427.3,654,332  s18.5-186.5,55.5-273.5s87-162,150-225s138-113,225-150S1262.7-372,1358-372s186.5,18.5,273.5,55.5s162,87,225,150s113,138,150,225  S2062,236.7,2062,332c0,146.7-41.3,279.7-124,399l343,343C2305.7,1098.7,2318,1128.7,2318,1164z" />
+    </svg>
+</div>
+<script src="/js/algoliasearch.min.js"></script>
+<script src="/js/autocomplete.min.js"></script>
+
+<script>
+var client = algoliasearch("1JDRAS0AZR", "8804ac109158bb3bb60d74ce98fa332f");
+var index = client.initIndex('prod_blog');
+
+autocomplete('#aa-search-input',
+{ hint: false}, {
+    source: autocomplete.sources.hits(index, {hitsPerPage: 5}),
+    
+    displayKey: 'name',
+    
+    templates: {
+        
+        suggestion: function(suggestion) {
+            return '<span>' + '<a href="/post/' + suggestion.slug + '">' +
+            suggestion._highlightResult.title.value + '</a></span>';
+        }
+    }
+});
+</script>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/20200317190406.png" ></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="post-heading">
+                <h1>Laravel各种调试工具和常用工具</h1>
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Laravel各种调试工具和常用工具</h1>
+                
+                
+                  <span class="post-meta">
+  
+    发表于 2019-12-02
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+  </header>
+
+
+    
+
+
+
+<div class="container" role="main">
+  <div class="row">
+
+    
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div>
+            
+            
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="/tags/php/">PHP</a> &nbsp;
+              
+                  <a href="/tags/laravel/">Laravel</a> &nbsp;
+              
+            </h5>
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+          
+            
+<aside class="toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#laravel-ddoc-数据字典">Laravel-ddoc 数据字典</a></li>
+    <li><a href="#laravel-log-viewer-日志">Laravel-log-viewer 日志</a></li>
+    <li><a href="#telescope-调试工具">Telescope 调试工具</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#安全工具">安全工具</a></li>
+    <li><a href="#opcache命令管理">Opcache命令管理</a></li>
+    <li><a href="#解决跨域">解决跨域</a></li>
+    <li><a href="#生成验证码图片">生成验证码图片</a></li>
+    <li><a href="#图片保存">图片保存</a></li>
+    <li><a href="#redis缓存">Redis缓存</a></li>
+    <li><a href="#excel导入导出">Excel导入导出</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#dingoapi">Dingo/API</a></li>
+    <li><a href="#laravel-应用路由自动生成项目-api-文档">Laravel 应用路由自动生成项目 API 文档</a></li>
+    <li><a href="#oauth20登录验证">Oauth2.0登录验证</a></li>
+    <li><a href="#参考文档">参考文档:</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#安装">安装</a></li>
+    <li><a href="#发布">发布</a></li>
+    <li><a href="#自动加载">自动加载</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#安装-1">安装</a></li>
+    <li><a href="#增加支持passport">增加支持Passport</a></li>
+    <li><a href="#参考文档-1">参考文档</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#php-codesniffer">PHP CodeSniffer</a></li>
+    <li><a href="#php-intelephense">PHP Intelephense</a></li>
+    <li><a href="#php-intelephense-1">PHP Intelephense</a></li>
+  </ul>
+</nav>
+</aside>
+
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <h1 id="laravel调试">Laravel调试</h1>
+<blockquote>
+<p>注意:调试工具切忌不可在正式环境中打开, 否则重要信息会泄露</p>
+</blockquote>
+<h2 id="laravel-ddoc-数据字典">Laravel-ddoc 数据字典</h2>
+<p><strong>安装</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">composer require jormin/laravel-ddoc --dev
+</code></pre></div><p><strong>发布</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">php artisan vendor:publish --provider=&#34;Jormin\DDoc\DDocServiceProvider&#34;
+</code></pre></div><h2 id="laravel-log-viewer-日志">Laravel-log-viewer 日志</h2>
+<p><strong>安装</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">composer require rap2hpoutre/laravel-log-viewer --dev
+</code></pre></div><p><strong>发布</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">php artisan vendor:publish --provider=&#34;Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider&#34;
+</code></pre></div><p><strong>添加路由 routes/web.php 中添加</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Route::get(&#39;logs&#39;, &#39;\Rap2hpoutre\LaravelLogViewer\LogViewerController@index&#39;);
+</code></pre></div><h2 id="telescope-调试工具">Telescope 调试工具</h2>
+<p><strong>安装</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 安装 Telescope</span>
+composer require laravel/telescope --dev
+<span style="color:#6272a4"># Artisan 命令 telescope:install 发布其公共资源</span>
+php artisan telescope:install
+<span style="color:#6272a4"># 运行 migrate 命令执行数据库变更：</span>
+php artisan migrate
+<span style="color:#6272a4"># 更新 Telescope 的时候，需要重新发布公共资源：</span>
+php artisan telescope:publish
+</code></pre></div><p><strong>配置</strong></p>
+<p>发布完 Telescope 的公共资源后，配置文件位于 config/telescope.php。该配置文件允许配置监听选项 watchers，每个配置项都包含其用途说明，所以建议使用 Telescope 之前通篇读一下这个配置文件。</p>
+<p>如果需要，可以完全禁止 Telescope 的数据收集功能，通过配置项 enabled 来设置即可：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&#39;enabled&#39; =&gt; env(&#39;TELESCOPE_ENABLED&#39;, true),
+</code></pre></div><h1 id="laravel常用工具">Laravel常用工具</h1>
+<h2 id="安全工具">安全工具</h2>
+<p><strong>安装</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">composer require akaunting/firewall
+</code></pre></div><p><strong>发布</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">php artisan vendor:publish --tag<span style="color:#ff79c6">=</span>firewall
+php artisan migrate
+</code></pre></div><p><strong>启用</strong>
+在 .env 环境文件中添加这一行配置，表示开启 Firewall：
+FIREWALL_ENABLED=true</p>
+<p><strong>配置</strong>
+Firewall 提供的中间件完成安全防护：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">firewall.all
+
+firewall.agent
+firewall.geo
+firewall.ip
+firewall.lfi
+firewall.php
+firewall.referrer
+firewall.rfi
+firewall.session
+firewall.sqli
+firewall.swear
+firewall.url
+firewall.whitelist
+firewall.xss
+</code></pre></div><p><strong>使用</strong>
+firewall.url 演示下这个中间件的安全校验，首先在 firewall.php 中配置一个白名单 IP：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&#39;whitelist&#39; =&gt; [&#39;127.0.0.1&#39;],
+</code></pre></div><p>然后在 middleware.url 配置项的 inspections 中配置检查路由 firewall：\</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&#39;url&#39; =&gt; [
+    &#39;methods&#39; =&gt; [&#39;all&#39;],
+
+    &#39;inspections&#39; =&gt; [&#39;firewall&#39;], // i.e. &#39;admin&#39;
+
+    &#39;auto_block&#39; =&gt; [
+        &#39;attempts&#39; =&gt; 5,
+        &#39;frequency&#39; =&gt; 1 * 60, // 1 minute
+        &#39;period&#39; =&gt; 30 * 60, // 30 minutes
+    ],
+],
+</code></pre></div><p>并且在 notifications.email 配置项中配置收发邮箱地址（确保 .env 中已经配置过 MAIL_FROM_ADDRESS，Firewall 使用通知的方式发送邮件，所以 mail.to 应该对应系统用户表 users 中某个有效用户的邮箱地址）：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&#39;mail&#39; =&gt; [
+    &#39;enabled&#39; =&gt; true,
+    &#39;name&#39; =&gt; &#39;Laravel Firewall&#39;,
+    &#39;from&#39; =&gt; env(&#39;MAIL_FROM_ADDRESS&#39;),
+    &#39;to&#39; =&gt; [&#39;yaojinbu@163.com&#39;],
+],
+</code></pre></div><p>最后，在路由文件 routes/web.php 中注册这个测试路由：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">Route::group([&#39;middleware&#39; =&gt; &#39;firewall.url&#39;], function () {
+    Route::get(&#39;/firewall&#39;, function() {
+        return &#34;访问成功&#34;;
+    });
+});
+</code></pre></div><p><a href="https://akaunting.com/">Akaunting 官网</a></p>
+<h2 id="opcache命令管理">Opcache命令管理</h2>
+<p><strong>说明</strong></p>
+<p>OPcache 是 PHP 中的 Zend 扩展，可以大大提升 PHP 的性能。
+OPcache 通过将 PHP 脚本预编译的字节码存储到共享内存中来提升 PHP 的性能， 存储预编译字节码的好处就是 省去了每次加载和解析 PHP 脚本的开销。</p>
+<p><strong>安装</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">composer require appstract/laravel-opcache
+</code></pre></div><p><strong>发布</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">php artisan vendor:publish --provider<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;Appstract\Opcache\OpcacheServiceProvider&#34;</span> --tag<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;config&#34;</span>
+</code></pre></div><p><strong>参考资料</strong>
+<a href="https://learnku.com/articles/18782">利用 OPcache 扩展提升 PHP7 性能 | Laravel 篇</a></p>
+<h2 id="解决跨域">解决跨域</h2>
+<p><strong>安装</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">composer require barryvdh/laravel-cors
+</code></pre></div><p><strong>发布</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">php artisan vendor:publish --provider<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;Barryvdh\Cors\ServiceProvider&#34;</span>
+</code></pre></div><p><strong>使用</strong>
+如果想要全局支持跨域请求，可以在 app/Http/Kernel.php 的 $middleware 数组中添加 HandleCors 中间件：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">protected $middleware = [
+    // ...
+    \Barryvdh\Cors\HandleCors::class,
+];
+</code></pre></div><p>如果想在特定路由中应用 CORS，可将其添加到对应的路由/中间件分组：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">protected $middlewareGroups = [
+    &#39;web&#39; =&gt; [
+       // ...
+    ],
+
+    &#39;api&#39; =&gt; [
+        // ...
+        \Barryvdh\Cors\HandleCors::class,
+    ],
+];
+</code></pre></div><h2 id="生成验证码图片">生成验证码图片</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">composer require gregwar/captcha
+</code></pre></div><h2 id="图片保存">图片保存</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">composer require intervention/image
+</code></pre></div><h2 id="redis缓存">Redis缓存</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">composer require predis/predis
+
+</code></pre></div><h2 id="excel导入导出">Excel导入导出</h2>
+<p><strong>安装</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">composer require maatwebsite/excel
+</code></pre></div><p><strong>发布</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">php artisan vendor:publish --provider<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;Maatwebsite\Excel\ExcelServiceProvider&#34;</span>
+</code></pre></div><p><strong>示例</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#ff79c6">&lt;?php</span>
+
+<span style="color:#ff79c6">namespace</span> App\Exports;
+
+<span style="color:#ff79c6">use</span> App\User;
+<span style="color:#ff79c6">use</span> Maatwebsite\Excel\Concerns\FromCollection;
+
+<span style="color:#ff79c6">class</span> <span style="color:#50fa7b">UsersExport</span> <span style="color:#ff79c6">implements</span> FromCollection
+{
+  <span style="color:#6272a4">//使用了集合类
+</span><span style="color:#6272a4"></span>    <span style="color:#ff79c6">public</span> <span style="color:#ff79c6">function</span> <span style="color:#50fa7b">collection</span>()
+    {
+        <span style="color:#ff79c6">return</span> User<span style="color:#ff79c6">::</span><span style="color:#50fa7b">all</span>();
+    }
+}
+</code></pre></div><p>控制器导出</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">use App\Exports\UsersExport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
+
+class UsersController extends Controller 
+{
+    public function export() 
+    {
+        return Excel::download(new UsersExport, &#39;users.xlsx&#39;);
+    }
+}
+</code></pre></div><h1 id="laravel-api">Laravel API</h1>
+<h2 id="dingoapi">Dingo/API</h2>
+<p><strong>安装</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">composer require dingo/api
+</code></pre></div><p><strong>发布</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">php artisan vendor:publish --provider<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;Dingo\Api\Provider\LaravelServiceProvider&#34;</span>
+</code></pre></div><p><strong>配置</strong></p>
+<p><strong>Standards Tree 标准树</strong></p>
+<p>这有三个不同的树: x，prs 和 vnd。使用的标准树需要取决于项目
+未注册的树（x）主要表示本地和私有环境
+私有树（prs）主要表示没有商业发布的项目
+供应商树（vnd）主要表示公开发布的项目</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">API_STANDARDS_TREE=vnd
+</code></pre></div><p><strong>子类型</strong></p>
+<p>子类型通常是应用程序或项目的短名称，都是小写的。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">API_SUBTYPE=myapp
+</code></pre></div><p><strong>前缀和子域</strong></p>
+<p>大多数服务都来自子域或前缀。前缀或子域是必须的，但只需要一个。请避免使用版本号作为前缀或子域，因为版本控制是通过 header 头 Accept 处理的。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">API_PREFIX=api
+</code></pre></div><p><strong>使用子域名</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">API_DOMAIN=api.myapp.com
+</code></pre></div><h2 id="laravel-应用路由自动生成项目-api-文档">Laravel 应用路由自动生成项目 API 文档</h2>
+<p><strong>安装</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">$ composer require mpociot/laravel-apidoc-generator
+</code></pre></div><p>安装完成后需要到config/app.php中注册服务提供者：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">Mpociot\ApiDoc\ApiDocGeneratorServiceProvider::class,
+</code></pre></div><p><strong>生成文档</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">php artisan api:generate --routePrefix=api/v1/*
+</code></pre></div><p><strong>修改配置文件apidoc.php</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">    /*
+     * The router to be used (Laravel or Dingo).
+     */
+    &#39;router&#39; =&gt; &#39;dingo&#39;, //默认是laravel
+</code></pre></div><h2 id="oauth20登录验证">Oauth2.0登录验证</h2>
+<p><strong>安装</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">composer require laravel/passport
+</code></pre></div><p><strong>生成安全访问令牌</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">php artisan passport:install --password
+</code></pre></div><p><strong>创建加密秘钥(一次)</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">php artisan passport:keys
+</code></pre></div><p><strong>导入User中</strong>
+运行完这个命令后，添加 Laravel\Passport\HasApiTokens trait 到 App\User 模型，该 trait 将会为模型类提供一些辅助函数用于检查认证用户的 token 和 scope：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#ff79c6">&lt;?php</span>
+
+<span style="color:#ff79c6">namespace</span> App;
+
+<span style="color:#ff79c6">use</span> Laravel\Passport\HasApiTokens;
+<span style="color:#ff79c6">use</span> Illuminate\Notifications\Notifiable;
+<span style="color:#ff79c6">use</span> Illuminate\Foundation\Auth\User <span style="color:#ff79c6">as</span> Authenticatable;
+
+<span style="color:#ff79c6">class</span> <span style="color:#50fa7b">User</span> <span style="color:#ff79c6">extends</span> Authenticatable
+{
+    <span style="color:#ff79c6">use</span> HasApiTokens, Notifiable;
+}
+</code></pre></div><p><strong>配置</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">&#39;guards&#39; =&gt; [
+    &#39;web&#39; =&gt; [
+        &#39;driver&#39; =&gt; &#39;session&#39;,
+        &#39;provider&#39; =&gt; &#39;users&#39;,
+    ],
+
+    &#39;api&#39; =&gt; [
+        &#39;driver&#39; =&gt; &#39;passport&#39;,
+        &#39;provider&#39; =&gt; &#39;users&#39;,
+    ],
+],
+</code></pre></div><p><strong>Passport多用户支持(Laravel6尚未支持)</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">composer require sfelix-martins/passport-multiauth
+</code></pre></div><h2 id="参考文档">参考文档:</h2>
+<p><a href="https://learnku.com/docs/dingo-api/2.0.0">Dingo API 2.0.0 中文文档</a>
+<a href="https://github.com/dingo/api">Dingo API Github</a>
+<a href="https://learnku.com/courses/laravel-advance-training/6.x/passport-introduction/5746">L03 Laravel 教程 - 实战构架 API 服务器 ( Laravel 6.x ) </a></p>
+<h1 id="laravel模块化">Laravel模块化</h1>
+<h2 id="安装">安装</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">composer require nwidart/laravel-modules
+</code></pre></div><h2 id="发布">发布</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">php artisan vendor:publish --provider<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;Nwidart\Modules\LaravelModulesServiceProvider&#34;</span>
+</code></pre></div><h2 id="自动加载">自动加载</h2>
+<p>修改composer.json文件</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">{</span>
+  <span style="color:#f1fa8c">&#34;autoload&#34;</span>: <span style="color:#ff79c6">{</span>
+    <span style="color:#f1fa8c">&#34;psr-4&#34;</span>: <span style="color:#ff79c6">{</span>
+      <span style="color:#f1fa8c">&#34;App\\&#34;</span>: <span style="color:#f1fa8c">&#34;app/&#34;</span>,
+      <span style="color:#f1fa8c">&#34;Modules\\&#34;</span>: <span style="color:#f1fa8c">&#34;Modules/&#34;</span>
+    <span style="color:#ff79c6">}</span>
+  <span style="color:#ff79c6">}</span>
+<span style="color:#ff79c6">}</span>
+</code></pre></div><p>需要再执行命令</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">composer dump-autoload
+</code></pre></div><h1 id="laravel管理后台">Laravel管理后台</h1>
+<h2 id="安装-1">安装</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">composer require encore/laravel-admin
+</code></pre></div><h2 id="增加支持passport">增加支持Passport</h2>
+<p><strong>添加dingoapi支持</strong>
+修改文件 Encore\Admin\Auth\Database\Administrator</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">use Laravel\Passport\HasApiTokens;
+
+class Administrator extends Model implements AuthenticatableContract
+{
+    use Authenticatable, AdminBuilder, HasPermissions, HasApiTokens;
+</code></pre></div><p><strong>添加手机号登录支持</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">    public function findForPassport($username)
+    {
+        filter_var($username, FILTER_VALIDATE_EMAIL) ?
+          $credentials[&#39;email&#39;] = $username :
+          $credentials[&#39;phone&#39;] = $username;
+
+        return self::where($credentials)-&gt;first();
+    }
+</code></pre></div><p><strong>.env文件增加自定义项</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 与config/auth.php中的guard对应</span>
+<span style="color:#8be9fd;font-style:italic">ADMIN_AUTH_GUARD</span><span style="color:#ff79c6">=</span>adminapi 
+<span style="color:#6272a4"># 路由前缀</span>
+<span style="color:#8be9fd;font-style:italic">ADMIN_ROUTE_PREFIX</span><span style="color:#ff79c6">=</span>api/modules_admin
+</code></pre></div><blockquote>
+<p>注意: 以下文件是项目必须不可删除, 内容基本固定, 如果没有可去其他项目复制.</p>
+<ul>
+<li>Modules\Admin\Http\Controllers\AuthorizationsController.php 登录入口</li>
+<li>App\Http\Requests\Api\AuthorizationRequest.php 登录验证, 固定文件.</li>
+</ul>
+</blockquote>
+<p><strong>权限错误返回错误码, 不再跳转页面</strong>
+修改 laravel-admin/src/Auth/Permission.php</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">    public static function error()
+    {
+        //添加自定义错误直接返回http code
+        throw new HttpException(403, trans(&#39;admin.deny&#39;));
+
+        $response = response(Admin::content()-&gt;withError(trans(&#39;admin.deny&#39;)));
+
+        if (!request()-&gt;pjax() &amp;&amp; request()-&gt;ajax()) {
+            abort(403, trans(&#39;admin.deny&#39;));
+        }
+
+        Pjax::respond($response);
+    }
+</code></pre></div><p><strong>未登录错误返回错误码, 不再跳转页面</strong>
+修改 laravel-admin/src/Middleware/Authenticate.php</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">    if (Admin::guard()-&gt;guest() &amp;&amp; !$this-&gt;shouldPassThrough($request)) {
+        // return redirect()-&gt;guest($redirectTo);
+        throw new HttpException(401, &#34;Unauthorized&#34;);
+    }
+</code></pre></div><h2 id="参考文档-1">参考文档</h2>
+<p><a href="https://laravel-admin.org/">Laravel-Admin 官网</a></p>
+<p><a href="https://github.com/z-song/laravel-admin/">Laravel-Admin Guihub</a></p>
+<h1 id="微信开发组件laravel-wecchat">微信开发组件Laravel-WecChat</h1>
+<p><strong>安装</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">composer require overtrue/laravel-wechat
+</code></pre></div><p><strong>发布</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">php artisan vendor:publish --provider<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;Overtrue\LaravelWeChat\ServiceProvider&#34;</span>
+</code></pre></div><p><a href="https://www.easywechat.com/">EasyWeChat 官网</a>
+<a href="https://github.com/overtrue/wechat">Laravel-WeChat Github</a></p>
+<h1 id="graphql">GraphQL</h1>
+<p>以一个后端开发者的视角去认识和学习 GraphQL，比较 SDL 优先和代码优先这两种 GraphQL 服务端开发方法，发现 GraphQL 的优势并分析目前存在的问题。最后对 GraphQL 的未来进行了展望。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">composer require rebing/graphql-laravel
+</code></pre></div><h1 id="vscode">VSCode</h1>
+<h2 id="php-codesniffer">PHP CodeSniffer</h2>
+<p>PHP CodeSniffer是用来检查PHP编码规范的扩展</p>
+<pre><code>注意: PHP CodeSniffer安装在Windows下
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">composer global require squizlabs/php_codesniffer
+</code></pre></div><p>VSCode配置phpcs.executablePath</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&#34;phpcs.executablePath&#34;: &#34;C:\\Users\\xy\\AppData\\Roaming\\Composer\\vendor\\bin\\phpcs.bat&#34;,
+</code></pre></div><h2 id="php-intelephense">PHP Intelephense</h2>
+<p>高级自动完成和重构支持（代码智能提示）</p>
+<h2 id="php-intelephense-1">PHP Intelephense</h2>
+<p>代码格式化工具, 编辑settings.json, 添加下面命令, 保存时自动格式化</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">editor.formatOnSave&#34;: true
+</code></pre></div>
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我们的微信公众帐号，在微信公众帐号中回复◉加群◉即可加入到我们的 kubernetes 讨论群里面共同学习。</p>
+<img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/qrcode.png" alt="wechat-account-qrcode">
+
+  
+          
+            <div class="entry-shang text-center">
+    <p>「真诚赞赏，手留余香」</p>
+    <button class="zs show-zs btn btn-bred">赞赏</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+    <div class="zs-modal-head">
+        <button type="button" class="close">×</button>
+        <span class="author"><img src="/img/avatar.jpeg"/>阳明</span>
+        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
+    </div>
+    <div class="zs-modal-body">
+        <div class="zs-modal-btns">
+            <button class="btn btn-blink" data-num="2">2元</button>
+            <button class="btn btn-blink" data-num="5">5元</button>
+            <button class="btn btn-blink" data-num="10">10元</button>
+            <button class="btn btn-blink" data-num="50">50元</button>
+            <button class="btn btn-blink" data-num="100">100元</button>
+            <button class="btn btn-blink" data-num="1">任意金额</button>
+        </div>
+        <div class="zs-modal-pay">
+            <button class="btn btn-bred" id="pay-text">2元</button>
+            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+            <img src="/img/wechat-2.png" id="pay-image"/>
+        </div>
+    </div>
+    <div class="zs-modal-footer">
+        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
+    </div>
+</div>
+          
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
+        
+          
+
+<h3>相关文章</h3>
+<ul style="margin-bottom: 25px;">
+    
+    <li><a href="/post/computerlanguages/php/computerlanguages-php-laravel-phpunit/">Laravel使用PHPUnit进行单元测试注意事项</a></li>
+    
+</ul>
+
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="/post/common/common-test/" data-toggle="tooltip" data-placement="top" title="接口自动化测试框架从设计到开发">&larr; 前一篇</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="/post/computerlanguages/php/computerlanguages-php-laravel-common/" data-toggle="tooltip" data-placement="top" title="Laravel常用命令">后一篇 &rarr;</a>
+            </li>
+          
+        </ul>
+        
+
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
+        
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+    var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        labels: ['gitment'],
+        title: 'Laravel各种调试工具和常用工具',
+        createIssueManually: true,
+        id: 'ComputerLanguages-PHP-Laravel-Component',      
+        distractionFreeMode: true  
+    });
+    gitalk.render('gitalk-container');
+</script>
+
+
+        
+          
+
+        
+  
+      </div>
+    
+    
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          <img src="/img/wechatmp.png" alt="k8s技术圈">
+          
+          <li>
+            <a href="mailto:icnych@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://github.com/cnych" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://weibo.com/cnych" title="微博">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://instagram.com/cnych" title="Instagram">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="/%20index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+          
+          <a href="/">WoolfBreathe</a>
+          
+          
+
+          &nbsp;&bull;&nbsp;
+          2021
+        </p>
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a
+            href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a
+            href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script> renderMathInElement(document.body); </script>
+<script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
+</script>
+<script>
+  (function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+
+  </body>
+</html>
+

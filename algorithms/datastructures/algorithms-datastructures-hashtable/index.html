@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+  <title>数据结构-散列表(HashTable, 哈希表)-WoolfBreathe</title>
+  <meta property="og:title" content="数据结构-散列表(HashTable, 哈希表)" />
+  <meta name="twitter:title" content="数据结构-散列表(HashTable, 哈希表)" />
+
+  <meta name="description" content="散列表(HashTable, 哈希表) 散列表（HashTable，也叫哈希表），是根据键（Key）直接访问在内存存储位置的数据结构。
+其实现原理是：通过散列函数（也叫哈希函数）将元素的键映射为数组下标（转化后的值叫做散列值或哈希值），然后在对应下标位置存储记录值。按照键值查询元素时，就是用同样的散列函数，将键值转化数组下标，从对应的数组下标的位置取数据：
+散列表用的是数组支持按照下标随机访问数据的特性，所以散列表其实就是数组的一种扩展，由数组演化而来。可以说，如果没有数组，就没有散列表。而 PHP 的关联数组干脆就是基于散列表实现。
+散列技术既是一种存储方法，也是一种查找方法。与之前的查找方法不同的是散列技术的记录之间不存在逻辑关系，因此主要是面向查找的数据结构。最适合求解的问题是查找给定值相等的记录。
+散列表中有两个关键的概念，一个是散列函数（或者哈希函数），一个是散列冲突（或者哈希冲突）。
+散列函数 散列函数用于将键值经过处理后转化为散列值。具有以下特性：
+散列函数计算得到的散列值是非负整数如果 key1 == key2，则 hash(key1) == hash(key2)如果 key1 != key2，则 hash(key1) != hash(key2) 散列冲突 所谓散列冲突，简单来说，指的是 key1 != key2 的情况下，通过散列函数处理，hash(key1) == hash(key2)，这个时候，发生了散列冲突。设计再好的散列函数也无法避免散列冲突，原因是散列值是非负整数，总量是有限的，但是现实世界中要处理的键值是无限的，将无限的数据映射到有限的集合，肯定避免不了冲突。
+事实上，如果不考虑散列冲突，散列表的查找效率是非常高的，时间复杂度是 O(1)，比二分查找效率还要高，但是因为无法避免散列冲突，所以散列表查找的时间复杂度取决于散列冲突，最坏的情况可能是 O(n)，退化为顺序查找。这种情况在散列函数设计不合理的情况下更糟。
+散列函数设计 $arr[&lsquo;test&rsquo;] = 123 这段代码，PHP 底层会将键值 test 通过散列函数转化为散列码，然后将 123 映射到这个散列码上。在不考虑哈希冲突的情况下，散列表查找、删除、插入的时间复杂度都是 O(1)，非常高效。
+要减少哈希冲突，提高散列表操作效率，设计一个优秀的散列函数至关重要，平时经常使用的 md5 函数就是一个散列函数，但是其实还有其他很多自定义的设计实现，要根据不同场景，设计不同的散列函数来减少散列冲突，而且散列函数本身也要很简单，否则执行散列函数本身会成为散列表的瓶颈。日常很少会自己去设计散列函数，但是做一些简单的了解还是有必要的。
+通常有以下几种散列函数构造方法：
+直接定址法：即 f(key) = a*key &#43; b，f 表示散列函数，a、b 是常量，key 是键值数字分析法：即对数字做左移、右移、反转等操作获取散列值除数留余法：即 f(key) = key % p，p 表示容器数量，这种方式通常用在将数据存放到指定容器中，如何决定哪个数据放到哪个容器，比如分表后插入数据如何处理（此时 p 表示拆分后数据表的数量），分布式 Redis 如何存放数据（此时 p 表示几台 Redis 服务器）随机数法：即 f(key) = random(key)，比如负载均衡的 random 机制 以上只是一些比较场景的散列函数设计思路，还有很多其他的设计方法，这里就不一一列举了。">
+  <meta property="og:description" content="散列表(HashTable, 哈希表) 散列表（HashTable，也叫哈希表），是根据键（Key）直接访问在内存存储位置的数据结构。
+其实现原理是：通过散列函数（也叫哈希函数）将元素的键映射为数组下标（转化后的值叫做散列值或哈希值），然后在对应下标位置存储记录值。按照键值查询元素时，就是用同样的散列函数，将键值转化数组下标，从对应的数组下标的位置取数据：
+散列表用的是数组支持按照下标随机访问数据的特性，所以散列表其实就是数组的一种扩展，由数组演化而来。可以说，如果没有数组，就没有散列表。而 PHP 的关联数组干脆就是基于散列表实现。
+散列技术既是一种存储方法，也是一种查找方法。与之前的查找方法不同的是散列技术的记录之间不存在逻辑关系，因此主要是面向查找的数据结构。最适合求解的问题是查找给定值相等的记录。
+散列表中有两个关键的概念，一个是散列函数（或者哈希函数），一个是散列冲突（或者哈希冲突）。
+散列函数 散列函数用于将键值经过处理后转化为散列值。具有以下特性：
+散列函数计算得到的散列值是非负整数如果 key1 == key2，则 hash(key1) == hash(key2)如果 key1 != key2，则 hash(key1) != hash(key2) 散列冲突 所谓散列冲突，简单来说，指的是 key1 != key2 的情况下，通过散列函数处理，hash(key1) == hash(key2)，这个时候，发生了散列冲突。设计再好的散列函数也无法避免散列冲突，原因是散列值是非负整数，总量是有限的，但是现实世界中要处理的键值是无限的，将无限的数据映射到有限的集合，肯定避免不了冲突。
+事实上，如果不考虑散列冲突，散列表的查找效率是非常高的，时间复杂度是 O(1)，比二分查找效率还要高，但是因为无法避免散列冲突，所以散列表查找的时间复杂度取决于散列冲突，最坏的情况可能是 O(n)，退化为顺序查找。这种情况在散列函数设计不合理的情况下更糟。
+散列函数设计 $arr[&lsquo;test&rsquo;] = 123 这段代码，PHP 底层会将键值 test 通过散列函数转化为散列码，然后将 123 映射到这个散列码上。在不考虑哈希冲突的情况下，散列表查找、删除、插入的时间复杂度都是 O(1)，非常高效。
+要减少哈希冲突，提高散列表操作效率，设计一个优秀的散列函数至关重要，平时经常使用的 md5 函数就是一个散列函数，但是其实还有其他很多自定义的设计实现，要根据不同场景，设计不同的散列函数来减少散列冲突，而且散列函数本身也要很简单，否则执行散列函数本身会成为散列表的瓶颈。日常很少会自己去设计散列函数，但是做一些简单的了解还是有必要的。
+通常有以下几种散列函数构造方法：
+直接定址法：即 f(key) = a*key &#43; b，f 表示散列函数，a、b 是常量，key 是键值数字分析法：即对数字做左移、右移、反转等操作获取散列值除数留余法：即 f(key) = key % p，p 表示容器数量，这种方式通常用在将数据存放到指定容器中，如何决定哪个数据放到哪个容器，比如分表后插入数据如何处理（此时 p 表示拆分后数据表的数量），分布式 Redis 如何存放数据（此时 p 表示几台 Redis 服务器）随机数法：即 f(key) = random(key)，比如负载均衡的 random 机制 以上只是一些比较场景的散列函数设计思路，还有很多其他的设计方法，这里就不一一列举了。">
+  <meta name="twitter:description" content="散列表(HashTable, 哈希表) 散列表（HashTable，也叫哈希表），是根据键（Key）直接访问在内存存储位置的数据结构。
+其实现原理是：通过散列函数（也叫哈希函数）将元素的键映射为数组下标（转化后的值叫做散列值或哈希值），然后在对应下标位置存储记录值。按照键值查询元素时，就是用同样的散列函数，将键值转化数组下标，从对应的数组下标的位置取数据：
+散列表用的是数组支持按照下标随机访问数据 …">
+  <meta name="author" content="WoolfBreathe"/>
+  <link href="/img/favicon.png" rel="icon" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/img/favicon.png"/>
+  <meta property="og:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@username" />
+  <meta name="twitter:creator" content="@username" />
+  <meta property="og:url" content="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="WoolfBreathe" />
+
+  <meta name="generator" content="Hugo 0.68.3" />
+  <link rel="canonical" href="/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="WoolfBreathe">
+
+  
+  
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700%7COpen+Sans:400,700" rel="stylesheet">
+  
+
+  <link rel="stylesheet" href='/css/bundle.min.62de9d30b83723e0d55f82908aedb1c5eb18c910bc24bcf43e530ce754ee1502.css' integrity='sha256-Yt6dMLg3I&#43;DVX4KQiu2xxesYyRC8JLz0PlMM51TuFQI='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
+<meta name="google-site-verification" content="oKxX4fOvB2yYmU02txZFChM93XQbESU4JaG3tNH9Hm8" />
+<meta name="baidu-site-verification" content="F5ojAyqaKU" />
+<meta name="keywords" content="Algorithms, DataStructures">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d611849735f187dd788dc054908f7d7a";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/" title="WoolfBreathe">
+        <img src="img/avatar-icon.png" style="margin-top: -5px;height: 32px;" alt="WoolfBreathe">
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="首页" href="/">首页</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="归档" href="/archives">归档</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="标签" href="/tags">标签</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于" href="/page/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="RSS" href="/index.xml">RSS</a>
+            </li>
+          
+        
+
+        
+
+        
+
+        
+          <li>
+            <a href="#modalSearch" data-toggle="modal" data-target="#modalSearch" style="outline: none;">
+              <span id="searchGlyph" class="glyphicon glyphicon-search"></span>
+            </a>
+          </li>
+          
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+  <div id="modalSearch" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">搜索</h4>
+        </div>
+        <div class="modal-body">
+            
+<div class="aa-input-container" id="aa-input-container">
+    <input type="search" id="aa-search-input" class="aa-input-search" placeholder="Search for titles or URIs..." name="search" autocomplete="off" />
+    <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
+        <path d="M1806,332c0-123.3-43.8-228.8-131.5-316.5C1586.8-72.2,1481.3-116,1358-116s-228.8,43.8-316.5,131.5  C953.8,103.2,910,208.7,910,332s43.8,228.8,131.5,316.5C1129.2,736.2,1234.7,780,1358,780s228.8-43.8,316.5-131.5  C1762.2,560.8,1806,455.3,1806,332z M2318,1164c0,34.7-12.7,64.7-38,90s-55.3,38-90,38c-36,0-66-12.7-90-38l-343-342  c-119.3,82.7-252.3,124-399,124c-95.3,0-186.5-18.5-273.5-55.5s-162-87-225-150s-113-138-150-225S654,427.3,654,332  s18.5-186.5,55.5-273.5s87-162,150-225s138-113,225-150S1262.7-372,1358-372s186.5,18.5,273.5,55.5s162,87,225,150s113,138,150,225  S2062,236.7,2062,332c0,146.7-41.3,279.7-124,399l343,343C2305.7,1098.7,2318,1128.7,2318,1164z" />
+    </svg>
+</div>
+<script src="/js/algoliasearch.min.js"></script>
+<script src="/js/autocomplete.min.js"></script>
+
+<script>
+var client = algoliasearch("1JDRAS0AZR", "8804ac109158bb3bb60d74ce98fa332f");
+var index = client.initIndex('prod_blog');
+
+autocomplete('#aa-search-input',
+{ hint: false}, {
+    source: autocomplete.sources.hits(index, {hitsPerPage: 5}),
+    
+    displayKey: 'name',
+    
+    templates: {
+        
+        suggestion: function(suggestion) {
+            return '<span>' + '<a href="/post/' + suggestion.slug + '">' +
+            suggestion._highlightResult.title.value + '</a></span>';
+        }
+    }
+});
+</script>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/20200317190406.png" data-img-desc-1="DataStructures"></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="Algorithms-heading">
+                <h1>数据结构-散列表(HashTable, 哈希表)</h1>
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="Algorithms-heading">
+              <h1>数据结构-散列表(HashTable, 哈希表)</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+  </header>
+
+
+    
+
+
+
+<div class="container" role="main">
+  <div class="row">
+
+    
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div>
+            
+            
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="/tags/algorithms/">Algorithms</a> &nbsp;
+              
+            </h5>
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+          
+            
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <h1 id="散列表hashtable-哈希表">散列表(HashTable, 哈希表)</h1>
+<p>散列表（HashTable，也叫哈希表），是根据键（Key）直接访问在内存存储位置的数据结构。</p>
+<p>其实现原理是：通过散列函数（也叫哈希函数）将元素的键映射为数组下标（转化后的值叫做散列值或哈希值），然后在对应下标位置存储记录值。按照键值查询元素时，就是用同样的散列函数，将键值转化数组下标，从对应的数组下标的位置取数据：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/DataStructures/87b9c475a9bf8150d30b6c7a2dc9f6478f269546497e305b16fe124d32763e54.png" alt="原理"></p>
+<p>散列表用的是数组支持按照下标随机访问数据的特性，所以散列表其实就是数组的一种扩展，由数组演化而来。可以说，如果没有数组，就没有散列表。而 PHP 的关联数组干脆就是基于散列表实现。</p>
+<p>散列技术既是一种存储方法，也是一种查找方法。与之前的查找方法不同的是散列技术的记录之间不存在逻辑关系，因此主要是面向查找的数据结构。最适合求解的问题是查找给定值相等的记录。</p>
+<p>散列表中有两个关键的概念，一个是散列函数（或者哈希函数），一个是散列冲突（或者哈希冲突）。</p>
+<h1 id="散列函数">散列函数</h1>
+<p>散列函数用于将键值经过处理后转化为散列值。具有以下特性：</p>
+<pre><code>散列函数计算得到的散列值是非负整数
+如果 key1 == key2，则 hash(key1) == hash(key2)
+如果 key1 != key2，则 hash(key1) != hash(key2)
+</code></pre>
+<h1 id="散列冲突">散列冲突</h1>
+<p>所谓散列冲突，简单来说，指的是 key1 != key2 的情况下，通过散列函数处理，hash(key1) == hash(key2)，这个时候，发生了散列冲突。设计再好的散列函数也无法避免散列冲突，原因是散列值是非负整数，总量是有限的，但是现实世界中要处理的键值是无限的，将无限的数据映射到有限的集合，肯定避免不了冲突。</p>
+<p>事实上，如果不考虑散列冲突，散列表的查找效率是非常高的，时间复杂度是 O(1)，比二分查找效率还要高，但是因为无法避免散列冲突，所以散列表查找的时间复杂度取决于散列冲突，最坏的情况可能是 O(n)，退化为顺序查找。这种情况在散列函数设计不合理的情况下更糟。</p>
+<h1 id="散列函数设计">散列函数设计</h1>
+<p>$arr[&lsquo;test&rsquo;] = 123 这段代码，PHP 底层会将键值 test 通过散列函数转化为散列码，然后将 123 映射到这个散列码上。在不考虑哈希冲突的情况下，散列表查找、删除、插入的时间复杂度都是 O(1)，非常高效。</p>
+<p>要减少哈希冲突，提高散列表操作效率，设计一个优秀的散列函数至关重要，平时经常使用的 md5 函数就是一个散列函数，但是其实还有其他很多自定义的设计实现，要根据不同场景，设计不同的散列函数来减少散列冲突，而且散列函数本身也要很简单，否则执行散列函数本身会成为散列表的瓶颈。日常很少会自己去设计散列函数，但是做一些简单的了解还是有必要的。</p>
+<p>通常有以下几种散列函数构造方法：</p>
+<pre><code>直接定址法：即 f(key) = a*key + b，f 表示散列函数，a、b 是常量，key 是键值
+数字分析法：即对数字做左移、右移、反转等操作获取散列值
+除数留余法：即 f(key) = key % p，p 表示容器数量，这种方式通常用在将数据存放到指定容器中，如何决定哪个数据放到哪个容器，比如分表后插入数据如何处理（此时 p 表示拆分后数据表的数量），分布式 Redis 如何存放数据（此时 p 表示几台 Redis 服务器）
+随机数法：即 f(key) = random(key)，比如负载均衡的 random 机制
+</code></pre>
+<p>以上只是一些比较场景的散列函数设计思路，还有很多其他的设计方法，这里就不一一列举了。</p>
+<h1 id="散列冲突处理">散列冲突处理</h1>
+<p>设计再好的散列函数也不能完全避免散列冲突，只能优化自己的实现让散列冲突尽可能少出现罢了，如果出现了散列冲突，该如何处理呢？下面给出一些思路：</p>
+<pre><code>开放寻址法：该方法又可以细分为三种 —— 线性寻址、二次探测、随机探测。线性寻址表示出现散列冲突之后，就去寻找下一个空的散列地址；线性寻址步长是1，二次探测步长是线性寻址步长的2次方，其它逻辑一样；同理，随机探测每次步长随机。不管哪种探测方法，散列表中空闲位置不多的时候，散列冲突的概率就会提高，为了保证操作效率，尽可能保证散列表中有一定比例的空闲槽位，用装载因子来表示空位的多少，装载因子=填入元素/散列表长度，装载因子越大，表明空闲位置越少，冲突越多，散列表性能降低。
+
+再散列函数法：发生散列冲突后，换一个散列函数计算散列值
+
+链地址法：发生散列冲突后，将对应数据链接到该散列值映射的上一个值之后，即将散列值相同的元素放到相同槽位对应的链表中。链地址法即使在散列冲突很多的情况下，也可以保证将所有数据存储到散列表中，但是也引入了遍历单链表带来性能损耗。
+</code></pre>
+<p>介绍完以上内容之后，想必你对如何打造工业级散列表已经心中有数。主要考虑因素包含以下几个方面：</p>
+<pre><code>散列函数设置合理，不能太过复杂，成为性能瓶颈；
+
+设置装载因子阈值，支持动态扩容，装载因子阈值设置要充分权衡时间、空间复杂度；
+
+如果一次性扩容耗时长，可采取分批扩容的策略，达到阈值后只申请空间，不搬移数据，以后每插入一条数据，搬移一个旧数据，最后逐步完成搬移，期间为了兼容新老散列表查询，可以先查新表，再查老表；
+
+散列冲突解决办法：开放寻址法在数据量较小、装载因子小的时候（小于1）选用；链表法可以容忍装载因子大于1，适合存储大对象、大数据量的散列表，且更加灵活，支持更多优化策略。
+</code></pre>
+<p>补充一张链地址法处理散列（哈希）冲突的图示：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/DataStructures/FlfN8VtZbZVs-8BJJGW31Mr5UDTm.png" alt="散列（哈希）冲突"></p>
+<h1 id="哈希算法的概念和特性">哈希算法的概念和特性</h1>
+<p>前面分享了散列表、散列函数和散列冲突，其实也可以译作哈希表、哈希函数和哈希冲突，是一个意思。哈希算法简单理解就是实现前面提到的哈希函数的算法，用于将任意长度的二进制值串映射为固定长度的二进制值串，映射之后得到的二进制值就是哈希值（散列值）。</p>
+<p>日常开发中最常见的哈希算法应用就是通过 md5 函数对数据进行加密了，md5 就是一个哈希函数，结合 md5 我们可以归纳出哈希算法的一般特性：</p>
+<pre><code>从哈希值不能反向推导出原始数据（所以哈希算法也叫单向算法，不可逆）；
+对输入数据非常敏感，哪怕原始数据只修改了一个比特，最后得到的哈希值也大不相同；
+散列冲突的概率要很小，对于不同的原始数据，哈希值相同的概率非常小；
+哈希算法的执行效率要尽量高效，针对较长的文本，也能快速地计算出哈希值
+</code></pre>
+<h1 id="哈希算法的应用">哈希算法的应用</h1>
+<p>1、场景一：安全加密</p>
+<p>日常用户密码加密通常使用的都是 md5、sha 等哈希函数，因为不可逆，而且微小的区别加密之后的结果差距很大，所以安全性更好。</p>
+<p>2、场景二：唯一标识</p>
+<p>比如 URL 字段或者图片字段要求不能重复，这个时候就可以通过对相应字段值做 md5 处理，将数据统一为 32 位长度从数据库索引构建和查询角度效果更好，此外，还可以对文件之类的二进制数据做 md5 处理，作为唯一标识，这样判定重复文件的时候更快捷。</p>
+<p>3、场景三：数据校验</p>
+<p>比如我们从网上下载的很多文件（尤其是 P2P 站点资源），都会包含一个 MD5 值，用于校验下载数据的完整性，避免数据在中途被劫持篡改。</p>
+<p>4、场景五：散列函数</p>
+<p>前面我们已经提到，PHP 中的 md5、sha1、hash 等函数都是基于哈希算法计算散列值。</p>
+<p>5、场景五：负载均衡</p>
+<p>对于同一个客户端上的请求，尤其是已登录用户的请求，我们需要将其会话请求都路由到同一台机器，以保证数据的一致性，这可以借助哈希算法来实现，通过用户 ID 尾号对总机器数取模（取多少位可以根据机器数定），将结果值作为机器编号。</p>
+<p>6、场景六：分布式缓存</p>
+<p>分布式缓存和其他机器或数据库的分布式不一样，因为每台机器存放的缓存数据不一致，每当缓存机器扩容时，需要对缓存存放机器进行重新索引（或者部分重新索引），这里应用到的也是哈希算法的思想。后面我们介绍 Redis 系列的时候会系统阐述这一块。</p>
+
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我们的微信公众帐号，在微信公众帐号中回复◉加群◉即可加入到我们的 kubernetes 讨论群里面共同学习。</p>
+<img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/qrcode.png" alt="wechat-account-qrcode">
+
+  
+          
+            <div class="entry-shang text-center">
+    <p>「真诚赞赏，手留余香」</p>
+    <button class="zs show-zs btn btn-bred">赞赏</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+    <div class="zs-modal-head">
+        <button type="button" class="close">×</button>
+        <span class="author"><img src="/img/avatar.jpeg"/>阳明</span>
+        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
+    </div>
+    <div class="zs-modal-body">
+        <div class="zs-modal-btns">
+            <button class="btn btn-blink" data-num="2">2元</button>
+            <button class="btn btn-blink" data-num="5">5元</button>
+            <button class="btn btn-blink" data-num="10">10元</button>
+            <button class="btn btn-blink" data-num="50">50元</button>
+            <button class="btn btn-blink" data-num="100">100元</button>
+            <button class="btn btn-blink" data-num="1">任意金额</button>
+        </div>
+        <div class="zs-modal-pay">
+            <button class="btn btn-bred" id="pay-text">2元</button>
+            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+            <img src="/img/wechat-2.png" id="pay-image"/>
+        </div>
+    </div>
+    <div class="zs-modal-footer">
+        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
+    </div>
+</div>
+          
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
+        
+          
+
+<h3>相关文章</h3>
+<ul style="margin-bottom: 25px;">
+    
+    <li><a href="/algorithms/datastructures/algorithms-datastructures-recursion/">数据结构-递归(Recursion)</a></li>
+    
+    <li><a href="/algorithms/datastructures/algorithms-datastructures-queue/">数据结构-队列(Queue)</a></li>
+    
+    <li><a href="/algorithms/datastructures/algorithms-datastructures-stack/">数据结构-栈(Stack)</a></li>
+    
+    <li><a href="/algorithms/datastructures/algorithms-datastructures-linkedlist/">数据结构-链表(LinkedList)</a></li>
+    
+    <li><a href="/algorithms/datastructures/algorithms-datastructures-array/">数据结构-数组(Array)</a></li>
+    
+    <li><a href="/algorithms/binarysearch/algorithms-binarysearch-case/">二分查找(BinarySearch)-索引查找</a></li>
+    
+    <li><a href="/algorithms/binarysearch/algorithms-binarysearch-interval/">二分查找(BinarySearch)-区间查找</a></li>
+    
+    <li><a href="/algorithms/binarysearch/algorithms-binarysearch-repeat/">二分查找(BinarySearch)-数组含有重复值</a></li>
+    
+    <li><a href="/algorithms/binarysearch/algorithms-binarysearch-base/">二分查找(BinarySearch)</a></li>
+    
+    <li><a href="/algorithms/sort/algorithms-sort-selectionsort/">排序算法-选择排序(SelectionSort)</a></li>
+    
+</ul>
+
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="/algorithms/binarysearch/algorithms-binarysearch-case/" data-toggle="tooltip" data-placement="top" title="二分查找(BinarySearch)-索引查找">&larr; 前一篇</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="/algorithms/stringmatching/algorithms-stringmatching-bf/" data-toggle="tooltip" data-placement="top" title="字符串匹配-BF(暴力匹配算法)">后一篇 &rarr;</a>
+            </li>
+          
+        </ul>
+        
+
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
+        
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+    var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        labels: ['gitment'],
+        title: '数据结构-散列表(HashTable, 哈希表)',
+        createIssueManually: true,
+        id: 'Algorithms-DataStructures-HashTable',      
+        distractionFreeMode: true  
+    });
+    gitalk.render('gitalk-container');
+</script>
+
+
+        
+          
+
+        
+  
+      </div>
+    
+    
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          <img src="/img/wechatmp.png" alt="k8s技术圈">
+          
+              <li>
+                <a href="mailto:icnych@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://github.com/cnych" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://weibo.com/cnych" title="微博">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://instagram.com/cnych" title="Instagram">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          
+          <li>
+            <a href="/index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="/">WoolfBreathe</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2021
+        </p>
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
+</script>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script >
+$(document).ready(function() {
+  var int = setInterval(fixCount, 50);  
+  
+  var initPVCount = 584976;
+  var initUVCount = 153191;
+  function fixCount() {                   
+    if ($("#busuanzi_container_site_pv").css("display") != "none") {
+        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
+        clearInterval(int); 
+    }
+    if ($("#busuanzi_container_site_uv").css("display") != "none") {
+      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
+      clearInterval(int); 
+    }  
+  }           
+});
+</script>
+ <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery-migrate@1.2.1/dist/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+$('.carousel').slick({
+    dots: true,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear',
+    centerMode: true,
+    prevArrow: '<button type="button" class="slick-prev"></button>',
+    nextArrow: '<button type="button" class="slick-next"></button>',
+});
+</script>
+
+  </body>
+</html>
+

@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+  <title>Linux安装Zabbix-WoolfBreathe</title>
+  <meta property="og:title" content="Linux安装Zabbix" />
+  <meta name="twitter:title" content="Linux安装Zabbix" />
+
+  <meta name="description" content="Zabbix简介 　Zabbix 是一个基于 WEB 界面的提供分布式系统监视以及网络监视功能的企业级的开源解决方案。Zabbix 能监视各种网络参数，保证服务器系统的安全运营；并提供灵活的通知机制以让系统管理员快速定位解决存在的各种问题。
+　Zabbix支持多种网络方式下的监控，可以通过分布式的部署和安装监控代理Zabbix，通过C/S模式采集数据，通过B/S模式在Web端展示和配置。Zabbix Agent监控端口10050。
+(1). Zabbix的主要特点
+　安装配置简单，学习成本低，支持多语言（包括中文），免费开源，自动发现服务器与网络设备分布式监视，Web集中管理，可以无agent监视，用户安全认证和柔软的授权方式，通过Web设置或查看监视结果，email等功能。
+(2). Zabbix的主要功能
+　监控CPU负载、内存使用、磁盘使用、网络状态、端口监控、日志监控、插件开发自定义
+(3). Zabbix运行机制
+　Zabbix由Zabbix server与可选组件Zabbix agent两部分组成。
+　Zabbix Server 可以通过 SNMP，Zabbix agent，Ping，端口监视等方法提供对远程服务器/网络状态的监视，数据收集功能，可以在运行 Linux，Solaris，HP-UX，AIX，FreeBSD，OpenBSD，OS X，Windows多平台。
+　Zabbix Agent 安装在需要被监控的目标服务器上，主要完成对硬件信息与操作系统有关的内存，CPU 等信息收集。
+　Zabbix Server可以单独监视远程服务器的服务状态，同时也可以与Zabbix Agent结合。可以轮询Zabbix Agent主动接收监视数据（trapping传递 方式），同时还可以被动接收Zabbix Agent发送的数据。
+(4). 准备安装包和部署环境
+　注意：日志文件在/tmp/目录下。
+　下载Zabbix的源码包：https://www.Zabbix.com/download_sources。注意下，下载提供了两种版本：LTS版和标准版。LTS是长期支持（Long Term Support）的缩写，Zabbix将为客户提供5年的支持服务。前三年完全支持与后两年有限制支持。前三年包括一般、关键、安全性问题解决，后两年包括关键、安全性问题解决。超出时间不提供技术支持服务；标准版只提供6&#43;1月支持。
+　现在自己电脑上的C:\Windows\Fonts目录下查看是否存在微软雅黑字体，如果有上传一份（ttf格式），如果没有网上下载微软雅黑字体的ttf格式文件。
+　Zabbix自带了数据库导入包，其中包括ibm_db2、mysql、oracle、postgresql和sqlite3。但是Web界面只提供了PHP。所以这里选择在LNMP环境下部署。
+(5). Zabbix监控端部署
+　主机名：web-test　IP地址：192.168.0.101　环境：LNMP（Mysql5.7.19、PHP7.2.24）
+　在Zabbix监控服务器上部署Zabbix Server和Zabbix Agent（监控本身）。
+　监控数据记录在mysql中
+Zabbix Serve安装 下载 (1).">
+  <meta property="og:description" content="Zabbix简介 　Zabbix 是一个基于 WEB 界面的提供分布式系统监视以及网络监视功能的企业级的开源解决方案。Zabbix 能监视各种网络参数，保证服务器系统的安全运营；并提供灵活的通知机制以让系统管理员快速定位解决存在的各种问题。
+　Zabbix支持多种网络方式下的监控，可以通过分布式的部署和安装监控代理Zabbix，通过C/S模式采集数据，通过B/S模式在Web端展示和配置。Zabbix Agent监控端口10050。
+(1). Zabbix的主要特点
+　安装配置简单，学习成本低，支持多语言（包括中文），免费开源，自动发现服务器与网络设备分布式监视，Web集中管理，可以无agent监视，用户安全认证和柔软的授权方式，通过Web设置或查看监视结果，email等功能。
+(2). Zabbix的主要功能
+　监控CPU负载、内存使用、磁盘使用、网络状态、端口监控、日志监控、插件开发自定义
+(3). Zabbix运行机制
+　Zabbix由Zabbix server与可选组件Zabbix agent两部分组成。
+　Zabbix Server 可以通过 SNMP，Zabbix agent，Ping，端口监视等方法提供对远程服务器/网络状态的监视，数据收集功能，可以在运行 Linux，Solaris，HP-UX，AIX，FreeBSD，OpenBSD，OS X，Windows多平台。
+　Zabbix Agent 安装在需要被监控的目标服务器上，主要完成对硬件信息与操作系统有关的内存，CPU 等信息收集。
+　Zabbix Server可以单独监视远程服务器的服务状态，同时也可以与Zabbix Agent结合。可以轮询Zabbix Agent主动接收监视数据（trapping传递 方式），同时还可以被动接收Zabbix Agent发送的数据。
+(4). 准备安装包和部署环境
+　注意：日志文件在/tmp/目录下。
+　下载Zabbix的源码包：https://www.Zabbix.com/download_sources。注意下，下载提供了两种版本：LTS版和标准版。LTS是长期支持（Long Term Support）的缩写，Zabbix将为客户提供5年的支持服务。前三年完全支持与后两年有限制支持。前三年包括一般、关键、安全性问题解决，后两年包括关键、安全性问题解决。超出时间不提供技术支持服务；标准版只提供6&#43;1月支持。
+　现在自己电脑上的C:\Windows\Fonts目录下查看是否存在微软雅黑字体，如果有上传一份（ttf格式），如果没有网上下载微软雅黑字体的ttf格式文件。
+　Zabbix自带了数据库导入包，其中包括ibm_db2、mysql、oracle、postgresql和sqlite3。但是Web界面只提供了PHP。所以这里选择在LNMP环境下部署。
+(5). Zabbix监控端部署
+　主机名：web-test　IP地址：192.168.0.101　环境：LNMP（Mysql5.7.19、PHP7.2.24）
+　在Zabbix监控服务器上部署Zabbix Server和Zabbix Agent（监控本身）。
+　监控数据记录在mysql中
+Zabbix Serve安装 下载 (1).">
+  <meta name="twitter:description" content="Zabbix简介 　Zabbix 是一个基于 WEB 界面的提供分布式系统监视以及网络监视功能的企业级的开源解决方案。Zabbix 能监视各种网络参数，保证服务器系统的安全运营；并提供灵活的通知机制以让系统管理员快速定位解决存在的各种问题。
+　Zabbix支持多种网络方式下的监控，可以通过分布式的部署和安装监控代理Zabbix，通过C/S模式采集数据，通过B/S模式在Web端展示和配 …">
+  <meta name="author" content="WoolfBreathe"/>
+  <link href="/img/favicon.png" rel="icon" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/img/favicon.png"/>
+  <meta property="og:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@username" />
+  <meta name="twitter:creator" content="@username" />
+  <meta property="og:url" content="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="WoolfBreathe" />
+
+  <meta name="generator" content="Hugo 0.68.3" />
+  <link rel="canonical" href="/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="WoolfBreathe">
+
+  
+  
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700%7COpen+Sans:400,700" rel="stylesheet">
+  
+
+  <link rel="stylesheet" href='/css/bundle.min.62de9d30b83723e0d55f82908aedb1c5eb18c910bc24bcf43e530ce754ee1502.css' integrity='sha256-Yt6dMLg3I&#43;DVX4KQiu2xxesYyRC8JLz0PlMM51TuFQI='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
+<meta name="google-site-verification" content="oKxX4fOvB2yYmU02txZFChM93XQbESU4JaG3tNH9Hm8" />
+<meta name="baidu-site-verification" content="F5ojAyqaKU" />
+<meta name="keywords" content="DevOps, Linux">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d611849735f187dd788dc054908f7d7a";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/" title="WoolfBreathe">
+        <img src="img/avatar-icon.png" style="margin-top: -5px;height: 32px;" alt="WoolfBreathe">
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="首页" href="/">首页</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="归档" href="/archives">归档</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="标签" href="/tags">标签</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于" href="/page/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="RSS" href="/index.xml">RSS</a>
+            </li>
+          
+        
+
+        
+
+        
+
+        
+          <li>
+            <a href="#modalSearch" data-toggle="modal" data-target="#modalSearch" style="outline: none;">
+              <span id="searchGlyph" class="glyphicon glyphicon-search"></span>
+            </a>
+          </li>
+          
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+  <div id="modalSearch" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">搜索</h4>
+        </div>
+        <div class="modal-body">
+            
+<div class="aa-input-container" id="aa-input-container">
+    <input type="search" id="aa-search-input" class="aa-input-search" placeholder="Search for titles or URIs..." name="search" autocomplete="off" />
+    <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
+        <path d="M1806,332c0-123.3-43.8-228.8-131.5-316.5C1586.8-72.2,1481.3-116,1358-116s-228.8,43.8-316.5,131.5  C953.8,103.2,910,208.7,910,332s43.8,228.8,131.5,316.5C1129.2,736.2,1234.7,780,1358,780s228.8-43.8,316.5-131.5  C1762.2,560.8,1806,455.3,1806,332z M2318,1164c0,34.7-12.7,64.7-38,90s-55.3,38-90,38c-36,0-66-12.7-90-38l-343-342  c-119.3,82.7-252.3,124-399,124c-95.3,0-186.5-18.5-273.5-55.5s-162-87-225-150s-113-138-150-225S654,427.3,654,332  s18.5-186.5,55.5-273.5s87-162,150-225s138-113,225-150S1262.7-372,1358-372s186.5,18.5,273.5,55.5s162,87,225,150s113,138,150,225  S2062,236.7,2062,332c0,146.7-41.3,279.7-124,399l343,343C2305.7,1098.7,2318,1128.7,2318,1164z" />
+    </svg>
+</div>
+<script src="/js/algoliasearch.min.js"></script>
+<script src="/js/autocomplete.min.js"></script>
+
+<script>
+var client = algoliasearch("1JDRAS0AZR", "8804ac109158bb3bb60d74ce98fa332f");
+var index = client.initIndex('prod_blog');
+
+autocomplete('#aa-search-input',
+{ hint: false}, {
+    source: autocomplete.sources.hits(index, {hitsPerPage: 5}),
+    
+    displayKey: 'name',
+    
+    templates: {
+        
+        suggestion: function(suggestion) {
+            return '<span>' + '<a href="/post/' + suggestion.slug + '">' +
+            suggestion._highlightResult.title.value + '</a></span>';
+        }
+    }
+});
+</script>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/20200317190406.png" ></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="DevOps-heading">
+                <h1>Linux安装Zabbix</h1>
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="DevOps-heading">
+              <h1>Linux安装Zabbix</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+  </header>
+
+
+    
+
+
+
+<div class="container" role="main">
+  <div class="row">
+
+    
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div>
+            
+            
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="/tags/devops/">DevOps</a> &nbsp;
+              
+                  <a href="/tags/linux/">Linux</a> &nbsp;
+              
+            </h5>
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+          
+            
+<aside class="toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#下载">下载</a></li>
+    <li><a href="#mysql创建用户和数据库">MySql创建用户和数据库</a></li>
+    <li><a href="#安装依赖包">安装依赖包</a></li>
+    <li><a href="#编译安装zabbix">编译安装Zabbix</a></li>
+    <li><a href="#修改配置文件">修改配置文件</a></li>
+    <li><a href="#启动">启动</a></li>
+    <li><a href="#网站配置">网站配置</a></li>
+    <li><a href="#默认后台密码">默认后台密码</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#下载-1">下载</a></li>
+    <li><a href="#解压">解压</a></li>
+    <li><a href="#安装依赖包-1">安装依赖包</a></li>
+    <li><a href="#编译安装zabbix-1">编译安装Zabbix</a></li>
+    <li><a href="#修改配置文件-1">修改配置文件</a></li>
+    <li><a href="#启动-1">启动</a></li>
+    <li><a href="#测试">测试</a></li>
+    <li><a href="#web端添加主机">Web端添加主机</a></li>
+  </ul>
+</nav>
+</aside>
+
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <h1 id="zabbix简介">Zabbix简介</h1>
+<p>　　Zabbix 是一个基于 WEB 界面的提供分布式系统监视以及网络监视功能的企业级的开源解决方案。Zabbix 能监视各种网络参数，保证服务器系统的安全运营；并提供灵活的通知机制以让系统管理员快速定位解决存在的各种问题。</p>
+<p>　　Zabbix支持多种网络方式下的监控，可以通过分布式的部署和安装监控代理Zabbix，通过C/S模式采集数据，通过B/S模式在Web端展示和配置。Zabbix Agent监控端口10050。</p>
+<p>(1). Zabbix的主要特点</p>
+<p>　　安装配置简单，学习成本低，支持多语言（包括中文），免费开源，自动发现服务器与网络设备分布式监视，Web集中管理，可以无agent监视，用户安全认证和柔软的授权方式，通过Web设置或查看监视结果，email等功能。</p>
+<p>(2). Zabbix的主要功能</p>
+<p>　　监控CPU负载、内存使用、磁盘使用、网络状态、端口监控、日志监控、插件开发自定义</p>
+<p>(3). Zabbix运行机制</p>
+<p>　　Zabbix由Zabbix server与可选组件Zabbix agent两部分组成。</p>
+<p>　　Zabbix Server 可以通过 SNMP，Zabbix agent，Ping，端口监视等方法提供对远程服务器/网络状态的监视，数据收集功能，可以在运行 Linux，Solaris，HP-UX，AIX，FreeBSD，OpenBSD，OS X，Windows多平台。</p>
+<p>　　Zabbix Agent 安装在需要被监控的目标服务器上，主要完成对硬件信息与操作系统有关的内存，CPU 等信息收集。</p>
+<p>　　Zabbix Server可以单独监视远程服务器的服务状态，同时也可以与Zabbix Agent结合。可以轮询Zabbix Agent主动接收监视数据（trapping传递 方式），同时还可以被动接收Zabbix Agent发送的数据。</p>
+<p>(4). 准备安装包和部署环境</p>
+<p>　　注意：日志文件在/tmp/目录下。</p>
+<p>　　下载Zabbix的源码包：https://www.Zabbix.com/download_sources。注意下，下载提供了两种版本：LTS版和标准版。LTS是长期支持（Long Term Support）的缩写，Zabbix将为客户提供5年的支持服务。前三年完全支持与后两年有限制支持。前三年包括一般、关键、安全性问题解决，后两年包括关键、安全性问题解决。超出时间不提供技术支持服务；标准版只提供6+1月支持。</p>
+<p>　　现在自己电脑上的C:\Windows\Fonts目录下查看是否存在微软雅黑字体，如果有上传一份（ttf格式），如果没有网上下载微软雅黑字体的ttf格式文件。</p>
+<p>　　Zabbix自带了数据库导入包，其中包括ibm_db2、mysql、oracle、postgresql和sqlite3。但是Web界面只提供了PHP。所以这里选择在LNMP环境下部署。</p>
+<p>(5). Zabbix监控端部署</p>
+<p>　　主机名：web-test　　IP地址：192.168.0.101　　环境：LNMP（Mysql5.7.19、PHP7.2.24）</p>
+<p>　　在Zabbix监控服务器上部署Zabbix Server和Zabbix Agent（监控本身）。</p>
+<p>　　监控数据记录在mysql中</p>
+<h1 id="zabbix-serve安装">Zabbix Serve安装</h1>
+<h2 id="下载">下载</h2>
+<p>(1). 下载
+<a href="https://www.Zabbix.com/download_sources">官方下载网址</a> : <a href="https://www.Zabbix.com/download_sources">https://www.Zabbix.com/download_sources</a></p>
+<p>(2). 解压</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">tar zxf Zabbix-3.4.3.tar.gz -C /usr/local/src/　　//解压
+</code></pre></div><h2 id="mysql创建用户和数据库">MySql创建用户和数据库</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">mysql&gt; create database Zabbix;　　//创建Zabbix需要的数据库
+Query OK, 1 row affected (0.01 sec)
+
+mysql&gt; grant all on Zabbix.* to Zabbix@localhost identified by &#39;Zabbix&#39;;　　//授权
+Query OK, 0 rows affected, 1 warning (0.06 sec)
+
+mysql&gt; flush privileges;　　//刷新
+Query OK, 0 rows affected (0.03 sec)
+
+mysql&gt; use Zabbix;　　//选择数据库
+Database changed
+mysql&gt; source /usr/local/src/Zabbix-3.4.3/database/mysql/schema.sql　　//导入数据，如果不是mysql可以选择其他数据库类型
+mysql&gt; source /usr/local/src/Zabbix-3.4.3/database/mysql/images.sql　　//数据导入顺序不可变。
+mysql&gt; source /usr/local/src/Zabbix-3.4.3/database/mysql/data.sql
+
+</code></pre></div><h2 id="安装依赖包">安装依赖包</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">yum install -y net-snmp-devel libevent libevent-devel
+</code></pre></div><h2 id="编译安装zabbix">编译安装Zabbix</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cd /usr/local/src/Zabbix-3.4.3/
+
+./configure --prefix=/usr/local/Zabbix --enable-server --enable-agent --with-mysql=/var/lib/mysql/bin/mysql_config --with-net-snmp --with-libcurl
+
+make install
+</code></pre></div><p>参数说明：</p>
+<p>　　　　&ndash;prefix　　指定路径
+　　　　&ndash;enable-server　　支持Zabbix Server
+　　　　&ndash;enable-agent　　支持Zabbix Agent
+　　　　&ndash;with-mysql　　指定mysql库，可以选择自定义路径mysql_config。mysql_config是脚本文件，用于编译 mysql 客户端程序。
+　　　　&ndash;with-net-snmp　　支持SNMP协议（简单网络管理协议），需要依赖包net-snmp-devel
+　　　　&ndash;libcurl　　libcurl库，libcurl当前支持http, https, ftp, gopher, telnet, dict, file,和ldap 协议</p>
+<p>　　其他参数：</p>
+<p>　　　　&ndash;enable-proxy　　支持Zabbix proxy，一般代理服务器才会启用。</p>
+<p>　　Zabbix proxy 是一个监控代理服务器，它收集到监控数据，先存放在缓冲区（保存时间可以通过配置文件设置），然后再发送到 Zabbix server。监控代理服务需要一个独立的数据库。用 Zabbix proxy的好处：进程监控，当监控的位置通信不便时或当通讯上千台设备的时候，使用Zabbix_proxy可以简化维护分布式监控，降低 Zabbix server 的负载。</p>
+<h2 id="修改配置文件">修改配置文件</h2>
+<p>修改Zabbix Server的配置信息</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">[root@youxi1 zabbix-3.4.3]# vim /usr/local/zabbix/etc/zabbix_server.conf
+# DBHost=localhost　　//第85行，指定Mysql的地址，默认本地localhost，如果不是本地就写Mysql所在服务器的IP地址
+DBName=zabbix　　//第95行，指定使用的数据库
+DBUser=zabbix　　//第111行，指定登录数据库的用户
+DBPassword=zabbix　　//第119行，指定登录数据库的密码
+# DBSocket=/tmp/mysql.sock　　//第126行，如果不是yum安装的mysql需要注意修改，指向mysql.sock
+# DBPort=3306　　//第134行，指定登录数据库的端口号，默认3306
+</code></pre></div><p>修改Zabbix Agent的配值信息</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">[root@youxi1 zabbix-3.4.3]# vim /usr/local/zabbix/etc/zabbix_agentd.conf
+Server=127.0.0.1　　//第93行，只接受这里指定的IP地址或主机名的传入连接，逗号分隔
+# ListenPort=10050　　//第101行，指定Zabbix Agent的监听端口号，默认10050
+ServerActive=127.0.0.1　　//第134行，主动连接的Zabbix Server的IP地址
+Hostname=Zabbix server　　//第145行，Zabbix Server查看时这台主机的名称
+UnsafeUserParameters=1　　//第280行，是否允许特殊字符存在于用户自定义的参数名称中。默认为0，不允许
+</code></pre></div><h2 id="启动">启动</h2>
+<p>脚本修改</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">vi /usr/local/src/zabbix-3.4.3/misc/init.d/fedora/core/zabbix_server
+BASEDIR=/usr/local/zabbix　　//第22行，修改zabbix的基本目录
+
+vi /usr/local/src/zabbix-.4.3/misc/init.d/fedora/core/zabbix_agentd
+BASEDIR=/usr/local/zabbix　　//第22行，修改zabbix的基本目录
+
+</code></pre></div><p>脚本启动</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">/usr/local/src/zabbix-3.4.3/misc/init.d/fedora/core/zabbix_server start
+</code></pre></div><p>命令启动</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">/usr/local/zabbix/sbin/zabbix_server
+</code></pre></div><pre><code>注意:启动报错
+</code></pre>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">[root@youxi1 zabbix-3.4.3]# /usr/local/zabbix/sbin/zabbix_server　　//启动
+/usr/local/zabbix/sbin/zabbix_server: error while loading shared libraries: libmysqlclient.so.20: cannot open shared object file: No such file or directory
+[root@youxi1 zabbix-3.4.3]# vim /etc/ld.so.conf
+/var/lib/mysql/lib　　//将这一行添加进去, libmysqlclient.so.20所在的地址
+[root@youxi1 zabbix-3.4.3]# ldconfig　　//重载库文件
+</code></pre></div><h2 id="网站配置">网站配置</h2>
+<p><img src="/img/posts/Linux/Zabbix/949069-20190701152758225-333942059.png" alt="配置报错信息!"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">[root@youxi1 zabbix-3.4.3]# vim /usr/local/php/php.ini
+//提示Minimum required size of PHP post is 16M (configuration option &#34;post_max_size&#34;).
+post_max_size = 16M　　//第671行
+//提示Minimum required limit on execution time of PHP scripts is 300 (configuration option &#34;max_execution_time&#34;).
+max_execution_time = 300　　//第383行
+//提示Minimum required limit on input parse time for PHP scripts is 300 (configuration option &#34;max_input_time&#34;).
+max_input_time = 300　　//第393行
+//提示Time zone for PHP is not set (configuration parameter &#34;date.timezone&#34;).
+date.timezone = Asia/Shanghai　　//第939行，指定上海的时区
+//另外还需要指定两个参数
+mysqli.default_socket =/var/lib/mysql/mysql.sock　　//第1170行，指定mysql.sock路径
+always_populate_raw_post_data = -1　　//必须禁用，php5.6.0及以上版本，需要自己添加，可以加在文件最后
+</code></pre></div><h2 id="默认后台密码">默认后台密码</h2>
+<p>最后跳转登录页面，默认用户名admin，密码zabbix</p>
+<h1 id="zabbix-agent安装">Zabbix Agent安装</h1>
+<h2 id="下载-1">下载</h2>
+<p><a href="https://www.Zabbix.com/download_sources">官方下载网址</a> : <a href="https://www.Zabbix.com/download_sources">https://www.Zabbix.com/download_sources</a></p>
+<h2 id="解压">解压</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">tar zxf Zabbix-3.4.3.tar.gz -C /usr/local/src/　　//解压
+</code></pre></div><h2 id="安装依赖包-1">安装依赖包</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">yum install -y net-snmp-devel libevent libevent-devel
+</code></pre></div><h2 id="编译安装zabbix-1">编译安装Zabbix</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cd /usr/local/src/Zabbix-3.4.3/
+
+./configure --prefix=/usr/local/Zabbix --enable-agent
+make install
+</code></pre></div><h2 id="修改配置文件-1">修改配置文件</h2>
+<p>修改Zabbix Agent的配值信息</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">[root@youxi1 zabbix-3.4.3]# vim /usr/local/zabbix/etc/zabbix_agentd.conf
+Server=192.168.5.101    //第93行，被动连接的服务器
+# ListenPort=10050　　//第101行，指定Zabbix Agent的监听端口号，默认10050
+ServerActive=192.168.5.101　　//第134行主动连接的服务器
+Hostname=Zabbix Agent //第145行，Zabbix Server查看时这台主机的名称
+UnsafeUserParameters=1　　//第280行，是否允许特殊字符存在于用户自定义的参数名称中。默认为0，不允许
+</code></pre></div><h2 id="启动-1">启动</h2>
+<p>脚本修改</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">vi /usr/local/src/zabbix-.4.3/misc/init.d/fedora/core/zabbix_agentd
+BASEDIR=/usr/local/zabbix　　//第22行，修改zabbix的基本目录
+
+</code></pre></div><p>脚本启动</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">/usr/local/src/zabbix-3.4.3/misc/init.d/fedora/core/zabbix_server start
+</code></pre></div><h2 id="测试">测试</h2>
+<p>这是在监控端运行的命令，如果输出正常则表示配置成功</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">[root@youxi1 ~]# /usr/local/zabbix/bin/zabbix_get -s 192.168.5.102 -p10050 -k system.uname
+Linux youxi2 3.10.0-862.el7.x86_64 #1 SMP Fri Apr 20 16:44:24 UTC 2018 x86_64
+</code></pre></div><h2 id="web端添加主机">Web端添加主机</h2>
+<p>A.进入页面添加主机
+<img src="/img/posts/Linux/Zabbix/949069-20190702152334208-1123466740.png" alt="添加主机">
+B.添加主机信息，然后选择模块进行配置
+<img src="/img/posts/Linux/Zabbix/949069-20190702154433188-139385723.png" alt="添加主机">
+<img src="/img/posts/Linux/Zabbix/949069-20190702160403548-1314010733.png" alt="添加主机">
+C.等待新加的主机的可用性中出现一个绿色，就可以使用了
+<img src="/img/posts/Linux/Zabbix/949069-20190702160700885-1525427011.png" alt="添加主机"></p>
+<h1 id="原文链接">原文链接</h1>
+<p><a href="https://www.cnblogs.com/diantong/p/11115283.html">原文链接</a> : <a href="https://www.cnblogs.com/diantong/p/11115283.html">https://www.cnblogs.com/diantong/p/11115283.html</a></p>
+
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我们的微信公众帐号，在微信公众帐号中回复◉加群◉即可加入到我们的 kubernetes 讨论群里面共同学习。</p>
+<img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/qrcode.png" alt="wechat-account-qrcode">
+
+  
+          
+            <div class="entry-shang text-center">
+    <p>「真诚赞赏，手留余香」</p>
+    <button class="zs show-zs btn btn-bred">赞赏</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+    <div class="zs-modal-head">
+        <button type="button" class="close">×</button>
+        <span class="author"><img src="/img/avatar.jpeg"/>阳明</span>
+        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
+    </div>
+    <div class="zs-modal-body">
+        <div class="zs-modal-btns">
+            <button class="btn btn-blink" data-num="2">2元</button>
+            <button class="btn btn-blink" data-num="5">5元</button>
+            <button class="btn btn-blink" data-num="10">10元</button>
+            <button class="btn btn-blink" data-num="50">50元</button>
+            <button class="btn btn-blink" data-num="100">100元</button>
+            <button class="btn btn-blink" data-num="1">任意金额</button>
+        </div>
+        <div class="zs-modal-pay">
+            <button class="btn btn-bred" id="pay-text">2元</button>
+            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+            <img src="/img/wechat-2.png" id="pay-image"/>
+        </div>
+    </div>
+    <div class="zs-modal-footer">
+        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
+    </div>
+</div>
+          
+          
+            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
+    <center>
+    <a href="#" class="social-share-icon icon-weibo"></a>
+    <a href="#" class="social-share-icon icon-wechat"></a>
+    <a href="#" class="social-share-icon icon-twitter"></a>
+    <a href="#" class="social-share-icon icon-linkedin"></a>
+    <a href="#" class="social-share-icon icon-facebook"></a>
+    <a href="#" class="social-share-icon icon-qq"></a>
+    <a href="#" class="social-share-icon icon-qzone"></a>
+    </center>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
+          
+        </article>
+  
+        
+          
+
+<h3>相关文章</h3>
+<ul style="margin-bottom: 25px;">
+    
+    <li><a href="/devops/linux/devops-linux-nginx/">Linux安装Nginx源码包</a></li>
+    
+    <li><a href="/devops/linux/devops-linux-php/">Linux安装PHP源码包</a></li>
+    
+    <li><a href="/devops/linux/devops-linux-redis/">Linux安装Redis</a></li>
+    
+    <li><a href="/devops/linux/devops-linux-ssh/">Linux SSH</a></li>
+    
+    <li><a href="/devops/database/devops-linux-mysql-utilities/">Centos7.X下编译安装MySQL Utilities</a></li>
+    
+    <li><a href="/devops/database/devops-mysql/">Linux安装MySQL</a></li>
+    
+    <li><a href="/devops/linux/devops-linux-homestead/">Homestead(Windows系统Laravel环境搭建)</a></li>
+    
+    <li><a href="/devops/git/devops-git-multiuser/">Linux 配置多个Git用户SSH登录</a></li>
+    
+    <li><a href="/devops/git/devops-git-gitignore/">Git忽略规则及.gitignore规则正确姿势</a></li>
+    
+</ul>
+
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="/devops/database/devops-linux-mysql-utilities/" data-toggle="tooltip" data-placement="top" title="Centos7.X下编译安装MySQL Utilities">&larr; 前一篇</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="/devops/linux/devops-linux-timedatectl/" data-toggle="tooltip" data-placement="top" title="Linux使用Timedatectl修改时区和时间">后一篇 &rarr;</a>
+            </li>
+          
+        </ul>
+        
+
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-5376999672787220"
+            data-ad-slot="3700507799"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+  
+        
+    <div id="gitalk-container"></div>
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+    var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        labels: ['gitment'],
+        title: 'Linux安装Zabbix',
+        createIssueManually: true,
+        id: 'DevOps-Linux-Zabbix',      
+        distractionFreeMode: true  
+    });
+    gitalk.render('gitalk-container');
+</script>
+
+
+        
+          
+
+        
+  
+      </div>
+    
+    
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          <img src="/img/wechatmp.png" alt="k8s技术圈">
+          
+              <li>
+                <a href="mailto:icnych@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://github.com/cnych" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://weibo.com/cnych" title="微博">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://instagram.com/cnych" title="Instagram">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          
+          <li>
+            <a href="/index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="/">WoolfBreathe</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2021
+        </p>
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
+</script>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script >
+$(document).ready(function() {
+  var int = setInterval(fixCount, 50);  
+  
+  var initPVCount = 584976;
+  var initUVCount = 153191;
+  function fixCount() {                   
+    if ($("#busuanzi_container_site_pv").css("display") != "none") {
+        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
+        clearInterval(int); 
+    }
+    if ($("#busuanzi_container_site_uv").css("display") != "none") {
+      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
+      clearInterval(int); 
+    }  
+  }           
+});
+</script>
+ <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery-migrate@1.2.1/dist/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+$('.carousel').slick({
+    dots: true,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear',
+    centerMode: true,
+    prevArrow: '<button type="button" class="slick-prev"></button>',
+    nextArrow: '<button type="button" class="slick-next"></button>',
+});
+</script>
+
+  </body>
+</html>
+

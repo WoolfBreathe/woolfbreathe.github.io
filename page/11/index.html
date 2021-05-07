@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+  <title>WoolfBreathe-云原生|神经网络</title>
+  <meta name="keywords" content="Kubernetes,k8s,Docker,istio,Python,Django,Golang,Hugo,Prometheus,Cloud Native,云原生,微服务">
+  <meta name="description" content="kubernetes、istio、devops、prometheus、python、django、golang、云原生、微服务等技术的个人博客。">
+  <meta property="og:title" content="WoolfBreathe" />
+  <meta name="twitter:title" content="WoolfBreathe" />
+
+  <meta name="description" content="Front Page Content beautifulhugo supports content on your front page. Edit /content/_index.md to change what appears here. Delete /content/_index.md if you don&rsquo;t want any content here.">
+  <meta property="og:description" content="Front Page Content beautifulhugo supports content on your front page. Edit /content/_index.md to change what appears here. Delete /content/_index.md if you don&rsquo;t want any content here.">
+  <meta name="twitter:description" content="Front Page Content beautifulhugo supports content on your front page. Edit /content/_index.md to change what appears here. Delete /content/_index.md if you don&rsquo;t want any content here.">
+  <meta name="author" content="WoolfBreathe"/>
+  <link href="/img/favicon.png" rel="icon" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/img/favicon.png"/>
+  <meta property="og:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@username" />
+  <meta name="twitter:creator" content="@username" />
+  <meta property="og:url" content="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="WoolfBreathe" />
+
+  <meta name="generator" content="Hugo 0.68.3" />
+  <link rel="canonical" href="/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="WoolfBreathe">
+
+  
+  
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700%7COpen+Sans:400,700" rel="stylesheet">
+  
+
+  <link rel="stylesheet" href='/css/bundle.min.62de9d30b83723e0d55f82908aedb1c5eb18c910bc24bcf43e530ce754ee1502.css' integrity='sha256-Yt6dMLg3I&#43;DVX4KQiu2xxesYyRC8JLz0PlMM51TuFQI='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
+<meta name="google-site-verification" content="oKxX4fOvB2yYmU02txZFChM93XQbESU4JaG3tNH9Hm8" />
+<meta name="baidu-site-verification" content="F5ojAyqaKU" />
+<meta name="keywords" content="">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d611849735f187dd788dc054908f7d7a";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/" title="WoolfBreathe">
+        <img src="img/avatar-icon.png" style="margin-top: -5px;height: 32px;" alt="WoolfBreathe">
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="首页" href="/">首页</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="归档" href="/archives">归档</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="标签" href="/tags">标签</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于" href="/page/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="RSS" href="/index.xml">RSS</a>
+            </li>
+          
+        
+
+        
+
+        
+
+        
+          <li>
+            <a href="#modalSearch" data-toggle="modal" data-target="#modalSearch" style="outline: none;">
+              <span id="searchGlyph" class="glyphicon glyphicon-search"></span>
+            </a>
+          </li>
+          
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+  <div id="modalSearch" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">搜索</h4>
+        </div>
+        <div class="modal-body">
+            
+<div class="aa-input-container" id="aa-input-container">
+    <input type="search" id="aa-search-input" class="aa-input-search" placeholder="Search for titles or URIs..." name="search" autocomplete="off" />
+    <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
+        <path d="M1806,332c0-123.3-43.8-228.8-131.5-316.5C1586.8-72.2,1481.3-116,1358-116s-228.8,43.8-316.5,131.5  C953.8,103.2,910,208.7,910,332s43.8,228.8,131.5,316.5C1129.2,736.2,1234.7,780,1358,780s228.8-43.8,316.5-131.5  C1762.2,560.8,1806,455.3,1806,332z M2318,1164c0,34.7-12.7,64.7-38,90s-55.3,38-90,38c-36,0-66-12.7-90-38l-343-342  c-119.3,82.7-252.3,124-399,124c-95.3,0-186.5-18.5-273.5-55.5s-162-87-225-150s-113-138-150-225S654,427.3,654,332  s18.5-186.5,55.5-273.5s87-162,150-225s138-113,225-150S1262.7-372,1358-372s186.5,18.5,273.5,55.5s162,87,225,150s113,138,150,225  S2062,236.7,2062,332c0,146.7-41.3,279.7-124,399l343,343C2305.7,1098.7,2318,1128.7,2318,1164z" />
+    </svg>
+</div>
+<script src="/js/algoliasearch.min.js"></script>
+<script src="/js/autocomplete.min.js"></script>
+
+<script>
+var client = algoliasearch("1JDRAS0AZR", "8804ac109158bb3bb60d74ce98fa332f");
+var index = client.initIndex('prod_blog');
+
+autocomplete('#aa-search-input',
+{ hint: false}, {
+    source: autocomplete.sources.hits(index, {hitsPerPage: 5}),
+    
+    displayKey: 'name',
+    
+    templates: {
+        
+        suggestion: function(suggestion) {
+            return '<span>' + '<a href="/post/' + suggestion.slug + '">' +
+            suggestion._highlightResult.title.value + '</a></span>';
+        }
+    }
+});
+</script>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    
+    
+    
+  </header>
+
+
+    
+
+  <div class="main-banner">
+      
+      <div class="main-banner-box">
+        <div class="carousel banner">
+          
+          <div class="carousel-item">
+            <a href="/post/promotion-51/" title="打造独当一面的 Kubernetes 运维、开发工程师" class="banner-link">
+              <img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/k8s-banner-k8scourse.jpg" class="banner-img" alt="打造独当一面的 Kubernetes 运维、开发工程师">
+            </a>
+          </div>
+          
+          <div class="carousel-item">
+            <a href="https://edu.aliyun.com/roadmap/cloudnative?spm=a1z389.11499242.0.0.65452413qdXfZ7&amp;utm_content=g_1000093512" title="云原生技术公开课" class="banner-link">
+              <img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/aliyun-cloudnative-edu1.jpeg" class="banner-img" alt="云原生技术公开课">
+            </a>
+          </div>
+          
+          <div class="carousel-item">
+            <a href="https://youdianzhishi.com/?utm_source=blog&amp;utm_campaign=referral&amp;utm_medium=banner" title="优点知识" class="banner-link">
+              <img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/k8s-banner-ydzs.jpg" class="banner-img" alt="优点知识">
+            </a>
+          </div>
+          
+          <div class="carousel-item">
+            <a href="https://detail.tmall.com/item.htm?spm=a212k0.12153887.0.0.64a3687dQ6nSzh&amp;id=590161370307" title="《深入浅出 Prometheus》" class="banner-link">
+              <img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/k8s-banner-promebook.jpg" class="banner-img" alt="《深入浅出 Prometheus》">
+            </a>
+          </div>
+          
+        </div>
+      </div>
+      
+    
+      
+      <div class="minor-banner-box container">
+        <div class="minor-banner row">
+          
+          <li class="minor-item col-md-3">
+            <a href="https://youdianzhishi.com/web/course/1018?utm_source=blog&amp;utm_campaign=referral&amp;utm_medium=tophero" title="Kubernetes 开发课">
+              <img src="https://sdn.youdianzhishi.com/covers/2020/7/14/066c90abafe0441686a868e7c8943b4f.png?imageMogr/v2/auto-orient/thumbnail/600x" alt="Kubernetes 开发课">
+            </a>
+          </li>
+          
+          <li class="minor-item col-md-3">
+            <a href="https://youdianzhishi.com/web/course/1023?utm_source=blog&amp;utm_campaign=referral&amp;utm_medium=tophero" title="CKA 线上直播班">
+              <img src="https://sdn.youdianzhishi.com/covers/2021/1/22/24da438bbef842cc8145e018c086e388.png?imageMogr/v2/auto-orient/thumbnail/600x" alt="CKA 线上直播班">
+            </a>
+          </li>
+          
+          <li class="minor-item col-md-3">
+            <a href="https://youdianzhishi.com/web/course/1013?utm_source=blog&amp;utm_campaign=referral&amp;utm_medium=tophero" title="基于 Jenkins 的 DevOps 流水线实践">
+              <img src="https://sdn.haimaxy.com/covers/2019/12/30/bca85adf15d94da39c9e5b6b45d7e412.png?x-oss-process=image/resize,w_400" alt="基于 Jenkins 的 DevOps 流水线实践">
+            </a>
+          </li>
+          
+          <li class="minor-item col-md-3">
+            <a href="https://youdianzhishi.com/web/course/1021?utm_source=blog&amp;utm_campaign=referral&amp;utm_medium=tophero" title="Kubernetes 网络训练营">
+              <img src="https://sdn.youdianzhishi.com/covers/2020/10/5/e29660a558a64d119a61438ae9e6b155.png?imageMogr/v2/auto-orient/thumbnail/600x" alt="Kubernetes 网络训练营">
+            </a>
+          </li>
+          
+        </div>
+      </div>
+      
+
+  </div>
+
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-lg-8 col-md-10">
+        <div class="posts-list">
+          
+          
+
+          	
+
+            <article class="post-preview">
+              <a href="/algorithms/binarytree/algorithms-binarytree-traversal/">
+                <h2 class="post-title">二叉树(BinaryTree)-遍历</h2>
+                
+              </a>
+
+              <span class="post-meta">
+  
+    发表于 2019-08-22
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <p>二叉树的遍历指的是从根节点出发，按照某种次序依次访问二叉树中的所有结点，使得每个结点被访问一次且仅被访问一次。</p>
+<p>有多种方式可以遍历二叉树，如果限制从左到右的习惯方式，主要分为三种：前序遍历、中序遍历和后序遍历。下面我们简单介绍这几种遍历方式及对应实现算法，所谓的前序、中序和后序都是以根节点作为参照系。</p>
+<h2 id="前序遍历">前序遍历</h2>
+<p>如果二叉树为空，则返回空，否则从根节点开始，先遍历左子树，再遍历右子树：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/87eceb3154bc88a58a470e5fb6dff444a9d74a61a6c82ebd842e0d42dc959673.png" alt="前序遍历"></p>
+<h2 id="中序遍历">中序遍历</h2>
+<p>同样，如果是空树，返回空，否则从左子树最左侧的节点开始，然后从左到右依次遍历左子树，真正的根节点，最后是右子树（依然是从最左侧节点开始从左到右的顺序遍历）：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/3bb2338085adc868f5d4548fd9368ddd1d6b7f7dfffb7719aa5cbd20829089f1.png" alt="中序遍历"></p>
+<h2 id="后序遍历">后序遍历</h2>
+<p>如果是空树，返回空，否则还是从左子树最左侧的节点开始，先遍历完叶子节点，再遍历父节点，遍历完左子树后，直接从右子树最左侧节点开始，按照和左子树同样的顺序遍历完右子树，最后访问根节点：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/e72f8a1215fc27864efc60e8daeed22cd2c082db38db7536edd6d351c36745bc.png" alt="后序遍历"></p>
+<p>不同的遍历方式从不同维度将二叉树这种非线性的结构变成了某种意义上的线性序列，从而方便计算机操作。</p>
+<h2 id="遍历实现代码">遍历实现代码</h2>
+<p>二叉树的遍历其实就是个递归的过程，所以对应算法也采用递归来实现。</p>
+<p>我们以二叉链表的方式来存储数组，对应的前序、中序、后序实现代码如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&lt;?php
+
+// 二叉链表节点
+class Node
+{
+    public $data;
+    public $left = null;
+    public $right = null;
+
+    public function __construct($data)
+    {
+        $this-&gt;data = $data;
+    }
+}
+
+/**
+ * 前序遍历
+ * @param Node $tree
+ */
+function preOrderTraverse($tree)
+{
+    if ($tree == null) {
+        return;
+    }
+    printf(&#34;%s\n&#34;, $tree-&gt;data);
+    preOrderTraverse($tree-&gt;left);
+    preOrderTraverse($tree-&gt;right);
+}
+
+/**
+ * 中序遍历
+ * @param Node $tree
+ */
+function midOrderTraverse($tree)
+{
+    if ($tree == null) {
+        return;
+    }
+    midOrderTraverse($tree-&gt;left);
+    printf(&#34;%s\n&#34;, $tree-&gt;data);
+    midOrderTraverse($tree-&gt;right);
+}
+
+/**
+ * 后序遍历
+ * @param Node $tree
+ */
+function postOrderTraverse($tree)
+{
+    if ($tree == null) {
+        return;
+    }
+    postOrderTraverse($tree-&gt;left);
+    postOrderTraverse($tree-&gt;right);
+    printf(&#34;%s\n&#34;, $tree-&gt;data);
+}
+</code></pre></div><p>对应的输出结果如下，表明三种遍历都没有问题：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/77e0e42b813a53dab4fe7ababd0bedce9144f7b4140b50483ab5b8d51101f88b.png" alt="二叉树遍历演示"></p>
+
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                
+                </span>
+              
+            </article>
+
+          
+
+          	
+
+            <article class="post-preview">
+              <a href="/algorithms/binarytree/algorithms-binarytree-storage/">
+                <h2 class="post-title">二叉树(BinaryTree)-存储</h2>
+                
+              </a>
+
+              <span class="post-meta">
+  
+    发表于 2019-08-21
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <p>树这种结构不能简单通过线性表的前后关系来存储，在线性表中，一个节点只有至多一个前驱节点和至多一个后驱节点，树则不然，一个节点可能有多个后驱节点，这个时候，我们需要通过更加复杂的结构才能存储树。二叉树是一种特殊的树，比多叉树要简单，因为特定节点至多只有两个节点，这就极大简化了相应的数据结构，使得通过线性表就可以实现二叉树的存储。我们后面基本只讨论二叉树，下面我们通过数组和链表来演示如何存储二叉树。</p>
+<h1 id="通过数组存储二叉树">通过数组存储二叉树</h1>
+<p>对于特定的二叉树而言，比如满二叉树、完全二叉树，它们的节点之间是有一定关联关系的，以下面这棵完全二叉树为例：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/image-1571818975547.png" alt="完全二叉树"></p>
+<p>按照从上到下，从左到右对所有节点编号，可以看到，下一层的左右子节点和对应父节点序号存在某种数学关系，如果父节点的序号是 i，其对应左子节点位于 2i 的位置上，对应右子节点位于 2i + 1 的位置上，我们可以参照这个规则将上述完全二叉树存储到数组中：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/image-1571819020160.png" alt="数组存储二叉树"></p>
+<p>注意我们的下标从 1 开始（根节点），索引为 0 的下标舍弃，浪费这个空间，以方便计算。这样，我们就可以从根节点开始，依次将所有节点元素存放到数组中，并且可以根据节点间的数学关系很方便地遍历整棵树。此外，由于完全二叉树的特殊性，除了第一个元素之外，该数组不存在任何空间的浪费。由于满二叉树是完全二叉树的子集，所以也可以通过这种方式来存储。</p>
+<p>那么其它二叉树呢？当然也可以按照这种思路来做，我们把不存在的节点补全，比如假设上述序号为 4、6、8、9 的元素不存在：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/image-1571819069689.png" alt="二叉树存储"></p>
+<p>可以看到，不存在的元素补上，只是对应位置值为 null，缺失的节点越多，数组的「空洞」也就越多，如果是极端情况，比如二叉树只包含 1、3、7 三个元素，那么数组中将会存在大量的「空洞」，浪费大量的空间，而且也会影响性能。</p>
+<p>综上，数组适合满二叉树、完全二叉树这些特殊二叉树的存储，一些比较稠密的二叉树也可以用数组，如果二叉树比较稀疏就不适合用数组了，我们可以通过链表来存储它们。</p>
+<h1 id="通过链表存储二叉树">通过链表存储二叉树</h1>
+<p>理论上来说，链表适用于所有的二叉树存储，只不过这里我们需要对线性表中的链表进行扩展，因为二叉树特定节点最多有两个子节点，所有我们在链表结点上设置两个指针域，分别指向左右子节点，所以这种链表结构又被称作二叉链表。我们可以通过一个类表示二叉链表的结点：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">class Node
+{
+    public $data;
+    public $left = null;
+    public $right = null;
+
+    public function __construct($data)
+    {
+        $this-&gt;data = $data;
+    }
+}
+</code></pre></div><p>如果要用二叉链表表示上面的完全二叉树，对应的图示如下：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/image-1571819153229.png" alt="链表存储二叉树"></p>
+<p>不管是什么样结构的二叉树，用链表来存储都不会存在空间的浪费。关于二叉树的创建、查找和删除，需要等到介绍完二叉树的遍历才能开始，下一篇我们就来探讨如何遍历二叉树。</p>
+
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                
+                </span>
+              
+            </article>
+
+          
+
+          	
+
+            <article class="post-preview">
+              <a href="/algorithms/binarytree/algorithms-binarytree/">
+                <h2 class="post-title">二叉树(BinaryTree)</h2>
+                
+              </a>
+
+              <span class="post-meta">
+  
+    发表于 2019-08-20
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <h1 id="树的相关概念">树的相关概念</h1>
+<p>树的相关概念</p>
+<p>树这种数据结构模拟了自然界中树的概念，自然界中的树有根、叶子、枝干，数据结构中的树也是如此，只不过是倒过来的：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/image-1571818138580.png" alt="二叉树图示"></p>
+<p>其中的每个元素叫做<strong>节点</strong>。树的顶点（没有父元素的节点）叫<strong>根节点</strong>，如 E；每个分支的末端节点（没有子元素的节点）叫<strong>叶子节点</strong>，如 G、H、I、J、K、L；用来连接相邻节点之间的关系叫父子关系，比如 E 是 A、F 的父节点，A、F 是 E 的<strong>子节点</strong>；具有同一个父节点的多个子节点叫做兄弟节点，比如 A、F 是<strong>兄弟节点</strong>。</p>
+<p>节点拥有的子节点数目叫做节点的<strong>度</strong>，显然，叶子节点的度为 0，树的度是树内各节点度的最大值。</p>
+<p>除此之外，树还有高度、深度和层的概念：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/image-1571818206467.png" alt="树的高度、深度和层"></p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/image-1571818238752.png" alt="树的高度、深度和层"></p>
+<pre><code>注：其实线性表也可以看作一种特殊的树，只不过所有节点都在一个分支上，第一个元素是根节点，最后一个元素是子节点，没有兄弟节点。层数就是线性表的长度。
+</code></pre>
+<p>另外，也有些地方将二叉树的深度定义为结点的最大层次数，比如《大话数据结构》就是这样定义的，这个问题不大，完全就是个定义而已：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/Jietu20200330-211806.jpg" alt="二叉树的深度"></p>
+<p>多个互不相交的树可以构成森林。</p>
+<h1 id="二叉树的定义">二叉树的定义</h1>
+<p>二叉树是平时遇到的最常见的树结构，它是一种特殊的树，顾名思义，就是每个节点最多有两个「分叉」，即两个子节点，分别是左子节点和右子节点，不过，二叉树并不要求每个节点都有两个子节点，有的节点只有左子结点，有的节点只有右子节点。比如下面这些都是二叉树：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/image-1571818363331.png" alt="二叉树"></p>
+<p>根据左右子节点的饱和度，我们又从二叉树中提取出两种特殊的二叉树 —— 满二叉树和完全二叉树。满二叉树即所有分支节点都有左右子节点，并且所有叶子节点都在同一层上，如上面的图2便是满二叉树。完全二叉树要复杂一些，深度为 k 有 n 个节点的二叉树，当且仅当其中的每一节点，都可以和同样深度 k 的满二叉树，序号为 1 到 n 的节点一对一对应时，称为完全二叉树，比如上面的图3就是完全二叉树。</p>
+<h1 id="二叉树的特性">二叉树的特性</h1>
+<p>在讨论二叉树的创建和存储之前，我们先来总结下二叉树的一些特性，以便后续用到（这里二叉树数的深度定义采用的最大层次数，如果从 0 开始计算的话，可以自行推演一下）：</p>
+<p><strong>性质1：</strong></p>
+<p>在第 i 层最多有 $2^{i-1}$ 个节点。</p>
+<p><strong>性质2：</strong></p>
+<p>深度为 k 的二叉树最多有 $2^k-1$ 个节点。</p>
+<p><strong>性质3：</strong></p>
+<p>对于任何一个二叉树，叶子节点数为 n0，度为 2 的节点数为 n2，则 n0 = n2+1。</p>
+<p><strong>性质4：</strong></p>
+<p>具有n个节点的完全二叉树深为 $\log_2 x + 1$（其中x表示不大于n的最大整数）。</p>
+<p><strong>性质5：</strong></p>
+<p>若对一棵有n个节点的完全二叉树进行顺序编号（1≤i≤n），那么，对于编号为i（i≥1）的节点：
+当i=1时，该节点为根，它无双亲节点 。
+当i&gt;1时，该节点的双亲节点的编号为i/2 。
+若2i≤n，则有编号为2的左孩子，否则没有左孩子 。
+若2+1≤n，则有编号为2i+1的右孩子，否则没有右孩子 。</p>
+
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                
+                </span>
+              
+            </article>
+
+          
+
+          	
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>	
+            <ins class="adsbygoogle"	
+                style="display:block"	
+                data-ad-format="fluid"	
+                data-ad-layout-key="-49+ch+3h-db+7h"	
+                data-ad-client="ca-pub-5376999672787220"	
+                data-ad-slot="7981888143"></ins>	
+            <script>	
+                (adsbygoogle = window.adsbygoogle || []).push({});	
+            </script>	
+          	
+
+            <article class="post-preview">
+              <a href="/algorithms/stringmatching/algorithms-stringmatching-kmp/">
+                <h2 class="post-title">字符串匹配-KMP</h2>
+                
+              </a>
+
+              <span class="post-meta">
+  
+    发表于 2019-08-18
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  简介 KMP 算法可以说是字符串匹配算法中最知名的算法了，KMP 算法是根据三位作者（D.E.Knuth，J.H.Morris 和 V.R.Pratt）的名字来命名的，算法的全称是 Knuth Morris Pratt 算法，简称为 KMP 算法。
+原理 假设主串是 a，模式串是 b。在模式串与主串匹配的过程中，当遇到不可匹配的字符的时候，我们希望找到一些规律，可以将模式串往后多滑动几位，跳过那些肯定不会匹配的情况，从而避免 BF 算法这种暴力匹配，提高算法性能。下面我们来探讨下这个规律如何找到。
+参考下面个主串和模式串的匹配，当模式串移动到当前位置，比对到最后一个字符 D 时，发现与主串不匹配，如果按照 BF 算法，就是把模式串往后移一位，再逐个比较，这样做固然可以，但是效率很差：
+一个基本事实是，当 D 与主串不匹配时，我们已知前面的主串序列是 ABCDA，如果把模式串往后移一位肯定和主串不匹配，我们可不可以直接把模式串移到下一个可能和 A 匹配的主串位置？
+实际上，KMP 算法正是基于这一理念，设法利用这个已知信息，不把模式串移到已经比较过的位置，继续把它向后移，这样综合下来就极大提高了搜索匹配效率。
+怎么找到这个规律，确定把模式串往后移多少位呢？在模式串和主串匹配的过程中，我们把不能匹配的那个字符仍然叫作「坏字符」，把已经匹配的那段字符串叫作「好前缀」：
+在模式串和主串匹配的过程中，当遇到坏字符后，对于已经比对过的好前缀，我们只需要拿好前缀本身，在它的后缀子串中，查找最长的那个可以跟好前缀的前缀子串匹配的下标位置，然后将模式串后移到该位置即可。
+这里，我们要解释几个概念：
+后缀子串：以某个字符串最后一个字符为尾字符的子串（不包含字符串自身），比如上面的 ababa，后缀子串为 baba、aba、ba、a；前缀子串：以某个字符串第一个字符为首字符的子串（不包含字符串自身），还是以 ababa 为例，前缀子串为 a、aba、abab；最长可匹配后缀子串：后缀子串与前缀子串最长可匹配子串，也可叫做共有子串，以 ababa 为例，自然是 aba 了，长度为 3；最长可匹配前缀子串：与上面定义相对，即前缀子串与后缀子串最长可匹配子串。最长可匹配前缀子串和最长可匹配后缀子串肯定是一样的。 假设坏字符所在位置是 j，最长可匹配后缀子串长度为 k，则模式串需要后移的位数为 j-k。每当我们遇到坏字符，就将模式串后移 j-k 位，直到模式串与对应主串字符完全匹配；如果移到最后还是不匹配，则返回 -1。这就是 KMP 算法的核心思想。
+KMP 算法的实现 了解了核心思想，接下来，就可以考虑如何实现 KMP 算法了，实现 KMP 算法最核心的部分是构建一个用来存储模式串中每个前缀子串（这些前缀都有可能是好前缀）最长可匹配前缀子串的结尾字符下标数组，我们把这个数组叫做 next 数组，对于上面 ababacd 这个模式串而言，对应的 next 数组如下：
+                  <a href="/algorithms/stringmatching/algorithms-stringmatching-kmp/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                
+                  #<a href="/tags/stringmatching/">StringMatching</a>&nbsp;
+                
+                </span>
+              
+            </article>
+
+          
+        </div>
+
+        <div align="center" class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          
+
+<ul class="pagination">
+    
+    <li class="page-item">
+        <a href="/" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+    </li>
+    
+    <li class="page-item">
+    <a href="/page/10/" class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+    </li>
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/">1</a></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/page/2/">2</a></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/page/3/">3</a></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item disabled"><span aria-hidden="true">&nbsp;&hellip;&nbsp;</span></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/page/10/">10</a></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item active"><a class="page-link" href="/page/11/">11</a></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/page/12/">12</a></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item disabled"><span aria-hidden="true">&nbsp;&hellip;&nbsp;</span></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/page/18/">18</a></li>
+    
+    
+    <li class="page-item">
+    <a href="/page/12/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+    </li>
+    
+    <li class="page-item">
+        <a href="/page/18/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    </li>
+    
+</ul>
+
+
+          
+          
+          
+          
+          
+        </div>
+
+      </div>
+
+      <div class="col-lg-4 col-md-2">
+
+        
+
+        <div class="sidebar-wrap sidebar-about">
+          <div class="about-img">
+            <img src="https://www.qikqiak.com/img/avatar.jpeg" alt="阳明" class="rounded-circle">
+          </div>
+          <h4 class="py-2">Hi! -That's Me</h4>
+          <p class="about-text">大家好，我是WoolfBreathe，一个有着产品思维的工程师，现在也在努力将自己的产品思维体系化，对互联网产品有自己独到的见解，现阶段专注kubernetes和istio。</p>
+          <ul class="list-inline social-link">
+            <li class="list-inline-item"><a href="mailto:icnych@gmail.com"><i class="fa fa-envelope"></i></a></li>
+            <li class="list-inline-item"><a href="https://github.com/cnych"><i class="fa fa-github"></i></a></li>
+            <li class="list-inline-item"><a href="https://weibo.com/cnych"><i class="fa fa-weibo"></i></a></li>
+            <li class="list-inline-item"><a href="/index.xml"><i class="fa fa-rss"></i></a></li>
+            <li class="list-inline-item"><a href="https://instagram.com/cnych"><i class="fa fa-instagram"></i></a></li>
+          </ul>
+          
+          <img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/qrcode_for_gh_d6dd87b6ceb4_344.jpg" alt="k8s技术圈">
+          
+          
+          
+          
+            
+          
+        </div>
+
+        
+
+        
+        <div class="sidebar-wrap">
+          <div class="sidebar-block course-wrap">
+            <h4 class="sidebar-title">文档资料</h4>
+            
+            <a class="course-post" href="/envoy-book/?utm_source=blog&amp;utm_campaign=referral&amp;utm_medium=sidemenu" title="Envoy 入门教程">
+              <img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/envoy-book-cover.png" alt="Envoy 入门教程" class="img-fluid">
+            </a>
+            
+            <a class="course-post" href="/k8s-book/?utm_source=blog&amp;utm_campaign=referral&amp;utm_medium=sidemenu" title="从 Docker 到 Kubernetes 进阶">
+              <img src="https://sdn.haimaxy.com/covers/2018/9/14/0b8530ca670b477d813e3ad7e24165f3.png" alt="从 Docker 到 Kubernetes 进阶" class="img-fluid">
+            </a>
+            
+            <a class="course-post" href="https://edu.aliyun.com/roadmap/cloudnative?spm=a1z389.11499242.0.0.65452413qdXfZ7&amp;utm_content=g_1000093512" title="云原生技术公开课">
+              <img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/aliyun-cloudnative-edu2.jpeg" alt="云原生技术公开课" class="img-fluid">
+            </a>
+            
+          </div>
+        </div>
+        
+        
+        
+        <div class="sidebar-wrap">
+          <div class="sidebar-block latest-post">
+            <h4 class="sidebar-title">热门文章</h4>
+            <ol class="list-unstyled">
+              
+              <li>
+                <a href="/post/how-to-learn-kubernetes/">
+                  <div class="rpost-img">
+                    <img src="/img/posts/photo-1535383494412-9bdda0d6d9f3.jpeg" alt="如何学习 Kubernetes？" class="img-fluid">
+                  </div>
+                  <h5>如何学习 Kubernetes？</h5>
+                  <p class="text-muted">August 29, 2018</p>
+                </a>
+              </li>
+              
+              <li>
+                <a href="/post/manual-install-high-available-kubernetes-cluster/">
+                  <div class="rpost-img">
+                    <img src="/img/posts/WX20171110-105351.png" alt="手动搭建高可用的 Kubernetes 集群" class="img-fluid">
+                  </div>
+                  <h5>手动搭建高可用的 Kubernetes 集群</h5>
+                  <p class="text-muted">November 6, 2017</p>
+                </a>
+              </li>
+              
+              <li>
+                <a href="/post/use-kubeadm-install-kubernetes-1.10/">
+                  <div class="rpost-img">
+                    <img src="/img/posts/kubeadm-dashboard.png" alt="使用 kubeadm 搭建 kubernetes1.10 集群" class="img-fluid">
+                  </div>
+                  <h5>使用 kubeadm 搭建 kubernetes1.10 集群</h5>
+                  <p class="text-muted">April 14, 2018</p>
+                </a>
+              </li>
+              
+              <li>
+                <a href="/post/huawei-cloudnativelives-k8s-course/">
+                  <div class="rpost-img">
+                    <img src="/img/posts/cloudnativelives-video.png" alt="华为 CloudNativeLives Kubernetes 系列课程" class="img-fluid">
+                  </div>
+                  <h5>华为 CloudNativeLives Kubernetes 系列课程</h5>
+                  <p class="text-muted">August 31, 2018</p>
+                </a>
+              </li>
+              
+              <li>
+                <a href="/post/dockerfile-best-practice/">
+                  <div class="rpost-img">
+                    <img src="/img/posts/photo-1536620752150-a7e9e62a62ee.jpeg" alt="Dockerfile 最佳实践" class="img-fluid">
+                  </div>
+                  <h5>Dockerfile 最佳实践</h5>
+                  <p class="text-muted">September 12, 2018</p>
+                </a>
+              </li>
+              
+              <li>
+                <a href="/post/kubernetes-jenkins1/">
+                  <div class="rpost-img">
+                    <img src="/img/posts/k8s-jenkins-slave.png" alt="基于 kubernetes 的动态 jenkins slave" class="img-fluid">
+                  </div>
+                  <h5>基于 kubernetes 的动态 jenkins slave</h5>
+                  <p class="text-muted">July 28, 2018</p>
+                </a>
+              </li>
+              
+              <li>
+                <a href="/post/kubernetes-jenkins2/">
+                  <div class="rpost-img">
+                    <img src="/img/posts/pipeline-demo5.png" alt="Jenkins Pipeline 部署 Kubernetes 应用" class="img-fluid">
+                  </div>
+                  <h5>Jenkins Pipeline 部署 Kubernetes 应用</h5>
+                  <p class="text-muted">July 28, 2018</p>
+                </a>
+              </li>
+              
+              <li>
+                <a href="/post/kubernetes-jenkins3/">
+                  <div class="rpost-img">
+                    <img src="/img/posts/blue-demo7.png" alt="Jenkins Blue Ocean 的使用" class="img-fluid">
+                  </div>
+                  <h5>Jenkins Blue Ocean 的使用</h5>
+                  <p class="text-muted">August 2, 2018</p>
+                </a>
+              </li>
+              
+              <li>
+                <a href="/post/prometheus-operator-advance/">
+                  <div class="rpost-img">
+                    <img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/lfrvk.jpg" alt="Prometheus Operator 高级配置" class="img-fluid">
+                  </div>
+                  <h5>Prometheus Operator 高级配置</h5>
+                  <p class="text-muted">December 20, 2018</p>
+                </a>
+              </li>
+              
+              <li>
+                <a href="/post/automatic-kubernetes-ingress-https-with-lets-encrypt/">
+                  <div class="rpost-img">
+                    <img src="/img/posts/traefik-dashboard-acme.png" alt="使用 Let&#39;s Encrypt 实现 Kubernetes Ingress 自动化 HTTPS" class="img-fluid">
+                  </div>
+                  <h5>使用 Let&#39;s Encrypt 实现 Kubernetes Ingress 自动化 HTTPS</h5>
+                  <p class="text-muted">December 5, 2018</p>
+                </a>
+              </li>
+              
+              <li>
+                <a href="/post/python-virtualenv-all-know/">
+                  <div class="rpost-img">
+                    <img src="/img/posts/django2-index.jpg" alt="Python 虚拟环境全知道" class="img-fluid">
+                  </div>
+                  <h5>Python 虚拟环境全知道</h5>
+                  <p class="text-muted">January 9, 2018</p>
+                </a>
+              </li>
+              
+              <li>
+                <a href="/post/use-rbac-in-k8s/">
+                  <div class="rpost-img">
+                    <img src="/img/posts/WX20180118-150156.png" alt="深入理解 Kubernetes RBAC 的用法" class="img-fluid">
+                  </div>
+                  <h5>深入理解 Kubernetes RBAC 的用法</h5>
+                  <p class="text-muted">June 22, 2018</p>
+                </a>
+              </li>
+              
+            </ol>
+          </div>
+        </div>
+        
+        
+        
+        
+      </div>
+    </div>
+  </div>
+
+  
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          <img src="/img/wechatmp.png" alt="k8s技术圈">
+          
+              <li>
+                <a href="mailto:icnych@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://github.com/cnych" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://weibo.com/cnych" title="微博">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://instagram.com/cnych" title="Instagram">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          
+          <li>
+            <a href="/index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="/">WoolfBreathe</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2021
+        </p>
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
+</script>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script >
+$(document).ready(function() {
+  var int = setInterval(fixCount, 50);  
+  
+  var initPVCount = 584976;
+  var initUVCount = 153191;
+  function fixCount() {                   
+    if ($("#busuanzi_container_site_pv").css("display") != "none") {
+        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
+        clearInterval(int); 
+    }
+    if ($("#busuanzi_container_site_uv").css("display") != "none") {
+      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
+      clearInterval(int); 
+    }  
+  }           
+});
+</script>
+ <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery-migrate@1.2.1/dist/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+$('.carousel').slick({
+    dots: true,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear',
+    centerMode: true,
+    prevArrow: '<button type="button" class="slick-prev"></button>',
+    nextArrow: '<button type="button" class="slick-next"></button>',
+});
+</script>
+
+  </body>
+</html>
+

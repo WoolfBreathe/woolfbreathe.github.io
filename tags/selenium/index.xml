@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Selenium on WoolfBreathe</title>
+    <link>/tags/selenium/</link>
+    <description>Recent content in Selenium on WoolfBreathe</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <managingEditor>youremail@domain.com (WoolfBreathe)</managingEditor>
+    <webMaster>youremail@domain.com (WoolfBreathe)</webMaster>
+    <lastBuildDate>Sun, 15 Mar 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/selenium/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Selenium &#43; Chrome</title>
+      <link>/post/computerlanguages/python/computerlanguages-python-selenium/</link>
+      <pubDate>Sun, 15 Mar 2020 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/computerlanguages/python/computerlanguages-python-selenium/</guid>
+      <description>简介 Selenium 用于 抓取数据 自动化测试(很多网站API会添加sign验证, 很难破解, Selenium是最优选择)
+Selenium IDE 可以实现录制页面操作功能并且回访的功能, 是非常强大的自动化测试工具, 不需要编程能力一样可以使用
+Selenium 结合 Chrome 使用 Chrome DevTools 可以实现非常强大的功能
+Ubuntu安装 安装Chrome sudo apt-get install libxss1 libappindicator1 libindicator7 libgconf-2-4 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb sudo dpkg -i google-chrome*.deb 运行可能出现错误,按照提示运行 apt --fix-broken install 安装Selenium pip install selenium 安装ChromeDriver wget -N http://chromedriver.storage.googleapis.com/2.29/chromedriver_linux64.zip ##注意，这里2.29要换成实际对应下载的CHROME的版本。目前最新的是：2.43 unzip chromedriver_linux64.zip chmod +x chromedriver sudo mv -f chromedriver /usr/local/share/chromedriver sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver sudo ln -s /usr/local/share/chromedriver /usr/bin/chromedriver 注意: Chrome浏览器版本要 与 chromedrive版本 相符 /usr/bin/google-chrome-stable --version 查看Chrome浏览器版本 /usr/bin/chromedrive -v 查看chromedrive版本  使用教程 Selenium 官网 Selenium Python Chrome DevTools Protocal, Chrome开发者工具协议 API文档: https://chromedevtools.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+  <title>WoolfBreathe-云原生|神经网络</title>
+  <meta name="keywords" content="Kubernetes,k8s,Docker,istio,Python,Django,Golang,Hugo,Prometheus,Cloud Native,云原生,微服务">
+  <meta name="description" content="kubernetes、istio、devops、prometheus、python、django、golang、云原生、微服务等技术的个人博客。">
+  <meta property="og:title" content="WoolfBreathe" />
+  <meta name="twitter:title" content="WoolfBreathe" />
+
+  <meta name="description" content="Front Page Content beautifulhugo supports content on your front page. Edit /content/_index.md to change what appears here. Delete /content/_index.md if you don&rsquo;t want any content here.">
+  <meta property="og:description" content="Front Page Content beautifulhugo supports content on your front page. Edit /content/_index.md to change what appears here. Delete /content/_index.md if you don&rsquo;t want any content here.">
+  <meta name="twitter:description" content="Front Page Content beautifulhugo supports content on your front page. Edit /content/_index.md to change what appears here. Delete /content/_index.md if you don&rsquo;t want any content here.">
+  <meta name="author" content="WoolfBreathe"/>
+  <link href="/img/favicon.png" rel="icon" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/img/favicon.png"/>
+  <meta property="og:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@username" />
+  <meta name="twitter:creator" content="@username" />
+  <meta property="og:url" content="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="WoolfBreathe" />
+
+  <meta name="generator" content="Hugo 0.68.3" />
+  <link rel="canonical" href="/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="WoolfBreathe">
+
+  
+  
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700%7COpen+Sans:400,700" rel="stylesheet">
+  
+
+  <link rel="stylesheet" href='/css/bundle.min.62de9d30b83723e0d55f82908aedb1c5eb18c910bc24bcf43e530ce754ee1502.css' integrity='sha256-Yt6dMLg3I&#43;DVX4KQiu2xxesYyRC8JLz0PlMM51TuFQI='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
+<meta name="google-site-verification" content="oKxX4fOvB2yYmU02txZFChM93XQbESU4JaG3tNH9Hm8" />
+<meta name="baidu-site-verification" content="F5ojAyqaKU" />
+<meta name="keywords" content="">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d611849735f187dd788dc054908f7d7a";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/" title="WoolfBreathe">
+        <img src="img/avatar-icon.png" style="margin-top: -5px;height: 32px;" alt="WoolfBreathe">
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="首页" href="/">首页</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="归档" href="/archives">归档</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="标签" href="/tags">标签</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于" href="/page/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="RSS" href="/index.xml">RSS</a>
+            </li>
+          
+        
+
+        
+
+        
+
+        
+          <li>
+            <a href="#modalSearch" data-toggle="modal" data-target="#modalSearch" style="outline: none;">
+              <span id="searchGlyph" class="glyphicon glyphicon-search"></span>
+            </a>
+          </li>
+          
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+  <div id="modalSearch" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">搜索</h4>
+        </div>
+        <div class="modal-body">
+            
+<div class="aa-input-container" id="aa-input-container">
+    <input type="search" id="aa-search-input" class="aa-input-search" placeholder="Search for titles or URIs..." name="search" autocomplete="off" />
+    <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
+        <path d="M1806,332c0-123.3-43.8-228.8-131.5-316.5C1586.8-72.2,1481.3-116,1358-116s-228.8,43.8-316.5,131.5  C953.8,103.2,910,208.7,910,332s43.8,228.8,131.5,316.5C1129.2,736.2,1234.7,780,1358,780s228.8-43.8,316.5-131.5  C1762.2,560.8,1806,455.3,1806,332z M2318,1164c0,34.7-12.7,64.7-38,90s-55.3,38-90,38c-36,0-66-12.7-90-38l-343-342  c-119.3,82.7-252.3,124-399,124c-95.3,0-186.5-18.5-273.5-55.5s-162-87-225-150s-113-138-150-225S654,427.3,654,332  s18.5-186.5,55.5-273.5s87-162,150-225s138-113,225-150S1262.7-372,1358-372s186.5,18.5,273.5,55.5s162,87,225,150s113,138,150,225  S2062,236.7,2062,332c0,146.7-41.3,279.7-124,399l343,343C2305.7,1098.7,2318,1128.7,2318,1164z" />
+    </svg>
+</div>
+<script src="/js/algoliasearch.min.js"></script>
+<script src="/js/autocomplete.min.js"></script>
+
+<script>
+var client = algoliasearch("1JDRAS0AZR", "8804ac109158bb3bb60d74ce98fa332f");
+var index = client.initIndex('prod_blog');
+
+autocomplete('#aa-search-input',
+{ hint: false}, {
+    source: autocomplete.sources.hits(index, {hitsPerPage: 5}),
+    
+    displayKey: 'name',
+    
+    templates: {
+        
+        suggestion: function(suggestion) {
+            return '<span>' + '<a href="/post/' + suggestion.slug + '">' +
+            suggestion._highlightResult.title.value + '</a></span>';
+        }
+    }
+});
+</script>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    
+    
+    
+  </header>
+
+
+    
+
+  <div class="main-banner">
+      
+      <div class="main-banner-box">
+        <div class="carousel banner">
+          
+          <div class="carousel-item">
+            <a href="/post/promotion-51/" title="打造独当一面的 Kubernetes 运维、开发工程师" class="banner-link">
+              <img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/k8s-banner-k8scourse.jpg" class="banner-img" alt="打造独当一面的 Kubernetes 运维、开发工程师">
+            </a>
+          </div>
+          
+          <div class="carousel-item">
+            <a href="https://edu.aliyun.com/roadmap/cloudnative?spm=a1z389.11499242.0.0.65452413qdXfZ7&amp;utm_content=g_1000093512" title="云原生技术公开课" class="banner-link">
+              <img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/aliyun-cloudnative-edu1.jpeg" class="banner-img" alt="云原生技术公开课">
+            </a>
+          </div>
+          
+          <div class="carousel-item">
+            <a href="https://youdianzhishi.com/?utm_source=blog&amp;utm_campaign=referral&amp;utm_medium=banner" title="优点知识" class="banner-link">
+              <img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/k8s-banner-ydzs.jpg" class="banner-img" alt="优点知识">
+            </a>
+          </div>
+          
+          <div class="carousel-item">
+            <a href="https://detail.tmall.com/item.htm?spm=a212k0.12153887.0.0.64a3687dQ6nSzh&amp;id=590161370307" title="《深入浅出 Prometheus》" class="banner-link">
+              <img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/k8s-banner-promebook.jpg" class="banner-img" alt="《深入浅出 Prometheus》">
+            </a>
+          </div>
+          
+        </div>
+      </div>
+      
+    
+      
+      <div class="minor-banner-box container">
+        <div class="minor-banner row">
+          
+          <li class="minor-item col-md-3">
+            <a href="https://youdianzhishi.com/web/course/1018?utm_source=blog&amp;utm_campaign=referral&amp;utm_medium=tophero" title="Kubernetes 开发课">
+              <img src="https://sdn.youdianzhishi.com/covers/2020/7/14/066c90abafe0441686a868e7c8943b4f.png?imageMogr/v2/auto-orient/thumbnail/600x" alt="Kubernetes 开发课">
+            </a>
+          </li>
+          
+          <li class="minor-item col-md-3">
+            <a href="https://youdianzhishi.com/web/course/1023?utm_source=blog&amp;utm_campaign=referral&amp;utm_medium=tophero" title="CKA 线上直播班">
+              <img src="https://sdn.youdianzhishi.com/covers/2021/1/22/24da438bbef842cc8145e018c086e388.png?imageMogr/v2/auto-orient/thumbnail/600x" alt="CKA 线上直播班">
+            </a>
+          </li>
+          
+          <li class="minor-item col-md-3">
+            <a href="https://youdianzhishi.com/web/course/1013?utm_source=blog&amp;utm_campaign=referral&amp;utm_medium=tophero" title="基于 Jenkins 的 DevOps 流水线实践">
+              <img src="https://sdn.haimaxy.com/covers/2019/12/30/bca85adf15d94da39c9e5b6b45d7e412.png?x-oss-process=image/resize,w_400" alt="基于 Jenkins 的 DevOps 流水线实践">
+            </a>
+          </li>
+          
+          <li class="minor-item col-md-3">
+            <a href="https://youdianzhishi.com/web/course/1021?utm_source=blog&amp;utm_campaign=referral&amp;utm_medium=tophero" title="Kubernetes 网络训练营">
+              <img src="https://sdn.youdianzhishi.com/covers/2020/10/5/e29660a558a64d119a61438ae9e6b155.png?imageMogr/v2/auto-orient/thumbnail/600x" alt="Kubernetes 网络训练营">
+            </a>
+          </li>
+          
+        </div>
+      </div>
+      
+
+  </div>
+
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-lg-8 col-md-10">
+        <div class="posts-list">
+          
+          
+
+          	
+
+            <article class="post-preview">
+              <a href="/algorithms/graph/algorithms-graph-topologicalsort/">
+                <h2 class="post-title">图(Graph)-拓扑排序(TopologicalSort)</h2>
+                
+              </a>
+
+              <span class="post-meta">
+  
+    发表于 2019-09-02
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  拓扑排序 无环图，就是图中没有回路。无环图两个常见的应用就是拓扑排序和关键路径。
+在日常生活中，通常会把软件开发、生产流程、网络设备互联都当成一个项目工程来对待，所有工程都可以分为若干个子工程（或者称之为「活动」），这些子工程之间往往会有一些条件约束，比如其中某些活动必须在另一些活动完成之后才能进行。下面是一个简单的软件开发流程图：
+将整个流程抽象为图这种数据结构，则每个子工程节点就是图的顶点，连接子工程的前后约束就是图的边（并且是有方向的边），并且工程有起始节点，也有结束节点，并且，首尾不会相连，所以综合来看，这样的工程图，一定是无环的有向图。
+在一个表示工程的有向图中，用顶点表示活动，用弧（有方向的边）表示活动之间的优先关系，这样的以顶点表示活动的有向图，称之为 AOV 网（Activity On Vertex Network）。
+拓扑排序的概念。 设 G=(V,E)（其中 V 表示顶点集合，E 表示弧集合）是一个具有 n 个顶点的有向图，V 集合中的顶点满足从顶点 i 到顶点 j 之间有一条路径，并且在顶点序列中 i 一定在 j 之前，则称这样的序列为一个拓扑序列。
+而所谓的拓扑排序，就是对有向图构造拓扑序列的过程。
+构造结果中如果全部顶点都被输出，则说明它是不存在回路的 AOV 网；否则说明存在回路，不是 AOV 网。
+对于不存在回路的 AOV 网，可以应用在各种不同的工程或项目流程图中，满足各种场景的需要，所以拓扑排序在工程中非常有实用价值。
+实现代码 拓扑排序的基本实现思路如下：
+在 AOV 网中，找到一个入度为 0 的顶点，然后删除此顶点，并删除以此顶点为起点的弧，重复此步骤，直到输出所有顶点，或者 AOV 网中不存在入度为 0 的顶点为止。
+和最小生成树和最短路径一样，我们还是通过邻接表来定义一个 AOV 网，考虑到始终需要查找入度为 0 的顶点，我们在原来的顶点数据结构基础上，新增一个入度域 in，用来表示入度值：
+/*** 顶点* Class VNode*/class VNode extends Node{public $in; // 入度public function __construct($data, $in){$this-&gt;in = $in;parent::__construct($data);}}此外拓扑排序针对的是有向图，而之前实现最小生成树和最短路径的时候，都是基于无向图，所以还要编写一个新的继承自 EdgeWeightedGraph 的子类：
+                  <a href="/algorithms/graph/algorithms-graph-topologicalsort/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                
+                  #<a href="/tags/graph/">Graph</a>&nbsp;
+                
+                </span>
+              
+            </article>
+
+          
+
+          	
+
+            <article class="post-preview">
+              <a href="/algorithms/graph/algorithms-graph-criticalpath/">
+                <h2 class="post-title">图(Graph)-关键路径(CriticalPath)</h2>
+                
+              </a>
+
+              <span class="post-meta">
+  
+    发表于 2019-09-01
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  关键路径 拓扑排序主要是为了解决一个工程是否可以顺利进行的问题，但有时候还要解决工程完成需要的最短时间问题。
+要对一个流程图计算最短时间，就要分析流程之间的拓扑关系，并且找到当中最关键的流程，这个流程的时间就是最短时间。
+在 AOV 网的基础上，引入一个新的概念，在一个表示工程的带权有向图中，用顶点表示事件，用有向边表示活动，用边上的权值表示活动的持续时间，把这种通过有向图的边表示活动的网称之为 AOE 网（Activity On Edge Network）。AOE 网中入度为 0 的顶点叫做始点或源点，出度为 0 的点叫做终点或汇点。
+一个 AOE 网，总有开始和结束，并且正常情况下，只有一个源点和汇点：
+把路径上各个活动所持续的时间之和称之为路径长度，从源点到汇点具有最大长度的路径称之为关键路径，在关键路径上的活动叫关键活动。比如上图中，从源点 V1 到汇点 V9 的路径及路径之和是：
+V1-&gt;V2-&gt;V5-&gt;V7-&gt;V9：18V1-&gt;V2-&gt;V5-&gt;V8-&gt;V9：18V1-&gt;V3-&gt;V5-&gt;V7-&gt;V9：16V1-&gt;V3-&gt;V5-&gt;V8-&gt;V9：16V1-&gt;V4-&gt;V6-&gt;V8-&gt;V9：15 所以其关键路径是 V1-&gt;V2-&gt;V5-&gt;V7-&gt;V9。
+尽管 AOE 网和 AOV 网都是针对工程进行建模的，但是两者有明显的不同，主要体现在 AOV 网是顶点表示活动的网，它只描述活动之间的制约关系；而 AOE 网是边表示活动的网，边上的权值表示活动持续的时间，因此 AOE 网建立在活动之间制约关系没有矛盾的基础之上，再来分析整个工程至少需要多少时间，或者为了缩短完成整个工程所需时间，应当加快哪些活动。这也是 AOE 网的主要应用场景。
+实现算法 在 AOE 网中，某些活动可以并行地进行，因此完成工程的最短时间是从源点到汇点的最大路径长度（事件之间耗时最长的活动完成了，才意味着下个事件可以开始，并行的活动并不是可选的，而是都要执行的，这一点需要明确），而找到这条具有最大路径长度的路径，也就找到了关键路径。
+比如示例 AOE 网，其关键路径是 V1-&gt;V2-&gt;V5-&gt;V7-&gt;V9。
+下面我们来探讨如何用抽象的算法来寻找关键路径，为了方便描述这个算法，需要先定义几个变量：
+事件的最早发生时间 etv，即顶点 Vk 的最早发生时间；事件的最晚发生时间 ltv，即顶点 Vk 的最晚发生时间，超出这个时间就会导致整个工程延期；活动的最早开始时间 ete，即弧 ak 的最早开始时间；活动的最晚开始时间 lte，即弧 ak 的最晚开始时间，也就是不会导致工程延期的最晚开始时间。 要找到关键路径，需要找到所有活动的最早开始时间和最晚开始时间，并且比较它们，如果相等则意味着此活动是关键活动（即弧的权值代表时间被填满），活动间的路径是关键路径，否则不是。
+                  <a href="/algorithms/graph/algorithms-graph-criticalpath/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                
+                  #<a href="/tags/graph/">Graph</a>&nbsp;
+                
+                </span>
+              
+            </article>
+
+          
+
+          	
+
+            <article class="post-preview">
+              <a href="/algorithms/graph/algorithms-graph-shortestpath/">
+                <h2 class="post-title">图(Graph)-最短路径(ShortestPath)</h2>
+                
+              </a>
+
+              <span class="post-meta">
+  
+    发表于 2019-09-01
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  最短路径 迪杰斯特拉算法（Dijkstra） 在日常生活中，经常面临路径选择的问题，比如从杭州到北京，可以选择汽车、火车、飞机，甚至还可以坐公交车（这不是笑话，最近网上就流传一个从杭州回临沂，转了 35 班公交车，行程 660 多公里，历时 7 天的神奇春运回家路），对于不同的选择，意味着不同的路径，不同的路径意味着不同的成本，这个成本有时间成本，也有经济成本，不差钱的可以选择时间成本低的，比如坐飞机，经济不那么宽裕却有时间的，可以做公交车，我们把杭州和北京看作图上的两个顶点（中间可能会经过其它城市，即多个顶点），把时间成本或者经济成本看作权重，那么从杭州到北京的路径规划就可以抽象为今天我们要分享的话题 —— 图的最短路径问题。
+对于带权重的网图来说，所谓最短路径，指的是两个顶点之间经过的边上权值之和最小的路径，我们将第一个顶点叫做起点，最后一个顶点叫做终点。
+最短路径的实现也有多种算法，和最小生成树一样，两种最常见的实现算法：迪杰斯特拉（Dijkstra）算法和弗洛伊德（Floyd）算法。
+迪杰斯特拉算法（Dijkstra） 迪杰斯特拉（Dijkstra）算法是典型的单源最短路径算法，用于计算一个节点到其他所有节点的最短路径。主要特点是以起始点为中心向外层层扩展，直到扩展到终点为止。
+以下面这个无向图为例：
+通过迪杰斯特拉算法计算最短路径，需要指定起点，用 S 表示图的所有顶点集合，U 表示起点外的其它顶点集合，顶点到自身的距离为 0，到相邻顶点距离为相应边的权值，到不相邻顶点的距离为无穷大（∞）。每一次从 U 中找出路径最短的顶点，并将其加入到 S 中，然后，更新 U 中的剩余顶点和顶点对应的路径，重复该操作，直到遍历完所有顶点：
+实现代码 然后将上述算法实现思路转化为代码，还是以前面创建的无向网图类 EdgeWeightedGraph 类为基础，在其中编写迪杰斯特拉算法实现方法如下：
+// 通过迪杰斯特拉算法实现最短路径public function dijkstra($start){$prev = []; // 前驱顶点数组，prev[i]的值是起点到顶点i的最短路径所经历的全部顶点中，i之前的那个顶点。$dist = []; // 长度数组，dist[i]是起点到顶点i的最短路径的长度$flag = []; // flag[i] = true 表示起点到顶点 i 的最短路径获取成功// 初始化for ($i = 0; $i &lt; $this-&gt;vNum; $i++) {$flag[$i] = false;$prev[$i] = 0;$dist[$i] = $this-&gt;getWeight($start, $i);}// 起点$flag[$start] = true;$dist[$start] = 0;// 遍历图，每次找出一个顶点的最短路径。$k = 0;for ($i = 1; $i &lt; $this-&gt;vNum; $i++) {// 在未获取最短路径的顶点中，找到离起点最近的顶点(k)。$min = INF;for ($j = 0; $j &lt; $this-&gt;vNum; $j++) {if ($flag[$j] == false &amp;&amp; $dist[$j] &lt; $min) {$min = $dist[$j];$k = $j;}}// 标记顶点k为已经获取到最短路径$flag[$k] = true;// 当获取顶点k的最短路径之后，更新未获取最短路径的顶点的最短路径和前驱顶点。for ($j = 0; $j &lt; $this-&gt;vNum; $j++) {$tmp = ($this-&gt;getWeight($k, $j) == INF ?
+                  <a href="/algorithms/graph/algorithms-graph-shortestpath/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                
+                  #<a href="/tags/graph/">Graph</a>&nbsp;
+                
+                </span>
+              
+            </article>
+
+          
+
+          	
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>	
+            <ins class="adsbygoogle"	
+                style="display:block"	
+                data-ad-format="fluid"	
+                data-ad-layout-key="-49+ch+3h-db+7h"	
+                data-ad-client="ca-pub-5376999672787220"	
+                data-ad-slot="7981888143"></ins>	
+            <script>	
+                (adsbygoogle = window.adsbygoogle || []).push({});	
+            </script>	
+          	
+
+            <article class="post-preview">
+              <a href="/algorithms/graph/algorithms-graph-minimumspanningtree/">
+                <h2 class="post-title">图(Graph)-最小生成树(MinimumSpanningTree)</h2>
+                
+              </a>
+
+              <span class="post-meta">
+  
+    发表于 2019-08-31
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  最小生成树 在介绍图的相关概念的时候，提到过连通图，以无向图为例，如果图的任意两个顶点之间都是想通的，这个图就是连通图，今天我们在此基础上进一步介绍连通图的生成树概念。
+一个连通图的生成树是一个极小的连通子图，它含有图中全部的 n 个顶点，和足以构成一棵树的 n-1 条边，如下图所示：
+图1是一个连通图，图2是该连通图的生成树，反过来说，如果一棵树大于 n-1 条边，则必然构成环。
+构造连通网（带权连通图）的最小代价生成树叫做最小生成树。这个最小代价指的是通过 n-1 条边具有把 n 个顶点的连通图连接起来，并且使所有边的权值和最小。如下图所示，实线部分就是最小生成树：
+最小生成树的应用场景很多，小到欧洲十国游，怎么规划路径让交通费用最低，大到国家的电力网、公路网、通信网，怎么规划路径可以让建设成本最低，学习了最小生成树后，就可以通过算法来计算出最佳路径了，不仅如此，所有涉及连接网络中所有节点的最优路径问题，都可以通过最小生成树来处理。
+最小生成树有多种实现算法，我们这里介绍两种比较常见的：普里姆算法（Prim）和克鲁斯卡尔算法（Kruskal）。
+普里姆（Prim）算法 算法定义 简单来说，普里姆算法从图中某个顶点开始，将其作为一棵树的根节点，然后这棵树会逐步长大，一直长大到覆盖图中的每一个顶点为止，每一步都会从剩下的与当前操作节点相邻的顶点中找到一条权重最小的边加入到树中，当算法终止时，这棵树就是一棵最小生成树。
+下面是图示过程：
+从 V1 开始，从与其相邻的顶点中找到权重最小的边，连接的是 V3，然后从 V3 开始，在于 V3 相邻的顶点中找到权重最小的边，连接的是 V6，再从 V6 开始，依次类推，当到达某个顶点，与该顶点相邻的所有顶点都已经访问过，则需要往前回溯，从所有前驱节点中找到权重最小的一条未添加的边开始，继续上述流程，直到所有顶点都已经覆盖，此时，通过 n-1 条边连接 n 个顶点构成的树就是最小生成树。
+代码实现 在开始编写实现代码之前，需要做一些准备工作，因为最小生成树操作的图的边是有权重的，所以需要先构建一个带权重的图，此外，还需要对之前通过邻接表存储图的代码做一些扩展，因为之前保存的无向图是没有权重的，将邻接表中存储顶点节点和边节点的节点类分开加以区分：
+/*** 带权重的边节点* Class ENode*/class ENode extends Node{public $weight; // 边的权重值public function __construct($data, $weight){$this-&gt;weight = $weight;parent::__construct($data);}}/*** 顶点* Class VNode*/class VNode extends Node{}对于存储图的邻接链表类也要稍作调整，将属性改成受保护的，以便可以在子类中继承，然后修改插入节点方法如下：
+                  <a href="/algorithms/graph/algorithms-graph-minimumspanningtree/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                
+                  #<a href="/tags/graph/">Graph</a>&nbsp;
+                
+                </span>
+              
+            </article>
+
+          
+        </div>
+
+        <div align="center" class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+          
+
+<ul class="pagination">
+    
+    <li class="page-item">
+        <a href="/" class="page-link" aria-label="First"><span aria-hidden="true">&laquo;&laquo;</span></a>
+    </li>
+    
+    <li class="page-item">
+    <a href="/page/7/" class="page-link" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+    </li>
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/">1</a></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/page/2/">2</a></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/page/3/">3</a></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item disabled"><span aria-hidden="true">&nbsp;&hellip;&nbsp;</span></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/page/7/">7</a></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item active"><a class="page-link" href="/page/8/">8</a></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/page/9/">9</a></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item disabled"><span aria-hidden="true">&nbsp;&hellip;&nbsp;</span></li>
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/page/18/">18</a></li>
+    
+    
+    <li class="page-item">
+    <a href="/page/9/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+    </li>
+    
+    <li class="page-item">
+        <a href="/page/18/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+    </li>
+    
+</ul>
+
+
+          
+          
+          
+          
+          
+        </div>
+
+      </div>
+
+      <div class="col-lg-4 col-md-2">
+
+        
+
+        <div class="sidebar-wrap sidebar-about">
+          <div class="about-img">
+            <img src="https://www.qikqiak.com/img/avatar.jpeg" alt="阳明" class="rounded-circle">
+          </div>
+          <h4 class="py-2">Hi! -That's Me</h4>
+          <p class="about-text">大家好，我是WoolfBreathe，一个有着产品思维的工程师，现在也在努力将自己的产品思维体系化，对互联网产品有自己独到的见解，现阶段专注kubernetes和istio。</p>
+          <ul class="list-inline social-link">
+            <li class="list-inline-item"><a href="mailto:icnych@gmail.com"><i class="fa fa-envelope"></i></a></li>
+            <li class="list-inline-item"><a href="https://github.com/cnych"><i class="fa fa-github"></i></a></li>
+            <li class="list-inline-item"><a href="https://weibo.com/cnych"><i class="fa fa-weibo"></i></a></li>
+            <li class="list-inline-item"><a href="/index.xml"><i class="fa fa-rss"></i></a></li>
+            <li class="list-inline-item"><a href="https://instagram.com/cnych"><i class="fa fa-instagram"></i></a></li>
+          </ul>
+          
+          <img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/qrcode_for_gh_d6dd87b6ceb4_344.jpg" alt="k8s技术圈">
+          
+          
+          
+          
+            
+          
+        </div>
+
+        
+
+        
+        <div class="sidebar-wrap">
+          <div class="sidebar-block course-wrap">
+            <h4 class="sidebar-title">文档资料</h4>
+            
+            <a class="course-post" href="/envoy-book/?utm_source=blog&amp;utm_campaign=referral&amp;utm_medium=sidemenu" title="Envoy 入门教程">
+              <img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/envoy-book-cover.png" alt="Envoy 入门教程" class="img-fluid">
+            </a>
+            
+            <a class="course-post" href="/k8s-book/?utm_source=blog&amp;utm_campaign=referral&amp;utm_medium=sidemenu" title="从 Docker 到 Kubernetes 进阶">
+              <img src="https://sdn.haimaxy.com/covers/2018/9/14/0b8530ca670b477d813e3ad7e24165f3.png" alt="从 Docker 到 Kubernetes 进阶" class="img-fluid">
+            </a>
+            
+            <a class="course-post" href="https://edu.aliyun.com/roadmap/cloudnative?spm=a1z389.11499242.0.0.65452413qdXfZ7&amp;utm_content=g_1000093512" title="云原生技术公开课">
+              <img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/aliyun-cloudnative-edu2.jpeg" alt="云原生技术公开课" class="img-fluid">
+            </a>
+            
+          </div>
+        </div>
+        
+        
+        
+        <div class="sidebar-wrap">
+          <div class="sidebar-block latest-post">
+            <h4 class="sidebar-title">热门文章</h4>
+            <ol class="list-unstyled">
+              
+              <li>
+                <a href="/post/how-to-learn-kubernetes/">
+                  <div class="rpost-img">
+                    <img src="/img/posts/photo-1535383494412-9bdda0d6d9f3.jpeg" alt="如何学习 Kubernetes？" class="img-fluid">
+                  </div>
+                  <h5>如何学习 Kubernetes？</h5>
+                  <p class="text-muted">August 29, 2018</p>
+                </a>
+              </li>
+              
+              <li>
+                <a href="/post/manual-install-high-available-kubernetes-cluster/">
+                  <div class="rpost-img">
+                    <img src="/img/posts/WX20171110-105351.png" alt="手动搭建高可用的 Kubernetes 集群" class="img-fluid">
+                  </div>
+                  <h5>手动搭建高可用的 Kubernetes 集群</h5>
+                  <p class="text-muted">November 6, 2017</p>
+                </a>
+              </li>
+              
+              <li>
+                <a href="/post/use-kubeadm-install-kubernetes-1.10/">
+                  <div class="rpost-img">
+                    <img src="/img/posts/kubeadm-dashboard.png" alt="使用 kubeadm 搭建 kubernetes1.10 集群" class="img-fluid">
+                  </div>
+                  <h5>使用 kubeadm 搭建 kubernetes1.10 集群</h5>
+                  <p class="text-muted">April 14, 2018</p>
+                </a>
+              </li>
+              
+              <li>
+                <a href="/post/huawei-cloudnativelives-k8s-course/">
+                  <div class="rpost-img">
+                    <img src="/img/posts/cloudnativelives-video.png" alt="华为 CloudNativeLives Kubernetes 系列课程" class="img-fluid">
+                  </div>
+                  <h5>华为 CloudNativeLives Kubernetes 系列课程</h5>
+                  <p class="text-muted">August 31, 2018</p>
+                </a>
+              </li>
+              
+              <li>
+                <a href="/post/dockerfile-best-practice/">
+                  <div class="rpost-img">
+                    <img src="/img/posts/photo-1536620752150-a7e9e62a62ee.jpeg" alt="Dockerfile 最佳实践" class="img-fluid">
+                  </div>
+                  <h5>Dockerfile 最佳实践</h5>
+                  <p class="text-muted">September 12, 2018</p>
+                </a>
+              </li>
+              
+              <li>
+                <a href="/post/kubernetes-jenkins1/">
+                  <div class="rpost-img">
+                    <img src="/img/posts/k8s-jenkins-slave.png" alt="基于 kubernetes 的动态 jenkins slave" class="img-fluid">
+                  </div>
+                  <h5>基于 kubernetes 的动态 jenkins slave</h5>
+                  <p class="text-muted">July 28, 2018</p>
+                </a>
+              </li>
+              
+              <li>
+                <a href="/post/kubernetes-jenkins2/">
+                  <div class="rpost-img">
+                    <img src="/img/posts/pipeline-demo5.png" alt="Jenkins Pipeline 部署 Kubernetes 应用" class="img-fluid">
+                  </div>
+                  <h5>Jenkins Pipeline 部署 Kubernetes 应用</h5>
+                  <p class="text-muted">July 28, 2018</p>
+                </a>
+              </li>
+              
+              <li>
+                <a href="/post/kubernetes-jenkins3/">
+                  <div class="rpost-img">
+                    <img src="/img/posts/blue-demo7.png" alt="Jenkins Blue Ocean 的使用" class="img-fluid">
+                  </div>
+                  <h5>Jenkins Blue Ocean 的使用</h5>
+                  <p class="text-muted">August 2, 2018</p>
+                </a>
+              </li>
+              
+              <li>
+                <a href="/post/prometheus-operator-advance/">
+                  <div class="rpost-img">
+                    <img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/lfrvk.jpg" alt="Prometheus Operator 高级配置" class="img-fluid">
+                  </div>
+                  <h5>Prometheus Operator 高级配置</h5>
+                  <p class="text-muted">December 20, 2018</p>
+                </a>
+              </li>
+              
+              <li>
+                <a href="/post/automatic-kubernetes-ingress-https-with-lets-encrypt/">
+                  <div class="rpost-img">
+                    <img src="/img/posts/traefik-dashboard-acme.png" alt="使用 Let&#39;s Encrypt 实现 Kubernetes Ingress 自动化 HTTPS" class="img-fluid">
+                  </div>
+                  <h5>使用 Let&#39;s Encrypt 实现 Kubernetes Ingress 自动化 HTTPS</h5>
+                  <p class="text-muted">December 5, 2018</p>
+                </a>
+              </li>
+              
+              <li>
+                <a href="/post/python-virtualenv-all-know/">
+                  <div class="rpost-img">
+                    <img src="/img/posts/django2-index.jpg" alt="Python 虚拟环境全知道" class="img-fluid">
+                  </div>
+                  <h5>Python 虚拟环境全知道</h5>
+                  <p class="text-muted">January 9, 2018</p>
+                </a>
+              </li>
+              
+              <li>
+                <a href="/post/use-rbac-in-k8s/">
+                  <div class="rpost-img">
+                    <img src="/img/posts/WX20180118-150156.png" alt="深入理解 Kubernetes RBAC 的用法" class="img-fluid">
+                  </div>
+                  <h5>深入理解 Kubernetes RBAC 的用法</h5>
+                  <p class="text-muted">June 22, 2018</p>
+                </a>
+              </li>
+              
+            </ol>
+          </div>
+        </div>
+        
+        
+        
+        
+      </div>
+    </div>
+  </div>
+
+  
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          <img src="/img/wechatmp.png" alt="k8s技术圈">
+          
+              <li>
+                <a href="mailto:icnych@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://github.com/cnych" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://weibo.com/cnych" title="微博">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+              <li>
+                <a href="https://instagram.com/cnych" title="Instagram">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          
+          <li>
+            <a href="/index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="/">WoolfBreathe</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2021
+        </p>
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
+</script>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+<script >
+$(document).ready(function() {
+  var int = setInterval(fixCount, 50);  
+  
+  var initPVCount = 584976;
+  var initUVCount = 153191;
+  function fixCount() {                   
+    if ($("#busuanzi_container_site_pv").css("display") != "none") {
+        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
+        clearInterval(int); 
+    }
+    if ($("#busuanzi_container_site_uv").css("display") != "none") {
+      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
+      clearInterval(int); 
+    }  
+  }           
+});
+</script>
+ <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery-migrate@1.2.1/dist/jquery-migrate.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+<script type="text/javascript">
+$('.carousel').slick({
+    dots: true,
+    arrows: true,
+    autoplay: true,
+    autoplaySpeed: 4000,
+    infinite: true,
+    speed: 500,
+    fade: true,
+    cssEase: 'linear',
+    centerMode: true,
+    prevArrow: '<button type="button" class="slick-prev"></button>',
+    nextArrow: '<button type="button" class="slick-next"></button>',
+});
+</script>
+
+  </body>
+</html>
+
