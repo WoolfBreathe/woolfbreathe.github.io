@@ -197,7 +197,7 @@ autocomplete('#aa-search-input',
         <div class="posts-list">
           
             <article class="post-preview">
-              <a href="/devops/database/devops-mysql/">
+              <a href="/post/devops/database/devops-mysql/">
                 <h2 class="post-title">Linux安装MySQL</h2>
 
                 
@@ -208,9 +208,9 @@ autocomplete('#aa-search-input',
               </p>
               <div class="post-entry">
                 
-                  Mysql搭建 1.下载二进制包(Linux-Generic 线上环境一般用二进制包) 解压到目录 /usr/local/mysql 2.增加执行路径 export PATH=/usr/local/mysql/bin:$PATH3.创建用户 groupadd -r mysql &amp;&amp; useradd -g mysql -s /sbin/nologin mysql4.安装数据库 /usr/local/mysql/script/mysql_install_db --user=mysql --basedir=/usr/local/mysql --datadir=/mysqldata/node1/usr/local/mysql/bin/mysqld --initialize --user=mysql --basedir=/usr/local/mysql --datadir=/data/mysql5.修改配置并启动 /usr/local/mysql/bin/mysqld_safe --defaults-file=/usr/local/mysql/cnf/my.cnf &amp;6.创建用户并分配权限 删除多余用户 删除test数据库
-select user,host,password from mysql.user;delete from msyql.user where user=&#39;&#39;;delete from mysql.user where host&lt;&gt;&#39;localhost&#39;;# set password for root@&#39;localhost&#39;=password(&#39;123456&#39;);alter user &#39;test&#39;@&#39;localhost&#39; identified by &#39;123&#39;;flush privileges;7.停止数据库 /usr/local/mysql/bin/mysqladmin --socket=/data/mysql/mysql.sock shutdown -pMysql在线升级 1.
-                  <a href="/devops/database/devops-mysql/" class="post-read-more">[阅读全文]</a>
+                  Mysql搭建 1.下载二进制包(Linux-Generic 线上环境一般用二进制包) 解压到目录 /usr/local/mysql  2.增加执行路径 export PATH=/usr/local/mysql/bin:$PATH 3.创建用户 groupadd -r mysql &amp;&amp; useradd -g mysql -s /sbin/nologin mysql 4.安装数据库 /usr/local/mysql/script/mysql_install_db --user=mysql --basedir=/usr/local/mysql --datadir=/mysqldata/node1 /usr/local/mysql/bin/mysqld --initialize --user=mysql --basedir=/usr/local/mysql --datadir=/data/mysql 5.修改配置并启动 /usr/local/mysql/bin/mysqld_safe --defaults-file=/usr/local/mysql/cnf/my.cnf &amp; 6.创建用户并分配权限 删除多余用户 删除test数据库
+select user,host,password from mysql.user; delete from msyql.user where user=&#39;&#39;; delete from mysql.user where host&lt;&gt;&#39;localhost&#39;; # set password for root@&#39;localhost&#39;=password(&#39;123456&#39;); alter user &#39;test&#39;@&#39;localhost&#39; identified by &#39;123&#39;; flush privileges; 7.停止数据库 /usr/local/mysql/bin/mysqladmin --socket=/data/mysql/mysql.sock shutdown -p Mysql在线升级 1.
+                  <a href="/post/devops/database/devops-mysql/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
@@ -227,7 +227,7 @@ select user,host,password from mysql.user;delete from msyql.user where user=&#3
             </article>
           
             <article class="post-preview">
-              <a href="/devops/linux/devops-linux-nginx/">
+              <a href="/post/devops/linux/devops-linux-nginx/">
                 <h2 class="post-title">Linux安装Nginx源码包</h2>
 
                 
@@ -238,9 +238,9 @@ select user,host,password from mysql.user;delete from msyql.user where user=&#3
               </p>
               <div class="post-entry">
                 
-                  依赖库安装 安装 gcc 环境 sudo yum -y install gcc gcc-c++ # nginx 编译时依赖 gcc 环境安装 pcre sudo yum -y install pcre pcre-devel # 让 nginx 支持重写功能安装 zlib # zlib 库提供了很多压缩和解压缩的方式，nginx 使用 zlib 对 http 包内容进行 gzip 压缩sudo yum -y install zlib zlib-devel 安装 openssl # 安全套接字层密码库，用于通信加密sudo yum -y install openssl openssl-develNginx 源码包安装 Nginx官方下载
-sudo tar -zxvf nginx-1.11.5.tar.gz # 解压缩生成 makefile 文件 cd nginx-1.11.5./configure --prefix=/usr/local/nginx --with-http_stub_status_module --with-http_ssl_module --with-http_flv_module --with-http_gzip_static_module # 检查平台安装环境# --prefix=/usr/local/nginx 是 nginx 编译安装的目录（推荐），安装完后会在此目录下生成相关文件进行源码编译并安装 make # 编译make install # 安装服务操作命令。 启动服务 /usr/local/nginx/sbin/nginx重新加载服务 /usr/local/nginx/sbin/nginx -s reload停止服务 /usr/local/nginx/sbin/nginx -s stop查看 nginx 服务进程 ps -ef | grep nginx # 查看服务进程配置 upstream phpserver {server 192.
-                  <a href="/devops/linux/devops-linux-nginx/" class="post-read-more">[阅读全文]</a>
+                  依赖库安装 安装 gcc 环境 sudo yum -y install gcc gcc-c++ # nginx 编译时依赖 gcc 环境 安装 pcre sudo yum -y install pcre pcre-devel # 让 nginx 支持重写功能 安装 zlib # zlib 库提供了很多压缩和解压缩的方式，nginx 使用 zlib 对 http 包内容进行 gzip 压缩 sudo yum -y install zlib zlib-devel 安装 openssl # 安全套接字层密码库，用于通信加密 sudo yum -y install openssl openssl-devel Nginx 源码包安装 Nginx官方下载
+sudo tar -zxvf nginx-1.11.5.tar.gz # 解压缩 生成 makefile 文件 cd nginx-1.11.5 ./configure --prefix=/usr/local/nginx --with-http_stub_status_module --with-http_ssl_module --with-http_flv_module --with-http_gzip_static_module # 检查平台安装环境 # --prefix=/usr/local/nginx 是 nginx 编译安装的目录（推荐），安装完后会在此目录下生成相关文件 进行源码编译并安装 make # 编译 make install # 安装 服务操作命令。 启动服务 /usr/local/nginx/sbin/nginx 重新加载服务 /usr/local/nginx/sbin/nginx -s reload 停止服务 /usr/local/nginx/sbin/nginx -s stop 查看 nginx 服务进程 ps -ef | grep nginx # 查看服务进程 配置 upstream phpserver { server 192.
+                  <a href="/post/devops/linux/devops-linux-nginx/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
@@ -257,7 +257,7 @@ sudo tar -zxvf nginx-1.11.5.tar.gz # 解压缩生成 makefile 文件 cd nginx-1
             </article>
           
             <article class="post-preview">
-              <a href="/devops/linux/devops-linux-php/">
+              <a href="/post/devops/linux/devops-linux-php/">
                 <h2 class="post-title">Linux安装PHP源码包</h2>
 
                 
@@ -268,9 +268,9 @@ sudo tar -zxvf nginx-1.11.5.tar.gz # 解压缩生成 makefile 文件 cd nginx-1
               </p>
               <div class="post-entry">
                 
-                  依赖库安装 安装 gcc 环境 sudo yum -y install gcc gcc-c++ # 编译时依赖 gcc 环境安装 libxml2 sudo yum -y install libxml2 libxml2-devel # Libxml2库提供了C语言解析和构造xml文档的接口安装 libjpeg-devel yum -y install libjpeg-devel libpng-devel # 图片处理安装 openssl # 安全套接字层密码库，用于通信加密$ sudo yum -y install openssl openssl-develyum install freetype-devel libzip安装sqlite yum install sqlite-devel创建用户组和用户 groupadd -r www &amp;&amp; useradd -g www -s /sbin/nologin www安装 Nginx 源码包安装 Nginx官方下载
+                  依赖库安装 安装 gcc 环境 sudo yum -y install gcc gcc-c++ # 编译时依赖 gcc 环境 安装 libxml2 sudo yum -y install libxml2 libxml2-devel # Libxml2库提供了C语言解析和构造xml文档的接口 安装 libjpeg-devel yum -y install libjpeg-devel libpng-devel # 图片处理 安装 openssl # 安全套接字层密码库，用于通信加密 $ sudo yum -y install openssl openssl-devel yum install freetype-devel libzip 安装sqlite yum install sqlite-devel 创建用户组和用户 groupadd -r www &amp;&amp; useradd -g www -s /sbin/nologin www 安装 Nginx 源码包安装 Nginx官方下载
 sudo tar -zxvf php-7.
-                  <a href="/devops/linux/devops-linux-php/" class="post-read-more">[阅读全文]</a>
+                  <a href="/post/devops/linux/devops-linux-php/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
@@ -287,7 +287,7 @@ sudo tar -zxvf php-7.
             </article>
           
             <article class="post-preview">
-              <a href="/devops/linux/devops-linux-redis/">
+              <a href="/post/devops/linux/devops-linux-redis/">
                 <h2 class="post-title">Linux安装Redis</h2>
 
                 
@@ -354,45 +354,45 @@ make install PREFIX=/usr/local/redis
         <ul class="list-inline text-center footer-links">
           <img src="/img/wechatmp.png" alt="k8s技术圈">
           
-              <li>
-                <a href="mailto:icnych@gmail.com" title="Email me">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
+          <li>
+            <a href="mailto:icnych@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
           
-              <li>
-                <a href="https://github.com/cnych" title="GitHub">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
+          <li>
+            <a href="https://github.com/cnych" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
           
-              <li>
-                <a href="https://weibo.com/cnych" title="微博">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
+          <li>
+            <a href="https://weibo.com/cnych" title="微博">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
           
-              <li>
-                <a href="https://instagram.com/cnych" title="Instagram">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
+          <li>
+            <a href="https://instagram.com/cnych" title="Instagram">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
           
           
           <li>
-            <a href="/index.xml" title="RSS">
+            <a href="/%20index.xml" title="RSS">
               <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
@@ -403,9 +403,9 @@ make install PREFIX=/usr/local/redis
         </ul>
         <p class="credits copyright text-muted">
           
-            
-              <a href="/">WoolfBreathe</a>
-            
+          
+          <a href="/">WoolfBreathe</a>
+          
           
 
           &nbsp;&bull;&nbsp;
@@ -423,7 +423,9 @@ make install PREFIX=/usr/local/redis
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a
+            href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a
+            href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
           
         </p>
       </div>
@@ -431,67 +433,35 @@ make install PREFIX=/usr/local/redis
   </div>
 </footer>
 
-
+<script> renderMathInElement(document.body); </script>
 <script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
 
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag() { dataLayer.push(arguments); }
   gtag('js', new Date());
   gtag('config', 'UA-69668147-3');
 </script>
 <script>
-(function(){
+  (function () {
     var bp = document.createElement('script');
     var curProtocol = window.location.protocol.split(':')[0];
     if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
     }
     else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
     }
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(bp, s);
-})();
+  })();
 </script>
-<script >
-$(document).ready(function() {
-  var int = setInterval(fixCount, 50);  
-  
-  var initPVCount = 584976;
-  var initUVCount = 153191;
-  function fixCount() {                   
-    if ($("#busuanzi_container_site_pv").css("display") != "none") {
-        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
-        clearInterval(int); 
-    }
-    if ($("#busuanzi_container_site_uv").css("display") != "none") {
-      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
-      clearInterval(int); 
-    }  
-  }           
-});
-</script>
- <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery-migrate@1.2.1/dist/jquery-migrate.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script type="text/javascript">
-$('.carousel').slick({
-    dots: true,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    infinite: true,
-    speed: 500,
-    fade: true,
-    cssEase: 'linear',
-    centerMode: true,
-    prevArrow: '<button type="button" class="slick-prev"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
-});
-</script>
+
+
+
+
 
   </body>
 </html>

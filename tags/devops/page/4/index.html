@@ -197,7 +197,7 @@ autocomplete('#aa-search-input',
         <div class="posts-list">
           
             <article class="post-preview">
-              <a href="/devops/linux/devops-linux-homestead/">
+              <a href="/post/devops/linux/devops-linux-homestead/">
                 <h2 class="post-title">Homestead(Windows系统Laravel环境搭建)</h2>
 
                 
@@ -212,7 +212,7 @@ autocomplete('#aa-search-input',
  安装 VirtualBox VirtualBox 是 Oracle 公司的开源虚拟机软件。VirtualBox 号称是最强的免费虚拟机软件，它不仅功能齐全，而且性能也很优异！VirtualBox 支持大部分流行的系统，如：Mac, Windows, Linux 等。
 安装 Vagrant Vagrant 是用来管理虚拟机的工具，支持当前主流的虚拟机系统如 VirtualBox、VMware、AWS 等。Vagrant 的主要作用是提供一个可配置、可移植和复用的软件环境。Vagrant 让你通过编写一个 Vagrantfile 文件来控制虚拟机的启动、虚拟机网络环境的配置、虚拟机与主机间的文件共享，以及启动后自动执行一些配置脚本，如自动执行一个 Shell Script 来安装一些必备的开发工具，如安装配置 MySQL、PHP，甚至是自动配置 Nginx 站点。这意味着，在一个多人开发的项目中，你只需要同步 Vagrantfile 文件，就可以保证参与项目的每个人各自的机器上拥有一致的开发环境。
 Homestead 介绍 Homestead 利用 Vagrantfile 提供的便利，定制了一整套的可配置、可移植和复用的 Laravel 开发环境。Homestead 虚拟机里面包含了 Nginx Web 服务器、PHP 7、MySQL、Postgres、Redis、Memcached、Node，以及所有你在使用 Laravel 开发时需要用到的各种软件。 Homestead 包含了两个东西： Homestead 管理脚本； Homestead Box 虚拟机盒子。 接下来独自说明下。
-                  <a href="/devops/linux/devops-linux-homestead/" class="post-read-more">[阅读全文]</a>
+                  <a href="/post/devops/linux/devops-linux-homestead/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
@@ -231,7 +231,7 @@ Homestead 介绍 Homestead 利用 Vagrantfile 提供的便利，定制了一整�
             </article>
           
             <article class="post-preview">
-              <a href="/devops/linux/devops-linux-ssh/">
+              <a href="/post/devops/linux/devops-linux-ssh/">
                 <h2 class="post-title">Linux SSH</h2>
 
                 
@@ -242,15 +242,15 @@ Homestead 介绍 Homestead 利用 Vagrantfile 提供的便利，定制了一整�
               </p>
               <div class="post-entry">
                 
-                  SSH通过密钥登录 测试登录命令 ssh -i /root/.ssh/id_rsa root@127.0.0.1创建密钥 [root@host ~]$ ssh-keygen //建立密钥对服务器上远程安装公钥 使用ssh-copy-id安装
-ssh-copy-id -i .ssh/id_rsa.pub root@192.168.10.100手动安装
-[root@host .ssh]$ cd .ssh &amp;&amp; cat id_rsa.pub &gt;&gt; authorized_keys[root@host .ssh]$ chmod 600 authorized_keys[root@host .ssh]$ chmod 700 ~/.ssh设置SSH打开密钥登录功能 /etc/ssh/sshd_config 打开密钥登录
-RSAAuthentication yesPubkeyAuthentication yes另外，请留意 root 用户能否通过 SSH 登录：
-PermitRootLogin yes 当完成全部设置，并以密钥方式登录成功后，再禁用密码登录：
-PasswordAuthentication no 设置root用户不能使用密码登录,必须使用密钥; 普通用户可以使用密码登录:
-PermitRootLogin without-password （设置root用户只能用密钥登录）PasswordAuthentication yes （其他用户可以使用密码登录） 首次登录去掉验证 /etc/ssh/ssh_config
-# StrictHostKeyChecking ask改成 StrictHostKeyChecking no 非root用户设置 需要先设置用户的默认目录(使用该命令请确保该用户下没有运行的软件或进程)
-                  <a href="/devops/linux/devops-linux-ssh/" class="post-read-more">[阅读全文]</a>
+                  SSH通过密钥登录 测试登录命令 ssh -i /root/.ssh/id_rsa root@127.0.0.1 创建密钥 [root@host ~]$ ssh-keygen //建立密钥对 服务器上远程安装公钥 使用ssh-copy-id安装
+ssh-copy-id -i .ssh/id_rsa.pub root@192.168.10.100 手动安装
+[root@host .ssh]$ cd .ssh &amp;&amp; cat id_rsa.pub &gt;&gt; authorized_keys [root@host .ssh]$ chmod 600 authorized_keys [root@host .ssh]$ chmod 700 ~/.ssh 设置SSH打开密钥登录功能 /etc/ssh/sshd_config 打开密钥登录
+RSAAuthentication yes PubkeyAuthentication yes 另外，请留意 root 用户能否通过 SSH 登录：
+PermitRootLogin yes  当完成全部设置，并以密钥方式登录成功后，再禁用密码登录：
+PasswordAuthentication no  设置root用户不能使用密码登录,必须使用密钥; 普通用户可以使用密码登录:
+PermitRootLogin without-password （设置root用户只能用密钥登录） PasswordAuthentication yes （其他用户可以使用密码登录）  首次登录去掉验证 /etc/ssh/ssh_config
+# StrictHostKeyChecking ask 改成 StrictHostKeyChecking no  非root用户设置 需要先设置用户的默认目录(使用该命令请确保该用户下没有运行的软件或进程)
+                  <a href="/post/devops/linux/devops-linux-ssh/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
@@ -267,7 +267,7 @@ PermitRootLogin without-password （设置root用户只能用密钥登录）Pas
             </article>
           
             <article class="post-preview">
-              <a href="/devops/git/devops-git-multiuser/">
+              <a href="/post/devops/git/devops-git-multiuser/">
                 <h2 class="post-title">Linux 配置多个Git用户SSH登录</h2>
 
                 
@@ -309,7 +309,7 @@ PermitRootLogin without-password （设置root用户只能用密钥登录）Pas
             </article>
           
             <article class="post-preview">
-              <a href="/devops/git/devops-git-gitignore/">
+              <a href="/post/devops/git/devops-git-gitignore/">
                 <h2 class="post-title">Git忽略规则及.gitignore规则正确姿势</h2>
 
                 
@@ -376,45 +376,45 @@ git commit -m &#39;update .gitignore&#39;
         <ul class="list-inline text-center footer-links">
           <img src="/img/wechatmp.png" alt="k8s技术圈">
           
-              <li>
-                <a href="mailto:icnych@gmail.com" title="Email me">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
+          <li>
+            <a href="mailto:icnych@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
           
-              <li>
-                <a href="https://github.com/cnych" title="GitHub">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
+          <li>
+            <a href="https://github.com/cnych" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
           
-              <li>
-                <a href="https://weibo.com/cnych" title="微博">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
+          <li>
+            <a href="https://weibo.com/cnych" title="微博">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
           
-              <li>
-                <a href="https://instagram.com/cnych" title="Instagram">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
+          <li>
+            <a href="https://instagram.com/cnych" title="Instagram">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
           
           
           <li>
-            <a href="/index.xml" title="RSS">
+            <a href="/%20index.xml" title="RSS">
               <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
@@ -425,9 +425,9 @@ git commit -m &#39;update .gitignore&#39;
         </ul>
         <p class="credits copyright text-muted">
           
-            
-              <a href="/">WoolfBreathe</a>
-            
+          
+          <a href="/">WoolfBreathe</a>
+          
           
 
           &nbsp;&bull;&nbsp;
@@ -445,7 +445,9 @@ git commit -m &#39;update .gitignore&#39;
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a
+            href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a
+            href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
           
         </p>
       </div>
@@ -453,67 +455,35 @@ git commit -m &#39;update .gitignore&#39;
   </div>
 </footer>
 
-
+<script> renderMathInElement(document.body); </script>
 <script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
 
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag() { dataLayer.push(arguments); }
   gtag('js', new Date());
   gtag('config', 'UA-69668147-3');
 </script>
 <script>
-(function(){
+  (function () {
     var bp = document.createElement('script');
     var curProtocol = window.location.protocol.split(':')[0];
     if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
     }
     else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
     }
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(bp, s);
-})();
+  })();
 </script>
-<script >
-$(document).ready(function() {
-  var int = setInterval(fixCount, 50);  
-  
-  var initPVCount = 584976;
-  var initUVCount = 153191;
-  function fixCount() {                   
-    if ($("#busuanzi_container_site_pv").css("display") != "none") {
-        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
-        clearInterval(int); 
-    }
-    if ($("#busuanzi_container_site_uv").css("display") != "none") {
-      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
-      clearInterval(int); 
-    }  
-  }           
-});
-</script>
- <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery-migrate@1.2.1/dist/jquery-migrate.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script type="text/javascript">
-$('.carousel').slick({
-    dots: true,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    infinite: true,
-    speed: 500,
-    fade: true,
-    cssEase: 'linear',
-    centerMode: true,
-    prevArrow: '<button type="button" class="slick-prev"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
-});
-</script>
+
+
+
+
 
   </body>
 </html>

@@ -667,6 +667,105 @@ class BinarySortedTree { /** * @var Node */ private $tree; public function getTr
 
             </article>
           
+            <article class="post-preview">
+              <a href="/post/algorithms/binarytree/algorithms-binarytree-traversal/">
+                <h2 class="post-title">二叉树(BinaryTree)-遍历</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-08-22
+              </p>
+              <div class="post-entry">
+                
+                  <p>二叉树的遍历指的是从根节点出发，按照某种次序依次访问二叉树中的所有结点，使得每个结点被访问一次且仅被访问一次。</p>
+<p>有多种方式可以遍历二叉树，如果限制从左到右的习惯方式，主要分为三种：前序遍历、中序遍历和后序遍历。下面我们简单介绍这几种遍历方式及对应实现算法，所谓的前序、中序和后序都是以根节点作为参照系。</p>
+<h2 id="前序遍历">前序遍历</h2>
+<p>如果二叉树为空，则返回空，否则从根节点开始，先遍历左子树，再遍历右子树：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/87eceb3154bc88a58a470e5fb6dff444a9d74a61a6c82ebd842e0d42dc959673.png" alt="前序遍历"></p>
+<h2 id="中序遍历">中序遍历</h2>
+<p>同样，如果是空树，返回空，否则从左子树最左侧的节点开始，然后从左到右依次遍历左子树，真正的根节点，最后是右子树（依然是从最左侧节点开始从左到右的顺序遍历）：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/3bb2338085adc868f5d4548fd9368ddd1d6b7f7dfffb7719aa5cbd20829089f1.png" alt="中序遍历"></p>
+<h2 id="后序遍历">后序遍历</h2>
+<p>如果是空树，返回空，否则还是从左子树最左侧的节点开始，先遍历完叶子节点，再遍历父节点，遍历完左子树后，直接从右子树最左侧节点开始，按照和左子树同样的顺序遍历完右子树，最后访问根节点：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/e72f8a1215fc27864efc60e8daeed22cd2c082db38db7536edd6d351c36745bc.png" alt="后序遍历"></p>
+<p>不同的遍历方式从不同维度将二叉树这种非线性的结构变成了某种意义上的线性序列，从而方便计算机操作。</p>
+<h2 id="遍历实现代码">遍历实现代码</h2>
+<p>二叉树的遍历其实就是个递归的过程，所以对应算法也采用递归来实现。</p>
+<p>我们以二叉链表的方式来存储数组，对应的前序、中序、后序实现代码如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&lt;?php
+
+// 二叉链表节点
+class Node
+{
+    public $data;
+    public $left = null;
+    public $right = null;
+
+    public function __construct($data)
+    {
+        $this-&gt;data = $data;
+    }
+}
+
+/**
+ * 前序遍历
+ * @param Node $tree
+ */
+function preOrderTraverse($tree)
+{
+    if ($tree == null) {
+        return;
+    }
+    printf(&#34;%s\n&#34;, $tree-&gt;data);
+    preOrderTraverse($tree-&gt;left);
+    preOrderTraverse($tree-&gt;right);
+}
+
+/**
+ * 中序遍历
+ * @param Node $tree
+ */
+function midOrderTraverse($tree)
+{
+    if ($tree == null) {
+        return;
+    }
+    midOrderTraverse($tree-&gt;left);
+    printf(&#34;%s\n&#34;, $tree-&gt;data);
+    midOrderTraverse($tree-&gt;right);
+}
+
+/**
+ * 后序遍历
+ * @param Node $tree
+ */
+function postOrderTraverse($tree)
+{
+    if ($tree == null) {
+        return;
+    }
+    postOrderTraverse($tree-&gt;left);
+    postOrderTraverse($tree-&gt;right);
+    printf(&#34;%s\n&#34;, $tree-&gt;data);
+}
+</code></pre></div><p>对应的输出结果如下，表明三种遍历都没有问题：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/BinaryTree/77e0e42b813a53dab4fe7ababd0bedce9144f7b4140b50483ab5b8d51101f88b.png" alt="二叉树遍历演示"></p>
+
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
         </div>
         
           <ul class="pager main-pager">
@@ -746,16 +845,7 @@ class BinarySortedTree { /** * @var Node */ private $tree; public function getTr
           &nbsp;&bull;&nbsp;
           2021
         </p>
-        <p class="text-center text-muted">
-          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-          <span id="busuanzi_container_site_pv" style="display:none">
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次
-          </span>
-          &nbsp;&bull;&nbsp;
-          <span id="busuanzi_container_site_uv" style="display:none">
-            访客数<span id="busuanzi_value_site_uv"></span>人次
-          </span>
-        </p>
+        
         
         <p class="credits theme-by text-muted">
           <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a
@@ -779,20 +869,7 @@ class BinarySortedTree { /** * @var Node */ private $tree; public function getTr
   gtag('js', new Date());
   gtag('config', 'UA-69668147-3');
 </script>
-<script>
-  (function () {
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-  })();
-</script>
+
 
 
 

@@ -197,7 +197,7 @@ autocomplete('#aa-search-input',
         <div class="posts-list">
           
             <article class="post-preview">
-              <a href="/algorithms/graph/algorithms-graph-traverse/">
+              <a href="/post/algorithms/graph/algorithms-graph-traverse/">
                 <h2 class="post-title">图(Graph)-遍历</h2>
 
                 
@@ -215,8 +215,8 @@ autocomplete('#aa-search-input',
 如果还有顶点未被访问，则将其作为起点，重复上述过程，直到图中所有顶点都被访问到。
 代码实现 首先将所有顶点的邻接顶点设置为空链表，然后我们可以通过 addEdge 方法为图添加边（$s 和 $t 分别代表边的两个顶点），从而完成图的构建。
 有了完整的图之后，就可以编写深度优先搜索方法对其进行遍历了。
-public function dfs($s, $t){$this-&gt;found = false;for ($i = 0; $i &lt;= $this-&gt;v; $i++) {$visited[$i] = 0;}for ($i = 0; $i &lt;= $this-&gt;v; $i++) {$prev[$i] = -1;}$this-&gt;recurDfs($s, $t, $visited, $prev);$this-&gt;printPath($prev, $s, $t);}public function recurDfs($w, $t, $visited, $prev){if ($this-&gt;found == true) {return;}$visited[$w] = 1;if ($w == $t) {$this-&gt;found = true;return true;}for ($i = 0; $i &lt; $this-&gt;adj[$w]-&gt;getSize(); $i++) {$q = $this-&gt;adj[$w]-&gt;get($i)-&gt;data;if (!
-                  <a href="/algorithms/graph/algorithms-graph-traverse/" class="post-read-more">[阅读全文]</a>
+public function dfs($s, $t) { $this-&gt;found = false; for ($i = 0; $i &lt;= $this-&gt;v; $i++) { $visited[$i] = 0; } for ($i = 0; $i &lt;= $this-&gt;v; $i++) { $prev[$i] = -1; } $this-&gt;recurDfs($s, $t, $visited, $prev); $this-&gt;printPath($prev, $s, $t); } public function recurDfs($w, $t, $visited, $prev) { if ($this-&gt;found == true) { return; } $visited[$w] = 1; if ($w == $t) { $this-&gt;found = true; return true; } for ($i = 0; $i &lt; $this-&gt;adj[$w]-&gt;getSize(); $i++) { $q = $this-&gt;adj[$w]-&gt;get($i)-&gt;data; if (!
+                  <a href="/post/algorithms/graph/algorithms-graph-traverse/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
@@ -233,7 +233,7 @@ public function dfs($s, $t){$this-&gt;found = false;for ($i = 0; $i &lt;= $th
             </article>
           
             <article class="post-preview">
-              <a href="/algorithms/graph/algorithms-graph-storage/">
+              <a href="/post/algorithms/graph/algorithms-graph-storage/">
                 <h2 class="post-title">图(Graph)-存储</h2>
 
                 
@@ -259,8 +259,8 @@ public function dfs($s, $t){$this-&gt;found = false;for ($i = 0; $i &lt;= $th
 但邻接表也不是十全十美，对于有向图来说，如果要计算某个顶点的入度，需要遍历整个图才能实现，要解决这个问题，我们可以通过逆邻接表来实现。所谓逆邻接表，就是和邻接表相反，指针指向基于入度，比如上面这个有向图，我们可以这样通过逆邻接表来构建：
 对于有权重的有向图（网图），还要通过一个额外的 weight 域来存储权重：
 代码示例 创建链表类 LinkedList 及对应的节点类 Node：
-/*** Class Node* 链表节点类*/class Node{public $data;/*** @var Node*/public $next;public function __construct($data = null){$this-&gt;data = $data;}}/*** Class LinkedList* 链表类*/class LinkedList{private $head = null;private $count = 0;public function __construct(){$emptyNode = new Node();$this-&gt;head = $emptyNode;}public function insert($data){if ($this-&gt;head == null) {return;}$newNode = new Node($data);$newNode-&gt;next = $this-&gt;head-&gt;next;$this-&gt;head-&gt;next = $newNode;$this-&gt;count++;}public function remove(Node $node){if ($node == null) {return false;}$preNode = $this-&gt;pre($node);$preNode-&gt;next = $node-&gt;next;$this-&gt;count--;}public function get($index){if ($index &gt;= $this-&gt;count) {return false;}$node = $this-&gt;head-&gt;next;$i = 0;while ($node) {if ($i == $index) {return $node;} else {$node = $node-&gt;next;$i++;}}return false;}public function pre(Node $node){if ($node == null) {return false;}$preNode = $this-&gt;head;$curNode = $this-&gt;head-&gt;next;while ($curNode) {if ($curNode === $node) {return $preNode;} else {$preNode = $curNode;$curNode = $preNode-&gt;next;}}return false;}public function getSize(){return $this-&gt;count;}public function __toString(){$node = $this-&gt;head-&gt;next;$arr = [];$i = 0;while ($node) {$arr[] = &#39;Node[&#39; .
-                  <a href="/algorithms/graph/algorithms-graph-storage/" class="post-read-more">[阅读全文]</a>
+/** * Class Node * 链表节点类 */ class Node { public $data; /** * @var Node */ public $next; public function __construct($data = null) { $this-&gt;data = $data; } } /** * Class LinkedList * 链表类 */ class LinkedList { private $head = null; private $count = 0; public function __construct() { $emptyNode = new Node(); $this-&gt;head = $emptyNode; } public function insert($data) { if ($this-&gt;head == null) { return; } $newNode = new Node($data); $newNode-&gt;next = $this-&gt;head-&gt;next; $this-&gt;head-&gt;next = $newNode; $this-&gt;count++; } public function remove(Node $node) { if ($node == null) { return false; } $preNode = $this-&gt;pre($node); $preNode-&gt;next = $node-&gt;next; $this-&gt;count--; } public function get($index) { if ($index &gt;= $this-&gt;count) { return false; } $node = $this-&gt;head-&gt;next; $i = 0; while ($node) { if ($i == $index) { return $node; } else { $node = $node-&gt;next; $i++; } } return false; } public function pre(Node $node) { if ($node == null) { return false; } $preNode = $this-&gt;head; $curNode = $this-&gt;head-&gt;next; while ($curNode) { if ($curNode === $node) { return $preNode; } else { $preNode = $curNode; $curNode = $preNode-&gt;next; } } return false; } public function getSize() { return $this-&gt;count; } public function __toString() { $node = $this-&gt;head-&gt;next; $arr = []; $i = 0; while ($node) { $arr[] = &#39;Node[&#39; .
+                  <a href="/post/algorithms/graph/algorithms-graph-storage/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
@@ -277,7 +277,7 @@ public function dfs($s, $t){$this-&gt;found = false;for ($i = 0; $i &lt;= $th
             </article>
           
             <article class="post-preview">
-              <a href="/algorithms/graph/algorithms-graph/">
+              <a href="/post/algorithms/graph/algorithms-graph/">
                 <h2 class="post-title">图(Graph)</h2>
 
                 
@@ -350,45 +350,45 @@ public function dfs($s, $t){$this-&gt;found = false;for ($i = 0; $i &lt;= $th
         <ul class="list-inline text-center footer-links">
           <img src="/img/wechatmp.png" alt="k8s技术圈">
           
-              <li>
-                <a href="mailto:icnych@gmail.com" title="Email me">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
+          <li>
+            <a href="mailto:icnych@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
           
-              <li>
-                <a href="https://github.com/cnych" title="GitHub">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
+          <li>
+            <a href="https://github.com/cnych" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
           
-              <li>
-                <a href="https://weibo.com/cnych" title="微博">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
+          <li>
+            <a href="https://weibo.com/cnych" title="微博">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
           
-              <li>
-                <a href="https://instagram.com/cnych" title="Instagram">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
+          <li>
+            <a href="https://instagram.com/cnych" title="Instagram">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
           
           
           <li>
-            <a href="/index.xml" title="RSS">
+            <a href="/%20index.xml" title="RSS">
               <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
@@ -399,9 +399,9 @@ public function dfs($s, $t){$this-&gt;found = false;for ($i = 0; $i &lt;= $th
         </ul>
         <p class="credits copyright text-muted">
           
-            
-              <a href="/">WoolfBreathe</a>
-            
+          
+          <a href="/">WoolfBreathe</a>
+          
           
 
           &nbsp;&bull;&nbsp;
@@ -419,7 +419,9 @@ public function dfs($s, $t){$this-&gt;found = false;for ($i = 0; $i &lt;= $th
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a
+            href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a
+            href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
           
         </p>
       </div>
@@ -427,67 +429,35 @@ public function dfs($s, $t){$this-&gt;found = false;for ($i = 0; $i &lt;= $th
   </div>
 </footer>
 
-
+<script> renderMathInElement(document.body); </script>
 <script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
 
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag() { dataLayer.push(arguments); }
   gtag('js', new Date());
   gtag('config', 'UA-69668147-3');
 </script>
 <script>
-(function(){
+  (function () {
     var bp = document.createElement('script');
     var curProtocol = window.location.protocol.split(':')[0];
     if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
     }
     else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
     }
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(bp, s);
-})();
+  })();
 </script>
-<script >
-$(document).ready(function() {
-  var int = setInterval(fixCount, 50);  
-  
-  var initPVCount = 584976;
-  var initUVCount = 153191;
-  function fixCount() {                   
-    if ($("#busuanzi_container_site_pv").css("display") != "none") {
-        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
-        clearInterval(int); 
-    }
-    if ($("#busuanzi_container_site_uv").css("display") != "none") {
-      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
-      clearInterval(int); 
-    }  
-  }           
-});
-</script>
- <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery-migrate@1.2.1/dist/jquery-migrate.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script type="text/javascript">
-$('.carousel').slick({
-    dots: true,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    infinite: true,
-    speed: 500,
-    fade: true,
-    cssEase: 'linear',
-    centerMode: true,
-    prevArrow: '<button type="button" class="slick-prev"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
-});
-</script>
+
+
+
+
 
   </body>
 </html>

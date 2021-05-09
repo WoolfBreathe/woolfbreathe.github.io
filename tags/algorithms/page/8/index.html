@@ -197,7 +197,7 @@ autocomplete('#aa-search-input',
         <div class="posts-list">
           
             <article class="post-preview">
-              <a href="/algorithms/datastructures/algorithms-datastructures-recursion/">
+              <a href="/post/algorithms/datastructures/algorithms-datastructures-recursion/">
                 <h2 class="post-title">数据结构-递归(Recursion)</h2>
 
                 
@@ -214,9 +214,9 @@ autocomplete('#aa-search-input',
 通过以上分析，可以整理出递归代码的编写思路：写出递归公式，找到终止条件。有句话叫做「人理解迭代，神理解递归」，说的就是递归代码可读性不好，理论上看，递归代码都是可以转化成迭代实现的，但是递归代码更简洁，更显逼格，在通过递归实现代码的时候，切忌试图通过人脑去分解每个步骤，那样会把自己搞晕的，这种重复迭代的事情交给计算机去做，要做的就是抽象出规律，写递归公式，找终止条件，再把它们转化为递归代码，就完事了。
 说了这么多，最后通过一个案例来帮助理解和实际运用。递归的应用案例很多，比如经典的汉诺塔、斐波那契数列等，以斐波那契数列来演示下递归代码的编写，斐波那契数列是这样一组数列：0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, …(可以去网上搜一下了解下这个数列的现实由来），求第n个数列的值。
 按照前面列出的递归问题解题思路，首先抽象出这组数列的一般规律，将其整理成递归公式，会得出如下结论（索引从0开始，即第零项）：
-F0 = 0F1 = 1...F(n) = F(n-1) + F(n-2)这样，同时有了终止条件和递归公式，接下来，就是将其转化为递归代码了：
-&lt;?php/*** 通过递归实现斐波那契数列*/function fibonacci($n){if ($n == 0) {return 0;}if ($n == 1) {return 1;}return fibonacci($n - 2) + fibonacci($n - 1);}print fibonacci(5); # 5print fibonacci(8); # 21通过递归，用非常简洁的代码就实现了复杂的斐波那契数列的求解，如果要用迭代来实现这个逻辑，不定要写多少代码呢。
-                  <a href="/algorithms/datastructures/algorithms-datastructures-recursion/" class="post-read-more">[阅读全文]</a>
+F0 = 0 F1 = 1 ... F(n) = F(n-1) + F(n-2) 这样，同时有了终止条件和递归公式，接下来，就是将其转化为递归代码了：
+&lt;?php /** * 通过递归实现斐波那契数列 */ function fibonacci($n) { if ($n == 0) { return 0; } if ($n == 1) { return 1; } return fibonacci($n - 2) + fibonacci($n - 1); } print fibonacci(5); # 5 print fibonacci(8); # 21 通过递归，用非常简洁的代码就实现了复杂的斐波那契数列的求解，如果要用迭代来实现这个逻辑，不定要写多少代码呢。
+                  <a href="/post/algorithms/datastructures/algorithms-datastructures-recursion/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
@@ -231,7 +231,7 @@ F0 = 0F1 = 1...F(n) = F(n-1) + F(n-2)这样，同时有了终止条件和递
             </article>
           
             <article class="post-preview">
-              <a href="/algorithms/datastructures/algorithms-datastructures-queue/">
+              <a href="/post/algorithms/datastructures/algorithms-datastructures-queue/">
                 <h2 class="post-title">数据结构-队列(Queue)</h2>
 
                 
@@ -245,8 +245,8 @@ F0 = 0F1 = 1...F(n) = F(n-1) + F(n-2)这样，同时有了终止条件和递
                   队列(Queue) 数据结构 —— 队列，和栈一样，队列也是一中特殊的线性表结构，只不过队列是在一端插入，另一端删除，就跟平常排队一样的道理，从队尾入队，在队头出去，所以队列的特性是先入先出（FIFO），允许插入的一端叫队尾，允许删除的一端叫队头。
 一张图可以形象的体现两者的差别：
 和栈一样，队列也可以通过数组和链表实现，通过数组实现的叫顺序队列，通过链表实现的叫做链式队列，栈只需要一个栈顶指针就可以了，因为只允许在栈顶插入删除，但是队列需要两个指针，一个指向队头，一个指向队尾。先来看通过 PHP 数组实现的顺序队列代码：
-&lt;?php/*** 通过 PHP 数组实现的队列*/class SimpleQueue{private $_queue = [];private $_size = 0;public function __construct($size = 10){$this-&gt;_size = $size;}// 入队public function enqueue($value){if (count($this-&gt;_queue) &gt; $this-&gt;_size) {return false;}array_push($this-&gt;_queue, $value);}// 出队public function dequeue(){if (count($this-&gt;_queue) == 0) {return false;}return array_shift($this-&gt;_queue);}public function size(){return count($this-&gt;_queue);}}$queue = new SimpleQueue(5);$queue-&gt;enqueue(1);$queue-&gt;enqueue(3);$queue-&gt;enqueue(5);var_dump($queue-&gt;dequeue()); # 1var_dump($queue-&gt;size()); # 2通过数组实现的顺序队列有一个问题，就是随着队列元素的插入和删除，队尾指针和队头指针不断后移，而导致队尾指针指向末尾无法插入数据，这时候有可能队列头部还是有剩余空间的，如下图所示：
-                  <a href="/algorithms/datastructures/algorithms-datastructures-queue/" class="post-read-more">[阅读全文]</a>
+&lt;?php /** * 通过 PHP 数组实现的队列 */ class SimpleQueue { private $_queue = []; private $_size = 0; public function __construct($size = 10) { $this-&gt;_size = $size; } // 入队 public function enqueue($value) { if (count($this-&gt;_queue) &gt; $this-&gt;_size) { return false; } array_push($this-&gt;_queue, $value); } // 出队 public function dequeue() { if (count($this-&gt;_queue) == 0) { return false; } return array_shift($this-&gt;_queue); } public function size() { return count($this-&gt;_queue); } } $queue = new SimpleQueue(5); $queue-&gt;enqueue(1); $queue-&gt;enqueue(3); $queue-&gt;enqueue(5); var_dump($queue-&gt;dequeue()); # 1 var_dump($queue-&gt;size()); # 2 通过数组实现的顺序队列有一个问题，就是随着队列元素的插入和删除，队尾指针和队头指针不断后移，而导致队尾指针指向末尾无法插入数据，这时候有可能队列头部还是有剩余空间的，如下图所示：
+                  <a href="/post/algorithms/datastructures/algorithms-datastructures-queue/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
@@ -261,7 +261,7 @@ F0 = 0F1 = 1...F(n) = F(n-1) + F(n-2)这样，同时有了终止条件和递
             </article>
           
             <article class="post-preview">
-              <a href="/algorithms/datastructures/algorithms-datastructures-stack/">
+              <a href="/post/algorithms/datastructures/algorithms-datastructures-stack/">
                 <h2 class="post-title">数据结构-栈(Stack)</h2>
 
                 
@@ -276,8 +276,8 @@ F0 = 0F1 = 1...F(n) = F(n-1) + F(n-2)这样，同时有了终止条件和递
 虽说 PHP 中很少接触到这些，但是学习使用 C 语言的话这些基础还是需要了解的。接下来要介绍两种特殊的线性结构，或者说用于满足特定场景需求的线性结构：栈和队列。
 栈又叫堆栈，是限定只能在一端进行插入和删除操作的线性表，并且满足后进先出（LIFO）的特点。把允许插入和删除的一端叫做栈顶，另一个端叫做栈底，不含任何数据的栈叫做空栈。
 栈支持通过数组/链表实现，通过数组实现的通常叫做顺序栈，通过链表实现的叫做链栈。下面简单演示下如何在 PHP 中通过数组实现一个简单的顺序栈：
-&lt;?php/*** 通过 PHP 数组实现简单的顺序栈*/class SimpleStack {private $_stack = [];private $_size = 0;public function __construct($size = 10){$this-&gt;_size = $size;}// 获取栈顶元素public function pop(){// 空栈if (count($this-&gt;_stack) == 0) {return false;}return array_pop($this-&gt;_stack);}// 推送元素到栈顶public function push($value){// 满栈if (count($this-&gt;_stack) == $this-&gt;_size) {return false;}array_push($this-&gt;_stack, $value);return true;}public function isEmpty(){// 是否是空栈return current($this-&gt;_stack) == false;}public function size(){return count($this-&gt;_stack);}}$stack = new SimpleStack(15);var_dump($stack-&gt;isEmpty()); # true$stack-&gt;push(111);$stack-&gt;push(&#39;学院君&#39;);var_dump($stack-&gt;pop()); # 学院君var_dump($stack-&gt;size()); # 1在 PHP 底层 SPL 库中也提供了堆栈的实现类 SplStack，堆栈的概念比较简单，理解起来也不复杂，下面给出一个图示，帮助了解栈的操作流程：
-                  <a href="/algorithms/datastructures/algorithms-datastructures-stack/" class="post-read-more">[阅读全文]</a>
+&lt;?php /** * 通过 PHP 数组实现简单的顺序栈 */ class SimpleStack { private $_stack = []; private $_size = 0; public function __construct($size = 10) { $this-&gt;_size = $size; } // 获取栈顶元素 public function pop() { // 空栈 if (count($this-&gt;_stack) == 0) { return false; } return array_pop($this-&gt;_stack); } // 推送元素到栈顶 public function push($value) { // 满栈 if (count($this-&gt;_stack) == $this-&gt;_size) { return false; } array_push($this-&gt;_stack, $value); return true; } public function isEmpty() { // 是否是空栈 return current($this-&gt;_stack) == false; } public function size() { return count($this-&gt;_stack); } } $stack = new SimpleStack(15); var_dump($stack-&gt;isEmpty()); # true $stack-&gt;push(111); $stack-&gt;push(&#39;学院君&#39;); var_dump($stack-&gt;pop()); # 学院君 var_dump($stack-&gt;size()); # 1 在 PHP 底层 SPL 库中也提供了堆栈的实现类 SplStack，堆栈的概念比较简单，理解起来也不复杂，下面给出一个图示，帮助了解栈的操作流程：
+                  <a href="/post/algorithms/datastructures/algorithms-datastructures-stack/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
@@ -292,7 +292,7 @@ F0 = 0F1 = 1...F(n) = F(n-1) + F(n-2)这样，同时有了终止条件和递
             </article>
           
             <article class="post-preview">
-              <a href="/algorithms/datastructures/algorithms-datastructures-linkedlist/">
+              <a href="/post/algorithms/datastructures/algorithms-datastructures-linkedlist/">
                 <h2 class="post-title">数据结构-链表(LinkedList)</h2>
 
                 
@@ -312,8 +312,8 @@ F0 = 0F1 = 1...F(n) = F(n-1) + F(n-2)这样，同时有了终止条件和递
 双向循环链表 最后要介绍的是结合循环链表和双向链表为一体的双向循环链表：
 其实就是将双向链表的首尾通过指针连接起来。 通过数组函数模拟实现单链表
 在 PHP 中由于没有指针，可以借助数组的 next、current、key 等函数实现链表这个数据结构：
-&lt;?php/*** 通过 PHP 数组模拟实现单链表*/class LinkedList{private $list = [];// 获取链表指定位置的元素值，从0开始public function get($index){$value = NULL;while (current($this-&gt;list)) {if (key($this-&gt;list) == $index) {$value = current($this-&gt;list);}next($this-&gt;list);}reset($this-&gt;list);return $value;}// 在链表指定位置插入值，默认插到链表头部public function add($value, $index = 0){array_splice($this-&gt;list, $index, 0, $value);}// 从链表指定位置删除元素public function remove($index){array_splice($this-&gt;list, $index, 1);}public function isEmpty(){return !
-                  <a href="/algorithms/datastructures/algorithms-datastructures-linkedlist/" class="post-read-more">[阅读全文]</a>
+&lt;?php /** * 通过 PHP 数组模拟实现单链表 */ class LinkedList { private $list = []; // 获取链表指定位置的元素值，从0开始 public function get($index) { $value = NULL; while (current($this-&gt;list)) { if (key($this-&gt;list) == $index) { $value = current($this-&gt;list); } next($this-&gt;list); } reset($this-&gt;list); return $value; } // 在链表指定位置插入值，默认插到链表头部 public function add($value, $index = 0) { array_splice($this-&gt;list, $index, 0, $value); } // 从链表指定位置删除元素 public function remove($index) { array_splice($this-&gt;list, $index, 1); } public function isEmpty() { return !
+                  <a href="/post/algorithms/datastructures/algorithms-datastructures-linkedlist/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
@@ -353,45 +353,45 @@ F0 = 0F1 = 1...F(n) = F(n-1) + F(n-2)这样，同时有了终止条件和递
         <ul class="list-inline text-center footer-links">
           <img src="/img/wechatmp.png" alt="k8s技术圈">
           
-              <li>
-                <a href="mailto:icnych@gmail.com" title="Email me">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
+          <li>
+            <a href="mailto:icnych@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
           
-              <li>
-                <a href="https://github.com/cnych" title="GitHub">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
+          <li>
+            <a href="https://github.com/cnych" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
           
-              <li>
-                <a href="https://weibo.com/cnych" title="微博">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
+          <li>
+            <a href="https://weibo.com/cnych" title="微博">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
           
-              <li>
-                <a href="https://instagram.com/cnych" title="Instagram">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
+          <li>
+            <a href="https://instagram.com/cnych" title="Instagram">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
           
           
           <li>
-            <a href="/index.xml" title="RSS">
+            <a href="/%20index.xml" title="RSS">
               <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
@@ -402,9 +402,9 @@ F0 = 0F1 = 1...F(n) = F(n-1) + F(n-2)这样，同时有了终止条件和递
         </ul>
         <p class="credits copyright text-muted">
           
-            
-              <a href="/">WoolfBreathe</a>
-            
+          
+          <a href="/">WoolfBreathe</a>
+          
           
 
           &nbsp;&bull;&nbsp;
@@ -422,7 +422,9 @@ F0 = 0F1 = 1...F(n) = F(n-1) + F(n-2)这样，同时有了终止条件和递
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a
+            href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a
+            href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
           
         </p>
       </div>
@@ -430,67 +432,35 @@ F0 = 0F1 = 1...F(n) = F(n-1) + F(n-2)这样，同时有了终止条件和递
   </div>
 </footer>
 
-
+<script> renderMathInElement(document.body); </script>
 <script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
 
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag() { dataLayer.push(arguments); }
   gtag('js', new Date());
   gtag('config', 'UA-69668147-3');
 </script>
 <script>
-(function(){
+  (function () {
     var bp = document.createElement('script');
     var curProtocol = window.location.protocol.split(':')[0];
     if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
     }
     else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
     }
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(bp, s);
-})();
+  })();
 </script>
-<script >
-$(document).ready(function() {
-  var int = setInterval(fixCount, 50);  
-  
-  var initPVCount = 584976;
-  var initUVCount = 153191;
-  function fixCount() {                   
-    if ($("#busuanzi_container_site_pv").css("display") != "none") {
-        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
-        clearInterval(int); 
-    }
-    if ($("#busuanzi_container_site_uv").css("display") != "none") {
-      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
-      clearInterval(int); 
-    }  
-  }           
-});
-</script>
- <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery-migrate@1.2.1/dist/jquery-migrate.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script type="text/javascript">
-$('.carousel').slick({
-    dots: true,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    infinite: true,
-    speed: 500,
-    fade: true,
-    cssEase: 'linear',
-    centerMode: true,
-    prevArrow: '<button type="button" class="slick-prev"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
-});
-</script>
+
+
+
+
 
   </body>
 </html>

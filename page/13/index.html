@@ -276,14 +276,14 @@ autocomplete('#aa-search-input',
           	
 
             <article class="post-preview">
-              <a href="/algorithms/binarysearch/algorithms-binarysearch-interval/">
-                <h2 class="post-title">二分查找(BinarySearch)-区间查找</h2>
+              <a href="/post/algorithms/stringmatching/algorithms-stringmatching-trie/">
+                <h2 class="post-title">字符串匹配-Trie</h2>
                 
               </a>
 
               <span class="post-meta">
   
-    发表于 2019-08-14
+    发表于 2019-08-18
   
   
 </span>
@@ -291,11 +291,15 @@ autocomplete('#aa-search-input',
 
               <div class="post-entry">
                 
-                  实现原理 二分查找的第三个变形版本：在给定排序序列中查找第一个大于等于给定值的元素。
-有了昨天的基础，来解决今天这个问题，是不是很简单？所不同的是判断节点不一样了，我们之前的需求都是查找等于给定值，现在变成了大于等于给定值，所以我们要在 $nums[$mid] &gt;= $num 这个判断条件上做文章，思路还是和之前两个变形版本类似，当 $mid 已经是最左边的元素，或者 $mid 的前一个元素值小于给定查询值，则 $mid 对应元素即为满足条件的元素，否则继续往前查找。
-示例代码 对应的 PHP 实现代码如下：
-&lt;?php/*** 二分查找变形版：查找第一个大于等于给定值的元素（数组中包含重复数据）*/function binary_search($nums, $num){if (count($nums) &lt;= 1) {return 0;}return binary_search_internal($nums, $num, 0, count($nums) - 1);}function binary_search_internal($nums, $num, $low, $high){if ($low &gt; $high) {return -1;}$mid = floor(($low + $high) / 2);if ($num &lt;= $nums[$mid]) {if ($mid == 0 || $nums[$mid - 1] &lt; $num) {return $mid;} else {return binary_search_internal($nums, $num, $low, $mid - 1);}} elseif ($num &gt; $nums[$mid]) {return binary_search_internal($nums, $num, $mid + 1, $high);}}$nums = [1, 2, 3, 3, 4, 5, 6];$index = binary_search($nums, 3);print $index;同样，与之相对的，还有我们这次分享中最后要讨论的一个二分查找的变形版本：在给定序列中查找最后一个小于等于给定值的元素。
-                  <a href="/algorithms/binarysearch/algorithms-binarysearch-interval/" class="post-read-more">[阅读全文]</a>
+                  定义 Trie 树，也叫「前缀树」或「字典树」，顾名思义，它是一个树形结构，专门用于处理字符串匹配，用来解决在一组字符串集合中快速查找某个字符串的问题。
+注：Trie 这个术语来自于单词「retrieval」，你可以把它读作 tree，也可以读作 try。  Trie 树的本质，就是利用字符串之间的公共前缀，将重复的前缀合并在一起，比如有[&ldquo;hello&rdquo;,&ldquo;her&rdquo;,&ldquo;hi&rdquo;,&ldquo;how&rdquo;,&ldquo;seo&rdquo;,&ldquo;so&rdquo;] 这个字符串集合，可以将其构建成下面这棵 Trie 树：
+每个节点表示一个字符串中的字符，从根节点到红色节点的一条路径表示一个字符串（红色节点表示是某个单词的结束字符，但不一定都是叶子节点）。
+这样，就可以通过遍历这棵树来检索是否存在待匹配的字符串了，比如要在这棵 Trie 树中查询 her，只需从 h 开始，依次往下匹配，在子节点中找到 e，然后继续匹配子节点，在 e 的子节点中找到 r，则表示匹配成功，否则匹配失败。通常，可以通过 Trie 树来构建敏感词或关键词匹配系统。
+实现 从刚刚 Trie 树的介绍来看，Trie 树主要有两个操作，一个是将字符串集合构造成 Trie 树。这个过程分解开来的话，就是一个将字符串插入到 Trie 树的过程。另一个是在 Trie 树中查询一个字符串。
+Trie 树是个多叉树，二叉树中，一个节点的左右子节点是通过两个指针来存储的，对于多叉树来说，怎么存储一个节点的所有子节点的指针呢？
+将 Trie 树的每个节点抽象为一个节点对象，对象包含的属性有节点字符、子节点引用和是否是字符串结束字符标志位：
+class TrieNode { public $data; // 节点字符 public $children = []; // 存放子节点引用（因为有任意个子节点，所以靠数组来存储） public $isEndingChar = false; // 是否是字符串结束字符 public function __construct($data) { $this-&gt;data = $data; } } 要构造一棵完整的 Trie 树，关键在于存储子节点引用的 $children 属性的实现。借助散列表的思想，通过一个下标与字符一一映射的数组，来构造 $children：将字符串中每个字符转化为 ASCII 码作为数组下标，将对应节点对象引用作为数组值，依次插入所有字符串，从而构造出 Trie 树。对应 PHP 实现代码如下：
+                  <a href="/post/algorithms/stringmatching/algorithms-stringmatching-trie/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
@@ -304,7 +308,7 @@ autocomplete('#aa-search-input',
                 
                   #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
                 
-                  #<a href="/tags/binarysearch/">BinarySearch</a>&nbsp;
+                  #<a href="/tags/stringmatching/">StringMatching</a>&nbsp;
                 
                 </span>
               
@@ -315,14 +319,14 @@ autocomplete('#aa-search-input',
           	
 
             <article class="post-preview">
-              <a href="/algorithms/binarysearch/algorithms-binarysearch-repeat/">
-                <h2 class="post-title">二分查找(BinarySearch)-数组含有重复值</h2>
+              <a href="/post/algorithms/stringmatching/algorithms-stringmatching-bf/">
+                <h2 class="post-title">字符串匹配-BF(暴力匹配算法)</h2>
                 
               </a>
 
               <span class="post-meta">
   
-    发表于 2019-08-13
+    发表于 2019-08-17
   
   
 </span>
@@ -330,12 +334,16 @@ autocomplete('#aa-search-input',
 
               <div class="post-entry">
                 
-                  日常开发过程中，除了正常的二分查找，还有很多二分查找的变形版本。
-符合标准的二分查找条件的序列一般是比较理想的情况，如果要查找的元素在序列中有多个怎么办？所以第一个常见的变形版本，就是在一个给定排序序列中查找第一个等于给定值的元素。
-其实关键节点就在于在序列中找到值等于待查找元素值时的处理。如果此时 $mid 位置已经到了序列的最左边，不能再往左了，或者序列中索引小于 $mid 的上一个元素值不等于待查找元素值，那么此时 $mid 就是第一个等于待查找元素值的位置；否则还要继续往前找。
-对应的 PHP 实现代码如下，其他地方都一样，就是 $num == $nums[$mid] 时的处理逻辑变了：
-&lt;?php/*** 二分查找变形版：查找第一个值等于给定值的元素（数组中包含重复数据）*/function binary_search($nums, $num){if (count($nums) &lt;= 1) {return 0;}return binary_search_internal($nums, $num, 0, count($nums) - 1);}function binary_search_internal($nums, $num, $low, $high){if ($low &gt; $high) {return -1;}$mid = floor(($low + $high) / 2);if ($num &lt; $nums[$mid]) {return binary_search_internal($nums, $num, $low, $mid - 1);} elseif ($num &gt; $nums[$mid]) {return binary_search_internal($nums, $num, $mid + 1, $high);} else {if ($mid == 0 || $nums[$mid-1] !
-                  <a href="/algorithms/binarysearch/algorithms-binarysearch-repeat/" class="post-read-more">[阅读全文]</a>
+                  <h1 id="原理">原理</h1>
+<p>最简单的字符串匹配算法 —— BF 算法说起，BF 是 Brute Force 的缩写，中文译作暴力匹配算法，也叫朴素匹配算法。</p>
+<p>BF 算法的原理很简单，在继续介绍之前，我们先引入两个术语：主串和模式串。简单来说，我们要在字符串 A 中查找子串 B，那么 A 就是主串，B 就是模式串。</p>
+<p>作为最简单、最暴力的字符串匹配算法，BF 算法的思想可以用一句话来概括，那就是，如果主串长度为 n，模式串长度为 m，我们在主串中检查起始位置分别是 0、1、2…n-m 且长度为 m 的 n-m+1 个子串，看有没有跟模式串匹配的。图示如下：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/StringMatching/1b463b1483d77731af561b5748d5eefa9568c11566c3f54624771e6f2c2ab128.png" alt="BF算法图示"></p>
+<p>结合上图，具体来说，就是每次拿模式串和主串对齐，然后从左到右依次比较每个字符，如果出现不相等，则把模式串往后移一个位置，再次重复上述步骤，直到模式串每个字符与对应主串位置字符都相等，则返回主串对应下标，表示找到，否则返回 -1，表示没找到。</p>
+<p>这个算法很好理解，因为这就是我们正常都能想到的暴力匹配，BF 算法的时间复杂度最差是 O(n*m)，意味着要模式串要移到主串 n-m 的位置上，并且模式串每个字符都要与子串比较。</p>
+<p>尽管 BF 算法复杂度看起来很高，但是在日常开发中，如果主串和模式串规模不大的话，该算法依然比较常用，因为足够简单，实现起来容易，不容易出错。另外，在规模不大的情况下，开销也可以接受，毕竟 O(n*m) 是最差的表现，大部分时候，执行效率比这个都要高。</p>
+<p>但是对于对时间要求比较敏感，或者需要高频匹配，数据规模较大的情况下，比如编辑器中的匹配功能、敏感词匹配系统等，BF 算法就不适用了。</p>
+
                 
               </div>
 
@@ -344,7 +352,7 @@ autocomplete('#aa-search-input',
                 
                   #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
                 
-                  #<a href="/tags/binarysearch/">BinarySearch</a>&nbsp;
+                  #<a href="/tags/stringmatching/">StringMatching</a>&nbsp;
                 
                 </span>
               
@@ -355,14 +363,14 @@ autocomplete('#aa-search-input',
           	
 
             <article class="post-preview">
-              <a href="/algorithms/binarysearch/algorithms-binarysearch-base/">
-                <h2 class="post-title">二分查找(BinarySearch)</h2>
+              <a href="/post/algorithms/datastructures/algorithms-datastructures-hashtable/">
+                <h2 class="post-title">数据结构-散列表(HashTable, 哈希表)</h2>
                 
               </a>
 
               <span class="post-meta">
   
-    发表于 2019-08-12
+    发表于 2019-08-16
   
   
 </span>
@@ -370,13 +378,19 @@ autocomplete('#aa-search-input',
 
               <div class="post-entry">
                 
-                  二分查找(BinarySearch) 在介绍二分查找之前，对于基于数字索引的数组元素的查找，第一反应都是遍历这个数组，直到给定数组元素值和待查找的值相等时，返回索引值并退出，否则一直遍历到最后一个元素，如果还是没有找到则返回 -1，这样的查找虽然是简单粗暴了点，但是对于规模不大的数据集，也是没什么问题的，不过很明显，对于 n 个元素的数组，这种查找的时间复杂度是 O(n)，随着数据规模的增加，性能会越来越差，设想如果数据集的长度是 40 亿（约 2 的 32 次方），那么最差的情况需要遍历数组 40 亿次，简直不敢想象需要花费多长时间！那有没有性能搞好的算法来解决这个问题呢？
-在进一步探讨这个问题之前，先来看一个生活中的例子。日常生活中，很多人应该有这种经历，朋友、同学或者同事淘了个宝贝，神秘兮兮的过来让大家猜多少钱，在约定一个价格范围之后（比如 10-100），大家会七嘴八舌的猜起价格来：
-同事A：新淘了个宝贝，猜猜多少钱？同事B：50块。同事A：高了。同事C：30块。同事A：低了。同事D：40块。同事A：高了。同事E：36块。同事A：对了。 如果用顺序遍历的逻辑，最差需要 91 次，才能猜到价格，现实生活中，没人会这么干，我们采用上面这种逻辑，只需要 4 次就猜到价格了，快了几十倍，而且数据量越大，优势越明显。基于这种思路，我算法科学家提炼出了二分查找算法，帮助在给定数据集中快速定位要查找的元素。
-实现原理 所谓二分查找，针对的是一个有序的数据集合（这点很重要），查找思想有点类似分治思想。每次都通过跟区间的中间元素对比，将待查找的区间缩小为之前的一半，直到找到要查找的元素，或者区间被缩小为 0。注意到二分查找针对的必须是已经排序过的有序数组，否则不能使用该算法。图示如下：
-示例代码 思路比较简单，我们将其通过 PHP 代码实现如下：
-&lt;?phpfunction binary_search($nums, $num){return binary_search_internal($nums, $num, 0, count($nums) - 1);}function binary_search_internal($nums, $num, $low, $high){if ($low &gt; $high) {return -1;}$mid = floor(($low + $high) / 2);if ($num &gt; $nums[$mid]) {return binary_search_internal($nums, $num, $mid + 1, $high);} elseif ($num &lt; $nums[$mid]) {return binary_search_internal($nums, $num, $low, $mid - 1);} else {return $mid;}}$nums = [1, 2, 3, 4, 5, 6];$index = binary_search($nums, 5);print $index;性能分析 很显然，二分查找的时间复杂度是 O(logn)。这是一个非常恐怖的数量级，有时候甚至比 O(1) 还要高效，比如要在开头提到的 40 亿个数字中查找某一个元素，也只需要32次（2 的 32 次方是 40 亿数量级），这真的是非常高效了，正因如此二分查找在线性表结构中的应用非常广泛。
-                  <a href="/algorithms/binarysearch/algorithms-binarysearch-base/" class="post-read-more">[阅读全文]</a>
+                  散列表(HashTable, 哈希表) 散列表（HashTable，也叫哈希表），是根据键（Key）直接访问在内存存储位置的数据结构。
+其实现原理是：通过散列函数（也叫哈希函数）将元素的键映射为数组下标（转化后的值叫做散列值或哈希值），然后在对应下标位置存储记录值。按照键值查询元素时，就是用同样的散列函数，将键值转化数组下标，从对应的数组下标的位置取数据：
+散列表用的是数组支持按照下标随机访问数据的特性，所以散列表其实就是数组的一种扩展，由数组演化而来。可以说，如果没有数组，就没有散列表。而 PHP 的关联数组干脆就是基于散列表实现。
+散列技术既是一种存储方法，也是一种查找方法。与之前的查找方法不同的是散列技术的记录之间不存在逻辑关系，因此主要是面向查找的数据结构。最适合求解的问题是查找给定值相等的记录。
+散列表中有两个关键的概念，一个是散列函数（或者哈希函数），一个是散列冲突（或者哈希冲突）。
+散列函数 散列函数用于将键值经过处理后转化为散列值。具有以下特性：
+散列函数计算得到的散列值是非负整数 如果 key1 == key2，则 hash(key1) == hash(key2) 如果 key1 != key2，则 hash(key1) != hash(key2)  散列冲突 所谓散列冲突，简单来说，指的是 key1 != key2 的情况下，通过散列函数处理，hash(key1) == hash(key2)，这个时候，发生了散列冲突。设计再好的散列函数也无法避免散列冲突，原因是散列值是非负整数，总量是有限的，但是现实世界中要处理的键值是无限的，将无限的数据映射到有限的集合，肯定避免不了冲突。
+事实上，如果不考虑散列冲突，散列表的查找效率是非常高的，时间复杂度是 O(1)，比二分查找效率还要高，但是因为无法避免散列冲突，所以散列表查找的时间复杂度取决于散列冲突，最坏的情况可能是 O(n)，退化为顺序查找。这种情况在散列函数设计不合理的情况下更糟。
+散列函数设计 $arr[&lsquo;test&rsquo;] = 123 这段代码，PHP 底层会将键值 test 通过散列函数转化为散列码，然后将 123 映射到这个散列码上。在不考虑哈希冲突的情况下，散列表查找、删除、插入的时间复杂度都是 O(1)，非常高效。
+要减少哈希冲突，提高散列表操作效率，设计一个优秀的散列函数至关重要，平时经常使用的 md5 函数就是一个散列函数，但是其实还有其他很多自定义的设计实现，要根据不同场景，设计不同的散列函数来减少散列冲突，而且散列函数本身也要很简单，否则执行散列函数本身会成为散列表的瓶颈。日常很少会自己去设计散列函数，但是做一些简单的了解还是有必要的。
+通常有以下几种散列函数构造方法：
+直接定址法：即 f(key) = a*key + b，f 表示散列函数，a、b 是常量，key 是键值 数字分析法：即对数字做左移、右移、反转等操作获取散列值 除数留余法：即 f(key) = key % p，p 表示容器数量，这种方式通常用在将数据存放到指定容器中，如何决定哪个数据放到哪个容器，比如分表后插入数据如何处理（此时 p 表示拆分后数据表的数量），分布式 Redis 如何存放数据（此时 p 表示几台 Redis 服务器） 随机数法：即 f(key) = random(key)，比如负载均衡的 random 机制  以上只是一些比较场景的散列函数设计思路，还有很多其他的设计方法，这里就不一一列举了。
+                  <a href="/post/algorithms/datastructures/algorithms-datastructures-hashtable/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
@@ -384,8 +398,6 @@ autocomplete('#aa-search-input',
                 <span class="post-meta">
                 
                   #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
-                
-                  #<a href="/tags/binarysearch/">BinarySearch</a>&nbsp;
                 
                 </span>
               
@@ -407,14 +419,14 @@ autocomplete('#aa-search-input',
           	
 
             <article class="post-preview">
-              <a href="/algorithms/sort/algorithms-sort-selectionsort/">
-                <h2 class="post-title">排序算法-选择排序(SelectionSort)</h2>
+              <a href="/post/algorithms/binarysearch/algorithms-binarysearch-case/">
+                <h2 class="post-title">二分查找(BinarySearch)-索引查找</h2>
                 
               </a>
 
               <span class="post-meta">
   
-    发表于 2019-08-09
+    发表于 2019-08-15
   
   
 </span>
@@ -422,10 +434,27 @@ autocomplete('#aa-search-input',
 
               <div class="post-entry">
                 
-                  实现原理 选择排序算法的实现思路有点类似插入排序，也分已排序区间和未排序区间。但是选择排序每次会从未排序区间中找到最小的元素，将其放到已排序区间的末尾。图示如下： 光看定义有点抽象，用图来演示，假设待排序数字是 4、5、6、3、2、1，第一次排序的流程是这样的：
-在这里搭配动态图查看效果更佳：https://visualgo.net/zh/sorting。
-&lt;?php/*** 选择排序算法实现*/function selection_sort($nums){if (count($nums) &lt;= 1) {return $nums;}for ($i = 0; $i &lt; count($nums); $i++) {$min= $i;for ($j = $i + 1; $j &lt; count($nums); $j++) {if ($nums[$j] &lt; $nums[$min]) {$min = $j;}}if ($min != $i) {$temp = $nums[$i];$nums[$i] = $nums[$min];$nums[$min] = $temp;}}return $nums;}$nums = [4, 5, 6, 3, 2, 1];$nums = selection_sort($nums);print_r($nums);性能分析 很显然，选择排序的时间复杂度也是 O(n2)由于不涉及额外的存储空间，所以是原地排序；由于涉及非相邻元素的位置交换，所以是不稳定的排序算法。 综合比较前面介绍的三个排序算法，时间复杂度都是一样的，也都是原地排序，但是选择排序是不稳定的排序算法，此外，插入排序和冒泡排序相比较，在将插入排序的时候讲到，插入排序只需要一条语句，而冒泡排序需要三条，在同等条件下，或者数据量很大的情况下，插入排序性能是要优于冒泡排序的，所以综合比较下来，三者的优先级是插入排序 &gt; 冒泡排序 &raquo; 选择排序。
-                  <a href="/algorithms/sort/algorithms-sort-selectionsort/" class="post-read-more">[阅读全文]</a>
+                  IP 地址对应城市查询 每个城市都有对应的 IP 地址段，这个在网上搜一下就能拿到。然后可以将这些不同城市 IP 地址段起始值转化为整型数字（转化函数Google/百度搜下就能找到），进而对其进行排序，就可以得到一个有序的序列。比如杭州和北京，IP区间分别是 [183.128.0.0,183.159.255.255] 和 [110.96.0.0,110.127.255.255]，转化为数字后对应区间分别是 [3078619136,3080716287] 和 [1851785216,1853882367]，这样，就可以对这两个区间起始值排序为 [1851785216,3078619136]。
+此外我们还需要存储每个区间值对应的城市，以便找到对应位置后可以快速定位对应城市，可以把这个映射关系存储到数据库里面，存储字段包括城市、起始 IP、结束 IP，这里有一个前提是不同城市区间值不可能交叉，否则没法玩。
+接下来就是二分查找排上用场的时候了，将待查找 IP 转化为数字，然后在排序序列中查找最后一个起始 IP 小于等于待查找 IP 的位置，通过该起始 IP 在数据库中定位到对应记录，判断待查找 IP 是否在这个 IP 区间范围内，如果在的话则返回对应城市，不在的话，就返回没找到。
+稠密索引（数据库索引技术基础） 二分查找适用于有序线性表的查找，此外针对二分查找还有升级版的插值查找，以及利用斐波那契原理进行查找的斐波那契查找.
+二分查找不适用于高速增长的海量数据，因为维护这个排序非常麻烦，所以我们引出索引这种数据结构。
+索引是为了加快查找速度而设计的一种数据结构。索引就是把一个关键字与它对应的记录相关联的过程，一个索引由若干索引项构成，每个索引项至少包含关键字和其对应记录在存储器中的位置等信息。
+由此可见，索引技术是组织大型数据库和磁盘文件的一种重要技术。
+索引技术分为线性索引、树形索引和多级索引，这里我们只介绍线性索引。所谓线性索引就是将索引项集合组织为线性结构，也称索引表。以下是一个索引表的示例图：
+在线性索引中，我们重点介绍三种：稠密索引、分块索引和倒排索引。
+首先是稠密索引。稠密索引是指在线性表中，将数据集中的每个记录对应一个索引项。就像上面示例图中的那样。以主键为例，可以将其抽象化如下：
+对于稠密索引这个索引表来说，索引项一定按照关键码有序排列，这样可以应用二分查找，以免索引查找本身影响性能。可见，稠密索引性能可以做到和二分查找相当（找到对应关键码就可以通过指针直接指向对应记录），但是索引项长度和数据集一样长，空间复杂度高，如果数据太多需要存放到磁盘上，反复读取磁盘对性能影响很大。
+分块索引（数据库索引技术基础） 为了减少索引项个数，对数据集进行分块，并使其分块有序，然后再给每个分块建立一个索引项（索引值是分块中最大关键码），至于分块内部，则不管其有序性，从而减少索引项的个数。在查找的时候在索引项中通过二分查找找到指定索引项，然后根据该索引项中的关键码去相应分块遍历查找指定元素，这是一种折中方案，既兼顾了空间复杂度，又兼顾了时间复杂度。
+分块索引图示如下：
+这里面有几个概念需要阐述下，首先是分块有序，需要满足两个先决条件：
+块内无序。即每一块内的记录不要求有序。当然，有序更理想，只不过要花费大量时间和空间的代价。 块间有序。即要求后一块的所有关键字都大于前一块的所有关键字。只有块间有序，才能给查找带来效率。  其次，分块索引的索引项包含三个数据项：
+最大关键码：它存储每一块中的最大关键字。这样做的好处是在它之后的下一块中最小的关键字也能比这一块最大的关键字要大。 块长：存储块中的记录个数，以便于循环时使用。 块首指针：用于指向块首数据元素的指针，便于开始对这一块的记录开始遍历。  最后，在分块索引中查找，分两块进行：
+在分块索引表中查找要查找关键字所在的块。由于块间有序，所以可以通过二分查找快速定位（通过不小于给定值的第一个元素，不大于给定值的最后一个元素确定区间，以前面给出的示例图为例，58位于57和96之间，则会去第三块中查找）。 根据块首指针找到相应的块，并在块中顺序查找指定值（即关键码，块中无序所以只能顺序查找）。  分块索引的时间复杂度是：O(log(m)+n)，其中 m 是分块数，n 是块内元素个数，在索引表长度和块内元素相等时，时间复杂度最优。性能要优于顺序查找，但是比二分查找要差。
+总体来说，分块索引在兼顾存储空间和查找性能的情况下，被普遍用于数据库查找等技术中。
+倒排索引（搜素引擎技术基础） 百度、Google 等搜索引擎为我们日常查找信息带来了巨大的方便，你是否思考过搜索引擎是如何从海量 HTML 文档中通过关键词查找资源的？今天给大家介绍最简单，也是最基础的搜索引擎技术 —— 倒排索引。
+有倒排索引，就有正向索引，正向索引指的是通过文档 ID 找到对应的文档，如果通过文档ID查找对应文档，再在文档中匹配关键词，意味着要扫描所有文档，最后还要排序，对于互联网上的海量资源来说，显然是不可取的。
+                  <a href="/post/algorithms/binarysearch/algorithms-binarysearch-case/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
@@ -433,6 +462,8 @@ autocomplete('#aa-search-input',
                 <span class="post-meta">
                 
                   #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                
+                  #<a href="/tags/binarysearch/">BinarySearch</a>&nbsp;
                 
                 </span>
               
@@ -633,7 +664,16 @@ autocomplete('#aa-search-input',
         
     
     
-    <li class="page-item"><a class="page-link" href="/page/18/">18</a></li>
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/page/19/">19</a></li>
     
     
     <li class="page-item">
@@ -641,7 +681,7 @@ autocomplete('#aa-search-input',
     </li>
     
     <li class="page-item">
-        <a href="/page/18/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+        <a href="/page/19/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
     </li>
     
 </ul>
@@ -852,45 +892,45 @@ autocomplete('#aa-search-input',
         <ul class="list-inline text-center footer-links">
           <img src="/img/wechatmp.png" alt="k8s技术圈">
           
-              <li>
-                <a href="mailto:icnych@gmail.com" title="Email me">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
+          <li>
+            <a href="mailto:icnych@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
           
-              <li>
-                <a href="https://github.com/cnych" title="GitHub">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
+          <li>
+            <a href="https://github.com/cnych" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
           
-              <li>
-                <a href="https://weibo.com/cnych" title="微博">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
+          <li>
+            <a href="https://weibo.com/cnych" title="微博">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
           
-              <li>
-                <a href="https://instagram.com/cnych" title="Instagram">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
+          <li>
+            <a href="https://instagram.com/cnych" title="Instagram">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
           
           
           <li>
-            <a href="/index.xml" title="RSS">
+            <a href="/%20index.xml" title="RSS">
               <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
@@ -901,9 +941,9 @@ autocomplete('#aa-search-input',
         </ul>
         <p class="credits copyright text-muted">
           
-            
-              <a href="/">WoolfBreathe</a>
-            
+          
+          <a href="/">WoolfBreathe</a>
+          
           
 
           &nbsp;&bull;&nbsp;
@@ -921,7 +961,9 @@ autocomplete('#aa-search-input',
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a
+            href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a
+            href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
           
         </p>
       </div>
@@ -929,67 +971,35 @@ autocomplete('#aa-search-input',
   </div>
 </footer>
 
-
+<script> renderMathInElement(document.body); </script>
 <script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
 
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag() { dataLayer.push(arguments); }
   gtag('js', new Date());
   gtag('config', 'UA-69668147-3');
 </script>
 <script>
-(function(){
+  (function () {
     var bp = document.createElement('script');
     var curProtocol = window.location.protocol.split(':')[0];
     if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
     }
     else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
     }
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(bp, s);
-})();
+  })();
 </script>
-<script >
-$(document).ready(function() {
-  var int = setInterval(fixCount, 50);  
-  
-  var initPVCount = 584976;
-  var initUVCount = 153191;
-  function fixCount() {                   
-    if ($("#busuanzi_container_site_pv").css("display") != "none") {
-        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
-        clearInterval(int); 
-    }
-    if ($("#busuanzi_container_site_uv").css("display") != "none") {
-      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
-      clearInterval(int); 
-    }  
-  }           
-});
-</script>
- <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery-migrate@1.2.1/dist/jquery-migrate.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script type="text/javascript">
-$('.carousel').slick({
-    dots: true,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    infinite: true,
-    speed: 500,
-    fade: true,
-    cssEase: 'linear',
-    centerMode: true,
-    prevArrow: '<button type="button" class="slick-prev"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
-});
-</script>
+
+
+
+
 
   </body>
 </html>

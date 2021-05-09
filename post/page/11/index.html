@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+  <title>Posts-WoolfBreathe</title>
+  <meta property="og:title" content="Posts" />
+  <meta name="twitter:title" content="Posts" />
+
+  <meta name="author" content="WoolfBreathe"/>
+  <link href="/img/favicon.png" rel="icon" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/img/favicon.png"/>
+  <meta property="og:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@username" />
+  <meta name="twitter:creator" content="@username" />
+  <meta property="og:url" content="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="WoolfBreathe" />
+
+  <meta name="generator" content="Hugo 0.68.3" />
+  <link rel="canonical" href="/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="WoolfBreathe">
+
+  
+  
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700%7COpen+Sans:400,700" rel="stylesheet">
+  
+
+  <link rel="stylesheet" href='/css/bundle.min.62de9d30b83723e0d55f82908aedb1c5eb18c910bc24bcf43e530ce754ee1502.css' integrity='sha256-Yt6dMLg3I&#43;DVX4KQiu2xxesYyRC8JLz0PlMM51TuFQI='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
+<meta name="google-site-verification" content="oKxX4fOvB2yYmU02txZFChM93XQbESU4JaG3tNH9Hm8" />
+<meta name="baidu-site-verification" content="F5ojAyqaKU" />
+<meta name="keywords" content="">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?d611849735f187dd788dc054908f7d7a";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/" title="WoolfBreathe">
+        <img src="img/avatar-icon.png" style="margin-top: -5px;height: 32px;" alt="WoolfBreathe">
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="首页" href="/">首页</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="归档" href="/archives">归档</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="标签" href="/tags">标签</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于" href="/page/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="RSS" href="/index.xml">RSS</a>
+            </li>
+          
+        
+
+        
+
+        
+
+        
+          <li>
+            <a href="#modalSearch" data-toggle="modal" data-target="#modalSearch" style="outline: none;">
+              <span id="searchGlyph" class="glyphicon glyphicon-search"></span>
+            </a>
+          </li>
+          
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+  <div id="modalSearch" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">搜索</h4>
+        </div>
+        <div class="modal-body">
+            
+<div class="aa-input-container" id="aa-input-container">
+    <input type="search" id="aa-search-input" class="aa-input-search" placeholder="Search for titles or URIs..." name="search" autocomplete="off" />
+    <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
+        <path d="M1806,332c0-123.3-43.8-228.8-131.5-316.5C1586.8-72.2,1481.3-116,1358-116s-228.8,43.8-316.5,131.5  C953.8,103.2,910,208.7,910,332s43.8,228.8,131.5,316.5C1129.2,736.2,1234.7,780,1358,780s228.8-43.8,316.5-131.5  C1762.2,560.8,1806,455.3,1806,332z M2318,1164c0,34.7-12.7,64.7-38,90s-55.3,38-90,38c-36,0-66-12.7-90-38l-343-342  c-119.3,82.7-252.3,124-399,124c-95.3,0-186.5-18.5-273.5-55.5s-162-87-225-150s-113-138-150-225S654,427.3,654,332  s18.5-186.5,55.5-273.5s87-162,150-225s138-113,225-150S1262.7-372,1358-372s186.5,18.5,273.5,55.5s162,87,225,150s113,138,150,225  S2062,236.7,2062,332c0,146.7-41.3,279.7-124,399l343,343C2305.7,1098.7,2318,1128.7,2318,1164z" />
+    </svg>
+</div>
+<script src="/js/algoliasearch.min.js"></script>
+<script src="/js/autocomplete.min.js"></script>
+
+<script>
+var client = algoliasearch("1JDRAS0AZR", "8804ac109158bb3bb60d74ce98fa332f");
+var index = client.initIndex('prod_blog');
+
+autocomplete('#aa-search-input',
+{ hint: false}, {
+    source: autocomplete.sources.hits(index, {hitsPerPage: 5}),
+    
+    displayKey: 'name',
+    
+    templates: {
+        
+        suggestion: function(suggestion) {
+            return '<span>' + '<a href="/post/' + suggestion.slug + '">' +
+            suggestion._highlightResult.title.value + '</a></span>';
+        }
+    }
+});
+</script>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+  <header class="header-section ">
+    <div class="intro-header no-img">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="page-heading">
+              <h1>Posts</h1>
+              <hr class="small">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+    
+  <div class="container" role="main">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        
+        <div class="posts-list">
+          
+            <article class="post-preview">
+              <a href="/post/algorithms/binarytree/algorithms-binarytree-heap/">
+                <h2 class="post-title">二叉树(BinaryTree)-堆(Heap)</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-08-26
+              </p>
+              <div class="post-entry">
+                
+                  定义 堆是一种特殊的二叉树，具备以下特性：
+堆是一个完全二叉树 每个节点的值都必须大于等于（或小于等于）其左右孩子节点的值  如果每个节点的值都大于等于左右孩子节点的值，这样的堆叫大顶堆；如果每个节点的值都小于等于左右孩子节点的值，这样的堆叫小顶堆。
+上图中，左侧的堆是大顶堆，右侧的堆是小顶堆，我们还可以得出这个结论：对应大顶堆，堆顶一定是最大值；对于小顶堆，堆顶一定是最小值。
+构建 由于完全二叉树的特殊性，可以通过数组来存储，堆也是完全二叉树，所以我们完全可以通过数组来存储。在使用数组存储堆的时候，把第一个索引位置留空，从第二个索引位置开始存储堆元素，这样，对于索引值为 i 的元素而言，其子节点索引分别为 2i 和 2i+1。
+下面我们就来看如何在堆中插入新节点，以大顶堆为例，从叶子结点插入，如果比父级元素大，则与父级元素交换位置，依次类推，直到到达根节点（小顶堆恰好相反）：
+注：构建堆的过程叫堆化。  构建实现 下面是对应的 PHP 实现代码：
+&lt;?php class Heap { private $a = []; private $n; private $count; public function __construct($capacity = 10) { $this-&gt;n = $capacity; $this-&gt;count = 0; } public function insert($data) { if ($this-&gt;count &gt;= $this-&gt;n) { return false; } $this-&gt;count++; $this-&gt;a[$this-&gt;count] = $data; $i = $this-&gt;count; while (floor($i/2) &gt; 0 &amp;&amp; $this-&gt;a[floor($i/2)] &lt; $this-&gt;a[$i]) { $temp = $this-&gt;a[$i]; $this-&gt;a[$i] = $this-&gt;a[floor($i/2)]; $this-&gt;a[floor($i/2)] = $temp; $i = $i / 2; } return true; } public function __toString() { return json_encode(array_values($this-&gt;a)); } } 打印结果如下，符合堆定义，表明堆构建成功：
+                  <a href="/post/algorithms/binarytree/algorithms-binarytree-heap/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/post/algorithms/binarytree/algorithms-redblacktree/">
+                <h2 class="post-title">二叉树(BinaryTree)-红黑树(Red-Black Tree)</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-08-25
+              </p>
+              <div class="post-entry">
+                
+                  特性和算法复杂度 平衡二叉树是最理想的二叉排序树，性能最好，也最稳定，但是缺点是维护成本高，需要在插入和删除节点时维护新树的平衡性，所以工程实践中，倾向于使用另一种二叉排序树 —— 红黑树.
+什么是红黑树 红黑树（Red-Black Tree）是每个节点都带有颜色属性的二叉排序（查找）树，具备以下特性：
+节点是红色或黑色； 根节点是黑色的； 每个叶子节点都是黑色的空节点（NIL），也就是说，叶子节点不存储数据； 任何相邻的节点都不能同时为红色，也就是说，红色节点是被黑色节点隔开的； 每个节点，从该节点到达其可达叶子节点的所有路径，都包含相同数目的黑色节点；  示例：
+这些约束保证了红黑树的关键特性：从根节点到叶子节点的最长的可能路径不多于最短的可能路径长度的两倍（每条路径红黑相间，且黑色节点数目相同，所以最短的路径上是两个黑色节点，相应的，此时最长路径节点一定是黑-红-黑-红，正好是其两倍），从而保证红黑树无论怎么插入、删除节点大致上也是平衡的。
+红黑树的算法复杂度 由于红黑树的特性，可以确保即使在最差情况下，红黑树也是大致平衡的，下面我们来简单推导下红黑树的时间复杂度。
+前面我们讲二叉排序树的时候说到二叉排序树的时间复杂度和树的高度成正比，红黑树是红黑相间的，我们可以先把红色的节点去掉，剩下的黑色节点就可能变成四叉树了，比如我们上面示例的那个红黑树。由于红黑树每条路径上黑色节点相同，所以可以继续把这个四叉树转化为完全二叉树，假设黑色节点的数量为 m，这样，这棵树的时间复杂度就是 O(logm) 了；然后我们把红色节点塞回来，红色节点的总数目肯定是小于等于黑色节点的，我们不妨假设等于黑色节点，这样，树的高度就增加一倍，对应的时间复杂度就是 2O(logm) 了，m≈n/2，由于在计算时间复杂度的时候，常量可以舍弃，所以红黑树的时间复杂度也是 O(logn)。虽然这里面都是估算的，但是由于前面提到的红黑树的特性约束，数量级上是没问题的。
+为什么工程上大多使用红黑树 红黑树维护成本比平衡二叉树低，性能上也能大致做到 O(logn)，且比较稳定，可以应付最差的情况。
+实现原理 插入节点 红黑树规定，插入的节点必须是红色的。而且，二叉排序（查找）树中新插入的节点都是放在叶子节点上。首先，两种最简单的情况：
+如果插入节点的父节点是黑色的，那我们什么都不用做，它仍然满足红黑树的定义。 如果插入的节点是根节点，那我们直接把它设置为黑色就可以了。  除此之外，其他情况都会违背红黑树的特性，所以我们需要进行动态调整，与平衡二叉树不同，调整的过程除了左右旋转之外，还涉及到节点颜色的调整。
+新节点插入之后，如果红黑树的平衡被打破，那一般会有下面三种情况。我们只需要根据每种情况的特点，不停地调整，就可以让红黑树继续符合定义，也就是继续保持平衡。
+有了前面平衡二叉树的铺垫，相信理解起来红黑树的构建过程将会更加轻松。为了方便表述，我们把正在处理的节点叫关注节点。
+CASE 1：如果关注节点是 a（待插入节点），它的叔叔节点（父亲的兄弟节点，从二叉排序树的角度来说叫伯伯节点更合适？） d 是红色，我们就依次执行下面的操作：
+将关注节点 a 的父节点 b、叔叔节点 d 的颜色都设置成黑色； 将关注节点 a 的祖父节点 c 的颜色设置成红色； 关注节点变成 a 的祖父节点 c； 跳到下面的 CASE 2 或者 CASE 3 继续处理。  CASE 2：如果关注节点是 a，它的叔叔节点 d 是黑色，关注节点 a 是其父节点 b 的右子节点，我们就依次执行下面的操作：
+                  <a href="/post/algorithms/binarytree/algorithms-redblacktree/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/post/algorithms/binarytree/algorithms-binarytree-avl/">
+                <h2 class="post-title">二叉树(BinaryTree)-平衡二叉树(AVL)</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-08-24
+              </p>
+              <div class="post-entry">
+                
+                  引子 二叉排序树，理想情况下，二叉排序树的插入、删除、查找时间复杂度都是 O(logn)，非常高效，而且它是一种动态的数据结构，插入删除性能合查找一样好，不像之前提到的二分查找，虽然查找性能也是 O(logn)，但是需要先对线性表进行排序，二排序的最好时间复杂度也是 O(nlogn)，所以二分查找不适合动态结构的排序。
+但是如果二叉排序树构造的不好的话就会退化成斜树：
+此时按照之前的实现算法性能退化成了 O(n)，所以如何构造二叉排序树很重要，我们的理想情况是满二叉树和完全二叉树，它们的性能都是 O(logn)，所以我们在构造二叉排序树的时候要尽可能像它们靠近，才能得到最佳的操作性能，由此引出平衡二叉树。
+什么是平衡二叉树 平衡二叉树的英文名是 Self-Balancing Binary Search Tree 或者 Height-Balancing Binary Search Tree，译作自平衡的二叉查找树，或者高度平衡的二叉查找树，二叉查找树和二叉排序树是一个意思，只是叫法不同，简称平衡二叉树，也叫 AVL 树（平衡二叉树作者的名字首字母），所以平衡二叉树首先是二叉排序树，并且这个二叉排序树是左右高度平衡的，这么讲有点抽象，具体来说，平衡二叉树要求每个节点的左子树和右子树的高度差至多等于 1，这个高度（深度）差的值叫做平衡因子 BF，也就是说 BF 的值不能大于1，否则就不是平衡二叉树。
+示例：
+图1满足平衡二叉树的定义，是平衡二叉树； 图2所示二叉树不是二叉排序树，所有不是平衡二叉树； 图3不满足平衡因子小于等于1的要求，对58这个节点来说，平衡因子BF的值是3，因而不是平衡二叉树； 图4满足平衡二叉树的定义，是平衡二叉树；  之所以这么约束平衡二叉树，是为了保证它能够始终做到插入、删除、查找的时间复杂度是 O(logn)。
+平衡二叉树的实现原理 平衡二叉树的基本实现思路，是在构建二叉排序树的时候，每插入一个节点，都要检查这个节点的插入是否破坏了原有的平衡性，如果是的话，则找出最小不平衡子树，在保证整体二叉排序树的前提下，通过左旋或者右旋的方式将其调整为平衡子树。从而动态维护这棵平衡二叉树。
+这里面有几个概念需要解释一下：
+1、最小不平衡子树 距离插入节点最近的，且平衡因子绝对值大于 1 的节点为根的子树，叫做最小不平衡子树：
+比如上图中以存储元素 58 的节点为根的子树叫做最小不平衡子树。
+2、左旋/右旋 所谓左旋和右旋指的是最小不平衡子树旋转的方向。
+如果平衡因子小于 -1，即右子树高度值比较大，则需要左旋：
+反之，如果平衡因子大于1，即左子树高度值比较大，则需要右旋：
+当然为了方便你理解原理，我们这里给出的都是最简化的情况，实际处理过程中比这个更复杂，下一篇我们将具体给你演示如何通过代码在各种情况下实现平衡二叉树并讨论对应的时间复杂度。
+演示 一棵二叉树：
+虽然这也是一棵二叉排序树，但是层数达到 8，显然可以通过平衡二叉树来降低层数，提高性能，如果把它转化为平衡二叉树，会是这个样子：
+层数降低了一半，变成了 4 层，显然性能要比之前要高。那么这个平衡二叉树是怎么构建的呢？假设插入节点的顺序是{3,2,1,4,5,6,7,10,9,8}，两个节点之前不用考虑，我们从第三个节点开始分析：
+插入第三个节点 1 时，左子树高度是 2，右子树高度是 0，高度差的绝对值是 2，不符合平衡二叉树的要求，需要把以 3 为根节点的子树进行右旋，到右图那个样子，左右子树高度差为 0，符合平衡二叉树要求，完成调整。同理，插入第四个节点 4 的时候，左右子树高度为 -1，符合平衡二叉树要求，继续插入第五个节点，此时又不符合平衡二叉树的要求了，这个时候右子树比较高，需要左旋：
+旋转的时候以最小不平衡子树为单位，此时最小的不平衡子树是 3、4、5 节点构成的子树，我们以 4 为中心进行左旋，将树结构调整为右图所示的样子，满足了平衡二叉树的要求，停止调整。注意到我们每次新增节点的时候，会调整以每个节点为根节点的左右子树的高度差，然后从最小子树开始进行调整，直到以每个节点为根节点的子树符合平衡二叉树的要求，这样整棵树就符合平衡二叉树的要求了。
+                  <a href="/post/algorithms/binarytree/algorithms-binarytree-avl/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/post/algorithms/binarytree/algorithms-binarytree-search/">
+                <h2 class="post-title">二叉树(BinaryTree)-查找</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-08-23
+              </p>
+              <div class="post-entry">
+                
+                  为什么要引入二叉排序树 前面已经介绍了很多数据结构，比如数组、链表、散列表等，数组查找性能高，但是插入、删除性能差，链表插入、删除性能高，但查找性能差，在不考虑散列冲突的话，散列表的插入、删除、查找性能都很高，但是前提是没有散列冲突，此外，散列表存储的数据是无序的，散列表的扩容非常麻烦，涉及到散列冲突时，性能不稳定，另外，散列表用起来爽，构造起来可不简单，要考虑散列函数的设计、哈希冲突的解决、扩容缩容等一系列问题，有没有一种插入、删除、查找性能都不错，构建起来也不是很复杂，性能还很稳定的数据结构呢？这就要介绍的数据结构 —— 二叉排序树。
+什么是二叉排序树 二叉排序树是一种特殊的二叉树，重点关注 「排序」 二字，二叉排序树要求，在树中的任意一个节点，其左子树中的每个节点的值，都要小于这个节点的值，而右子树节点的值都大于这个节点的值，所以这么看来，二叉排序树是天然有序的，如果按照昨天讲的中序遍历，得到将是一个从小到大的有序数据集。但是构造二叉排序树的目的，并不是为了排序，而是为了提高查找、插入和删除的速度。不管怎么说，在一个有序数据集上查找数据肯定比无序数据集要快，同时二叉排序树这种非线性结构，也非常有利于插入和删除的实现。
+注：二叉排序树也叫做二叉查找树，二叉搜索树，你如果看到类似概念，它们是一个意思。  二叉排序树的插入 首先我们先定义好基本的类结构，还是通过二叉链表来存储二叉排序树，对应的节点类如下：
+class Node { public $data; public $left = null; public $right = null; public function __construct($data) { $this-&gt;data = $data; } } 然后，我们定义下二叉排序树对应类的基本结构：
+class BinarySortedTree { /** * @var Node */ private $tree; public function getTree() { return $this-&gt;tree; } } 然后我们按照二叉排序树的定义，实现对应二叉排序树节点的插入方法：
+// 插入节点数据 public function insert(int $data) { // 如果是空树，则将数据插入到根节点 if (!$this-&gt;tree) { $this-&gt;tree = new Node($data); return; } $p = $this-&gt;tree; while ($p) { if ($data &lt; $p-&gt;data) { if (!
+                  <a href="/post/algorithms/binarytree/algorithms-binarytree-search/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+        </div>
+        
+          <ul class="pager main-pager">
+            
+              <li class="previous">
+                <a href="page/10">&larr; 上一页</a>
+              </li>
+            
+            
+              <li class="next">
+                <a href="page/12">下一页 &rarr;</a>
+              </li>
+            
+          </ul>
+        
+      </div>
+    </div>
+  </div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          <img src="/img/wechatmp.png" alt="k8s技术圈">
+          
+          <li>
+            <a href="mailto:icnych@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://github.com/cnych" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://weibo.com/cnych" title="微博">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://instagram.com/cnych" title="Instagram">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="/%20index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+          
+          <a href="/">WoolfBreathe</a>
+          
+          
+
+          &nbsp;&bull;&nbsp;
+          2021
+        </p>
+        <p class="text-center text-muted">
+          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+          <span id="busuanzi_container_site_pv" style="display:none">
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次
+          </span>
+          &nbsp;&bull;&nbsp;
+          <span id="busuanzi_container_site_uv" style="display:none">
+            访客数<span id="busuanzi_value_site_uv"></span>人次
+          </span>
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a
+            href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a
+            href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script> renderMathInElement(document.body); </script>
+<script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() { dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'UA-69668147-3');
+</script>
+<script>
+  (function () {
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+  })();
+</script>
+
+
+
+
+
+  </body>
+</html>
+

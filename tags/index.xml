@@ -14,7 +14,7 @@
     
     
     <item>
-      <title>math</title>
+      <title>Math</title>
       <link>/tags/math/</link>
       <pubDate>Thu, 06 May 2021 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (WoolfBreathe)</author>
@@ -37,6 +37,15 @@
       <pubDate>Mon, 19 Apr 2021 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (WoolfBreathe)</author>
       <guid>/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>MachineLearning</title>
+      <link>/tags/machinelearning/</link>
+      <pubDate>Fri, 02 Apr 2021 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/tags/machinelearning/</guid>
       <description></description>
     </item>
     

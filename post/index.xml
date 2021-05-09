@@ -15,10 +15,10 @@
     
     <item>
       <title>Matrix Analysis</title>
-      <link>/post/matrix/2021-05-06-matrixanalysis/</link>
+      <link>/post/math/2021-05-06-matrixanalysis/</link>
       <pubDate>Thu, 06 May 2021 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (WoolfBreathe)</author>
-      <guid>/post/matrix/2021-05-06-matrixanalysis/</guid>
+      <guid>/post/math/2021-05-06-matrixanalysis/</guid>
       <description></description>
     </item>
     
@@ -55,6 +55,52 @@ Install Docker CE 使用存储库安装(Install using the repository) 在新主�
       <author>youremail@domain.com (WoolfBreathe)</author>
       <guid>/post/devops/docker/devops-docker-layering-principle/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title>斯坦福大学2014机器学习学习笔记</title>
+      <link>/post/machinelearning/machinelearning-stanford/</link>
+      <pubDate>Fri, 02 Apr 2021 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/machinelearning/machinelearning-stanford/</guid>
+      <description>基本概念 机器学习   (Arthur Samuel) 在进行特定编程的情况下，给予计算机学习能力的领域
+  (Tom Mitchell) 一个程序被认为能从经验E中学习，解决任务T，达到性能度量值P，当且仅当，有了经验E后，经过P评判，程序在处理T时的性能有所提升
+  建模误差（modeling error）  模型所预测的值与训练集中实际值之间的差距
+ 监督学习   利用一组已知类别的样本调整分类器的参数，使其达到所要求性能的 过程，也称为监督训练或有教师学习。
+  监督学习是从标记的训练数据来推断一个功能的机器学习任务。
+  无监督学习 确定型无监督学习 概率型无监督学习 线性回归(Linear Regression with One Variable) 回归 根据之前的数据预测出一个准确的输出值
+模型表示  m 代表训练集中实例的数量 x 代表特征/输入变量 y 代表目标变量/输出变量 (x, y) 代表训练集中的实例
+ 第 i 个观察实例
+$$ (x^{(i)},y^{(i)}) $$
+$$ h_\theta(x) = \theta_0x_0 + \theta_1x_1 + \cdots + \theta_nx_n $$
+模型中的参数是一个n+1维的向量，特征矩阵的维度是m*(n+1)。 因此公式可以简化为:</description>
+    </item>
+    
+    <item>
+      <title>线性代数的本质 学习笔记</title>
+      <link>/post/math/math-matrix/</link>
+      <pubDate>Sat, 27 Mar 2021 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/math/math-matrix/</guid>
+      <description>学习顺序  几何直观 -&amp;gt; 计算工作 -&amp;gt; 实际应用 -&amp;gt; 钻研领域
+ 向量  在线性代数中, 向量经常以原点为起点 向量: 有序的数字列表
+ 线性相关 线性无关 线性组合  两个向量标量乘法之和的结果被称为这两个向量的线性组合
+ 张成空间  所有可以表示为给定向量线性组合的向量合集被称为给定向量的张成空间
+ 基  空间的一个基: 张成该空间的一个线性无关向量的合集
+ 矩阵  用数值描述线性变化的语言
+ 矩阵加法和矩阵乘法 线性变换(函数)  直线变换后依然是直线 原点不能移动 保持网格线平行且等距分布的变换  单位矩阵  矩阵面积为 1  行列式  定义: 矩阵所围成的面积 意义: 线性变换对面积产生的变换比率 特征: 行列式等于零意味着矩阵的维度降低  逆矩阵  一个矩阵与其逆矩阵相乘等于单位矩阵 恒等变换: 恢复到单位矩阵 行列式不等于零时才存在逆矩阵  列空间  定义:矩阵所有可能的变换结果 矩阵的列所张成的空间 向量垂直时, 取最大值  秩  定义:列空间维度 满秩: 当秩与矩阵列数相等时  零空间(核)  变换后落在原点的向量合集  点积 .</description>
+    </item>
+    
+    <item>
+      <title>微积分的本质 学习笔记</title>
+      <link>/post/math/math-calculus/</link>
+      <pubDate>Tue, 09 Mar 2021 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/math/math-calculus/</guid>
+      <description>微积分本质  复杂问题-&amp;gt;转化为许多小量之和(为了越来越精确的近似)-&amp;gt;求二次函数图像阴影面积 意义:描述事物变化率的语言  定义自己的微积分公式  保持数学的对称性  导数   悖论:导数测量的是瞬时变化率 矛盾: 变化发生在两个点之间, 固定时间点则没有变化率 智慧: 导数是变化率的最佳近似
+  本质:微小的变化(有限小的量, 非零)
+  公式 $$ \dot{x^{\mu}} = \mu x^{\mu-1} $$ $$ \dot{\log_a^x} = \frac{1}{xlna} $$ $$ \dot{a^x} = a^x lna $$ $$ \dot{(\sin x} = \cos x $$ $$ \dot{\cos x} = - \sin x $$
+规律 $$ \dot{(u \pm v)} = \dot{u} + \dot{v} $$ $$ \dot{(uv)} = \dot{u}v + \dot{v}u $$ $$ \dot{(\frac{u}{v})} = \frac{\dot{u}v-\dot{v}u}{v^2}(v \neq 0) $$ $$ \dot{(\frac{C}{v})} = - \frac{C\dot{v}}{v^2} $$</description>
     </item>
     
     <item>

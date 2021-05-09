@@ -276,14 +276,14 @@ autocomplete('#aa-search-input',
           	
 
             <article class="post-preview">
-              <a href="/computerlanguages/php/computerlanguages-php-laravel-phpunit/">
-                <h2 class="post-title">Laravel使用PHPUnit进行单元测试注意事项</h2>
+              <a href="/page/friend/">
+                <h2 class="post-title">友情链接</h2>
                 
               </a>
 
               <span class="post-meta">
   
-    发表于 2019-11-26
+    发表于 0001-01-01
   
   
 </span>
@@ -291,266 +291,25 @@ autocomplete('#aa-search-input',
 
               <div class="post-entry">
                 
-                  <h1 id="laravel单元测试常用示例">Laravel单元测试常用示例</h1>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">
-<span style="color:#6272a4"># 运行单个测试实例</span>
-phpunit tests/Unit/AdministratorTest.php
-
-<span style="color:#6272a4"># 单独执行某个测试中的函数</span>
-phpunit --filter a_thread_has_a_creator
-
-<span style="color:#6272a4"># 带环境变量运行全部(不需要 CsrfToken)</span>
-<span style="color:#8be9fd;font-style:italic">APP_ENV</span><span style="color:#ff79c6">=</span>testing phpunit
-
-<span style="color:#6272a4"># 带环境变量运行单个函数(不需要 CsrfToken)</span>
-<span style="color:#8be9fd;font-style:italic">APP_ENV</span><span style="color:#ff79c6">=</span>testing phpunit --filter an_authenticated_user_may_participate_in_forum_threads
-
-</code></pre></div><h1 id="laravel使用phpunit注意">Laravel使用PHPUnit注意:</h1>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">
-class TestHelper
-{    
-    // 任何测试类里都不要使用__construct方法
-    // 会与PHPUnit @depends @dataProvider方法重置
-    public function __construct()
-    {
-    }
-
-    //$this里的属性赋值之后, 在其他方法中是无法拿到值的
-    private $_store;
-
-    //设置_store值
-    public function create($class, $attributes = [])
-    {
-        $this-&gt;_store = 1;
-        return ;
-    }
-
-    //这里会返回null, 
-    public function get()
-    {
-        return $this-&gt;_store;
-    }
-}
-</code></pre></div><h1 id="phpunit-依赖关系使用示例">PHPUnit 依赖关系使用示例</h1>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php">
-class StackTest extends TestCase
-{
-    // 注意:@depends 必须依赖PHPUnit测试方法, 也就是必须以test开头的方法
-    public function testEmpty()
-    {
-        $stack = [];
-        $this-&gt;assertEmpty($stack);
-
-        //保持依赖关系的变量名必须一致, 下一个接口参数名必须是$stack
-        return $stack;
-    }
-    
-    /**
-     * 保持依赖关系的变量名必须一致, 上一个接口必须是 return $stack
-     * 
-     * @depends testEmpty
-     */
-    public function testPush(array $stack)
-    {
-        array_push($stack, &#39;foo&#39;);
-        $this-&gt;assertEquals(&#39;foo&#39;, $stack[count($stack)-1]);
-        $this-&gt;assertNotEmpty($stack);
-
-        return $stack;
-    }
-
-    /**
-     * @depends testPush
-     */
-    public function testPop(array $stack)
-    {
-        $this-&gt;assertEquals(&#39;foo&#39;, array_pop($stack));
-        $this-&gt;assertEmpty($stack);
-    }
-}
-</code></pre></div>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="/tags/php/">PHP</a>&nbsp;
-                
-                  #<a href="/tags/laravel/">Laravel</a>&nbsp;
-                
-                </span>
-              
-            </article>
-
-          
-
-          	
-
-            <article class="post-preview">
-              <a href="/computerlanguages/python/computerlanguages-python-mitmproxy/">
-                <h2 class="post-title">Mitmproxy拦截代理</h2>
-                
-              </a>
-
-              <span class="post-meta">
-  
-    发表于 2019-11-26
-  
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  <h1 id="安装-mitmproxy">安装 mitmproxy</h1>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">pip install mitmproxy
-</code></pre></div><h1 id="启动-mitmproxy">启动 mitmproxy</h1>
-<pre><code>mitmproxy有三种启动命令：
-(1) mitmweb
--- 提供一个web界面；
--- 代理端口：绑定了 *:8080作为代理端口；
--- 交互界面地址：localhost:8081；
-(2) mitmproxy
--- 提供命令行界面；
--- 可以通过命令过滤请求；
-(3) mitmdump
--- 【TODO】
-</code></pre>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">mitmweb -p <span style="color:#bd93f9">8082</span> --web-iface 192.168.10.10 --web-port 8081
--p 代理端口 --web-iface 网页访问IP --web-port 网页访问端口
-</code></pre></div><p>修改WIFI, 连接代理
-<img src="/img/posts/Python/Mitmproxy/Screenshot_2019-11-13-15-15-38.png" alt="修改WIFI"></p>
-<p>用户目录下的.mitmproxy目录里</p>
-<pre><code>mitmproxy-ca.pem PEM格式的证书私钥
-mitmproxy-ca-cert.pem PEM格式证书，适用于大多数非Windows平台
-mitmproxy-ca-cert.p12 PKCS12格式的证书，适用于Windows平台
-mitmproxy-ca-cert.cer与mitmproxy-ca-cert.pem相同，只是改变了后缀，适用于部分Android平台
-mitmproxy-dhparam.pem PEM格式的秘钥文件，用于增强SSL安全性
-</code></pre>
-<p>安装证书(手机模拟器)  设置-&gt;安全-&gt;从SD卡安装证书</p>
-<p>安装证书(浏览器)  设置-&gt;网络设置-&gt;手动配置代理</p>
-<h1 id="firefox特殊处理">FireFox特殊处理</h1>
-<p>1、打开
-about:config</p>
-<p>2、查找(默认为false，改为true就可以了)
-security.enterprise_roots.enabled</p>
-<p>3、吐槽，firefox太极端了，这是作死。</p>
+                  <h2 id="阳明的一些朋友">阳明的一些朋友</h2>
+<ul>
+<li><a href="http://lijinxiu.com?utm_source=qikqiak">JACK LEE</a></li>
+<li><a href="https://fuckcloudnative.io?utm_source=qikqiak">云原生实验室</a></li>
+<li><a href="https://imroc.io?utm_source=qikqiak">Roc</a></li>
+<li><a href="http://www.recall704.com?utm_source=qikqiak">RECALL&rsquo;s Blog</a></li>
+<li><a href="http://www.devopser.org?utm_source=qikqiak">devopser</a></li>
+<li><a href="https://sealyun.com?utm_source=qikqiak">sealyun</a></li>
+<li><a href="https://wujunze.com?utm_source=qikqiak">wujunze</a></li>
+<li><a href="https://wind-nest.com?utm_source=qikqiak">风巢知识导航</a></li>
+<li><a href="https://ops-coffee.cn?utm_source=qikqiak">运维咖啡吧</a></li>
+<li><a href="https://i4t.com/?utm_source=qikqiak">abcdocker 运维博客</a></li>
+<li><a href="https://dbawsp.com/?utm_source=qikqiak">鸡书之家</a></li>
+<li><a href="https://www.anonym0x1.com/?utm_source=qikqiak">anonym0x1</a></li>
+</ul>
 
                 
               </div>
 
-              
-                <span class="post-meta">
-                
-                  #<a href="/tags/python/">Python</a>&nbsp;
-                
-                  #<a href="/tags/mitmproxy/">Mitmproxy</a>&nbsp;
-                
-                </span>
-              
-            </article>
-
-          
-
-          	
-
-            <article class="post-preview">
-              <a href="/devops/linux/devops-linux-ssh/">
-                <h2 class="post-title">Linux SSH</h2>
-                
-              </a>
-
-              <span class="post-meta">
-  
-    发表于 2019-11-19
-  
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  SSH通过密钥登录 测试登录命令 ssh -i /root/.ssh/id_rsa root@127.0.0.1创建密钥 [root@host ~]$ ssh-keygen //建立密钥对服务器上远程安装公钥 使用ssh-copy-id安装
-ssh-copy-id -i .ssh/id_rsa.pub root@192.168.10.100手动安装
-[root@host .ssh]$ cd .ssh &amp;&amp; cat id_rsa.pub &gt;&gt; authorized_keys[root@host .ssh]$ chmod 600 authorized_keys[root@host .ssh]$ chmod 700 ~/.ssh设置SSH打开密钥登录功能 /etc/ssh/sshd_config 打开密钥登录
-RSAAuthentication yesPubkeyAuthentication yes另外，请留意 root 用户能否通过 SSH 登录：
-PermitRootLogin yes 当完成全部设置，并以密钥方式登录成功后，再禁用密码登录：
-PasswordAuthentication no 设置root用户不能使用密码登录,必须使用密钥; 普通用户可以使用密码登录:
-PermitRootLogin without-password （设置root用户只能用密钥登录）PasswordAuthentication yes （其他用户可以使用密码登录） 首次登录去掉验证 /etc/ssh/ssh_config
-# StrictHostKeyChecking ask改成 StrictHostKeyChecking no 非root用户设置 需要先设置用户的默认目录(使用该命令请确保该用户下没有运行的软件或进程)
-                  <a href="/devops/linux/devops-linux-ssh/" class="post-read-more">[阅读全文]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="/tags/devops/">DevOps</a>&nbsp;
-                
-                  #<a href="/tags/linux/">Linux</a>&nbsp;
-                
-                </span>
-              
-            </article>
-
-          
-
-          	
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>	
-            <ins class="adsbygoogle"	
-                style="display:block"	
-                data-ad-format="fluid"	
-                data-ad-layout-key="-49+ch+3h-db+7h"	
-                data-ad-client="ca-pub-5376999672787220"	
-                data-ad-slot="7981888143"></ins>	
-            <script>	
-                (adsbygoogle = window.adsbygoogle || []).push({});	
-            </script>	
-          	
-
-            <article class="post-preview">
-              <a href="/devops/git/devops-git-multiuser/">
-                <h2 class="post-title">Linux 配置多个Git用户SSH登录</h2>
-                
-              </a>
-
-              <span class="post-meta">
-  
-    发表于 2019-11-18
-  
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  <h1 id="配置">配置</h1>
-<pre><code>git config 覆盖的优先级是 local &gt; global &gt; default
-</code></pre>
-<p><strong>当前项目配置</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">.git/config
-</code></pre></div><p><strong>添加参数</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback"># 添加用户
-[user]
-    name = admin
-    email = admin@admin.com
-    password = admin
-# 缓存用户名密码
-[credential]
-	helper = store
-</code></pre></div>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="/tags/devops/">DevOps</a>&nbsp;
-                
-                  #<a href="/tags/git/">GIT</a>&nbsp;
-                
-                </span>
               
             </article>
 
@@ -647,125 +406,17 @@ PermitRootLogin without-password （设置root用户只能用密钥登录）Pas
     <li class="page-item active"><a class="page-link" href="/page/7/">7</a></li>
     
     
-    
-    
-    
-    
-        
-        
-    
-    
-    <li class="page-item"><a class="page-link" href="/page/8/">8</a></li>
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    <li class="page-item disabled"><span aria-hidden="true">&nbsp;&hellip;&nbsp;</span></li>
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    
-    
-    
-    
-    
-        
-        
-    
-    
-    <li class="page-item"><a class="page-link" href="/page/18/">18</a></li>
-    
-    
-    <li class="page-item">
-    <a href="/page/8/" class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+    <li class="page-item disabled">
+    <a  class="page-link" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
     </li>
     
     <li class="page-item">
-        <a href="/page/18/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+        <a href="/page/7/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
     </li>
     
 </ul>
 
 
-          
-          
-          
           
           
         </div>
@@ -968,45 +619,45 @@ PermitRootLogin without-password （设置root用户只能用密钥登录）Pas
         <ul class="list-inline text-center footer-links">
           <img src="/img/wechatmp.png" alt="k8s技术圈">
           
-              <li>
-                <a href="mailto:icnych@gmail.com" title="Email me">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
+          <li>
+            <a href="mailto:icnych@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
           
-              <li>
-                <a href="https://github.com/cnych" title="GitHub">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
+          <li>
+            <a href="https://github.com/cnych" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
           
-              <li>
-                <a href="https://weibo.com/cnych" title="微博">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
+          <li>
+            <a href="https://weibo.com/cnych" title="微博">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
           
-              <li>
-                <a href="https://instagram.com/cnych" title="Instagram">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
+          <li>
+            <a href="https://instagram.com/cnych" title="Instagram">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
           
           
           <li>
-            <a href="/index.xml" title="RSS">
+            <a href="/%20index.xml" title="RSS">
               <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
@@ -1017,9 +668,9 @@ PermitRootLogin without-password （设置root用户只能用密钥登录）Pas
         </ul>
         <p class="credits copyright text-muted">
           
-            
-              <a href="/">WoolfBreathe</a>
-            
+          
+          <a href="/">WoolfBreathe</a>
+          
           
 
           &nbsp;&bull;&nbsp;
@@ -1037,7 +688,9 @@ PermitRootLogin without-password （设置root用户只能用密钥登录）Pas
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a
+            href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a
+            href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
           
         </p>
       </div>
@@ -1045,67 +698,35 @@ PermitRootLogin without-password （设置root用户只能用密钥登录）Pas
   </div>
 </footer>
 
-
+<script> renderMathInElement(document.body); </script>
 <script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
 
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag() { dataLayer.push(arguments); }
   gtag('js', new Date());
   gtag('config', 'UA-69668147-3');
 </script>
 <script>
-(function(){
+  (function () {
     var bp = document.createElement('script');
     var curProtocol = window.location.protocol.split(':')[0];
     if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
     }
     else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
     }
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(bp, s);
-})();
+  })();
 </script>
-<script >
-$(document).ready(function() {
-  var int = setInterval(fixCount, 50);  
-  
-  var initPVCount = 584976;
-  var initUVCount = 153191;
-  function fixCount() {                   
-    if ($("#busuanzi_container_site_pv").css("display") != "none") {
-        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
-        clearInterval(int); 
-    }
-    if ($("#busuanzi_container_site_uv").css("display") != "none") {
-      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
-      clearInterval(int); 
-    }  
-  }           
-});
-</script>
- <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery-migrate@1.2.1/dist/jquery-migrate.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script type="text/javascript">
-$('.carousel').slick({
-    dots: true,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    infinite: true,
-    speed: 500,
-    fade: true,
-    cssEase: 'linear',
-    centerMode: true,
-    prevArrow: '<button type="button" class="slick-prev"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
-});
-</script>
+
+
+
+
 
   </body>
 </html>

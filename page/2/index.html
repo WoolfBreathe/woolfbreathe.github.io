@@ -276,6 +276,89 @@ autocomplete('#aa-search-input',
           	
 
             <article class="post-preview">
+              <a href="/post/computerlanguages/php/computerlanguages-php-mockery/">
+                <h2 class="post-title">PHP测试替身 Mockery</h2>
+                
+              </a>
+
+              <span class="post-meta">
+  
+    发表于 2020-03-22
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  单元测试：测试替身 Gerard Meszaros 在 Meszaros2007 中介绍了测试替身的概念： 『有时候对被测系统（SUT）进行测试是很困难的，因为它依赖于其他无法在测试环境中使用的组件。这有可能是因为这些组件不可用，它们不会返回测试所需要的结果，或者执行它们会有不良副作用。在其他情况下，的测试策略要求对被测系统的内部行为有更多控制或更多可见性。 如果在编写测试时无法使用（或选择不使用）实际的依赖组件（DOC），可以用测试替身来代替。测试替身不需要和真正的依赖组件有完全一样的的行为方式；他只需要提供和真正的组件同样的 API 即可，这样被测系统就会以为它是真正的组件！』 运行单元测试的环境不一定具有生产环境的系统组件，比如在代码持续集成系统中，通常只有代码与基本的构建环境。为了在测试环境中能保证测试的正常运行，需要对环境依赖使用替身来代替，以达到稳定测试效果，所以在测试时，网络请求组件是需要使用模拟对象（替身）来代替的，并不会真正的去请求 API。 Mockery使用说明 安装
+composer require phpunit/phpunit mockery/mockery 期望 使用with/withArg 判断是否满足期望需要用 \Mockery::close();
+$mock = \Mockery::mock(&#39;MyClass&#39;); $mock-&gt;shouldReceive(&#39;foo&#39;)-&gt;with(&#39;Hello&#39;); $mock-&gt;foo(&#39;Goodbye&#39;); // throws a NoMatchingExpectationException \Mockery::close(); 使用闭包函数
+$mock = \Mockery::mock(&#39;MyClass&#39;); $mock-&gt;shouldReceive(&#39;foo&#39;)-&gt;withArgs(function ($arg) { if ($arg % 2 == 0) { return true; } return false; }); $mock-&gt;foo(4); // matches the expectation $mock-&gt;foo(3); // throws a NoMatchingExpectationException \Mockery::close(); 部分参数期望
+$mock = \Mockery::mock(&#39;MyClass&#39;); $mock-&gt;shouldReceive(&#39;foo&#39;) -&gt;withSomeOfArgs(1, 2); $mock-&gt;foo(1, 2, 3); // matches the expectation $mock-&gt;foo(3, 2, 1); // matches the expectation (passed order doesn&#39;t matter) $mock-&gt;foo(&#39;1&#39;, &#39;2&#39;); // throws a NoMatchingExpectationException (type should be matched) $mock-&gt;foo(3); // throws a NoMatchingExpectationException \Mockery::close(); 系列返回值
+                  <a href="/post/computerlanguages/php/computerlanguages-php-mockery/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="/tags/php/">PHP</a>&nbsp;
+                
+                  #<a href="/tags/laravel/">Laravel</a>&nbsp;
+                
+                  #<a href="/tags/phpunit/">PHPUnit</a>&nbsp;
+                
+                </span>
+              
+            </article>
+
+          
+
+          	
+
+            <article class="post-preview">
+              <a href="/post/computerlanguages/python/computerlanguages-python-selenium/">
+                <h2 class="post-title">Selenium &#43; Chrome</h2>
+                
+              </a>
+
+              <span class="post-meta">
+  
+    发表于 2020-03-15
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  简介 Selenium 用于 抓取数据 自动化测试(很多网站API会添加sign验证, 很难破解, Selenium是最优选择)
+Selenium IDE 可以实现录制页面操作功能并且回访的功能, 是非常强大的自动化测试工具, 不需要编程能力一样可以使用
+Selenium 结合 Chrome 使用 Chrome DevTools 可以实现非常强大的功能
+Ubuntu安装 安装Chrome sudo apt-get install libxss1 libappindicator1 libindicator7 libgconf-2-4 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb sudo dpkg -i google-chrome*.deb 运行可能出现错误,按照提示运行 apt --fix-broken install 安装Selenium pip install selenium 安装ChromeDriver wget -N http://chromedriver.storage.googleapis.com/2.29/chromedriver_linux64.zip ##注意，这里2.29要换成实际对应下载的CHROME的版本。目前最新的是：2.43 unzip chromedriver_linux64.zip chmod +x chromedriver sudo mv -f chromedriver /usr/local/share/chromedriver sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver sudo ln -s /usr/local/share/chromedriver /usr/bin/chromedriver 注意: Chrome浏览器版本要 与 chromedrive版本 相符 /usr/bin/google-chrome-stable --version 查看Chrome浏览器版本 /usr/bin/chromedrive -v 查看chromedrive版本  使用教程 Selenium 官网 Selenium Python Chrome DevTools Protocal, Chrome开发者工具协议 API文档: https://chromedevtools.
+                  <a href="/post/computerlanguages/python/computerlanguages-python-selenium/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="/tags/python/">Python</a>&nbsp;
+                
+                  #<a href="/tags/unittest/">UnitTest</a>&nbsp;
+                
+                  #<a href="/tags/selenium/">Selenium</a>&nbsp;
+                
+                </span>
+              
+            </article>
+
+          
+
+          	
+
+            <article class="post-preview">
               <a href="/post/devops/linux/devops-linux-timedatectl/">
                 <h2 class="post-title">Linux使用Timedatectl修改时区和时间</h2>
                 
@@ -319,6 +402,17 @@ autocomplete('#aa-search-input',
 
           
 
+          	
+            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>	
+            <ins class="adsbygoogle"	
+                style="display:block"	
+                data-ad-format="fluid"	
+                data-ad-layout-key="-49+ch+3h-db+7h"	
+                data-ad-client="ca-pub-5376999672787220"	
+                data-ad-slot="7981888143"></ins>	
+            <script>	
+                (adsbygoogle = window.adsbygoogle || []).push({});	
+            </script>	
           	
 
             <article class="post-preview">
@@ -412,17 +506,6 @@ Binary Log Operations(二进制日志操作) mysqlbinlogmove 二进制日志移�
 
           
 
-          	
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>	
-            <ins class="adsbygoogle"	
-                style="display:block"	
-                data-ad-format="fluid"	
-                data-ad-layout-key="-49+ch+3h-db+7h"	
-                data-ad-client="ca-pub-5376999672787220"	
-                data-ad-slot="7981888143"></ins>	
-            <script>	
-                (adsbygoogle = window.adsbygoogle || []).push({});	
-            </script>	
           	
 
             <article class="post-preview">
@@ -767,94 +850,6 @@ Route::get(&#39;logs&#39;, &#39;\Rap2hpoutre\LaravelLogViewer\LogViewerControlle
             </article>
 
           
-
-          	
-
-            <article class="post-preview">
-              <a href="/post/common/common-test/">
-                <h2 class="post-title">接口自动化测试框架从设计到开发</h2>
-                
-              </a>
-
-              <span class="post-meta">
-  
-    发表于 2019-11-28
-  
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  <h1 id="入门条件">入门条件</h1>
-<blockquote>
-<ul>
-<li>设计框架</li>
-<li>开发框架</li>
-<li>重构框架</li>
-</ul>
-</blockquote>
-<h1 id="接口基础">接口基础</h1>
-<blockquote>
-<p>HTTP接口</p>
-<ul>
-<li>接口组成</li>
-<li>常见接口介绍</li>
-<li>接口工具使用</li>
-<li>接口基础面试</li>
-</ul>
-</blockquote>
-<h1 id="接口开发">接口开发</h1>
-<blockquote>
-<ul>
-<li>dingo</li>
-</ul>
-</blockquote>
-<h1 id="unittest与接口测试结合">UnitTest与接口测试结合</h1>
-<blockquote>
-<ul>
-<li>UnitTest</li>
-<li>HTMLTestRunner</li>
-<li>断言 Case</li>
-<li>Requests包的使用</li>
-</ul>
-</blockquote>
-<h1 id="设计-开发-测试框架">设计 开发 测试框架</h1>
-<blockquote>
-<ul>
-<li>设计</li>
-<li>工具封装</li>
-<li>基类封装</li>
-<li>调试错误</li>
-<li>接口数据</li>
-<li>回写报告</li>
-<li>解决数据依赖</li>
-<li>结果统计</li>
-<li>右键服务</li>
-<li>发送报告</li>
-</ul>
-</blockquote>
-<h1 id="接口测试辅助操作">接口测试辅助操作</h1>
-<blockquote>
-<ul>
-<li>操作数据库</li>
-<li>操作Cookie</li>
-</ul>
-</blockquote>
-
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="/tags/test/">Test</a>&nbsp;
-                
-                </span>
-              
-            </article>
-
-          
         </div>
 
         <div align="center" class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -947,6 +942,7 @@ Route::get(&#39;logs&#39;, &#39;\Rap2hpoutre\LaravelLogViewer\LogViewerControlle
 </ul>
 
 
+          
           
           
           
@@ -1217,16 +1213,7 @@ Route::get(&#39;logs&#39;, &#39;\Rap2hpoutre\LaravelLogViewer\LogViewerControlle
           &nbsp;&bull;&nbsp;
           2021
         </p>
-        <p class="text-center text-muted">
-          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-          <span id="busuanzi_container_site_pv" style="display:none">
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次
-          </span>
-          &nbsp;&bull;&nbsp;
-          <span id="busuanzi_container_site_uv" style="display:none">
-            访客数<span id="busuanzi_value_site_uv"></span>人次
-          </span>
-        </p>
+        
         
         <p class="credits theme-by text-muted">
           <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a
@@ -1250,20 +1237,7 @@ Route::get(&#39;logs&#39;, &#39;\Rap2hpoutre\LaravelLogViewer\LogViewerControlle
   gtag('js', new Date());
   gtag('config', 'UA-69668147-3');
 </script>
-<script>
-  (function () {
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-  })();
-</script>
+
 
 
 

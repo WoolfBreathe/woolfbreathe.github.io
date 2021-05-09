@@ -197,7 +197,7 @@ autocomplete('#aa-search-input',
         <div class="posts-list">
           
             <article class="post-preview">
-              <a href="/post/matrix/2021-05-06-matrixanalysis/">
+              <a href="/post/math/2021-05-06-matrixanalysis/">
                 <h2 class="post-title">Matrix Analysis</h2>
 
                 
@@ -314,6 +314,106 @@ Install Docker CE 使用存储库安装(Install using the repository) 在新主�
                     #<a href="/tags/devops/">DevOps</a>&nbsp;
                   
                     #<a href="/tags/docker/">Docker</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/post/machinelearning/machinelearning-stanford/">
+                <h2 class="post-title">斯坦福大学2014机器学习学习笔记</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2021-04-02
+              </p>
+              <div class="post-entry">
+                
+                  基本概念 机器学习   (Arthur Samuel) 在进行特定编程的情况下，给予计算机学习能力的领域
+  (Tom Mitchell) 一个程序被认为能从经验E中学习，解决任务T，达到性能度量值P，当且仅当，有了经验E后，经过P评判，程序在处理T时的性能有所提升
+  建模误差（modeling error）  模型所预测的值与训练集中实际值之间的差距
+ 监督学习   利用一组已知类别的样本调整分类器的参数，使其达到所要求性能的 过程，也称为监督训练或有教师学习。
+  监督学习是从标记的训练数据来推断一个功能的机器学习任务。
+  无监督学习 确定型无监督学习 概率型无监督学习 线性回归(Linear Regression with One Variable) 回归 根据之前的数据预测出一个准确的输出值
+模型表示  m 代表训练集中实例的数量 x 代表特征/输入变量 y 代表目标变量/输出变量 (x, y) 代表训练集中的实例
+ 第 i 个观察实例
+$$ (x^{(i)},y^{(i)}) $$
+$$ h_\theta(x) = \theta_0x_0 + \theta_1x_1 + \cdots + \theta_nx_n $$
+模型中的参数是一个n+1维的向量，特征矩阵的维度是m*(n+1)。 因此公式可以简化为:
+                  <a href="/post/machinelearning/machinelearning-stanford/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/machinelearning/">MachineLearning</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/post/math/math-matrix/">
+                <h2 class="post-title">线性代数的本质 学习笔记</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2021-03-27
+              </p>
+              <div class="post-entry">
+                
+                  学习顺序  几何直观 -&gt; 计算工作 -&gt; 实际应用 -&gt; 钻研领域
+ 向量  在线性代数中, 向量经常以原点为起点 向量: 有序的数字列表
+ 线性相关 线性无关 线性组合  两个向量标量乘法之和的结果被称为这两个向量的线性组合
+ 张成空间  所有可以表示为给定向量线性组合的向量合集被称为给定向量的张成空间
+ 基  空间的一个基: 张成该空间的一个线性无关向量的合集
+ 矩阵  用数值描述线性变化的语言
+ 矩阵加法和矩阵乘法 线性变换(函数)  直线变换后依然是直线 原点不能移动 保持网格线平行且等距分布的变换  单位矩阵  矩阵面积为 1  行列式  定义: 矩阵所围成的面积 意义: 线性变换对面积产生的变换比率 特征: 行列式等于零意味着矩阵的维度降低  逆矩阵  一个矩阵与其逆矩阵相乘等于单位矩阵 恒等变换: 恢复到单位矩阵 行列式不等于零时才存在逆矩阵  列空间  定义:矩阵所有可能的变换结果 矩阵的列所张成的空间 向量垂直时, 取最大值  秩  定义:列空间维度 满秩: 当秩与矩阵列数相等时  零空间(核)  变换后落在原点的向量合集  点积 .
+                  <a href="/post/math/math-matrix/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/math/">Math</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/post/math/math-calculus/">
+                <h2 class="post-title">微积分的本质 学习笔记</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2021-03-09
+              </p>
+              <div class="post-entry">
+                
+                  微积分本质  复杂问题-&gt;转化为许多小量之和(为了越来越精确的近似)-&gt;求二次函数图像阴影面积 意义:描述事物变化率的语言  定义自己的微积分公式  保持数学的对称性  导数   悖论:导数测量的是瞬时变化率 矛盾: 变化发生在两个点之间, 固定时间点则没有变化率 智慧: 导数是变化率的最佳近似
+  本质:微小的变化(有限小的量, 非零)
+  公式 $$ \dot{x^{\mu}} = \mu x^{\mu-1} $$ $$ \dot{\log_a^x} = \frac{1}{xlna} $$ $$ \dot{a^x} = a^x lna $$ $$ \dot{(\sin x} = \cos x $$ $$ \dot{\cos x} = - \sin x $$
+规律 $$ \dot{(u \pm v)} = \dot{u} + \dot{v} $$ $$ \dot{(uv)} = \dot{u}v + \dot{v}u $$ $$ \dot{(\frac{u}{v})} = \frac{\dot{u}v-\dot{v}u}{v^2}(v \neq 0) $$ $$ \dot{(\frac{C}{v})} = - \frac{C\dot{v}}{v^2} $$
+                  <a href="/post/math/math-calculus/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/math/">Math</a>&nbsp;
                   
                 </span>
               
@@ -522,75 +622,6 @@ class Girl(Base): __tablename__ = &#34;girl&#34; id = Column(Integer, primary_ke
 
             </article>
           
-            <article class="post-preview">
-              <a href="/post/computerlanguages/php/computerlanguages-php-mockery/">
-                <h2 class="post-title">PHP测试替身 Mockery</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                发表于 2020-03-22
-              </p>
-              <div class="post-entry">
-                
-                  单元测试：测试替身 Gerard Meszaros 在 Meszaros2007 中介绍了测试替身的概念： 『有时候对被测系统（SUT）进行测试是很困难的，因为它依赖于其他无法在测试环境中使用的组件。这有可能是因为这些组件不可用，它们不会返回测试所需要的结果，或者执行它们会有不良副作用。在其他情况下，的测试策略要求对被测系统的内部行为有更多控制或更多可见性。 如果在编写测试时无法使用（或选择不使用）实际的依赖组件（DOC），可以用测试替身来代替。测试替身不需要和真正的依赖组件有完全一样的的行为方式；他只需要提供和真正的组件同样的 API 即可，这样被测系统就会以为它是真正的组件！』 运行单元测试的环境不一定具有生产环境的系统组件，比如在代码持续集成系统中，通常只有代码与基本的构建环境。为了在测试环境中能保证测试的正常运行，需要对环境依赖使用替身来代替，以达到稳定测试效果，所以在测试时，网络请求组件是需要使用模拟对象（替身）来代替的，并不会真正的去请求 API。 Mockery使用说明 安装
-composer require phpunit/phpunit mockery/mockery 期望 使用with/withArg 判断是否满足期望需要用 \Mockery::close();
-$mock = \Mockery::mock(&#39;MyClass&#39;); $mock-&gt;shouldReceive(&#39;foo&#39;)-&gt;with(&#39;Hello&#39;); $mock-&gt;foo(&#39;Goodbye&#39;); // throws a NoMatchingExpectationException \Mockery::close(); 使用闭包函数
-$mock = \Mockery::mock(&#39;MyClass&#39;); $mock-&gt;shouldReceive(&#39;foo&#39;)-&gt;withArgs(function ($arg) { if ($arg % 2 == 0) { return true; } return false; }); $mock-&gt;foo(4); // matches the expectation $mock-&gt;foo(3); // throws a NoMatchingExpectationException \Mockery::close(); 部分参数期望
-$mock = \Mockery::mock(&#39;MyClass&#39;); $mock-&gt;shouldReceive(&#39;foo&#39;) -&gt;withSomeOfArgs(1, 2); $mock-&gt;foo(1, 2, 3); // matches the expectation $mock-&gt;foo(3, 2, 1); // matches the expectation (passed order doesn&#39;t matter) $mock-&gt;foo(&#39;1&#39;, &#39;2&#39;); // throws a NoMatchingExpectationException (type should be matched) $mock-&gt;foo(3); // throws a NoMatchingExpectationException \Mockery::close(); 系列返回值
-                  <a href="/post/computerlanguages/php/computerlanguages-php-mockery/" class="post-read-more">[阅读全文]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="/tags/php/">PHP</a>&nbsp;
-                  
-                    #<a href="/tags/laravel/">Laravel</a>&nbsp;
-                  
-                    #<a href="/tags/phpunit/">PHPUnit</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="/post/computerlanguages/python/computerlanguages-python-selenium/">
-                <h2 class="post-title">Selenium &#43; Chrome</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                发表于 2020-03-15
-              </p>
-              <div class="post-entry">
-                
-                  简介 Selenium 用于 抓取数据 自动化测试(很多网站API会添加sign验证, 很难破解, Selenium是最优选择)
-Selenium IDE 可以实现录制页面操作功能并且回访的功能, 是非常强大的自动化测试工具, 不需要编程能力一样可以使用
-Selenium 结合 Chrome 使用 Chrome DevTools 可以实现非常强大的功能
-Ubuntu安装 安装Chrome sudo apt-get install libxss1 libappindicator1 libindicator7 libgconf-2-4 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb sudo dpkg -i google-chrome*.deb 运行可能出现错误,按照提示运行 apt --fix-broken install 安装Selenium pip install selenium 安装ChromeDriver wget -N http://chromedriver.storage.googleapis.com/2.29/chromedriver_linux64.zip ##注意，这里2.29要换成实际对应下载的CHROME的版本。目前最新的是：2.43 unzip chromedriver_linux64.zip chmod +x chromedriver sudo mv -f chromedriver /usr/local/share/chromedriver sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver sudo ln -s /usr/local/share/chromedriver /usr/bin/chromedriver 注意: Chrome浏览器版本要 与 chromedrive版本 相符 /usr/bin/google-chrome-stable --version 查看Chrome浏览器版本 /usr/bin/chromedrive -v 查看chromedrive版本  使用教程 Selenium 官网 Selenium Python Chrome DevTools Protocal, Chrome开发者工具协议 API文档: https://chromedevtools.
-                  <a href="/post/computerlanguages/python/computerlanguages-python-selenium/" class="post-read-more">[阅读全文]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="/tags/python/">Python</a>&nbsp;
-                  
-                    #<a href="/tags/unittest/">UnitTest</a>&nbsp;
-                  
-                    #<a href="/tags/selenium/">Selenium</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
         </div>
         
           <ul class="pager main-pager">
@@ -670,16 +701,7 @@ Ubuntu安装 安装Chrome sudo apt-get install libxss1 libappindicator1 libindic
           &nbsp;&bull;&nbsp;
           2021
         </p>
-        <p class="text-center text-muted">
-          <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-          <span id="busuanzi_container_site_pv" style="display:none">
-            本站总访问量<span id="busuanzi_value_site_pv"></span>次
-          </span>
-          &nbsp;&bull;&nbsp;
-          <span id="busuanzi_container_site_uv" style="display:none">
-            访客数<span id="busuanzi_value_site_uv"></span>人次
-          </span>
-        </p>
+        
         
         <p class="credits theme-by text-muted">
           <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a
@@ -703,20 +725,7 @@ Ubuntu安装 安装Chrome sudo apt-get install libxss1 libappindicator1 libindic
   gtag('js', new Date());
   gtag('config', 'UA-69668147-3');
 </script>
-<script>
-  (function () {
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-  })();
-</script>
+
 
 
 

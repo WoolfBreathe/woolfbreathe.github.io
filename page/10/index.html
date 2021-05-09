@@ -276,14 +276,14 @@ autocomplete('#aa-search-input',
           	
 
             <article class="post-preview">
-              <a href="/algorithms/binarytree/algorithms-binarytree-heap/">
-                <h2 class="post-title">二叉树(BinaryTree)-堆(Heap)</h2>
+              <a href="/post/algorithms/graph/algorithms-graph-traverse/">
+                <h2 class="post-title">图(Graph)-遍历</h2>
                 
               </a>
 
               <span class="post-meta">
   
-    发表于 2019-08-26
+    发表于 2019-08-30
   
   
 </span>
@@ -291,14 +291,15 @@ autocomplete('#aa-search-input',
 
               <div class="post-entry">
                 
-                  定义 堆是一种特殊的二叉树，具备以下特性：
-堆是一个完全二叉树每个节点的值都必须大于等于（或小于等于）其左右孩子节点的值 如果每个节点的值都大于等于左右孩子节点的值，这样的堆叫大顶堆；如果每个节点的值都小于等于左右孩子节点的值，这样的堆叫小顶堆。
-上图中，左侧的堆是大顶堆，右侧的堆是小顶堆，我们还可以得出这个结论：对应大顶堆，堆顶一定是最大值；对于小顶堆，堆顶一定是最小值。
-构建 由于完全二叉树的特殊性，可以通过数组来存储，堆也是完全二叉树，所以我们完全可以通过数组来存储。在使用数组存储堆的时候，把第一个索引位置留空，从第二个索引位置开始存储堆元素，这样，对于索引值为 i 的元素而言，其子节点索引分别为 2i 和 2i+1。
-下面我们就来看如何在堆中插入新节点，以大顶堆为例，从叶子结点插入，如果比父级元素大，则与父级元素交换位置，依次类推，直到到达根节点（小顶堆恰好相反）：
-注：构建堆的过程叫堆化。 构建实现 下面是对应的 PHP 实现代码：
-&lt;?phpclass Heap{private $a = [];private $n;private $count;public function __construct($capacity = 10){$this-&gt;n = $capacity;$this-&gt;count = 0;}public function insert($data){if ($this-&gt;count &gt;= $this-&gt;n) {return false;}$this-&gt;count++;$this-&gt;a[$this-&gt;count] = $data;$i = $this-&gt;count;while (floor($i/2) &gt; 0 &amp;&amp; $this-&gt;a[floor($i/2)] &lt; $this-&gt;a[$i]) {$temp = $this-&gt;a[$i];$this-&gt;a[$i] = $this-&gt;a[floor($i/2)];$this-&gt;a[floor($i/2)] = $temp;$i = $i / 2;}return true;}public function __toString(){return json_encode(array_values($this-&gt;a));}}打印结果如下，符合堆定义，表明堆构建成功：
-                  <a href="/algorithms/binarytree/algorithms-binarytree-heap/" class="post-read-more">[阅读全文]</a>
+                  图的遍历 图的遍历和树的遍历类似，最直接的理解就是，在图中某个顶点出发，访遍图中其余顶点，并且其中每个顶点仅被访问一次，这个过程就是图的遍历。
+图的遍历主要有两种方式，一种是深度优先搜索，一种是广度优先搜索。我们先来看深度优先搜索。
+深度优先搜索定义 深度优先搜索（Depth First Search），简称 DFS，这种算法有点像走迷宫，沿着一条路径一直走，如果某个路径不通，则回到前驱节点，以此为出发点继续尝试下一条路径，以此类推，直到访遍所有顶点。
+深度优先搜索也是这样，它从图的某个顶点出发，访问此顶点，然后从该顶点未被访问的邻接顶点出发，深度遍历图，在未遇到已访问过的重复顶点前，我们约定右手优先原则，一直往前走，遇到已经访问过的顶点，则回溯到前驱顶点，访问与其相邻路径对应的邻接顶点，继续做上述判断，依次类推，直到图中所有与该顶点路径想通的顶点都被访问到，如下图所示：
+如果还有顶点未被访问，则将其作为起点，重复上述过程，直到图中所有顶点都被访问到。
+代码实现 首先将所有顶点的邻接顶点设置为空链表，然后我们可以通过 addEdge 方法为图添加边（$s 和 $t 分别代表边的两个顶点），从而完成图的构建。
+有了完整的图之后，就可以编写深度优先搜索方法对其进行遍历了。
+public function dfs($s, $t) { $this-&gt;found = false; for ($i = 0; $i &lt;= $this-&gt;v; $i++) { $visited[$i] = 0; } for ($i = 0; $i &lt;= $this-&gt;v; $i++) { $prev[$i] = -1; } $this-&gt;recurDfs($s, $t, $visited, $prev); $this-&gt;printPath($prev, $s, $t); } public function recurDfs($w, $t, $visited, $prev) { if ($this-&gt;found == true) { return; } $visited[$w] = 1; if ($w == $t) { $this-&gt;found = true; return true; } for ($i = 0; $i &lt; $this-&gt;adj[$w]-&gt;getSize(); $i++) { $q = $this-&gt;adj[$w]-&gt;get($i)-&gt;data; if (!
+                  <a href="/post/algorithms/graph/algorithms-graph-traverse/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
@@ -306,6 +307,8 @@ autocomplete('#aa-search-input',
                 <span class="post-meta">
                 
                   #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                
+                  #<a href="/tags/graph/">Graph</a>&nbsp;
                 
                 </span>
               
@@ -316,14 +319,14 @@ autocomplete('#aa-search-input',
           	
 
             <article class="post-preview">
-              <a href="/algorithms/binarytree/algorithms-redblacktree/">
-                <h2 class="post-title">二叉树(BinaryTree)-红黑树(Red-Black Tree)</h2>
+              <a href="/post/algorithms/graph/algorithms-graph-storage/">
+                <h2 class="post-title">图(Graph)-存储</h2>
                 
               </a>
 
               <span class="post-meta">
   
-    发表于 2019-08-25
+    发表于 2019-08-29
   
   
 </span>
@@ -331,20 +334,23 @@ autocomplete('#aa-search-input',
 
               <div class="post-entry">
                 
-                  特性和算法复杂度 平衡二叉树是最理想的二叉排序树，性能最好，也最稳定，但是缺点是维护成本高，需要在插入和删除节点时维护新树的平衡性，所以工程实践中，倾向于使用另一种二叉排序树 —— 红黑树.
-什么是红黑树 红黑树（Red-Black Tree）是每个节点都带有颜色属性的二叉排序（查找）树，具备以下特性：
-节点是红色或黑色；根节点是黑色的；每个叶子节点都是黑色的空节点（NIL），也就是说，叶子节点不存储数据；任何相邻的节点都不能同时为红色，也就是说，红色节点是被黑色节点隔开的；每个节点，从该节点到达其可达叶子节点的所有路径，都包含相同数目的黑色节点； 示例：
-这些约束保证了红黑树的关键特性：从根节点到叶子节点的最长的可能路径不多于最短的可能路径长度的两倍（每条路径红黑相间，且黑色节点数目相同，所以最短的路径上是两个黑色节点，相应的，此时最长路径节点一定是黑-红-黑-红，正好是其两倍），从而保证红黑树无论怎么插入、删除节点大致上也是平衡的。
-红黑树的算法复杂度 由于红黑树的特性，可以确保即使在最差情况下，红黑树也是大致平衡的，下面我们来简单推导下红黑树的时间复杂度。
-前面我们讲二叉排序树的时候说到二叉排序树的时间复杂度和树的高度成正比，红黑树是红黑相间的，我们可以先把红色的节点去掉，剩下的黑色节点就可能变成四叉树了，比如我们上面示例的那个红黑树。由于红黑树每条路径上黑色节点相同，所以可以继续把这个四叉树转化为完全二叉树，假设黑色节点的数量为 m，这样，这棵树的时间复杂度就是 O(logm) 了；然后我们把红色节点塞回来，红色节点的总数目肯定是小于等于黑色节点的，我们不妨假设等于黑色节点，这样，树的高度就增加一倍，对应的时间复杂度就是 2O(logm) 了，m≈n/2，由于在计算时间复杂度的时候，常量可以舍弃，所以红黑树的时间复杂度也是 O(logn)。虽然这里面都是估算的，但是由于前面提到的红黑树的特性约束，数量级上是没问题的。
-为什么工程上大多使用红黑树 红黑树维护成本比平衡二叉树低，性能上也能大致做到 O(logn)，且比较稳定，可以应付最差的情况。
-实现原理 插入节点 红黑树规定，插入的节点必须是红色的。而且，二叉排序（查找）树中新插入的节点都是放在叶子节点上。首先，两种最简单的情况：
-如果插入节点的父节点是黑色的，那我们什么都不用做，它仍然满足红黑树的定义。如果插入的节点是根节点，那我们直接把它设置为黑色就可以了。 除此之外，其他情况都会违背红黑树的特性，所以我们需要进行动态调整，与平衡二叉树不同，调整的过程除了左右旋转之外，还涉及到节点颜色的调整。
-新节点插入之后，如果红黑树的平衡被打破，那一般会有下面三种情况。我们只需要根据每种情况的特点，不停地调整，就可以让红黑树继续符合定义，也就是继续保持平衡。
-有了前面平衡二叉树的铺垫，相信理解起来红黑树的构建过程将会更加轻松。为了方便表述，我们把正在处理的节点叫关注节点。
-CASE 1：如果关注节点是 a（待插入节点），它的叔叔节点（父亲的兄弟节点，从二叉排序树的角度来说叫伯伯节点更合适？） d 是红色，我们就依次执行下面的操作：
-将关注节点 a 的父节点 b、叔叔节点 d 的颜色都设置成黑色；将关注节点 a 的祖父节点 c 的颜色设置成红色；关注节点变成 a 的祖父节点 c；跳到下面的 CASE 2 或者 CASE 3 继续处理。 CASE 2：如果关注节点是 a，它的叔叔节点 d 是黑色，关注节点 a 是其父节点 b 的右子节点，我们就依次执行下面的操作：
-                  <a href="/algorithms/binarytree/algorithms-redblacktree/" class="post-read-more">[阅读全文]</a>
+                  图的存储 由于图这种数据结构比较复杂，单纯的数组和链表已经无法表示了，需要通过更复杂的结构来存储。
+两种存储图的方式，一种是基于数组，一种是基于链表，但是不是简单的数组和链表，下面我们就一起来看看到底是如何存储图的。
+邻接矩阵 显然，通过一维数组是无法存储图的，因为图包含顶点和边，而且每个顶点都可能与其他顶点有关联，所以我们通过两个数组来存储图：一个一维数组用于存储所有顶点，一个二维数组来存储连接顶点的边/弧，边或弧连接的是两个顶点，所以需要二维数组来存储。我们把这种存储图的方式叫做邻接矩阵。
+说概念很抽象，下面我们通过实例来演示，对于无向图而言，由于边没有方向，所以存储无向图边的二维数组是一个对称矩阵（矩阵是一个数学概念，一个 m x n 的矩阵是一个由 m 行 n 列元素排列成的矩形阵列）：
+对于有向图而言，由于边是有方向的，我们将二维数组中指向某个顶点的元素值设置为 1，否则设置为 0，比如下面 v1v0 为 1，而 v0v1 为 0（注意存储顺序，先横后纵，横向表示某个顶点的出度，纵向表示某个顶点的入度）：
+对于带权的有向图，要更复杂一些，在存储弧的二维数组中，相邻的顶点对应元素值等于权重（入度），自己指向自己的对应元素值为 0，否则等于无穷大（∞）：
+对于邻接矩阵而言，初始化的时间复杂度等于边数组构建的复杂度，对于有 n 个顶点的图而言，时间复杂度是 O(n^2)，空间复杂度也是如此，而且如果图比较稀疏的话（稀疏图），边数组会存在巨大的空间浪费。但是优点是实现起来非常简单，对于稠密图或者非常简单的图来说，用邻接矩阵是比较方便的。
+邻接表 既然稀疏图用邻接矩阵存储不合适，那要怎么存储呢？有了前面的数据结构基础，我们很容易会联想到基于链表替代边数组来存储边，这样就可以避免对空间的浪费了。这种存储方式还是通过一个一维数组来存储顶点，只是将边/弧通过链表来表示，我们把这种存储方式叫做邻接表。
+对于无向图来说，通过邻接表来存储，可以这么实现：
+每个顶点上通过 data 保存数据，通过 firstedge 指向第一个邻接顶点，指向节点上 adjvex 存储的是对应顶点的数组下标，如果该顶点有多个邻接顶点，可以通过 next 指向下一个邻接顶点，如果没有的话，则将对应指针设置为空。
+对于有向图来说，原理也是类似，只不过有向图的边有方向而已，链表指针指向基于出度，所以很容易计算出某个顶点的出度：
+显然，邻接表的构建时间复杂度要比邻接矩阵好，对于一个有 n 个顶点和 e 条边的图而言，时间复杂度是 O(n+e)，而且不存在任何空间的浪费，比较高效，可用于存储任何图。
+但邻接表也不是十全十美，对于有向图来说，如果要计算某个顶点的入度，需要遍历整个图才能实现，要解决这个问题，我们可以通过逆邻接表来实现。所谓逆邻接表，就是和邻接表相反，指针指向基于入度，比如上面这个有向图，我们可以这样通过逆邻接表来构建：
+对于有权重的有向图（网图），还要通过一个额外的 weight 域来存储权重：
+代码示例 创建链表类 LinkedList 及对应的节点类 Node：
+/** * Class Node * 链表节点类 */ class Node { public $data; /** * @var Node */ public $next; public function __construct($data = null) { $this-&gt;data = $data; } } /** * Class LinkedList * 链表类 */ class LinkedList { private $head = null; private $count = 0; public function __construct() { $emptyNode = new Node(); $this-&gt;head = $emptyNode; } public function insert($data) { if ($this-&gt;head == null) { return; } $newNode = new Node($data); $newNode-&gt;next = $this-&gt;head-&gt;next; $this-&gt;head-&gt;next = $newNode; $this-&gt;count++; } public function remove(Node $node) { if ($node == null) { return false; } $preNode = $this-&gt;pre($node); $preNode-&gt;next = $node-&gt;next; $this-&gt;count--; } public function get($index) { if ($index &gt;= $this-&gt;count) { return false; } $node = $this-&gt;head-&gt;next; $i = 0; while ($node) { if ($i == $index) { return $node; } else { $node = $node-&gt;next; $i++; } } return false; } public function pre(Node $node) { if ($node == null) { return false; } $preNode = $this-&gt;head; $curNode = $this-&gt;head-&gt;next; while ($curNode) { if ($curNode === $node) { return $preNode; } else { $preNode = $curNode; $curNode = $preNode-&gt;next; } } return false; } public function getSize() { return $this-&gt;count; } public function __toString() { $node = $this-&gt;head-&gt;next; $arr = []; $i = 0; while ($node) { $arr[] = &#39;Node[&#39; .
+                  <a href="/post/algorithms/graph/algorithms-graph-storage/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
@@ -352,6 +358,8 @@ CASE 1：如果关注节点是 a（待插入节点），它的叔叔节点（父
                 <span class="post-meta">
                 
                   #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                
+                  #<a href="/tags/graph/">Graph</a>&nbsp;
                 
                 </span>
               
@@ -362,14 +370,14 @@ CASE 1：如果关注节点是 a（待插入节点），它的叔叔节点（父
           	
 
             <article class="post-preview">
-              <a href="/algorithms/binarytree/algorithms-binarytree-avl/">
-                <h2 class="post-title">二叉树(BinaryTree)-平衡二叉树(AVL)</h2>
+              <a href="/post/algorithms/graph/algorithms-graph/">
+                <h2 class="post-title">图(Graph)</h2>
                 
               </a>
 
               <span class="post-meta">
   
-    发表于 2019-08-24
+    发表于 2019-08-28
   
   
 </span>
@@ -377,26 +385,31 @@ CASE 1：如果关注节点是 a（待插入节点），它的叔叔节点（父
 
               <div class="post-entry">
                 
-                  引子 二叉排序树，理想情况下，二叉排序树的插入、删除、查找时间复杂度都是 O(logn)，非常高效，而且它是一种动态的数据结构，插入删除性能合查找一样好，不像之前提到的二分查找，虽然查找性能也是 O(logn)，但是需要先对线性表进行排序，二排序的最好时间复杂度也是 O(nlogn)，所以二分查找不适合动态结构的排序。
-但是如果二叉排序树构造的不好的话就会退化成斜树：
-此时按照之前的实现算法性能退化成了 O(n)，所以如何构造二叉排序树很重要，我们的理想情况是满二叉树和完全二叉树，它们的性能都是 O(logn)，所以我们在构造二叉排序树的时候要尽可能像它们靠近，才能得到最佳的操作性能，由此引出平衡二叉树。
-什么是平衡二叉树 平衡二叉树的英文名是 Self-Balancing Binary Search Tree 或者 Height-Balancing Binary Search Tree，译作自平衡的二叉查找树，或者高度平衡的二叉查找树，二叉查找树和二叉排序树是一个意思，只是叫法不同，简称平衡二叉树，也叫 AVL 树（平衡二叉树作者的名字首字母），所以平衡二叉树首先是二叉排序树，并且这个二叉排序树是左右高度平衡的，这么讲有点抽象，具体来说，平衡二叉树要求每个节点的左子树和右子树的高度差至多等于 1，这个高度（深度）差的值叫做平衡因子 BF，也就是说 BF 的值不能大于1，否则就不是平衡二叉树。
-示例：
-图1满足平衡二叉树的定义，是平衡二叉树；图2所示二叉树不是二叉排序树，所有不是平衡二叉树；图3不满足平衡因子小于等于1的要求，对58这个节点来说，平衡因子BF的值是3，因而不是平衡二叉树；图4满足平衡二叉树的定义，是平衡二叉树； 之所以这么约束平衡二叉树，是为了保证它能够始终做到插入、删除、查找的时间复杂度是 O(logn)。
-平衡二叉树的实现原理 平衡二叉树的基本实现思路，是在构建二叉排序树的时候，每插入一个节点，都要检查这个节点的插入是否破坏了原有的平衡性，如果是的话，则找出最小不平衡子树，在保证整体二叉排序树的前提下，通过左旋或者右旋的方式将其调整为平衡子树。从而动态维护这棵平衡二叉树。
-这里面有几个概念需要解释一下：
-1、最小不平衡子树 距离插入节点最近的，且平衡因子绝对值大于 1 的节点为根的子树，叫做最小不平衡子树：
-比如上图中以存储元素 58 的节点为根的子树叫做最小不平衡子树。
-2、左旋/右旋 所谓左旋和右旋指的是最小不平衡子树旋转的方向。
-如果平衡因子小于 -1，即右子树高度值比较大，则需要左旋：
-反之，如果平衡因子大于1，即左子树高度值比较大，则需要右旋：
-当然为了方便你理解原理，我们这里给出的都是最简化的情况，实际处理过程中比这个更复杂，下一篇我们将具体给你演示如何通过代码在各种情况下实现平衡二叉树并讨论对应的时间复杂度。
-演示 一棵二叉树：
-虽然这也是一棵二叉排序树，但是层数达到 8，显然可以通过平衡二叉树来降低层数，提高性能，如果把它转化为平衡二叉树，会是这个样子：
-层数降低了一半，变成了 4 层，显然性能要比之前要高。那么这个平衡二叉树是怎么构建的呢？假设插入节点的顺序是{3,2,1,4,5,6,7,10,9,8}，两个节点之前不用考虑，我们从第三个节点开始分析：
-插入第三个节点 1 时，左子树高度是 2，右子树高度是 0，高度差的绝对值是 2，不符合平衡二叉树的要求，需要把以 3 为根节点的子树进行右旋，到右图那个样子，左右子树高度差为 0，符合平衡二叉树要求，完成调整。同理，插入第四个节点 4 的时候，左右子树高度为 -1，符合平衡二叉树要求，继续插入第五个节点，此时又不符合平衡二叉树的要求了，这个时候右子树比较高，需要左旋：
-旋转的时候以最小不平衡子树为单位，此时最小的不平衡子树是 3、4、5 节点构成的子树，我们以 4 为中心进行左旋，将树结构调整为右图所示的样子，满足了平衡二叉树的要求，停止调整。注意到我们每次新增节点的时候，会调整以每个节点为根节点的左右子树的高度差，然后从最小子树开始进行调整，直到以每个节点为根节点的子树符合平衡二叉树的要求，这样整棵树就符合平衡二叉树的要求了。
-                  <a href="/algorithms/binarytree/algorithms-binarytree-avl/" class="post-read-more">[阅读全文]</a>
+                  <h1 id="图的相关概念">图的相关概念</h1>
+<p>图会综合运用前面所介绍的所有数据结构，所以说，学好了图，也就等同于掌握了数据结构的精髓。</p>
+<h2 id="图的基本定义">图的基本定义</h2>
+<p>图（Graph）由顶点（Vertex）和边（Edge）组成。图中的元素叫顶点，图不能为空，在线性表中，相邻元素有前后关系，在树中，相邻元素有层次关系，在图中，任意两个元素之间都可能有关系，顶点之间的关系通过边来表示。图可以表示为 G(V,E)，其中 G 表示图，V 表示顶点的集合，E 表示边的集合。</p>
+<p>下面就是一个典型的图：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/Graph/image-1572532058891.png" alt="图"></p>
+<p>其中字母标识的节点就是图的顶点，节点之间的连线就是图的边。</p>
+<h2 id="无向图与有向图">无向图与有向图</h2>
+<p>没有方向的边叫无向边，任意两个顶点之间都是无向边的图叫无向图，比如上面那个示例图就是无向图。在无向图中，任意两个顶点之间都有边的图叫无向完全图。</p>
+<p>与之相对的，有方向的边叫有向边（也叫<strong>弧</strong>），任意两个顶点之间都是有向边的图叫有向图，例如下面这个图就是有向图：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/Graph/image-1572532076617.png" alt="有向图"></p>
+<p>在有向图中，任意两个顶点之间都有方向相反的两条有向边的图叫<strong>有向完全图</strong>。</p>
+<p>按照边的数目，我们将边数很少的图叫稀疏图，边数很多的图叫稠密图。</p>
+<p>有些图的边还拥有与其相关的数字，我们把这个数字叫做<strong>权</strong>，这种带权的图通常称作<strong>网</strong>。</p>
+<h2 id="顶点与边的关系">顶点与边的关系</h2>
+<p><strong>顶点的度</strong>指的是与顶点相连接的边数，整个图的度数是所有顶点度数之和。</p>
+<p>在无向图中，边不分方向，边数是图的度数/2。</p>
+<p>在有向图中，边有方向，按照方向将有向图顶点的度分为出度和入度，出度表示有多少条边是以这个顶点为起点指向其他顶点；入度表示有多少条边指向这个顶点。</p>
+<p>在树中，顶点到任意节点的路径是唯一的，而在图中，顶点到任意顶点的路径却不是唯一的。比如上述示例有向图中，从 B 到 A 就有 B-&gt;A、B-&gt;C-&gt;A 两条路径，示例无向图中还有 B-&gt;C-&gt;D-&gt;A 这条路径。</p>
+<h2 id="连通图">连通图</h2>
+<p>在<em>无向图</em> G 中，如果顶点 v 到顶点 v&rsquo; 有路径，则称 v 和 v&rsquo; 是<strong>连通</strong>的，如果任意两个顶点都是连通的，则称 G 是<strong>连通图</strong>。比如上述示例无向图就是连通图。</p>
+<p>在<em>有向图</em> G 中，对于每一对顶点，如果相互之间都存在路径，则 G 是<strong>强连通图</strong>。上述示例有向图不是强连通图，因为 A 到 D 存在路径，而 D 到 A 不存在。</p>
+<h2 id="图的典型应用">图的典型应用</h2>
+<p>图的应用场景很多，比如社交网络中用户之间的关系，网络设备之间的拓扑结构，以及显示生活中形形色色的网：公路网、铁路网、地铁网等等，都可以通过图来表示。</p>
+
                 
               </div>
 
@@ -404,6 +417,8 @@ CASE 1：如果关注节点是 a（待插入节点），它的叔叔节点（父
                 <span class="post-meta">
                 
                   #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                
+                  #<a href="/tags/graph/">Graph</a>&nbsp;
                 
                 </span>
               
@@ -425,14 +440,14 @@ CASE 1：如果关注节点是 a（待插入节点），它的叔叔节点（父
           	
 
             <article class="post-preview">
-              <a href="/algorithms/binarytree/algorithms-binarytree-search/">
-                <h2 class="post-title">二叉树(BinaryTree)-查找</h2>
+              <a href="/post/algorithms/binarytree/algorithms-binarytree-huffmantree/">
+                <h2 class="post-title">二叉树(BinaryTree)-哈夫曼树(HuffmanTree)</h2>
                 
               </a>
 
               <span class="post-meta">
   
-    发表于 2019-08-23
+    发表于 2019-08-26
   
   
 </span>
@@ -440,13 +455,17 @@ CASE 1：如果关注节点是 a（待插入节点），它的叔叔节点（父
 
               <div class="post-entry">
                 
-                  为什么要引入二叉排序树 前面已经介绍了很多数据结构，比如数组、链表、散列表等，数组查找性能高，但是插入、删除性能差，链表插入、删除性能高，但查找性能差，在不考虑散列冲突的话，散列表的插入、删除、查找性能都很高，但是前提是没有散列冲突，此外，散列表存储的数据是无序的，散列表的扩容非常麻烦，涉及到散列冲突时，性能不稳定，另外，散列表用起来爽，构造起来可不简单，要考虑散列函数的设计、哈希冲突的解决、扩容缩容等一系列问题，有没有一种插入、删除、查找性能都不错，构建起来也不是很复杂，性能还很稳定的数据结构呢？这就要介绍的数据结构 —— 二叉排序树。
-什么是二叉排序树 二叉排序树是一种特殊的二叉树，重点关注 「排序」 二字，二叉排序树要求，在树中的任意一个节点，其左子树中的每个节点的值，都要小于这个节点的值，而右子树节点的值都大于这个节点的值，所以这么看来，二叉排序树是天然有序的，如果按照昨天讲的中序遍历，得到将是一个从小到大的有序数据集。但是构造二叉排序树的目的，并不是为了排序，而是为了提高查找、插入和删除的速度。不管怎么说，在一个有序数据集上查找数据肯定比无序数据集要快，同时二叉排序树这种非线性结构，也非常有利于插入和删除的实现。
-注：二叉排序树也叫做二叉查找树，二叉搜索树，你如果看到类似概念，它们是一个意思。 二叉排序树的插入 首先我们先定义好基本的类结构，还是通过二叉链表来存储二叉排序树，对应的节点类如下：
-class Node{public $data;public $left = null;public $right = null;public function __construct($data){$this-&gt;data = $data;}}然后，我们定义下二叉排序树对应类的基本结构：
-class BinarySortedTree{/*** @var Node*/private $tree;public function getTree(){return $this-&gt;tree;}}然后我们按照二叉排序树的定义，实现对应二叉排序树节点的插入方法：
-// 插入节点数据public function insert(int $data){// 如果是空树，则将数据插入到根节点if (!$this-&gt;tree) {$this-&gt;tree = new Node($data);return;}$p = $this-&gt;tree;while ($p) {if ($data &lt; $p-&gt;data) {if (!
-                  <a href="/algorithms/binarytree/algorithms-binarytree-search/" class="post-read-more">[阅读全文]</a>
+                  赫夫曼树 在中小学每年期末考试结束后都会领到成绩单，成绩单上列出我们考试分数的等级，比如优秀（&gt;=90）、良好(&gt;=80)、合格(&gt;=60)、不合格(&lt;60)，以某个班为例，总人数是100人，不同成绩区间的比例如下：
+不考虑效率因素的话，可以这么实现成绩等级判定：
+这种情况下，比例占80%以上的分数都需要经历三次以上的判断才能得到结果，显然不合理，可以对判断逻辑进行改进：
+大部分同学的成绩都在 80 分左右，因此我们判断的逻辑改成了先通过 80 分对成绩进行划分，看起来效率是提升了，这其中的原理是每个分数都要循环调用此逻辑，将 80 分放到入口判断，总体判断次数更少，效率更高。
+这就是赫夫曼树的雏形。显然，上述流程图可以抽象为一棵二叉树，每个等级的人数看作路径权重，
+带权路径长度（权重x路径求和）最小的树叫做 赫夫曼树  把上面两个流程图抽象为带路径权重的二叉树如下：
+二叉树 a 的带权路径长度是 $15+215+340+430+410 = 315$，二叉树 b 的带权路径长度是 $240+35+153+230+102 = 220$，这意味着，对于人数 100 的班级，通过第一种方式要做 315 次比较，对于第二种方式，只需要 220 次比较，显然二叉树 b 比二叉树 a 更优。
+赫夫曼树的构建 当然，上述二叉树 b 还不是赫夫曼树，因为它不是最优的，赫夫曼树的构造方式如下：
+1. 把有权值的节点按照从小到大顺序进行排序：A5、E10、B15、D30、C40； 2. 取最小的两个节点作为某个新节点 N1 的子节点，较小的作为左子结点； 3. 然后将 N1 替代 A5 和 E10，插入上述有序序列，保持从小到大排序：N115、B15、D30、C40； 4. 重复步骤2，将 N1 和 B 作为一个新节点 N2 的左右节点，依次类推，直到把所有节点纳入树中。  最终形成的二叉树如下所示：
+对应的带权路径长度是 $140+230+315+45+4*10 = 205$，对于 100 个学生而言，需要进行 205 次判断。比前面的二叉树 b 更优，同时也是最优的二叉树，所以是赫夫曼树。
+                  <a href="/post/algorithms/binarytree/algorithms-binarytree-huffmantree/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
@@ -654,7 +673,16 @@ class BinarySortedTree{/*** @var Node*/private $tree;public function getTr
         
     
     
-    <li class="page-item"><a class="page-link" href="/page/18/">18</a></li>
+    
+    
+    
+    
+    
+        
+        
+    
+    
+    <li class="page-item"><a class="page-link" href="/page/19/">19</a></li>
     
     
     <li class="page-item">
@@ -662,7 +690,7 @@ class BinarySortedTree{/*** @var Node*/private $tree;public function getTr
     </li>
     
     <li class="page-item">
-        <a href="/page/18/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
+        <a href="/page/19/" class="page-link" aria-label="Last"><span aria-hidden="true">&raquo;&raquo;</span></a>
     </li>
     
 </ul>
@@ -873,45 +901,45 @@ class BinarySortedTree{/*** @var Node*/private $tree;public function getTr
         <ul class="list-inline text-center footer-links">
           <img src="/img/wechatmp.png" alt="k8s技术圈">
           
-              <li>
-                <a href="mailto:icnych@gmail.com" title="Email me">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
+          <li>
+            <a href="mailto:icnych@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
           
-              <li>
-                <a href="https://github.com/cnych" title="GitHub">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
+          <li>
+            <a href="https://github.com/cnych" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
           
-              <li>
-                <a href="https://weibo.com/cnych" title="微博">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
+          <li>
+            <a href="https://weibo.com/cnych" title="微博">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
           
-              <li>
-                <a href="https://instagram.com/cnych" title="Instagram">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
+          <li>
+            <a href="https://instagram.com/cnych" title="Instagram">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
           
           
           <li>
-            <a href="/index.xml" title="RSS">
+            <a href="/%20index.xml" title="RSS">
               <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
@@ -922,9 +950,9 @@ class BinarySortedTree{/*** @var Node*/private $tree;public function getTr
         </ul>
         <p class="credits copyright text-muted">
           
-            
-              <a href="/">WoolfBreathe</a>
-            
+          
+          <a href="/">WoolfBreathe</a>
+          
           
 
           &nbsp;&bull;&nbsp;
@@ -942,7 +970,9 @@ class BinarySortedTree{/*** @var Node*/private $tree;public function getTr
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a
+            href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a
+            href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
           
         </p>
       </div>
@@ -950,67 +980,35 @@ class BinarySortedTree{/*** @var Node*/private $tree;public function getTr
   </div>
 </footer>
 
-
+<script> renderMathInElement(document.body); </script>
 <script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
 
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag() { dataLayer.push(arguments); }
   gtag('js', new Date());
   gtag('config', 'UA-69668147-3');
 </script>
 <script>
-(function(){
+  (function () {
     var bp = document.createElement('script');
     var curProtocol = window.location.protocol.split(':')[0];
     if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
     }
     else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
     }
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(bp, s);
-})();
+  })();
 </script>
-<script >
-$(document).ready(function() {
-  var int = setInterval(fixCount, 50);  
-  
-  var initPVCount = 584976;
-  var initUVCount = 153191;
-  function fixCount() {                   
-    if ($("#busuanzi_container_site_pv").css("display") != "none") {
-        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
-        clearInterval(int); 
-    }
-    if ($("#busuanzi_container_site_uv").css("display") != "none") {
-      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
-      clearInterval(int); 
-    }  
-  }           
-});
-</script>
- <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery-migrate@1.2.1/dist/jquery-migrate.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script type="text/javascript">
-$('.carousel').slick({
-    dots: true,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    infinite: true,
-    speed: 500,
-    fade: true,
-    cssEase: 'linear',
-    centerMode: true,
-    prevArrow: '<button type="button" class="slick-prev"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
-});
-</script>
+
+
+
+
 
   </body>
 </html>

@@ -197,7 +197,7 @@ autocomplete('#aa-search-input',
         <div class="posts-list">
           
             <article class="post-preview">
-              <a href="/algorithms/sort/algorithms-sort-insertionsort/">
+              <a href="/post/algorithms/sort/algorithms-sort-insertionsort/">
                 <h2 class="post-title">排序算法-选择排序(InsertionSort)</h2>
 
                 
@@ -265,7 +265,7 @@ autocomplete('#aa-search-input',
             </article>
           
             <article class="post-preview">
-              <a href="/algorithms/sort/algorithms-sort-bubblesort/">
+              <a href="/post/algorithms/sort/algorithms-sort-bubblesort/">
                 <h2 class="post-title">排序算法-冒泡排序(BubbleSort)</h2>
 
                 
@@ -277,13 +277,13 @@ autocomplete('#aa-search-input',
               <div class="post-entry">
                 
                   冒泡排序(BubbleSort) 常见基于选择的排序算法有冒泡排序、插入排序、选择排序、归并排序和快速排序，在选择排序算法的时候，通常会根据以下几个维度来考虑：
-时间复杂度空间复杂度（对内存空间的消耗）算法的稳定性（如果待排序的序列中存在值相等的元素，经过排序之后，相等元素之间原有的先后顺序不变） 实现原理 冒泡排序只会操作相邻的两个数据。每次冒泡操作都会对相邻的两个元素进行比较，看是否满足大小关系要求，如果不满足就让它俩互换。一次冒泡会让至少一个元素移动到它应该在的位置，重复 n 次，就完成了 n 个数据的排序工作。
+时间复杂度 空间复杂度（对内存空间的消耗） 算法的稳定性（如果待排序的序列中存在值相等的元素，经过排序之后，相等元素之间原有的先后顺序不变）  实现原理 冒泡排序只会操作相邻的两个数据。每次冒泡操作都会对相邻的两个元素进行比较，看是否满足大小关系要求，如果不满足就让它俩互换。一次冒泡会让至少一个元素移动到它应该在的位置，重复 n 次，就完成了 n 个数据的排序工作。
 光看定义有点抽象，用图来演示，假设待排序数字是 4、5、6、3、2、1，第一次排序的流程是这样的：
 看这个图的时候要结合定义一起看，否则也比较懵逼，当然如果去 VisuAlgo 上看动态图的话就更形象了：https://visualgo.net/zh/sorting，经过 n 次冒泡，最终完成排序（所谓冒泡，以升序来看，就是每次把待排序序列中的最大值插到已排序序列的最前面，这个过程就像冒泡一样）：
 示例代码
 重要的是理解冒泡排序的原理，懂了原理就是把这个排序过程翻译成代码而已，以下是 PHP 代码实现的冒泡排序：
-&lt;?php/*** 冒泡排序实现函数（PHP）* @param $nums* @return mixed*/function bubble_sort($nums) {if (count($nums) &lt;= 1) {return $nums;}for ($i = 0; $i &lt; count($nums); $i++) {$flag = false;for ($j = 0; $j &lt; count($nums) - $i - 1; $j++) {if ($nums[$j] &gt; $nums[$j+1]) {$temp = $nums[$j];$nums[$j] = $nums[$j+1];$nums[$j+1] = $temp;$flag = true;}}if (!
-                  <a href="/algorithms/sort/algorithms-sort-bubblesort/" class="post-read-more">[阅读全文]</a>
+&lt;?php /** * 冒泡排序实现函数（PHP） * @param $nums * @return mixed */ function bubble_sort($nums) { if (count($nums) &lt;= 1) { return $nums; } for ($i = 0; $i &lt; count($nums); $i++) { $flag = false; for ($j = 0; $j &lt; count($nums) - $i - 1; $j++) { if ($nums[$j] &gt; $nums[$j+1]) { $temp = $nums[$j]; $nums[$j] = $nums[$j+1]; $nums[$j+1] = $temp; $flag = true; } } if (!
+                  <a href="/post/algorithms/sort/algorithms-sort-bubblesort/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
@@ -298,7 +298,7 @@ autocomplete('#aa-search-input',
             </article>
           
             <article class="post-preview">
-              <a href="/algorithms/sort/algorithms-sort-mergesort/">
+              <a href="/post/algorithms/sort/algorithms-sort-mergesort/">
                 <h2 class="post-title">排序算法-归并排序(MergeSort)</h2>
 
                 
@@ -314,8 +314,8 @@ autocomplete('#aa-search-input',
 归并排序使用了分治思想，分治，顾名思义，就是分而治之，将一个大问题分解成小的子问题来解决。说到这里，可能你就能联想起我们之前讲到的一个编程技巧 —— 递归，没错，归并排序就是通过递归来实现的。这个递归的公式是每次都将传入的待排序数组一分为二，直到不能分割，然后将排序后序列合并，最终返回排序后的数组。
 原理图如下所示：
 由于涉及到递归，所以归并排序从理解上要比前面三个排序要困难一些，还是建议通过这个动态图帮助理解：https://visualgo.net/zh/sorting，在界面顶部选择归并排序，然后在左下角点击执行即可。
-示例代码 &lt;?phpfunction merge_sort($nums){if (count($nums) &lt;= 1) {return $nums;}merge_sort_c($nums, 0, count($nums) - 1);return $nums;}function merge_sort_c(&amp;$nums, $p, $r){if ($p &gt;= $r) {return;}$q = floor(($p + $r) / 2);merge_sort_c($nums, $p, $q);merge_sort_c($nums, $q + 1, $r);merge($nums, [&#39;start&#39; =&gt; $p, &#39;end&#39; =&gt; $q], [&#39;start&#39; =&gt; $q + 1, &#39;end&#39; =&gt; $r]);}function merge(&amp;$nums, $nums_p, $nums_q){$temp = [];$i = $nums_p[&#39;start&#39;];$j = $nums_q[&#39;start&#39;];$k = 0;while ($i &lt;= $nums_p[&#39;end&#39;] &amp;&amp; $j &lt;= $nums_q[&#39;end&#39;]) {if ($nums[$i] &lt;= $nums[$j]) {$temp[$k++] = $nums[$i++];} else {$temp[$k++] = $nums[$j++];}}if ($i &lt;= $nums_p[&#39;end&#39;]) {for (; $i &lt;= $nums_p[&#39;end&#39;]; $i++) {$temp[$k++] = $nums[$i];}}if ($j &lt;= $nums_q[&#39;end&#39;]) {for (; $j &lt;= $nums_q[&#39;end&#39;]; $j++) {$temp[$k++] = $nums[$j];}}for ($x = 0; $x &lt; $k; $x++) {$nums[$nums_p[&#39;start&#39;] + $x] = $temp[$x];}}$nums = [4, 5, 6, 3, 2, 1];$nums = merge_sort($nums);print_r($nums);性能分析 总结，归并排序不涉及相等元素位置交换，是稳定的排序算法，时间复杂度是 O(nlogn)，要优于冒泡排序和插入排序的 O(n2)，但是归并排序需要额外的空间存放排序数据，不是原地排序，最多需要和待排序数组同样大小的空间，所以空间复杂度是 O(n)。
-                  <a href="/algorithms/sort/algorithms-sort-mergesort/" class="post-read-more">[阅读全文]</a>
+示例代码 &lt;?php function merge_sort($nums) { if (count($nums) &lt;= 1) { return $nums; } merge_sort_c($nums, 0, count($nums) - 1); return $nums; } function merge_sort_c(&amp;$nums, $p, $r) { if ($p &gt;= $r) { return; } $q = floor(($p + $r) / 2); merge_sort_c($nums, $p, $q); merge_sort_c($nums, $q + 1, $r); merge($nums, [&#39;start&#39; =&gt; $p, &#39;end&#39; =&gt; $q], [&#39;start&#39; =&gt; $q + 1, &#39;end&#39; =&gt; $r]); } function merge(&amp;$nums, $nums_p, $nums_q) { $temp = []; $i = $nums_p[&#39;start&#39;]; $j = $nums_q[&#39;start&#39;]; $k = 0; while ($i &lt;= $nums_p[&#39;end&#39;] &amp;&amp; $j &lt;= $nums_q[&#39;end&#39;]) { if ($nums[$i] &lt;= $nums[$j]) { $temp[$k++] = $nums[$i++]; } else { $temp[$k++] = $nums[$j++]; } } if ($i &lt;= $nums_p[&#39;end&#39;]) { for (; $i &lt;= $nums_p[&#39;end&#39;]; $i++) { $temp[$k++] = $nums[$i]; } } if ($j &lt;= $nums_q[&#39;end&#39;]) { for (; $j &lt;= $nums_q[&#39;end&#39;]; $j++) { $temp[$k++] = $nums[$j]; } } for ($x = 0; $x &lt; $k; $x++) { $nums[$nums_p[&#39;start&#39;] + $x] = $temp[$x]; } } $nums = [4, 5, 6, 3, 2, 1]; $nums = merge_sort($nums); print_r($nums); 性能分析 总结，归并排序不涉及相等元素位置交换，是稳定的排序算法，时间复杂度是 O(nlogn)，要优于冒泡排序和插入排序的 O(n2)，但是归并排序需要额外的空间存放排序数据，不是原地排序，最多需要和待排序数组同样大小的空间，所以空间复杂度是 O(n)。
+                  <a href="/post/algorithms/sort/algorithms-sort-mergesort/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
@@ -330,7 +330,7 @@ autocomplete('#aa-search-input',
             </article>
           
             <article class="post-preview">
-              <a href="/algorithms/sort/algorithms-sort-quicksort/">
+              <a href="/post/algorithms/sort/algorithms-sort-quicksort/">
                 <h2 class="post-title">排序算法-快速排序(QuickSort)</h2>
 
                 
@@ -348,7 +348,7 @@ autocomplete('#aa-search-input',
 图示如下：
 根据分治、递归的处理思想，可以用递归排序下标从 p 到 q-1 之间的数据和下标从 q+1 到 r 之间的数据，直到区间缩小为 1，就说明所有的数据都有序了，而且可以看到不需要像归并排序那样做合并操作，也就不需要额外的内存空间，在算法复杂度和归并排序一样的情况下，有着更好的空间复杂度表现。
 快速排序首先要找到分区点 pivot，一般我们会将数组最后一个元素或者第一个元素作为 pivot，比如我们以最后一个元素作为分区点，然后通过两个变量 i 和 j 作为下标来循环数组，当下标 j 对应数据小于 pivot 时，交换 i 和 j 对应数据，并且将 i 往前移动一位，否则 i 不动，下标 j 始终是往前移动的，j 到达终点后，将 pivot 与下标 i 对应数据交换，这样最终将 pivot 置于数组中间，[0&hellip;i-1] 区间的数据都比 pivot 小，[i+1&hellip;j] 之间的数据都比 pivot 大，我们以递归的方式处理该流程，最终整个数组都会变成有序的，对应的算法操作流程如下：
-                  <a href="/algorithms/sort/algorithms-sort-quicksort/" class="post-read-more">[阅读全文]</a>
+                  <a href="/post/algorithms/sort/algorithms-sort-quicksort/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 
@@ -388,45 +388,45 @@ autocomplete('#aa-search-input',
         <ul class="list-inline text-center footer-links">
           <img src="/img/wechatmp.png" alt="k8s技术圈">
           
-              <li>
-                <a href="mailto:icnych@gmail.com" title="Email me">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
+          <li>
+            <a href="mailto:icnych@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
           
-              <li>
-                <a href="https://github.com/cnych" title="GitHub">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
+          <li>
+            <a href="https://github.com/cnych" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
           
-              <li>
-                <a href="https://weibo.com/cnych" title="微博">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
+          <li>
+            <a href="https://weibo.com/cnych" title="微博">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
           
-              <li>
-                <a href="https://instagram.com/cnych" title="Instagram">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
+          <li>
+            <a href="https://instagram.com/cnych" title="Instagram">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
           
           
           <li>
-            <a href="/index.xml" title="RSS">
+            <a href="/%20index.xml" title="RSS">
               <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
                 <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
@@ -437,9 +437,9 @@ autocomplete('#aa-search-input',
         </ul>
         <p class="credits copyright text-muted">
           
-            
-              <a href="/">WoolfBreathe</a>
-            
+          
+          <a href="/">WoolfBreathe</a>
+          
           
 
           &nbsp;&bull;&nbsp;
@@ -457,7 +457,9 @@ autocomplete('#aa-search-input',
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a
+            href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a
+            href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
           
         </p>
       </div>
@@ -465,67 +467,35 @@ autocomplete('#aa-search-input',
   </div>
 </footer>
 
-
+<script> renderMathInElement(document.body); </script>
 <script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
 
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag() { dataLayer.push(arguments); }
   gtag('js', new Date());
   gtag('config', 'UA-69668147-3');
 </script>
 <script>
-(function(){
+  (function () {
     var bp = document.createElement('script');
     var curProtocol = window.location.protocol.split(':')[0];
     if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+      bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
     }
     else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+      bp.src = 'http://push.zhanzhang.baidu.com/push.js';
     }
     var s = document.getElementsByTagName("script")[0];
     s.parentNode.insertBefore(bp, s);
-})();
+  })();
 </script>
-<script >
-$(document).ready(function() {
-  var int = setInterval(fixCount, 50);  
-  
-  var initPVCount = 584976;
-  var initUVCount = 153191;
-  function fixCount() {                   
-    if ($("#busuanzi_container_site_pv").css("display") != "none") {
-        $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + initPVCount); 
-        clearInterval(int); 
-    }
-    if ($("#busuanzi_container_site_uv").css("display") != "none") {
-      $("#busuanzi_value_site_uv").html(parseInt($("#busuanzi_value_site_uv").html()) + initUVCount);
-      clearInterval(int); 
-    }  
-  }           
-});
-</script>
- <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('init','BJICPtxnbz-7vq9kEwH5psPCuHe2CvludQug4R2tuJGPF0GQT2hwSWTAhlSt2EFD5InpuQyxCGJdigf6-KbQ53c');</script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/jquery-migrate@1.2.1/dist/jquery-migrate.min.js"></script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
-<script type="text/javascript">
-$('.carousel').slick({
-    dots: true,
-    arrows: true,
-    autoplay: true,
-    autoplaySpeed: 4000,
-    infinite: true,
-    speed: 500,
-    fade: true,
-    cssEase: 'linear',
-    centerMode: true,
-    prevArrow: '<button type="button" class="slick-prev"></button>',
-    nextArrow: '<button type="button" class="slick-next"></button>',
-});
-</script>
+
+
+
+
 
   </body>
 </html>
