@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+  <title>Docker 常用命令-WoolfBreathe</title>
+  <meta property="og:title" content="Docker 常用命令" />
+  <meta name="twitter:title" content="Docker 常用命令" />
+
+  <meta name="description" content="常用命令
+执行流程
+当利用docker run来创建容器时，Docker 在后台运行的标准操作包括：
+
+检查本地是否存在指定的镜像，不存在就从公有仓库下载
+利用镜像创建并启动一个容器
+分配一个文件系统，并在只读的镜像层外面挂载一层可读写层
+从宿主主机配置的网桥接口中桥接一个虚拟接口到容器中去
+从地址池配置一个 ip 地址给容器
+执行用户指定的应用程序
+执行完毕后容器被终止
+">
+  <meta property="og:description" content="常用命令
+执行流程
+当利用docker run来创建容器时，Docker 在后台运行的标准操作包括：
+
+检查本地是否存在指定的镜像，不存在就从公有仓库下载
+利用镜像创建并启动一个容器
+分配一个文件系统，并在只读的镜像层外面挂载一层可读写层
+从宿主主机配置的网桥接口中桥接一个虚拟接口到容器中去
+从地址池配置一个 ip 地址给容器
+执行用户指定的应用程序
+执行完毕后容器被终止
+">
+  <meta name="twitter:description" content="常用命令
+执行流程
+当利用docker run来创建容器时，Docker 在后台运行的标准操作包括：
+
+检查本地是否存在指定的镜像，不存在就从公有仓库下载
+利用镜像创建并启动一个容器
+分配一个文件系统，并在只读的镜像层外面挂载一层可读写层
+从宿主主机配置的网桥接口中桥接一个虚拟接口到容器中去
+从地址池配置一个 ip 地址给容器
+执行用户指定的应用程序
+执行完毕后容器被终止
+">
+  <meta name="author" content="WoolfBreathe"/>
+  <link href="/img/favicon.png" rel="icon" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/img/favicon.png"/>
+  <meta property="og:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@username" />
+  <meta name="twitter:creator" content="@username" />
+  <meta property="og:url" content="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="WoolfBreathe" />
+
+  <meta name="generator" content="Hugo 0.68.3" />
+  <link rel="canonical" href="/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="WoolfBreathe">
+
+  
+  
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700%7COpen+Sans:400,700" rel="stylesheet">
+  
+
+  <link rel="stylesheet" href='/css/bundle.min.62de9d30b83723e0d55f82908aedb1c5eb18c910bc24bcf43e530ce754ee1502.css' integrity='sha256-Yt6dMLg3I&#43;DVX4KQiu2xxesYyRC8JLz0PlMM51TuFQI='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
+<meta name="google-site-verification" content="oKxX4fOvB2yYmU02txZFChM93XQbESU4JaG3tNH9Hm8" />
+<meta name="baidu-site-verification" content="F5ojAyqaKU" />
+<meta name="keywords" content="DevOps, Docker">
+
+
+
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/" title="WoolfBreathe">
+        <img src="/img/avatar-icon.png" style="margin-top: -5px;height: 32px;" alt="WoolfBreathe">
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="首页" href="/">首页</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="归档" href="/archives">归档</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="标签" href="/tags">标签</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于" href="/page/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="RSS" href="/index.xml">RSS</a>
+            </li>
+          
+        
+
+        
+
+        
+
+        
+          <li>
+            <a href="#modalSearch" data-toggle="modal" data-target="#modalSearch" style="outline: none;">
+              <span id="searchGlyph" class="glyphicon glyphicon-search"></span>
+            </a>
+          </li>
+          
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+  <div id="modalSearch" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">搜索</h4>
+        </div>
+        <div class="modal-body">
+            
+<div class="aa-input-container" id="aa-input-container">
+    <input type="search" id="aa-search-input" class="aa-input-search" placeholder="Search for titles or URIs..." name="search" autocomplete="off" />
+    <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
+        <path d="M1806,332c0-123.3-43.8-228.8-131.5-316.5C1586.8-72.2,1481.3-116,1358-116s-228.8,43.8-316.5,131.5  C953.8,103.2,910,208.7,910,332s43.8,228.8,131.5,316.5C1129.2,736.2,1234.7,780,1358,780s228.8-43.8,316.5-131.5  C1762.2,560.8,1806,455.3,1806,332z M2318,1164c0,34.7-12.7,64.7-38,90s-55.3,38-90,38c-36,0-66-12.7-90-38l-343-342  c-119.3,82.7-252.3,124-399,124c-95.3,0-186.5-18.5-273.5-55.5s-162-87-225-150s-113-138-150-225S654,427.3,654,332  s18.5-186.5,55.5-273.5s87-162,150-225s138-113,225-150S1262.7-372,1358-372s186.5,18.5,273.5,55.5s162,87,225,150s113,138,150,225  S2062,236.7,2062,332c0,146.7-41.3,279.7-124,399l343,343C2305.7,1098.7,2318,1128.7,2318,1164z" />
+    </svg>
+</div>
+<script src="/js/algoliasearch.min.js"></script>
+<script src="/js/autocomplete.min.js"></script>
+
+<script>
+var client = algoliasearch("1JDRAS0AZR", "8804ac109158bb3bb60d74ce98fa332f");
+var index = client.initIndex('prod_blog');
+
+autocomplete('#aa-search-input',
+{ hint: false}, {
+    source: autocomplete.sources.hits(index, {hitsPerPage: 5}),
+    
+    displayKey: 'name',
+    
+    templates: {
+        
+        suggestion: function(suggestion) {
+            return '<span>' + '<a href="/post/' + suggestion.slug + '">' +
+            suggestion._highlightResult.title.value + '</a></span>';
+        }
+    }
+});
+</script>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="/img/banner/photo-1470020337050-543c4e581988.jpeg" ></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="post-heading">
+                <h1>Docker 常用命令</h1>
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Docker 常用命令</h1>
+                
+                
+                  <span class="post-meta">
+  
+    发表于 2021-04-21
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+  </header>
+
+
+    
+
+<div class="container" role="main">
+  <div class="row">
+
+    
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div>
+            
+            
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="/tags/devops/">DevOps</a> &nbsp;
+              
+                  <a href="/tags/docker/">Docker</a> &nbsp;
+              
+            </h5>
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+          
+            
+<aside class="toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#常用命令">常用命令</a>
+      <ul>
+        <li><a href="#执行流程">执行流程</a></li>
+        <li><a href="#容器">容器</a></li>
+        <li><a href="#镜像">镜像</a></li>
+        <li><a href="#定制镜像流程">定制镜像流程</a></li>
+        <li><a href="#dockerfile定制镜像">DockerFile定制镜像</a></li>
+        <li><a href="#迁移镜像">迁移镜像</a></li>
+        <li><a href="#私有仓库">私有仓库</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+</aside>
+
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <h2 id="常用命令">常用命令</h2>
+<h3 id="执行流程">执行流程</h3>
+<p>当利用docker run来创建容器时，Docker 在后台运行的标准操作包括：</p>
+<ol>
+<li>检查本地是否存在指定的镜像，不存在就从公有仓库下载</li>
+<li>利用镜像创建并启动一个容器</li>
+<li>分配一个文件系统，并在只读的镜像层外面挂载一层可读写层</li>
+<li>从宿主主机配置的网桥接口中桥接一个虚拟接口到容器中去</li>
+<li>从地址池配置一个 ip 地址给容器</li>
+<li>执行用户指定的应用程序</li>
+<li>执行完毕后容器被终止</li>
+</ol>
+<h3 id="容器">容器</h3>
+<p>查看正在运行的容器</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker ps -a
+
+docker container ls
+</code></pre></div><p>查看镜像、容器、数据卷所占用的空间</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker system df
+</code></pre></div><p>创建并运行</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker container run -it ubuntu:16.04 /bin/bash
+</code></pre></div><p>进入容器</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker <span style="color:#8be9fd;font-style:italic">exec</span> -it 容器ID /bin/bash
+</code></pre></div><p>启动容器</p>
+<p>注意:
+docker container run ubuntu:16.04 创建的容器不能使用start启动
+docker container run -it ubuntu:16.04 /bin/bash 创建的容器可以使用start启动</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker container start 容器ID
+</code></pre></div><p>停止容器</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker container stop 容器ID
+</code></pre></div><p>删除指定容器</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker container rm 容器ID
+</code></pre></div><p>清除停止的容器(谨慎使用!)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker container prune
+</code></pre></div><h3 id="镜像">镜像</h3>
+<p>查看已有镜像</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker image ls
+</code></pre></div><p>删除镜像</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker image rm <span style="color:#ff79c6">[</span>选项<span style="color:#ff79c6">]</span> &lt;镜像1&gt; <span style="color:#ff79c6">[</span>&lt;镜像2&gt; ...<span style="color:#ff79c6">]</span>
+</code></pre></div><h3 id="定制镜像流程">定制镜像流程</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker run --name webserver -d -p 80:80 nginx
+</code></pre></div><p>添加修改</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ docker <span style="color:#8be9fd;font-style:italic">exec</span> -it webserver bash
+root@3729b97e8226:/# <span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#39;&lt;h1&gt;Hello, Docker!&lt;/h1&gt;&#39;</span> &gt; /usr/share/nginx/html/index.html
+root@3729b97e8226:/# <span style="color:#8be9fd;font-style:italic">exit</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ docker diff webserver
+C /root
+A /root/.bash_history
+C /run
+C /usr
+C /usr/share
+C /usr/share/nginx
+C /usr/share/nginx/html
+C /usr/share/nginx/html/index.html
+C /var
+C /var/cache
+C /var/cache/nginx
+A /var/cache/nginx/client_temp
+A /var/cache/nginx/fastcgi_temp
+A /var/cache/nginx/proxy_temp
+A /var/cache/nginx/scgi_temp
+A /var/cache/nginx/uwsgi_temp
+</code></pre></div><p>提交修改生成新镜像</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ docker commit <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    --author <span style="color:#f1fa8c">&#34;海马学院&#34;</span> <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    --message <span style="color:#f1fa8c">&#34;修改了默认首页&#34;</span> <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    webserver <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    nginx:v2
+sha256:07e33465974800ce65751acc279adc6ed2dc5ed4e0838f8b86f0c87aa1795214
+</code></pre></div><p>查看提交记录</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ docker <span style="color:#8be9fd;font-style:italic">history</span> nginx:v2
+IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
+07e334659748        <span style="color:#bd93f9">54</span> seconds ago      nginx -g daemon off;                            <span style="color:#bd93f9">95</span> B                修改了默认网页
+e43d811ce2f4        <span style="color:#bd93f9">4</span> weeks ago         /bin/sh -c <span style="color:#6272a4">#(nop)  CMD [&#34;nginx&#34; &#34;-g&#34; &#34;daemon    0 B</span>
+&lt;missing&gt;           <span style="color:#bd93f9">4</span> weeks ago         /bin/sh -c <span style="color:#6272a4">#(nop)  EXPOSE 443/tcp 80/tcp        0 B</span>
+&lt;missing&gt;           <span style="color:#bd93f9">4</span> weeks ago         /bin/sh -c ln -sf /dev/stdout /var/log/nginx/   <span style="color:#bd93f9">22</span> B
+&lt;missing&gt;           <span style="color:#bd93f9">4</span> weeks ago         /bin/sh -c apt-key adv --keyserver hkp://pgp.   58.46 MB
+&lt;missing&gt;           <span style="color:#bd93f9">4</span> weeks ago         /bin/sh -c <span style="color:#6272a4">#(nop)  ENV NGINX_VERSION=1.11.5-1   0 B</span>
+&lt;missing&gt;           <span style="color:#bd93f9">4</span> weeks ago         /bin/sh -c <span style="color:#6272a4">#(nop)  MAINTAINER NGINX Docker Ma   0 B</span>
+&lt;missing&gt;           <span style="color:#bd93f9">4</span> weeks ago         /bin/sh -c <span style="color:#6272a4">#(nop)  CMD [&#34;/bin/bash&#34;]            0 B</span>
+&lt;missing&gt;           <span style="color:#bd93f9">4</span> weeks ago         /bin/sh -c <span style="color:#6272a4">#(nop) ADD file:23aa4f893e3288698c   123 MB</span>
+</code></pre></div><p>启用新的容器</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker run --name webserv2 -d -p 81:80 nginx:v2
+</code></pre></div><h3 id="dockerfile定制镜像">DockerFile定制镜像</h3>
+<p>FROM 指定基础镜像
+RUN 执行命令(每一个RUN建立一层，执行结束后，COMMEIT 这一层的修改，构成新的镜像)
+COPY 复制上下文文件</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">FROM nginx
+RUN <span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#39;&lt;h1&gt;Hello, Docker!&lt;/h1&gt;&#39;</span> &gt; /usr/share/nginx/html/index.html <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#39;&lt;h1&gt;Hello, Docker!&lt;/h1&gt;&#39;</span> &gt; /usr/share/nginx/html/home.html
+COPY ./package.json /app/
+</code></pre></div><p>构建镜像</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ docker build -t nginx:v3 .
+Sending build context to Docker daemon 2.048 kB
+Step <span style="color:#bd93f9">1</span> : FROM nginx
+ ---&gt; e43d811ce2f4
+Step <span style="color:#bd93f9">2</span> : RUN <span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#39;&lt;h1&gt;Hello, Docker!&lt;/h1&gt;&#39;</span> &gt; /usr/share/nginx/html/index.html
+ ---&gt; Running in 9cdc27646c7b
+ ---&gt; 44aa4490ce2c
+Removing intermediate container 9cdc27646c7b
+Successfully built 44aa4490ce2c
+</code></pre></div><h3 id="迁移镜像">迁移镜像</h3>
+<p>Docker 还提供了docker load和docker save命令，用以将镜像保存为一个 tar 文件，然后传输到另一个位置上，再加载进来。这是在没有 Docker Registry 时的做法，现在已经不推荐，镜像迁移应该直接使用 Docker Registry，无论是直接使用 Docker Hub 还是使用内网私有 Registry 都可以。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker save alpine | gzip &gt; alpine-latest.tar.gz
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ docker load -i alpine-latest.tar.gz
+Loaded image: alpine:latest
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker save &lt;镜像名&gt; | bzip2 | pv | ssh &lt;用户名&gt;@&lt;主机名&gt; <span style="color:#f1fa8c">&#39;cat | docker load&#39;</span>
+</code></pre></div><h3 id="私有仓库">私有仓库</h3>
+<p>docker-registry是官方提供的工具，可以用于构建私有的镜像仓库。本文内容基于 docker-registry v2.x 版本。你可以通过获取官方 registry 镜像来运行。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker run -d <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    -p 27018:5000 <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    -v /home/vagrant/opt/data/registry:/var/lib/registry <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    registry
+</code></pre></div><p>如果你不想使用 127.0.0.1:5000 作为仓库地址，比如想让本网段的其他主机也能把镜像推送到私有仓库。你就得把例如 192.168.199.100:5000 这样的内网地址作为私有仓库地址，这时你会发现无法成功推送镜像。</p>
+<p>这是因为 Docker 默认不允许非 HTTPS 方式推送镜像。我们可以通过 Docker 的配置选项来取消这个限制。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">{</span>
+    <span style="color:#f1fa8c">&#34;registry-mirrors&#34;</span>: <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;https://alzgoonw.mirror.aliyuncs.com&#34;</span><span style="color:#ff79c6">]</span>,
+    <span style="color:#f1fa8c">&#34;insecure-registries&#34;</span>: <span style="color:#ff79c6">[</span>
+        <span style="color:#f1fa8c">&#34;192.168.10.10:27018&#34;</span>,
+        <span style="color:#f1fa8c">&#34;10.0.2.15:27018&#34;</span>,
+        <span style="color:#f1fa8c">&#34;192.168.31.31:27018&#34;</span>,
+        <span style="color:#f1fa8c">&#34;192.168.31.36:27018&#34;</span>,
+        <span style="color:#f1fa8c">&#34;0.0.0.0:27018&#34;</span>
+    <span style="color:#ff79c6">]</span>
+<span style="color:#ff79c6">}</span>
+</code></pre></div><p>重启docker</p>
+<p>使用docker tag来标记一个镜像，然后推送它到仓库。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker tag hello-world:latest 0.0.0.0:27018/hello-world:latest
+</code></pre></div><p>推送镜像</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker push 10.0.2.15:27018/hello-world:latest
+</code></pre></div><p>检查仓库中的镜像</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ curl 127.0.0.1:27018/v2/_catalog
+<span style="color:#ff79c6">{</span><span style="color:#f1fa8c">&#34;repositories&#34;</span>:<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;ubuntu&#34;</span><span style="color:#ff79c6">]}</span>
+</code></pre></div><p>拉取镜像</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker pull 192.168.31.36:27018/hello-world:latest
+</code></pre></div>
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我们的微信公众帐号，在微信公众帐号中回复◉加群◉即可加入到我们的 kubernetes 讨论群里面共同学习。</p>
+<img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/qrcode.png" alt="wechat-account-qrcode">
+
+  
+          
+            <div class="entry-shang text-center">
+    <p>「真诚赞赏，手留余香」</p>
+    <button class="zs show-zs btn btn-bred">赞赏</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+    <div class="zs-modal-head">
+        <button type="button" class="close">×</button>
+        <span class="author"><img src="/img/avatar.jpeg"/>阳明</span>
+        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
+    </div>
+    <div class="zs-modal-body">
+        <div class="zs-modal-btns">
+            <button class="btn btn-blink" data-num="2">2元</button>
+            <button class="btn btn-blink" data-num="5">5元</button>
+            <button class="btn btn-blink" data-num="10">10元</button>
+            <button class="btn btn-blink" data-num="50">50元</button>
+            <button class="btn btn-blink" data-num="100">100元</button>
+            <button class="btn btn-blink" data-num="1">任意金额</button>
+        </div>
+        <div class="zs-modal-pay">
+            <button class="btn btn-bred" id="pay-text">2元</button>
+            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+            <img src="/img/wechat-2.png" id="pay-image"/>
+        </div>
+    </div>
+    <div class="zs-modal-footer">
+        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
+    </div>
+</div>
+          
+          
+            
+
+
+
+          
+        </article>
+  
+        
+          
+
+<h3>相关文章</h3>
+<ul style="margin-bottom: 25px;">
+    
+    <li><a href="/post/devops/docker/devops-docker-install/">Docker Install</a></li>
+    
+    <li><a href="/post/devops/docker/devops-docker-docker/">Docker</a></li>
+    
+    <li><a href="/post/devops/linux/devops-linux-rsync/">Linux Rsync 文件同步</a></li>
+    
+    <li><a href="/post/devops/linux/devops-linux-permisssions/">Linux Permisssions(文件权限)</a></li>
+    
+    <li><a href="/post/devops/linux/devops-linux-timedatectl/">Linux使用Timedatectl修改时区和时间</a></li>
+    
+    <li><a href="/post/devops/linux/devops-linux-zabbix/">Linux安装Zabbix</a></li>
+    
+    <li><a href="/post/devops/database/devops-linux-mysql-utilities/">Centos7.X下编译安装MySQL Utilities</a></li>
+    
+    <li><a href="/post/devops/database/devops-mysql/">Linux安装MySQL</a></li>
+    
+    <li><a href="/post/devops/linux/devops-linux-nginx/">Linux安装Nginx源码包</a></li>
+    
+    <li><a href="/post/devops/linux/devops-linux-php/">Linux安装PHP源码包</a></li>
+    
+</ul>
+
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="/post/devops/docker/devops-docker-install/" data-toggle="tooltip" data-placement="top" title="Docker Install">&larr; 前一篇</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="/post/math/2021-05-06-matrixanalysis/" data-toggle="tooltip" data-placement="top" title="Matrix Analysis">后一篇 &rarr;</a>
+            </li>
+          
+        </ul>
+        
+
+        
+        
+        
+  
+        
+
+        
+          
+
+        
+  
+      </div>
+    
+    
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          <img src="/img/wechatmp.png" alt="k8s技术圈">
+          
+          <li>
+            <a href="mailto:icnych@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://github.com/cnych" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://weibo.com/cnych" title="微博">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://instagram.com/cnych" title="Instagram">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="/%20index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+          
+          <a href="/">WoolfBreathe</a>
+          
+          
+
+          &nbsp;&bull;&nbsp;
+          2021
+        </p>
+        
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a
+            href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a
+            href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
+
+
+
+=======
+</script>
+>>>>>>> 399fb13c00b61c640f819f0855ce313cd2e0810c
+
+
+
+
+
+
+  </body>
+</html>
+

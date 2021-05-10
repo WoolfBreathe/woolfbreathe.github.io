@@ -19,8 +19,7 @@
       <pubDate>Thu, 12 Nov 2020 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (WoolfBreathe)</author>
       <guid>/post/devops/linux/devops-linux-rsync/</guid>
-      <description>安装 服务器配置 配置/etc/rsyncd.conf文件
-uid = root gid = root use chroot = no max connections = 2000 port = 8973 timeout = 900 log file = /var/run/rsyncd.log pid file = /var/run/rsyncd.pid lock file = /var/run/rsyncd.lock log format = %t%a%m%f%b commemt = rsync list = yes read only = yes write only = no # auth users = apprsync # secrets file = /etc/rsyncd.secret ignore errors = yes # hosts allow = 172.</description>
+      <description></description>
     </item>
     
     <item>

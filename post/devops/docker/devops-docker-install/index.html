@@ -10,25 +10,12 @@
   <meta property="og:title" content="Docker Install" />
   <meta name="twitter:title" content="Docker Install" />
 
-  <meta name="description" content="Get Docker CE for Ubuntu 要在Ubuntu上开始使用Docker CE，请确保满足先决条件，然后安装Docker。
-先决条件(Prerequisites) Docker EE 用户 要安装Docker Enterprise Edition（Docker EE），请转到获取Ubuntu的Docker EE而不是此主题。
-OS requirements 要安装Docker CE，您需要其中一个64位的Ubuntu版本  Cosmic 18.10 Bionic 18.04 (LTS) Xenial 16.04 (LTS) 在x86_64（或amd64），armhf，arm64，s390x（IBM Z）和ppc64le（IBM Power）体系结构上支持Docker CE。
- Uninstall old versions 较旧版本的Docker被称为docker，docker.io或docker引擎。如果已安装，请卸载它们：
-sudo apt-get remove docker docker-engine docker.io containerd runc 如果apt-get报告没有安装这些软件包，那就没关系。 保留/var/lib/docker/的内容，包括图像，容器，卷(volumes)和网络。 Docker CE包现在称为docker-ce。
-Supported storage drivers Ubuntu上的Docker CE支持overlay2，aufs和btrfs存储驱动程序。
-对于Linux内核版本4及更高版本的新安装，支持overlay2并优先于aufs。 Docker CE默认使用overlay2存储驱动程序。如果您需要使用aufs，则需要手动配置它。见aufs
-Install Docker CE 使用存储库安装(Install using the repository) 在新主机上首次安装Docker CE之前，需要设置Docker存储库。之后，您可以从存储库安装和更新Docker。 Set up the repository">
-  <meta property="og:description" content="Get Docker CE for Ubuntu 要在Ubuntu上开始使用Docker CE，请确保满足先决条件，然后安装Docker。
-先决条件(Prerequisites) Docker EE 用户 要安装Docker Enterprise Edition（Docker EE），请转到获取Ubuntu的Docker EE而不是此主题。
-OS requirements 要安装Docker CE，您需要其中一个64位的Ubuntu版本  Cosmic 18.10 Bionic 18.04 (LTS) Xenial 16.04 (LTS) 在x86_64（或amd64），armhf，arm64，s390x（IBM Z）和ppc64le（IBM Power）体系结构上支持Docker CE。
- Uninstall old versions 较旧版本的Docker被称为docker，docker.io或docker引擎。如果已安装，请卸载它们：
-sudo apt-get remove docker docker-engine docker.io containerd runc 如果apt-get报告没有安装这些软件包，那就没关系。 保留/var/lib/docker/的内容，包括图像，容器，卷(volumes)和网络。 Docker CE包现在称为docker-ce。
-Supported storage drivers Ubuntu上的Docker CE支持overlay2，aufs和btrfs存储驱动程序。
-对于Linux内核版本4及更高版本的新安装，支持overlay2并优先于aufs。 Docker CE默认使用overlay2存储驱动程序。如果您需要使用aufs，则需要手动配置它。见aufs
-Install Docker CE 使用存储库安装(Install using the repository) 在新主机上首次安装Docker CE之前，需要设置Docker存储库。之后，您可以从存储库安装和更新Docker。 Set up the repository">
-  <meta name="twitter:description" content="Get Docker CE for Ubuntu 要在Ubuntu上开始使用Docker CE，请确保满足先决条件，然后安装Docker。
-先决条件(Prerequisites) Docker EE 用户 要安装Docker Enterprise Edition（Docker EE），请转到获取Ubuntu的Docker EE而不是此主题。
-OS requirements 要安装Docker …">
+  <meta name="description" content="Get Docker CE for Ubuntu
+要在Ubuntu上开始使用Docker CE，请确保满足先决条件，然后安装Docker。">
+  <meta property="og:description" content="Get Docker CE for Ubuntu
+要在Ubuntu上开始使用Docker CE，请确保满足先决条件，然后安装Docker。">
+  <meta name="twitter:description" content="Get Docker CE for Ubuntu
+要在Ubuntu上开始使用Docker CE，请确保满足先决条件，然后安装Docker。">
   <meta name="author" content="WoolfBreathe"/>
   <link href="/img/favicon.png" rel="icon" type="image/x-icon" />
   <link rel="apple-touch-icon" href="/img/favicon.png"/>
@@ -65,15 +52,7 @@ OS requirements 要安装Docker …">
 <meta name="google-site-verification" content="oKxX4fOvB2yYmU02txZFChM93XQbESU4JaG3tNH9Hm8" />
 <meta name="baidu-site-verification" content="F5ojAyqaKU" />
 <meta name="keywords" content="DevOps, Docker">
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?d611849735f187dd788dc054908f7d7a";
-  var s = document.getElementsByTagName("script")[0];
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
+
 
 
 
@@ -90,7 +69,7 @@ var _hmt = _hmt || [];
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="/" title="WoolfBreathe">
-        <img src="img/avatar-icon.png" style="margin-top: -5px;height: 32px;" alt="WoolfBreathe">
+        <img src="/img/avatar-icon.png" style="margin-top: -5px;height: 32px;" alt="WoolfBreathe">
       </a>
     </div>
 
@@ -201,7 +180,7 @@ autocomplete('#aa-search-input',
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/20200317190406.png" ></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="/img/banner/photo-1522481889-27404a7ea14a.jpeg" ></div>
   
 
   <header class="header-section has-img">
@@ -253,8 +232,6 @@ autocomplete('#aa-search-input',
 
 
     
-
-
 
 <div class="container" role="main">
   <div class="row">
@@ -415,7 +392,6 @@ docker在本地没有找到hello-world镜像，也没有从docker仓库中拉取
 </code></pre></div></li>
 </ol>
 
-
           <h2>微信公众号</h2>
 <p>扫描下面的二维码关注我们的微信公众帐号，在微信公众帐号中回复◉加群◉即可加入到我们的 kubernetes 讨论群里面共同学习。</p>
 <img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/qrcode.png" alt="wechat-account-qrcode">
@@ -454,20 +430,9 @@ docker在本地没有找到hello-world镜像，也没有从docker仓库中拉取
 </div>
           
           
-            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
-    <center>
-    <a href="#" class="social-share-icon icon-weibo"></a>
-    <a href="#" class="social-share-icon icon-wechat"></a>
-    <a href="#" class="social-share-icon icon-twitter"></a>
-    <a href="#" class="social-share-icon icon-linkedin"></a>
-    <a href="#" class="social-share-icon icon-facebook"></a>
-    <a href="#" class="social-share-icon icon-qq"></a>
-    <a href="#" class="social-share-icon icon-qzone"></a>
-    </center>
-</div>
+            
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
 
           
         </article>
@@ -479,8 +444,6 @@ docker在本地没有找到hello-world镜像，也没有从docker仓库中拉取
 <ul style="margin-bottom: 25px;">
     
     <li><a href="/post/devops/docker/devops-docker-docker/">Docker</a></li>
-    
-    <li><a href="/post/devops/docker/devops-docker-layering-principle/">Docker分层原理</a></li>
     
     <li><a href="/post/devops/linux/devops-linux-rsync/">Linux Rsync 文件同步</a></li>
     
@@ -498,6 +461,8 @@ docker在本地没有找到hello-world镜像，也没有从docker仓库中拉取
     
     <li><a href="/post/devops/linux/devops-linux-php/">Linux安装PHP源码包</a></li>
     
+    <li><a href="/post/devops/linux/devops-linux-redis/">Linux安装Redis</a></li>
+    
 </ul>
 
         
@@ -511,23 +476,15 @@ docker在本地没有找到hello-world镜像，也没有从docker仓库中拉取
           
           
             <li class="next">
-              <a href="/post/math/2021-05-06-matrixanalysis/" data-toggle="tooltip" data-placement="top" title="Matrix Analysis">后一篇 &rarr;</a>
+              <a href="/post/devops/docker/devops-docker-command/" data-toggle="tooltip" data-placement="top" title="Docker 常用命令">后一篇 &rarr;</a>
             </li>
           
         </ul>
         
 
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-5376999672787220"
-            data-ad-slot="3700507799"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
+        
+        
   
         
     <div id="gitalk-container"></div>
@@ -638,17 +595,13 @@ docker在本地没有找到hello-world镜像，也没有从docker仓库中拉取
   </div>
 </footer>
 
-<script> renderMathInElement(document.body); </script>
 <script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag() { dataLayer.push(arguments); }
-  gtag('js', new Date());
-  gtag('config', 'UA-69668147-3');
+
+=======
 </script>
+>>>>>>> 399fb13c00b61c640f819f0855ce313cd2e0810c
 
 
 

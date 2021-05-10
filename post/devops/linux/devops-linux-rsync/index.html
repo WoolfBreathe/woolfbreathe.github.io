@@ -10,12 +10,6 @@
   <meta property="og:title" content="Linux Rsync 文件同步" />
   <meta name="twitter:title" content="Linux Rsync 文件同步" />
 
-  <meta name="description" content="安装 服务器配置 配置/etc/rsyncd.conf文件
-uid = root gid = root use chroot = no max connections = 2000 port = 8973 timeout = 900 log file = /var/run/rsyncd.log pid file = /var/run/rsyncd.pid lock file = /var/run/rsyncd.lock log format = %t%a%m%f%b commemt = rsync list = yes read only = yes write only = no # auth users = apprsync # secrets file = /etc/rsyncd.secret ignore errors = yes # hosts allow = 172.">
-  <meta property="og:description" content="安装 服务器配置 配置/etc/rsyncd.conf文件
-uid = root gid = root use chroot = no max connections = 2000 port = 8973 timeout = 900 log file = /var/run/rsyncd.log pid file = /var/run/rsyncd.pid lock file = /var/run/rsyncd.lock log format = %t%a%m%f%b commemt = rsync list = yes read only = yes write only = no # auth users = apprsync # secrets file = /etc/rsyncd.secret ignore errors = yes # hosts allow = 172.">
-  <meta name="twitter:description" content="安装 服务器配置 配置/etc/rsyncd.conf文件
-uid = root gid = root use chroot = no max connections = 2000 port = 8973 timeout = 900 log file = /var/run/rsyncd.log pid file = /var/run/rsyncd.pid lock file = …">
   <meta name="author" content="WoolfBreathe"/>
   <link href="/img/favicon.png" rel="icon" type="image/x-icon" />
   <link rel="apple-touch-icon" href="/img/favicon.png"/>
@@ -52,15 +46,7 @@ uid = root gid = root use chroot = no max connections = 2000 port = 8973 timeout
 <meta name="google-site-verification" content="oKxX4fOvB2yYmU02txZFChM93XQbESU4JaG3tNH9Hm8" />
 <meta name="baidu-site-verification" content="F5ojAyqaKU" />
 <meta name="keywords" content="DevOps, Linux">
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?d611849735f187dd788dc054908f7d7a";
-  var s = document.getElementsByTagName("script")[0];
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
+
 
 
 
@@ -77,7 +63,7 @@ var _hmt = _hmt || [];
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="/" title="WoolfBreathe">
-        <img src="img/avatar-icon.png" style="margin-top: -5px;height: 32px;" alt="WoolfBreathe">
+        <img src="/img/avatar-icon.png" style="margin-top: -5px;height: 32px;" alt="WoolfBreathe">
       </a>
     </div>
 
@@ -188,7 +174,7 @@ autocomplete('#aa-search-input',
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/20200317190406.png" ></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="/img/banner/photo-1522481889-27404a7ea14a.jpe" ></div>
   
 
   <header class="header-section has-img">
@@ -241,8 +227,6 @@ autocomplete('#aa-search-input',
 
     
 
-
-
 <div class="container" role="main">
   <div class="row">
 
@@ -278,9 +262,11 @@ autocomplete('#aa-search-input',
           
           
 
-          <h1 id="安装">安装</h1>
-<h1 id="服务器配置">服务器配置</h1>
-<p><strong>配置/etc/rsyncd.conf文件</strong></p>
+          <h2 id="安装">安装</h2>
+<h3 id="服务器配置">服务器配置</h3>
+<ol>
+<li>
+<p>配置/etc/rsyncd.conf文件</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#8be9fd;font-style:italic">uid</span> <span style="color:#ff79c6">=</span> root
 <span style="color:#8be9fd;font-style:italic">gid</span> <span style="color:#ff79c6">=</span> root
 use <span style="color:#8be9fd;font-style:italic">chroot</span> <span style="color:#ff79c6">=</span> no
@@ -310,18 +296,31 @@ auth <span style="color:#8be9fd;font-style:italic">users</span> <span style="col
 secrets <span style="color:#8be9fd;font-style:italic">file</span> <span style="color:#ff79c6">=</span> /etc/rsyncd.secret
 <span style="color:#8be9fd;font-style:italic">exclude</span><span style="color:#ff79c6">=</span> *.log .svn config.php auth.php gate/start_config.php *VO.php image_cache/*.jpg *.xlsx.json *.tpl.php
 
-</code></pre></div><p><strong>服务器端添加密钥文件</strong></p>
+</code></pre></div></li>
+<li>
+<p>服务器端添加密钥文件</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#34;web:123456&#34;</span> &gt;&gt; /etc/rsyncd.secret
-</code></pre></div><p><strong>修改文件权限</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">chmod 600 /etc/rsyncd.secret
-</code></pre></div><h1 id="客户端配置">客户端配置</h1>
-<p><strong>客户端添加密钥文件</strong></p>
+</code></pre></div></li>
+<li>
+<p>修改文件权限</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">chmod <span style="color:#bd93f9">600</span> /etc/rsyncd.secret
+</code></pre></div></li>
+</ol>
+<h3 id="客户端配置">客户端配置</h3>
+<ol>
+<li>
+<p>客户端添加密钥文件</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#34;123456&#34;</span> &gt;&gt; /etc/rsyncd.secret
-</code></pre></div><p><strong>修改文件权限</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">chmod 600 /etc/rsyncd.secret
-</code></pre></div><p><strong>客户端同步命令</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">sudo rsync -vzrtopg --delete --ignore-errors /home/vagrant/code/production/microecology/* pailisi@47.95.249.62::microecology --port=82 --password-file=/etc/rsyncd.secret --exclude-from=/home/vagrant/exclude.list
-</code></pre></div>
+</code></pre></div></li>
+<li>
+<p>修改文件权限</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">chmod <span style="color:#bd93f9">600</span> /etc/rsyncd.secret
+</code></pre></div></li>
+<li>
+<p>客户端同步命令</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo rsync -vzrtopg --delete --ignore-errors /home/vagrant/code/production/microecology/* pailisi@47.95.249.62::microecology --port<span style="color:#ff79c6">=</span><span style="color:#bd93f9">82</span> --password-file<span style="color:#ff79c6">=</span>/etc/rsyncd.secret --exclude-from<span style="color:#ff79c6">=</span>/home/vagrant/exclude.list
+</code></pre></div></li>
+</ol>
 
           <h2>微信公众号</h2>
 <p>扫描下面的二维码关注我们的微信公众帐号，在微信公众帐号中回复◉加群◉即可加入到我们的 kubernetes 讨论群里面共同学习。</p>
@@ -361,20 +360,9 @@ secrets <span style="color:#8be9fd;font-style:italic">file</span> <span style="c
 </div>
           
           
-            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
-    <center>
-    <a href="#" class="social-share-icon icon-weibo"></a>
-    <a href="#" class="social-share-icon icon-wechat"></a>
-    <a href="#" class="social-share-icon icon-twitter"></a>
-    <a href="#" class="social-share-icon icon-linkedin"></a>
-    <a href="#" class="social-share-icon icon-facebook"></a>
-    <a href="#" class="social-share-icon icon-qq"></a>
-    <a href="#" class="social-share-icon icon-qzone"></a>
-    </center>
-</div>
+            
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
 
           
         </article>
@@ -424,17 +412,9 @@ secrets <span style="color:#8be9fd;font-style:italic">file</span> <span style="c
         </ul>
         
 
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-5376999672787220"
-            data-ad-slot="3700507799"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
+        
+        
   
         
     <div id="gitalk-container"></div>
@@ -545,17 +525,13 @@ secrets <span style="color:#8be9fd;font-style:italic">file</span> <span style="c
   </div>
 </footer>
 
-<script> renderMathInElement(document.body); </script>
 <script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag() { dataLayer.push(arguments); }
-  gtag('js', new Date());
-  gtag('config', 'UA-69668147-3');
+
+=======
 </script>
+>>>>>>> 399fb13c00b61c640f819f0855ce313cd2e0810c
 
 
 

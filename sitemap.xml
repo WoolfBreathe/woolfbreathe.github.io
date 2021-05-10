@@ -30,12 +30,17 @@
   
   <url>
     <loc>/tags/devops/</loc>
-    <lastmod>2021-04-19T00:00:00+00:00</lastmod>
+    <lastmod>2021-04-21T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/docker/</loc>
-    <lastmod>2021-04-19T00:00:00+00:00</lastmod>
+    <lastmod>2021-04-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/devops/docker/devops-docker-command/</loc>
+    <lastmod>2021-04-21T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -46,11 +51,6 @@
   <url>
     <loc>/post/devops/docker/devops-docker-docker/</loc>
     <lastmod>2021-04-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/devops/docker/devops-docker-layering-principle/</loc>
-    <lastmod>2021-04-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>

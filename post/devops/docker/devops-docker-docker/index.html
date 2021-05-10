@@ -11,9 +11,11 @@
   <meta name="twitter:title" content="Docker" />
 
   <meta name="description" content="Docker 架构
-Docker 使用 C/S （客户端/服务器）体系的架构，Docker 客户端与 Docker 守护进程通信，Docker 守护进程负责构建，运行和分发 Docker 容器。Docker 客户端和守护进程可以在同一个系统上运行，也可以将 Docker 客户端连接到远程 Docker 守护进程。Docker 客户端和守护进程使用 REST API 通过UNIX套接字或网络接口进行通信。 docker structrue ​​">
+Docker 使用 C/S （客户端/服务器）体系的架构，Docker 客户端与 Docker 守护进程通信，Docker 守护进程负责构建，运行和分发 Docker 容器。Docker 客户端和守护进程可以在同一个系统上运行，也可以将 Docker 客户端连接到远程 Docker 守护进程。Docker 客户端和守护进程使用 REST API 通过UNIX套接字或网络接口进行通信。
+">
   <meta property="og:description" content="Docker 架构
-Docker 使用 C/S （客户端/服务器）体系的架构，Docker 客户端与 Docker 守护进程通信，Docker 守护进程负责构建，运行和分发 Docker 容器。Docker 客户端和守护进程可以在同一个系统上运行，也可以将 Docker 客户端连接到远程 Docker 守护进程。Docker 客户端和守护进程使用 REST API 通过UNIX套接字或网络接口进行通信。 docker structrue ​​">
+Docker 使用 C/S （客户端/服务器）体系的架构，Docker 客户端与 Docker 守护进程通信，Docker 守护进程负责构建，运行和分发 Docker 容器。Docker 客户端和守护进程可以在同一个系统上运行，也可以将 Docker 客户端连接到远程 Docker 守护进程。Docker 客户端和守护进程使用 REST API 通过UNIX套接字或网络接口进行通信。
+">
   <meta name="twitter:description" content="Docker 架构
 Docker 使用 C/S （客户端/服务器）体系的架构，Docker 客户端与 Docker 守护进程通信，Docker 守护进程负责构建，运行和分发 Docker 容器。Docker 客户端和守护进程可以在同一个系统上运行，也可以将 Docker 客户端连接到远程 Docker 守护进程。Docker 客户端和守护进程使用 REST API 通过UNIX套接字或网络接口进行 …">
   <meta name="author" content="WoolfBreathe"/>
@@ -52,15 +54,7 @@ Docker 使用 C/S （客户端/服务器）体系的架构，Docker 客户端与
 <meta name="google-site-verification" content="oKxX4fOvB2yYmU02txZFChM93XQbESU4JaG3tNH9Hm8" />
 <meta name="baidu-site-verification" content="F5ojAyqaKU" />
 <meta name="keywords" content="DevOps, Docker">
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?d611849735f187dd788dc054908f7d7a";
-  var s = document.getElementsByTagName("script")[0];
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
+
 
 
 
@@ -77,7 +71,7 @@ var _hmt = _hmt || [];
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="/" title="WoolfBreathe">
-        <img src="img/avatar-icon.png" style="margin-top: -5px;height: 32px;" alt="WoolfBreathe">
+        <img src="/img/avatar-icon.png" style="margin-top: -5px;height: 32px;" alt="WoolfBreathe">
       </a>
     </div>
 
@@ -188,7 +182,7 @@ autocomplete('#aa-search-input',
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="/img/posts/24327236_2084467321787075_5515671519205785600_n.jpg" ></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="/img/banner/photo-1435777940218-be0b632d06db.jpeg" ></div>
   
 
   <header class="header-section has-img">
@@ -241,8 +235,6 @@ autocomplete('#aa-search-input',
 
     
 
-
-
 <div class="container" role="main">
   <div class="row">
 
@@ -268,15 +260,18 @@ autocomplete('#aa-search-input',
   <nav id="TableOfContents">
   <ul>
     <li><a href="#docker-架构">Docker 架构</a></li>
-    <li><a href="#常用命令">常用命令</a>
+    <li><a href="#docker的技术组件">Docker的技术组件</a></li>
+    <li><a href="#核心概念">核心概念</a>
       <ul>
-        <li><a href="#执行流程">执行流程</a></li>
-        <li><a href="#容器">容器</a></li>
-        <li><a href="#镜像">镜像</a></li>
-        <li><a href="#定制镜像流程">定制镜像流程</a></li>
-        <li><a href="#dockerfile定制镜像">DockerFile定制镜像</a></li>
-        <li><a href="#迁移镜像">迁移镜像</a></li>
-        <li><a href="#私有仓库">私有仓库</a></li>
+        <li><a href="#1-镜像image">1. 镜像(Image)</a></li>
+        <li><a href="#2-容器container">2. 容器(Container)</a></li>
+        <li><a href="#3-仓库repository">3. 仓库(Repository)</a></li>
+      </ul>
+    </li>
+    <li><a href="#联合文件系统">联合文件系统</a></li>
+    <li><a href="#镜像的分层结构">镜像的分层结构</a>
+      <ul>
+        <li><a href="#可写的容器层">可写的容器层</a></li>
       </ul>
     </li>
   </ul>
@@ -298,151 +293,117 @@ autocomplete('#aa-search-input',
           
 
           <h2 id="docker-架构">Docker 架构</h2>
-<p>Docker 使用 C/S （客户端/服务器）体系的架构，Docker 客户端与 Docker 守护进程通信，Docker 守护进程负责构建，运行和分发 Docker 容器。Docker 客户端和守护进程可以在同一个系统上运行，也可以将 Docker 客户端连接到远程 Docker 守护进程。Docker 客户端和守护进程使用 REST API 通过UNIX套接字或网络接口进行通信。 docker structrue ​​</p>
-<p><img src="/img/posts/DevOps/Docker/docker-structrue.png" alt="PHP-FPM动态页面的过程!"></p>
-<blockquote>
-<p>Docker Damon：dockerd，用来监听 Docker API 的请求和管理 Docker 对象，比如镜像、容器、网络和 Volume。
-Docker Client：docker，docker client 是我们和 Docker 进行交互的最主要的方式方法，比如我们可以通过 docker run 命令来运行一个容器，然后我们的这个 client 会把命令发送给上面的 Dockerd，让他来做真正事情。
-Docker Registry：用来存储 Docker 镜像的仓库，Docker Hub 是 Docker 官方提供的一个公共仓库，而且 Docker 默认也是从 4. Docker Hub 上查找镜像的，当然你也可以很方便的运行一个私有仓库，当我们使用 docker pull 或者 docker run 命令时，就会从我们配置的 Docker 镜像仓库中去拉取镜像，使用 docker push 命令时，会将我们构建的镜像推送到对应的镜像仓库中。
-Images：镜像，镜像是一个只读模板，带有创建 Docker 容器的说明，一般来说的，镜像会基于另外的一些基础镜像并加上一些额外的自定义功能。比如，你可以构建一个基于 Centos 的镜像，然后在这个基础镜像上面安装一个 Nginx 服务器，这样就可以构成一个属于我们自己的镜像了。
-Containers：容器，容器是一个镜像的可运行的实例，可以使用 Docker REST API 或者 CLI 来操作容器，容器的实质是进程，但与直接在宿主执行的进程不同，容器进程运行于属于自己的独立的命名空间。因此容器可以拥有自己的 root 文件系统、自己的网络配置、自己的进程空间，甚至自己的用户 ID 空间。容器内的进程是运行在一个隔离的环境里，使用起来，就好像是在一个独立于宿主的系统下操作一样。这种特性使得容器封装的应用比直接在宿主运行更加安全。
-底层技术支持：Namespaces（做隔离）、CGroups（做资源限制）、UnionFS（镜像和容器的分层） the-underlying-technology Docker 底层架构分析</p>
-</blockquote>
-<h2 id="常用命令">常用命令</h2>
-<h3 id="执行流程">执行流程</h3>
-<p>当利用docker run来创建容器时，Docker 在后台运行的标准操作包括：</p>
+<p>Docker 使用 C/S （客户端/服务器）体系的架构，Docker 客户端与 Docker 守护进程通信，Docker 守护进程负责构建，运行和分发 Docker 容器。Docker 客户端和守护进程可以在同一个系统上运行，也可以将 Docker 客户端连接到远程 Docker 守护进程。Docker 客户端和守护进程使用 REST API 通过UNIX套接字或网络接口进行通信。</p>
+<p><img src="/img/posts/DevOps/Docker/docker-structrue.png" alt="docker-structrue"></p>
+<h2 id="docker的技术组件">Docker的技术组件</h2>
 <ol>
-<li>检查本地是否存在指定的镜像，不存在就从公有仓库下载</li>
-<li>利用镜像创建并启动一个容器</li>
-<li>分配一个文件系统，并在只读的镜像层外面挂载一层可读写层</li>
-<li>从宿主主机配置的网桥接口中桥接一个虚拟接口到容器中去</li>
-<li>从地址池配置一个 ip 地址给容器</li>
-<li>执行用户指定的应用程序</li>
-<li>执行完毕后容器被终止</li>
+<li>一个原生的 Linux 容器格式，Docker 中称为 libcontainer。</li>
+<li>Linux 内核的命名空间(namespace)，用于隔离文件系统、进程和网络。</li>
+<li>文件系统隔离：每个容器都有自己的 root 文件系统。</li>
+<li>进程隔离：每个容器都运行在自己的进程环境中。</li>
+<li>网络隔离：容器间的虚拟网络接口和IP地址都是分开的。</li>
+<li>资源隔离和分组：使用 cgroups(即control group，Linux 的内核特性之一)将 CPU 和内存之类的资源独立分配给每个 Docker 容器。</li>
+<li>写时复制(Copy on write)：文件系统都是通过写时复制创建的，这就意味着文件系统是分层的、快速的，而且占用磁盘空间更小。</li>
+<li>日志：容器产生的STDOUT、STDERR和STDIN这些IO流都会被收集并计入日志。用来进行日志分割和故障排错。</li>
+<li>交互式shell：用户可以创建一个伪 tty 终端，将其连接到STDIN，为容器提供一个交互式shell。</li>
 </ol>
-<h3 id="容器">容器</h3>
-<p>查看正在运行的容器</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker ps -a
-
-docker container ls
-</code></pre></div><p>查看镜像、容器、数据卷所占用的空间</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker system df
-</code></pre></div><p>创建并运行</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker container run -it ubuntu:16.04 /bin/bash
-</code></pre></div><p>进入容器</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker <span style="color:#8be9fd;font-style:italic">exec</span> -it 容器ID /bin/bash
-</code></pre></div><p>启动容器</p>
-<p>注意:
-docker container run ubuntu:16.04 创建的容器不能使用start启动
-docker container run -it ubuntu:16.04 /bin/bash 创建的容器可以使用start启动</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker container start 容器ID
-</code></pre></div><p>停止容器</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker container stop 容器ID
-</code></pre></div><p>删除指定容器</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker container rm 容器ID
-</code></pre></div><p>清除停止的容器(谨慎使用!)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker container prune
-</code></pre></div><h3 id="镜像">镜像</h3>
-<p>查看已有镜像</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker image ls
-</code></pre></div><p>删除镜像</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker image rm <span style="color:#ff79c6">[</span>选项<span style="color:#ff79c6">]</span> &lt;镜像1&gt; <span style="color:#ff79c6">[</span>&lt;镜像2&gt; ...<span style="color:#ff79c6">]</span>
-</code></pre></div><h3 id="定制镜像流程">定制镜像流程</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker run --name webserver -d -p 80:80 nginx
-</code></pre></div><p>添加修改</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ docker <span style="color:#8be9fd;font-style:italic">exec</span> -it webserver bash
-root@3729b97e8226:/# <span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#39;&lt;h1&gt;Hello, Docker!&lt;/h1&gt;&#39;</span> &gt; /usr/share/nginx/html/index.html
-root@3729b97e8226:/# <span style="color:#8be9fd;font-style:italic">exit</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ docker diff webserver
-C /root
-A /root/.bash_history
-C /run
-C /usr
-C /usr/share
-C /usr/share/nginx
-C /usr/share/nginx/html
-C /usr/share/nginx/html/index.html
-C /var
-C /var/cache
-C /var/cache/nginx
-A /var/cache/nginx/client_temp
-A /var/cache/nginx/fastcgi_temp
-A /var/cache/nginx/proxy_temp
-A /var/cache/nginx/scgi_temp
-A /var/cache/nginx/uwsgi_temp
-</code></pre></div><p>提交修改生成新镜像</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ docker commit <span style="color:#f1fa8c">\
-</span><span style="color:#f1fa8c"></span>    --author <span style="color:#f1fa8c">&#34;海马学院&#34;</span> <span style="color:#f1fa8c">\
-</span><span style="color:#f1fa8c"></span>    --message <span style="color:#f1fa8c">&#34;修改了默认首页&#34;</span> <span style="color:#f1fa8c">\
-</span><span style="color:#f1fa8c"></span>    webserver <span style="color:#f1fa8c">\
-</span><span style="color:#f1fa8c"></span>    nginx:v2
-sha256:07e33465974800ce65751acc279adc6ed2dc5ed4e0838f8b86f0c87aa1795214
-</code></pre></div><p>查看提交记录</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ docker <span style="color:#8be9fd;font-style:italic">history</span> nginx:v2
-IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
-07e334659748        <span style="color:#bd93f9">54</span> seconds ago      nginx -g daemon off;                            <span style="color:#bd93f9">95</span> B                修改了默认网页
-e43d811ce2f4        <span style="color:#bd93f9">4</span> weeks ago         /bin/sh -c <span style="color:#6272a4">#(nop)  CMD [&#34;nginx&#34; &#34;-g&#34; &#34;daemon    0 B</span>
-&lt;missing&gt;           <span style="color:#bd93f9">4</span> weeks ago         /bin/sh -c <span style="color:#6272a4">#(nop)  EXPOSE 443/tcp 80/tcp        0 B</span>
-&lt;missing&gt;           <span style="color:#bd93f9">4</span> weeks ago         /bin/sh -c ln -sf /dev/stdout /var/log/nginx/   <span style="color:#bd93f9">22</span> B
-&lt;missing&gt;           <span style="color:#bd93f9">4</span> weeks ago         /bin/sh -c apt-key adv --keyserver hkp://pgp.   58.46 MB
-&lt;missing&gt;           <span style="color:#bd93f9">4</span> weeks ago         /bin/sh -c <span style="color:#6272a4">#(nop)  ENV NGINX_VERSION=1.11.5-1   0 B</span>
-&lt;missing&gt;           <span style="color:#bd93f9">4</span> weeks ago         /bin/sh -c <span style="color:#6272a4">#(nop)  MAINTAINER NGINX Docker Ma   0 B</span>
-&lt;missing&gt;           <span style="color:#bd93f9">4</span> weeks ago         /bin/sh -c <span style="color:#6272a4">#(nop)  CMD [&#34;/bin/bash&#34;]            0 B</span>
-&lt;missing&gt;           <span style="color:#bd93f9">4</span> weeks ago         /bin/sh -c <span style="color:#6272a4">#(nop) ADD file:23aa4f893e3288698c   123 MB</span>
-</code></pre></div><p>启用新的容器</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker run --name webserv2 -d -p 81:80 nginx:v2
-</code></pre></div><h3 id="dockerfile定制镜像">DockerFile定制镜像</h3>
-<p>FROM 指定基础镜像
-RUN 执行命令(每一个RUN建立一层，执行结束后，COMMEIT 这一层的修改，构成新的镜像)
-COPY 复制上下文文件</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">FROM nginx
-RUN <span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#39;&lt;h1&gt;Hello, Docker!&lt;/h1&gt;&#39;</span> &gt; /usr/share/nginx/html/index.html <span style="color:#ff79c6">&amp;&amp;</span> <span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#39;&lt;h1&gt;Hello, Docker!&lt;/h1&gt;&#39;</span> &gt; /usr/share/nginx/html/home.html
-COPY ./package.json /app/
-</code></pre></div><p>构建镜像</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ docker build -t nginx:v3 .
-Sending build context to Docker daemon 2.048 kB
-Step <span style="color:#bd93f9">1</span> : FROM nginx
- ---&gt; e43d811ce2f4
-Step <span style="color:#bd93f9">2</span> : RUN <span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#39;&lt;h1&gt;Hello, Docker!&lt;/h1&gt;&#39;</span> &gt; /usr/share/nginx/html/index.html
- ---&gt; Running in 9cdc27646c7b
- ---&gt; 44aa4490ce2c
-Removing intermediate container 9cdc27646c7b
-Successfully built 44aa4490ce2c
-</code></pre></div><h3 id="迁移镜像">迁移镜像</h3>
-<p>Docker 还提供了docker load和docker save命令，用以将镜像保存为一个 tar 文件，然后传输到另一个位置上，再加载进来。这是在没有 Docker Registry 时的做法，现在已经不推荐，镜像迁移应该直接使用 Docker Registry，无论是直接使用 Docker Hub 还是使用内网私有 Registry 都可以。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker save alpine | gzip &gt; alpine-latest.tar.gz
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ docker load -i alpine-latest.tar.gz
-Loaded image: alpine:latest
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker save &lt;镜像名&gt; | bzip2 | pv | ssh &lt;用户名&gt;@&lt;主机名&gt; <span style="color:#f1fa8c">&#39;cat | docker load&#39;</span>
-</code></pre></div><h3 id="私有仓库">私有仓库</h3>
-<p>docker-registry是官方提供的工具，可以用于构建私有的镜像仓库。本文内容基于 docker-registry v2.x 版本。你可以通过获取官方 registry 镜像来运行。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker run -d <span style="color:#f1fa8c">\
-</span><span style="color:#f1fa8c"></span>    -p 27018:5000 <span style="color:#f1fa8c">\
-</span><span style="color:#f1fa8c"></span>    -v /home/vagrant/opt/data/registry:/var/lib/registry <span style="color:#f1fa8c">\
-</span><span style="color:#f1fa8c"></span>    registry
-</code></pre></div><p>如果你不想使用 127.0.0.1:5000 作为仓库地址，比如想让本网段的其他主机也能把镜像推送到私有仓库。你就得把例如 192.168.199.100:5000 这样的内网地址作为私有仓库地址，这时你会发现无法成功推送镜像。</p>
-<p>这是因为 Docker 默认不允许非 HTTPS 方式推送镜像。我们可以通过 Docker 的配置选项来取消这个限制。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">{</span>
-    <span style="color:#f1fa8c">&#34;registry-mirrors&#34;</span>: <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;https://alzgoonw.mirror.aliyuncs.com&#34;</span><span style="color:#ff79c6">]</span>,
-    <span style="color:#f1fa8c">&#34;insecure-registries&#34;</span>: <span style="color:#ff79c6">[</span>
-        <span style="color:#f1fa8c">&#34;192.168.10.10:27018&#34;</span>,
-        <span style="color:#f1fa8c">&#34;10.0.2.15:27018&#34;</span>,
-        <span style="color:#f1fa8c">&#34;192.168.31.31:27018&#34;</span>,
-        <span style="color:#f1fa8c">&#34;192.168.31.36:27018&#34;</span>,
-        <span style="color:#f1fa8c">&#34;0.0.0.0:27018&#34;</span>
-    <span style="color:#ff79c6">]</span>
-<span style="color:#ff79c6">}</span>
-</code></pre></div><p>重启docker</p>
-<p>使用docker tag来标记一个镜像，然后推送它到仓库。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker tag hello-world:latest 0.0.0.0:27018/hello-world:latest
-</code></pre></div><p>推送镜像</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker push 10.0.2.15:27018/hello-world:latest
-</code></pre></div><p>检查仓库中的镜像</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ curl 127.0.0.1:27018/v2/_catalog
-<span style="color:#ff79c6">{</span><span style="color:#f1fa8c">&#34;repositories&#34;</span>:<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;ubuntu&#34;</span><span style="color:#ff79c6">]}</span>
-</code></pre></div><p>拉取镜像</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker pull 192.168.31.36:27018/hello-world:latest
-</code></pre></div>
+<h2 id="核心概念">核心概念</h2>
+<h3 id="1-镜像image">1. 镜像(Image)</h3>
+<p>Docker镜像（Image）类似与虚拟机的镜像，可以将他理解为一个面向Docker引擎的只读模板，包含了文件系统。</p>
+<p>例如：一个镜像可以完全包含了Ubuntu操作系统环境，可以把它称作一个Ubuntu镜像。镜像也可以安装了Apache应用程序（或其他软件），可以把它称为一个Apache镜像。</p>
+<p>镜像是创建Docker容器的基础，通过版本管理和增量的文件系统，Docker提供了一套十分简单的机制来创建和更新现有的镜像。
+用户可以从网上下载一个已经做好的应用镜像，并通过命令直接使用。</p>
+<p>总之，应用运行是需要环境的，而镜像就是来提供这种环境。</p>
+<h3 id="2-容器container">2. 容器(Container)</h3>
+<p>Docker容器（Container）类似于一个轻量级的沙箱子（因为Docker是基于Linux内核的虚拟技术，所以消耗资源十分少），Docker利用容器来运行和隔离应用。</p>
+<p>容器是从镜像创建的应用运行实例，可以将其启动、开始、停止、删除，而这些容器都是相互隔离、互不可见的。</p>
+<p>可以吧每个容器看作一个简易版的Linux系统环境（包括了root用户权限、进程空间、用户空间和网络空间），以及与运行在其中的应用程序打包而成的应用盒子。</p>
+<p>镜像自身是只读的。容器从镜像启动的时候，Docker会在镜像的最上层创建一个可写层，镜像本身将保持不变。就像用ISO装系统之后，ISO并没有什么变化一样。</p>
+<h3 id="3-仓库repository">3. 仓库(Repository)</h3>
+<p>Docker仓库（Repository）类似与代码仓库，是Docker集中存放镜像文件的场所。</p>
+<p>有时候会看到有资料将Docker仓库和注册服务器（Registry）混为一谈，并不严格区分。实际上，注册服务器是存放仓库的地方，其上往往存放着多个仓库。每个仓库集中存放某一类镜像，往往包括多个镜像文件，通过不同的标签（tag）来进行区分。例如存放Ubuntu操作系统镜像的仓库，称为Ubuntu仓库，其中可能包括14.04,12.04等不同版本的镜像。</p>
+<p>根据存储的镜像公开分享与否，Docker仓库分为公开仓库（Public）和私有仓库（Private）两种形式。</p>
+<p>目前，最大的公开仓库是Docker Hub，存放了数量庞大的镜像供用户下载。国内的公开仓库包括Docker Pool等，可以提供稳定的国内访问。山东理工大学开源社区什么时候搞个这个啊，可以提上进程。</p>
+<p>如果用户不希望公开分享自己的镜像文件，Docker也支持用户在本地网络内创建一个只能自己访问的私有仓库。</p>
+<p>当用户创建了自己的镜像之后就可以使用push明亮将它上传到指定的公有或则私有仓库。这样用户下次在另一台机器上使用该镜像时，只需将其从仓库pull下来就可以了。</p>
+<p>Docker利用仓库管理镜像的设计理念甚至命令和git非常相似，也就意味着非常好上手。</p>
+<h2 id="联合文件系统">联合文件系统</h2>
+<p>典型的Linux启动到运行需要两个FS，bootfs + rootfs，如下图：</p>
+<p><img src="/img/posts/DevOps/Docker/file-system.jpg" alt="file-system"></p>
+<ol>
+<li>
+<p>rootfs</p>
+<p>内核空间是 kernel，Linux 刚启动时会加载 bootfs 文件系统，之后 bootfs 会被卸载掉。用户空间的文件系统是 rootfs，包含我们熟悉的 /dev, /proc, /bin 等目录。</p>
+<p>对于 base 镜像来说，底层直接用 Host 的 kernel，自己只需要提供 rootfs 就行了。</p>
+<p>而对于一个精简的 OS，rootfs 可以很小，只需要包括最基本的命令、工具和程序库就可以了。相比其他 Linux 发行版，CentOS 的 rootfs 已经算臃肿的了，alpine 还不到 10MB。</p>
+<p>我们平时安装的 CentOS 除了 rootfs 还会选装很多软件、服务、图形桌面等，需要好几个 GB 就不足为奇了。</p>
+</li>
+<li>
+<p>bootfs</p>
+<p>bootfs (boot file system) 主要包含 bootloader 和 kernel, bootloader主要是引导加载kernel, 当boot成功后 kernel 被加载到内存中后 bootfs就被umount了.</p>
+<p>rootfs (root file system) 包含的就是典型 Linux 系统中的 /dev, /proc, /bin, /etc 等标准目录和文件。</p>
+<p>由此可见对于不同的linux发行版, bootfs基本是一致的, rootfs会有差别, 因此不同的发行版可以公用bootfs。</p>
+<p>比如 Ubuntu 14.04 使用 upstart 管理服务，apt 管理软件包；而 CentOS 7 使用 systemd 和 yum。这些都是用户空间上的区别，Linux kernel 差别不大。</p>
+<p>所以 Docker 可以同时支持多种 Linux镜像，模拟出多种操作系统环境。</p>
+</li>
+<li>
+<p>kernel</p>
+<blockquote>
+<p>base 镜像只是在用户空间与发行版一致，kernel 版本与发型版是不同的。</p>
+</blockquote>
+<p>CentOS 7 使用 3.x.x 的 kernel，如果 Docker Host 是 Ubuntu 16.04，那么在 CentOS 容器中使用的实际是是 Host 4.x.x 的 kernel。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">root@ubuntu:~# uname -r
+4.4.0-62-generic
+root@ubuntu:~# docker run -ti centos /bin/bash
+<span style="color:#ff79c6">[</span>root@06f13ef13853 /<span style="color:#ff79c6">]</span><span style="color:#6272a4"># uname -r</span>
+4.4.0-62-generic
+</code></pre></div><blockquote>
+<p>容器只能使用 Host 的 kernel，并且不能修改。</p>
+</blockquote>
+<p>所有容器都共用 host 的 kernel，在容器中没办法对 kernel 升级。如果容器对 kernel 版本有要求（比如应用只能在某个 kernel 版本下运行），则不建议用容器，这种场景虚拟机可能更合适。</p>
+</li>
+</ol>
+<h2 id="镜像的分层结构">镜像的分层结构</h2>
+<p>Docker 支持通过扩展现有镜像，创建新的镜像。</p>
+<p>实际上，Docker Hub 中 99% 的镜像都是通过在 base 镜像中安装和配置需要的软件构建出来的。比如我们现在构建一个新的镜像，Dockerfile 如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># Version: 0.0.1</span>
+<span style="color:#6272a4"># 1.新镜像不再是从 scratch 开始，而是直接在 Debian base 镜像上构建</span>
+FROM debian
+MAINTAINER wzlinux
+<span style="color:#6272a4"># 2.安装 emacs 编辑器</span>
+RUN apt-get update <span style="color:#ff79c6">&amp;&amp;</span> apt-get install -y emacs
+<span style="color:#6272a4"># 3.安装 apache2</span>
+RUN apt-get install -y apache2  
+<span style="color:#6272a4"># 4.容器启动时运行 bash</span>
+CMD <span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#34;/bin/bash&#34;</span><span style="color:#ff79c6">]</span>
+</code></pre></div><p>构建过程如下图所示：
+<img src="/img/posts/DevOps/Docker/462718f3cd35608c20481b33b09db020.png" alt="build-process"></p>
+<p>新镜像是从 base 镜像一层一层叠加生成的。每安装一个软件，就在现有镜像的基础上增加一层。</p>
+<p>采用这种分层结构最大的一个好处就是 - 共享资源。</p>
+<p>比如：有多个镜像都从相同的 base 镜像构建而来，那么 Docker Host 只需在磁盘上保存一份 base 镜像；同时内存中也只需加载一份 base 镜像，就可以为所有容器服务了。而且镜像的每一层都可以被共享，我们将在后面更深入地讨论这个特性。</p>
+<p>如果多个容器共享一份基础镜像，当某个容器修改了基础镜像的内容，比如 /etc 下的文件，这时其他容器的 /etc 不会被修改
+修改会被限制在单个容器内。</p>
+<p>这就是我们接下来要说的容器 Copy-on-Write 特性。</p>
+<ol>
+<li>新数据会直接存放在最上面的容器层。</li>
+<li>修改现有数据会先从镜像层将数据复制到容器层，修改后的数据直接保存在容器层中，镜像层保持不变。</li>
+<li>如果多个层中有命名相同的文件，用户只能看到最上面那层中的文件。</li>
+</ol>
+<h3 id="可写的容器层">可写的容器层</h3>
+<p>当容器启动时，一个新的可写层被加载到镜像的顶部。这一层通常被称作“容器层”，“容器层”之下的都叫“镜像层”。</p>
+<p>典型的Linux在启动后，首先将 rootfs 置为 readonly, 进行一系列检查, 然后将其切换为 “readwrite” 供用户使用。在docker中，起初也是将 rootfs 以readonly方式加载并检查，然而接下来利用 union mount 的将一个 readwrite 文件系统挂载在 readonly 的rootfs之上，并且允许再次将下层的 file system设定为readonly 并且向上叠加, 这样一组readonly和一个writeable的结构构成一个container的运行目录, 每一个被称作一个Layer。如下图所示。</p>
+<p><img src="/img/posts/DevOps/Docker/bdf6de9d0071f46b259889fca7f333a6.jpg" alt="copy-on-Write"></p>
+<p>所有对容器的改动，无论添加、删除、还是修改文件都只会发生在容器层中。只有容器层是可写的，容器层下面的所有镜像层都是只读的。</p>
+<p>下面我们深入讨论容器层的细节。</p>
+<p>镜像层数量可能会很多，所有镜像层会联合在一起组成一个统一的文件系统。如果不同层中有一个相同路径的文件，比如 /a，上层的 /a 会覆盖下层的 /a，也就是说用户只能访问到上层中的文件 /a。在容器层中，用户看到的是一个叠加之后的文件系统。</p>
+<ol>
+<li>添加文件：在容器中创建文件时，新文件被添加到容器层中。</li>
+<li>读取文件：在容器中读取某个文件时，Docker 会从上往下依次在各镜像层中查找此文件。一旦找到，立即将其复制到容器层，然后打开并读入内存。</li>
+<li>修改文件：在容器中修改已存在的文件时，Docker 会从上往下依次在各镜像层中查找此文件。一旦找到，立即将其复制到容器层，然后修改之。</li>
+<li>删除文件：在容器中删除文件时，Docker 也是从上往下依次在镜像层中查找此文件。找到后，会在容器层中记录下此删除操作。</li>
+</ol>
+<p>只有当需要修改时才复制一份数据，这种特性被称作 Copy-on-Write。可见，容器层保存的是镜像变化的部分，不会对镜像本身进行任何修改。</p>
+<p>这样就解释了我们前面提出的问题：容器层记录对镜像的修改，所有镜像层都是只读的，不会被容器修改，所以镜像可以被多个容器共享。</p>
 
           <h2>微信公众号</h2>
 <p>扫描下面的二维码关注我们的微信公众帐号，在微信公众帐号中回复◉加群◉即可加入到我们的 kubernetes 讨论群里面共同学习。</p>
@@ -482,20 +443,9 @@ Loaded image: alpine:latest
 </div>
           
           
-            <div class="social-share" data-initialized="true" style="margin-bottom: 20px;margin-top:20px;">
-    <center>
-    <a href="#" class="social-share-icon icon-weibo"></a>
-    <a href="#" class="social-share-icon icon-wechat"></a>
-    <a href="#" class="social-share-icon icon-twitter"></a>
-    <a href="#" class="social-share-icon icon-linkedin"></a>
-    <a href="#" class="social-share-icon icon-facebook"></a>
-    <a href="#" class="social-share-icon icon-qq"></a>
-    <a href="#" class="social-share-icon icon-qzone"></a>
-    </center>
-</div>
+            
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/css/share.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/social-share.js/1.0.16/js/social-share.min.js"></script>
+
 
           
         </article>
@@ -505,8 +455,6 @@ Loaded image: alpine:latest
 
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
-    
-    <li><a href="/post/devops/docker/devops-docker-layering-principle/">Docker分层原理</a></li>
     
     <li><a href="/post/devops/linux/devops-linux-rsync/">Linux Rsync 文件同步</a></li>
     
@@ -526,6 +474,8 @@ Loaded image: alpine:latest
     
     <li><a href="/post/devops/linux/devops-linux-redis/">Linux安装Redis</a></li>
     
+    <li><a href="/post/devops/linux/devops-linux-homestead/">Homestead(Windows系统Laravel环境搭建)</a></li>
+    
 </ul>
 
         
@@ -534,7 +484,7 @@ Loaded image: alpine:latest
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="/post/devops/docker/devops-docker-layering-principle/" data-toggle="tooltip" data-placement="top" title="Docker分层原理">&larr; 前一篇</a>
+              <a href="/post/machinelearning/machinelearning-stanford/" data-toggle="tooltip" data-placement="top" title="斯坦福大学2014机器学习学习笔记">&larr; 前一篇</a>
             </li>
           
           
@@ -545,17 +495,9 @@ Loaded image: alpine:latest
         </ul>
         
 
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-5376999672787220"
-            data-ad-slot="3700507799"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
+        
+        
   
         
 
@@ -647,17 +589,13 @@ Loaded image: alpine:latest
   </div>
 </footer>
 
-<script> renderMathInElement(document.body); </script>
 <script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
 
 
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-69668147-3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag() { dataLayer.push(arguments); }
-  gtag('js', new Date());
-  gtag('config', 'UA-69668147-3');
+
+=======
 </script>
+>>>>>>> 399fb13c00b61c640f819f0855ce313cd2e0810c
 
 
 
