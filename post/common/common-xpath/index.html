@@ -10,12 +10,24 @@
   <meta property="og:title" content="Xpath高级用法" />
   <meta name="twitter:title" content="Xpath高级用法" />
 
-  <meta name="description" content="试验环境 Python lxml.etree
-试验所使用的html代码 &lt;!DOCTYPE html&gt; &lt;html&gt; &lt;head&gt; &lt;title&gt;xpath test&lt;/title&gt; &lt;/head&gt; &lt;body&gt; &lt;div price=&#34;99.8&#34;&gt; &lt;div&gt; &lt;ul&gt; &lt;li&gt;时间&lt;/li&gt; &lt;li&gt;地点&lt;/li&gt; &lt;li&gt;任务&lt;/li&gt; &lt;/ul&gt; &lt;/div&gt; &lt;div id=&#39;testid&#39; data-h=&#34;first&#34;&gt; &lt;h2&gt;这里是个小标题&lt;/h2&gt; &lt;ol&gt; &lt;li data=&#34;one&#34;&gt;1&lt;/li&gt; &lt;li data=&#34;two&#34;&gt;2&lt;/li&gt; &lt;li data=&#34;three&#34;&gt;3&lt;/li&gt; &lt;/ol&gt; &lt;ul&gt; &lt;li code=&#34;84&#34;&gt;84&lt;/li&gt; &lt;li code=&#34;104&#34;&gt;104&lt;/li&gt; &lt;li code=&#34;223&#34;&gt;223&lt;/li&gt; &lt;/ul&gt; &lt;/div&gt; &lt;div&gt; &lt;h3&gt;这里是H3的内容 &lt;a href=&#34;http://www.baidu.com&#34;&gt;百度一下&lt;/a&gt; &lt;ul&gt; &lt;li&gt;test1&lt;/li&gt; &lt;li&gt;test2&lt;/li&gt; &lt;/ul&gt; &lt;/h3&gt; &lt;/div&gt; &lt;div id=&#34;go&#34;&gt; &lt;ul&gt; &lt;li&gt;1&lt;/li&gt; &lt;li&gt;2&lt;/li&gt; &lt;li&gt;3&lt;/li&gt; &lt;li&gt;4&lt;/li&gt; &lt;li&gt;5&lt;/li&gt; &lt;li&gt;6&lt;/li&gt; &lt;li&gt;7&lt;/li&gt; &lt;li&gt;8&lt;/li&gt; &lt;li&gt;9&lt;/li&gt; &lt;li&gt;10&lt;/li&gt; &lt;/ul&gt; &lt;/div&gt; &lt;/div&gt; &lt;/body&gt; &lt;/html&gt; 1、匹配某节点下的所有 .">
-  <meta property="og:description" content="试验环境 Python lxml.etree
-试验所使用的html代码 &lt;!DOCTYPE html&gt; &lt;html&gt; &lt;head&gt; &lt;title&gt;xpath test&lt;/title&gt; &lt;/head&gt; &lt;body&gt; &lt;div price=&#34;99.8&#34;&gt; &lt;div&gt; &lt;ul&gt; &lt;li&gt;时间&lt;/li&gt; &lt;li&gt;地点&lt;/li&gt; &lt;li&gt;任务&lt;/li&gt; &lt;/ul&gt; &lt;/div&gt; &lt;div id=&#39;testid&#39; data-h=&#34;first&#34;&gt; &lt;h2&gt;这里是个小标题&lt;/h2&gt; &lt;ol&gt; &lt;li data=&#34;one&#34;&gt;1&lt;/li&gt; &lt;li data=&#34;two&#34;&gt;2&lt;/li&gt; &lt;li data=&#34;three&#34;&gt;3&lt;/li&gt; &lt;/ol&gt; &lt;ul&gt; &lt;li code=&#34;84&#34;&gt;84&lt;/li&gt; &lt;li code=&#34;104&#34;&gt;104&lt;/li&gt; &lt;li code=&#34;223&#34;&gt;223&lt;/li&gt; &lt;/ul&gt; &lt;/div&gt; &lt;div&gt; &lt;h3&gt;这里是H3的内容 &lt;a href=&#34;http://www.baidu.com&#34;&gt;百度一下&lt;/a&gt; &lt;ul&gt; &lt;li&gt;test1&lt;/li&gt; &lt;li&gt;test2&lt;/li&gt; &lt;/ul&gt; &lt;/h3&gt; &lt;/div&gt; &lt;div id=&#34;go&#34;&gt; &lt;ul&gt; &lt;li&gt;1&lt;/li&gt; &lt;li&gt;2&lt;/li&gt; &lt;li&gt;3&lt;/li&gt; &lt;li&gt;4&lt;/li&gt; &lt;li&gt;5&lt;/li&gt; &lt;li&gt;6&lt;/li&gt; &lt;li&gt;7&lt;/li&gt; &lt;li&gt;8&lt;/li&gt; &lt;li&gt;9&lt;/li&gt; &lt;li&gt;10&lt;/li&gt; &lt;/ul&gt; &lt;/div&gt; &lt;/div&gt; &lt;/body&gt; &lt;/html&gt; 1、匹配某节点下的所有 .">
-  <meta name="twitter:description" content="试验环境 Python lxml.etree
-试验所使用的html代码 &lt;!DOCTYPE html&gt; &lt;html&gt; &lt;head&gt; &lt;title&gt;xpath test&lt;/title&gt; &lt;/head&gt; &lt;body&gt; &lt;div price=&#34;99.8&#34;&gt; &lt;div&gt; …">
+  <meta name="description" content="简介
+XPath 使用路径表达式在 XML 文档中进行导航
+XPath 包含一个标准函数库
+XPath 是 XSLT 中的主要元素
+XPath 是一个 W3C 标准
+">
+  <meta property="og:description" content="简介
+XPath 使用路径表达式在 XML 文档中进行导航
+XPath 包含一个标准函数库
+XPath 是 XSLT 中的主要元素
+XPath 是一个 W3C 标准
+">
+  <meta name="twitter:description" content="简介
+XPath 使用路径表达式在 XML 文档中进行导航
+XPath 包含一个标准函数库
+XPath 是 XSLT 中的主要元素
+XPath 是一个 W3C 标准
+">
   <meta name="author" content="WoolfBreathe"/>
   <link href="/img/favicon.png" rel="icon" type="image/x-icon" />
   <link rel="apple-touch-icon" href="/img/favicon.png"/>
@@ -180,7 +192,7 @@ autocomplete('#aa-search-input',
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="/img/banner/photo-1522481889-27404a7ea14a.jpe" ></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="/img/banner/photo-1522481889-27404a7ea14a.jpeg" ></div>
   
 
   <header class="header-section has-img">
@@ -252,6 +264,16 @@ autocomplete('#aa-search-input',
         <article role="main" class="blog-post" itemprop="articleBody" id="content">
           
             
+<aside class="toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#简介">简介</a></li>
+    <li><a href="#试验环境">试验环境</a></li>
+    <li><a href="#试验所使用的html代码">试验所使用的html代码</a></li>
+  </ul>
+</nav>
+</aside>
+
           
   
           
@@ -266,69 +288,75 @@ autocomplete('#aa-search-input',
           
           
 
-          <h1 id="试验环境">试验环境</h1>
+          <h2 id="简介">简介</h2>
+<pre><code>XPath 使用路径表达式在 XML 文档中进行导航
+XPath 包含一个标准函数库
+XPath 是 XSLT 中的主要元素
+XPath 是一个 W3C 标准
+</code></pre>
+<h2 id="试验环境">试验环境</h2>
 <p>Python
 lxml.etree</p>
-<h1 id="试验所使用的html代码">试验所使用的html代码</h1>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-    &lt;title&gt;xpath test&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;div price=&#34;99.8&#34;&gt;
-    &lt;div&gt;
-        &lt;ul&gt;
-            &lt;li&gt;时间&lt;/li&gt;
-            &lt;li&gt;地点&lt;/li&gt;
-            &lt;li&gt;任务&lt;/li&gt;
-        &lt;/ul&gt;
-    &lt;/div&gt;
-    &lt;div id=&#39;testid&#39; data-h=&#34;first&#34;&gt;
-        &lt;h2&gt;这里是个小标题&lt;/h2&gt;
-        &lt;ol&gt;
-            &lt;li data=&#34;one&#34;&gt;1&lt;/li&gt;
-            &lt;li data=&#34;two&#34;&gt;2&lt;/li&gt;
-            &lt;li data=&#34;three&#34;&gt;3&lt;/li&gt;
-        &lt;/ol&gt;
-        &lt;ul&gt;
-            &lt;li code=&#34;84&#34;&gt;84&lt;/li&gt;
-            &lt;li code=&#34;104&#34;&gt;104&lt;/li&gt;
-            &lt;li code=&#34;223&#34;&gt;223&lt;/li&gt;
-        &lt;/ul&gt;
-    &lt;/div&gt;
-    &lt;div&gt;
-        &lt;h3&gt;这里是H3的内容
-            &lt;a href=&#34;http://www.baidu.com&#34;&gt;百度一下&lt;/a&gt;
-            &lt;ul&gt;
-                &lt;li&gt;test1&lt;/li&gt;
-                &lt;li&gt;test2&lt;/li&gt;
-            &lt;/ul&gt;
-        &lt;/h3&gt;
-    &lt;/div&gt;
-    &lt;div id=&#34;go&#34;&gt;
-        &lt;ul&gt;
-            &lt;li&gt;1&lt;/li&gt;
-            &lt;li&gt;2&lt;/li&gt;
-            &lt;li&gt;3&lt;/li&gt;
-            &lt;li&gt;4&lt;/li&gt;
-            &lt;li&gt;5&lt;/li&gt;
-            &lt;li&gt;6&lt;/li&gt;
-            &lt;li&gt;7&lt;/li&gt;
-            &lt;li&gt;8&lt;/li&gt;
-            &lt;li&gt;9&lt;/li&gt;
-            &lt;li&gt;10&lt;/li&gt;
-        &lt;/ul&gt;
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/body&gt;
-&lt;/html&gt;
+<h2 id="试验所使用的html代码">试验所使用的html代码</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html"><span style="color:#ff79c6">&lt;!DOCTYPE html&gt;</span>
+&lt;<span style="color:#ff79c6">html</span>&gt;
+&lt;<span style="color:#ff79c6">head</span>&gt;
+    &lt;<span style="color:#ff79c6">title</span>&gt;xpath test&lt;/<span style="color:#ff79c6">title</span>&gt;
+&lt;/<span style="color:#ff79c6">head</span>&gt;
+&lt;<span style="color:#ff79c6">body</span>&gt;
+&lt;<span style="color:#ff79c6">div</span> <span style="color:#50fa7b">price</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;99.8&#34;</span>&gt;
+    &lt;<span style="color:#ff79c6">div</span>&gt;
+        &lt;<span style="color:#ff79c6">ul</span>&gt;
+            &lt;<span style="color:#ff79c6">li</span>&gt;时间&lt;/<span style="color:#ff79c6">li</span>&gt;
+            &lt;<span style="color:#ff79c6">li</span>&gt;地点&lt;/<span style="color:#ff79c6">li</span>&gt;
+            &lt;<span style="color:#ff79c6">li</span>&gt;任务&lt;/<span style="color:#ff79c6">li</span>&gt;
+        &lt;/<span style="color:#ff79c6">ul</span>&gt;
+    &lt;/<span style="color:#ff79c6">div</span>&gt;
+    &lt;<span style="color:#ff79c6">div</span> <span style="color:#50fa7b">id</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;testid&#39;</span> <span style="color:#50fa7b">data-h</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;first&#34;</span>&gt;
+        &lt;<span style="color:#ff79c6">h2</span>&gt;这里是个小标题&lt;/<span style="color:#ff79c6">h2</span>&gt;
+        &lt;<span style="color:#ff79c6">ol</span>&gt;
+            &lt;<span style="color:#ff79c6">li</span> <span style="color:#50fa7b">data</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;one&#34;</span>&gt;1&lt;/<span style="color:#ff79c6">li</span>&gt;
+            &lt;<span style="color:#ff79c6">li</span> <span style="color:#50fa7b">data</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;two&#34;</span>&gt;2&lt;/<span style="color:#ff79c6">li</span>&gt;
+            &lt;<span style="color:#ff79c6">li</span> <span style="color:#50fa7b">data</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;three&#34;</span>&gt;3&lt;/<span style="color:#ff79c6">li</span>&gt;
+        &lt;/<span style="color:#ff79c6">ol</span>&gt;
+        &lt;<span style="color:#ff79c6">ul</span>&gt;
+            &lt;<span style="color:#ff79c6">li</span> <span style="color:#50fa7b">code</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;84&#34;</span>&gt;84&lt;/<span style="color:#ff79c6">li</span>&gt;
+            &lt;<span style="color:#ff79c6">li</span> <span style="color:#50fa7b">code</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;104&#34;</span>&gt;104&lt;/<span style="color:#ff79c6">li</span>&gt;
+            &lt;<span style="color:#ff79c6">li</span> <span style="color:#50fa7b">code</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;223&#34;</span>&gt;223&lt;/<span style="color:#ff79c6">li</span>&gt;
+        &lt;/<span style="color:#ff79c6">ul</span>&gt;
+    &lt;/<span style="color:#ff79c6">div</span>&gt;
+    &lt;<span style="color:#ff79c6">div</span>&gt;
+        &lt;<span style="color:#ff79c6">h3</span>&gt;这里是H3的内容
+            &lt;<span style="color:#ff79c6">a</span> <span style="color:#50fa7b">href</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;http://www.baidu.com&#34;</span>&gt;百度一下&lt;/<span style="color:#ff79c6">a</span>&gt;
+            &lt;<span style="color:#ff79c6">ul</span>&gt;
+                &lt;<span style="color:#ff79c6">li</span>&gt;test1&lt;/<span style="color:#ff79c6">li</span>&gt;
+                &lt;<span style="color:#ff79c6">li</span>&gt;test2&lt;/<span style="color:#ff79c6">li</span>&gt;
+            &lt;/<span style="color:#ff79c6">ul</span>&gt;
+        &lt;/<span style="color:#ff79c6">h3</span>&gt;
+    &lt;/<span style="color:#ff79c6">div</span>&gt;
+    &lt;<span style="color:#ff79c6">div</span> <span style="color:#50fa7b">id</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;go&#34;</span>&gt;
+        &lt;<span style="color:#ff79c6">ul</span>&gt;
+            &lt;<span style="color:#ff79c6">li</span>&gt;1&lt;/<span style="color:#ff79c6">li</span>&gt;
+            &lt;<span style="color:#ff79c6">li</span>&gt;2&lt;/<span style="color:#ff79c6">li</span>&gt;
+            &lt;<span style="color:#ff79c6">li</span>&gt;3&lt;/<span style="color:#ff79c6">li</span>&gt;
+            &lt;<span style="color:#ff79c6">li</span>&gt;4&lt;/<span style="color:#ff79c6">li</span>&gt;
+            &lt;<span style="color:#ff79c6">li</span>&gt;5&lt;/<span style="color:#ff79c6">li</span>&gt;
+            &lt;<span style="color:#ff79c6">li</span>&gt;6&lt;/<span style="color:#ff79c6">li</span>&gt;
+            &lt;<span style="color:#ff79c6">li</span>&gt;7&lt;/<span style="color:#ff79c6">li</span>&gt;
+            &lt;<span style="color:#ff79c6">li</span>&gt;8&lt;/<span style="color:#ff79c6">li</span>&gt;
+            &lt;<span style="color:#ff79c6">li</span>&gt;9&lt;/<span style="color:#ff79c6">li</span>&gt;
+            &lt;<span style="color:#ff79c6">li</span>&gt;10&lt;/<span style="color:#ff79c6">li</span>&gt;
+        &lt;/<span style="color:#ff79c6">ul</span>&gt;
+    &lt;/<span style="color:#ff79c6">div</span>&gt;
+&lt;/<span style="color:#ff79c6">div</span>&gt;
+&lt;/<span style="color:#ff79c6">body</span>&gt;
+&lt;/<span style="color:#ff79c6">html</span>&gt;
 </code></pre></div><p><strong>1、匹配某节点下的所有 .//</strong>
 <code>//</code>
 获取文档中所有匹配的节点，.获取当前节点，获取当前节点下的所有节点，.//一定要结合.使用//，否则都会获取整个文档的匹配结果.</p>
 <p><strong>2、匹配包含某属性的所有的属性值 //@lang</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">print tree.xpath(&#39;//@code&#39;) #匹配所有带有code属性的属性值
-&gt;&gt;[&#39;84&#39;, &#39;104&#39;, &#39;223&#39;]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">print tree.xpath<span style="color:#ff79c6">(</span><span style="color:#f1fa8c">&#39;//@code&#39;</span><span style="color:#ff79c6">)</span> <span style="color:#6272a4">#匹配所有带有code属性的属性值</span>
+&gt;&gt;<span style="color:#ff79c6">[</span><span style="color:#f1fa8c">&#39;84&#39;</span>, <span style="color:#f1fa8c">&#39;104&#39;</span>, <span style="color:#f1fa8c">&#39;223&#39;</span><span style="color:#ff79c6">]</span>
 </code></pre></div><p><strong>3、选取若干路径 |</strong></p>
 <p>这个符号用于在一个xpath中写多个表达式用，用|分开，每个表达式互不干扰</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">print tree.xpath(&#39;//div[@id=&#34;testid&#34;]/h2/text() | //li[@data]/text()&#39;) #多个匹配条件
@@ -488,7 +516,6 @@ starts-with：以。。开始
 </code></pre></div><p>以上就是整理出的全部内容，说明一点，xpath虽快，但是使用时尽量使用简洁高效的方式，本文旨在定位那些较难的地方使用，刻意追求晦涩难懂的技巧会影响其效率，并不可取。</p>
 <p>参考:
 <a href="https://baike.baidu.com/item/XPath/5574064?fr=aladdin">https://baike.baidu.com/item/XPath/5574064?fr=aladdin</a></p>
-
 
           <h2>微信公众号</h2>
 <p>扫描下面的二维码关注我们的微信公众帐号，在微信公众帐号中回复◉加群◉即可加入到我们的 kubernetes 讨论群里面共同学习。</p>

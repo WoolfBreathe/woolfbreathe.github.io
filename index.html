@@ -444,17 +444,16 @@ autocomplete('#aa-search-input',
 
               <div class="post-entry">
                 
-                  基本概念 机器学习   (Arthur Samuel) 在进行特定编程的情况下，给予计算机学习能力的领域
-  (Tom Mitchell) 一个程序被认为能从经验E中学习，解决任务T，达到性能度量值P，当且仅当，有了经验E后，经过P评判，程序在处理T时的性能有所提升
-  建模误差（modeling error）  模型所预测的值与训练集中实际值之间的差距
- 监督学习   利用一组已知类别的样本调整分类器的参数，使其达到所要求性能的 过程，也称为监督训练或有教师学习。
-  监督学习是从标记的训练数据来推断一个功能的机器学习任务。
-  无监督学习 确定型无监督学习 概率型无监督学习 线性回归(Linear Regression with One Variable) 回归 根据之前的数据预测出一个准确的输出值
-模型表示  m 代表训练集中实例的数量 x 代表特征/输入变量 y 代表目标变量/输出变量 (x, y) 代表训练集中的实例
- 第 i 个观察实例
-$$ (x^{(i)},y^{(i)}) $$
-$$ h_\theta(x) = \theta_0x_0 + \theta_1x_1 + \cdots + \theta_nx_n $$
-模型中的参数是一个n+1维的向量，特征矩阵的维度是m*(n+1)。 因此公式可以简化为:
+                  <h2 id="基本概念">基本概念</h2>
+<h3 id="机器学习">机器学习</h3>
+<ol>
+<li>
+<p>(Arthur Samuel) 在进行特定编程的情况下，给予计算机学习能力的领域</p>
+</li>
+<li>
+<p>(Tom Mitchell) 一个程序被认为能从经验E中学习，解决任务T，达到性能度量值P，当且仅当，有了经验E后，经过P评判，程序在处理T时的性能有所提升</p>
+</li>
+</ol>
                   <a href="/post/machinelearning/machinelearning-stanford/" class="post-read-more">[阅读全文]</a>
                 
               </div>
@@ -488,13 +487,10 @@ $$ h_\theta(x) = \theta_0x_0 + \theta_1x_1 + \cdots + \theta_nx_n $$
 
               <div class="post-entry">
                 
-                  学习顺序  几何直观 -&gt; 计算工作 -&gt; 实际应用 -&gt; 钻研领域
- 向量  在线性代数中, 向量经常以原点为起点 向量: 有序的数字列表
- 线性相关 线性无关 线性组合  两个向量标量乘法之和的结果被称为这两个向量的线性组合
- 张成空间  所有可以表示为给定向量线性组合的向量合集被称为给定向量的张成空间
- 基  空间的一个基: 张成该空间的一个线性无关向量的合集
- 矩阵  用数值描述线性变化的语言
- 矩阵加法和矩阵乘法 线性变换(函数)  直线变换后依然是直线 原点不能移动 保持网格线平行且等距分布的变换  单位矩阵  矩阵面积为 1  行列式  定义: 矩阵所围成的面积 意义: 线性变换对面积产生的变换比率 特征: 行列式等于零意味着矩阵的维度降低  逆矩阵  一个矩阵与其逆矩阵相乘等于单位矩阵 恒等变换: 恢复到单位矩阵 行列式不等于零时才存在逆矩阵  列空间  定义:矩阵所有可能的变换结果 矩阵的列所张成的空间 向量垂直时, 取最大值  秩  定义:列空间维度 满秩: 当秩与矩阵列数相等时  零空间(核)  变换后落在原点的向量合集  点积 .
+                  <h2 id="学习顺序">学习顺序</h2>
+<blockquote>
+<p>几何直观 -&gt; 计算工作 -&gt; 实际应用 -&gt; 钻研领域</p>
+</blockquote>
                   <a href="/post/math/math-matrix/" class="post-read-more">[阅读全文]</a>
                 
               </div>
@@ -528,10 +524,11 @@ $$ h_\theta(x) = \theta_0x_0 + \theta_1x_1 + \cdots + \theta_nx_n $$
 
               <div class="post-entry">
                 
-                  微积分本质  复杂问题-&gt;转化为许多小量之和(为了越来越精确的近似)-&gt;求二次函数图像阴影面积 意义:描述事物变化率的语言  定义自己的微积分公式  保持数学的对称性  导数   悖论:导数测量的是瞬时变化率 矛盾: 变化发生在两个点之间, 固定时间点则没有变化率 智慧: 导数是变化率的最佳近似
-  本质:微小的变化(有限小的量, 非零)
-  公式 $$ \dot{x^{\mu}} = \mu x^{\mu-1} $$ $$ \dot{\log_a^x} = \frac{1}{xlna} $$ $$ \dot{a^x} = a^x lna $$ $$ \dot{(\sin x} = \cos x $$ $$ \dot{\cos x} = - \sin x $$
-规律 $$ \dot{(u \pm v)} = \dot{u} + \dot{v} $$ $$ \dot{(uv)} = \dot{u}v + \dot{v}u $$ $$ \dot{(\frac{u}{v})} = \frac{\dot{u}v-\dot{v}u}{v^2}(v \neq 0) $$ $$ \dot{(\frac{C}{v})} = - \frac{C\dot{v}}{v^2} $$
+                  <h2 id="微积分本质">微积分本质</h2>
+<ol>
+<li>复杂问题-&gt;转化为许多小量之和(为了越来越精确的近似)-&gt;求二次函数图像阴影面积</li>
+<li>意义:描述事物变化率的语言</li>
+</ol>
                   <a href="/post/math/math-calculus/" class="post-read-more">[阅读全文]</a>
                 
               </div>
@@ -637,20 +634,10 @@ $$ h_\theta(x) = \theta_0x_0 + \theta_1x_1 + \cdots + \theta_nx_n $$
 
               <div class="post-entry">
                 
-                  权限说明 许可和所有权-为什么？ 如果不能访问自己Linux系统的某些文件夹可能是由于文件访问权限的配置错误。如果你是linux的唯一使用者，你也许想知道怎么拥有所有的许可（或者取消所有的），因为它限制了你完全的拥有你的企鹅操作系统！然而，在你扯掉头发前，你因该明白Linux被设计成一个多用户环境。在同一个环境下，有超过一个以上的用户，判断哪些文件是你的，谁能使用它，这些对于一个安全的系统来说是至关重要的！
-甚至如果你是一个普通桌面系统的唯一使用者，文件许可帮助保持你的重要文件安全，阻止外部的和你自己的误操作！ ：）
-理解文件所有权 你的Linux系统的每一个文件，包括目录，被一个特殊的用户和用户组拥有。因此，文件许可对于用户，用户组和其他使用者来说，都是独立的！
-用户：拥有文件的那个人的名字。默认情况下，文件的创建者就是所有者。
-组：用户组拥有文件。所有属于这个组的用户拥有此文件，拥有同样的访问许可。这很有用，例如，如果你有一个项目需要一群不同的用户能够访问特定的文件，而其他人不能访问。在那种情况下，你将添加所有的用户到一个同样的组，确保所要求的文件被哪个组拥有，设置这个文件相应的组许可。
-其他的：一个用户既不属于文件的所有者也不属于文件的组。换句话说，如果你设置一个“other”种类，默认地，他将影响其他用户。因为这个原因，人们常常说起设置“world”许可约束，他们是说设置“other”许可。
-理解文件许可 Linux上有三种类型的访问许可：读，写和执行。这些许可对于文件的所有者，组和其他用户都是独立的。
-读权限：对于一个普通的文件，读权限意味着文件能被打开和读取。对于一个目录，读权限意味着你可以列出目录内容。
-写权限：对于一个普通的文件，这意味着你可以修改文件，又叫做写入新数据到文件。当是目录时，写权限意味着你可以增加，移除和重命名目录里的文件。也就是说，如果一个文件有写权限，你就可以修改文件的内容，但是只有在文件的目录权限允许的情况下你才可以重命名和删除文件。
-执行权限：在普通文件的情况下，你可以把文件作为一个程序或者一个shell脚本执行。如果是目录，执行权限（也叫做“搜索块”）允许你实用cd命令访问目录并进入。例如，记事本尽管有执行块让你进入目录，但是你不能列出它的的内容，除非你有那个目录的读权限。
-怎样查看文件权限 通过使用ls -l 命令列出目录的列表，你可以查看一个文件的访问权限。一个长的目录列表可能如下所示：
-me@puter: /home/writers$ ls -l total 17 drwxr-xr-x 3 nana writers 80 2005-09-20 21:37 dir -rw-r----- 1 nana writers 8187 2005-09-19 13:35 file -rwxr-xr-x 1 nana writers 10348 2005-07-17 20:31 otherfile 文件信息说明 ls -l 输出的是什么意思？
-第一列 显示了文件类型和权限。 第二列 显示链接（与文件相关的目录入口）的数目 第三列 显示文件的所有者， 第四列 显示文件属于哪个组。 其他列显示文件的大小（用byte显示），日期和最后修改时间和文件名。  权限说明 第一列总共10位, 被分成了四个独立的组:
-第一组 一位字符 显示文件的类型 第二组 2、3、4位 给出了文件或目录所有者的权限 第三组 5、6、7位给出了文件或目录所属用户组的权限 第四组 8、9、10位给出了其他用户权限  第一个字符可以是如下任一种:
+                  <h2 id="权限说明">权限说明</h2>
+<h3 id="许可和所有权-为什么">许可和所有权-为什么？</h3>
+<p>如果不能访问自己Linux系统的某些文件夹可能是由于文件访问权限的配置错误。如果你是linux的唯一使用者，你也许想知道怎么拥有所有的许可（或者取消所有的），因为它限制了你完全的拥有你的企鹅操作系统！然而，在你扯掉头发前，你因该明白Linux被设计成一个多用户环境。在同一个环境下，有超过一个以上的用户，判断哪些文件是你的，谁能使用它，这些对于一个安全的系统来说是至关重要的！</p>
+<p>甚至如果你是一个普通桌面系统的唯一使用者，文件许可帮助保持你的重要文件安全，阻止外部的和你自己的误操作！ ：）</p>
                   <a href="/post/devops/linux/devops-linux-permisssions/" class="post-read-more">[阅读全文]</a>
                 
               </div>
@@ -686,8 +673,12 @@ me@puter: /home/writers$ ls -l total 17 drwxr-xr-x 3 nana writers 80 2005-09-20 
 
               <div class="post-entry">
                 
-                  试验环境 Python lxml.etree
-试验所使用的html代码 &lt;!DOCTYPE html&gt; &lt;html&gt; &lt;head&gt; &lt;title&gt;xpath test&lt;/title&gt; &lt;/head&gt; &lt;body&gt; &lt;div price=&#34;99.8&#34;&gt; &lt;div&gt; &lt;ul&gt; &lt;li&gt;时间&lt;/li&gt; &lt;li&gt;地点&lt;/li&gt; &lt;li&gt;任务&lt;/li&gt; &lt;/ul&gt; &lt;/div&gt; &lt;div id=&#39;testid&#39; data-h=&#34;first&#34;&gt; &lt;h2&gt;这里是个小标题&lt;/h2&gt; &lt;ol&gt; &lt;li data=&#34;one&#34;&gt;1&lt;/li&gt; &lt;li data=&#34;two&#34;&gt;2&lt;/li&gt; &lt;li data=&#34;three&#34;&gt;3&lt;/li&gt; &lt;/ol&gt; &lt;ul&gt; &lt;li code=&#34;84&#34;&gt;84&lt;/li&gt; &lt;li code=&#34;104&#34;&gt;104&lt;/li&gt; &lt;li code=&#34;223&#34;&gt;223&lt;/li&gt; &lt;/ul&gt; &lt;/div&gt; &lt;div&gt; &lt;h3&gt;这里是H3的内容 &lt;a href=&#34;http://www.baidu.com&#34;&gt;百度一下&lt;/a&gt; &lt;ul&gt; &lt;li&gt;test1&lt;/li&gt; &lt;li&gt;test2&lt;/li&gt; &lt;/ul&gt; &lt;/h3&gt; &lt;/div&gt; &lt;div id=&#34;go&#34;&gt; &lt;ul&gt; &lt;li&gt;1&lt;/li&gt; &lt;li&gt;2&lt;/li&gt; &lt;li&gt;3&lt;/li&gt; &lt;li&gt;4&lt;/li&gt; &lt;li&gt;5&lt;/li&gt; &lt;li&gt;6&lt;/li&gt; &lt;li&gt;7&lt;/li&gt; &lt;li&gt;8&lt;/li&gt; &lt;li&gt;9&lt;/li&gt; &lt;li&gt;10&lt;/li&gt; &lt;/ul&gt; &lt;/div&gt; &lt;/div&gt; &lt;/body&gt; &lt;/html&gt; 1、匹配某节点下的所有 .
+                  <h2 id="简介">简介</h2>
+<pre><code>XPath 使用路径表达式在 XML 文档中进行导航
+XPath 包含一个标准函数库
+XPath 是 XSLT 中的主要元素
+XPath 是一个 W3C 标准
+</code></pre>
                   <a href="/post/common/common-xpath/" class="post-read-more">[阅读全文]</a>
                 
               </div>

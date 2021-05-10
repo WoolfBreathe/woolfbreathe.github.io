@@ -19,8 +19,12 @@
       <pubDate>Mon, 22 Jun 2020 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (WoolfBreathe)</author>
       <guid>/post/common/common-xpath/</guid>
-      <description>试验环境 Python lxml.etree
-试验所使用的html代码 &amp;lt;!DOCTYPE html&amp;gt; &amp;lt;html&amp;gt; &amp;lt;head&amp;gt; &amp;lt;title&amp;gt;xpath test&amp;lt;/title&amp;gt; &amp;lt;/head&amp;gt; &amp;lt;body&amp;gt; &amp;lt;div price=&amp;#34;99.8&amp;#34;&amp;gt; &amp;lt;div&amp;gt; &amp;lt;ul&amp;gt; &amp;lt;li&amp;gt;时间&amp;lt;/li&amp;gt; &amp;lt;li&amp;gt;地点&amp;lt;/li&amp;gt; &amp;lt;li&amp;gt;任务&amp;lt;/li&amp;gt; &amp;lt;/ul&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;div id=&amp;#39;testid&amp;#39; data-h=&amp;#34;first&amp;#34;&amp;gt; &amp;lt;h2&amp;gt;这里是个小标题&amp;lt;/h2&amp;gt; &amp;lt;ol&amp;gt; &amp;lt;li data=&amp;#34;one&amp;#34;&amp;gt;1&amp;lt;/li&amp;gt; &amp;lt;li data=&amp;#34;two&amp;#34;&amp;gt;2&amp;lt;/li&amp;gt; &amp;lt;li data=&amp;#34;three&amp;#34;&amp;gt;3&amp;lt;/li&amp;gt; &amp;lt;/ol&amp;gt; &amp;lt;ul&amp;gt; &amp;lt;li code=&amp;#34;84&amp;#34;&amp;gt;84&amp;lt;/li&amp;gt; &amp;lt;li code=&amp;#34;104&amp;#34;&amp;gt;104&amp;lt;/li&amp;gt; &amp;lt;li code=&amp;#34;223&amp;#34;&amp;gt;223&amp;lt;/li&amp;gt; &amp;lt;/ul&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;div&amp;gt; &amp;lt;h3&amp;gt;这里是H3的内容 &amp;lt;a href=&amp;#34;http://www.baidu.com&amp;#34;&amp;gt;百度一下&amp;lt;/a&amp;gt; &amp;lt;ul&amp;gt; &amp;lt;li&amp;gt;test1&amp;lt;/li&amp;gt; &amp;lt;li&amp;gt;test2&amp;lt;/li&amp;gt; &amp;lt;/ul&amp;gt; &amp;lt;/h3&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;div id=&amp;#34;go&amp;#34;&amp;gt; &amp;lt;ul&amp;gt; &amp;lt;li&amp;gt;1&amp;lt;/li&amp;gt; &amp;lt;li&amp;gt;2&amp;lt;/li&amp;gt; &amp;lt;li&amp;gt;3&amp;lt;/li&amp;gt; &amp;lt;li&amp;gt;4&amp;lt;/li&amp;gt; &amp;lt;li&amp;gt;5&amp;lt;/li&amp;gt; &amp;lt;li&amp;gt;6&amp;lt;/li&amp;gt; &amp;lt;li&amp;gt;7&amp;lt;/li&amp;gt; &amp;lt;li&amp;gt;8&amp;lt;/li&amp;gt; &amp;lt;li&amp;gt;9&amp;lt;/li&amp;gt; &amp;lt;li&amp;gt;10&amp;lt;/li&amp;gt; &amp;lt;/ul&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;/div&amp;gt; &amp;lt;/body&amp;gt; &amp;lt;/html&amp;gt; 1、匹配某节点下的所有 .</description>
+      <description>&lt;h2 id=&#34;简介&#34;&gt;简介&lt;/h2&gt;
+&lt;pre&gt;&lt;code&gt;XPath 使用路径表达式在 XML 文档中进行导航
+XPath 包含一个标准函数库
+XPath 是 XSLT 中的主要元素
+XPath 是一个 W3C 标准
+&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
     
     <item>

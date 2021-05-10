@@ -28,13 +28,10 @@
       <pubDate>Sat, 27 Mar 2021 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (WoolfBreathe)</author>
       <guid>/post/math/math-matrix/</guid>
-      <description>学习顺序  几何直观 -&amp;gt; 计算工作 -&amp;gt; 实际应用 -&amp;gt; 钻研领域
- 向量  在线性代数中, 向量经常以原点为起点 向量: 有序的数字列表
- 线性相关 线性无关 线性组合  两个向量标量乘法之和的结果被称为这两个向量的线性组合
- 张成空间  所有可以表示为给定向量线性组合的向量合集被称为给定向量的张成空间
- 基  空间的一个基: 张成该空间的一个线性无关向量的合集
- 矩阵  用数值描述线性变化的语言
- 矩阵加法和矩阵乘法 线性变换(函数)  直线变换后依然是直线 原点不能移动 保持网格线平行且等距分布的变换  单位矩阵  矩阵面积为 1  行列式  定义: 矩阵所围成的面积 意义: 线性变换对面积产生的变换比率 特征: 行列式等于零意味着矩阵的维度降低  逆矩阵  一个矩阵与其逆矩阵相乘等于单位矩阵 恒等变换: 恢复到单位矩阵 行列式不等于零时才存在逆矩阵  列空间  定义:矩阵所有可能的变换结果 矩阵的列所张成的空间 向量垂直时, 取最大值  秩  定义:列空间维度 满秩: 当秩与矩阵列数相等时  零空间(核)  变换后落在原点的向量合集  点积 .</description>
+      <description>&lt;h2 id=&#34;学习顺序&#34;&gt;学习顺序&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;几何直观 -&amp;gt; 计算工作 -&amp;gt; 实际应用 -&amp;gt; 钻研领域&lt;/p&gt;
+&lt;/blockquote&gt;</description>
     </item>
     
     <item>
@@ -43,10 +40,11 @@
       <pubDate>Tue, 09 Mar 2021 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (WoolfBreathe)</author>
       <guid>/post/math/math-calculus/</guid>
-      <description>微积分本质  复杂问题-&amp;gt;转化为许多小量之和(为了越来越精确的近似)-&amp;gt;求二次函数图像阴影面积 意义:描述事物变化率的语言  定义自己的微积分公式  保持数学的对称性  导数   悖论:导数测量的是瞬时变化率 矛盾: 变化发生在两个点之间, 固定时间点则没有变化率 智慧: 导数是变化率的最佳近似
-  本质:微小的变化(有限小的量, 非零)
-  公式 $$ \dot{x^{\mu}} = \mu x^{\mu-1} $$ $$ \dot{\log_a^x} = \frac{1}{xlna} $$ $$ \dot{a^x} = a^x lna $$ $$ \dot{(\sin x} = \cos x $$ $$ \dot{\cos x} = - \sin x $$
-规律 $$ \dot{(u \pm v)} = \dot{u} + \dot{v} $$ $$ \dot{(uv)} = \dot{u}v + \dot{v}u $$ $$ \dot{(\frac{u}{v})} = \frac{\dot{u}v-\dot{v}u}{v^2}(v \neq 0) $$ $$ \dot{(\frac{C}{v})} = - \frac{C\dot{v}}{v^2} $$</description>
+      <description>&lt;h2 id=&#34;微积分本质&#34;&gt;微积分本质&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;复杂问题-&amp;gt;转化为许多小量之和(为了越来越精确的近似)-&amp;gt;求二次函数图像阴影面积&lt;/li&gt;
+&lt;li&gt;意义:描述事物变化率的语言&lt;/li&gt;
+&lt;/ol&gt;</description>
     </item>
     
   </channel>
