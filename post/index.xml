@@ -28,9 +28,7 @@
       <pubDate>Wed, 21 Apr 2021 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (WoolfBreathe)</author>
       <guid>/post/devops/docker/devops-docker-command/</guid>
-      <description>&lt;h2 id=&#34;常用命令&#34;&gt;常用命令&lt;/h2&gt;
-&lt;h3 id=&#34;执行流程&#34;&gt;执行流程&lt;/h3&gt;
-&lt;p&gt;当利用docker run来创建容器时，Docker 在后台运行的标准操作包括：&lt;/p&gt;
+      <description>&lt;p&gt;当利用docker run来创建容器时，Docker 在后台运行的标准操作包括：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;检查本地是否存在指定的镜像，不存在就从公有仓库下载&lt;/li&gt;
 &lt;li&gt;利用镜像创建并启动一个容器&lt;/li&gt;
@@ -48,8 +46,7 @@
       <pubDate>Mon, 19 Apr 2021 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (WoolfBreathe)</author>
       <guid>/post/devops/docker/devops-docker-install/</guid>
-      <description>&lt;h2 id=&#34;get-docker-ce-for-ubuntu&#34;&gt;Get Docker CE for Ubuntu&lt;/h2&gt;
-&lt;p&gt;要在Ubuntu上开始使用Docker CE，请确保满足先决条件，然后安装Docker。&lt;/p&gt;</description>
+      <description>&lt;p&gt;要在Ubuntu上开始使用Docker CE，请确保满足先决条件，然后安装Docker。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -58,8 +55,7 @@
       <pubDate>Sun, 18 Apr 2021 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (WoolfBreathe)</author>
       <guid>/post/devops/docker/devops-docker-docker/</guid>
-      <description>&lt;h2 id=&#34;docker-架构&#34;&gt;Docker 架构&lt;/h2&gt;
-&lt;p&gt;Docker 使用 C/S （客户端/服务器）体系的架构，Docker 客户端与 Docker 守护进程通信，Docker 守护进程负责构建，运行和分发 Docker 容器。Docker 客户端和守护进程可以在同一个系统上运行，也可以将 Docker 客户端连接到远程 Docker 守护进程。Docker 客户端和守护进程使用 REST API 通过UNIX套接字或网络接口进行通信。&lt;/p&gt;
+      <description>&lt;p&gt;Docker 使用 C/S （客户端/服务器）&lt;strong&gt;体系架构&lt;/strong&gt;，Docker 客户端与 Docker 守护进程通信，Docker 守护进程负责构建，运行和分发 Docker 容器。Docker 客户端和守护进程可以在同一个系统上运行，也可以将 Docker 客户端连接到远程 Docker 守护进程。Docker 客户端和守护进程使用 REST API 通过UNIX套接字或网络接口进行通信。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;/img/posts/DevOps/Docker/docker-structrue.png&#34; alt=&#34;docker-structrue&#34;&gt;&lt;/p&gt;</description>
     </item>
     
@@ -69,16 +65,7 @@
       <pubDate>Fri, 02 Apr 2021 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (WoolfBreathe)</author>
       <guid>/post/machinelearning/machinelearning-stanford/</guid>
-      <description>&lt;h2 id=&#34;基本概念&#34;&gt;基本概念&lt;/h2&gt;
-&lt;h3 id=&#34;机器学习&#34;&gt;机器学习&lt;/h3&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;(Arthur Samuel) 在进行特定编程的情况下，给予计算机学习能力的领域&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;(Tom Mitchell) 一个程序被认为能从经验E中学习，解决任务T，达到性能度量值P，当且仅当，有了经验E后，经过P评判，程序在处理T时的性能有所提升&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;</description>
+      <description>&lt;p&gt;定义: (Tom Mitchell) 一个程序被认为能从经验E中学习，解决任务T，达到性能度量值P，当且仅当，有了经验E后，经过P评判，程序在处理T时的性能有所提升&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -87,10 +74,7 @@
       <pubDate>Sat, 27 Mar 2021 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (WoolfBreathe)</author>
       <guid>/post/math/math-matrix/</guid>
-      <description>&lt;h2 id=&#34;学习顺序&#34;&gt;学习顺序&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;几何直观 -&amp;gt; 计算工作 -&amp;gt; 实际应用 -&amp;gt; 钻研领域&lt;/p&gt;
-&lt;/blockquote&gt;</description>
+      <description>&lt;p&gt;线性代数是数学的一个分支，它的研究对象是向量，向量空间（或称线性空间），线性变换和有限维的线性方程组。向量空间是现代数学的一个重要课题；因而，线性代数被广泛地应用于抽象代数和泛函分析中；通过解析几何，线性代数得以被具体表示&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -99,11 +83,7 @@
       <pubDate>Tue, 09 Mar 2021 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (WoolfBreathe)</author>
       <guid>/post/math/math-calculus/</guid>
-      <description>&lt;h2 id=&#34;微积分本质&#34;&gt;微积分本质&lt;/h2&gt;
-&lt;ol&gt;
-&lt;li&gt;复杂问题-&amp;gt;转化为许多小量之和(为了越来越精确的近似)-&amp;gt;求二次函数图像阴影面积&lt;/li&gt;
-&lt;li&gt;意义:描述事物变化率的语言&lt;/li&gt;
-&lt;/ol&gt;</description>
+      <description>&lt;p&gt;微积分意义: 描述事物变化率的语言&lt;/p&gt;</description>
     </item>
     
     <item>

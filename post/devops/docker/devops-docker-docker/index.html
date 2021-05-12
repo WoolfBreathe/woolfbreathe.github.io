@@ -10,14 +10,12 @@
   <meta property="og:title" content="Docker" />
   <meta name="twitter:title" content="Docker" />
 
-  <meta name="description" content="Docker 架构
-Docker 使用 C/S （客户端/服务器）体系的架构，Docker 客户端与 Docker 守护进程通信，Docker 守护进程负责构建，运行和分发 Docker 容器。Docker 客户端和守护进程可以在同一个系统上运行，也可以将 Docker 客户端连接到远程 Docker 守护进程。Docker 客户端和守护进程使用 REST API 通过UNIX套接字或网络接口进行通信。
+  <meta name="description" content="Docker 使用 C/S （客户端/服务器）体系架构，Docker 客户端与 Docker 守护进程通信，Docker 守护进程负责构建，运行和分发 Docker 容器。Docker 客户端和守护进程可以在同一个系统上运行，也可以将 Docker 客户端连接到远程 Docker 守护进程。Docker 客户端和守护进程使用 REST API 通过UNIX套接字或网络接口进行通信。
 ">
-  <meta property="og:description" content="Docker 架构
-Docker 使用 C/S （客户端/服务器）体系的架构，Docker 客户端与 Docker 守护进程通信，Docker 守护进程负责构建，运行和分发 Docker 容器。Docker 客户端和守护进程可以在同一个系统上运行，也可以将 Docker 客户端连接到远程 Docker 守护进程。Docker 客户端和守护进程使用 REST API 通过UNIX套接字或网络接口进行通信。
+  <meta property="og:description" content="Docker 使用 C/S （客户端/服务器）体系架构，Docker 客户端与 Docker 守护进程通信，Docker 守护进程负责构建，运行和分发 Docker 容器。Docker 客户端和守护进程可以在同一个系统上运行，也可以将 Docker 客户端连接到远程 Docker 守护进程。Docker 客户端和守护进程使用 REST API 通过UNIX套接字或网络接口进行通信。
 ">
-  <meta name="twitter:description" content="Docker 架构
-Docker 使用 C/S （客户端/服务器）体系的架构，Docker 客户端与 Docker 守护进程通信，Docker 守护进程负责构建，运行和分发 Docker 容器。Docker 客户端和守护进程可以在同一个系统上运行，也可以将 Docker 客户端连接到远程 Docker 守护进程。Docker 客户端和守护进程使用 REST API 通过UNIX套接字或网络接口进行 …">
+  <meta name="twitter:description" content="Docker 使用 C/S （客户端/服务器）体系架构，Docker 客户端与 Docker 守护进程通信，Docker 守护进程负责构建，运行和分发 Docker 容器。Docker 客户端和守护进程可以在同一个系统上运行，也可以将 Docker 客户端连接到远程 Docker 守护进程。Docker 客户端和守护进程使用 REST API 通过UNIX套接字或网络接口进行通信。
+">
   <meta name="author" content="WoolfBreathe"/>
   <link href="/img/favicon.png" rel="icon" type="image/x-icon" />
   <link rel="apple-touch-icon" href="/img/favicon.png"/>
@@ -259,7 +257,6 @@ autocomplete('#aa-search-input',
 <aside class="toc">
   <nav id="TableOfContents">
   <ul>
-    <li><a href="#docker-架构">Docker 架构</a></li>
     <li><a href="#docker的技术组件">Docker的技术组件</a></li>
     <li><a href="#核心概念">核心概念</a>
       <ul>
@@ -292,17 +289,19 @@ autocomplete('#aa-search-input',
           
           
 
-          <h2 id="docker-架构">Docker 架构</h2>
-<p>Docker 使用 C/S （客户端/服务器）体系的架构，Docker 客户端与 Docker 守护进程通信，Docker 守护进程负责构建，运行和分发 Docker 容器。Docker 客户端和守护进程可以在同一个系统上运行，也可以将 Docker 客户端连接到远程 Docker 守护进程。Docker 客户端和守护进程使用 REST API 通过UNIX套接字或网络接口进行通信。</p>
+          <p>Docker 使用 C/S （客户端/服务器）<strong>体系架构</strong>，Docker 客户端与 Docker 守护进程通信，Docker 守护进程负责构建，运行和分发 Docker 容器。Docker 客户端和守护进程可以在同一个系统上运行，也可以将 Docker 客户端连接到远程 Docker 守护进程。Docker 客户端和守护进程使用 REST API 通过UNIX套接字或网络接口进行通信。</p>
 <p><img src="/img/posts/DevOps/Docker/docker-structrue.png" alt="docker-structrue"></p>
 <h2 id="docker的技术组件">Docker的技术组件</h2>
 <ol>
 <li>一个原生的 Linux 容器格式，Docker 中称为 libcontainer。</li>
-<li>Linux 内核的命名空间(namespace)，用于隔离文件系统、进程和网络。</li>
-<li>文件系统隔离：每个容器都有自己的 root 文件系统。
-进程隔离：每个容器都运行在自己的进程环境中。
-网络隔离：容器间的虚拟网络接口和IP地址都是分开的。
-资源隔离和分组：使用 cgroups(即control group，Linux 的内核特性之一)将 CPU 和内存之类的资源独立分配给每个 Docker 容器。</li>
+<li>Linux 内核的命名空间(namespace)，用于隔离文件系统、进程和网络。
+<ul>
+<li>文件系统隔离：每个容器都有自己的 root 文件系统。</li>
+<li>进程隔离：每个容器都运行在自己的进程环境中。</li>
+<li>网络隔离：容器间的虚拟网络接口和IP地址都是分开的。</li>
+</ul>
+</li>
+<li>资源隔离和分组：使用 cgroups(即control group，Linux 的内核特性之一)将 CPU 和内存之类的资源独立分配给每个 Docker 容器。</li>
 <li>写时复制(Copy on write)：文件系统都是通过写时复制创建的，这就意味着文件系统是分层的、快速的，而且占用磁盘空间更小。</li>
 <li>日志：容器产生的STDOUT、STDERR和STDIN这些IO流都会被收集并计入日志。用来进行日志分割和故障排错。</li>
 <li>交互式shell：用户可以创建一个伪 tty 终端，将其连接到STDIN，为容器提供一个交互式shell。</li>

@@ -19,9 +19,7 @@
       <pubDate>Wed, 21 Apr 2021 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (WoolfBreathe)</author>
       <guid>/post/devops/docker/devops-docker-command/</guid>
-      <description>&lt;h2 id=&#34;常用命令&#34;&gt;常用命令&lt;/h2&gt;
-&lt;h3 id=&#34;执行流程&#34;&gt;执行流程&lt;/h3&gt;
-&lt;p&gt;当利用docker run来创建容器时，Docker 在后台运行的标准操作包括：&lt;/p&gt;
+      <description>&lt;p&gt;当利用docker run来创建容器时，Docker 在后台运行的标准操作包括：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;检查本地是否存在指定的镜像，不存在就从公有仓库下载&lt;/li&gt;
 &lt;li&gt;利用镜像创建并启动一个容器&lt;/li&gt;
@@ -39,8 +37,7 @@
       <pubDate>Mon, 19 Apr 2021 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (WoolfBreathe)</author>
       <guid>/post/devops/docker/devops-docker-install/</guid>
-      <description>&lt;h2 id=&#34;get-docker-ce-for-ubuntu&#34;&gt;Get Docker CE for Ubuntu&lt;/h2&gt;
-&lt;p&gt;要在Ubuntu上开始使用Docker CE，请确保满足先决条件，然后安装Docker。&lt;/p&gt;</description>
+      <description>&lt;p&gt;要在Ubuntu上开始使用Docker CE，请确保满足先决条件，然后安装Docker。&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -49,8 +46,7 @@
       <pubDate>Sun, 18 Apr 2021 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (WoolfBreathe)</author>
       <guid>/post/devops/docker/devops-docker-docker/</guid>
-      <description>&lt;h2 id=&#34;docker-架构&#34;&gt;Docker 架构&lt;/h2&gt;
-&lt;p&gt;Docker 使用 C/S （客户端/服务器）体系的架构，Docker 客户端与 Docker 守护进程通信，Docker 守护进程负责构建，运行和分发 Docker 容器。Docker 客户端和守护进程可以在同一个系统上运行，也可以将 Docker 客户端连接到远程 Docker 守护进程。Docker 客户端和守护进程使用 REST API 通过UNIX套接字或网络接口进行通信。&lt;/p&gt;
+      <description>&lt;p&gt;Docker 使用 C/S （客户端/服务器）&lt;strong&gt;体系架构&lt;/strong&gt;，Docker 客户端与 Docker 守护进程通信，Docker 守护进程负责构建，运行和分发 Docker 容器。Docker 客户端和守护进程可以在同一个系统上运行，也可以将 Docker 客户端连接到远程 Docker 守护进程。Docker 客户端和守护进程使用 REST API 通过UNIX套接字或网络接口进行通信。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;/img/posts/DevOps/Docker/docker-structrue.png&#34; alt=&#34;docker-structrue&#34;&gt;&lt;/p&gt;</description>
     </item>
     
