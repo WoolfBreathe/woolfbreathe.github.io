@@ -268,6 +268,124 @@ autocomplete('#aa-search-input',
           	
 
             <article class="post-preview">
+              <a href="/post/devops/kubernetes/devops-kubernetes-install/">
+                <h2 class="post-title">Kubernetes Install</h2>
+                
+              </a>
+
+              <span class="post-meta">
+  
+    发表于 2021-05-24
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <table>
+<thead>
+<tr>
+<th>配置信息</th>
+<th>备注</th>
+<th>配置信息</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>系统版本</td>
+<td>Ubuntu20.04</td>
+<td>系统版本</td>
+<td>CentOS 7.9</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>1.20.0</td>
+<td>Docker</td>
+<td>19.03.x</td>
+</tr>
+<tr>
+<td>Etcd</td>
+<td>3.4.13</td>
+<td>CoreDNS</td>
+<td>1.7.0</td>
+</tr>
+<tr>
+<td>Calico</td>
+<td>3.15.3</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Pod网段</td>
+<td>172.16.0.0/12</td>
+<td>Service网段</td>
+<td>10.96.0.0/12</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>主机名</th>
+<th>IP地址</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>k8s-master01</td>
+<td>192.168.1.100</td>
+<td>master节点</td>
+</tr>
+<tr>
+<td>k8s-master02</td>
+<td>192.168.1.101</td>
+<td>master节点</td>
+</tr>
+<tr>
+<td>k8s-master03</td>
+<td>192.168.1.102</td>
+<td>master节点</td>
+</tr>
+<tr>
+<td>k8s-master-lb（在master节点）</td>
+<td>192.168.1.246</td>
+<td>keepalived虚拟IP</td>
+</tr>
+<tr>
+<td>k8s-node01</td>
+<td>192.168.1.103</td>
+<td>worker节点</td>
+</tr>
+<tr>
+<td>k8s-node02</td>
+<td>192.168.1.104</td>
+<td>worker节点</td>
+</tr>
+</tbody>
+</table>
+                  <a href="/post/devops/kubernetes/devops-kubernetes-install/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="/tags/devops/">DevOps</a>&nbsp;
+                
+                  #<a href="/tags/kubernetes/">Kubernetes</a>&nbsp;
+                
+                </span>
+              
+            </article>
+
+          
+
+          	
+
+            <article class="post-preview">
               <a href="/post/math/2021-05-06-matrixanalysis/">
                 <h2 class="post-title">Matrix Analysis</h2>
                 
@@ -348,6 +466,8 @@ autocomplete('#aa-search-input',
           
 
           	
+            
+          	
 
             <article class="post-preview">
               <a href="/post/devops/docker/devops-docker-install/">
@@ -383,8 +503,6 @@ autocomplete('#aa-search-input',
 
           
 
-          	
-            
           	
 
             <article class="post-preview">
@@ -705,42 +823,6 @@ class Girl(Base): __tablename__ = &#34;girl&#34; id = Column(Integer, primary_ke
                   #<a href="/tags/python/">Python</a>&nbsp;
                 
                   #<a href="/tags/sqlalchemy/">SQLAlchemy</a>&nbsp;
-                
-                </span>
-              
-            </article>
-
-          
-
-          	
-
-            <article class="post-preview">
-              <a href="/post/computerlanguages/php/computerlanguages-php-xdebug/">
-                <h2 class="post-title">Windows VSCode 远程调试 Homestead PHP</h2>
-                
-              </a>
-
-              <span class="post-meta">
-  
-    发表于 2020-04-29
-  
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  环境准备 Homestead VSCode 安装 PHP Debug 扩展 Chrome 安装 Xdebug helper 扩展程序 | FireFox 安装 Xdebug helper 扩展程序 Homestead PHP 版本要和 Windows PHP 版本 一致  VSCode 修改 launch.json { &#34;version&#34;: &#34;0.2.0&#34;, &#34;configurations&#34;: [ { &#34;name&#34;: &#34;Listen for XDebug&#34;, &#34;type&#34;: &#34;php&#34;, &#34;request&#34;: &#34;launch&#34;, &#34;port&#34;: 9000, &#34;stopOnEntry&#34;: false, &#34;pathMappings&#34;: { &#34;/home/vagrant/code/production/kwc&#34;:&#34;${workspaceRoot}&#34; }, &#34;log&#34;: true }, { &#34;name&#34;: &#34;Launch currently open script&#34;, &#34;type&#34;: &#34;php&#34;, &#34;request&#34;: &#34;launch&#34;, &#34;program&#34;: &#34;${workspaceRoot}/public/index.php&#34;, &#34;cwd&#34;: &#34;${workspaceRoot}/public/&#34;, &#34;port&#34;: 9000 } ] } 这里主要添加了 pathMappings 配置项：
-                  <a href="/post/computerlanguages/php/computerlanguages-php-xdebug/" class="post-read-more">[阅读全文]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="/tags/php/">PHP</a>&nbsp;
-                
-                  #<a href="/tags/laravel/">Laravel</a>&nbsp;
                 
                 </span>
               

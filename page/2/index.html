@@ -268,6 +268,42 @@ autocomplete('#aa-search-input',
           	
 
             <article class="post-preview">
+              <a href="/post/computerlanguages/php/computerlanguages-php-xdebug/">
+                <h2 class="post-title">Windows VSCode 远程调试 Homestead PHP</h2>
+                
+              </a>
+
+              <span class="post-meta">
+  
+    发表于 2020-04-29
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  环境准备 Homestead VSCode 安装 PHP Debug 扩展 Chrome 安装 Xdebug helper 扩展程序 | FireFox 安装 Xdebug helper 扩展程序 Homestead PHP 版本要和 Windows PHP 版本 一致  VSCode 修改 launch.json { &#34;version&#34;: &#34;0.2.0&#34;, &#34;configurations&#34;: [ { &#34;name&#34;: &#34;Listen for XDebug&#34;, &#34;type&#34;: &#34;php&#34;, &#34;request&#34;: &#34;launch&#34;, &#34;port&#34;: 9000, &#34;stopOnEntry&#34;: false, &#34;pathMappings&#34;: { &#34;/home/vagrant/code/production/kwc&#34;:&#34;${workspaceRoot}&#34; }, &#34;log&#34;: true }, { &#34;name&#34;: &#34;Launch currently open script&#34;, &#34;type&#34;: &#34;php&#34;, &#34;request&#34;: &#34;launch&#34;, &#34;program&#34;: &#34;${workspaceRoot}/public/index.php&#34;, &#34;cwd&#34;: &#34;${workspaceRoot}/public/&#34;, &#34;port&#34;: 9000 } ] } 这里主要添加了 pathMappings 配置项：
+                  <a href="/post/computerlanguages/php/computerlanguages-php-xdebug/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="/tags/php/">PHP</a>&nbsp;
+                
+                  #<a href="/tags/laravel/">Laravel</a>&nbsp;
+                
+                </span>
+              
+            </article>
+
+          
+
+          	
+
+            <article class="post-preview">
               <a href="/post/computerlanguages/php/computerlanguages-php-mockery/">
                 <h2 class="post-title">PHP测试替身 Mockery</h2>
                 
@@ -349,6 +385,8 @@ Ubuntu安装 安装Chrome sudo apt-get install libxss1 libappindicator1 libindic
           
 
           	
+            
+          	
 
             <article class="post-preview">
               <a href="/post/devops/linux/devops-linux-timedatectl/">
@@ -394,8 +432,6 @@ Ubuntu安装 安装Chrome sudo apt-get install libxss1 libappindicator1 libindic
 
           
 
-          	
-            
           	
 
             <article class="post-preview">
@@ -774,50 +810,6 @@ make install PREFIX=/usr/local/redis
             <span style="color:#ff79c6">include</span>        <span style="color:#f1fa8c">fastcgi_params</span>;
         }
 </code></pre></div>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="/tags/php/">PHP</a>&nbsp;
-                
-                  #<a href="/tags/laravel/">Laravel</a>&nbsp;
-                
-                </span>
-              
-            </article>
-
-          
-
-          	
-
-            <article class="post-preview">
-              <a href="/post/computerlanguages/php/computerlanguages-php-laravel-component/">
-                <h2 class="post-title">Laravel各种调试工具和常用工具</h2>
-                
-              </a>
-
-              <span class="post-meta">
-  
-    发表于 2019-12-02
-  
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  Laravel调试  注意:调试工具切忌不可在正式环境中打开, 否则重要信息会泄露
- Laravel-ddoc 数据字典 安装
-composer require jormin/laravel-ddoc --dev 发布
-php artisan vendor:publish --provider=&#34;Jormin\DDoc\DDocServiceProvider&#34; Laravel-log-viewer 日志 安装
-composer require rap2hpoutre/laravel-log-viewer --dev 发布
-php artisan vendor:publish --provider=&#34;Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider&#34; 添加路由 routes/web.php 中添加
-Route::get(&#39;logs&#39;, &#39;\Rap2hpoutre\LaravelLogViewer\LogViewerController@index&#39;); Telescope 调试工具 安装
-# 安装 Telescope composer require laravel/telescope --dev # Artisan 命令 telescope:install 发布其公共资源 php artisan telescope:install # 运行 migrate 命令执行数据库变更： php artisan migrate # 更新 Telescope 的时候，需要重新发布公共资源： php artisan telescope:publish 配置
-发布完 Telescope 的公共资源后，配置文件位于 config/telescope.
-                  <a href="/post/computerlanguages/php/computerlanguages-php-laravel-component/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 

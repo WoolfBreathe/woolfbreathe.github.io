@@ -268,6 +268,106 @@ autocomplete('#aa-search-input',
           	
 
             <article class="post-preview">
+              <a href="/post/algorithms/datastructures/algorithms-datastructures-hashtable/">
+                <h2 class="post-title">数据结构-散列表(HashTable, 哈希表)</h2>
+                
+              </a>
+
+              <span class="post-meta">
+  
+    发表于 2019-08-16
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  散列表(HashTable, 哈希表) 散列表（HashTable，也叫哈希表），是根据键（Key）直接访问在内存存储位置的数据结构。
+其实现原理是：通过散列函数（也叫哈希函数）将元素的键映射为数组下标（转化后的值叫做散列值或哈希值），然后在对应下标位置存储记录值。按照键值查询元素时，就是用同样的散列函数，将键值转化数组下标，从对应的数组下标的位置取数据：
+散列表用的是数组支持按照下标随机访问数据的特性，所以散列表其实就是数组的一种扩展，由数组演化而来。可以说，如果没有数组，就没有散列表。而 PHP 的关联数组干脆就是基于散列表实现。
+散列技术既是一种存储方法，也是一种查找方法。与之前的查找方法不同的是散列技术的记录之间不存在逻辑关系，因此主要是面向查找的数据结构。最适合求解的问题是查找给定值相等的记录。
+散列表中有两个关键的概念，一个是散列函数（或者哈希函数），一个是散列冲突（或者哈希冲突）。
+散列函数 散列函数用于将键值经过处理后转化为散列值。具有以下特性：
+散列函数计算得到的散列值是非负整数 如果 key1 == key2，则 hash(key1) == hash(key2) 如果 key1 != key2，则 hash(key1) != hash(key2)  散列冲突 所谓散列冲突，简单来说，指的是 key1 != key2 的情况下，通过散列函数处理，hash(key1) == hash(key2)，这个时候，发生了散列冲突。设计再好的散列函数也无法避免散列冲突，原因是散列值是非负整数，总量是有限的，但是现实世界中要处理的键值是无限的，将无限的数据映射到有限的集合，肯定避免不了冲突。
+事实上，如果不考虑散列冲突，散列表的查找效率是非常高的，时间复杂度是 O(1)，比二分查找效率还要高，但是因为无法避免散列冲突，所以散列表查找的时间复杂度取决于散列冲突，最坏的情况可能是 O(n)，退化为顺序查找。这种情况在散列函数设计不合理的情况下更糟。
+散列函数设计 $arr[&lsquo;test&rsquo;] = 123 这段代码，PHP 底层会将键值 test 通过散列函数转化为散列码，然后将 123 映射到这个散列码上。在不考虑哈希冲突的情况下，散列表查找、删除、插入的时间复杂度都是 O(1)，非常高效。
+要减少哈希冲突，提高散列表操作效率，设计一个优秀的散列函数至关重要，平时经常使用的 md5 函数就是一个散列函数，但是其实还有其他很多自定义的设计实现，要根据不同场景，设计不同的散列函数来减少散列冲突，而且散列函数本身也要很简单，否则执行散列函数本身会成为散列表的瓶颈。日常很少会自己去设计散列函数，但是做一些简单的了解还是有必要的。
+通常有以下几种散列函数构造方法：
+直接定址法：即 f(key) = a*key + b，f 表示散列函数，a、b 是常量，key 是键值 数字分析法：即对数字做左移、右移、反转等操作获取散列值 除数留余法：即 f(key) = key % p，p 表示容器数量，这种方式通常用在将数据存放到指定容器中，如何决定哪个数据放到哪个容器，比如分表后插入数据如何处理（此时 p 表示拆分后数据表的数量），分布式 Redis 如何存放数据（此时 p 表示几台 Redis 服务器） 随机数法：即 f(key) = random(key)，比如负载均衡的 random 机制  以上只是一些比较场景的散列函数设计思路，还有很多其他的设计方法，这里就不一一列举了。
+                  <a href="/post/algorithms/datastructures/algorithms-datastructures-hashtable/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                
+                </span>
+              
+            </article>
+
+          
+
+          	
+
+            <article class="post-preview">
+              <a href="/post/algorithms/binarysearch/algorithms-binarysearch-case/">
+                <h2 class="post-title">二分查找(BinarySearch)-索引查找</h2>
+                
+              </a>
+
+              <span class="post-meta">
+  
+    发表于 2019-08-15
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  IP 地址对应城市查询 每个城市都有对应的 IP 地址段，这个在网上搜一下就能拿到。然后可以将这些不同城市 IP 地址段起始值转化为整型数字（转化函数Google/百度搜下就能找到），进而对其进行排序，就可以得到一个有序的序列。比如杭州和北京，IP区间分别是 [183.128.0.0,183.159.255.255] 和 [110.96.0.0,110.127.255.255]，转化为数字后对应区间分别是 [3078619136,3080716287] 和 [1851785216,1853882367]，这样，就可以对这两个区间起始值排序为 [1851785216,3078619136]。
+此外我们还需要存储每个区间值对应的城市，以便找到对应位置后可以快速定位对应城市，可以把这个映射关系存储到数据库里面，存储字段包括城市、起始 IP、结束 IP，这里有一个前提是不同城市区间值不可能交叉，否则没法玩。
+接下来就是二分查找排上用场的时候了，将待查找 IP 转化为数字，然后在排序序列中查找最后一个起始 IP 小于等于待查找 IP 的位置，通过该起始 IP 在数据库中定位到对应记录，判断待查找 IP 是否在这个 IP 区间范围内，如果在的话则返回对应城市，不在的话，就返回没找到。
+稠密索引（数据库索引技术基础） 二分查找适用于有序线性表的查找，此外针对二分查找还有升级版的插值查找，以及利用斐波那契原理进行查找的斐波那契查找.
+二分查找不适用于高速增长的海量数据，因为维护这个排序非常麻烦，所以我们引出索引这种数据结构。
+索引是为了加快查找速度而设计的一种数据结构。索引就是把一个关键字与它对应的记录相关联的过程，一个索引由若干索引项构成，每个索引项至少包含关键字和其对应记录在存储器中的位置等信息。
+由此可见，索引技术是组织大型数据库和磁盘文件的一种重要技术。
+索引技术分为线性索引、树形索引和多级索引，这里我们只介绍线性索引。所谓线性索引就是将索引项集合组织为线性结构，也称索引表。以下是一个索引表的示例图：
+在线性索引中，我们重点介绍三种：稠密索引、分块索引和倒排索引。
+首先是稠密索引。稠密索引是指在线性表中，将数据集中的每个记录对应一个索引项。就像上面示例图中的那样。以主键为例，可以将其抽象化如下：
+对于稠密索引这个索引表来说，索引项一定按照关键码有序排列，这样可以应用二分查找，以免索引查找本身影响性能。可见，稠密索引性能可以做到和二分查找相当（找到对应关键码就可以通过指针直接指向对应记录），但是索引项长度和数据集一样长，空间复杂度高，如果数据太多需要存放到磁盘上，反复读取磁盘对性能影响很大。
+分块索引（数据库索引技术基础） 为了减少索引项个数，对数据集进行分块，并使其分块有序，然后再给每个分块建立一个索引项（索引值是分块中最大关键码），至于分块内部，则不管其有序性，从而减少索引项的个数。在查找的时候在索引项中通过二分查找找到指定索引项，然后根据该索引项中的关键码去相应分块遍历查找指定元素，这是一种折中方案，既兼顾了空间复杂度，又兼顾了时间复杂度。
+分块索引图示如下：
+这里面有几个概念需要阐述下，首先是分块有序，需要满足两个先决条件：
+块内无序。即每一块内的记录不要求有序。当然，有序更理想，只不过要花费大量时间和空间的代价。 块间有序。即要求后一块的所有关键字都大于前一块的所有关键字。只有块间有序，才能给查找带来效率。  其次，分块索引的索引项包含三个数据项：
+最大关键码：它存储每一块中的最大关键字。这样做的好处是在它之后的下一块中最小的关键字也能比这一块最大的关键字要大。 块长：存储块中的记录个数，以便于循环时使用。 块首指针：用于指向块首数据元素的指针，便于开始对这一块的记录开始遍历。  最后，在分块索引中查找，分两块进行：
+在分块索引表中查找要查找关键字所在的块。由于块间有序，所以可以通过二分查找快速定位（通过不小于给定值的第一个元素，不大于给定值的最后一个元素确定区间，以前面给出的示例图为例，58位于57和96之间，则会去第三块中查找）。 根据块首指针找到相应的块，并在块中顺序查找指定值（即关键码，块中无序所以只能顺序查找）。  分块索引的时间复杂度是：O(log(m)+n)，其中 m 是分块数，n 是块内元素个数，在索引表长度和块内元素相等时，时间复杂度最优。性能要优于顺序查找，但是比二分查找要差。
+总体来说，分块索引在兼顾存储空间和查找性能的情况下，被普遍用于数据库查找等技术中。
+倒排索引（搜素引擎技术基础） 百度、Google 等搜索引擎为我们日常查找信息带来了巨大的方便，你是否思考过搜索引擎是如何从海量 HTML 文档中通过关键词查找资源的？今天给大家介绍最简单，也是最基础的搜索引擎技术 —— 倒排索引。
+有倒排索引，就有正向索引，正向索引指的是通过文档 ID 找到对应的文档，如果通过文档ID查找对应文档，再在文档中匹配关键词，意味着要扫描所有文档，最后还要排序，对于互联网上的海量资源来说，显然是不可取的。
+                  <a href="/post/algorithms/binarysearch/algorithms-binarysearch-case/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                
+                  #<a href="/tags/binarysearch/">BinarySearch</a>&nbsp;
+                
+                </span>
+              
+            </article>
+
+          
+
+          	
+
+            <article class="post-preview">
               <a href="/post/algorithms/binarysearch/algorithms-binarysearch-interval/">
                 <h2 class="post-title">二分查找(BinarySearch)-区间查找</h2>
                 
@@ -304,6 +404,8 @@ autocomplete('#aa-search-input',
 
           
 
+          	
+            
           	
 
             <article class="post-preview">
@@ -385,8 +487,6 @@ autocomplete('#aa-search-input',
 
           
 
-          	
-            
           	
 
             <article class="post-preview">
@@ -719,85 +819,6 @@ F0 = 0 F1 = 1 ... F(n) = F(n-1) + F(n-2) 这样，同时有了终止条件和递
 栈支持通过数组/链表实现，通过数组实现的通常叫做顺序栈，通过链表实现的叫做链栈。下面简单演示下如何在 PHP 中通过数组实现一个简单的顺序栈：
 &lt;?php /** * 通过 PHP 数组实现简单的顺序栈 */ class SimpleStack { private $_stack = []; private $_size = 0; public function __construct($size = 10) { $this-&gt;_size = $size; } // 获取栈顶元素 public function pop() { // 空栈 if (count($this-&gt;_stack) == 0) { return false; } return array_pop($this-&gt;_stack); } // 推送元素到栈顶 public function push($value) { // 满栈 if (count($this-&gt;_stack) == $this-&gt;_size) { return false; } array_push($this-&gt;_stack, $value); return true; } public function isEmpty() { // 是否是空栈 return current($this-&gt;_stack) == false; } public function size() { return count($this-&gt;_stack); } } $stack = new SimpleStack(15); var_dump($stack-&gt;isEmpty()); # true $stack-&gt;push(111); $stack-&gt;push(&#39;学院君&#39;); var_dump($stack-&gt;pop()); # 学院君 var_dump($stack-&gt;size()); # 1 在 PHP 底层 SPL 库中也提供了堆栈的实现类 SplStack，堆栈的概念比较简单，理解起来也不复杂，下面给出一个图示，帮助了解栈的操作流程：
                   <a href="/post/algorithms/datastructures/algorithms-datastructures-stack/" class="post-read-more">[阅读全文]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
-                
-                </span>
-              
-            </article>
-
-          
-
-          	
-
-            <article class="post-preview">
-              <a href="/post/algorithms/datastructures/algorithms-datastructures-linkedlist/">
-                <h2 class="post-title">数据结构-链表(LinkedList)</h2>
-                
-              </a>
-
-              <span class="post-meta">
-  
-    发表于 2019-08-03
-  
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  链表(LinkedList) 链表并不需要一块连续的内存空间，它通过“指针”将一组零散的内存块串联起来使用，如图所示：
-单链表 链表有多种类型，最简单的是单链表，单链表是最原生的链表，其结构如图所示： 单链表中有两个节点比较特殊，分别是第一个结点和最后一个结点。通常把第一个结点叫作头结点，把最后一个结点叫作尾结点。其中，头结点用来记录链表的基地址，有了它，就可以遍历得到整条链表。而尾结点特殊的地方是：指针不是指向下一个结点，而是指向一个空地址 NULL，表示这是链表上最后一个结点。对单链表而言，理论上来说，插入和删除节点的时间复杂度是 O(1)，查询节点的时间复杂度是 O(n)。
-循环链表 然后还有在单链表的基础上扩展还有循环链表，循环链表和单链表的区别是尾节点指向了头结点，从而首尾相连，有点像贪吃蛇，可用于解决「约瑟夫环」问题，循环链表的结构如图所示：
-双向链表 顾名思义，与单链表的区别是双向链表除了有一个指向下一个节点的指针外，还有一个用于指向上一个节点的指针，从而实现通过 O(1) 复杂度找到上一个节点。正是因为这个节点，使得双向链表在插入、删除节点时比单链表更高效，虽然前面已经提到单链表插入、删除时间复杂度已经是 O(1) 了，但是这没有考虑还只是针对插入、删除操作本身而言，以删除为例，删除某个节点后，需要将其前驱节点的指针指向被删除节点的下一个节点，这样，还需要获取其前驱节点，在单链表中获取前驱节点的时间复杂度是 O(n)，所以综合来看单链表的删除、插入操作时间复杂度也是 O(n)，而双向链表则不然，它有一个指针指向上一个节点，所以其插入和删除时间复杂度才是真正的 O(1)。
-此外，对于有序链表而言，双向链表的查询效率显然也要高于单链表，不过更优的时间复杂度是靠更差的空间复杂度换取的，双向链表始终需要单链表的两倍空间，但是正如之前说的，在 Web 应用中，时间效率优先级更高，所以通常都是空间换时间来提高性能，Java 的 LinkedHashMap 底层就用到了双向链表。
-双向链表的结构如图所示：
-双向循环链表 最后要介绍的是结合循环链表和双向链表为一体的双向循环链表：
-其实就是将双向链表的首尾通过指针连接起来。 通过数组函数模拟实现单链表
-在 PHP 中由于没有指针，可以借助数组的 next、current、key 等函数实现链表这个数据结构：
-&lt;?php /** * 通过 PHP 数组模拟实现单链表 */ class LinkedList { private $list = []; // 获取链表指定位置的元素值，从0开始 public function get($index) { $value = NULL; while (current($this-&gt;list)) { if (key($this-&gt;list) == $index) { $value = current($this-&gt;list); } next($this-&gt;list); } reset($this-&gt;list); return $value; } // 在链表指定位置插入值，默认插到链表头部 public function add($value, $index = 0) { array_splice($this-&gt;list, $index, 0, $value); } // 从链表指定位置删除元素 public function remove($index) { array_splice($this-&gt;list, $index, 1); } public function isEmpty() { return !
-                  <a href="/post/algorithms/datastructures/algorithms-datastructures-linkedlist/" class="post-read-more">[阅读全文]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
-                
-                </span>
-              
-            </article>
-
-          
-
-          	
-
-            <article class="post-preview">
-              <a href="/post/algorithms/datastructures/algorithms-datastructures-array/">
-                <h2 class="post-title">数据结构-数组(Array)</h2>
-                
-              </a>
-
-              <span class="post-meta">
-  
-    发表于 2019-08-02
-  
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  <h1 id="数组array">数组(Array)</h1>
-<p>数组（Array）是一种线性表数据结构，它用一组连续的内存空间，来存储一组具有相同类型的数据。如果学习过 C 语言，应该对这段定义很熟悉，但是在 PHP 这种动态语言中，因为数组底层是通过散列表实现的，所以功能异常强大，这段常规的数组定义在 PHP 中并不成立，PHP 的数组可以存储任何类型数据，如果与 Java 对比的话，PHP 数组集成了 Java 的数组、List、Set、Map 于一身，所以写代码的效率比 Java 高了几个量级。</p>
-<p>抛开 PHP 或 JavaScript 这种动态语言，对于传统的数组，比如 C 语言和 Java 中的数组，在使用之前都需要声明数组存储数据的类型和数组的大小，数组的优点是可以通过下标值随机访问数组内的任何元素，算法复杂度是 O(1)，非常高效，但是缺点是删除/插入元素比较费劲，以删除为例，需要在删除某个元素后，将后续元素都往前移一位，如果是插入，则需要将插入位置之后的元素都往后移，所以对数组的插入/删除而言，算法复杂度是 O(n)，当然了，这个是针对 C / Java 这种语言而言，PHP 不受此约束，因为它不是传统一样上的数组嘛。</p>
-
                 
               </div>
 

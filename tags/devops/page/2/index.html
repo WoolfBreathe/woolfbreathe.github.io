@@ -189,6 +189,40 @@ autocomplete('#aa-search-input',
         <div class="posts-list">
           
             <article class="post-preview">
+              <a href="/post/devops/linux/devops-linux-homestead/">
+                <h2 class="post-title">Homestead(Windows系统Laravel环境搭建)</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-11-27
+              </p>
+              <div class="post-entry">
+                
+                  步骤简略  接下来让我们按照这几个步骤来完成整个 Laravel 开发环境的安装及配置： 安装 VirtualBox 安装 Vagrant 导入 Homestead Box 虚拟机盒子 安装 Git 安装 Homestead 管理脚本 配置 Homestead.yaml 文件 启动 Homestead 虚拟机
+ 安装 VirtualBox VirtualBox 是 Oracle 公司的开源虚拟机软件。VirtualBox 号称是最强的免费虚拟机软件，它不仅功能齐全，而且性能也很优异！VirtualBox 支持大部分流行的系统，如：Mac, Windows, Linux 等。
+安装 Vagrant Vagrant 是用来管理虚拟机的工具，支持当前主流的虚拟机系统如 VirtualBox、VMware、AWS 等。Vagrant 的主要作用是提供一个可配置、可移植和复用的软件环境。Vagrant 让你通过编写一个 Vagrantfile 文件来控制虚拟机的启动、虚拟机网络环境的配置、虚拟机与主机间的文件共享，以及启动后自动执行一些配置脚本，如自动执行一个 Shell Script 来安装一些必备的开发工具，如安装配置 MySQL、PHP，甚至是自动配置 Nginx 站点。这意味着，在一个多人开发的项目中，你只需要同步 Vagrantfile 文件，就可以保证参与项目的每个人各自的机器上拥有一致的开发环境。
+Homestead 介绍 Homestead 利用 Vagrantfile 提供的便利，定制了一整套的可配置、可移植和复用的 Laravel 开发环境。Homestead 虚拟机里面包含了 Nginx Web 服务器、PHP 7、MySQL、Postgres、Redis、Memcached、Node，以及所有你在使用 Laravel 开发时需要用到的各种软件。 Homestead 包含了两个东西： Homestead 管理脚本； Homestead Box 虚拟机盒子。 接下来独自说明下。
+                  <a href="/post/devops/linux/devops-linux-homestead/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/devops/">DevOps</a>&nbsp;
+                  
+                    #<a href="/tags/vagrant/">Vagrant</a>&nbsp;
+                  
+                    #<a href="/tags/homestead/">Homestead</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
               <a href="/post/devops/linux/devops-linux-ssh/">
                 <h2 class="post-title">Linux SSH</h2>
 
@@ -209,6 +243,43 @@ PasswordAuthentication no  设置root用户不能使用密码登录,必须使用
 PermitRootLogin without-password （设置root用户只能用密钥登录） PasswordAuthentication yes （其他用户可以使用密码登录）  首次登录去掉验证 /etc/ssh/ssh_config
 # StrictHostKeyChecking ask 改成 StrictHostKeyChecking no  非root用户设置 需要先设置用户的默认目录(使用该命令请确保该用户下没有运行的软件或进程)
                   <a href="/post/devops/linux/devops-linux-ssh/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/devops/">DevOps</a>&nbsp;
+                  
+                    #<a href="/tags/linux/">Linux</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/post/devops/git/devops-linux-multiuser/">
+                <h2 class="post-title">MultiUser</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-11-19
+              </p>
+              <div class="post-entry">
+                
+                  配置多个Git用户使用密钥 首先呢，要为不同的Github账号配置不同的Git账号
+为A用户生成：
+$ git config user.name &#34;A&#34;$ git config user.email &#34;A@hotmail.com&#34;注意：这里git config命令没有带—global，表示这是一个局部的设置，也就是这个用户是当前项目的，而不是全局的。
+为B用户配置：
+$ git config user.name &#34;B&#34;$ git config user.email &#34;B@gmail.com&#34;在~/.ssh/ 下创建 config文件，可以添加多个账号，减少认证的问题, 并以如下格式编辑配置文件
+为不同的用户生成SSH密钥 一般的Git服务器为了安全，都会需要我们提供一个安全的SSH密钥，默认情况下，生成密钥的文件名都是一样的，但是不同的用户，必须设置不同文件名的密钥文件，否则会发生覆盖。密钥生成后，添加到服务端（如Github）
+为A用户生成SSH：
+$ ssh-keygen -t rsa -C &#34;A@hotmail.com&#34;运行后，会然你输入存储密钥文件的地址和密码，自己决定就行，最好是用默认的路径，然后修改下密钥文件名，类似下面的：
+Enter passphrase (empty for no passphrase):Enter same passphrase again:Your identification has been saved in /c/Users/lange/.ssh/id_rsa.Your public key has been saved in /c/Users/lange/.ssh/github_id_rsa.pub.The key fingerprint is:SHA256:mRAluu98izlMRIQhaezphUvRHnkEH5HFm+aAX6wtXBU zlzsam@hotmail.
+                  <a href="/post/devops/git/devops-linux-multiuser/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 

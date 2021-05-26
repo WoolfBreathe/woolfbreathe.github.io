@@ -475,6 +475,43 @@ PermitRootLogin without-password （设置root用户只能用密钥登录） Pas
 
             </article>
           
+            <article class="post-preview">
+              <a href="/post/devops/git/devops-linux-multiuser/">
+                <h2 class="post-title">MultiUser</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2019-11-19
+              </p>
+              <div class="post-entry">
+                
+                  配置多个Git用户使用密钥 首先呢，要为不同的Github账号配置不同的Git账号
+为A用户生成：
+$ git config user.name &#34;A&#34;$ git config user.email &#34;A@hotmail.com&#34;注意：这里git config命令没有带—global，表示这是一个局部的设置，也就是这个用户是当前项目的，而不是全局的。
+为B用户配置：
+$ git config user.name &#34;B&#34;$ git config user.email &#34;B@gmail.com&#34;在~/.ssh/ 下创建 config文件，可以添加多个账号，减少认证的问题, 并以如下格式编辑配置文件
+为不同的用户生成SSH密钥 一般的Git服务器为了安全，都会需要我们提供一个安全的SSH密钥，默认情况下，生成密钥的文件名都是一样的，但是不同的用户，必须设置不同文件名的密钥文件，否则会发生覆盖。密钥生成后，添加到服务端（如Github）
+为A用户生成SSH：
+$ ssh-keygen -t rsa -C &#34;A@hotmail.com&#34;运行后，会然你输入存储密钥文件的地址和密码，自己决定就行，最好是用默认的路径，然后修改下密钥文件名，类似下面的：
+Enter passphrase (empty for no passphrase):Enter same passphrase again:Your identification has been saved in /c/Users/lange/.ssh/id_rsa.Your public key has been saved in /c/Users/lange/.ssh/github_id_rsa.pub.The key fingerprint is:SHA256:mRAluu98izlMRIQhaezphUvRHnkEH5HFm+aAX6wtXBU zlzsam@hotmail.
+                  <a href="/post/devops/git/devops-linux-multiuser/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/devops/">DevOps</a>&nbsp;
+                  
+                    #<a href="/tags/linux/">Linux</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
         </div>
         
       </div>

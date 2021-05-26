@@ -268,6 +268,85 @@ autocomplete('#aa-search-input',
           	
 
             <article class="post-preview">
+              <a href="/post/algorithms/datastructures/algorithms-datastructures-linkedlist/">
+                <h2 class="post-title">数据结构-链表(LinkedList)</h2>
+                
+              </a>
+
+              <span class="post-meta">
+  
+    发表于 2019-08-03
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  链表(LinkedList) 链表并不需要一块连续的内存空间，它通过“指针”将一组零散的内存块串联起来使用，如图所示：
+单链表 链表有多种类型，最简单的是单链表，单链表是最原生的链表，其结构如图所示： 单链表中有两个节点比较特殊，分别是第一个结点和最后一个结点。通常把第一个结点叫作头结点，把最后一个结点叫作尾结点。其中，头结点用来记录链表的基地址，有了它，就可以遍历得到整条链表。而尾结点特殊的地方是：指针不是指向下一个结点，而是指向一个空地址 NULL，表示这是链表上最后一个结点。对单链表而言，理论上来说，插入和删除节点的时间复杂度是 O(1)，查询节点的时间复杂度是 O(n)。
+循环链表 然后还有在单链表的基础上扩展还有循环链表，循环链表和单链表的区别是尾节点指向了头结点，从而首尾相连，有点像贪吃蛇，可用于解决「约瑟夫环」问题，循环链表的结构如图所示：
+双向链表 顾名思义，与单链表的区别是双向链表除了有一个指向下一个节点的指针外，还有一个用于指向上一个节点的指针，从而实现通过 O(1) 复杂度找到上一个节点。正是因为这个节点，使得双向链表在插入、删除节点时比单链表更高效，虽然前面已经提到单链表插入、删除时间复杂度已经是 O(1) 了，但是这没有考虑还只是针对插入、删除操作本身而言，以删除为例，删除某个节点后，需要将其前驱节点的指针指向被删除节点的下一个节点，这样，还需要获取其前驱节点，在单链表中获取前驱节点的时间复杂度是 O(n)，所以综合来看单链表的删除、插入操作时间复杂度也是 O(n)，而双向链表则不然，它有一个指针指向上一个节点，所以其插入和删除时间复杂度才是真正的 O(1)。
+此外，对于有序链表而言，双向链表的查询效率显然也要高于单链表，不过更优的时间复杂度是靠更差的空间复杂度换取的，双向链表始终需要单链表的两倍空间，但是正如之前说的，在 Web 应用中，时间效率优先级更高，所以通常都是空间换时间来提高性能，Java 的 LinkedHashMap 底层就用到了双向链表。
+双向链表的结构如图所示：
+双向循环链表 最后要介绍的是结合循环链表和双向链表为一体的双向循环链表：
+其实就是将双向链表的首尾通过指针连接起来。 通过数组函数模拟实现单链表
+在 PHP 中由于没有指针，可以借助数组的 next、current、key 等函数实现链表这个数据结构：
+&lt;?php /** * 通过 PHP 数组模拟实现单链表 */ class LinkedList { private $list = []; // 获取链表指定位置的元素值，从0开始 public function get($index) { $value = NULL; while (current($this-&gt;list)) { if (key($this-&gt;list) == $index) { $value = current($this-&gt;list); } next($this-&gt;list); } reset($this-&gt;list); return $value; } // 在链表指定位置插入值，默认插到链表头部 public function add($value, $index = 0) { array_splice($this-&gt;list, $index, 0, $value); } // 从链表指定位置删除元素 public function remove($index) { array_splice($this-&gt;list, $index, 1); } public function isEmpty() { return !
+                  <a href="/post/algorithms/datastructures/algorithms-datastructures-linkedlist/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                
+                </span>
+              
+            </article>
+
+          
+
+          	
+
+            <article class="post-preview">
+              <a href="/post/algorithms/datastructures/algorithms-datastructures-array/">
+                <h2 class="post-title">数据结构-数组(Array)</h2>
+                
+              </a>
+
+              <span class="post-meta">
+  
+    发表于 2019-08-02
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <h1 id="数组array">数组(Array)</h1>
+<p>数组（Array）是一种线性表数据结构，它用一组连续的内存空间，来存储一组具有相同类型的数据。如果学习过 C 语言，应该对这段定义很熟悉，但是在 PHP 这种动态语言中，因为数组底层是通过散列表实现的，所以功能异常强大，这段常规的数组定义在 PHP 中并不成立，PHP 的数组可以存储任何类型数据，如果与 Java 对比的话，PHP 数组集成了 Java 的数组、List、Set、Map 于一身，所以写代码的效率比 Java 高了几个量级。</p>
+<p>抛开 PHP 或 JavaScript 这种动态语言，对于传统的数组，比如 C 语言和 Java 中的数组，在使用之前都需要声明数组存储数据的类型和数组的大小，数组的优点是可以通过下标值随机访问数组内的任何元素，算法复杂度是 O(1)，非常高效，但是缺点是删除/插入元素比较费劲，以删除为例，需要在删除某个元素后，将后续元素都往前移一位，如果是插入，则需要将插入位置之后的元素都往后移，所以对数组的插入/删除而言，算法复杂度是 O(n)，当然了，这个是针对 C / Java 这种语言而言，PHP 不受此约束，因为它不是传统一样上的数组嘛。</p>
+
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                
+                </span>
+              
+            </article>
+
+          
+
+          	
+
+            <article class="post-preview">
               <a href="/post/algorithms/basis/algorithms-base-conception/">
                 <h2 class="post-title">算法(Algorithms)-概念</h2>
                 
@@ -318,6 +397,8 @@ autocomplete('#aa-search-input',
 
           
 
+          	
+            
           	
 
             <article class="post-preview">
@@ -418,8 +499,6 @@ git commit -m &#39;update .gitignore&#39;
 
           
 
-          	
-            
           	
 
             <article class="post-preview">
@@ -695,6 +774,8 @@ git commit -m &#39;update .gitignore&#39;
 </ul>
 
 
+          
+          
           
           
           
