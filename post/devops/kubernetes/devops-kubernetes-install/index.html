@@ -1248,7 +1248,7 @@ EFO
 </code></pre></div><h4 id="73启动并查看集群状态任意master">7.3、启动并查看集群状态（任意master）</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">systemctl start etcd
 
-etcdctl --endpoints<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;192.168.1.102:2379,192.168.1.101:2379,192.168.1.100:2379&#34;</span> --cacert<span style="color:#ff79c6">=</span>/etc/kubernetes/pki/etcd/etcd-ca.pem --cert<span style="color:#ff79c6">=</span>/etc/kubernetes/pki/etcd/etcd.pem --key<span style="color:#ff79c6">=</span>/etc/kubernetes/pki/etcd/etcd-key.pem  endpoint status --write-out<span style="color:#ff79c6">=</span>table
+etcdctl --endpoints<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">ETCD_ENDPOINTS</span><span style="color:#f1fa8c">}</span> --cacert<span style="color:#ff79c6">=</span>/etc/kubernetes/pki/etcd/etcd-ca.pem --cert<span style="color:#ff79c6">=</span>/etc/kubernetes/pki/etcd/etcd.pem --key<span style="color:#ff79c6">=</span>/etc/kubernetes/pki/etcd/etcd-key.pem  endpoint status --write-out<span style="color:#ff79c6">=</span>table
 </code></pre></div><p>输出如下结果：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">+--------------------+------------------+---------+---------+-----------+------------+-----------+------------+--------------------+--------+
 |      ENDPOINT      |        ID        | VERSION | DB SIZE | IS LEADER | IS LEARNER | RAFT TERM | RAFT INDEX | RAFT APPLIED INDEX | ERRORS |
@@ -1497,7 +1497,7 @@ clusterrolebinding.rbac.authorization.k8s.io/system:kube-apiserver created
 </span><span style="color:#f1fa8c">syncFrequency: 1m0s
 </span><span style="color:#f1fa8c">volumeStatsAggPeriod: 1m0s
 </span><span style="color:#f1fa8c">EFO</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cat &gt; /usr/lib/systemd/system/kubelet.service <span style="color:#f1fa8c">&lt;&lt;EOF
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cat &gt; /usr/lib/systemd/system/kubelet.service <span style="color:#f1fa8c">&lt;&lt;EFO
 </span><span style="color:#f1fa8c">
 </span><span style="color:#f1fa8c">[Unit]
 </span><span style="color:#f1fa8c">Description=Kubernetes Kubelet
@@ -1506,24 +1506,25 @@ clusterrolebinding.rbac.authorization.k8s.io/system:kube-apiserver created
 </span><span style="color:#f1fa8c">Requires=docker.service
 </span><span style="color:#f1fa8c">
 </span><span style="color:#f1fa8c">[Service]
-</span><span style="color:#f1fa8c">E</span>xecStart<span style="color:#ff79c6">=</span>/usr/local/bin/kubelet <span style="color:#f1fa8c">\
-</span><span style="color:#f1fa8c"></span>    --bootstrap-kubeconfig<span style="color:#ff79c6">=</span>/etc/kubernetes/bootstrap-kubelet.kubeconfig <span style="color:#f1fa8c">\
-</span><span style="color:#f1fa8c"></span>    --kubeconfig<span style="color:#ff79c6">=</span>/etc/kubernetes/kubelet.kubeconfig <span style="color:#f1fa8c">\
-</span><span style="color:#f1fa8c"></span>    --network-plugin<span style="color:#ff79c6">=</span>cni <span style="color:#f1fa8c">\
-</span><span style="color:#f1fa8c"></span>    --cni-conf-dir<span style="color:#ff79c6">=</span>/etc/cni/net.d <span style="color:#f1fa8c">\
-</span><span style="color:#f1fa8c"></span>    --cni-bin-dir<span style="color:#ff79c6">=</span>/opt/cni/bin <span style="color:#f1fa8c">\
-</span><span style="color:#f1fa8c"></span>    --cgroup-driver<span style="color:#ff79c6">=</span>cgroupfs <span style="color:#f1fa8c">\
-</span><span style="color:#f1fa8c"></span>    --config<span style="color:#ff79c6">=</span>/etc/kubernetes/kubelet-conf.yml <span style="color:#f1fa8c">\
-</span><span style="color:#f1fa8c"></span>    --pod-infra-container-image<span style="color:#ff79c6">=</span>registry.cn-hangzhou.aliyuncs.com/google_containers/pause-amd64:3.2 <span style="color:#f1fa8c">\
-</span><span style="color:#f1fa8c"></span>    --node-labels<span style="color:#ff79c6">=</span>node.kubernetes.io/node<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#39;&#39;</span>
-
-<span style="color:#8be9fd;font-style:italic">Restart</span><span style="color:#ff79c6">=</span>always
-<span style="color:#8be9fd;font-style:italic">StartLimitInterval</span><span style="color:#ff79c6">=</span><span style="color:#bd93f9">0</span>
-<span style="color:#8be9fd;font-style:italic">RestartSec</span><span style="color:#ff79c6">=</span><span style="color:#bd93f9">10</span>
-
-<span style="color:#ff79c6">[</span>Install<span style="color:#ff79c6">]</span>
-<span style="color:#8be9fd;font-style:italic">WantedBy</span><span style="color:#ff79c6">=</span>multi-user.target
-EFO
+</span><span style="color:#f1fa8c">ExecStart=/usr/local/bin/kubelet \\
+</span><span style="color:#f1fa8c">    --node-ip=${NODE_IP} \\
+</span><span style="color:#f1fa8c">    --bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.kubeconfig \\
+</span><span style="color:#f1fa8c">    --kubeconfig=/etc/kubernetes/kubelet.kubeconfig \\
+</span><span style="color:#f1fa8c">    --network-plugin=cni \\
+</span><span style="color:#f1fa8c">    --cni-conf-dir=/etc/cni/net.d \\
+</span><span style="color:#f1fa8c">    --cni-bin-dir=/opt/cni/bin \\
+</span><span style="color:#f1fa8c">    --cgroup-driver=cgroupfs \\
+</span><span style="color:#f1fa8c">    --config=/etc/kubernetes/kubelet-conf.yml \\
+</span><span style="color:#f1fa8c">    --pod-infra-container-image=registry.cn-hangzhou.aliyuncs.com/google_containers/pause-amd64:3.2 \\
+</span><span style="color:#f1fa8c">    --node-labels=node.kubernetes.io/node=&#39;&#39;
+</span><span style="color:#f1fa8c">
+</span><span style="color:#f1fa8c">Restart=always
+</span><span style="color:#f1fa8c">StartLimitInterval=0
+</span><span style="color:#f1fa8c">RestartSec=10
+</span><span style="color:#f1fa8c">
+</span><span style="color:#f1fa8c">[Install]
+</span><span style="color:#f1fa8c">WantedBy=multi-user.target
+</span><span style="color:#f1fa8c">EFO</span>
 </code></pre></div><p>启动kubelet</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">systemctl start kubelet
 </code></pre></div><p>查看集群状态（matser01上）</p>
@@ -1747,8 +1748,10 @@ kubernetes-dashboard   NodePort   10.96.77.112   &lt;none&gt;        443:30902/T
   
         
     <div id="gitalk-container"></div>
-    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    
+    
+    <link rel="stylesheet" href="/css/gitalk.css" />
+    <script src="/js/gitalk.min.js"></script>
     <script>
     var gitalk = new Gitalk({
         clientID: '',
