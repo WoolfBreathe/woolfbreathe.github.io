@@ -466,22 +466,21 @@ autocomplete('#aa-search-input',
   <ul>
     <li><a href="#kubernetes-二进制安装">Kubernetes 二进制安装</a>
       <ul>
-        <li><a href="#二基础环境配置以下操作所有节点都得执行">二、基础环境配置（以下操作所有节点都得执行）</a></li>
-        <li><a href="#21换源">2.1、换源</a></li>
-        <li><a href="#三内核升级centos">三、内核升级(Centos)</a></li>
-        <li><a href="#四运行环境准备">四、运行环境准备</a></li>
-        <li><a href="#五docker启动">五、Docker启动</a></li>
-        <li><a href="#六下载安装源码文件master01上">六、下载安装源码文件：（Master01上）</a></li>
-        <li><a href="#七生成证书">七、生成证书</a></li>
-        <li><a href="#七kubernetes系统组件配置">七、Kubernetes系统组件配置</a></li>
-        <li><a href="#八高可用配置">八、高可用配置</a></li>
-        <li><a href="#九kubernetes组件配置master">九、Kubernetes组件配置(Master)</a></li>
-        <li><a href="#十tls-bootstrapping配置">十、TLS Bootstrapping配置</a></li>
-        <li><a href="#十一node节点配置">十一、Node节点配置</a></li>
-        <li><a href="#十二安装calico">十二、安装Calico</a></li>
-        <li><a href="#十三安装coredns">十三、安装CoreDNS</a></li>
-        <li><a href="#十四安装metrics-server">十四、安装Metrics Server</a></li>
-        <li><a href="#十五安装dashboard">十五、安装dashboard</a></li>
+        <li><a href="#一基础环境配置以下操作所有节点都得执行">一、基础环境配置（以下操作所有节点都得执行）</a></li>
+        <li><a href="#13更换yum源码centos系统">1.3、更换yum源码(Centos系统)</a></li>
+        <li><a href="#二运行环境准备">二、运行环境准备</a></li>
+        <li><a href="#三docker启动">三、Docker启动</a></li>
+        <li><a href="#四下载安装源码文件master01上">四、下载安装源码文件：（Master01上）</a></li>
+        <li><a href="#五生成证书">五、生成证书</a></li>
+        <li><a href="#六kubernetes系统组件配置">六、Kubernetes系统组件配置</a></li>
+        <li><a href="#七高可用配置">七、高可用配置</a></li>
+        <li><a href="#八kubernetes组件配置master">八、Kubernetes组件配置(Master)</a></li>
+        <li><a href="#九tls-bootstrapping配置">九、TLS Bootstrapping配置</a></li>
+        <li><a href="#十node节点配置">十、Node节点配置</a></li>
+        <li><a href="#十一安装calico">十一、安装Calico</a></li>
+        <li><a href="#十二安装coredns">十二、安装CoreDNS</a></li>
+        <li><a href="#十三安装metrics-server">十三、安装Metrics Server</a></li>
+        <li><a href="#十四安装dashboard">十四、安装dashboard</a></li>
       </ul>
     </li>
     <li><a href="#附录">附录</a>
@@ -591,8 +590,8 @@ autocomplete('#aa-search-input',
 </tbody>
 </table>
 <h2 id="kubernetes-二进制安装">Kubernetes 二进制安装</h2>
-<h3 id="二基础环境配置以下操作所有节点都得执行">二、基础环境配置（以下操作所有节点都得执行）</h3>
-<h4 id="21配置hosts解析">2.1、配置hosts解析</h4>
+<h3 id="一基础环境配置以下操作所有节点都得执行">一、基础环境配置（以下操作所有节点都得执行）</h3>
+<h4 id="11配置hosts解析">1.1、配置hosts解析</h4>
 <p>修改主机名字</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># hostnamectl set-hostname k8s-master01</span>
 </code></pre></div><p>配置Host文件</p>
@@ -609,7 +608,7 @@ autocomplete('#aa-search-input',
 192.168.1.103 k8s-node01
 192.168.1.104 k8s-node02
 EFO
-</code></pre></div><h4 id="环境变量">环境变量</h4>
+</code></pre></div><h4 id="12环境变量">1.2、环境变量</h4>
 <p><em><strong>每个服务器的NODE_NAME和NODE_NAME需要单独修改</strong></em></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cat &gt; /etc/profile.d/k8s-env.sh <span style="color:#f1fa8c">&lt;&lt;EFO
 </span><span style="color:#f1fa8c"># TLS Bootstrapping 使用的Token，可以使用命令 head -c 16 /dev/urandom | od -An -t x | tr -d &#39; &#39; 生成
@@ -617,16 +616,16 @@ EFO
 </span><span style="color:#f1fa8c">
 </span><span style="color:#f1fa8c"># 建议使用未用的网段来定义服务网段和Pod 网段
 </span><span style="color:#f1fa8c"># 服务网段(Service CIDR)，部署前路由不可达，部署后集群内部使用IP:Port可达
-</span><span style="color:#f1fa8c">SERVICE_CIDR=&#34;10.96.0.0/12&#34;
+</span><span style="color:#f1fa8c">SERVICE_CIDR=&#34;10.254.0.0/16&#34;
 </span><span style="color:#f1fa8c">
 </span><span style="color:#f1fa8c"># Pod 网段(Cluster CIDR)，部署前路由不可达，部署后路由可达(flanneld 保证)
-</span><span style="color:#f1fa8c">CLUSTER_CIDR=&#34;172.16.0.0/12&#34;
+</span><span style="color:#f1fa8c">CLUSTER_CIDR=&#34;172.30.0.0/16&#34;
 </span><span style="color:#f1fa8c">
 </span><span style="color:#f1fa8c"># kubernetes 服务IP(预先分配，一般为SERVICE_CIDR中的第一个IP)
-</span><span style="color:#f1fa8c">CLUSTER_KUBERNETES_SVC_IP=&#34;10.96.0.1&#34;
+</span><span style="color:#f1fa8c">CLUSTER_KUBERNETES_SVC_IP=&#34;10.254.0.1&#34;
 </span><span style="color:#f1fa8c">
 </span><span style="color:#f1fa8c"># 集群 DNS 服务IP(从SERVICE_CIDR 中预先分配)
-</span><span style="color:#f1fa8c">CLUSTER_DNS_SVC_IP=&#34;10.96.0.10&#34;
+</span><span style="color:#f1fa8c">CLUSTER_DNS_SVC_IP=&#34;10.254.0.2&#34;
 </span><span style="color:#f1fa8c">
 </span><span style="color:#f1fa8c"># 集群 DNS 域名
 </span><span style="color:#f1fa8c">CLUSTER_DNS_DOMAIN=&#34;cluster.local.&#34;
@@ -634,7 +633,7 @@ EFO
 </span><span style="color:#f1fa8c"># MASTER API Server 地址
 </span><span style="color:#f1fa8c">MASTER_URL=&#34;k8s-api.virtual.local&#34;
 </span><span style="color:#f1fa8c">
-</span><span style="color:#f1fa8c">KUBE_APISERVER=&#34;https://k8s-api.virtual.local:6443&#34;
+</span><span style="color:#f1fa8c">KUBE_APISERVER=&#34;https://${MASTER_URL}:6443&#34;
 </span><span style="color:#f1fa8c">
 </span><span style="color:#f1fa8c"># 服务端口范围(NodePort Range)
 </span><span style="color:#f1fa8c">NODE_PORT_RANGE=&#34;30000-32766&#34;
@@ -660,8 +659,7 @@ EFO
 </span><span style="color:#f1fa8c">WorkNodes=&#34;k8s-node01 k8s-node02&#34;
 </span><span style="color:#f1fa8c">
 </span><span style="color:#f1fa8c"># CA 集群所有机器 IP
-</span><span style="color:#f1fa8c">CANodes=&#34;10.96.0.1,10.96.0.10,127.0.0.1,192.168.1.100,k8s-api.virtual.local,k8s-api,kubernetes,kubernetes.default,kubernetes.default.svc,kubernetes.default.svc.cluster,kubernetes.default.svc.cluster.local,k8s-master01,k8s-master02,k8s-master03,k8s-node01,k8s-node02&#34;
-</span><span style="color:#f1fa8c">
+</span><span style="color:#f1fa8c">CANodes=&#34;${CLUSTER_DNS_SVC_IP},${NODE_IP},127.0.0.1,k8s-api.virtual.local,k8s-api,kubernetes,kubernetes.default,kubernetes.default.svc,kubernetes.default.svc.cluster,kubernetes.default.svc.cluster.local,k8s-master01,k8s-master02,k8s-master03,k8s-node01,k8s-node02&#34;
 </span><span style="color:#f1fa8c">
 </span><span style="color:#f1fa8c">
 </span><span style="color:#f1fa8c">
@@ -671,8 +669,7 @@ EFO
 </span><span style="color:#f1fa8c"># Etcd 集群间通信的IP和端口(注意:服务器名字要和IP对应)
 </span><span style="color:#f1fa8c">ETCD_NODES=&#34;k8s-master01=https://192.168.1.100:2380,k8s-master02=https://192.168.1.101:2380,k8s-master03=https://192.168.1.102:2380&#34;
 </span><span style="color:#f1fa8c">EFO</span>
-</code></pre></div><h3 id="21换源">2.1、换源</h3>
-<p>Centos</p>
+</code></pre></div><h3 id="13更换yum源码centos系统">1.3、更换yum源码(Centos系统)</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo</span>
 
 <span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># yum install -y yum-utils device-mapper-persistent-data lvm2</span>
@@ -690,39 +687,11 @@ EFO
 EFO
 
 <span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># sed -i -e &#39;/mirrors.cloud.aliyuncs.com/d&#39; -e &#39;/mirrors.aliyuncs.com/d&#39; /etc/yum.repos.d/CentOS-Base.repo</span>
-</code></pre></div><p>Ubuntu</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo cp /etc/apt/sources.list /etc/apt/sources.list.bat
-
-<span style="color:#6272a4"># 查看版本代号</span>
-<span style="color:#6272a4"># Ubuntu 15.04 代号为：vivid</span>
-<span style="color:#6272a4"># Ubuntu 16.04代号为：xenial</span>
-<span style="color:#6272a4"># Ubuntu 17.04代号为：zesty</span>
-<span style="color:#6272a4"># Ubuntu 18.04代号为：bionic</span>
-<span style="color:#6272a4"># Ubuntu 19.04代号为：disco</span>
-<span style="color:#6272a4"># Ubuntu 20.04代号为：focal</span> 
-
-lsb_release -c
-
-<span style="color:#6272a4"># 编辑</span>
-sudo vim /etc/apt/sources.list
-
-deb http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse
-deb http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse
-deb http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse
-deb http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse
-deb http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse
-deb-src http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse
-</code></pre></div><p>添加公钥</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">apt-key adv --keyserver keyserver.ubuntu.com --recv-keys <span style="color:#f1fa8c">&#39;公钥编码&#39;</span>
-</code></pre></div><h4 id="22安装常用工具">2.2、安装常用工具</h4>
+</code></pre></div><h4 id="14安装常用工具">1.4、安装常用工具</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># yum install wget jq psmisc vim net-tools telnet yum-utils device-mapper-persistent-data lvm2 git lrzsz -y</span>
 
 <span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># yum install ipvsadm ipset sysstat conntrack libseccomp -y</span>
-</code></pre></div><h4 id="23关闭防火墙selinuxdnsmasqswap">2.3、关闭防火墙、selinux、dnsmasq、swap</h4>
+</code></pre></div><h4 id="15关闭防火墙selinuxdnsmasqswap">1.5、关闭防火墙、selinux、dnsmasq、swap</h4>
 <p>Centos</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># systemctl disable --now firewalld</span> 
 <span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># systemctl disable --now dnsmasq</span>
@@ -740,7 +709,7 @@ deb-src http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted univers
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># swapoff -a &amp;&amp; sysctl -w vm.swappiness=0</span>
 <span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># sed -ri &#39;/^[^#]*swap/s@^@#@&#39; /etc/fstab</span>
 </code></pre></div><p><a href="#f1.1">附录: 参考文档</a></p>
-<h4 id="24时间同步配置">2.4、时间同步配置</h4>
+<h4 id="16时间同步配置">1.6、时间同步配置</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># yum install chrony -y</span>
 <span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># systemctl enable chronyd</span>
 <span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># systemctl start chronyd</span>
@@ -754,11 +723,7 @@ MS Name/IP address         Stratum Poll Reach LastRx Last <span style="color:#8b
 ^* 119.28.183.184                <span style="color:#bd93f9">2</span>   <span style="color:#bd93f9">6</span>    <span style="color:#bd93f9">33</span>    <span style="color:#bd93f9">32</span>   +661us<span style="color:#ff79c6">[</span> +357us<span style="color:#ff79c6">]</span> +/-   38ms
 $ date
 Tue Aug <span style="color:#bd93f9">27</span> 09:28:41 CST <span style="color:#bd93f9">2019</span>
-</code></pre></div><p>Conetos</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#39;Asia/Shanghai&#39;</span> &gt;/etc/timezone
-</code></pre></div><p>Ubuntu</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">timedatectl set-timezone Asia/Shanghai
-</code></pre></div><h4 id="25优化linux">2.5、优化Linux</h4>
+</code></pre></div><h4 id="17优化linux">1.7、优化Linux</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#8be9fd;font-style:italic">ulimit</span> -SHn <span style="color:#bd93f9">65535</span>
 
 vi /etc/security/limits.conf
@@ -772,40 +737,7 @@ vi /etc/security/limits.conf
 
 <span style="color:#6272a4"># 然后重启Linux</span>
 reboot
-</code></pre></div><h4 id="26所有节点升级系统并重启此处升级没有升级内核下节会单独升级内核">2.6、所有节点升级系统并重启，此处升级没有升级内核，下节会单独升级内核</h4>
-<p>CentOS</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># CentOS7需要升级，CentOS8可以按需升级系统</span>
-yum update -y --exclude<span style="color:#ff79c6">=</span>kernel* <span style="color:#ff79c6">&amp;&amp;</span> reboot 
-</code></pre></div><p>Ubuntu</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">apt-get update
-
-apt-get upgrade
-</code></pre></div><h3 id="三内核升级centos">三、内核升级(Centos)</h3>
-<h4 id="31配置免密登录master01上">3.1、配置免密登录（Master01上）</h4>
-<p><em><strong>Master01节点免密钥登录其他节点，安装过程中生成配置文件和证书均在Master01上操作，集群管理也在Master01上操作，阿里云或者AWS上需要单独一台kubectl服务器。密钥配置如下：</strong></em></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 一直回车就行</span>
-ssh-keygen -t rsa 
-
-<span style="color:#ff79c6">for</span> <span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">NODE</span><span style="color:#f1fa8c">}</span> in <span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">MasterNodes</span><span style="color:#f1fa8c">}</span>;<span style="color:#ff79c6">do</span> ssh-copy-id -i .ssh/id_rsa.pub <span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">NODE</span><span style="color:#f1fa8c">}</span>;<span style="color:#ff79c6">done</span>
-</code></pre></div><h4 id="33下载升级所需安装包master01上">3.3、下载升级所需安装包（Master01上）</h4>
-<p><em><strong>CentOS7 需要升级内核至4.18+，本地升级的版本为4.19</strong></em></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 在master01节点下载内核</span>
-wget http://193.49.22.109/elrepo/kernel/el7/x86_64/RPMS/kernel-ml-devel-4.19.12-1.el7.elrepo.x86_64.rpm
-wget http://193.49.22.109/elrepo/kernel/el7/x86_64/RPMS/kernel-ml-4.19.12-1.el7.elrepo.x86_64.rpm
-</code></pre></div><h4 id="34内核升级所有节点">3.4、内核升级（所有节点）</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 安装内核</span>
-<span style="color:#8be9fd;font-style:italic">cd</span> /root <span style="color:#ff79c6">&amp;&amp;</span> yum localinstall -y kernel-ml*
-grub2-set-default  <span style="color:#bd93f9">0</span> <span style="color:#ff79c6">&amp;&amp;</span> grub2-mkconfig -o /etc/grub2.cfg
-grubby --args<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;user_namespace.enable=1&#34;</span> --update-kernel<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;</span><span style="color:#ff79c6">$(</span>grubby --default-kernel<span style="color:#ff79c6">)</span><span style="color:#f1fa8c">&#34;</span>
-
-<span style="color:#6272a4"># 检查默认内核是不是4.19</span>
-grubby --default-kernel /boot/vmlinuz-4.19.12-1.el7.elrepo.x86_64
-
-<span style="color:#6272a4"># 所有节点重启，然后检查内核是不是4.19</span>
-reboot
-<span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># uname -a</span>
-Linux k8s-node02 4.19.12-1.el7.elrepo.x86_64 <span style="color:#6272a4">#1 SMP Fri Dec 21 11:06:36 EST 2018 x86_64 x86_64 x86_64 GNU/Linux</span>
-</code></pre></div><h4 id="35安装ipvsadm所有节点">3.5、安装ipvsadm（所有节点）</h4>
+</code></pre></div><h4 id="18安装ipvsadm所有节点">1.8、安装ipvsadm（所有节点）</h4>
 <p><em><strong>所有节点配置ipvs模块，在内核4.19+版本nf_conntrack_ipv4已经改为nf_conntrack， 4.18以下使用nf_conntrack_ipv4即可：</strong></em></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 加入以下内容</span>
 cat &gt; /etc/modules-load.d/ipvs.conf <span style="color:#f1fa8c">&lt;&lt; EFO
@@ -835,7 +767,7 @@ cat &gt; /etc/modules-load.d/ipvs.conf <span style="color:#f1fa8c">&lt;&lt; EFO
 
 <span style="color:#6272a4"># 然后执行</span>
 systemctl restart systemd-modules-load.service
-</code></pre></div><h4 id="36开启一些k8s集群中必须的内核参数配置k8s内核所有节点">3.6、开启一些k8s集群中必须的内核参数，配置k8s内核（所有节点）</h4>
+</code></pre></div><h4 id="19开启一些k8s集群中必须的内核参数配置k8s内核所有节点">1.9、开启一些k8s集群中必须的内核参数，配置k8s内核（所有节点）</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cat <span style="color:#f1fa8c">&lt;&lt;EFO &gt; /etc/sysctl.d/k8s.conf
 </span><span style="color:#f1fa8c">net.ipv4.ip_forward = 1
 </span><span style="color:#f1fa8c">net.bridge.bridge-nf-call-iptables = 1
@@ -880,45 +812,33 @@ nf_conntrack          <span style="color:#bd93f9">143360</span>  <span style="co
 nf_defrag_ipv6         <span style="color:#bd93f9">20480</span>  <span style="color:#bd93f9">1</span> nf_conntrack
 nf_defrag_ipv4         <span style="color:#bd93f9">16384</span>  <span style="color:#bd93f9">1</span> nf_conntrack
 libcrc32c              <span style="color:#bd93f9">16384</span>  <span style="color:#bd93f9">4</span> nf_conntrack,nf_nat,xfs,ip_vs
-</code></pre></div><p><em><strong>Ubuntu</strong></em></p>
-<p>因为Gemfield的K8s集群即将部署的是calico网络插件，而calico需要这个内核参数是0或者1，但是Ubuntu20.04上默认是2，这样就会导致calico插件报下面的错误（这是个fatal级别的error）：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">int_dataplane.go 1035: Kernel<span style="color:#f1fa8c">&#39;s RPF check is set to &#39;</span>loose<span style="color:#f1fa8c">&#39;.  \
-</span><span style="color:#f1fa8c">This would allow endpoints to spoof their IP address.  \
-</span><span style="color:#f1fa8c">Calico requires net.ipv4.conf.all.rp_filter to be set to 0 or 1. \
-</span><span style="color:#f1fa8c">If you require loose RPF and you are not concerned about spoofing, \
-</span><span style="color:#f1fa8c">this check can be disabled by setting the IgnoreLooseRPF configuration parameter to &#39;</span>true&#39;.
-</code></pre></div><p>修改这个参数的值：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4">#修改/etc/sysctl.d/10-network-security.conf</span>
-gemfield@ai05:~$ sudo vi /etc/sysctl.d/10-network-security.conf
-
-<span style="color:#6272a4">#将下面两个参数的值从2修改为1</span>
-net.ipv4.conf.default.rp_filter<span style="color:#ff79c6">=</span><span style="color:#bd93f9">1</span>
-net.ipv4.conf.all.rp_filter<span style="color:#ff79c6">=</span><span style="color:#bd93f9">1</span>
-
-</code></pre></div><p>重新加载内核参数</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sysctl --system
-</code></pre></div><h3 id="四运行环境准备">四、运行环境准备</h3>
-<h4 id="41下载kubernetes安装包">4.1、下载kubernetes安装包</h4>
+</code></pre></div><h3 id="二运行环境准备">二、运行环境准备</h3>
+<h4 id="21下载kubernetes安装包">2.1、下载kubernetes安装包</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 注意目前版本是1.20.0，你们安装时需要下载最新的1.20.x版本：</span>
 <span style="color:#6272a4"># https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/</span>
 <span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># wget https://dl.k8s.io/v1.20.0/kubernetes-server-linux-amd64.tar.gz</span>
 </code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># tar -xf kubernetes-server-linux-amd64.tar.gz</span>
-</code></pre></div><h4 id="42下载etcd安装包">4.2、下载etcd安装包</h4>
+
+<span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># for NODE in ${MasterNodes}; do echo ${NODE}; scp kubernetes/server/bin/kube{let,ctl,-apiserver,-controller-manager,-scheduler,-proxy} ${NODE}:/usr/local/bin/; done</span>
+
+<span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># for NODE in ${WorkNodes}; do scp kubernetes/server/bin/kube{let,-proxy} ${NODE}:/usr/local/bin/ ; done</span>
+</code></pre></div><h4 id="22下载etcd安装包">2.2、下载etcd安装包</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># wget https://github.com/etcd-io/etcd/releases/download/v3.4.13/etcd-v3.4.13-linux-amd64.tar.gz</span>
 </code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># tar -zxvf etcd-v3.4.13-linux-amd64.tar.gz --strip-components=1 -C /usr/local/bin etcd-v3.4.13-linux-amd64/etcd{,ctl}</span>
 
-</code></pre></div><h4 id="43-下载docker所有机器上">4.3 下载docker(所有机器上)</h4>
+<span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># for NODE in ${EtcdNodes}; do echo ${NODE}; scp etcd-v3.4.13-linux-amd64/etcd{,ctl} ${NODE}:/usr/local/bin/; done</span>
+
+</code></pre></div><h4 id="23-下载docker所有机器上">2.3 下载docker(所有机器上)</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># wget https://download.docker.com/linux/static/stable/x86_64/docker-19.03.9.tgz</span>
 </code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># tar -zxvf docker-19.03.9.tgz</span>
-</code></pre></div><h4 id="44-下载calicoctlmaster01">4.4 下载calicoctl(Master01)</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># wget  https://github.com/projectcalico/calicoctl/releases/download/v3.15.3/calicoctl</span>
-</code></pre></div><h4 id="45-复制到可执行目录下">4.5 复制到可执行目录下</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cp kubernetes/server/bin/kube<span style="color:#ff79c6">{</span>let,ctl,-apiserver,-controller-manager,-scheduler,-proxy<span style="color:#ff79c6">}</span> /usr/local/bin
-cp etcd-v3.4.13-linux-amd64/etcd<span style="color:#ff79c6">{</span>,ctl<span style="color:#ff79c6">}</span> /usr/local/bin
-cp calicoctl /usr/local/bin
-cp docker/* /usr/local/bin
-cp cfssl_linux-amd64 /usr/local/bin/cfssl
-cp cfssljson_linux-amd64  /usr/local/bin/cfssljson
+
+<span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># for NODE in ${MasterNodes}; do echo ${NODE}; scp docker/* ${NODE}:/usr/local/bin/; done</span>
+
+<span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># for NODE in ${WorkNodes}; do echo ${NODE}; scp docker/* ${NODE}:/usr/local/bin/; done</span>
+</code></pre></div><h4 id="24-下载calicoctlmaster01">2.4 下载calicoctl(Master01)</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># curl -O -L  https://github.com/projectcalico/calicoctl/releases/download/v3.15.3/calicoctl</span>
+
+<span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># for NODE in ${MasterNodes}; do echo ${NODE}; scp calicoctl ${NODE}:/usr/local/bin/; done</span>
 </code></pre></div><h4 id="下载生成证书工具master01">下载生成证书工具（Master01）</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">wget <span style="color:#f1fa8c">&#34;https://pkg.cfssl.org/R1.2/cfssl_linux-amd64&#34;</span> -O /usr/local/bin/cfssl
 wget <span style="color:#f1fa8c">&#34;https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64&#34;</span> -O /usr/local/bin/cfssljson
@@ -926,17 +846,11 @@ wget <span style="color:#f1fa8c">&#34;https://pkg.cfssl.org/R1.2/cfssljson_linux
 <span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># mv cfssl_linux-amd64 /usr/local/bin/cfssl</span>
 <span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># mv cfssljson_linux-amd64  /usr/local/bin/cfssljson</span>
 <span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># chmod +x /usr/local/bin/cfssl /usr/local/bin/cfssljson</span>
-</code></pre></div><h4 id="49-创建目录">4.9 创建目录</h4>
+</code></pre></div><h4 id="25-创建目录">2.5 创建目录</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">mkdir -p /opt/cni/bin
 mkdir -p /etc/etcd/ssl
-mkdir -p /etc/kubernetes/manifests/
-mkdir -p /etc/kubernetes/pki/etcd
-mkdir -p /root/.kube
-mkdir -p /etc/docker
-mkdir -p /var/lib/kubelet 
-mkdir -p /var/log/kubernetes
-mkdir -p /etc/systemd/system/kubelet.service.d
-</code></pre></div><h3 id="五docker启动">五、Docker启动</h3>
+mkdir -p /etc/kubernetes/pki
+</code></pre></div><h3 id="三docker启动">三、Docker启动</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cat &gt; /etc/docker/daemon.json <span style="color:#f1fa8c">&lt;&lt;EFO
 </span><span style="color:#f1fa8c">{  
 </span><span style="color:#f1fa8c">    &#34;registry-mirrors&#34;: [
@@ -980,79 +894,16 @@ mkdir -p /etc/systemd/system/kubelet.service.d
 </span><span style="color:#f1fa8c">WantedBy=multi-user.target
 </span><span style="color:#f1fa8c">EFO</span>
 </code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">systemctl daemon-reload <span style="color:#ff79c6">&amp;&amp;</span> systemctl start docker
-</code></pre></div><h4 id="下载镜像">下载镜像</h4>
-<p>网速不好或服务器性能不够的情况, 会造成莫名其妙的错误, 最好提前下载好所需镜像</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker pull registry.cn-beijing.aliyuncs.com/dotbalo/cni:v3.15.3
-docker pull registry.cn-beijing.aliyuncs.com/dotbalo/pod2daemon-flexvol:v3.15.3
-docker pull registry.cn-beijing.aliyuncs.com/dotbalo/node:v3.15.3
-docker pull registry.cn-beijing.aliyuncs.com/dotbalo/kube-controllers:v3.15.3
-docker pull registry.cn-beijing.aliyuncs.com/dotbalo/coredns:1.7.0
-docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/kube-proxy-amd64:v1.11.3
-docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/pause-amd64:3.2
-docker pull registry.cn-beijing.aliyuncs.com/dotbalo/metrics-server:v0.4.1
-docker pull registry.cn-beijing.aliyuncs.com/dotbalo/dashboard:v2.0.4
-docker pull registry.cn-beijing.aliyuncs.com/dotbalo/metrics-scraper:v1.0.4
-</code></pre></div><h3 id="六下载安装源码文件master01上">六、下载安装源码文件：（Master01上）</h3>
+</code></pre></div><h3 id="四下载安装源码文件master01上">四、下载安装源码文件：（Master01上）</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">git clone https://github.com/dotbalo/k8s-ha-install.git
 
 <span style="color:#6272a4"># 切换分之</span>
 git checkout manual-installation-v1.20.x
-</code></pre></div><h3 id="七生成证书">七、生成证书</h3>
-<p>Kubernetes 系统各个组件需要使用TLS证书对通信进行加密，这里我们使用CloudFlare的PKI 工具集cfssl 来生成Certificate Authority(CA) 证书和密钥文件， CA 是自签名的证书，用来签名后续创建的其他TLS 证书。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ cat ca-config.json
-<span style="color:#ff79c6">{</span>
-    <span style="color:#f1fa8c">&#34;signing&#34;</span>: <span style="color:#ff79c6">{</span>
-        <span style="color:#f1fa8c">&#34;default&#34;</span>: <span style="color:#ff79c6">{</span>
-            <span style="color:#f1fa8c">&#34;expiry&#34;</span>: <span style="color:#f1fa8c">&#34;87600h&#34;</span>
-        <span style="color:#ff79c6">}</span>,
-        <span style="color:#f1fa8c">&#34;profiles&#34;</span>: <span style="color:#ff79c6">{</span>
-            <span style="color:#f1fa8c">&#34;kubernetes&#34;</span>: <span style="color:#ff79c6">{</span>
-                <span style="color:#f1fa8c">&#34;expiry&#34;</span>: <span style="color:#f1fa8c">&#34;87600h&#34;</span>,
-                <span style="color:#f1fa8c">&#34;usages&#34;</span>: <span style="color:#ff79c6">[</span>
-                    <span style="color:#f1fa8c">&#34;signing&#34;</span>,
-                    <span style="color:#f1fa8c">&#34;key encipherment&#34;</span>,
-                    <span style="color:#f1fa8c">&#34;server auth&#34;</span>,
-                    <span style="color:#f1fa8c">&#34;client auth&#34;</span>
-                <span style="color:#ff79c6">]</span>
-            <span style="color:#ff79c6">}</span>
-        <span style="color:#ff79c6">}</span>
-    <span style="color:#ff79c6">}</span>
-<span style="color:#ff79c6">}</span>
-</code></pre></div><blockquote>
-<p>config.json：可以定义多个profiles，分别指定不同的过期时间、使用场景等参数；后续在签名证书时使用某个profile；
-signing: 表示该证书可用于签名其它证书；生成的ca.pem 证书中CA=TRUE；
-server auth: 表示client 可以用该CA 对server 提供的证书进行校验；
-client auth: 表示server 可以用该CA 对client 提供的证书进行验证。</p>
-</blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">$ cat ca-csr.json
-<span style="color:#ff79c6">{</span>
-    <span style="color:#f1fa8c">&#34;CN&#34;</span>: <span style="color:#f1fa8c">&#34;kubernetes&#34;</span>,
-    <span style="color:#f1fa8c">&#34;hosts&#34;</span>: <span style="color:#ff79c6">[</span>
-        <span style="color:#f1fa8c">&#34;127.0.0.1&#34;</span>
-    <span style="color:#ff79c6">]</span>,
-    <span style="color:#f1fa8c">&#34;key&#34;</span>: <span style="color:#ff79c6">{</span>
-        <span style="color:#f1fa8c">&#34;algo&#34;</span>: <span style="color:#f1fa8c">&#34;rsa&#34;</span>,
-        <span style="color:#f1fa8c">&#34;size&#34;</span>: <span style="color:#bd93f9">2048</span>
-    <span style="color:#ff79c6">}</span>,
-    <span style="color:#f1fa8c">&#34;names&#34;</span>: <span style="color:#ff79c6">[</span>
-        <span style="color:#ff79c6">{</span>
-            <span style="color:#f1fa8c">&#34;C&#34;</span>: <span style="color:#f1fa8c">&#34;CN&#34;</span>,
-            <span style="color:#f1fa8c">&#34;L&#34;</span>: <span style="color:#f1fa8c">&#34;BeiJing&#34;</span>,
-            <span style="color:#f1fa8c">&#34;ST&#34;</span>: <span style="color:#f1fa8c">&#34;BeiJing&#34;</span>,
-            <span style="color:#f1fa8c">&#34;O&#34;</span>: <span style="color:#f1fa8c">&#34;k8s&#34;</span>,
-            <span style="color:#f1fa8c">&#34;OU&#34;</span>: <span style="color:#f1fa8c">&#34;System&#34;</span>
-        <span style="color:#ff79c6">}</span>
-    <span style="color:#ff79c6">]</span>
-<span style="color:#ff79c6">}</span>
-</code></pre></div><blockquote>
-<p>CN: Common Name，kube-apiserver 从证书中提取该字段作为请求的用户名(User Name)；浏览器使用该字段验证网站是否合法；
-O: Organization，kube-apiserver 从证书中提取该字段作为请求用户所属的组(Group)；
-hosts 字段指定授权使用该证书的节点IP</p>
-</blockquote>
+</code></pre></div><h3 id="五生成证书">五、生成证书</h3>
 <p><em><strong>二进制安装最关键步骤，一步错误全盘皆输</strong></em></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 生成证书的CSR文件：证书签名请求文件，配置了一些域名、公司、单位</span>
 <span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># cd k8s-ha-install/pki</span>
-</code></pre></div><h4 id="61生成etcd-ca证书和ca证书的key">6.1、生成Etcd CA证书和CA证书的key</h4>
+</code></pre></div><h4 id="51生成etcd-ca证书和ca证书的key">5.1、生成Etcd CA证书和CA证书的key</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">[</span>root@k8s-master01 pki<span style="color:#ff79c6">]</span><span style="color:#6272a4"># cfssl gencert -initca etcd-ca-csr.json | cfssljson -bare /etc/etcd/ssl/etcd-ca</span>
 
 <span style="color:#ff79c6">[</span>root@k8s-master01 pki<span style="color:#ff79c6">]</span><span style="color:#6272a4"># cfssl gencert \</span>
@@ -1063,8 +914,15 @@ hosts 字段指定授权使用该证书的节点IP</p>
 </span><span style="color:#f1fa8c"></span>   -profile<span style="color:#ff79c6">=</span>kubernetes <span style="color:#f1fa8c">\
 </span><span style="color:#f1fa8c"></span>   etcd-csr.json | cfssljson -bare /etc/etcd/ssl/etcd
 
+<span style="color:#ff79c6">[</span>root@k8s-master01 pki<span style="color:#ff79c6">]</span><span style="color:#6272a4"># for NODE in ${EtcdNodes}; do</span>
+    ssh <span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">NODE</span><span style="color:#f1fa8c">}</span> <span style="color:#f1fa8c">&#34;mkdir -p /etc/etcd/ssl&#34;</span>
+    <span style="color:#ff79c6">for</span> FILE in etcd-ca-key.pem  etcd-ca.pem  etcd-key.pem  etcd.pem; <span style="color:#ff79c6">do</span>
+    scp /etc/etcd/ssl/<span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">FILE</span><span style="color:#f1fa8c">}</span> <span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">NODE</span><span style="color:#f1fa8c">}</span>:/etc/etcd/ssl/<span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">FILE</span><span style="color:#f1fa8c">}</span>
+    <span style="color:#ff79c6">done</span>
+<span style="color:#ff79c6">done</span>
+
 <span style="color:#ff79c6">[</span>root@k8s-master01 pki<span style="color:#ff79c6">]</span><span style="color:#6272a4"># ln -s /etc/etcd/ssl/* /etc/kubernetes/pki/etcd/</span>
-</code></pre></div><h4 id="62k8s组件证书">6.2、k8s组件证书</h4>
+</code></pre></div><h4 id="52k8s组件证书">5.2、k8s组件证书</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">[</span>root@k8s-master01 pki<span style="color:#ff79c6">]</span><span style="color:#6272a4"># cfssl gencert -initca ca-csr.json | cfssljson -bare /etc/kubernetes/pki/ca</span>
 
 <span style="color:#ff79c6">[</span>root@k8s-master01 pki<span style="color:#ff79c6">]</span><span style="color:#6272a4"># cfssl gencert \</span>
@@ -1085,11 +943,11 @@ cfssl gencert <span style="color:#f1fa8c">\
 </code></pre></div><p>生成controller-manage的证书（Master01节点）</p>
 <p><em><strong>注意，如果不是高可用集群，192.168.1.246:8443改为master01的地址，8443改为apiserver的端口，默认是6443</strong></em></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">[</span>root@k8s-master01 pki<span style="color:#ff79c6">]</span><span style="color:#6272a4"># cfssl gencert \</span>
-    -ca<span style="color:#ff79c6">=</span>/etc/kubernetes/pki/ca.pem <span style="color:#f1fa8c">\
-</span><span style="color:#f1fa8c"></span>    -ca-key<span style="color:#ff79c6">=</span>/etc/kubernetes/pki/ca-key.pem <span style="color:#f1fa8c">\
-</span><span style="color:#f1fa8c"></span>    -config<span style="color:#ff79c6">=</span>ca-config.json <span style="color:#f1fa8c">\
-</span><span style="color:#f1fa8c"></span>    -profile<span style="color:#ff79c6">=</span>kubernetes <span style="color:#f1fa8c">\
-</span><span style="color:#f1fa8c"></span>    manager-csr.json | cfssljson -bare /etc/kubernetes/pki/controller-manager
+   -ca<span style="color:#ff79c6">=</span>/etc/kubernetes/pki/ca.pem <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>   -ca-key<span style="color:#ff79c6">=</span>/etc/kubernetes/pki/ca-key.pem <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>   -config<span style="color:#ff79c6">=</span>ca-config.json <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>   -profile<span style="color:#ff79c6">=</span>kubernetes <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>   manager-csr.json | cfssljson -bare /etc/kubernetes/pki/controller-manager
 
 <span style="color:#6272a4"># set-cluster：设置一个集群项,192.168.1.246是VIP</span>
 <span style="color:#ff79c6">[</span>root@k8s-master01 pki<span style="color:#ff79c6">]</span><span style="color:#6272a4"># kubectl config set-cluster kubernetes \</span>
@@ -1144,13 +1002,6 @@ kubectl config use-context system:kube-scheduler@kubernetes <span style="color:#
 </span><span style="color:#f1fa8c"></span>    --kubeconfig<span style="color:#ff79c6">=</span>/etc/kubernetes/scheduler.kubeconfig
 </code></pre></div><p>生成admin的证书（Master01节点）</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">
-cfssl gencert <span style="color:#f1fa8c">\
-</span><span style="color:#f1fa8c"></span>    -ca<span style="color:#ff79c6">=</span>/etc/kubernetes/pki/ca.pem <span style="color:#f1fa8c">\
-</span><span style="color:#f1fa8c"></span>    -ca-key<span style="color:#ff79c6">=</span>/etc/kubernetes/pki/ca-key.pem <span style="color:#f1fa8c">\
-</span><span style="color:#f1fa8c"></span>    -config<span style="color:#ff79c6">=</span>ca-config.json <span style="color:#f1fa8c">\
-</span><span style="color:#f1fa8c"></span>    -profile<span style="color:#ff79c6">=</span>kubernetes <span style="color:#f1fa8c">\
-</span><span style="color:#f1fa8c"></span>    admin-csr.json | cfssljson -bare /etc/kubernetes/pki/admin
-
 kubectl config set-cluster kubernetes <span style="color:#f1fa8c">\
 </span><span style="color:#f1fa8c"></span>    --certificate-authority<span style="color:#ff79c6">=</span>/etc/kubernetes/pki/ca.pem <span style="color:#f1fa8c">\
 </span><span style="color:#f1fa8c"></span>    --embed-certs<span style="color:#ff79c6">=</span><span style="color:#8be9fd;font-style:italic">true</span> <span style="color:#f1fa8c">\
@@ -1172,16 +1023,24 @@ kubectl config use-context kubernetes-admin@kubernetes --kubeconfig<span style="
 
 mkdir -p /root/.kube ; cp /etc/kubernetes/admin.kubeconfig /root/.kube/config
 
-</code></pre></div><h4 id="63创建serviceaccount-key-à-secret">6.3、创建ServiceAccount Key à secret</h4>
+</code></pre></div><h4 id="53创建serviceaccount-key-à-secret">5.3、创建ServiceAccount Key à secret</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">[</span>root@k8s-master01 pki<span style="color:#ff79c6">]</span><span style="color:#6272a4"># openssl genrsa -out /etc/kubernetes/pki/sa.key 2048</span>
 
 <span style="color:#ff79c6">[</span>root@k8s-master01 pki<span style="color:#ff79c6">]</span><span style="color:#6272a4"># openssl rsa -in /etc/kubernetes/pki/sa.key -pubout -out /etc/kubernetes/pki/sa.pub</span>
-</code></pre></div><h3 id="七kubernetes系统组件配置">七、Kubernetes系统组件配置</h3>
-<h4 id="71etcd配置所有master节点">7.1、Etcd配置（所有Master节点）</h4>
+</code></pre></div><h4 id="54发送证书至其他节点">5.4、发送证书至其他节点</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">for</span> NODE in <span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">MasterNodes</span><span style="color:#f1fa8c">}</span>; <span style="color:#ff79c6">do</span> 
+    <span style="color:#ff79c6">for</span> FILE in <span style="color:#ff79c6">$(</span>ls /etc/kubernetes/pki | grep -v etcd<span style="color:#ff79c6">)</span>; <span style="color:#ff79c6">do</span> 
+        scp /etc/kubernetes/pki/<span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">FILE</span><span style="color:#f1fa8c">}</span> <span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">NODE</span><span style="color:#f1fa8c">}</span>:/etc/kubernetes/pki/<span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">FILE</span><span style="color:#f1fa8c">}</span>;
+    <span style="color:#ff79c6">done</span>; 
+    <span style="color:#ff79c6">for</span> FILE in admin.kubeconfig controller-manager.kubeconfig scheduler.kubeconfig; <span style="color:#ff79c6">do</span> 
+        scp /etc/kubernetes/<span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">FILE</span><span style="color:#f1fa8c">}</span> <span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">NODE</span><span style="color:#f1fa8c">}</span>:/etc/kubernetes/<span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">FILE</span><span style="color:#f1fa8c">}</span>;
+<span style="color:#ff79c6">done</span>;
+</code></pre></div><h3 id="六kubernetes系统组件配置">六、Kubernetes系统组件配置</h3>
+<h4 id="61etcd配置所有master节点">6.1、Etcd配置（所有Master节点）</h4>
 <p><em><strong>etcd配置大致相同，注意修改每个Master节点的etcd配置的主机名和IP地址</strong></em></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># cat &gt; /etc/etcd/etcd.config.yaml &lt;&lt;EFO</span>
 name: <span style="color:#f1fa8c">&#39;${NODE_NAME}&#39;</span>
-data-dir: /var/lib/etcd <span style="color:#6272a4">#数据目录</span>
+data-dir: /var/lib/etcd
 wal-dir: /var/lib/etcd/wal
 snapshot-count: <span style="color:#bd93f9">5000</span>
 heartbeat-interval: <span style="color:#bd93f9">100</span>
@@ -1200,7 +1059,7 @@ discovery-proxy:
 discovery-srv:
 initial-cluster: <span style="color:#f1fa8c">&#39;${ETCD_NODES}&#39;</span>
 initial-cluster-token: <span style="color:#f1fa8c">&#39;etcd-k8s-cluster&#39;</span>
-initial-cluster-state: <span style="color:#f1fa8c">&#39;new&#39;</span> <span style="color:#6272a4">#--name的参数值必须位于--initial-cluster列表中；</span>
+initial-cluster-state: <span style="color:#f1fa8c">&#39;new&#39;</span>
 strict-reconfig-check: <span style="color:#8be9fd;font-style:italic">false</span>
 enable-v2: <span style="color:#8be9fd;font-style:italic">true</span>
 enable-pprof: <span style="color:#8be9fd;font-style:italic">true</span>
@@ -1227,7 +1086,7 @@ log-package-levels:
 log-outputs: <span style="color:#ff79c6">[</span>default<span style="color:#ff79c6">]</span>
 force-new-cluster: <span style="color:#8be9fd;font-style:italic">false</span>
 EFO
-</code></pre></div><h4 id="72-创建service">7.2、 创建Service</h4>
+</code></pre></div><h4 id="62创建service">6.2、创建Service</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cat &gt; /usr/lib/systemd/system/etcd.service <span style="color:#f1fa8c">&lt;&lt;EFO
 </span><span style="color:#f1fa8c">[Unit]
 </span><span style="color:#f1fa8c">Description=Etcd Service
@@ -1245,10 +1104,10 @@ EFO
 </span><span style="color:#f1fa8c">WantedBy=multi-user.target
 </span><span style="color:#f1fa8c">Alias=etcd3.service
 </span><span style="color:#f1fa8c">EFO</span>
-</code></pre></div><h4 id="73启动并查看集群状态任意master">7.3、启动并查看集群状态（任意master）</h4>
+</code></pre></div><h4 id="63启动并查看集群状态任意master">6.3、启动并查看集群状态（任意master）</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">systemctl start etcd
 
-etcdctl --endpoints<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">ETCD_ENDPOINTS</span><span style="color:#f1fa8c">}</span> --cacert<span style="color:#ff79c6">=</span>/etc/kubernetes/pki/etcd/etcd-ca.pem --cert<span style="color:#ff79c6">=</span>/etc/kubernetes/pki/etcd/etcd.pem --key<span style="color:#ff79c6">=</span>/etc/kubernetes/pki/etcd/etcd-key.pem  endpoint status --write-out<span style="color:#ff79c6">=</span>table
+etcdctl --endpoints<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;192.168.1.102:2379,192.168.1.101:2379,192.168.1.100:2379&#34;</span> --cacert<span style="color:#ff79c6">=</span>/etc/kubernetes/pki/etcd/etcd-ca.pem --cert<span style="color:#ff79c6">=</span>/etc/kubernetes/pki/etcd/etcd.pem --key<span style="color:#ff79c6">=</span>/etc/kubernetes/pki/etcd/etcd-key.pem  endpoint status --write-out<span style="color:#ff79c6">=</span>table
 </code></pre></div><p>输出如下结果：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">+--------------------+------------------+---------+---------+-----------+------------+-----------+------------+--------------------+--------+
 |      ENDPOINT      |        ID        | VERSION | DB SIZE | IS LEADER | IS LEARNER | RAFT TERM | RAFT INDEX | RAFT APPLIED INDEX | ERRORS |
@@ -1257,9 +1116,9 @@ etcdctl --endpoints<span style="color:#ff79c6">=</span><span style="color:#f1fa8
 | 192.168.1.101:2379 | e3adc675ac3b3dbd |  3.4.13 |   20 kB |     false |      false |       465 |          9 |                  9 |        |
 | 192.168.1.100:2379 | 47a087175e3f17b3 |  3.4.13 |   20 kB |      true |      false |       465 |          9 |                  9 |        |
 +--------------------+------------------+---------+---------+-----------+------------+-----------+------------+--------------------+--------+
-</code></pre></div><h3 id="八高可用配置">八、高可用配置</h3>
-<h3 id="九kubernetes组件配置master">九、Kubernetes组件配置(Master)</h3>
-<h4 id="91apiserver">9.1、apiserver</h4>
+</code></pre></div><h3 id="七高可用配置">七、高可用配置</h3>
+<h3 id="八kubernetes组件配置master">八、Kubernetes组件配置(Master)</h3>
+<h4 id="81apiserver">8.1、apiserver</h4>
 <p><em><strong>所有Master节点创建kube-apiserver service，# 注意，如果不是高可用集群，192.168.1.246改为master01的地址</strong></em></p>
 <p><em><strong>注意本文档使用的k8s service网段为10.96.0.0/12，该网段不能和宿主机的网段、Pod网段的重复，请按需修改</strong></em></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cat &gt; /etc/systemd/system/kube-apiserver.service <span style="color:#f1fa8c">&lt;&lt;EFO
@@ -1313,7 +1172,7 @@ etcdctl --endpoints<span style="color:#ff79c6">=</span><span style="color:#f1fa8
 </span><span style="color:#f1fa8c">EFO</span>
 </code></pre></div><p>启动apiserver（所有Master节点）</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">systemctl daemon-reload <span style="color:#ff79c6">&amp;&amp;</span> systemctl start kube-apiserver
-</code></pre></div><h4 id="92配置kube-controller-manager-service-所有master节点">9.2、配置kube-controller-manager service （所有Master节点）</h4>
+</code></pre></div><h4 id="82配置kube-controller-manager-service-所有master节点">8.2、配置kube-controller-manager service （所有Master节点）</h4>
 <p><em><strong>注意本文档使用的k8s Pod网段为172.16.0.0/12，该网段不能和宿主机的网段、k8s Service网段的重复，请按需修改</strong></em></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cat &gt; /etc/systemd/system/kube-controller-manager.service <span style="color:#f1fa8c">&lt;&lt;EFO
 </span><span style="color:#f1fa8c">[Unit]
@@ -1350,7 +1209,7 @@ etcdctl --endpoints<span style="color:#ff79c6">=</span><span style="color:#f1fa8
 </span><span style="color:#f1fa8c">EFO</span>
 </code></pre></div><p>启动controller-manager （所有matser节点）</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">systemctl daemon-reload <span style="color:#ff79c6">&amp;&amp;</span> systemctl start kube-controller-manager
-</code></pre></div><h4 id="93配置kube-scheduler-service所有master节点">9.3、配置kube-scheduler service（所有Master节点）</h4>
+</code></pre></div><h4 id="83配置kube-scheduler-service所有master节点">8.3、配置kube-scheduler service（所有Master节点）</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cat &gt; /etc/systemd/system/kube-scheduler.service <span style="color:#f1fa8c">&lt;&lt;EFO
 </span><span style="color:#f1fa8c">[Unit]
 </span><span style="color:#f1fa8c">Description=Kubernetes Scheduler
@@ -1373,8 +1232,8 @@ etcdctl --endpoints<span style="color:#ff79c6">=</span><span style="color:#f1fa8
 </span><span style="color:#f1fa8c">EFO</span>
 </code></pre></div><p>启动scheduler（所有matser节点）</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">systemctl daemon-reload <span style="color:#ff79c6">&amp;&amp;</span> systemctl start kube-scheduler
-</code></pre></div><h3 id="十tls-bootstrapping配置">十、TLS Bootstrapping配置</h3>
-<h4 id="101创建bootstrapmaster01节点">10.1、创建bootstrap（Master01节点）</h4>
+</code></pre></div><h3 id="九tls-bootstrapping配置">九、TLS Bootstrapping配置</h3>
+<h4 id="91创建bootstrapmaster01节点">9.1、创建bootstrap（Master01节点）</h4>
 <p><em><strong>注意，如果不是高可用集群，192.168.1.246:8443改为master01的地址，8443改为apiserver的端口，默认是6443</strong></em></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubectl config set-cluster kubernetes <span style="color:#f1fa8c">\
 </span><span style="color:#f1fa8c"></span>    --certificate-authority<span style="color:#ff79c6">=</span>/etc/kubernetes/pki/ca.pem <span style="color:#f1fa8c">\
@@ -1411,8 +1270,8 @@ clusterrolebinding.rbac.authorization.k8s.io/node-autoapprove-bootstrap created
 clusterrolebinding.rbac.authorization.k8s.io/node-autoapprove-certificate-rotation created
 clusterrole.rbac.authorization.k8s.io/system:kube-apiserver-to-kubelet created
 clusterrolebinding.rbac.authorization.k8s.io/system:kube-apiserver created
-</code></pre></div><h3 id="十一node节点配置">十一、Node节点配置</h3>
-<h4 id="111复制证书至node节点">11.1、复制证书至Node节点</h4>
+</code></pre></div><h3 id="十node节点配置">十、Node节点配置</h3>
+<h4 id="101复制证书至node节点">10.1、复制证书至Node节点</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span># 
 <span style="color:#ff79c6">for</span> NODE in <span style="color:#ff79c6">(</span><span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">MasterNodes</span>[*]<span style="color:#f1fa8c">}</span> <span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">WorkNodes</span>[*]<span style="color:#f1fa8c">}</span><span style="color:#ff79c6">)</span>; <span style="color:#ff79c6">do</span>
     ssh <span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">NODE</span><span style="color:#f1fa8c">}</span> mkdir -p /etc/kubernetes/pki /etc/etcd/ssl /etc/etcd/ssl
@@ -1423,7 +1282,7 @@ clusterrolebinding.rbac.authorization.k8s.io/system:kube-apiserver created
        scp /etc/kubernetes/<span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">FILE</span><span style="color:#f1fa8c">}</span> <span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">NODE</span><span style="color:#f1fa8c">}</span>:/etc/kubernetes/<span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">FILE</span><span style="color:#f1fa8c">}</span>
     <span style="color:#ff79c6">done</span>
 <span style="color:#ff79c6">done</span>
-</code></pre></div><h4 id="112kubelet配置">11.2、Kubelet配置</h4>
+</code></pre></div><h4 id="102kubelet配置">10.2、Kubelet配置</h4>
 <p><em><strong>注意：如果更改了k8s的service网段，需要更改kubelet-conf.yml 的clusterDNS:配置，改成k8s Service网段的第十个地址，比如10.96.0.10（k8s的service网段开始设置的是10.96.0.0/12）</strong></em></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cat &gt; /etc/kubernetes/kubelet-conf.yml <span style="color:#f1fa8c">&lt;&lt;EFO
 </span><span style="color:#f1fa8c">apiVersion: kubelet.config.k8s.io/v1beta1
@@ -1447,7 +1306,7 @@ clusterrolebinding.rbac.authorization.k8s.io/system:kube-apiserver created
 </span><span style="color:#f1fa8c">cgroupDriver: systemd
 </span><span style="color:#f1fa8c">cgroupsPerQOS: true
 </span><span style="color:#f1fa8c">clusterDNS:
-</span><span style="color:#f1fa8c">- ${CLUSTER_DNS_SVC_IP}
+</span><span style="color:#f1fa8c">- 10.96.0.10
 </span><span style="color:#f1fa8c">clusterDomain: cluster.local
 </span><span style="color:#f1fa8c">containerLogMaxFiles: 5
 </span><span style="color:#f1fa8c">containerLogMaxSize: 10Mi
@@ -1497,8 +1356,13 @@ clusterrolebinding.rbac.authorization.k8s.io/system:kube-apiserver created
 </span><span style="color:#f1fa8c">syncFrequency: 1m0s
 </span><span style="color:#f1fa8c">volumeStatsAggPeriod: 1m0s
 </span><span style="color:#f1fa8c">EFO</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span># 
+<span style="color:#ff79c6">for</span> NODE in <span style="color:#ff79c6">(</span><span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">MasterNodes</span>[*]<span style="color:#f1fa8c">}</span> <span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">WorkNodes</span>[*]<span style="color:#f1fa8c">}</span><span style="color:#ff79c6">)</span>; <span style="color:#ff79c6">do</span>
+    ssh <span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">NODE</span><span style="color:#f1fa8c">}</span> mkdir -p /var/lib/kubelet /var/log/kubernetes /etc/systemd/system/kubelet.service.d /etc/kubernetes/manifests/
+    scp /usr/lib/systemd/system/kubelet.service <span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">NODE</span><span style="color:#f1fa8c">}</span>:/usr/lib/systemd/system/
+    scp /usr/lib/systemd/system/kubelet.service <span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">NODE</span><span style="color:#f1fa8c">}</span>:/usr/lib/systemd/system/
+<span style="color:#ff79c6">done</span>
 </code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cat &gt; /usr/lib/systemd/system/kubelet.service <span style="color:#f1fa8c">&lt;&lt;EFO
-</span><span style="color:#f1fa8c">
 </span><span style="color:#f1fa8c">[Unit]
 </span><span style="color:#f1fa8c">Description=Kubernetes Kubelet
 </span><span style="color:#f1fa8c">Documentation=https://github.com/kubernetes/kubernetes
@@ -1506,16 +1370,15 @@ clusterrolebinding.rbac.authorization.k8s.io/system:kube-apiserver created
 </span><span style="color:#f1fa8c">Requires=docker.service
 </span><span style="color:#f1fa8c">
 </span><span style="color:#f1fa8c">[Service]
-</span><span style="color:#f1fa8c">ExecStart=/usr/local/bin/kubelet \\
-</span><span style="color:#f1fa8c">    --node-ip=${NODE_IP} \\
-</span><span style="color:#f1fa8c">    --bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.kubeconfig \\
-</span><span style="color:#f1fa8c">    --kubeconfig=/etc/kubernetes/kubelet.kubeconfig \\
-</span><span style="color:#f1fa8c">    --network-plugin=cni \\
-</span><span style="color:#f1fa8c">    --cni-conf-dir=/etc/cni/net.d \\
-</span><span style="color:#f1fa8c">    --cni-bin-dir=/opt/cni/bin \\
-</span><span style="color:#f1fa8c">    --cgroup-driver=cgroupfs \\
-</span><span style="color:#f1fa8c">    --config=/etc/kubernetes/kubelet-conf.yml \\
-</span><span style="color:#f1fa8c">    --pod-infra-container-image=registry.cn-hangzhou.aliyuncs.com/google_containers/pause-amd64:3.2 \\
+</span><span style="color:#f1fa8c">ExecStart=/usr/local/bin/kubelet \
+</span><span style="color:#f1fa8c">    --bootstrap-kubeconfig=/etc/kubernetes/bootstrap-kubelet.kubeconfig \
+</span><span style="color:#f1fa8c">    --kubeconfig=/etc/kubernetes/kubelet.kubeconfig \
+</span><span style="color:#f1fa8c">    --network-plugin=cni \
+</span><span style="color:#f1fa8c">    --cni-conf-dir=/etc/cni/net.d \
+</span><span style="color:#f1fa8c">    --cni-bin-dir=/opt/cni/bin \
+</span><span style="color:#f1fa8c">    --cgroup-driver=cgroupfs \
+</span><span style="color:#f1fa8c">    --config=/etc/kubernetes/kubelet-conf.yml \
+</span><span style="color:#f1fa8c">    --pod-infra-container-image=registry.cn-hangzhou.aliyuncs.com/google_containers/pause-amd64:3.2 \
 </span><span style="color:#f1fa8c">    --node-labels=node.kubernetes.io/node=&#39;&#39;
 </span><span style="color:#f1fa8c">
 </span><span style="color:#f1fa8c">Restart=always
@@ -1535,7 +1398,7 @@ k8s-master02   NotReady   &lt;none&gt;   3m48s   v1.20.0
 k8s-master03   NotReady   &lt;none&gt;   3m48s   v1.20.0
 k8s-node01     NotReady   &lt;none&gt;   3m47s   v1.20.0
 k8s-node02     NotReady   &lt;none&gt;   3m48s   v1.20.0
-</code></pre></div><h4 id="113kube-proxy配置">11.3、kube-proxy配置</h4>
+</code></pre></div><h4 id="103kube-proxy配置">10.3、kube-proxy配置</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubectl -n kube-system create serviceaccount kube-proxy
 
 kubectl create clusterrolebinding system:kube-proxy <span style="color:#f1fa8c">\
@@ -1567,13 +1430,17 @@ kubectl config use-context kubernetes --kubeconfig<span style="color:#ff79c6">=<
 </code></pre></div><p>如果更改了集群Pod的网段，需要更改kube-proxy/kube-proxy.conf的clusterCIDR: 172.16.0.0/12参数为pod的网段。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># vim /root/k8s-ha-install/kube-proxy/kube-proxy.conf</span>
 clusterCIDR: 172.16.0.0/12
+</code></pre></div><p>分发配置文件（master01上）</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span># 
+<span style="color:#ff79c6">for</span> NODE in <span style="color:#ff79c6">(</span><span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">MasterNodes</span>[*]<span style="color:#f1fa8c">}</span> <span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">WorkNodes</span>[*]<span style="color:#f1fa8c">}</span><span style="color:#ff79c6">)</span><span style="color:#ff79c6">do</span>
+    scp /etc/kubernetes/kube-proxy.kubeconfig <span style="color:#8be9fd;font-style:italic">$NODE</span>:/etc/kubernetes/kube-proxy.kubeconfig
+    scp kube-proxy/kube-proxy.conf <span style="color:#8be9fd;font-style:italic">$NODE</span>:/etc/kubernetes/kube-proxy.conf
+    scp kube-proxy/kube-proxy.service <span style="color:#8be9fd;font-style:italic">$NODE</span>:/usr/lib/systemd/system/kube-proxy.service
+<span style="color:#ff79c6">done</span>
 </code></pre></div><p>启动kube-proxy（所有节点）</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cp kube-proxy/kube-proxy.conf /etc/kubernetes/kube-proxy.conf
-cp kube-proxy/kube-proxy.service /usr/lib/systemd/system/kube-proxy.service
-
-systemctl daemon-reload <span style="color:#ff79c6">&amp;&amp;</span> systemctl start kube-proxy
-</code></pre></div><h3 id="十二安装calico">十二、安装Calico</h3>
-<h4 id="121安装calico在master01上">12.1、安装Calico（在master01上）</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">systemctl daemon-reload <span style="color:#ff79c6">&amp;&amp;</span> systemctl start kube-proxy
+</code></pre></div><h3 id="十一安装calico">十一、安装Calico</h3>
+<h4 id="111安装calico在master01上">11.1、安装Calico（在master01上）</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 修改calico-etcd.yaml的以下位置</span>
 sed -i <span style="color:#f1fa8c">&#39;s#etcd_endpoints: &#34;http://&lt;ETCD_IP&gt;:&lt;ETCD_PORT&gt;&#34;#etcd_endpoints: &#34;${ETCD_ENDPOINTS}&#34;#g&#39;</span> calico-etcd.yaml
 
@@ -1581,14 +1448,14 @@ sed -i <span style="color:#f1fa8c">&#39;s#etcd_endpoints: &#34;http://&lt;ETCD_I
 <span style="color:#8be9fd;font-style:italic">ETCD_CERT</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">`</span>cat /etc/kubernetes/pki/etcd/etcd.pem | base64 | tr -d <span style="color:#f1fa8c">&#39;\n&#39;</span><span style="color:#f1fa8c">`</span>
 <span style="color:#8be9fd;font-style:italic">ETCD_KEY</span><span style="color:#ff79c6">=</span><span style="color:#f1fa8c">`</span>cat /etc/kubernetes/pki/etcd/etcd-key.pem | base64 | tr -d <span style="color:#f1fa8c">&#39;\n&#39;</span><span style="color:#f1fa8c">`</span>
 
-sed -i <span style="color:#f1fa8c">&#34;s@# etcd-key: null@etcd-key: </span><span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">ETCD_KEY</span><span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">@g; s@# etcd-cert: null@etcd-cert: </span><span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">ETCD_CERT</span><span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">@g; s@# etcd-ca: null@etcd-ca: </span><span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">ETCD_CA</span><span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">@g&#34;</span> calico/calico-etcd.yaml
+sed -i <span style="color:#f1fa8c">&#34;s@# etcd-key: null@etcd-key: </span><span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">ETCD_KEY</span><span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">@g; s@# etcd-cert: null@etcd-cert: </span><span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">ETCD_CERT</span><span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">@g; s@# etcd-ca: null@etcd-ca: </span><span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">ETCD_CA</span><span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">@g&#34;</span> calico-etcd.yaml
 
 sed -i <span style="color:#f1fa8c">&#39;s#etcd_ca: &#34;&#34;#etcd_ca: &#34;/calico-secrets/etcd-ca&#34;#g; s#etcd_cert: &#34;&#34;#etcd_cert: &#34;/calico-secrets/etcd-cert&#34;#g; s#etcd_key: &#34;&#34; #etcd_key: &#34;/calico-secrets/etcd-key&#34; #g&#39;</span> calico-etcd.yaml
 
 <span style="color:#6272a4"># 更改此处为自己的pod网段</span>
 sed -i <span style="color:#f1fa8c">&#39;s@# - name: CALICO_IPV4POOL_CIDR@- name: CALICO_IPV4POOL_CIDR@g; s@#   value: &#34;192.168.0.0/16&#34;@  value: &#39;</span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">CLUSTER_CIDR</span><span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">&#39;@g&#39;</span> calico-etcd.yaml
 </code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">[</span>root@k8s-master01 calico<span style="color:#ff79c6">]</span><span style="color:#6272a4"># kubectl apply -f calico/calico-etcd.yaml</span>
-</code></pre></div><h3 id="十三安装coredns">十三、安装CoreDNS</h3>
+</code></pre></div><h3 id="十二安装coredns">十二、安装CoreDNS</h3>
 <p><em><strong>如果更改了k8s service的网段需要将coredns的serviceIP改成k8s service网段的第十个IP</strong></em></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">[</span>root@k8s-master01 k8s-ha-install<span style="color:#ff79c6">]</span><span style="color:#6272a4"># sed -i &#34;s#10.96.0.10#10.96.0.10#g&#34; CoreDNS/coredns.yaml</span>
 
@@ -1599,7 +1466,7 @@ clusterrolebinding.rbac.authorization.k8s.io/system:coredns created
 configmap/coredns created
 deployment.apps/coredns created
 service/kube-dns created
-</code></pre></div><h3 id="十四安装metrics-server">十四、安装Metrics Server</h3>
+</code></pre></div><h3 id="十三安装metrics-server">十三、安装Metrics Server</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># kubectl create -f metrics-server-0.4.x/</span>
 serviceaccount/metrics-server created
 clusterrole.rbac.authorization.k8s.io/system:aggregated-metrics-reader created
@@ -1618,7 +1485,7 @@ k8s-master02   334m         16%    1086Mi          58%
 k8s-master03   324m         16%    1043Mi          55%       
 k8s-node01     208m         10%    573Mi           30%       
 k8s-node02     180m         9%     534Mi           28%
-</code></pre></div><h3 id="十五安装dashboard">十五、安装dashboard</h3>
+</code></pre></div><h3 id="十四安装dashboard">十四、安装dashboard</h3>
 <p><em><strong>Dashboard用于展示集群中的各类资源，同时也可以通过Dashboard实时查看Pod的日志和在容器中执行一些命令等。</strong></em></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># kubectl  create -f dashboard/</span>
 serviceaccount/admin-user created
@@ -1653,8 +1520,7 @@ kubernetes-dashboard   NodePort   10.96.77.112   &lt;none&gt;        443:30902/T
 页面访问：https://192.168.1.246:30902/
 </code></pre></div><h2 id="附录">附录</h2>
 <h3 id="参考文档">参考文档</h3>
-<p>1.1 <a href="https://ywnz.com/linuxyffq/3903.html">在Ubuntu 18.04 LTS系统上安装和配置Dnsmasq的步骤</a>
-1.2 <a href="https://www.cnblogs.com/hsyw/p/14166191.html">二进制安装Kubernetes 1.20</a></p>
+<p>1.1 <a href="https://ywnz.com/linuxyffq/3903.html">在Ubuntu 18.04 LTS系统上安装和配置Dnsmasq的步骤</a></p>
 
           <h2>微信公众号</h2>
 <p>扫描下面的二维码关注我们的微信公众帐号，在微信公众帐号中回复◉加群◉即可加入到我们的 kubernetes 讨论群里面共同学习。</p>
