@@ -467,7 +467,6 @@ autocomplete('#aa-search-input',
     <li><a href="#kubernetes-二进制安装">Kubernetes 二进制安装</a>
       <ul>
         <li><a href="#一基础环境配置以下操作所有节点都得执行">一、基础环境配置（以下操作所有节点都得执行）</a></li>
-        <li><a href="#13更换yum源码centos系统">1.3、更换yum源码(Centos系统)</a></li>
         <li><a href="#二运行环境准备">二、运行环境准备</a></li>
         <li><a href="#三docker启动">三、Docker启动</a></li>
         <li><a href="#四下载安装源码文件master01上">四、下载安装源码文件：（Master01上）</a></li>
@@ -669,7 +668,7 @@ EFO
 </span><span style="color:#f1fa8c"># Etcd 集群间通信的IP和端口(注意:服务器名字要和IP对应)
 </span><span style="color:#f1fa8c">ETCD_NODES=&#34;k8s-master01=https://192.168.1.100:2380,k8s-master02=https://192.168.1.101:2380,k8s-master03=https://192.168.1.102:2380&#34;
 </span><span style="color:#f1fa8c">EFO</span>
-</code></pre></div><h3 id="13更换yum源码centos系统">1.3、更换yum源码(Centos系统)</h3>
+</code></pre></div><h4 id="13更换yum源码centos系统">1.3、更换yum源码(Centos系统)</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># curl -o /etc/yum.repos.d/CentOS-Base.repo https://mirrors.aliyun.com/repo/Centos-7.repo</span>
 
 <span style="color:#ff79c6">[</span>root@k8s-master01 ~<span style="color:#ff79c6">]</span><span style="color:#6272a4"># yum install -y yum-utils device-mapper-persistent-data lvm2</span>
