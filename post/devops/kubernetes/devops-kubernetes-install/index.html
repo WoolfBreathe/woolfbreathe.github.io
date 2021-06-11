@@ -791,6 +791,8 @@ systemctl restart systemd-modules-load.service
 </span><span style="color:#f1fa8c">net.ipv4.tcp_timestamps = 0
 </span><span style="color:#f1fa8c">net.core.somaxconn = 16384
 </span><span style="color:#f1fa8c">EFO</span>
+</code></pre></div><p>重新加载所有的配置文件</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sysctl --system
 </code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">lsmod | grep --color<span style="color:#ff79c6">=</span>auto -e ip_vs -e nf_conntrack
 ip_vs_ftp              <span style="color:#bd93f9">16384</span>  <span style="color:#bd93f9">0</span> 
 nf_nat                 <span style="color:#bd93f9">32768</span>  <span style="color:#bd93f9">1</span> ip_vs_ftp
@@ -1740,10 +1742,6 @@ kubernetes-dashboard   NodePort   10.96.77.112   &lt;none&gt;        443:30902/T
 <script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
 
 
-
-=======
-</script>
->>>>>>> 399fb13c00b61c640f819f0855ce313cd2e0810c
 
 
 
