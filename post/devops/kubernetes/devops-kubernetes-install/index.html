@@ -893,7 +893,7 @@ cp calicoctl /usr/local/bin/
 </span><span style="color:#f1fa8c">[Install]
 </span><span style="color:#f1fa8c">WantedBy=multi-user.target
 </span><span style="color:#f1fa8c">EFO</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">systemctl daemon-reload <span style="color:#ff79c6">&amp;&amp;</span> systemctl start docker
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">systemctl daemon-reload <span style="color:#ff79c6">&amp;&amp;</span> systemctl restart docker
 </code></pre></div><h3 id="四生成证书">四、生成证书</h3>
 <p><em><strong>二进制安装最关键步骤，一步错误全盘皆输</strong></em></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 生成证书的CSR文件：证书签名请求文件，配置了一些域名、公司、单位</span>
@@ -1091,9 +1091,13 @@ openssl rsa -in /etc/kubernetes/pki/sa.key -pubout -out /etc/kubernetes/pki/sa.p
 </span><span style="color:#f1fa8c">Alias=etcd3.service
 </span><span style="color:#f1fa8c">EFO</span>
 </code></pre></div><h4 id="53启动并查看集群状态任意master">5.3、启动并查看集群状态（任意master）</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">systemctl start etcd
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">systemctl daemon-reload <span style="color:#ff79c6">&amp;&amp;</span> systemctl restart etcd
 
-etcdctl --endpoints<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">ETCD_ENDPOINTS</span><span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#34;</span> --cacert<span style="color:#ff79c6">=</span>/etc/kubernetes/pki/etcd/etcd-ca.pem --cert<span style="color:#ff79c6">=</span>/etc/kubernetes/pki/etcd/etcd.pem --key<span style="color:#ff79c6">=</span>/etc/kubernetes/pki/etcd/etcd-key.pem  endpoint status --write-out<span style="color:#ff79c6">=</span>table
+etcdctl --endpoints<span style="color:#ff79c6">=</span><span style="color:#f1fa8c">&#34;</span><span style="color:#f1fa8c">${</span><span style="color:#8be9fd;font-style:italic">ETCD_ENDPOINTS</span><span style="color:#f1fa8c">}</span><span style="color:#f1fa8c">&#34;</span> <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    --cacert<span style="color:#ff79c6">=</span>/etc/kubernetes/pki/etcd/etcd-ca.pem <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    --cert<span style="color:#ff79c6">=</span>/etc/kubernetes/pki/etcd/etcd.pem <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    --key<span style="color:#ff79c6">=</span>/etc/kubernetes/pki/etcd/etcd-key.pem  <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    endpoint status --write-out<span style="color:#ff79c6">=</span>table
 </code></pre></div><p>输出如下结果：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">+--------------------+------------------+---------+---------+-----------+------------+-----------+------------+--------------------+--------+
 |      ENDPOINT      |        ID        | VERSION | DB SIZE | IS LEADER | IS LEARNER | RAFT TERM | RAFT INDEX | RAFT APPLIED INDEX | ERRORS |
@@ -1107,7 +1111,7 @@ etcdctl --endpoints<span style="color:#ff79c6">=</span><span style="color:#f1fa8
 <h4 id="71apiserver">7.1、apiserver</h4>
 <p><em><strong>所有Master节点创建kube-apiserver service，# 注意，如果不是高可用集群，192.168.1.246改为master01的地址</strong></em></p>
 <p><em><strong>注意本文档使用的k8s service网段为10.96.0.0/12，该网段不能和宿主机的网段、Pod网段的重复，请按需修改</strong></em></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cat &gt; /etc/systemd/system/kube-apiserver.service <span style="color:#f1fa8c">&lt;&lt;EFO
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cat &gt; /usr/lib/systemd/system//kube-apiserver.service <span style="color:#f1fa8c">&lt;&lt;EFO
 </span><span style="color:#f1fa8c">[Unit]
 </span><span style="color:#f1fa8c">Description=Kubernetes API Server
 </span><span style="color:#f1fa8c">Documentation=https://github.com/kubernetes/kubernetes
@@ -1157,10 +1161,10 @@ etcdctl --endpoints<span style="color:#ff79c6">=</span><span style="color:#f1fa8
 </span><span style="color:#f1fa8c">WantedBy=multi-user.target
 </span><span style="color:#f1fa8c">EFO</span>
 </code></pre></div><p>启动apiserver（所有Master节点）</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">systemctl daemon-reload <span style="color:#ff79c6">&amp;&amp;</span> systemctl start kube-apiserver
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">systemctl daemon-reload <span style="color:#ff79c6">&amp;&amp;</span> systemctl restart kube-apiserver
 </code></pre></div><h4 id="72配置kube-controller-manager-service-所有master节点">7.2、配置kube-controller-manager service （所有Master节点）</h4>
 <p><em><strong>注意本文档使用的k8s Pod网段为172.16.0.0/12，该网段不能和宿主机的网段、k8s Service网段的重复，请按需修改</strong></em></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cat &gt; /etc/systemd/system/kube-controller-manager.service <span style="color:#f1fa8c">&lt;&lt;EFO
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cat &gt; /usr/lib/systemd/system//kube-controller-manager.service <span style="color:#f1fa8c">&lt;&lt;EFO
 </span><span style="color:#f1fa8c">[Unit]
 </span><span style="color:#f1fa8c">Description=Kubernetes Controller Manager
 </span><span style="color:#f1fa8c">Documentation=https://github.com/kubernetes/kubernetes
@@ -1194,9 +1198,9 @@ etcdctl --endpoints<span style="color:#ff79c6">=</span><span style="color:#f1fa8
 </span><span style="color:#f1fa8c">WantedBy=multi-user.target
 </span><span style="color:#f1fa8c">EFO</span>
 </code></pre></div><p>启动controller-manager （所有matser节点）</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">systemctl daemon-reload <span style="color:#ff79c6">&amp;&amp;</span> systemctl start kube-controller-manager
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">systemctl daemon-reload <span style="color:#ff79c6">&amp;&amp;</span> systemctl restart kube-controller-manager
 </code></pre></div><h4 id="73配置kube-scheduler-service所有master节点">7.3、配置kube-scheduler service（所有Master节点）</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cat &gt; /etc/systemd/system/kube-scheduler.service <span style="color:#f1fa8c">&lt;&lt;EFO
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cat &gt; /usr/lib/systemd/system//kube-scheduler.service <span style="color:#f1fa8c">&lt;&lt;EFO
 </span><span style="color:#f1fa8c">[Unit]
 </span><span style="color:#f1fa8c">Description=Kubernetes Scheduler
 </span><span style="color:#f1fa8c">Documentation=https://github.com/kubernetes/kubernetes
@@ -1217,7 +1221,7 @@ etcdctl --endpoints<span style="color:#ff79c6">=</span><span style="color:#f1fa8
 </span><span style="color:#f1fa8c">WantedBy=multi-user.target
 </span><span style="color:#f1fa8c">EFO</span>
 </code></pre></div><p>启动scheduler（所有matser节点）</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">systemctl daemon-reload <span style="color:#ff79c6">&amp;&amp;</span> systemctl start kube-scheduler
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">systemctl daemon-reload <span style="color:#ff79c6">&amp;&amp;</span> systemctl restart kube-scheduler
 </code></pre></div><h3 id="八tls-bootstrapping配置">八、TLS Bootstrapping配置</h3>
 <h4 id="81创建bootstrapmaster01节点">8.1、创建bootstrap（Master01节点）</h4>
 <p><em><strong>注意，如果不是高可用集群，192.168.1.246:8443改为master01的地址，8443改为apiserver的端口，默认是6443</strong></em></p>
@@ -1258,8 +1262,8 @@ clusterrole.rbac.authorization.k8s.io/system:kube-apiserver-to-kubelet created
 clusterrolebinding.rbac.authorization.k8s.io/system:kube-apiserver created
 </code></pre></div><h3 id="九node节点配置">九、Node节点配置</h3>
 <h4 id="91kubelet配置">9.1、Kubelet配置</h4>
-<p><em><strong>注意：如果更改了k8s的service网段，需要更改kubelet-conf.yml 的clusterDNS:配置，改成k8s Service网段的第十个地址，比如10.96.0.10（k8s的service网段开始设置的是10.96.0.0/12）</strong></em></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cat &gt; /etc/kubernetes/kubelet-conf.yml <span style="color:#f1fa8c">&lt;&lt;EFO
+<p><em><strong>注意：如果更改了k8s的service网段，需要更改kubelet-conf.yaml 的clusterDNS:配置，改成k8s Service网段的第十个地址，比如10.96.0.10（k8s的service网段开始设置的是10.96.0.0/12）</strong></em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cat &gt; /etc/kubernetes/kubelet-conf.yaml <span style="color:#f1fa8c">&lt;&lt;EFO
 </span><span style="color:#f1fa8c">apiVersion: kubelet.config.k8s.io/v1beta1
 </span><span style="color:#f1fa8c">kind: KubeletConfiguration
 </span><span style="color:#f1fa8c">address: 0.0.0.0
@@ -1330,6 +1334,18 @@ clusterrolebinding.rbac.authorization.k8s.io/system:kube-apiserver created
 </span><span style="color:#f1fa8c">streamingConnectionIdleTimeout: 4h0m0s
 </span><span style="color:#f1fa8c">syncFrequency: 1m0s
 </span><span style="color:#f1fa8c">volumeStatsAggPeriod: 1m0s
+</span><span style="color:#f1fa8c">rotateServerCertificates: true
+</span><span style="color:#f1fa8c">allowedUnsafeSysctls:
+</span><span style="color:#f1fa8c"> - &#34;net.core*&#34;
+</span><span style="color:#f1fa8c"> - &#34;net.ipv4.*&#34;
+</span><span style="color:#f1fa8c">kubeReserved:
+</span><span style="color:#f1fa8c">  cpu: &#34;10m&#34;
+</span><span style="color:#f1fa8c">  memory: 10Mi
+</span><span style="color:#f1fa8c">  ephemeral-storage: 10Mi
+</span><span style="color:#f1fa8c">systemReserved:
+</span><span style="color:#f1fa8c">  cpu: &#34;1&#34;
+</span><span style="color:#f1fa8c">  memory: 20Mi
+</span><span style="color:#f1fa8c">  ephemeral-storage: 1Gi
 </span><span style="color:#f1fa8c">EFO</span>
 </code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cat &gt; /usr/lib/systemd/system/kubelet.service <span style="color:#f1fa8c">&lt;&lt;EFO
 </span><span style="color:#f1fa8c">[Unit]
@@ -1346,9 +1362,10 @@ clusterrolebinding.rbac.authorization.k8s.io/system:kube-apiserver created
 </span><span style="color:#f1fa8c">    --cni-conf-dir=/etc/cni/net.d \\
 </span><span style="color:#f1fa8c">    --cni-bin-dir=/opt/cni/bin \\
 </span><span style="color:#f1fa8c">    --cgroup-driver=cgroupfs \\
-</span><span style="color:#f1fa8c">    --config=/etc/kubernetes/kubelet-conf.yml \\
+</span><span style="color:#f1fa8c">    --config=/etc/kubernetes/kubelet-conf.yaml \\
 </span><span style="color:#f1fa8c">    --pod-infra-container-image=registry.cn-hangzhou.aliyuncs.com/google_containers/pause-amd64:3.2 \\
-</span><span style="color:#f1fa8c">    --node-labels=node.kubernetes.io/node=&#39;&#39;
+</span><span style="color:#f1fa8c">    --node-labels=node.kubernetes.io/node=&#39;&#39; \\
+</span><span style="color:#f1fa8c">    --tls-cipher-suites=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 \\ --image-pull-progress-deadline=30m
 </span><span style="color:#f1fa8c">
 </span><span style="color:#f1fa8c">Restart=always
 </span><span style="color:#f1fa8c">StartLimitInterval=0
@@ -1358,7 +1375,7 @@ clusterrolebinding.rbac.authorization.k8s.io/system:kube-apiserver created
 </span><span style="color:#f1fa8c">WantedBy=multi-user.target
 </span><span style="color:#f1fa8c">EFO</span>
 </code></pre></div><p>启动kubelet</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">systemctl start kubelet
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">systemctl daemon-reload <span style="color:#ff79c6">&amp;&amp;</span> systemctl restart kubelet
 </code></pre></div><p>查看集群状态（matser01上）</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubectl get node
 NAME           STATUS     ROLES    AGE     VERSION
@@ -1454,7 +1471,7 @@ kubectl config use-context kubernetes --kubeconfig<span style="color:#ff79c6">=<
 </span><span style="color:#f1fa8c">WantedBy=multi-user.target
 </span><span style="color:#f1fa8c">EFO</span>
 </code></pre></div><p>启动kube-proxy（所有节点）</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">systemctl daemon-reload <span style="color:#ff79c6">&amp;&amp;</span> systemctl start kube-proxy
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">systemctl daemon-reload <span style="color:#ff79c6">&amp;&amp;</span> systemctl restart kube-proxy
 </code></pre></div><h3 id="十安装calico">十、安装Calico</h3>
 <h4 id="101安装calico在master01上">10.1、安装Calico（在master01上）</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 修改calico-etcd.yaml的以下位置</span>
