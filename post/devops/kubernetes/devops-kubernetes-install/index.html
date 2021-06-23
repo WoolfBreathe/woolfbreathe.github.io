@@ -896,9 +896,7 @@ cp calicoctl /usr/local/bin/
 </code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">systemctl daemon-reload <span style="color:#ff79c6">&amp;&amp;</span> systemctl restart docker
 </code></pre></div><h3 id="四生成证书">四、生成证书</h3>
 <p><em><strong>二进制安装最关键步骤，一步错误全盘皆输</strong></em></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 生成证书的CSR文件：证书签名请求文件，配置了一些域名、公司、单位</span>
-<span style="color:#8be9fd;font-style:italic">cd</span> k8s-ha-install/pki
-</code></pre></div><h4 id="41生成etcd-ca证书和ca证书的key">4.1、生成Etcd CA证书和CA证书的key</h4>
+<h4 id="41生成etcd-ca证书和ca证书的key">4.1、生成Etcd CA证书和CA证书的key</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cfssl gencert -initca etcd-ca-csr.json | cfssljson -bare /etc/etcd/ssl/etcd-ca
 
 cfssl gencert <span style="color:#f1fa8c">\
@@ -1490,9 +1488,9 @@ sed -i <span style="color:#f1fa8c">&#39;s@# - name: CALICO_IPV4POOL_CIDR@- name:
 </code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">[</span>root@k8s-master01 calico<span style="color:#ff79c6">]</span><span style="color:#6272a4"># kubectl apply -f calico/calico-etcd.yaml</span>
 </code></pre></div><h3 id="十一安装coredns">十一、安装CoreDNS</h3>
 <p><em><strong>如果更改了k8s service的网段需要将coredns的serviceIP改成k8s service网段的第十个IP</strong></em></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">[</span>root@k8s-master01 k8s-ha-install<span style="color:#ff79c6">]</span><span style="color:#6272a4"># sed -i &#34;s#10.96.0.10#10.96.0.10#g&#34; CoreDNS/coredns.yaml</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#ff79c6">[</span>root@k8s-master01<span style="color:#ff79c6">]</span><span style="color:#6272a4"># sed -i &#34;s#10.96.0.10#10.96.0.10#g&#34; CoreDNS/coredns.yaml</span>
 
-<span style="color:#ff79c6">[</span>root@k8s-master01 k8s-ha-install<span style="color:#ff79c6">]</span><span style="color:#6272a4"># kubectl  create -f CoreDNS/coredns.yaml</span>
+<span style="color:#ff79c6">[</span>root@k8s-master01<span style="color:#ff79c6">]</span><span style="color:#6272a4"># kubectl  create -f CoreDNS/coredns.yaml</span>
 serviceaccount/coredns created
 clusterrole.rbac.authorization.k8s.io/system:coredns created
 clusterrolebinding.rbac.authorization.k8s.io/system:coredns created
