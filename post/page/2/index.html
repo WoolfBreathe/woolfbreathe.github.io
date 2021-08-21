@@ -189,6 +189,37 @@ autocomplete('#aa-search-input',
         <div class="posts-list">
           
             <article class="post-preview">
+              <a href="/post/computerlanguages/python/computerlanguages-python-sqlalchemy/">
+                <h2 class="post-title">Python ORM SQLAlchemy</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                发表于 2020-06-16
+              </p>
+              <div class="post-entry">
+                
+                  官网 (SQLAlchemy Documentation)[https://www.osgeo.cn/sqlalchemy/]
+安装 pip instal sqlalchemy 基本代码 注意: SQLAlchemy多对多关联, 所有数据库实例需要继承一个declarative_base, 否则将会找不到表  from sqlalchemy.ext.declarative import declarative_base from sqlalchemy.orm import sessionmaker from sqlalchemy.orm import relationship from sqlalchemy import create_engine # 连接格式: dialect+driver://username:password@host:port/database engine = create_engine( &#34;mysql+pymysql://homestead:secret@192.168.10.10:3306/gbei_admin?charset=utf8&#34; ) Base = declarative_base() Session = sessionmaker(engine) db_session = Session() 示例 多对多关联示例代码
+class Girl(Base): __tablename__ = &#34;girl&#34; id = Column(Integer, primary_key=True) name = Column(String(32)) # secondary=&#34;Hotel&#34; 表示两个表关联Hotel girl2boy = relationship(&#34;Boy&#34;, secondary=&#34;hotel&#34;, backref=&#34;boy2girl&#34;) class Boy(Base): __tablename__ = &#34;boy&#34; id = Column(Integer, primary_key=True) name = Column(String(32)) class Hotel(Base): __tablename__ = &#34;hotel&#34; id = Column(Integer, primary_key=True) girl_id = Column(Integer, ForeignKey(&#34;girl.
+                  <a href="/post/computerlanguages/python/computerlanguages-python-sqlalchemy/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/python/">Python</a>&nbsp;
+                  
+                    #<a href="/tags/sqlalchemy/">SQLAlchemy</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
               <a href="/post/computerlanguages/php/computerlanguages-php-xdebug/">
                 <h2 class="post-title">Windows VSCode 远程调试 Homestead PHP</h2>
 
@@ -606,50 +637,6 @@ make install PREFIX=/usr/local/redis
                     #<a href="/tags/devops/">DevOps</a>&nbsp;
                   
                     #<a href="/tags/linux/">Linux</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="/post/computerlanguages/php/computerlanguages-php-laravel-common/">
-                <h2 class="post-title">Laravel常用命令</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                发表于 2019-12-03
-              </p>
-              <div class="post-entry">
-                
-                  <h1 id="laravel多环境配置">Laravel多环境配置</h1>
-<p><strong>新建文件</strong>
-.env.beta beta预发布环境</p>
-<p><strong>Nginx配置</strong></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nginx" data-lang="nginx">        <span style="color:#ff79c6">location</span> ~ <span style="color:#f1fa8c">\.php$</span> {
-            <span style="color:#ff79c6">try_files</span> <span style="color:#8be9fd;font-style:italic">$uri</span> =<span style="color:#bd93f9">404</span>;
-            <span style="color:#ff79c6">fastcgi_split_path_info</span> <span style="color:#f1fa8c">^(.+\.php)(/.+)</span>$;
-            <span style="color:#ff79c6">fastcgi_pass</span> <span style="color:#f1fa8c">phpserver</span>;
-            <span style="color:#ff79c6">fastcgi_index</span> <span style="color:#f1fa8c">index.php</span>;
-            <span style="color:#6272a4"># 添加 APP_ENV 参数, 这个参数设置会覆盖Laravel里的 APP_ENV, 设置后就会读取指定配置文件 .env.beta
-</span><span style="color:#6272a4"></span>            <span style="color:#ff79c6">fastcgi_param</span> <span style="color:#f1fa8c">APP_ENV</span> <span style="color:#f1fa8c">beta</span>;
-
-            <span style="color:#ff79c6">fastcgi_param</span> <span style="color:#f1fa8c">SCRIPT_FILENAME</span> <span style="color:#8be9fd;font-style:italic">$document_root$fastcgi_script_name</span>;
-            <span style="color:#ff79c6">fastcgi_param</span>  <span style="color:#f1fa8c">QUERY_STRING</span>       <span style="color:#8be9fd;font-style:italic">$query_string</span>;
-            <span style="color:#ff79c6">include</span>        <span style="color:#f1fa8c">fastcgi_params</span>;
-        }
-</code></pre></div>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="/tags/php/">PHP</a>&nbsp;
-                  
-                    #<a href="/tags/laravel/">Laravel</a>&nbsp;
                   
                 </span>
               

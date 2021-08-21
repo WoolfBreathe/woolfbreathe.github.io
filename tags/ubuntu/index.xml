@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ubuntu on WoolfBreathe</title>
+    <link>/tags/ubuntu/</link>
+    <description>Recent content in Ubuntu on WoolfBreathe</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <managingEditor>youremail@domain.com (WoolfBreathe)</managingEditor>
+    <webMaster>youremail@domain.com (WoolfBreathe)</webMaster>
+    <lastBuildDate>Thu, 12 Nov 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Ubuntu 桌面版 安装 Window 应用</title>
+      <link>/post/devops/linux/devops-linux-rsync/</link>
+      <pubDate>Thu, 12 Nov 2020 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/devops/linux/devops-linux-rsync/</guid>
+      <description>&lt;h2 id=&#34;wine简介&#34;&gt;Wine简介&lt;/h2&gt;
+&lt;p&gt;Wine是一款开源的应用程序，它提供了在类似Unix的操作系统上运行为微软Windows开发的软件的兼容性。&lt;/p&gt;
+&lt;p&gt;系统： Ubuntu Desktop 20.04
+应用： Winehp 6.0&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

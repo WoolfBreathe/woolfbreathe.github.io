@@ -268,6 +268,44 @@ autocomplete('#aa-search-input',
           	
 
             <article class="post-preview">
+              <a href="/post/algorithms/datastructures/algorithms-datastructures-stack/">
+                <h2 class="post-title">数据结构-栈(Stack)</h2>
+                
+              </a>
+
+              <span class="post-meta">
+  
+    发表于 2019-08-04
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  栈(Stack) 数组和链表，从逻辑角度来说，它们都是线性结构（就是排成一条线的结构，只有前后两个方向，非线性结构包括树、图等，后面会讲到），从存储角度来说，一个是顺序存储，一个是链式存储，各有利弊，数组需要预先申请连续内存，超出限制会溢出，但是对明确知道规模的小型数据集而言，使用数组会更加高效，随机访问的特性也更加方面数组读取，但插入和删除性能要差一些；链表的话没有空间限制，但是需要额外空间存储指针，插入、删除效率很高，但不支持随机访问。
+虽说 PHP 中很少接触到这些，但是学习使用 C 语言的话这些基础还是需要了解的。接下来要介绍两种特殊的线性结构，或者说用于满足特定场景需求的线性结构：栈和队列。
+栈又叫堆栈，是限定只能在一端进行插入和删除操作的线性表，并且满足后进先出（LIFO）的特点。把允许插入和删除的一端叫做栈顶，另一个端叫做栈底，不含任何数据的栈叫做空栈。
+栈支持通过数组/链表实现，通过数组实现的通常叫做顺序栈，通过链表实现的叫做链栈。下面简单演示下如何在 PHP 中通过数组实现一个简单的顺序栈：
+&lt;?php /** * 通过 PHP 数组实现简单的顺序栈 */ class SimpleStack { private $_stack = []; private $_size = 0; public function __construct($size = 10) { $this-&gt;_size = $size; } // 获取栈顶元素 public function pop() { // 空栈 if (count($this-&gt;_stack) == 0) { return false; } return array_pop($this-&gt;_stack); } // 推送元素到栈顶 public function push($value) { // 满栈 if (count($this-&gt;_stack) == $this-&gt;_size) { return false; } array_push($this-&gt;_stack, $value); return true; } public function isEmpty() { // 是否是空栈 return current($this-&gt;_stack) == false; } public function size() { return count($this-&gt;_stack); } } $stack = new SimpleStack(15); var_dump($stack-&gt;isEmpty()); # true $stack-&gt;push(111); $stack-&gt;push(&#39;学院君&#39;); var_dump($stack-&gt;pop()); # 学院君 var_dump($stack-&gt;size()); # 1 在 PHP 底层 SPL 库中也提供了堆栈的实现类 SplStack，堆栈的概念比较简单，理解起来也不复杂，下面给出一个图示，帮助了解栈的操作流程：
+                  <a href="/post/algorithms/datastructures/algorithms-datastructures-stack/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                
+                </span>
+              
+            </article>
+
+          
+
+          	
+
+            <article class="post-preview">
               <a href="/post/algorithms/datastructures/algorithms-datastructures-linkedlist/">
                 <h2 class="post-title">数据结构-链表(LinkedList)</h2>
                 
@@ -345,6 +383,8 @@ autocomplete('#aa-search-input',
           
 
           	
+            
+          	
 
             <article class="post-preview">
               <a href="/post/algorithms/basis/algorithms-base-conception/">
@@ -397,8 +437,6 @@ autocomplete('#aa-search-input',
 
           
 
-          	
-            
           	
 
             <article class="post-preview">
@@ -774,6 +812,7 @@ git commit -m &#39;update .gitignore&#39;
 </ul>
 
 
+          
           
           
           

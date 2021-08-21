@@ -268,6 +268,49 @@ autocomplete('#aa-search-input',
           	
 
             <article class="post-preview">
+              <a href="/post/algorithms/graph/algorithms-graph-traverse/">
+                <h2 class="post-title">图(Graph)-遍历</h2>
+                
+              </a>
+
+              <span class="post-meta">
+  
+    发表于 2019-08-30
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  图的遍历 图的遍历和树的遍历类似，最直接的理解就是，在图中某个顶点出发，访遍图中其余顶点，并且其中每个顶点仅被访问一次，这个过程就是图的遍历。
+图的遍历主要有两种方式，一种是深度优先搜索，一种是广度优先搜索。我们先来看深度优先搜索。
+深度优先搜索定义 深度优先搜索（Depth First Search），简称 DFS，这种算法有点像走迷宫，沿着一条路径一直走，如果某个路径不通，则回到前驱节点，以此为出发点继续尝试下一条路径，以此类推，直到访遍所有顶点。
+深度优先搜索也是这样，它从图的某个顶点出发，访问此顶点，然后从该顶点未被访问的邻接顶点出发，深度遍历图，在未遇到已访问过的重复顶点前，我们约定右手优先原则，一直往前走，遇到已经访问过的顶点，则回溯到前驱顶点，访问与其相邻路径对应的邻接顶点，继续做上述判断，依次类推，直到图中所有与该顶点路径想通的顶点都被访问到，如下图所示：
+如果还有顶点未被访问，则将其作为起点，重复上述过程，直到图中所有顶点都被访问到。
+代码实现 首先将所有顶点的邻接顶点设置为空链表，然后我们可以通过 addEdge 方法为图添加边（$s 和 $t 分别代表边的两个顶点），从而完成图的构建。
+有了完整的图之后，就可以编写深度优先搜索方法对其进行遍历了。
+public function dfs($s, $t) { $this-&gt;found = false; for ($i = 0; $i &lt;= $this-&gt;v; $i++) { $visited[$i] = 0; } for ($i = 0; $i &lt;= $this-&gt;v; $i++) { $prev[$i] = -1; } $this-&gt;recurDfs($s, $t, $visited, $prev); $this-&gt;printPath($prev, $s, $t); } public function recurDfs($w, $t, $visited, $prev) { if ($this-&gt;found == true) { return; } $visited[$w] = 1; if ($w == $t) { $this-&gt;found = true; return true; } for ($i = 0; $i &lt; $this-&gt;adj[$w]-&gt;getSize(); $i++) { $q = $this-&gt;adj[$w]-&gt;get($i)-&gt;data; if (!
+                  <a href="/post/algorithms/graph/algorithms-graph-traverse/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                
+                  #<a href="/tags/graph/">Graph</a>&nbsp;
+                
+                </span>
+              
+            </article>
+
+          
+
+          	
+
+            <article class="post-preview">
               <a href="/post/algorithms/graph/algorithms-graph-storage/">
                 <h2 class="post-title">图(Graph)-存储</h2>
                 
@@ -376,6 +419,8 @@ autocomplete('#aa-search-input',
           
 
           	
+            
+          	
 
             <article class="post-preview">
               <a href="/post/algorithms/binarytree/algorithms-binarytree-huffmantree/">
@@ -418,8 +463,6 @@ autocomplete('#aa-search-input',
 
           
 
-          	
-            
           	
 
             <article class="post-preview">
@@ -902,50 +945,6 @@ Trie 树是个多叉树，二叉树中，一个节点的左右子节点是通过
 将 Trie 树的每个节点抽象为一个节点对象，对象包含的属性有节点字符、子节点引用和是否是字符串结束字符标志位：
 class TrieNode { public $data; // 节点字符 public $children = []; // 存放子节点引用（因为有任意个子节点，所以靠数组来存储） public $isEndingChar = false; // 是否是字符串结束字符 public function __construct($data) { $this-&gt;data = $data; } } 要构造一棵完整的 Trie 树，关键在于存储子节点引用的 $children 属性的实现。借助散列表的思想，通过一个下标与字符一一映射的数组，来构造 $children：将字符串中每个字符转化为 ASCII 码作为数组下标，将对应节点对象引用作为数组值，依次插入所有字符串，从而构造出 Trie 树。对应 PHP 实现代码如下：
                   <a href="/post/algorithms/stringmatching/algorithms-stringmatching-trie/" class="post-read-more">[阅读全文]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
-                
-                  #<a href="/tags/stringmatching/">StringMatching</a>&nbsp;
-                
-                </span>
-              
-            </article>
-
-          
-
-          	
-
-            <article class="post-preview">
-              <a href="/post/algorithms/stringmatching/algorithms-stringmatching-bf/">
-                <h2 class="post-title">字符串匹配-BF(暴力匹配算法)</h2>
-                
-              </a>
-
-              <span class="post-meta">
-  
-    发表于 2019-08-17
-  
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  <h1 id="原理">原理</h1>
-<p>最简单的字符串匹配算法 —— BF 算法说起，BF 是 Brute Force 的缩写，中文译作暴力匹配算法，也叫朴素匹配算法。</p>
-<p>BF 算法的原理很简单，在继续介绍之前，我们先引入两个术语：主串和模式串。简单来说，我们要在字符串 A 中查找子串 B，那么 A 就是主串，B 就是模式串。</p>
-<p>作为最简单、最暴力的字符串匹配算法，BF 算法的思想可以用一句话来概括，那就是，如果主串长度为 n，模式串长度为 m，我们在主串中检查起始位置分别是 0、1、2…n-m 且长度为 m 的 n-m+1 个子串，看有没有跟模式串匹配的。图示如下：</p>
-<p><img src="/img/posts/AlgorithmsAndDataStructures/StringMatching/1b463b1483d77731af561b5748d5eefa9568c11566c3f54624771e6f2c2ab128.png" alt="BF算法图示"></p>
-<p>结合上图，具体来说，就是每次拿模式串和主串对齐，然后从左到右依次比较每个字符，如果出现不相等，则把模式串往后移一个位置，再次重复上述步骤，直到模式串每个字符与对应主串位置字符都相等，则返回主串对应下标，表示找到，否则返回 -1，表示没找到。</p>
-<p>这个算法很好理解，因为这就是我们正常都能想到的暴力匹配，BF 算法的时间复杂度最差是 O(n*m)，意味着要模式串要移到主串 n-m 的位置上，并且模式串每个字符都要与子串比较。</p>
-<p>尽管 BF 算法复杂度看起来很高，但是在日常开发中，如果主串和模式串规模不大的话，该算法依然比较常用，因为足够简单，实现起来容易，不容易出错。另外，在规模不大的情况下，开销也可以接受，毕竟 O(n*m) 是最差的表现，大部分时候，执行效率比这个都要高。</p>
-<p>但是对于对时间要求比较敏感，或者需要高频匹配，数据规模较大的情况下，比如编辑器中的匹配功能、敏感词匹配系统等，BF 算法就不适用了。</p>
-
                 
               </div>
 

@@ -268,6 +268,50 @@ autocomplete('#aa-search-input',
           	
 
             <article class="post-preview">
+              <a href="/post/algorithms/stringmatching/algorithms-stringmatching-bf/">
+                <h2 class="post-title">字符串匹配-BF(暴力匹配算法)</h2>
+                
+              </a>
+
+              <span class="post-meta">
+  
+    发表于 2019-08-17
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  <h1 id="原理">原理</h1>
+<p>最简单的字符串匹配算法 —— BF 算法说起，BF 是 Brute Force 的缩写，中文译作暴力匹配算法，也叫朴素匹配算法。</p>
+<p>BF 算法的原理很简单，在继续介绍之前，我们先引入两个术语：主串和模式串。简单来说，我们要在字符串 A 中查找子串 B，那么 A 就是主串，B 就是模式串。</p>
+<p>作为最简单、最暴力的字符串匹配算法，BF 算法的思想可以用一句话来概括，那就是，如果主串长度为 n，模式串长度为 m，我们在主串中检查起始位置分别是 0、1、2…n-m 且长度为 m 的 n-m+1 个子串，看有没有跟模式串匹配的。图示如下：</p>
+<p><img src="/img/posts/AlgorithmsAndDataStructures/StringMatching/1b463b1483d77731af561b5748d5eefa9568c11566c3f54624771e6f2c2ab128.png" alt="BF算法图示"></p>
+<p>结合上图，具体来说，就是每次拿模式串和主串对齐，然后从左到右依次比较每个字符，如果出现不相等，则把模式串往后移一个位置，再次重复上述步骤，直到模式串每个字符与对应主串位置字符都相等，则返回主串对应下标，表示找到，否则返回 -1，表示没找到。</p>
+<p>这个算法很好理解，因为这就是我们正常都能想到的暴力匹配，BF 算法的时间复杂度最差是 O(n*m)，意味着要模式串要移到主串 n-m 的位置上，并且模式串每个字符都要与子串比较。</p>
+<p>尽管 BF 算法复杂度看起来很高，但是在日常开发中，如果主串和模式串规模不大的话，该算法依然比较常用，因为足够简单，实现起来容易，不容易出错。另外，在规模不大的情况下，开销也可以接受，毕竟 O(n*m) 是最差的表现，大部分时候，执行效率比这个都要高。</p>
+<p>但是对于对时间要求比较敏感，或者需要高频匹配，数据规模较大的情况下，比如编辑器中的匹配功能、敏感词匹配系统等，BF 算法就不适用了。</p>
+
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                
+                  #<a href="/tags/stringmatching/">StringMatching</a>&nbsp;
+                
+                </span>
+              
+            </article>
+
+          
+
+          	
+
+            <article class="post-preview">
               <a href="/post/algorithms/datastructures/algorithms-datastructures-hashtable/">
                 <h2 class="post-title">数据结构-散列表(HashTable, 哈希表)</h2>
                 
@@ -366,6 +410,8 @@ autocomplete('#aa-search-input',
           
 
           	
+            
+          	
 
             <article class="post-preview">
               <a href="/post/algorithms/binarysearch/algorithms-binarysearch-interval/">
@@ -404,8 +450,6 @@ autocomplete('#aa-search-input',
 
           
 
-          	
-            
           	
 
             <article class="post-preview">
@@ -781,44 +825,6 @@ F0 = 0 F1 = 1 ... F(n) = F(n-1) + F(n-2) 这样，同时有了终止条件和递
 和栈一样，队列也可以通过数组和链表实现，通过数组实现的叫顺序队列，通过链表实现的叫做链式队列，栈只需要一个栈顶指针就可以了，因为只允许在栈顶插入删除，但是队列需要两个指针，一个指向队头，一个指向队尾。先来看通过 PHP 数组实现的顺序队列代码：
 &lt;?php /** * 通过 PHP 数组实现的队列 */ class SimpleQueue { private $_queue = []; private $_size = 0; public function __construct($size = 10) { $this-&gt;_size = $size; } // 入队 public function enqueue($value) { if (count($this-&gt;_queue) &gt; $this-&gt;_size) { return false; } array_push($this-&gt;_queue, $value); } // 出队 public function dequeue() { if (count($this-&gt;_queue) == 0) { return false; } return array_shift($this-&gt;_queue); } public function size() { return count($this-&gt;_queue); } } $queue = new SimpleQueue(5); $queue-&gt;enqueue(1); $queue-&gt;enqueue(3); $queue-&gt;enqueue(5); var_dump($queue-&gt;dequeue()); # 1 var_dump($queue-&gt;size()); # 2 通过数组实现的顺序队列有一个问题，就是随着队列元素的插入和删除，队尾指针和队头指针不断后移，而导致队尾指针指向末尾无法插入数据，这时候有可能队列头部还是有剩余空间的，如下图所示：
                   <a href="/post/algorithms/datastructures/algorithms-datastructures-queue/" class="post-read-more">[阅读全文]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
-                
-                </span>
-              
-            </article>
-
-          
-
-          	
-
-            <article class="post-preview">
-              <a href="/post/algorithms/datastructures/algorithms-datastructures-stack/">
-                <h2 class="post-title">数据结构-栈(Stack)</h2>
-                
-              </a>
-
-              <span class="post-meta">
-  
-    发表于 2019-08-04
-  
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  栈(Stack) 数组和链表，从逻辑角度来说，它们都是线性结构（就是排成一条线的结构，只有前后两个方向，非线性结构包括树、图等，后面会讲到），从存储角度来说，一个是顺序存储，一个是链式存储，各有利弊，数组需要预先申请连续内存，超出限制会溢出，但是对明确知道规模的小型数据集而言，使用数组会更加高效，随机访问的特性也更加方面数组读取，但插入和删除性能要差一些；链表的话没有空间限制，但是需要额外空间存储指针，插入、删除效率很高，但不支持随机访问。
-虽说 PHP 中很少接触到这些，但是学习使用 C 语言的话这些基础还是需要了解的。接下来要介绍两种特殊的线性结构，或者说用于满足特定场景需求的线性结构：栈和队列。
-栈又叫堆栈，是限定只能在一端进行插入和删除操作的线性表，并且满足后进先出（LIFO）的特点。把允许插入和删除的一端叫做栈顶，另一个端叫做栈底，不含任何数据的栈叫做空栈。
-栈支持通过数组/链表实现，通过数组实现的通常叫做顺序栈，通过链表实现的叫做链栈。下面简单演示下如何在 PHP 中通过数组实现一个简单的顺序栈：
-&lt;?php /** * 通过 PHP 数组实现简单的顺序栈 */ class SimpleStack { private $_stack = []; private $_size = 0; public function __construct($size = 10) { $this-&gt;_size = $size; } // 获取栈顶元素 public function pop() { // 空栈 if (count($this-&gt;_stack) == 0) { return false; } return array_pop($this-&gt;_stack); } // 推送元素到栈顶 public function push($value) { // 满栈 if (count($this-&gt;_stack) == $this-&gt;_size) { return false; } array_push($this-&gt;_stack, $value); return true; } public function isEmpty() { // 是否是空栈 return current($this-&gt;_stack) == false; } public function size() { return count($this-&gt;_stack); } } $stack = new SimpleStack(15); var_dump($stack-&gt;isEmpty()); # true $stack-&gt;push(111); $stack-&gt;push(&#39;学院君&#39;); var_dump($stack-&gt;pop()); # 学院君 var_dump($stack-&gt;size()); # 1 在 PHP 底层 SPL 库中也提供了堆栈的实现类 SplStack，堆栈的概念比较简单，理解起来也不复杂，下面给出一个图示，帮助了解栈的操作流程：
-                  <a href="/post/algorithms/datastructures/algorithms-datastructures-stack/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 

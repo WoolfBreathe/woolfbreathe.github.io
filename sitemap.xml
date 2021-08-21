@@ -104,6 +104,16 @@
   </url>
   
   <url>
+    <loc>/tags/ubuntu/</loc>
+    <lastmod>2020-11-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/devops/linux/devops-linux-rsync/</loc>
+    <lastmod>2020-11-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/devops/linux/devops-linux-permisssions/</loc>
     <lastmod>2020-06-27T00:00:00+00:00</lastmod>
   </url>
