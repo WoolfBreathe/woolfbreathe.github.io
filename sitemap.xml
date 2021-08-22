@@ -4,8 +4,33 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2021-05-24T00:00:00+00:00</lastmod>
+    <lastmod>2021-08-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/linux/</loc>
+    <lastmod>2021-08-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2021-08-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2021-08-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/ubuntu/</loc>
+    <lastmod>2021-08-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/devops/linux/ubuntu-desktop-wine/</loc>
+    <lastmod>2021-08-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -20,16 +45,6 @@
   
   <url>
     <loc>/post/devops/kubernetes/devops-kubernetes-install/</loc>
-    <lastmod>2021-05-24T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/</loc>
-    <lastmod>2021-05-24T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
     <lastmod>2021-05-24T00:00:00+00:00</lastmod>
   </url>
   
@@ -94,22 +109,7 @@
   </url>
   
   <url>
-    <loc>/tags/linux/</loc>
-    <lastmod>2020-11-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/post/devops/linux/devops-linux-rsync/</loc>
-    <lastmod>2020-11-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/ubuntu/</loc>
-    <lastmod>2020-11-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/devops/linux/ubuntu-desktop-wine/</loc>
     <lastmod>2020-11-12T00:00:00+00:00</lastmod>
   </url>
   
