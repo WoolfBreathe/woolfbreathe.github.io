@@ -6,10 +6,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>Linux Rsync 文件同步-WoolfBreathe</title>
-  <meta property="og:title" content="Linux Rsync 文件同步" />
-  <meta name="twitter:title" content="Linux Rsync 文件同步" />
+  <title>Ubuntu 桌面版 安装 Window 应用-WoolfBreathe</title>
+  <meta property="og:title" content="Ubuntu 桌面版 安装 Window 应用" />
+  <meta name="twitter:title" content="Ubuntu 桌面版 安装 Window 应用" />
 
+  <meta name="description" content="Wine简介
+Wine是一款开源的应用程序，它提供了在类似Unix的操作系统上运行为微软Windows开发的软件的兼容性。
+系统： Ubuntu Desktop 20.04
+应用： Winehp 6.0">
+  <meta property="og:description" content="Wine简介
+Wine是一款开源的应用程序，它提供了在类似Unix的操作系统上运行为微软Windows开发的软件的兼容性。
+系统： Ubuntu Desktop 20.04
+应用： Winehp 6.0">
+  <meta name="twitter:description" content="Wine简介
+Wine是一款开源的应用程序，它提供了在类似Unix的操作系统上运行为微软Windows开发的软件的兼容性。
+系统： Ubuntu Desktop 20.04
+应用： Winehp 6.0">
   <meta name="author" content="WoolfBreathe"/>
   <link href="/img/favicon.png" rel="icon" type="image/x-icon" />
   <link rel="apple-touch-icon" href="/img/favicon.png"/>
@@ -45,7 +57,7 @@
     <![endif]-->
 <meta name="google-site-verification" content="oKxX4fOvB2yYmU02txZFChM93XQbESU4JaG3tNH9Hm8" />
 <meta name="baidu-site-verification" content="F5ojAyqaKU" />
-<meta name="keywords" content="DevOps, Linux">
+<meta name="keywords" content="Ubuntu-Desktop&#39;, Linux">
 
 
 
@@ -185,7 +197,7 @@ autocomplete('#aa-search-input',
           <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
               <div class="post-heading">
-                <h1>Linux Rsync 文件同步</h1>
+                <h1>Ubuntu 桌面版 安装 Window 应用</h1>
                   
                   
               </div>
@@ -203,7 +215,7 @@ autocomplete('#aa-search-input',
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="post-heading">
-              <h1>Linux Rsync 文件同步</h1>
+              <h1>Ubuntu 桌面版 安装 Window 应用</h1>
                 
                 
                   <span class="post-meta">
@@ -237,7 +249,7 @@ autocomplete('#aa-search-input',
             
             <h5 id="tags" style="margin-top: 30px;">标签:
               
-                  <a href="/tags/devops/">DevOps</a> &nbsp;
+                  <a href="/tags/ubuntu/">Ubuntu</a> &nbsp;
               
                   <a href="/tags/linux/">Linux</a> &nbsp;
               
@@ -262,65 +274,104 @@ autocomplete('#aa-search-input',
           
           
 
-          <h2 id="安装">安装</h2>
-<h3 id="服务器配置">服务器配置</h3>
+          <h2 id="wine简介">Wine简介</h2>
+<p>Wine是一款开源的应用程序，它提供了在类似Unix的操作系统上运行为微软Windows开发的软件的兼容性。</p>
+<p>系统： Ubuntu Desktop 20.04
+应用： Winehp 6.0</p>
+<h2 id="wine安装">Wine安装</h2>
+<blockquote>
 <ol>
-<li>
-<p>配置/etc/rsyncd.conf文件</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#8be9fd;font-style:italic">uid</span> <span style="color:#ff79c6">=</span> root
-<span style="color:#8be9fd;font-style:italic">gid</span> <span style="color:#ff79c6">=</span> root
-use <span style="color:#8be9fd;font-style:italic">chroot</span> <span style="color:#ff79c6">=</span> no
-max <span style="color:#8be9fd;font-style:italic">connections</span> <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">2000</span>
-<span style="color:#8be9fd;font-style:italic">port</span> <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">8973</span>
-<span style="color:#8be9fd;font-style:italic">timeout</span> <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">900</span>
-log <span style="color:#8be9fd;font-style:italic">file</span> <span style="color:#ff79c6">=</span> /var/run/rsyncd.log
-pid <span style="color:#8be9fd;font-style:italic">file</span> <span style="color:#ff79c6">=</span> /var/run/rsyncd.pid
-lock <span style="color:#8be9fd;font-style:italic">file</span> <span style="color:#ff79c6">=</span> /var/run/rsyncd.lock
-log <span style="color:#8be9fd;font-style:italic">format</span> <span style="color:#ff79c6">=</span> %t%a%m%f%b
-<span style="color:#8be9fd;font-style:italic">commemt</span> <span style="color:#ff79c6">=</span> rsync
-<span style="color:#8be9fd;font-style:italic">list</span> <span style="color:#ff79c6">=</span> yes
-<span style="color:#8be9fd;font-style:italic">read</span> <span style="color:#8be9fd;font-style:italic">only</span> <span style="color:#ff79c6">=</span> yes
-write <span style="color:#8be9fd;font-style:italic">only</span> <span style="color:#ff79c6">=</span> no
-<span style="color:#6272a4"># auth users = apprsync</span>
-<span style="color:#6272a4"># secrets file = /etc/rsyncd.secret</span>
-ignore <span style="color:#8be9fd;font-style:italic">errors</span> <span style="color:#ff79c6">=</span> yes
-<span style="color:#6272a4"># hosts allow = 172.21.5.164</span>
-
-<span style="color:#ff79c6">[</span>brave_web<span style="color:#ff79c6">]</span>
-<span style="color:#8be9fd;font-style:italic">path</span> <span style="color:#ff79c6">=</span> /data/deploy/brave
-ignore errors
-<span style="color:#8be9fd;font-style:italic">read</span> <span style="color:#8be9fd;font-style:italic">only</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">false</span>
-<span style="color:#8be9fd;font-style:italic">list</span> <span style="color:#ff79c6">=</span> <span style="color:#8be9fd;font-style:italic">false</span>
-hosts <span style="color:#8be9fd;font-style:italic">allow</span> <span style="color:#ff79c6">=</span> *
-auth <span style="color:#8be9fd;font-style:italic">users</span> <span style="color:#ff79c6">=</span> web
-secrets <span style="color:#8be9fd;font-style:italic">file</span> <span style="color:#ff79c6">=</span> /etc/rsyncd.secret
-<span style="color:#8be9fd;font-style:italic">exclude</span><span style="color:#ff79c6">=</span> *.log .svn config.php auth.php gate/start_config.php *VO.php image_cache/*.jpg *.xlsx.json *.tpl.php
-
-</code></pre></div></li>
-<li>
-<p>服务器端添加密钥文件</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#34;web:123456&#34;</span> &gt;&gt; /etc/rsyncd.secret
-</code></pre></div></li>
-<li>
-<p>修改文件权限</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">chmod <span style="color:#bd93f9">600</span> /etc/rsyncd.secret
-</code></pre></div></li>
+<li>首先，运行64位体系结构的系统需要启用32位体系结构。</li>
 </ol>
-<h3 id="客户端配置">客户端配置</h3>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo dpkg --add-architecture i386
+</code></pre></div><blockquote>
+<ol start="2">
+<li>然后，下载存储库密钥并将其添加到系统中。</li>
+</ol>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">wget -qO - https://dl.winehq.org/wine-builds/winehq.key | sudo apt-key add - 
+</code></pre></div><blockquote>
+<ol start="3">
+<li>之后，使用以下命令在系统中启用Wine apt存储库。</li>
+</ol>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo apt-add-repository <span style="color:#f1fa8c">&#39;deb https://dl.winehq.org/wine-builds/ubuntu/ focal main&#39;</span> 
+</code></pre></div><blockquote>
+<ol start="4">
+<li>在Ubuntu 20.04上安装Wine</li>
+</ol>
+</blockquote>
+<p>使用以下命令从apt信息库安装Wine软件包。该&ndash;install-recommends选项将在您的Ubuntu 20.04系统上安装winehq稳定版本的所有推荐软件包。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo apt update
+sudo apt install --install-recommends winehq-stable
+</code></pre></div><p>在任何情况下，您在安装过程中都会遇到未满足依赖性的错误，请使用以下命令在Ubuntu上使用aptitude安装wine。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo apt install aptitude
+sudo aptitude install winehq-stable
+</code></pre></div><p>这将在Ubuntu 20.04系统上安装Wine和所有需要的软件包。</p>
+<blockquote>
+<ol start="5">
+<li>测试Wine版本</li>
+</ol>
+</blockquote>
+<p>在您的Ubuntu系统上，Wine的安装已经成功完成。使用以下命令检查您系统上安装的Wine版本。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">wine --version 
+</code></pre></div><h2 id="wechat安装">Wechat安装</h2>
+<blockquote>
 <ol>
-<li>
-<p>客户端添加密钥文件</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#8be9fd;font-style:italic">echo</span> <span style="color:#f1fa8c">&#34;123456&#34;</span> &gt;&gt; /etc/rsyncd.secret
-</code></pre></div></li>
-<li>
-<p>修改文件权限</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">chmod <span style="color:#bd93f9">600</span> /etc/rsyncd.secret
-</code></pre></div></li>
-<li>
-<p>客户端同步命令</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">sudo rsync -vzrtopg --delete --ignore-errors /home/vagrant/code/production/microecology/* pailisi@47.95.249.62::microecology --port<span style="color:#ff79c6">=</span><span style="color:#bd93f9">82</span> --password-file<span style="color:#ff79c6">=</span>/etc/rsyncd.secret --exclude-from<span style="color:#ff79c6">=</span>/home/vagrant/exclude.list
-</code></pre></div></li>
+<li>官网下载微信；</li>
 </ol>
+</blockquote>
+<blockquote>
+<ol start="2">
+<li>在ubuntu中，右键点击exe安装包，open with wine windows program &hellip; 就可以安装了；</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="3">
+<li>安装完后，桌面有个 &lsquo;微信.desktop&rsquo; ，先用文本编辑器打开，如下图所示在‘Exec=env’后添加 &lsquo;GTK_IM_MODILE=ibus QT_IM_MODULE=ibus&rsquo; ，保存，解决可能无法输入中文的问题；</li>
+</ol>
+</blockquote>
+<h2 id="中文乱码框框">中文乱码（框框）</h2>
+<blockquote>
+<ol>
+<li>下载Windows字体</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2">
+<li>把Fonts文件夹内所有字体复制到wine的映射目录内</li>
+</ol>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">cp Fonts/* ~/.wine/drive_c/windows/Fonts/
+</code></pre></div><h2 id="输入框内容">输入框内容</h2>
+<h3 id="方法一">方法一</h3>
+<blockquote>
+<ol>
+<li>下载windows的riched20.dll</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2">
+<li>将windows的c:/windows/system32/riched20.dll复制到ubuntu下的~/.wine/drive_c/windows/system32/下</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="3">
+<li>终端执行winecfg，选择函数库标签页，然后在新增函数库顶替里添加riched20，并且编辑为原装优先于内建，重启微信即可。</li>
+</ol>
+</blockquote>
+<p><img src="/img/posts/Linux/Wine/20201213214014926.pngg" alt="新增函数库riched20!"></p>
+<h3 id="方法二未成功">方法二(未成功)</h3>
+<p>在终端执行winetricks riched20，让其自动修复即可，但是执行这个指令可能会提示你not found以及连接失败，网络不可达的错误信息，可按以下方法进行，亲测可用。</p>
+<blockquote>
+<ol>
+<li>下载了两个文件，给出了这两个文件的下载地址：</li>
+</ol>
+</blockquote>
+<p>链接1: <a href="https://saimei.ftp.acc.umu.se/mirror/archive/ftp.sunet.se/pub/security/vendor/microsoft/win2000/Service_Packs/usa/W2KSP4_EN.EXE">W2KSP4_EN.EXE</a>
+链接2: <a href="https://whp-aus2.cold.extweb.hp.com/pub/softlib/software/msi/InstMsiW.exe">InstMsiW</a></p>
+<p>所以这里我们点击这两个连接进行手动下载，然后将下载的W2KSP4_EN.EXE复制到~/.cache/winetricks/win2ksp4 目录下，再次执行winetricks riched20 即可成功，登陆微信输入显示正常。</p>
 
           <h2>微信公众号</h2>
 <p>扫描下面的二维码关注我们的微信公众帐号，在微信公众帐号中回复◉加群◉即可加入到我们的 kubernetes 讨论群里面共同学习。</p>
@@ -373,6 +424,8 @@ secrets <span style="color:#8be9fd;font-style:italic">file</span> <span style="c
 <h3>相关文章</h3>
 <ul style="margin-bottom: 25px;">
     
+    <li><a href="/post/devops/linux/devops-linux-rsync/">Linux Rsync 文件同步</a></li>
+    
     <li><a href="/post/devops/linux/devops-linux-permisssions/">Linux Permisssions(文件权限)</a></li>
     
     <li><a href="/post/devops/linux/devops-linux-timedatectl/">Linux使用Timedatectl修改时区和时间</a></li>
@@ -389,10 +442,6 @@ secrets <span style="color:#8be9fd;font-style:italic">file</span> <span style="c
     
     <li><a href="/post/devops/git/devops-linux-multiuser/">MultiUser</a></li>
     
-    <li><a href="/post/devops/linux/ubuntu-desktop-wine/">Ubuntu 桌面版 安装 Window 应用</a></li>
-    
-    <li><a href="/post/devops/database/devops-linux-mysql-utilities/">Centos7.X下编译安装MySQL Utilities</a></li>
-    
 </ul>
 
         
@@ -401,12 +450,12 @@ secrets <span style="color:#8be9fd;font-style:italic">file</span> <span style="c
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="/post/devops/linux/ubuntu-desktop-wine/" data-toggle="tooltip" data-placement="top" title="Ubuntu 桌面版 安装 Window 应用">&larr; 前一篇</a>
+              <a href="/post/devops/linux/devops-linux-permisssions/" data-toggle="tooltip" data-placement="top" title="Linux Permisssions(文件权限)">&larr; 前一篇</a>
             </li>
           
           
             <li class="next">
-              <a href="/post/computerlanguages/php/computerlanguages-php-principle/" data-toggle="tooltip" data-placement="top" title="PHP的运行机制和基本原理">后一篇 &rarr;</a>
+              <a href="/post/devops/linux/devops-linux-rsync/" data-toggle="tooltip" data-placement="top" title="Linux Rsync 文件同步">后一篇 &rarr;</a>
             </li>
           
         </ul>
@@ -430,9 +479,9 @@ secrets <span style="color:#8be9fd;font-style:italic">file</span> <span style="c
         owner: '',
         admin: [''],
         labels: ['gitment'],
-        title: 'Linux Rsync 文件同步',
+        title: 'Ubuntu 桌面版 安装 Window 应用',
         createIssueManually: true,
-        id: 'DevOps-Linux-Rsync',      
+        id: 'Ubuntu-Desktop-Wine',      
         distractionFreeMode: true  
     });
     gitalk.render('gitalk-container');
