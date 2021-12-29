@@ -8,10 +8,20 @@
     <language>zh-cn</language>
     <managingEditor>youremail@domain.com (WoolfBreathe)</managingEditor>
     <webMaster>youremail@domain.com (WoolfBreathe)</webMaster>
-    <lastBuildDate>Fri, 20 Aug 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 28 Dec 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Docker 下载 Google 镜像</title>
+      <link>/post/devops/kubernetes/google-docker-image/</link>
+      <pubDate>Tue, 28 Dec 2021 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/devops/kubernetes/google-docker-image/</guid>
+      <description>&lt;h2 id=&#34;无法下载镜像问题&#34;&gt;无法下载镜像问题&lt;/h2&gt;
+&lt;p&gt;在使用Docker或者Kubernetes的时候，经常会遇到镜像下不下来的情况，大部分镜像都能在DockerHub或者阿里云容器仓库中能找到（能找到是因为有其他人拉取到他们的仓库里了），但是出现找不到的时候，就得自己去Google拉镜像了。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Ubuntu 桌面版 安装 Window 应用</title>

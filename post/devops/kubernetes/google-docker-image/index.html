@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+  <title>Docker 下载 Google 镜像-WoolfBreathe</title>
+  <meta property="og:title" content="Docker 下载 Google 镜像" />
+  <meta name="twitter:title" content="Docker 下载 Google 镜像" />
+
+  <meta name="description" content="无法下载镜像问题
+在使用Docker或者Kubernetes的时候，经常会遇到镜像下不下来的情况，大部分镜像都能在DockerHub或者阿里云容器仓库中能找到（能找到是因为有其他人拉取到他们的仓库里了），但是出现找不到的时候，就得自己去Google拉镜像了。">
+  <meta property="og:description" content="无法下载镜像问题
+在使用Docker或者Kubernetes的时候，经常会遇到镜像下不下来的情况，大部分镜像都能在DockerHub或者阿里云容器仓库中能找到（能找到是因为有其他人拉取到他们的仓库里了），但是出现找不到的时候，就得自己去Google拉镜像了。">
+  <meta name="twitter:description" content="无法下载镜像问题
+在使用Docker或者Kubernetes的时候，经常会遇到镜像下不下来的情况，大部分镜像都能在DockerHub或者阿里云容器仓库中能找到（能找到是因为有其他人拉取到他们的仓库里了），但是出现找不到的时候，就得自己去Google拉镜像了。">
+  <meta name="author" content="WoolfBreathe"/>
+  <link href="/img/favicon.png" rel="icon" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="/img/favicon.png"/>
+  <meta property="og:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:image" content="/img/avatar-icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@username" />
+  <meta name="twitter:creator" content="@username" />
+  <meta property="og:url" content="/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="WoolfBreathe" />
+
+  <meta name="generator" content="Hugo 0.68.3" />
+  <link rel="canonical" href="/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="WoolfBreathe">
+
+  
+  
+  <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700%7COpen+Sans:400,700" rel="stylesheet">
+  
+
+  <link rel="stylesheet" href='/css/bundle.min.62de9d30b83723e0d55f82908aedb1c5eb18c910bc24bcf43e530ce754ee1502.css' integrity='sha256-Yt6dMLg3I&#43;DVX4KQiu2xxesYyRC8JLz0PlMM51TuFQI='>
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+  
+  
+    
+    <!--[if lt IE 9]>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <![endif]-->
+<meta name="google-site-verification" content="oKxX4fOvB2yYmU02txZFChM93XQbESU4JaG3tNH9Hm8" />
+<meta name="baidu-site-verification" content="F5ojAyqaKU" />
+<meta name="keywords" content="Docker-Image&#39;, Kubernetes">
+
+
+
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">切换导航</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/" title="WoolfBreathe">
+        <img src="/img/avatar-icon.png" style="margin-top: -5px;height: 32px;" alt="WoolfBreathe">
+      </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="首页" href="/">首页</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="归档" href="/archives">归档</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="标签" href="/tags">标签</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="关于" href="/page/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="RSS" href="/index.xml">RSS</a>
+            </li>
+          
+        
+
+        
+
+        
+
+        
+          <li>
+            <a href="#modalSearch" data-toggle="modal" data-target="#modalSearch" style="outline: none;">
+              <span id="searchGlyph" class="glyphicon glyphicon-search"></span>
+            </a>
+          </li>
+          
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+  <div id="modalSearch" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">搜索</h4>
+        </div>
+        <div class="modal-body">
+            
+<div class="aa-input-container" id="aa-input-container">
+    <input type="search" id="aa-search-input" class="aa-input-search" placeholder="Search for titles or URIs..." name="search" autocomplete="off" />
+    <svg class="aa-input-icon" viewBox="654 -372 1664 1664">
+        <path d="M1806,332c0-123.3-43.8-228.8-131.5-316.5C1586.8-72.2,1481.3-116,1358-116s-228.8,43.8-316.5,131.5  C953.8,103.2,910,208.7,910,332s43.8,228.8,131.5,316.5C1129.2,736.2,1234.7,780,1358,780s228.8-43.8,316.5-131.5  C1762.2,560.8,1806,455.3,1806,332z M2318,1164c0,34.7-12.7,64.7-38,90s-55.3,38-90,38c-36,0-66-12.7-90-38l-343-342  c-119.3,82.7-252.3,124-399,124c-95.3,0-186.5-18.5-273.5-55.5s-162-87-225-150s-113-138-150-225S654,427.3,654,332  s18.5-186.5,55.5-273.5s87-162,150-225s138-113,225-150S1262.7-372,1358-372s186.5,18.5,273.5,55.5s162,87,225,150s113,138,150,225  S2062,236.7,2062,332c0,146.7-41.3,279.7-124,399l343,343C2305.7,1098.7,2318,1128.7,2318,1164z" />
+    </svg>
+</div>
+<script src="/js/algoliasearch.min.js"></script>
+<script src="/js/autocomplete.min.js"></script>
+
+<script>
+var client = algoliasearch("1JDRAS0AZR", "8804ac109158bb3bb60d74ce98fa332f");
+var index = client.initIndex('prod_blog');
+
+autocomplete('#aa-search-input',
+{ hint: false}, {
+    source: autocomplete.sources.hits(index, {hitsPerPage: 5}),
+    
+    displayKey: 'name',
+    
+    templates: {
+        
+        suggestion: function(suggestion) {
+            return '<span>' + '<a href="/post/' + suggestion.slug + '">' +
+            suggestion._highlightResult.title.value + '</a></span>';
+        }
+    }
+});
+</script>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+  
+  
+  
+
+
+
+
+  
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="/img/banner/photo-1522481889-27404a7ea14a.jpeg" ></div>
+  
+
+  <header class="header-section has-img">
+    
+      <div class="intro-header big-img">
+        
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+              <div class="post-heading">
+                <h1>Docker 下载 Google 镜像</h1>
+                  
+                  
+              </div>
+            </div>
+          </div>
+        </div>
+        <span class="img-desc" style="display: inline;"></span>
+      </div>
+    
+    
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Docker 下载 Google 镜像</h1>
+                
+                
+                  <span class="post-meta">
+  
+    2021-12-28
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+  </header>
+
+
+    
+
+<div class="container" role="main">
+  <div class="row">
+
+    
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div>
+            
+            
+            <h5 id="tags" style="margin-top: 30px;">标签:
+              
+                  <a href="/tags/docker/">Docker</a> &nbsp;
+              
+                  <a href="/tags/kubernetes/">Kubernetes</a> &nbsp;
+              
+            </h5>
+            
+        </div>
+  
+        <article role="main" class="blog-post" itemprop="articleBody" id="content">
+          
+            
+          
+  
+          
+          
+          
+  
+          
+          
+          
+  
+          
+          
+          
+
+          <h2 id="无法下载镜像问题">无法下载镜像问题</h2>
+<p>在使用Docker或者Kubernetes的时候，经常会遇到镜像下不下来的情况，大部分镜像都能在DockerHub或者阿里云容器仓库中能找到（能找到是因为有其他人拉取到他们的仓库里了），但是出现找不到的时候，就得自己去Google拉镜像了。</p>
+<h2 id="google-cloud-shell">Google cloud shell</h2>
+<p>这个方法借助Google cloud shell。核心原理如下</p>
+<blockquote>
+<ol>
+<li>使用Google cloud shell来拉取镜像</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2">
+<li>将镜像上传至一个自己的仓库中（示例使用DockerHub库）</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="3">
+<li>再从个人仓库中把对应镜像下载下来。</li>
+</ol>
+</blockquote>
+<p>从原理上来说，使用这个方法可以解决几乎所有的镜像拉取问题。</p>
+<h2 id="准备">准备</h2>
+<blockquote>
+<ol>
+<li>翻墙工具</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2">
+<li>Google账号</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="3">
+<li>DockerHub账号</li>
+</ol>
+</blockquote>
+<h2 id="操作">操作</h2>
+<blockquote>
+<ol>
+<li>进入 <a href="https://cloud.google.com/shell">Google Cloud Shell</a></li>
+</ol>
+</blockquote>
+<p><img src="/img/posts/DevOps/Kubernetes/v2-e6a13560405f8281090644c696970747_1440w.jpg" alt="GoogleCloudShell界面"></p>
+<blockquote>
+<ol start="2">
+<li>点击转到控制台</li>
+</ol>
+</blockquote>
+<p><img src="/img/posts/DevOps/Kubernetes/v2-ee8c431e1c871de4eb9ff375e3a6ca85_1440w.jpg" alt="Google Cloud Shell控制台"></p>
+<blockquote>
+<ol start="3">
+<li>登陆DokcerHub</li>
+</ol>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker login --username<span style="color:#ff79c6">=</span>****
+</code></pre></div><p><img src="/img/posts/DevOps/Kubernetes/v2-e831b25d4a4214bc71ad1f635e06c1be_1440w.png" alt="Google Cloud Shell控制台Docker登陆"></p>
+<blockquote>
+<ol start="4">
+<li>拉取目标镜像</li>
+</ol>
+</blockquote>
+<p>使用docker pull 把这个镜像拉取到google cloud shell本地</p>
+<p><img src="/img/posts/DevOps/Kubernetes/v2-0a194ffd940de3bdad3f2e49373ceb48_1440w.jpg" alt="Google Cloud Shell控制台Docker拉取镜像"></p>
+<blockquote>
+<ol start="5">
+<li>镜像重新打标签</li>
+</ol>
+</blockquote>
+<p>要求重新tag的格式为：域名+namespace+仓库名:版本号</p>
+<p><img src="/img/posts/DevOps/Kubernetes/v2-d4a7b7c23f00a29115551b641a906dd7_1440w.png" alt="Google Cloud Shell控制台Docker镜像重新打标签"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker tag xdp-service-runtime:2.2 edisonsaonian/xdp-service-runtime:2.2
+</code></pre></div><blockquote>
+<ol start="6">
+<li>创建一个Repository仓库</li>
+</ol>
+</blockquote>
+<p><img src="/img/posts/DevOps/Kubernetes/381412-20190712191010110-392774783.png" alt="DockerHub创建Repository仓库"></p>
+<blockquote>
+<ol start="7">
+<li>推送镜像</li>
+</ol>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker push edisonsaonian/xdp-service-runtime:2.2
+</code></pre></div><p><img src="/img/posts/DevOps/Kubernetes/381412-20190712191339548-229729843.png" alt="Google Cloud Shell控制台Docker推送镜像"></p>
+<blockquote>
+<ol start="8">
+<li>DockerHub上查看Repository的信息</li>
+</ol>
+</blockquote>
+<p><img src="/img/posts/DevOps/Kubernetes/381412-20190712191420255-1695629547.png" alt="Google Cloud Shell控制台Docker推送镜像"></p>
+<blockquote>
+<ol start="9">
+<li>拉取目标镜像到本地</li>
+</ol>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker pull docker.io/edisonsaonian/xdp-service-runtime:2.2
+</code></pre></div>
+
+          <h2>微信公众号</h2>
+<p>扫描下面的二维码关注我们的微信公众帐号，在微信公众帐号中回复◉加群◉即可加入到我们的 kubernetes 讨论群里面共同学习。</p>
+<img src="https://bxdc-static.oss-cn-beijing.aliyuncs.com/images/qrcode.png" alt="wechat-account-qrcode">
+
+  
+          
+            <div class="entry-shang text-center">
+    <p>「真诚赞赏，手留余香」</p>
+    <button class="zs show-zs btn btn-bred">赞赏</button>
+</div>
+<div class="zs-modal-bg"></div>
+<div class="zs-modal-box">
+    <div class="zs-modal-head">
+        <button type="button" class="close">×</button>
+        <span class="author"><img src="/img/avatar.jpeg"/>阳明</span>
+        <p class="tip"><i></i><span>请我喝杯咖啡？</span></p>
+    </div>
+    <div class="zs-modal-body">
+        <div class="zs-modal-btns">
+            <button class="btn btn-blink" data-num="2">2元</button>
+            <button class="btn btn-blink" data-num="5">5元</button>
+            <button class="btn btn-blink" data-num="10">10元</button>
+            <button class="btn btn-blink" data-num="50">50元</button>
+            <button class="btn btn-blink" data-num="100">100元</button>
+            <button class="btn btn-blink" data-num="1">任意金额</button>
+        </div>
+        <div class="zs-modal-pay">
+            <button class="btn btn-bred" id="pay-text">2元</button>
+            <p>使用<span id="pay-type">微信</span>扫描二维码完成支付</p>
+            <img src="/img/wechat-2.png" id="pay-image"/>
+        </div>
+    </div>
+    <div class="zs-modal-footer">
+        <span class="zs-wechat"><img src="/img/wechat-btn.png"/></span>
+    </div>
+</div>
+          
+          
+            
+
+
+
+          
+        </article>
+  
+        
+          
+
+<h3>相关文章</h3>
+<ul style="margin-bottom: 25px;">
+    
+    <li><a href="/post/devops/kubernetes/devops-kubernetes-install/">Kubernetes Install</a></li>
+    
+    <li><a href="/post/devops/docker/devops-docker-command/">Docker 常用命令</a></li>
+    
+    <li><a href="/post/devops/docker/devops-docker-install/">Docker Install</a></li>
+    
+    <li><a href="/post/devops/docker/devops-docker-docker/">Docker</a></li>
+    
+</ul>
+
+        
+  
+        
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="/post/devops/linux/ubuntu-desktop-wine/" data-toggle="tooltip" data-placement="top" title="Ubuntu 桌面版 安装 Window 应用">&larr; 前一篇</a>
+            </li>
+          
+          
+        </ul>
+        
+
+        
+        
+        
+  
+        
+    <div id="gitalk-container"></div>
+    
+    
+    <link rel="stylesheet" href="/css/gitalk.css" />
+    <script src="/js/gitalk.min.js"></script>
+    <script>
+    var gitalk = new Gitalk({
+        clientID: '',
+        clientSecret: '',
+        repo: '',
+        owner: '',
+        admin: [''],
+        labels: ['gitment'],
+        title: 'Docker 下载 Google 镜像',
+        createIssueManually: true,
+        id: 'Google-Docker-Image',      
+        distractionFreeMode: true  
+    });
+    gitalk.render('gitalk-container');
+</script>
+
+
+        
+          
+
+        
+  
+      </div>
+    
+    
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          <img src="/img/wechatmp.png" alt="k8s技术圈">
+          
+          <li>
+            <a href="mailto:icnych@gmail.com" title="Email me">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://github.com/cnych" title="GitHub">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://weibo.com/cnych" title="微博">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          <li>
+            <a href="https://instagram.com/cnych" title="Instagram">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-instagram fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+          
+          <li>
+            <a href="/%20index.xml" title="RSS">
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+          
+          <a href="/">WoolfBreathe</a>
+          
+          
+
+          &nbsp;&bull;&nbsp;
+          2021
+        </p>
+        
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.68.3</a> powered &nbsp;&bull;&nbsp; Theme by <a
+            href="https://github.com/rootsongjc/beautifulhugo">Beautiful Hugo</a> Adapted To <a
+            href="https://github.com/cnych/qikqiak.com">qikqiak-blog</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src='/js/bundle.min.b7dfdd821c9f407aafd1909c145d179393173d1476e753e70269be48968a707d.js' integrity='sha256-t9/dghyfQHqv0ZCcFF0Xk5MXPRR251PnAmm&#43;SJaKcH0='></script>
+
+
+
+
+
+
+
+
+  </body>
+</html>
+

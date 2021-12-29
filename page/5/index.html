@@ -268,6 +268,49 @@ autocomplete('#aa-search-input',
           	
 
             <article class="post-preview">
+              <a href="/post/algorithms/stringmatching/algorithms-stringmatching-trie/">
+                <h2 class="post-title">字符串匹配-Trie</h2>
+                
+              </a>
+
+              <span class="post-meta">
+  
+    2019-08-18
+  
+  
+</span>
+
+
+              <div class="post-entry">
+                
+                  定义 Trie 树，也叫「前缀树」或「字典树」，顾名思义，它是一个树形结构，专门用于处理字符串匹配，用来解决在一组字符串集合中快速查找某个字符串的问题。
+注：Trie 这个术语来自于单词「retrieval」，你可以把它读作 tree，也可以读作 try。  Trie 树的本质，就是利用字符串之间的公共前缀，将重复的前缀合并在一起，比如有[&ldquo;hello&rdquo;,&ldquo;her&rdquo;,&ldquo;hi&rdquo;,&ldquo;how&rdquo;,&ldquo;seo&rdquo;,&ldquo;so&rdquo;] 这个字符串集合，可以将其构建成下面这棵 Trie 树：
+每个节点表示一个字符串中的字符，从根节点到红色节点的一条路径表示一个字符串（红色节点表示是某个单词的结束字符，但不一定都是叶子节点）。
+这样，就可以通过遍历这棵树来检索是否存在待匹配的字符串了，比如要在这棵 Trie 树中查询 her，只需从 h 开始，依次往下匹配，在子节点中找到 e，然后继续匹配子节点，在 e 的子节点中找到 r，则表示匹配成功，否则匹配失败。通常，可以通过 Trie 树来构建敏感词或关键词匹配系统。
+实现 从刚刚 Trie 树的介绍来看，Trie 树主要有两个操作，一个是将字符串集合构造成 Trie 树。这个过程分解开来的话，就是一个将字符串插入到 Trie 树的过程。另一个是在 Trie 树中查询一个字符串。
+Trie 树是个多叉树，二叉树中，一个节点的左右子节点是通过两个指针来存储的，对于多叉树来说，怎么存储一个节点的所有子节点的指针呢？
+将 Trie 树的每个节点抽象为一个节点对象，对象包含的属性有节点字符、子节点引用和是否是字符串结束字符标志位：
+class TrieNode { public $data; // 节点字符 public $children = []; // 存放子节点引用（因为有任意个子节点，所以靠数组来存储） public $isEndingChar = false; // 是否是字符串结束字符 public function __construct($data) { $this-&gt;data = $data; } } 要构造一棵完整的 Trie 树，关键在于存储子节点引用的 $children 属性的实现。借助散列表的思想，通过一个下标与字符一一映射的数组，来构造 $children：将字符串中每个字符转化为 ASCII 码作为数组下标，将对应节点对象引用作为数组值，依次插入所有字符串，从而构造出 Trie 树。对应 PHP 实现代码如下：
+                  <a href="/post/algorithms/stringmatching/algorithms-stringmatching-trie/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                
+                  #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                
+                  #<a href="/tags/stringmatching/">StringMatching</a>&nbsp;
+                
+                </span>
+              
+            </article>
+
+          
+
+          	
+
+            <article class="post-preview">
               <a href="/post/algorithms/stringmatching/algorithms-stringmatching-bf/">
                 <h2 class="post-title">字符串匹配-BF(暴力匹配算法)</h2>
                 
@@ -275,7 +318,7 @@ autocomplete('#aa-search-input',
 
               <span class="post-meta">
   
-    发表于 2019-08-17
+    2019-08-17
   
   
 </span>
@@ -319,7 +362,7 @@ autocomplete('#aa-search-input',
 
               <span class="post-meta">
   
-    发表于 2019-08-16
+    2019-08-16
   
   
 </span>
@@ -355,6 +398,8 @@ autocomplete('#aa-search-input',
           
 
           	
+            
+          	
 
             <article class="post-preview">
               <a href="/post/algorithms/binarysearch/algorithms-binarysearch-case/">
@@ -364,7 +409,7 @@ autocomplete('#aa-search-input',
 
               <span class="post-meta">
   
-    发表于 2019-08-15
+    2019-08-15
   
   
 </span>
@@ -410,8 +455,6 @@ autocomplete('#aa-search-input',
           
 
           	
-            
-          	
 
             <article class="post-preview">
               <a href="/post/algorithms/binarysearch/algorithms-binarysearch-interval/">
@@ -421,7 +464,7 @@ autocomplete('#aa-search-input',
 
               <span class="post-meta">
   
-    发表于 2019-08-14
+    2019-08-14
   
   
 </span>
@@ -460,7 +503,7 @@ autocomplete('#aa-search-input',
 
               <span class="post-meta">
   
-    发表于 2019-08-13
+    2019-08-13
   
   
 </span>
@@ -500,7 +543,7 @@ autocomplete('#aa-search-input',
 
               <span class="post-meta">
   
-    发表于 2019-08-12
+    2019-08-12
   
   
 </span>
@@ -541,7 +584,7 @@ autocomplete('#aa-search-input',
 
               <span class="post-meta">
   
-    发表于 2019-08-09
+    2019-08-09
   
   
 </span>
@@ -577,7 +620,7 @@ autocomplete('#aa-search-input',
 
               <span class="post-meta">
   
-    发表于 2019-08-08
+    2019-08-08
   
   
 </span>
@@ -652,7 +695,7 @@ autocomplete('#aa-search-input',
 
               <span class="post-meta">
   
-    发表于 2019-08-07
+    2019-08-07
   
   
 </span>
@@ -692,7 +735,7 @@ autocomplete('#aa-search-input',
 
               <span class="post-meta">
   
-    发表于 2019-08-07
+    2019-08-07
   
   
 </span>
@@ -731,7 +774,7 @@ autocomplete('#aa-search-input',
 
               <span class="post-meta">
   
-    发表于 2019-08-07
+    2019-08-07
   
   
 </span>
@@ -771,7 +814,7 @@ autocomplete('#aa-search-input',
 
               <span class="post-meta">
   
-    发表于 2019-08-06
+    2019-08-06
   
   
 </span>
@@ -788,43 +831,6 @@ autocomplete('#aa-search-input',
 F0 = 0 F1 = 1 ... F(n) = F(n-1) + F(n-2) 这样，同时有了终止条件和递归公式，接下来，就是将其转化为递归代码了：
 &lt;?php /** * 通过递归实现斐波那契数列 */ function fibonacci($n) { if ($n == 0) { return 0; } if ($n == 1) { return 1; } return fibonacci($n - 2) + fibonacci($n - 1); } print fibonacci(5); # 5 print fibonacci(8); # 21 通过递归，用非常简洁的代码就实现了复杂的斐波那契数列的求解，如果要用迭代来实现这个逻辑，不定要写多少代码呢。
                   <a href="/post/algorithms/datastructures/algorithms-datastructures-recursion/" class="post-read-more">[阅读全文]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
-                
-                </span>
-              
-            </article>
-
-          
-
-          	
-
-            <article class="post-preview">
-              <a href="/post/algorithms/datastructures/algorithms-datastructures-queue/">
-                <h2 class="post-title">数据结构-队列(Queue)</h2>
-                
-              </a>
-
-              <span class="post-meta">
-  
-    发表于 2019-08-05
-  
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  队列(Queue) 数据结构 —— 队列，和栈一样，队列也是一中特殊的线性表结构，只不过队列是在一端插入，另一端删除，就跟平常排队一样的道理，从队尾入队，在队头出去，所以队列的特性是先入先出（FIFO），允许插入的一端叫队尾，允许删除的一端叫队头。
-一张图可以形象的体现两者的差别：
-和栈一样，队列也可以通过数组和链表实现，通过数组实现的叫顺序队列，通过链表实现的叫做链式队列，栈只需要一个栈顶指针就可以了，因为只允许在栈顶插入删除，但是队列需要两个指针，一个指向队头，一个指向队尾。先来看通过 PHP 数组实现的顺序队列代码：
-&lt;?php /** * 通过 PHP 数组实现的队列 */ class SimpleQueue { private $_queue = []; private $_size = 0; public function __construct($size = 10) { $this-&gt;_size = $size; } // 入队 public function enqueue($value) { if (count($this-&gt;_queue) &gt; $this-&gt;_size) { return false; } array_push($this-&gt;_queue, $value); } // 出队 public function dequeue() { if (count($this-&gt;_queue) == 0) { return false; } return array_shift($this-&gt;_queue); } public function size() { return count($this-&gt;_queue); } } $queue = new SimpleQueue(5); $queue-&gt;enqueue(1); $queue-&gt;enqueue(3); $queue-&gt;enqueue(5); var_dump($queue-&gt;dequeue()); # 1 var_dump($queue-&gt;size()); # 2 通过数组实现的顺序队列有一个问题，就是随着队列元素的插入和删除，队尾指针和队头指针不断后移，而导致队尾指针指向末尾无法插入数据，这时候有可能队列头部还是有剩余空间的，如下图所示：
-                  <a href="/post/algorithms/datastructures/algorithms-datastructures-queue/" class="post-read-more">[阅读全文]</a>
                 
               </div>
 

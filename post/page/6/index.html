@@ -189,6 +189,36 @@ autocomplete('#aa-search-input',
         <div class="posts-list">
           
             <article class="post-preview">
+              <a href="/post/algorithms/datastructures/algorithms-datastructures-queue/">
+                <h2 class="post-title">数据结构-队列(Queue)</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                2019-08-05
+              </p>
+              <div class="post-entry">
+                
+                  队列(Queue) 数据结构 —— 队列，和栈一样，队列也是一中特殊的线性表结构，只不过队列是在一端插入，另一端删除，就跟平常排队一样的道理，从队尾入队，在队头出去，所以队列的特性是先入先出（FIFO），允许插入的一端叫队尾，允许删除的一端叫队头。
+一张图可以形象的体现两者的差别：
+和栈一样，队列也可以通过数组和链表实现，通过数组实现的叫顺序队列，通过链表实现的叫做链式队列，栈只需要一个栈顶指针就可以了，因为只允许在栈顶插入删除，但是队列需要两个指针，一个指向队头，一个指向队尾。先来看通过 PHP 数组实现的顺序队列代码：
+&lt;?php /** * 通过 PHP 数组实现的队列 */ class SimpleQueue { private $_queue = []; private $_size = 0; public function __construct($size = 10) { $this-&gt;_size = $size; } // 入队 public function enqueue($value) { if (count($this-&gt;_queue) &gt; $this-&gt;_size) { return false; } array_push($this-&gt;_queue, $value); } // 出队 public function dequeue() { if (count($this-&gt;_queue) == 0) { return false; } return array_shift($this-&gt;_queue); } public function size() { return count($this-&gt;_queue); } } $queue = new SimpleQueue(5); $queue-&gt;enqueue(1); $queue-&gt;enqueue(3); $queue-&gt;enqueue(5); var_dump($queue-&gt;dequeue()); # 1 var_dump($queue-&gt;size()); # 2 通过数组实现的顺序队列有一个问题，就是随着队列元素的插入和删除，队尾指针和队头指针不断后移，而导致队尾指针指向末尾无法插入数据，这时候有可能队列头部还是有剩余空间的，如下图所示：
+                  <a href="/post/algorithms/datastructures/algorithms-datastructures-queue/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
               <a href="/post/algorithms/datastructures/algorithms-datastructures-stack/">
                 <h2 class="post-title">数据结构-栈(Stack)</h2>
 
@@ -196,7 +226,7 @@ autocomplete('#aa-search-input',
               </a>
 
               <p class="post-meta">
-                发表于 2019-08-04
+                2019-08-04
               </p>
               <div class="post-entry">
                 
@@ -227,7 +257,7 @@ autocomplete('#aa-search-input',
               </a>
 
               <p class="post-meta">
-                发表于 2019-08-03
+                2019-08-03
               </p>
               <div class="post-entry">
                 
@@ -263,7 +293,7 @@ autocomplete('#aa-search-input',
               </a>
 
               <p class="post-meta">
-                发表于 2019-08-02
+                2019-08-02
               </p>
               <div class="post-entry">
                 
@@ -292,7 +322,7 @@ autocomplete('#aa-search-input',
               </a>
 
               <p class="post-meta">
-                发表于 2019-08-02
+                2019-08-02
               </p>
               <div class="post-entry">
                 
@@ -338,7 +368,7 @@ autocomplete('#aa-search-input',
               </a>
 
               <p class="post-meta">
-                发表于 2019-07-16
+                2019-07-16
               </p>
               <div class="post-entry">
                 
@@ -378,7 +408,7 @@ cd /usr/local/openssl/bin ./openssl version -a 此处显示错误，说明找到
               </a>
 
               <p class="post-meta">
-                发表于 2018-07-16
+                2018-07-16
               </p>
               <div class="post-entry">
                 
