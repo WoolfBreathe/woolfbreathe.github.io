@@ -189,6 +189,40 @@ autocomplete('#aa-search-input',
         <div class="posts-list">
           
             <article class="post-preview">
+              <a href="/post/algorithms/datastructures/algorithms-datastructures-recursion/">
+                <h2 class="post-title">数据结构-递归(Recursion)</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                2019-08-06
+              </p>
+              <div class="post-entry">
+                
+                  递归(Recursion) 递归算不上任何数据结构和算法，但确实是一种很重要的编程技巧，很多算法也会用到递归来实现，比如归并排序、快速排序、二分查找等。
+递归，简单来讲就是在函数定义中调用函数自身，从之前学习数学解题经验来讲，就是将一个大的问题拆分成多个小问题，逐一击破后最后归并结果。判断一个问题是否可以通过递归来解决，主要看它是否满足以下三个条件：
+ 一个问题的解可以分解为几个子问题的解 这个问题与分解之后的子问题，除了数据规模不同，求解思路完全一样 存在递归终止条件  递归一定要有终止条件，否则会导致函数被无限调用最终致使内存溢出。
+通过以上分析，可以整理出递归代码的编写思路：写出递归公式，找到终止条件。有句话叫做「人理解迭代，神理解递归」，说的就是递归代码可读性不好，理论上看，递归代码都是可以转化成迭代实现的，但是递归代码更简洁，更显逼格，在通过递归实现代码的时候，切忌试图通过人脑去分解每个步骤，那样会把自己搞晕的，这种重复迭代的事情交给计算机去做，要做的就是抽象出规律，写递归公式，找终止条件，再把它们转化为递归代码，就完事了。
+说了这么多，最后通过一个案例来帮助理解和实际运用。递归的应用案例很多，比如经典的汉诺塔、斐波那契数列等，以斐波那契数列来演示下递归代码的编写，斐波那契数列是这样一组数列：0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, …(可以去网上搜一下了解下这个数列的现实由来），求第n个数列的值。
+按照前面列出的递归问题解题思路，首先抽象出这组数列的一般规律，将其整理成递归公式，会得出如下结论（索引从0开始，即第零项）：
+F0 = 0 F1 = 1 ... F(n) = F(n-1) + F(n-2) 这样，同时有了终止条件和递归公式，接下来，就是将其转化为递归代码了：
+&lt;?php /** * 通过递归实现斐波那契数列 */ function fibonacci($n) { if ($n == 0) { return 0; } if ($n == 1) { return 1; } return fibonacci($n - 2) + fibonacci($n - 1); } print fibonacci(5); # 5 print fibonacci(8); # 21 通过递归，用非常简洁的代码就实现了复杂的斐波那契数列的求解，如果要用迭代来实现这个逻辑，不定要写多少代码呢。
+                  <a href="/post/algorithms/datastructures/algorithms-datastructures-recursion/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
               <a href="/post/algorithms/datastructures/algorithms-datastructures-queue/">
                 <h2 class="post-title">数据结构-队列(Queue)</h2>
 
@@ -523,7 +557,7 @@ git commit -m &#39;update .gitignore&#39;
           
 
           &nbsp;&bull;&nbsp;
-          2021
+          2022
         </p>
         
         

@@ -8,10 +8,20 @@
     <language>zh-cn</language>
     <managingEditor>youremail@domain.com (WoolfBreathe)</managingEditor>
     <webMaster>youremail@domain.com (WoolfBreathe)</webMaster>
-    <lastBuildDate>Tue, 28 Dec 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 03 Jan 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CertManager</title>
+      <link>/post/devops/kubernetes/devops-kubernetes-certmanager/</link>
+      <pubDate>Mon, 03 Jan 2022 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/post/devops/kubernetes/devops-kubernetes-certmanager/</guid>
+      <description>&lt;h2 id=&#34;kubernetes-cert-manager-管理集群证书&#34;&gt;Kubernetes Cert-Manager 管理集群证书&lt;/h2&gt;
+&lt;p&gt;Cert-Manager 是一个云原生证书管理开源项目，用于在 Kubernetes 集群中自动管理和颁发来自各种颁发源的 TLS 证书，它可以从各种受支持的来源颁发证书，包括 &lt;a href=&#34;https://letsencrypt.org/&#34;&gt;Let’s Encrypt&lt;/a&gt;、&lt;a href=&#34;https://www.vaultproject.io/&#34;&gt;HashiCorp Vault&lt;/a&gt;和 &lt;a href=&#34;https://www.venafi.com/&#34;&gt;Venafi&lt;/a&gt; 以及私有 PKI，它将确保证书定期有效和更新，并在到期前的适当时间尝试更新证书。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Docker 下载 Google 镜像</title>

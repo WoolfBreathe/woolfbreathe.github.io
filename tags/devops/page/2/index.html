@@ -189,6 +189,48 @@ autocomplete('#aa-search-input',
         <div class="posts-list">
           
             <article class="post-preview">
+              <a href="/post/devops/linux/devops-linux-redis/">
+                <h2 class="post-title">Linux安装Redis</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                2019-12-26
+              </p>
+              <div class="post-entry">
+                
+                  <h1 id="安装">安装</h1>
+<h2 id="下载">下载</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">wget http://download.redis.io/releases/redis-5.0.3.tar.gz
+</code></pre></div><h2 id="解压">解压</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">tar -zxvf redis-5.0.3.tar.gz
+</code></pre></div><h2 id="执行编译">执行编译</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">cd redis-5.0.3
+make
+# PREFIX用于指定目录
+make install PREFIX=/usr/local/redis
+</code></pre></div><h2 id="启动">启动</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">/usr/local/redis/bin/redis-server redis.conf
+</code></pre></div><h2 id="创建命令软链接">创建命令软链接</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-fallback" data-lang="fallback">ln -s /usr/local/redis/bin/redis-cli /usr/bin/redis
+</code></pre></div>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/devops/">DevOps</a>&nbsp;
+                  
+                    #<a href="/tags/linux/">Linux</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
               <a href="/post/devops/linux/devops-linux-homestead/">
                 <h2 class="post-title">Homestead(Windows系统Laravel环境搭建)</h2>
 
@@ -460,7 +502,7 @@ git commit -m &#39;update .gitignore&#39;
           
 
           &nbsp;&bull;&nbsp;
-          2021
+          2022
         </p>
         
         

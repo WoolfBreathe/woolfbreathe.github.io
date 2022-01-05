@@ -8,10 +8,28 @@
     <language>zh-cn</language>
     <managingEditor>youremail@domain.com (WoolfBreathe)</managingEditor>
     <webMaster>youremail@domain.com (WoolfBreathe)</webMaster>
-    <lastBuildDate>Tue, 28 Dec 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 03 Jan 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>DevOps</title>
+      <link>/tags/devops/</link>
+      <pubDate>Mon, 03 Jan 2022 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/tags/devops/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Kubernetes</title>
+      <link>/tags/kubernetes/</link>
+      <pubDate>Mon, 03 Jan 2022 00:00:00 +0000</pubDate>
+      <author>youremail@domain.com (WoolfBreathe)</author>
+      <guid>/tags/kubernetes/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Docker</title>
@@ -19,15 +37,6 @@
       <pubDate>Tue, 28 Dec 2021 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (WoolfBreathe)</author>
       <guid>/tags/docker/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Kubernetes</title>
-      <link>/tags/kubernetes/</link>
-      <pubDate>Tue, 28 Dec 2021 00:00:00 +0000</pubDate>
-      <author>youremail@domain.com (WoolfBreathe)</author>
-      <guid>/tags/kubernetes/</guid>
       <description></description>
     </item>
     
@@ -46,15 +55,6 @@
       <pubDate>Fri, 20 Aug 2021 00:00:00 +0000</pubDate>
       <author>youremail@domain.com (WoolfBreathe)</author>
       <guid>/tags/ubuntu/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>DevOps</title>
-      <link>/tags/devops/</link>
-      <pubDate>Mon, 24 May 2021 00:00:00 +0000</pubDate>
-      <author>youremail@domain.com (WoolfBreathe)</author>
-      <guid>/tags/devops/</guid>
       <description></description>
     </item>
     

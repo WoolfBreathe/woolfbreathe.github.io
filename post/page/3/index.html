@@ -189,6 +189,36 @@ autocomplete('#aa-search-input',
         <div class="posts-list">
           
             <article class="post-preview">
+              <a href="/post/devops/linux/devops-linux-php/">
+                <h2 class="post-title">Linux安装PHP源码包</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                2019-12-28
+              </p>
+              <div class="post-entry">
+                
+                  依赖库安装 安装 gcc 环境 sudo yum -y install gcc gcc-c++ # 编译时依赖 gcc 环境 安装 libxml2 sudo yum -y install libxml2 libxml2-devel # Libxml2库提供了C语言解析和构造xml文档的接口 安装 libjpeg-devel yum -y install libjpeg-devel libpng-devel # 图片处理 安装 openssl # 安全套接字层密码库，用于通信加密 $ sudo yum -y install openssl openssl-devel yum install freetype-devel libzip 安装sqlite yum install sqlite-devel 创建用户组和用户 groupadd -r www &amp;&amp; useradd -g www -s /sbin/nologin www 安装 Nginx 源码包安装 Nginx官方下载
+sudo tar -zxvf php-7.
+                  <a href="/post/devops/linux/devops-linux-php/" class="post-read-more">[阅读全文]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="/tags/devops/">DevOps</a>&nbsp;
+                  
+                    #<a href="/tags/linux/">Linux</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
               <a href="/post/devops/linux/devops-linux-redis/">
                 <h2 class="post-title">Linux安装Redis</h2>
 
@@ -786,42 +816,6 @@ V1-&gt;V2-&gt;V5-&gt;V7-&gt;V9：18 V1-&gt;V2-&gt;V5-&gt;V8-&gt;V9：18 V1-&gt;V
 
             </article>
           
-            <article class="post-preview">
-              <a href="/post/algorithms/graph/algorithms-graph-shortestpath/">
-                <h2 class="post-title">图(Graph)-最短路径(ShortestPath)</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                2019-09-01
-              </p>
-              <div class="post-entry">
-                
-                  最短路径 迪杰斯特拉算法（Dijkstra） 在日常生活中，经常面临路径选择的问题，比如从杭州到北京，可以选择汽车、火车、飞机，甚至还可以坐公交车（这不是笑话，最近网上就流传一个从杭州回临沂，转了 35 班公交车，行程 660 多公里，历时 7 天的神奇春运回家路），对于不同的选择，意味着不同的路径，不同的路径意味着不同的成本，这个成本有时间成本，也有经济成本，不差钱的可以选择时间成本低的，比如坐飞机，经济不那么宽裕却有时间的，可以做公交车，我们把杭州和北京看作图上的两个顶点（中间可能会经过其它城市，即多个顶点），把时间成本或者经济成本看作权重，那么从杭州到北京的路径规划就可以抽象为今天我们要分享的话题 —— 图的最短路径问题。
-对于带权重的网图来说，所谓最短路径，指的是两个顶点之间经过的边上权值之和最小的路径，我们将第一个顶点叫做起点，最后一个顶点叫做终点。
-最短路径的实现也有多种算法，和最小生成树一样，两种最常见的实现算法：迪杰斯特拉（Dijkstra）算法和弗洛伊德（Floyd）算法。
-迪杰斯特拉算法（Dijkstra） 迪杰斯特拉（Dijkstra）算法是典型的单源最短路径算法，用于计算一个节点到其他所有节点的最短路径。主要特点是以起始点为中心向外层层扩展，直到扩展到终点为止。
-以下面这个无向图为例：
-通过迪杰斯特拉算法计算最短路径，需要指定起点，用 S 表示图的所有顶点集合，U 表示起点外的其它顶点集合，顶点到自身的距离为 0，到相邻顶点距离为相应边的权值，到不相邻顶点的距离为无穷大（∞）。每一次从 U 中找出路径最短的顶点，并将其加入到 S 中，然后，更新 U 中的剩余顶点和顶点对应的路径，重复该操作，直到遍历完所有顶点：
-实现代码 然后将上述算法实现思路转化为代码，还是以前面创建的无向网图类 EdgeWeightedGraph 类为基础，在其中编写迪杰斯特拉算法实现方法如下：
-// 通过迪杰斯特拉算法实现最短路径 public function dijkstra($start) { $prev = []; // 前驱顶点数组，prev[i]的值是起点到顶点i的最短路径所经历的全部顶点中，i之前的那个顶点。 $dist = []; // 长度数组，dist[i]是起点到顶点i的最短路径的长度 $flag = []; // flag[i] = true 表示起点到顶点 i 的最短路径获取成功 // 初始化 for ($i = 0; $i &lt; $this-&gt;vNum; $i++) { $flag[$i] = false; $prev[$i] = 0; $dist[$i] = $this-&gt;getWeight($start, $i); } // 起点 $flag[$start] = true; $dist[$start] = 0; // 遍历图，每次找出一个顶点的最短路径。 $k = 0; for ($i = 1; $i &lt; $this-&gt;vNum; $i++) { // 在未获取最短路径的顶点中，找到离起点最近的顶点(k)。 $min = INF; for ($j = 0; $j &lt; $this-&gt;vNum; $j++) { if ($flag[$j] == false &amp;&amp; $dist[$j] &lt; $min) { $min = $dist[$j]; $k = $j; } } // 标记顶点k为已经获取到最短路径 $flag[$k] = true; // 当获取顶点k的最短路径之后，更新未获取最短路径的顶点的最短路径和前驱顶点。 for ($j = 0; $j &lt; $this-&gt;vNum; $j++) { $tmp = ($this-&gt;getWeight($k, $j) == INF ?
-                  <a href="/post/algorithms/graph/algorithms-graph-shortestpath/" class="post-read-more">[阅读全文]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="/tags/algorithms/">Algorithms</a>&nbsp;
-                  
-                    #<a href="/tags/graph/">Graph</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
         </div>
         
           <ul class="pager main-pager">
@@ -903,7 +897,7 @@ V1-&gt;V2-&gt;V5-&gt;V7-&gt;V9：18 V1-&gt;V2-&gt;V5-&gt;V8-&gt;V9：18 V1-&gt;V
           
 
           &nbsp;&bull;&nbsp;
-          2021
+          2022
         </p>
         
         

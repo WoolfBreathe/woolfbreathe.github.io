@@ -6,16 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 
-  <title>Docker 下载 Google 镜像-WoolfBreathe</title>
-  <meta property="og:title" content="Docker 下载 Google 镜像" />
-  <meta name="twitter:title" content="Docker 下载 Google 镜像" />
+  <title>CertManager-WoolfBreathe</title>
+  <meta property="og:title" content="CertManager" />
+  <meta name="twitter:title" content="CertManager" />
 
-  <meta name="description" content="无法下载镜像问题
-在使用Docker或者Kubernetes的时候，经常会遇到镜像下不下来的情况，大部分镜像都能在DockerHub或者阿里云容器仓库中能找到（能找到是因为有其他人拉取到他们的仓库里了），但是出现找不到的时候，就得自己去Google拉镜像了。">
-  <meta property="og:description" content="无法下载镜像问题
-在使用Docker或者Kubernetes的时候，经常会遇到镜像下不下来的情况，大部分镜像都能在DockerHub或者阿里云容器仓库中能找到（能找到是因为有其他人拉取到他们的仓库里了），但是出现找不到的时候，就得自己去Google拉镜像了。">
-  <meta name="twitter:description" content="无法下载镜像问题
-在使用Docker或者Kubernetes的时候，经常会遇到镜像下不下来的情况，大部分镜像都能在DockerHub或者阿里云容器仓库中能找到（能找到是因为有其他人拉取到他们的仓库里了），但是出现找不到的时候，就得自己去Google拉镜像了。">
+  <meta name="description" content="Kubernetes Cert-Manager 管理集群证书
+Cert-Manager 是一个云原生证书管理开源项目，用于在 Kubernetes 集群中自动管理和颁发来自各种颁发源的 TLS 证书，它可以从各种受支持的来源颁发证书，包括 Let’s Encrypt、HashiCorp Vault和 Venafi 以及私有 PKI，它将确保证书定期有效和更新，并在到期前的适当时间尝试更新证书。">
+  <meta property="og:description" content="Kubernetes Cert-Manager 管理集群证书
+Cert-Manager 是一个云原生证书管理开源项目，用于在 Kubernetes 集群中自动管理和颁发来自各种颁发源的 TLS 证书，它可以从各种受支持的来源颁发证书，包括 Let’s Encrypt、HashiCorp Vault和 Venafi 以及私有 PKI，它将确保证书定期有效和更新，并在到期前的适当时间尝试更新证书。">
+  <meta name="twitter:description" content="Kubernetes Cert-Manager 管理集群证书
+Cert-Manager 是一个云原生证书管理开源项目，用于在 Kubernetes 集群中自动管理和颁发来自各种颁发源的 TLS 证书，它可以从各种受支持的来源颁发证书，包括 Let’s Encrypt、HashiCorp Vault和 Venafi 以及私有 PKI，它将确保证书定期有效和更新，并在到期前的适当时间尝试更新证书。">
   <meta name="author" content="WoolfBreathe"/>
   <link href="/img/favicon.png" rel="icon" type="image/x-icon" />
   <link rel="apple-touch-icon" href="/img/favicon.png"/>
@@ -51,7 +51,7 @@
     <![endif]-->
 <meta name="google-site-verification" content="oKxX4fOvB2yYmU02txZFChM93XQbESU4JaG3tNH9Hm8" />
 <meta name="baidu-site-verification" content="F5ojAyqaKU" />
-<meta name="keywords" content="Docker-Image&#39;, Kubernetes">
+<meta name="keywords" content="DevOps, Kubernetes, CertManager">
 
 
 
@@ -180,7 +180,7 @@ autocomplete('#aa-search-input',
 
 
   
-    <div id="header-big-imgs" data-num-img=1 data-img-src-1="/img/banner/photo-1522481889-27404a7ea14a.jpeg" ></div>
+    <div id="header-big-imgs" data-num-img=1 data-img-src-1="/img/banner/photo-1435777940218-be0b632d06db.jpeg" ></div>
   
 
   <header class="header-section has-img">
@@ -191,7 +191,7 @@ autocomplete('#aa-search-input',
           <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
               <div class="post-heading">
-                <h1>Docker 下载 Google 镜像</h1>
+                <h1>CertManager</h1>
                   
                   
               </div>
@@ -209,12 +209,12 @@ autocomplete('#aa-search-input',
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="post-heading">
-              <h1>Docker 下载 Google 镜像</h1>
+              <h1>CertManager</h1>
                 
                 
                   <span class="post-meta">
   
-    2021-12-28
+    2022-01-03
   
   
 </span>
@@ -243,7 +243,7 @@ autocomplete('#aa-search-input',
             
             <h5 id="tags" style="margin-top: 30px;">标签:
               
-                  <a href="/tags/docker/">Docker</a> &nbsp;
+                  <a href="/tags/devops/">DevOps</a> &nbsp;
               
                   <a href="/tags/kubernetes/">Kubernetes</a> &nbsp;
               
@@ -254,6 +254,23 @@ autocomplete('#aa-search-input',
         <article role="main" class="blog-post" itemprop="articleBody" id="content">
           
             
+<aside class="toc">
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#kubernetes-cert-manager-管理集群证书">Kubernetes Cert-Manager 管理集群证书</a></li>
+    <li><a href="#架构">架构</a></li>
+    <li><a href="#部署">部署</a></li>
+    <li><a href="#配置issuerclusterissuer">配置Issuer/ClusterIssuer</a>
+      <ul>
+        <li><a href="#内网开发">内网开发</a></li>
+        <li><a href="#方法">方法</a></li>
+      </ul>
+    </li>
+    <li><a href="#参考文档">参考文档</a></li>
+  </ul>
+</nav>
+</aside>
+
           
   
           
@@ -268,103 +285,180 @@ autocomplete('#aa-search-input',
           
           
 
-          <h2 id="无法下载镜像问题">无法下载镜像问题</h2>
-<p>在使用Docker或者Kubernetes的时候，经常会遇到镜像下不下来的情况，大部分镜像都能在DockerHub或者阿里云容器仓库中能找到（能找到是因为有其他人拉取到他们的仓库里了），但是出现找不到的时候，就得自己去Google拉镜像了。</p>
-<h2 id="google-cloud-shell">Google cloud shell</h2>
-<p>这个方法借助Google cloud shell。核心原理如下</p>
+          <h2 id="kubernetes-cert-manager-管理集群证书">Kubernetes Cert-Manager 管理集群证书</h2>
+<p>Cert-Manager 是一个云原生证书管理开源项目，用于在 Kubernetes 集群中自动管理和颁发来自各种颁发源的 TLS 证书，它可以从各种受支持的来源颁发证书，包括 <a href="https://letsencrypt.org/">Let’s Encrypt</a>、<a href="https://www.vaultproject.io/">HashiCorp Vault</a>和 <a href="https://www.venafi.com/">Venafi</a> 以及私有 PKI，它将确保证书定期有效和更新，并在到期前的适当时间尝试更新证书。</p>
+<h2 id="架构">架构</h2>
+<p><img src="/img/posts/DevOps/Kubernetes/image-20210801000443423.png" alt="docker-structrue"></p>
+<p>Issuers/ClusterIssuers：定义使用 什么证书颁发机构 (CA) 来去颁发证书，Issuers和ClusterIssuers区别是issuers是一个名称空间级别的资源， 只能用来签发自己所在 namespace 下的证书，ClusterIssuer是个集群级别的资源 可以签发任意 namespace 下的证书</p>
+<p>Certificate：定义所需的 X.509 证书，该证书将更新并保持最新。Certificate是一个命名空间资源，当Certificate被创建时，它会去创建相应的CertificateRequest资源来去申请证书。</p>
+<h2 id="部署">部署</h2>
 <blockquote>
 <ol>
-<li>使用Google cloud shell来拉取镜像</li>
+<li>创建命名空间</li>
+</ol>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">kubectl create namespace cert-manager
+</code></pre></div><blockquote>
+<ol start="2">
+<li>Helm更新</li>
+</ol>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 添加 Jetstack Helm repository</span>
+helm repo add jetstack https://charts.jetstack.io
+<span style="color:#6272a4"># 更新本地Helm chart repository</span>
+helm repo update
+</code></pre></div><blockquote>
+<ol start="3">
+<li>Helm安装</li>
+</ol>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">helm install <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>cert-manager jetstack/cert-manager <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--namespace cert-manager <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>--set <span style="color:#8be9fd;font-style:italic">installCRDs</span><span style="color:#ff79c6">=</span><span style="color:#8be9fd;font-style:italic">true</span>
+</code></pre></div><h2 id="配置issuerclusterissuer">配置Issuer/ClusterIssuer</h2>
+<p>cert-manager支持以下几种证书颁发者</p>
+<pre><code>SelfSigned
+CA
+Vault
+Venafi
+External
+ACME
+</code></pre>
+<h3 id="内网开发">内网开发</h3>
+<h4 id="目的">目的</h4>
+<p>内网K8s开发环境配置HTTPS，保持与生产环境的配置的一致性，其必要性有：</p>
+<blockquote>
+<ol>
+<li>PWA开发，HTTPS是必要条件</li>
 </ol>
 </blockquote>
 <blockquote>
 <ol start="2">
-<li>将镜像上传至一个自己的仓库中（示例使用DockerHub库）</li>
+<li>网页引入HTTP资源，如果开发环境是HTTP就不会被开发和测试人员发现，造成生产环境故障</li>
 </ol>
 </blockquote>
 <blockquote>
 <ol start="3">
-<li>再从个人仓库中把对应镜像下载下来。</li>
+<li>HTTP/2，与HTTP相差太大，必须保持环境一致</li>
 </ol>
 </blockquote>
-<p>从原理上来说，使用这个方法可以解决几乎所有的镜像拉取问题。</p>
-<h2 id="准备">准备</h2>
+<h3 id="方法">方法</h3>
+<p>开发环境在内网，做不了域名验证，无法使用Let&rsquo;s Encrypt颁发和自动更新证书，所以采用自签名CA证书+由此CA颁发证书的方式。</p>
 <blockquote>
 <ol>
-<li>翻墙工具</li>
+<li>生成签名密钥对</li>
 </ol>
 </blockquote>
-<blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 1. 先生成私钥key</span>
+openssl genrsa -out tls.key <span style="color:#bd93f9">2048</span>
+
+<span style="color:#6272a4"># 2.再基于key生成tls证书(注意：这里我用的*.boge.com，这是生成泛域名的证书，后面所有新增加的三级域名都是可以用这个证书的)</span>
+openssl req -new -x509 -key tls.key -out tls.crt -days <span style="color:#bd93f9">360</span> -subj /CN<span style="color:#ff79c6">=</span>*.boge.com
+
+<span style="color:#6272a4"># 3.将签名密钥对保存为Secret</span>
+kubectl create secret tls homestead-test-tls <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    --cert<span style="color:#ff79c6">=</span>tls.crt <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    --key<span style="color:#ff79c6">=</span>tls.key <span style="color:#f1fa8c">\
+</span><span style="color:#f1fa8c"></span>    --namespace<span style="color:#ff79c6">=</span>cert-manager
+</code></pre></div><blockquote>
 <ol start="2">
-<li>Google账号</li>
+<li>创建自签名发行者</li>
 </ol>
 </blockquote>
-<blockquote>
-<ol start="3">
-<li>DockerHub账号</li>
-</ol>
-</blockquote>
-<h2 id="操作">操作</h2>
-<blockquote>
-<ol>
-<li>进入 <a href="https://cloud.google.com/shell">Google Cloud Shell</a></li>
-</ol>
-</blockquote>
-<p><img src="/img/posts/DevOps/Kubernetes/v2-e6a13560405f8281090644c696970747_1440w.jpg" alt="GoogleCloudShell界面"></p>
-<blockquote>
-<ol start="2">
-<li>点击转到控制台</li>
-</ol>
-</blockquote>
-<p><img src="/img/posts/DevOps/Kubernetes/v2-ee8c431e1c871de4eb9ff375e3a6ca85_1440w.jpg" alt="Google Cloud Shell控制台"></p>
-<blockquote>
-<ol start="3">
-<li>登陆DokcerHub</li>
-</ol>
-</blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker login --username<span style="color:#ff79c6">=</span>****
-</code></pre></div><p><img src="/img/posts/DevOps/Kubernetes/v2-e831b25d4a4214bc71ad1f635e06c1be_1440w.png" alt="Google Cloud Shell控制台Docker登陆"></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 参考：https://cert-manager.io/docs/configuration/ca/</span>
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: homestead-test-issuer
+  namespace: cert-manager
+spec:
+  ca:
+    secretName: homestead-test-tls
+</code></pre></div><p>注意: secret 要与 namespace 保持一致</p>
 <blockquote>
 <ol start="4">
-<li>拉取目标镜像</li>
+<li>生成证书</li>
 </ol>
 </blockquote>
-<p>使用docker pull 把这个镜像拉取到google cloud shell本地</p>
-<p><img src="/img/posts/DevOps/Kubernetes/v2-0a194ffd940de3bdad3f2e49373ceb48_1440w.jpg" alt="Google Cloud Shell控制台Docker拉取镜像"></p>
-<blockquote>
-<ol start="5">
-<li>镜像重新打标签</li>
-</ol>
-</blockquote>
-<p>要求重新tag的格式为：域名+namespace+仓库名:版本号</p>
-<p><img src="/img/posts/DevOps/Kubernetes/v2-d4a7b7c23f00a29115551b641a906dd7_1440w.png" alt="Google Cloud Shell控制台Docker镜像重新打标签"></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker tag xdp-service-runtime:2.2 edisonsaonian/xdp-service-runtime:2.2
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell"><span style="color:#6272a4"># 参考：https://cert-manager.io/docs/usage/certificate/</span>
+<span style="color:#6272a4"># API参考：https://cert-manager.io/docs/reference/api-docs/#cert-manager.io/v1.Certificate</span>
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: homestead-test
+  namespace: default <span style="color:#6272a4">### 站点所在名字空间</span>
+spec:
+  <span style="color:#6272a4"># Secret names are always required.</span>
+  secretName: homestead-test-tls <span style="color:#6272a4">### Secret名字</span>
+  duration: 2160h
+  renewBefore: 360h
+  subject:
+    organizations:
+    - Local Inc.
+  <span style="color:#6272a4"># The use of the common name field has been deprecated since 2000 and is</span>
+  <span style="color:#6272a4"># discouraged from being used.</span>
+  <span style="color:#6272a4"># commonName: site.example.com</span>
+  isCA: <span style="color:#8be9fd;font-style:italic">true</span>
+  privateKey:
+    algorithm: RSA
+    encoding: PKCS1
+    size: <span style="color:#bd93f9">2048</span>
+  <span style="color:#6272a4">#usages: ### 注释了usages，使用情况是证书要求的x509使用情况的集合。默认为digital signature，key encipherment如果未指定。</span>
+  <span style="color:#6272a4">#  - server auth</span>
+  <span style="color:#6272a4">#  - client auth</span>
+  <span style="color:#6272a4"># At least one of a DNS Name, URI, or IP address is required.</span>
+  dnsNames:
+  - code-server.homestead.test <span style="color:#6272a4">###</span>
+  <span style="color:#6272a4">#uris: ### 注释了uris、ipAddresses</span>
+  <span style="color:#6272a4">#- spiffe://cluster.local/ns/sandbox/sa/example</span>
+  <span style="color:#6272a4">#ipAddresses:</span>
+  <span style="color:#6272a4">#- 192.168.0.5</span>
+  <span style="color:#6272a4"># Issuer references are always required.</span>
+  issuerRef:
+    name: homestead-test-issuer <span style="color:#6272a4">### 使用CA Issuer</span>
+    <span style="color:#6272a4"># We can reference ClusterIssuers by changing the kind here.</span>
+    <span style="color:#6272a4"># The default value is Issuer (i.e. a locally namespaced Issuer)</span>
+    kind: ClusterIssuer <span style="color:#6272a4">### CA Issuer是ClusterIssuer</span>
+    <span style="color:#6272a4"># This is optional since cert-manager will default to this value however</span>
+    <span style="color:#6272a4"># if you are using an external issuer, change this to that issuer group.</span>
+    group: cert-manager.io
 </code></pre></div><blockquote>
-<ol start="6">
-<li>创建一个Repository仓库</li>
+<ol start="5">
+<li>将网站证书配置到Ingress</li>
 </ol>
 </blockquote>
-<p><img src="/img/posts/DevOps/Kubernetes/381412-20190712191010110-392774783.png" alt="DockerHub创建Repository仓库"></p>
-<blockquote>
-<ol start="7">
-<li>推送镜像</li>
-</ol>
-</blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker push edisonsaonian/xdp-service-runtime:2.2
-</code></pre></div><p><img src="/img/posts/DevOps/Kubernetes/381412-20190712191339548-229729843.png" alt="Google Cloud Shell控制台Docker推送镜像"></p>
-<blockquote>
-<ol start="8">
-<li>DockerHub上查看Repository的信息</li>
-</ol>
-</blockquote>
-<p><img src="/img/posts/DevOps/Kubernetes/381412-20190712191420255-1695629547.png" alt="Google Cloud Shell控制台Docker推送镜像"></p>
-<blockquote>
-<ol start="9">
-<li>拉取目标镜像到本地</li>
-</ol>
-</blockquote>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">docker pull docker.io/edisonsaonian/xdp-service-runtime:2.2
-</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-shell" data-lang="shell">apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: code-server-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: homestead-test
+spec:
+  rules:
+  - host: code-server.homestead.test
+    http:
+      paths:
+      - pathType: Prefix
+        path: /
+        backend:
+          service:
+            name: code-server
+            port:
+              number: <span style="color:#bd93f9">8080</span>
+  tls:
+  - hosts:
+    - code-server.homestead.test
+    secretName: homestead-test-tls
+</code></pre></div><p>cert-manager.io/cluster-issuer : 这个annotation就可以自动触发cert-manager中的一个ClusterIssuer来签发一个证书。
+secretName要与创建的secret对应</p>
+<h2 id="参考文档">参考文档</h2>
+<p><a href="https://docs.cert-manager.io">Cert-Manager</a>
+<a href="https://github.com/jetstack/cert-manager/tree/master">Cert-Manager Github</a>
+<a href="https://blog.csdn.net/weixin_30664539/article/details/101583457">Cert-Manager管理k8s集群证书</a>
+<a href="https://yoshiera.gitee.io/posts/k8s/cert-manager/#cert-manager">Cert-Manager-Yoshieraの部屋</a>
+<a href="https://www.cnblogs.com/dandelion/p/14083023.html">Cert-Manager管理内网K8s开发环境证书</a></p>
 
           <h2>微信公众号</h2>
 <p>扫描下面的二维码关注我们的微信公众帐号，在微信公众帐号中回复◉加群◉即可加入到我们的 kubernetes 讨论群里面共同学习。</p>
@@ -419,11 +513,23 @@ autocomplete('#aa-search-input',
     
     <li><a href="/post/devops/kubernetes/devops-kubernetes-install/">Kubernetes Install</a></li>
     
+    <li><a href="/post/devops/kubernetes/google-docker-image/">Docker 下载 Google 镜像</a></li>
+    
     <li><a href="/post/devops/docker/devops-docker-command/">Docker 常用命令</a></li>
     
     <li><a href="/post/devops/docker/devops-docker-install/">Docker Install</a></li>
     
     <li><a href="/post/devops/docker/devops-docker-docker/">Docker</a></li>
+    
+    <li><a href="/post/devops/linux/devops-linux-rsync/">Linux Rsync 文件同步</a></li>
+    
+    <li><a href="/post/devops/linux/devops-linux-permisssions/">Linux Permisssions(文件权限)</a></li>
+    
+    <li><a href="/post/devops/linux/devops-linux-timedatectl/">Linux使用Timedatectl修改时区和时间</a></li>
+    
+    <li><a href="/post/devops/linux/devops-linux-zabbix/">Linux安装Zabbix</a></li>
+    
+    <li><a href="/post/devops/database/devops-linux-mysql-utilities/">Centos7.X下编译安装MySQL Utilities</a></li>
     
 </ul>
 
@@ -433,13 +539,9 @@ autocomplete('#aa-search-input',
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="/post/devops/linux/ubuntu-desktop-wine/" data-toggle="tooltip" data-placement="top" title="Ubuntu 桌面版 安装 Window 应用">&larr; 前一篇</a>
+              <a href="/post/devops/kubernetes/google-docker-image/" data-toggle="tooltip" data-placement="top" title="Docker 下载 Google 镜像">&larr; 前一篇</a>
             </li>
           
-          
-            <li class="next">
-              <a href="/post/devops/kubernetes/devops-kubernetes-certmanager/" data-toggle="tooltip" data-placement="top" title="CertManager">后一篇 &rarr;</a>
-            </li>
           
         </ul>
         
@@ -449,27 +551,6 @@ autocomplete('#aa-search-input',
         
   
         
-    <div id="gitalk-container"></div>
-    
-    
-    <link rel="stylesheet" href="/css/gitalk.css" />
-    <script src="/js/gitalk.min.js"></script>
-    <script>
-    var gitalk = new Gitalk({
-        clientID: '',
-        clientSecret: '',
-        repo: '',
-        owner: '',
-        admin: [''],
-        labels: ['gitment'],
-        title: 'Docker 下载 Google 镜像',
-        createIssueManually: true,
-        id: 'Google-Docker-Image',      
-        distractionFreeMode: true  
-    });
-    gitalk.render('gitalk-container');
-</script>
-
 
         
           

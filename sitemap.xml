@@ -4,8 +4,33 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2021-12-28T00:00:00+00:00</lastmod>
+    <lastmod>2022-01-03T00:00:00+00:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/post/devops/kubernetes/devops-kubernetes-certmanager/</loc>
+    <lastmod>2022-01-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/devops/</loc>
+    <lastmod>2022-01-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/kubernetes/</loc>
+    <lastmod>2022-01-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2022-01-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2022-01-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -15,21 +40,6 @@
   
   <url>
     <loc>/post/devops/kubernetes/google-docker-image/</loc>
-    <lastmod>2021-12-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/kubernetes/</loc>
-    <lastmod>2021-12-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/</loc>
-    <lastmod>2021-12-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
     <lastmod>2021-12-28T00:00:00+00:00</lastmod>
   </url>
   
@@ -46,11 +56,6 @@
   <url>
     <loc>/post/devops/linux/ubuntu-desktop-wine/</loc>
     <lastmod>2021-08-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/devops/</loc>
-    <lastmod>2021-05-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
