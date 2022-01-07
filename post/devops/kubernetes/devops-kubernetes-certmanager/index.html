@@ -260,10 +260,9 @@ autocomplete('#aa-search-input',
     <li><a href="#kubernetes-cert-manager-管理集群证书">Kubernetes Cert-Manager 管理集群证书</a></li>
     <li><a href="#架构">架构</a></li>
     <li><a href="#部署">部署</a></li>
-    <li><a href="#配置issuerclusterissuer">配置Issuer/ClusterIssuer</a>
+    <li><a href="#配置">配置</a>
       <ul>
         <li><a href="#内网开发">内网开发</a></li>
-        <li><a href="#方法">方法</a></li>
       </ul>
     </li>
     <li><a href="#参考文档">参考文档</a></li>
@@ -316,7 +315,7 @@ helm repo update
 </span><span style="color:#f1fa8c"></span>cert-manager jetstack/cert-manager <span style="color:#f1fa8c">\
 </span><span style="color:#f1fa8c"></span>--namespace cert-manager <span style="color:#f1fa8c">\
 </span><span style="color:#f1fa8c"></span>--set <span style="color:#8be9fd;font-style:italic">installCRDs</span><span style="color:#ff79c6">=</span><span style="color:#8be9fd;font-style:italic">true</span>
-</code></pre></div><h2 id="配置issuerclusterissuer">配置Issuer/ClusterIssuer</h2>
+</code></pre></div><h2 id="配置">配置</h2>
 <p>cert-manager支持以下几种证书颁发者</p>
 <pre><code>SelfSigned
 CA
@@ -343,7 +342,7 @@ ACME
 <li>HTTP/2，与HTTP相差太大，必须保持环境一致</li>
 </ol>
 </blockquote>
-<h3 id="方法">方法</h3>
+<h4 id="方法">方法</h4>
 <p>开发环境在内网，做不了域名验证，无法使用Let&rsquo;s Encrypt颁发和自动更新证书，所以采用自签名CA证书+由此CA颁发证书的方式。</p>
 <blockquote>
 <ol>
@@ -454,11 +453,13 @@ spec:
 </code></pre></div><p>cert-manager.io/cluster-issuer : 这个annotation就可以自动触发cert-manager中的一个ClusterIssuer来签发一个证书。
 secretName要与创建的secret对应</p>
 <h2 id="参考文档">参考文档</h2>
+<blockquote>
 <p><a href="https://docs.cert-manager.io">Cert-Manager</a>
 <a href="https://github.com/jetstack/cert-manager/tree/master">Cert-Manager Github</a>
 <a href="https://blog.csdn.net/weixin_30664539/article/details/101583457">Cert-Manager管理k8s集群证书</a>
 <a href="https://yoshiera.gitee.io/posts/k8s/cert-manager/#cert-manager">Cert-Manager-Yoshieraの部屋</a>
 <a href="https://www.cnblogs.com/dandelion/p/14083023.html">Cert-Manager管理内网K8s开发环境证书</a></p>
+</blockquote>
 
           <h2>微信公众号</h2>
 <p>扫描下面的二维码关注我们的微信公众帐号，在微信公众帐号中回复◉加群◉即可加入到我们的 kubernetes 讨论群里面共同学习。</p>
